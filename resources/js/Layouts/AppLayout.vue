@@ -386,7 +386,7 @@ const logout = () => {
                                     <div class="sm:flex sm:items-center sm:justify-between">
                                         <div class="sm:flex sm:space-x-5">
                                             <div class="flex-shrink-0">
-                                                <img v-if="props.avatar" class="mx-auto h-20 w-20 rounded-full"
+                                                <img v-if="props.avatar" class="mx-auto h-20 w-20 object-cover rounded-full"
                                                      :src="props.avatar" :alt="props.avatar"/>
                                             </div>
                                             <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
