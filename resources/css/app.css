@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rounded-md {
+    @apply rounded-3xl bg-white text-gray-800;
+}
+
+/*.rounded-2xl {*/
+/*    @apply rounded-lg;*/
+/*}*/
+
+/*.rounded-t-2xl {*/
+/*    @apply rounded-t-lg;*/
+/*}*/
+
+/*.rounded-tl-2xl {*/
+/*    @apply rounded-tl-lg;*/
+/*}*/
+
+/*.rounded-tr-2xl {*/
+/*    @apply rounded-tr-lg*/
+/*}*/
+
+/*.rounded-bl-2xl {*/
+/*    @apply rounded-bl-lg;*/
+/*}*/
+
+/*.rounded-br-2xl {*/
+/*    @apply rounded-br-lg;*/
+/*}*/
+
+/*.bg-opacity-25 {*/
+/*    @apply bg-opacity-100;*/
+/*}*/
+
+/*strong {*/
+/*    @apply text-gray-900;*/
+/*}*/
+
+/*ul {*/
+/*    @apply list-disc;*/
+/*}*/

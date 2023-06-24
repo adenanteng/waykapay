@@ -1,0 +1,68 @@
+<script setup>
+import AppLayout from "@/Layouts/AppLayout.vue";
+import TextInput from '@/Components/TextInput.vue';
+import {ref} from "vue";
+import Table from "@/Components/Table.vue";
+// import { Table } from "@protonemedia/inertiajs-tables-laravel-query-builder";
+
+const props = defineProps({
+    users: Object | String,
+});
+
+const searchQuery = ref('')
+const gridTitle = [
+    'Nama',
+    'Email',
+    'Peran',
+    'Bergabung',
+]
+const gridColumns = [
+    'name',
+    'email',
+    'role',
+    'created',
+]
+
+</script>
+
+<template>
+    <AppLayout title="Pengguna"
+               name="Pengguna"
+               desc="lorem ipsum"
+               action="Tambah Pengguna"
+               :href="route('user.create')"
+    >
+
+<!--        <Table :resource="props.users" >-->
+<!--            <template #cell(aksi)="{ item: users }">-->
+<!--                <Link class="text-primary-500 font-medium" :href="`/user/${users.id}/edit`">-->
+<!--                    Ubah-->
+<!--                </Link>-->
+<!--            </template>-->
+<!--        </Table>-->
+
+        <form id="search">
+            <TextInput
+                name="query"
+                v-model="searchQuery"
+                type="text"
+                class="mt-1 block w-96 mb-5 shadow"
+                placeholder="Cari disini"
+            />
+        </form>
+
+        <Table
+            :title="gridTitle"
+            :data="props.users.data"
+            :paginate="props.users"
+            :columns="gridColumns"
+            :filter-key="searchQuery"
+            routes="user"
+            :edit=true
+        />
+
+    </AppLayout>
+
+
+
+</template>
