@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('name');
             $table->longText('desc')->nullable();
 
-            $table->string('midtrans_id_merchant');
-            $table->string('midtrans_client_key');
-            $table->string('midtrans_server_key');
+            $table->string('midtrans_id_merchant')->nullable();
+            $table->string('midtrans_client_key')->nullable();
+            $table->string('midtrans_server_key')->nullable();
 
-            $table->string('digiflazz_username');
-            $table->string('digiflazz_key');
+            $table->string('digiflazz_username')->nullable();
+            $table->string('digiflazz_key')->nullable();
             $table->timestamps();
 
         });

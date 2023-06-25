@@ -22,12 +22,12 @@ const form = useForm({
     desc: props.setting.desc ?? null,
     photo: null,
 
-    midtrans_id_merchant: props.setting.midtrans_id_merchant ?? null,
-    midtrans_client_key: props.setting.midtrans_client_key ?? null,
-    midtrans_server_key: props.setting.midtrans_server_key ?? null,
-
-    digiflazz_username: props.setting.digiflazz_username ?? null,
-    digiflazz_key: props.setting.digiflazz_key ?? null,
+    // midtrans_id_merchant: props.setting.midtrans_id_merchant ?? null,
+    // midtrans_client_key: props.setting.midtrans_client_key ?? null,
+    // midtrans_server_key: props.setting.midtrans_server_key ?? null,
+    //
+    // digiflazz_username: props.setting.digiflazz_username ?? null,
+    // digiflazz_key: props.setting.digiflazz_key ?? null,
 });
 
 const updateSettingInformation = () => {
@@ -61,16 +61,6 @@ const updatePhotoPreview = () => {
 
     reader.readAsDataURL(photo);
 };
-
-// const deletePhoto = () => {
-//     Inertia.delete(route('current-user-photo.destroy'), {
-//         preserveScroll: true,
-//         onSuccess: () => {
-//             photoPreview.value = null;
-//             clearPhotoFileInput();
-//         },
-//     });
-// };
 
 const clearPhotoFileInput = () => {
     if (photoInput.value?.value) {
@@ -160,65 +150,65 @@ const clearPhotoFileInput = () => {
                 <InputError :message="form.errors.desc" class="mt-2" />
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="midtransIdMerchant" value="Midtrans Id Merchant" />
-                <TextInput
-                    id="midtransIdMerchant"
-                    v-model="form.midtrans_id_merchant"
-                    type="text"
-                    class="mt-1 block w-full capitalize"
-                    required
-                />
-                <InputError :message="form.errors.midtrans_id_merchant" class="mt-2" />
-            </div>
+<!--            <div class="col-span-6 sm:col-span-4">-->
+<!--                <InputLabel for="midtransIdMerchant" value="Midtrans Id Merchant" />-->
+<!--                <TextInput-->
+<!--                    id="midtransIdMerchant"-->
+<!--                    v-model="form.midtrans_id_merchant"-->
+<!--                    type="text"-->
+<!--                    class="mt-1 block w-full capitalize"-->
+<!--                    required-->
+<!--                />-->
+<!--                <InputError :message="form.errors.midtrans_id_merchant" class="mt-2" />-->
+<!--            </div>-->
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="midtransClientKey" value="Midtrans Client Key" />
-                <TextInput
-                    id="midtransClientKey"
-                    v-model="form.midtrans_client_key"
-                    type="text"
-                    class="mt-1 block w-full capitalize"
-                    required
-                />
-                <InputError :message="form.errors.midtrans_client_key" class="mt-2" />
-            </div>
+<!--            <div class="col-span-6 sm:col-span-4">-->
+<!--                <InputLabel for="midtransClientKey" value="Midtrans Client Key" />-->
+<!--                <TextInput-->
+<!--                    id="midtransClientKey"-->
+<!--                    v-model="form.midtrans_client_key"-->
+<!--                    type="text"-->
+<!--                    class="mt-1 block w-full capitalize"-->
+<!--                    required-->
+<!--                />-->
+<!--                <InputError :message="form.errors.midtrans_client_key" class="mt-2" />-->
+<!--            </div>-->
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="midtransServerKey" value="Midtrans Server Key" />
-                <TextInput
-                    id="midtransServerKey"
-                    v-model="form.midtrans_server_key"
-                    type="text"
-                    class="mt-1 block w-full capitalize"
-                    required
-                />
-                <InputError :message="form.errors.midtrans_server_key" class="mt-2" />
-            </div>
+<!--            <div class="col-span-6 sm:col-span-4">-->
+<!--                <InputLabel for="midtransServerKey" value="Midtrans Server Key" />-->
+<!--                <TextInput-->
+<!--                    id="midtransServerKey"-->
+<!--                    v-model="form.midtrans_server_key"-->
+<!--                    type="text"-->
+<!--                    class="mt-1 block w-full capitalize"-->
+<!--                    required-->
+<!--                />-->
+<!--                <InputError :message="form.errors.midtrans_server_key" class="mt-2" />-->
+<!--            </div>-->
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="digiflazzUsername" value="Digiflazz Username" />
-                <TextInput
-                    id="digiflazzUsername"
-                    v-model="form.digiflazz_username"
-                    type="text"
-                    class="mt-1 block w-full capitalize"
-                    required
-                />
-                <InputError :message="form.errors.digiflazz_username" class="mt-2" />
-            </div>
+<!--            <div class="col-span-6 sm:col-span-4">-->
+<!--                <InputLabel for="digiflazzUsername" value="Digiflazz Username" />-->
+<!--                <TextInput-->
+<!--                    id="digiflazzUsername"-->
+<!--                    v-model="form.digiflazz_username"-->
+<!--                    type="text"-->
+<!--                    class="mt-1 block w-full capitalize"-->
+<!--                    required-->
+<!--                />-->
+<!--                <InputError :message="form.errors.digiflazz_username" class="mt-2" />-->
+<!--            </div>-->
 
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="digiflazzKey" value="Digiflazz Key" />
-                <TextInput
-                    id="digiflazzKey"
-                    v-model="form.digiflazz_key"
-                    type="text"
-                    class="mt-1 block w-full capitalize"
-                    required
-                />
-                <InputError :message="form.errors.digiflazz_key" class="mt-2" />
-            </div>
+<!--            <div class="col-span-6 sm:col-span-4">-->
+<!--                <InputLabel for="digiflazzKey" value="Digiflazz Key" />-->
+<!--                <TextInput-->
+<!--                    id="digiflazzKey"-->
+<!--                    v-model="form.digiflazz_key"-->
+<!--                    type="text"-->
+<!--                    class="mt-1 block w-full capitalize"-->
+<!--                    required-->
+<!--                />-->
+<!--                <InputError :message="form.errors.digiflazz_key" class="mt-2" />-->
+<!--            </div>-->
 
         </template>
 

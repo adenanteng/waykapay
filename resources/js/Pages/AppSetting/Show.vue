@@ -3,6 +3,8 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import UpdateAppInformationForm from '@/Pages/AppSetting/Partials/UpdateAppInformationForm.vue';
 import PreviousButton from "@/Components/PreviousButton.vue";
 import SectionBorder from "@/Components/SectionBorder.vue";
+import UpdateApiMidtransForm from "./Partials/UpdateApiMidtransForm.vue";
+import UpdateApiDigiflazzForm from "./Partials/UpdateApiDigiflazzForm.vue";
 
 </script>
 
@@ -17,8 +19,13 @@ import SectionBorder from "@/Components/SectionBorder.vue";
 
         <UpdateAppInformationForm :setting="$page.props.setting" />
 
-<!--        <SectionBorder />-->
+        <SectionBorder />
 
+        <UpdateApiMidtransForm :setting="$page.props.setting" />
+
+        <SectionBorder />
+
+        <UpdateApiDigiflazzForm :setting="$page.props.setting" />
 
     </AppLayout>
 </template>

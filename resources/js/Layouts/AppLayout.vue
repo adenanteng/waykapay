@@ -329,7 +329,7 @@ const logout = () => {
                                     <div class="pt-4 pb-2">
                                         <div class="flex items-center px-5">
                                             <div class="flex-shrink-0">
-                                                <img class="h-12 w-12 rounded-full"
+                                                <img class="h-12 w-12 rounded-full object-cover"
                                                      :src="$page.props.user.profile_photo_url"
                                                      :alt="$page.props.user.name"/>
                                             </div>
