@@ -98,7 +98,7 @@ function formatPrice(value) {
 <!--            </template>-->
 <!--        </SectionTitle>-->
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="history in $page.props.history">
                         <li>

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use Psy\Util\Str;
-use Spatie\Activitylog\Models\Activity;
 use Stephenjude\Wallet\Exceptions\InsufficientFundException;
 
 class DashboardController extends Controller
@@ -23,7 +22,8 @@ class DashboardController extends Controller
 
         return Inertia::render('Dashboard', [
             'users' => auth()->user(),
-            'history'  =>  Activity::where('properties->user_id', auth()->user()->id)->latest()->get()->take(5)
+//            'history'  =>  Activity::where('properties->user_id', auth()->user()->id)->latest()->get()->take(5)
+        'history'   => null
         ]);
     }
 

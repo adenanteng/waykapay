@@ -7,9 +7,6 @@ import {computed, ref} from "vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
-import InputError from "@/Components/InputError.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputLabel from "@/Components/InputLabel.vue";
 import FormSection from "@/Components/FormSection.vue";
 
 const props = defineProps({

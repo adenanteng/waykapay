@@ -48,7 +48,7 @@ const updateSettingInformation = () => {
                     id="midtransIdMerchant"
                     v-model="form.midtrans_id_merchant"
                     type="text"
-                    class="mt-1 block w-full capitalize"
+                    class="mt-1 block w-full"
                     required
                 />
                 <InputError :message="form.errors.midtrans_id_merchant" class="mt-2" />
@@ -60,7 +60,7 @@ const updateSettingInformation = () => {
                     id="midtransClientKey"
                     v-model="form.midtrans_client_key"
                     type="text"
-                    class="mt-1 block w-full capitalize"
+                    class="mt-1 block w-full"
                     required
                 />
                 <InputError :message="form.errors.midtrans_client_key" class="mt-2" />
@@ -72,7 +72,7 @@ const updateSettingInformation = () => {
                     id="midtransServerKey"
                     v-model="form.midtrans_server_key"
                     type="text"
-                    class="mt-1 block w-full capitalize"
+                    class="mt-1 block w-full"
                     required
                 />
                 <InputError :message="form.errors.midtrans_server_key" class="mt-2" />

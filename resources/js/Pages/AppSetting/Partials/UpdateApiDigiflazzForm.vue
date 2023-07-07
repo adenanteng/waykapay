@@ -47,7 +47,7 @@ const updateSettingInformation = () => {
                     id="digiflazzUsername"
                     v-model="form.digiflazz_username"
                     type="text"
-                    class="mt-1 block w-full capitalize"
+                    class="mt-1 block w-full"
                     required
                 />
                 <InputError :message="form.errors.digiflazz_username" class="mt-2" />
@@ -59,7 +59,7 @@ const updateSettingInformation = () => {
                     id="digiflazzKey"
                     v-model="form.digiflazz_key"
                     type="text"
-                    class="mt-1 block w-full capitalize"
+                    class="mt-1 block w-full"
                     required
                 />
                 <InputError :message="form.errors.digiflazz_key" class="mt-2" />

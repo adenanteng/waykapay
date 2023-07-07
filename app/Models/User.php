@@ -53,14 +53,14 @@ class User extends Authenticatable implements Wallet
         self::ADMIN => 'Admin',
     ];
 
-    const SUKSES = 1;
-    const PENDING = 2;
-    const GAGAL = 3;
-    const STATUS = [
-        self::SUKSES => 'Sukses',
-        self::PENDING => 'Pending',
-        self::GAGAL =>  'Gagal,'
-    ];
+//    const SUKSES = 1;
+//    const PENDING = 2;
+//    const GAGAL = 3;
+//    const STATUS = [
+//        self::SUKSES => 'Sukses',
+//        self::PENDING => 'Pending',
+//        self::GAGAL =>  'Gagal,'
+//    ];
 
     /**
      * The attributes that should be cast.
@@ -80,7 +80,6 @@ class User extends Authenticatable implements Wallet
     protected $appends = [
         'profile_photo_url',
         'created',
-        'role'
     ];
 
     public function getCreatedAttribute()
@@ -88,8 +87,8 @@ class User extends Authenticatable implements Wallet
         return date('d M Y', strtotime($this->created_at));
     }
 
-    public function getRoleAttribute(): string
-    {
-        return self::ROLE[$this->role_id];
-    }
+//    public function getRoleAttribute(): string
+//    {
+//        return self::ROLE[$this->role_id];
+//    }
 }
