@@ -52,18 +52,6 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="phone" value="Telepon" />
-                <TextInput
-                    id="phone"
-                    v-model="form.phone"
-                    type="tel"
-                    class="mt-1 block w-full"
-                    required
-                />
-                <InputError class="mt-2" :message="form.errors.phone" />
-            </div>
-
-            <div class="mt-4">
                 <InputLabel for="email" value="Email" />
                 <TextInput
                     id="email"
@@ -73,6 +61,18 @@ const submit = () => {
                     required
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div class="mt-4">
+                <InputLabel for="phone" value="Telepon" />
+                <TextInput
+                    id="phone"
+                    v-model="form.phone"
+                    type="tel"
+                    class="mt-1 block w-full"
+                    required
+                />
+                <InputError class="mt-2" :message="form.errors.phone" />
             </div>
 
             <div class="mt-4">

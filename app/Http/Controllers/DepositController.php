@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use Psy\Util\Str;
-use Spatie\Activitylog\Models\Activity;
 use Stephenjude\Wallet\Exceptions\InsufficientFundException;
 
 class DepositController extends Controller
@@ -24,17 +23,18 @@ class DepositController extends Controller
         ]);
     }
 
-    public function create(Request $request, User $user) {
+    public function create(Request $request) {
+
+//        dd($user->all(), $request->all());
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic '.base64_encode(Helper::api()->midtrans_server_key.':')
         ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions',
-
-        [
+            [
             "transaction_details" => [
-                "order_id" => "deposit-".$user->name.\Illuminate\Support\Str::random(8),
+                "order_id" => "deposit-".$request->id."-".\Illuminate\Support\Str::random(8),
                 "gross_amount" => $request['amount']
             ],
             "item_details" => [
@@ -43,25 +43,22 @@ class DepositController extends Controller
                     "price" => $request['amount'],
                     "quantity" => 1,
                     "name" => "deposit",
-                    "brand" => "Mudah Saja",
+                    "brand" => "Waykapay",
                     "category" => "payment",
-                    "merchant_name" => "Mudah Saja",
-                    "url" => "http://company.test"
+                    "merchant_name" => "Waykapay",
+                    "url" => "https://waykapay.com"
                 ]
             ],
             "customer_details" => [
-                    "first_name" => auth()->user()->name,
+                    "first_name" => $request->name,
                     "last_name" => "",
-                    "email" => auth()->user()->email,
-                    "phone" => auth()->user()->phone,
-
+                    "email" => $request->email,
+                    "phone" => $request->phone,
                 ],
-        ],
+            ],
+        );
 
-
-    );
-
-//        dd($response->object());
+        //        dd($response->object());
         if ($response->successful()) {
             return Inertia::render('Deposit/Show', [
                 'users' => auth()->user(),
@@ -72,6 +69,8 @@ class DepositController extends Controller
         } else {
             dd($response->status());
         }
+
+
     }
 
     public function show(Request $request) {
@@ -79,15 +78,15 @@ class DepositController extends Controller
         $user = User::where('id', $request['id'])->first();
         $user->deposit($request['amount']);
 
-        activity()
-            ->withProperties([
-                'amount' => $request['amount'],
-                'user_id'  => $user->id,
-                'status_id'    => User::SUKSES,
-                'created'   => Carbon::now(),
-            ])
-            ->event('deposit')
-            ->log('Deposit');
+//        activity()
+//            ->withProperties([
+//                'amount' => $request['amount'],
+//                'user_id'  => $user->id,
+//                'status_id'    => User::SUKSES,
+//                'created'   => Carbon::now(),
+//            ])
+//            ->event('deposit')
+//            ->log('Deposit');
 
         session()->flash('flash.banner', 'Deposit berhasil!');
         session()->flash('flash.bannerStyle', 'success');
@@ -103,12 +102,12 @@ class DepositController extends Controller
         try {
             $user->withdraw($amount);
 
-            activity()
-                ->withProperties([
-                    'amount' => $amount
-                ])
-                ->event('withdraw')
-                ->log('withdraw');
+//            activity()
+//                ->withProperties([
+//                    'amount' => $amount
+//                ])
+//                ->event('withdraw')
+//                ->log('withdraw');
 
         } catch (InsufficientFundException $e) {
             report($e);

@@ -6,7 +6,7 @@ import {Link} from "@inertiajs/vue3";
 <template>
     <div class="rounded-t-3xl bg-white bg-opacity-50 backdrop-blur-2xl border-t border-gray-300 overflow-hidden shadow-lg fixed bottom-0 right-0 left-0">
         <div class="pt-3 pb-2">
-            <div class="grid grid-cols-4">
+            <div class="grid grid-cols-4 max-w-7xl mx-auto">
                 <Link :href="route('dashboard')" class="group text-center">
                     <i class="fa-home text-xl text-gray-700" :class="$page.url == '/dashboard' ? 'fa-solid text-primary-700' : 'fa-regular' " />
                     <h3 class="text-sm text-gray-700" :class="$page.url == '/dashboard' ? 'font-semibold text-primary-700' : '' ">Beranda</h3>
