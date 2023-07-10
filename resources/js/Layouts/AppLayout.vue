@@ -91,10 +91,10 @@ const logout = () => {
 
                             <template v-else>
                                 <ApplicationMark class="block h-10 w-auto" />
-                                <div class="ml-2 nightwind-prevent-block" v-if="$page.props.appSetting">
-                                    <h1 class="text-white capitalize font-semibold">{{ $page.props.appSetting.name }}</h1>
-                                    <p class="text-gray-100 font-light text-sm">{{ $page.props.appSetting.desc }}</p>
-                                </div>
+<!--                                <div class="ml-2 nightwind-prevent-block" v-if="$page.props.appSetting">-->
+<!--                                    <h1 class="text-white capitalize font-semibold">{{ $page.props.appSetting.name }}</h1>-->
+<!--                                    <p class="text-gray-100 font-light text-sm">{{ $page.props.appSetting.desc }}</p>-->
+<!--                                </div>-->
                             </template>
                         </div>
 

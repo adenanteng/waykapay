@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->longText('desc')->nullable();
 
+            $table->integer('fees')->default(0);
+
             $table->string('midtrans_id_merchant')->nullable();
             $table->string('midtrans_client_key')->nullable();
             $table->string('midtrans_server_key')->nullable();

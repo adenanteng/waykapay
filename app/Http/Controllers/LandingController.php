@@ -25,12 +25,13 @@ class LandingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function welcome(): Response
+    public function welcome(): RedirectResponse
     {
-        return Inertia::render('Landing/Welcome', [
-//            'trip' => Trip::all()
-        ]);
+//        return Inertia::render('Landing/Welcome', [
+////            'trip' => Trip::all()
+//        ]);
+        return Redirect::route('dashboard');
     }
 }

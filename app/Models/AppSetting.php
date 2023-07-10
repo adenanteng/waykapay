@@ -19,6 +19,7 @@ class AppSetting extends Model implements HasMedia
     protected $fillable = [
         'name',
         'desc',
+        'fees',
         'midtrans_id_merchant',
         'midtrans_client_key',
         'midtrans_server_key',

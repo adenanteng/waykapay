@@ -59,6 +59,7 @@ const submit = () => {
                     type="email"
                     class="mt-1 block w-full"
                     required
+                    autocomplete="email"
                 />
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
@@ -71,6 +72,7 @@ const submit = () => {
                     type="tel"
                     class="mt-1 block w-full"
                     required
+                    autocomplete="phone"
                 />
                 <InputError class="mt-2" :message="form.errors.phone" />
             </div>

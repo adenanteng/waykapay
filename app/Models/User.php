@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +21,7 @@ class User extends Authenticatable implements Wallet
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasWallet;
+//    use HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -48,19 +50,12 @@ class User extends Authenticatable implements Wallet
 
     const SUPERADMIN = 1;
     const ADMIN = 2;
+    const USER = 3;
     const ROLE = [
         self::SUPERADMIN => 'Super Admin',
         self::ADMIN => 'Admin',
+        self::USER => 'Jelata',
     ];
-
-//    const SUKSES = 1;
-//    const PENDING = 2;
-//    const GAGAL = 3;
-//    const STATUS = [
-//        self::SUKSES => 'Sukses',
-//        self::PENDING => 'Pending',
-//        self::GAGAL =>  'Gagal,'
-//    ];
 
     /**
      * The attributes that should be cast.
@@ -80,6 +75,7 @@ class User extends Authenticatable implements Wallet
     protected $appends = [
         'profile_photo_url',
         'created',
+        'role',
     ];
 
     public function getCreatedAttribute()
@@ -87,8 +83,8 @@ class User extends Authenticatable implements Wallet
         return date('d M Y', strtotime($this->created_at));
     }
 
-//    public function getRoleAttribute(): string
-//    {
-//        return self::ROLE[$this->role_id];
-//    }
+    public function getRoleAttribute(): string
+    {
+        return self::ROLE[$this->role_id];
+    }
 }

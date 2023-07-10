@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('status_id');
             $table->integer('category_id');
+            $table->string('order_id');
             $table->integer('amount');
             $table->string('desc')->nullable();
             $table->timestamps();

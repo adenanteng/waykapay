@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -27,10 +28,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
     Route::post('/deposit', [DepositController::class, 'create'])->name('deposit.create');
-    Route::post('/deposit/midtrans', [DepositController::class, 'show'])->name('deposit.show');
+    Route::post('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
 
     Route::post('/withdraw', [DepositController::class, 'withdraw'])->name('withdraw');
 
+    Route::resource('/history', HistoryController::class)->names('history');
 
     Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
 

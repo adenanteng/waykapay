@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -27,6 +28,8 @@ class DepositController extends Controller
 
 //        dd($user->all(), $request->all());
 
+        $order_id = "deposit-".$request->id."-".\Illuminate\Support\Str::random(8);
+
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
@@ -34,7 +37,7 @@ class DepositController extends Controller
         ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions',
             [
             "transaction_details" => [
-                "order_id" => "deposit-".$request->id."-".\Illuminate\Support\Str::random(8),
+                "order_id" => $order_id,
                 "gross_amount" => $request['amount']
             ],
             "item_details" => [
@@ -58,12 +61,14 @@ class DepositController extends Controller
             ],
         );
 
-        //        dd($response->object());
+//        dd($response->object());
+
         if ($response->successful()) {
-            return Inertia::render('Deposit/Show', [
-                'users' => auth()->user(),
+            return Inertia::render('Deposit/Confirm', [
+                'users'     => auth()->user(),
                 'response'  => $response->object(),
-                'amount'    => $request['amount']
+                'amount'    => $request['amount'],
+                'order_id'  => $order_id
             ]);
 
         } else {
@@ -73,23 +78,51 @@ class DepositController extends Controller
 
     }
 
-    public function show(Request $request) {
+    public function confirm(Request $request) {
 //        dd($request->toArray());
-        $user = User::where('id', $request['id'])->first();
-        $user->deposit($request['amount']);
 
-//        activity()
-//            ->withProperties([
-//                'amount' => $request['amount'],
-//                'user_id'  => $user->id,
-//                'status_id'    => User::SUKSES,
-//                'created'   => Carbon::now(),
-//            ])
-//            ->event('deposit')
-//            ->log('Deposit');
+        $user = User::where('id', $request['user_id'])->first();
 
-        session()->flash('flash.banner', 'Deposit berhasil!');
-        session()->flash('flash.bannerStyle', 'success');
+        if ($request['status'] == 'success') {
+            $user->deposit($request['amount']);
+            $status = Transaction::SUCCESS;
+
+            session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
+            session()->flash('flash.bannerStyle', 'success');
+
+        } elseif ($request['status'] == 'pending') {
+            $status = Transaction::PENDING;
+
+            session()->flash('flash.banner', 'Deposit pending!');
+            session()->flash('flash.bannerStyle', 'danger');
+
+        } elseif ($request['status'] == 'error') {
+            $status = Transaction::ERROR;
+
+            session()->flash('flash.banner', 'Deposit error!');
+            session()->flash('flash.bannerStyle', 'danger');
+
+        } elseif ($request['status'] == 'close') {
+            $status = Transaction::CLOSE;
+
+            session()->flash('flash.banner', 'Deposit close!');
+            session()->flash('flash.bannerStyle', 'danger');
+
+        } else {
+            $status = Transaction::UNDEFINED;
+
+            session()->flash('flash.banner', 'Gatau lagi kami!');
+            session()->flash('flash.bannerStyle', 'danger');
+        }
+
+        $transaction = Transaction::create([
+            'token' => $request['token'],
+            'user_id' => $request['user_id'],
+            'status_id' => $status,
+            'category_id' => Transaction::DEPOSIT,
+            'order_id' => $request['order_id'],
+            'amount' => $request['amount'],
+        ]);
 
         return Redirect::route('dashboard');
 

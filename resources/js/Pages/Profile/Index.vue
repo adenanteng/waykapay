@@ -15,14 +15,14 @@ import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <li class="px-6 py-4 flex">
-                    <Link :href="route('profile.show')">
+                <li class="px-6 py-4">
+                    <Link :href="route('profile.show')" class="block">
                         <p class="text-sm font-medium text-gray-900">Pengaturan Profil</p>
                     </Link>
                 </li>
 
-                <li class="px-6 py-4 flex">
-                    <Link :href="route('setting.index')">
+                <li class="px-6 py-4">
+                    <Link :href="route('setting.index')" class="block">
                         <p class="text-sm font-medium text-gray-900">Pengaturan Aplikasi</p>
                     </Link>
                 </li>

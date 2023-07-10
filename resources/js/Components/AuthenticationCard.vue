@@ -18,7 +18,7 @@ watch(darkMode, (newDarkMode) => {
     <div class="" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
     <div class="min-h-screen flex bg-white bg-glass bg-fixed" >
         <div class="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-            <div class="mx-auto w-full max-w-sm lg:w-96">
+            <div class="mx-auto w-full max-w-sm lg:w-96 py-10">
                 <div>
                     <button @click="darkMode = ! darkMode">
                         <slot name="logo" />

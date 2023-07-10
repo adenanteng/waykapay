@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
     use HasFactory;
+//    use HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -19,17 +21,22 @@ class Transaction extends Model
         'user_id',
         'status_id',
         'category_id',
+        'order_id',
         'amount',
         'desc',
     ];
 
-    const SUKSES = 1;
+    const SUCCESS = 1;
     const PENDING = 2;
-    const GAGAL = 3;
+    const ERROR = 3;
+    const CLOSE = 4;
+    const UNDEFINED = 5;
     const STATUS = [
-        self::SUKSES => 'Sukses',
+        self::SUCCESS => 'Sukses',
         self::PENDING => 'Pending',
-        self::GAGAL =>  'Gagal,'
+        self::ERROR =>  'Gagal',
+        self::CLOSE => 'Tertutup',
+        self::UNDEFINED => 'Undefined',
     ];
 
     const DEPOSIT = 1;
