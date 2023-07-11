@@ -16,7 +16,7 @@ watch(darkMode, (newDarkMode) => {
 <template>
 
     <div class="" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
-    <div class="min-h-screen flex bg-white bg-glass bg-fixed" >
+        <div class="min-h-screen flex bg-white bg-glass bg-fixed" >
         <div class="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full max-w-sm lg:w-96 py-10">
                 <div>
@@ -64,7 +64,7 @@ watch(darkMode, (newDarkMode) => {
             </div>
         </div>
         <div class="hidden lg:block relative w-0 flex-1 ">
-            <img class="absolute inset-0 h-full w-full object-cover" src="/img/camp.jpg" alt="" />
+            <img class="absolute inset-0 h-full w-full object-cover" src="/img/minion.jpg" alt="" />
         </div>
     </div>
     </div>

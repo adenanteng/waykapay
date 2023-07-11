@@ -23,10 +23,16 @@
 
 {{--        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>--}}
 
+
+{{--        <script type="text/javascript"--}}
+{{--                src="https://app.sandbox.midtrans.com/snap/snap.js"--}}
+{{--                data-client-key="SB-Mid-client-cXAFoUN7DLvFfF2V"--}}
+{{--        ></script>--}}
+
         <script type="text/javascript"
                 src="https://app.sandbox.midtrans.com/snap/snap.js"
-                data-client-key="SB-Mid-client-cXAFoUN7DLvFfF2V">
-        </script>
+                data-client-key="{{ Helper::api()->midtrans_client_key ?? '' }}"
+        ></script>
 
         <!-- Scripts -->
         @routes

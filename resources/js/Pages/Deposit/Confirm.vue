@@ -23,6 +23,7 @@ const form = useForm({
     user_id: props.users.id,
     amount: props.amount,
     token: props.response.token,
+    redirect_url: props.response.redirect_url,
     status: null,
     order_id: props.order_id
 });

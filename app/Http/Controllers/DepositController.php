@@ -27,7 +27,6 @@ class DepositController extends Controller
     public function create(Request $request) {
 
 //        dd($user->all(), $request->all());
-
         $order_id = "deposit-".$request->id."-".\Illuminate\Support\Str::random(8);
 
         $response = Http::withHeaders([
@@ -117,6 +116,7 @@ class DepositController extends Controller
 
         $transaction = Transaction::create([
             'token' => $request['token'],
+            'redirect_url' => $request['redirect_url'],
             'user_id' => $request['user_id'],
             'status_id' => $status,
             'category_id' => Transaction::DEPOSIT,

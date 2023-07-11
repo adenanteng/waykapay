@@ -18,6 +18,7 @@ class Transaction extends Model
      */
     protected $fillable = [
         'token',
+        'redirect_url',
         'user_id',
         'status_id',
         'category_id',
@@ -28,14 +29,20 @@ class Transaction extends Model
 
     const SUCCESS = 1;
     const PENDING = 2;
-    const ERROR = 3;
-    const CLOSE = 4;
-    const UNDEFINED = 5;
+    const CANCEL = 3;
+    const DENY = 4;
+    const EXPIRED = 5;
+    const ERROR = 6;
+    const CLOSE = 7;
+    const UNDEFINED = 8;
     const STATUS = [
         self::SUCCESS => 'Sukses',
         self::PENDING => 'Pending',
+        self::CANCEL => 'Batal',
+        self::DENY => 'Ditolak',
+        self::EXPIRED => 'Kadaluarsa',
         self::ERROR =>  'Gagal',
-        self::CLOSE => 'Tertutup',
+        self::CLOSE => 'Keluar',
         self::UNDEFINED => 'Undefined',
     ];
 

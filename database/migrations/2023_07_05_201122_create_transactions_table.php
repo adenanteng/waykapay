@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('token');
+            $table->string('redirect_url')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->integer('status_id');
             $table->integer('category_id');
