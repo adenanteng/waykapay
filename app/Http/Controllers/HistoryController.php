@@ -29,63 +29,45 @@ class HistoryController extends Controller
         $transaction = Transaction::where('id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
-        $response = Http::withHeaders([
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Basic '.base64_encode(Helper::api()->midtrans_server_key.':')
-        ])->get('https://api.sandbox.midtrans.com/v2/'.$transaction->order_id.'/status');
+        if ($transaction->status_id !== Transaction::SUCCESS) {
 
-//        dd($response->object()->transaction_status);
-//        if ($response->object()->transaction_status == 'settlement') {
-//            $status_id = Transaction::SUCCESS;
-//            $user->deposit($transaction->amount);
-//
-//        } elseif ($response->object()->transaction_status == 'capture') {
-//            $status_id = Transaction::SUCCESS;
-//            $user->deposit($transaction->amount);
-//
-//        } elseif ($response->object()->transaction_status == 'pending') {
-//            $status_id = Transaction::PENDING;
-//        } elseif ($response->object()->transaction_status == 'cancel') {
-//            $status_id = Transaction::CANCEL;
-//        } elseif ($response->object()->transaction_status == 'deny') {
-//            $status_id = Transaction::DENY;
-//        } elseif ($response->object()->transaction_status == 'expire') {
-//            $status_id = Transaction::EXPIRE;
-//        } else {
-//            $status_id = Transaction::UNDEFINED;
-//        }
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Basic '.base64_encode(Helper::api()->midtrans_server_key.':')
+            ])->get('https://api.sandbox.midtrans.com/v2/'.$transaction->order_id.'/status');
 
-        switch($response->object()->transaction_status) {
-            case ('capture'):
-            case('settlement'):
-                $status_id = Transaction::SUCCESS;
-                $user->deposit($transaction->amount);
-                break;
+            switch($response->object()->transaction_status) {
+                case ('capture'):
+                case('settlement'):
+                    $status_id = Transaction::SUCCESS;
+                    $user->deposit($transaction->amount);
+                    break;
 
-            case ('pending'):
-                $status_id = Transaction::PENDING;
-                break;
+                case ('pending'):
+                    $status_id = Transaction::PENDING;
+                    break;
 
-            case ('cancel'):
-                $status_id = Transaction::CANCEL;
-                break;
+                case ('cancel'):
+                    $status_id = Transaction::CANCEL;
+                    break;
 
-            case ('deny'):
-                $status_id = Transaction::DENY;
-                break;
+                case ('deny'):
+                    $status_id = Transaction::DENY;
+                    break;
 
-            case ('expire'):
-                $status_id = Transaction::EXPIRE;
-                break;
+                case ('expire'):
+                    $status_id = Transaction::EXPIRE;
+                    break;
 
-            default:
-                $status_id = Transaction::UNDEFINED;
+                default:
+                    $status_id = Transaction::UNDEFINED;
+            }
+
+            $transaction->update([
+                'status_id'     => $status_id,
+            ]);
         }
-
-        $transaction->update([
-            'status_id'     => $status_id,
-        ]);
 
         return to_route('history.index');
     }

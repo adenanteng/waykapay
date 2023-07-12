@@ -45,7 +45,7 @@ function formatPrice(value) {
                 <template v-for="history in $page.props.history">
                         <li>
 <!--                            :href="history.redirect_url"-->
-                            <Link :href="history.status_id !== 1 ? route('history.show', history) : '' " class="block hover:bg-primary-50" >
+                            <Link :href="route('history.show', history)" class="block hover:bg-primary-50" >
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
                                         <p class="font-medium text-primary-600 truncate">{{ history.category }}</p>
