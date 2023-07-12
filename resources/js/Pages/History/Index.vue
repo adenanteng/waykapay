@@ -64,8 +64,8 @@ function formatPrice(value) {
                                                 Rp {{ formatPrice(history.amount) }}
                                             </p>
                                             <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />
-                                                
+<!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
+                                                {{ history.order_id }}
                                             </p>
                                         </div>
                                         <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">

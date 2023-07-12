@@ -31,7 +31,7 @@ class Transaction extends Model
     const PENDING = 2;
     const CANCEL = 3;
     const DENY = 4;
-    const EXPIRED = 5;
+    const EXPIRE = 5;
     const ERROR = 6;
     const CLOSE = 7;
     const UNDEFINED = 8;
@@ -40,7 +40,7 @@ class Transaction extends Model
         self::PENDING => 'Pending',
         self::CANCEL => 'Batal',
         self::DENY => 'Ditolak',
-        self::EXPIRED => 'Kadaluarsa',
+        self::EXPIRE => 'Kadaluarsa',
         self::ERROR =>  'Gagal',
         self::CLOSE => 'Keluar',
         self::UNDEFINED => 'Undefined',

@@ -36,24 +36,51 @@ class HistoryController extends Controller
         ])->get('https://api.sandbox.midtrans.com/v2/'.$transaction->order_id.'/status');
 
 //        dd($response->object()->transaction_status);
-        if ($response->object()->transaction_status == 'settlement') {
-            $status_id = Transaction::SUCCESS;
-            $user->deposit($transaction->amount);
+//        if ($response->object()->transaction_status == 'settlement') {
+//            $status_id = Transaction::SUCCESS;
+//            $user->deposit($transaction->amount);
+//
+//        } elseif ($response->object()->transaction_status == 'capture') {
+//            $status_id = Transaction::SUCCESS;
+//            $user->deposit($transaction->amount);
+//
+//        } elseif ($response->object()->transaction_status == 'pending') {
+//            $status_id = Transaction::PENDING;
+//        } elseif ($response->object()->transaction_status == 'cancel') {
+//            $status_id = Transaction::CANCEL;
+//        } elseif ($response->object()->transaction_status == 'deny') {
+//            $status_id = Transaction::DENY;
+//        } elseif ($response->object()->transaction_status == 'expire') {
+//            $status_id = Transaction::EXPIRE;
+//        } else {
+//            $status_id = Transaction::UNDEFINED;
+//        }
 
-        } elseif ($response->object()->transaction_status == 'capture') {
-            $status_id = Transaction::SUCCESS;
-            $user->deposit($transaction->amount);
+        switch($response->object()->transaction_status) {
+            case ('capture'):
+            case('settlement'):
+                $status_id = Transaction::SUCCESS;
+                $user->deposit($transaction->amount);
+                break;
 
-        } elseif ($response->object()->transaction_status == 'pending') {
-            $status_id = Transaction::PENDING;
-        } elseif ($response->object()->transaction_status == 'cancel') {
-            $status_id = Transaction::CANCEL;
-        } elseif ($response->object()->transaction_status == 'deny') {
-            $status_id = Transaction::ERROR;
-        } elseif ($response->object()->transaction_status == 'expire') {
-            $status_id = Transaction::EXPIRED;
-        } else {
-            $status_id = Transaction::UNDEFINED;
+            case ('pending'):
+                $status_id = Transaction::PENDING;
+                break;
+
+            case ('cancel'):
+                $status_id = Transaction::CANCEL;
+                break;
+
+            case ('deny'):
+                $status_id = Transaction::DENY;
+                break;
+
+            case ('expire'):
+                $status_id = Transaction::EXPIRE;
+                break;
+
+            default:
+                $status_id = Transaction::UNDEFINED;
         }
 
         $transaction->update([

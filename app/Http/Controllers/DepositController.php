@@ -82,43 +82,80 @@ class DepositController extends Controller
 
         $user = User::where('id', $request['user_id'])->first();
 
-        if ($request['status'] == 'success') {
-            $user->deposit($request['amount']);
-            $status = Transaction::SUCCESS;
+//        if ($request['status'] == 'success') {
+//            $user->deposit($request['amount']);
+//            $status_id = Transaction::SUCCESS;
+//
+//            session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
+//            session()->flash('flash.bannerStyle', 'success');
+//
+//        } elseif ($request['status'] == 'pending') {
+//            $status_id = Transaction::PENDING;
+//
+//            session()->flash('flash.banner', 'Deposit pending!');
+//            session()->flash('flash.bannerStyle', 'danger');
+//
+//        } elseif ($request['status'] == 'error') {
+//            $status_id = Transaction::ERROR;
+//
+//            session()->flash('flash.banner', 'Deposit error!');
+//            session()->flash('flash.bannerStyle', 'danger');
+//
+//        } elseif ($request['status'] == 'close') {
+//            $status_id = Transaction::CLOSE;
+//
+//            session()->flash('flash.banner', 'Deposit close!');
+//            session()->flash('flash.bannerStyle', 'danger');
+//
+//        } else {
+//            $status_id = Transaction::UNDEFINED;
+//
+//            session()->flash('flash.banner', 'Gatau lagi kami!');
+//            session()->flash('flash.bannerStyle', 'danger');
+//        }
 
-            session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
-            session()->flash('flash.bannerStyle', 'success');
+        switch($request['status']) {
+            case ('success'):
+                $user->deposit($request['amount']);
+                $status_id = Transaction::SUCCESS;
 
-        } elseif ($request['status'] == 'pending') {
-            $status = Transaction::PENDING;
+                session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
+                session()->flash('flash.bannerStyle', 'success');
+                break;
 
-            session()->flash('flash.banner', 'Deposit pending!');
-            session()->flash('flash.bannerStyle', 'danger');
+            case ('pending'):
+                $status_id = Transaction::PENDING;
 
-        } elseif ($request['status'] == 'error') {
-            $status = Transaction::ERROR;
+                session()->flash('flash.banner', 'Deposit pending!');
+                session()->flash('flash.bannerStyle', 'danger');
+                break;
 
-            session()->flash('flash.banner', 'Deposit error!');
-            session()->flash('flash.bannerStyle', 'danger');
+            case ('error'):
+                $status_id = Transaction::ERROR;
 
-        } elseif ($request['status'] == 'close') {
-            $status = Transaction::CLOSE;
+                session()->flash('flash.banner', 'Deposit error!');
+                session()->flash('flash.bannerStyle', 'danger');
+                break;
 
-            session()->flash('flash.banner', 'Deposit close!');
-            session()->flash('flash.bannerStyle', 'danger');
+            case ('close'):
+                $status_id = Transaction::CLOSE;
 
-        } else {
-            $status = Transaction::UNDEFINED;
+                session()->flash('flash.banner', 'Deposit close!');
+                session()->flash('flash.bannerStyle', 'danger');
+                break;
 
-            session()->flash('flash.banner', 'Gatau lagi kami!');
-            session()->flash('flash.bannerStyle', 'danger');
+            default:
+                $status_id = Transaction::UNDEFINED;
+
+                session()->flash('flash.banner', 'Gatau lagi kami!');
+                session()->flash('flash.bannerStyle', 'danger');
         }
 
         $transaction = Transaction::create([
             'token' => $request['token'],
             'redirect_url' => $request['redirect_url'],
             'user_id' => $request['user_id'],
-            'status_id' => $status,
+            'status_id' => $status_id,
             'category_id' => Transaction::DEPOSIT,
             'order_id' => $request['order_id'],
             'amount' => $request['amount'],
