@@ -27,7 +27,7 @@ class DepositController extends Controller
     public function create(Request $request) {
 
 //        dd($user->all(), $request->all());
-        $order_id = "deposit-".$request->id."-".\Illuminate\Support\Str::random(8);
+        $order_id = "dp-".$request->id."-".\Illuminate\Support\Str::random(8);
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
@@ -124,7 +124,7 @@ class DepositController extends Controller
             'amount' => $request['amount'],
         ]);
 
-        return Redirect::route('dashboard');
+        return to_route('dashboard');
 
     }
 

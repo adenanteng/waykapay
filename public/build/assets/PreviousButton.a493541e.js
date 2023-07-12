@@ -1,1 +1,0 @@
-import{o as r,c as a,w as s,u as o,j as n,a as c}from"./app.da2f3e67.js";const f=c("i",{class:"fa-regular fa-arrow-left text-lg text-white nightwind-prevent p-2"},null,-1),_={__name:"PreviousButton",props:{href:String},setup(e){const t=e;return(i,p)=>(r(),a(o(n),{href:t.href},{default:s(()=>[f]),_:1},8,["href"]))}};export{_};

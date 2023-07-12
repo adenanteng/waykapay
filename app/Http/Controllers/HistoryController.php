@@ -60,7 +60,7 @@ class HistoryController extends Controller
             'status_id'     => $status_id,
         ]);
 
-        return Redirect::route('history.index');
+        return to_route('history.index');
     }
 
 
