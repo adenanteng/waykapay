@@ -26,7 +26,7 @@ class DepositController extends Controller
 
     public function create(Request $request) {
 
-//        dd($user->all(), $request->all());
+//        dd($request->all());
         $order_id = "dp-".$request->id."-".\Illuminate\Support\Str::random(8);
 
         $response = Http::withHeaders([
@@ -63,8 +63,18 @@ class DepositController extends Controller
 //        dd($response->object());
 
         if ($response->successful()) {
+            $transaction = Transaction::create([
+                'token' => $response->object()->token,
+                'redirect_url' => $response->object()->redirect_url,
+                'user_id' => $request['user_id'],
+                'status_id' => Transaction::PENDING,
+                'category_id' => Transaction::DEPOSIT,
+                'order_id' => $order_id,
+                'amount' => $request['amount'],
+            ]);
+
             return Inertia::render('Deposit/Confirm', [
-                'users'     => auth()->user(),
+                'users'     => User::where('id', $request['user_id'])->first(),
                 'response'  => $response->object(),
                 'amount'    => $request['amount'],
                 'order_id'  => $order_id
@@ -151,15 +161,15 @@ class DepositController extends Controller
                 session()->flash('flash.bannerStyle', 'danger');
         }
 
-        $transaction = Transaction::create([
-            'token' => $request['token'],
-            'redirect_url' => $request['redirect_url'],
-            'user_id' => $request['user_id'],
-            'status_id' => $status_id,
-            'category_id' => Transaction::DEPOSIT,
-            'order_id' => $request['order_id'],
-            'amount' => $request['amount'],
-        ]);
+//        $transaction = Transaction::create([
+//            'token' => $request['token'],
+//            'redirect_url' => $request['redirect_url'],
+//            'user_id' => $request['user_id'],
+//            'status_id' => $status_id,
+//            'category_id' => Transaction::DEPOSIT,
+//            'order_id' => $request['order_id'],
+//            'amount' => $request['amount'],
+//        ]);
 
         return to_route('dashboard');
 

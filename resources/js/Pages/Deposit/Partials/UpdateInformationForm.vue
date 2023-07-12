@@ -14,7 +14,7 @@ const props = defineProps({
 });
 
 const form = useForm({
-    id: props.users.id ?? null,
+    user_id: props.users.id ?? null,
     amount: null,
 });
 
