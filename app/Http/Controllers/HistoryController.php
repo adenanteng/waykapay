@@ -29,15 +29,16 @@ class HistoryController extends Controller
         $transaction = Transaction::where('id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
-        if ($transaction->status_id != Transaction::SUCCESS) {
+//        dd($transaction->status_id);
 
+        if ($transaction->status_id != Transaction::SUCCESS) {
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Basic '.base64_encode(Helper::api()->midtrans_server_key.':')
-            ])->get('https://api.sandbox.midtrans.com/v2/'.$transaction->order_id.'/status');
+                'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
+            ])->get('https://api.sandbox.midtrans.com/v2/' . $transaction->order_id . '/status');
 
-            switch($response->object()->transaction_status) {
+            switch ($response->object()->transaction_status) {
                 case ('capture'):
                 case('settlement'):
                     $status_id = Transaction::SUCCESS;
@@ -65,11 +66,13 @@ class HistoryController extends Controller
             }
 
             $transaction->update([
-                'status_id'     => $status_id,
+                'status_id' => $status_id,
             ]);
+
         }
 
-        return to_route('history.index');
+//        return to_route('history.index');
+        return redirect()->back();
     }
 
 

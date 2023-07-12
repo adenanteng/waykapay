@@ -63,15 +63,15 @@ class DepositController extends Controller
 //        dd($response->object());
 
         if ($response->successful()) {
-            $transaction = Transaction::create([
-                'token' => $response->object()->token,
-                'redirect_url' => $response->object()->redirect_url,
-                'user_id' => $request['user_id'],
-                'status_id' => Transaction::PENDING,
-                'category_id' => Transaction::DEPOSIT,
-                'order_id' => $order_id,
-                'amount' => $request['amount'],
-            ]);
+//            $transaction = Transaction::create([
+//                'token' => $response->object()->token,
+//                'redirect_url' => $response->object()->redirect_url,
+//                'user_id' => $request['user_id'],
+//                'status_id' => Transaction::PENDING,
+//                'category_id' => Transaction::DEPOSIT,
+//                'order_id' => $order_id,
+//                'amount' => $request['amount'],
+//            ]);
 
             return Inertia::render('Deposit/Confirm', [
                 'users'     => User::where('id', $request['user_id'])->first(),
@@ -91,38 +91,6 @@ class DepositController extends Controller
 //        dd($request->toArray());
 
         $user = User::where('id', $request['user_id'])->first();
-
-//        if ($request['status'] == 'success') {
-//            $user->deposit($request['amount']);
-//            $status_id = Transaction::SUCCESS;
-//
-//            session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
-//            session()->flash('flash.bannerStyle', 'success');
-//
-//        } elseif ($request['status'] == 'pending') {
-//            $status_id = Transaction::PENDING;
-//
-//            session()->flash('flash.banner', 'Deposit pending!');
-//            session()->flash('flash.bannerStyle', 'danger');
-//
-//        } elseif ($request['status'] == 'error') {
-//            $status_id = Transaction::ERROR;
-//
-//            session()->flash('flash.banner', 'Deposit error!');
-//            session()->flash('flash.bannerStyle', 'danger');
-//
-//        } elseif ($request['status'] == 'close') {
-//            $status_id = Transaction::CLOSE;
-//
-//            session()->flash('flash.banner', 'Deposit close!');
-//            session()->flash('flash.bannerStyle', 'danger');
-//
-//        } else {
-//            $status_id = Transaction::UNDEFINED;
-//
-//            session()->flash('flash.banner', 'Gatau lagi kami!');
-//            session()->flash('flash.bannerStyle', 'danger');
-//        }
 
         switch($request['status']) {
             case ('success'):
@@ -161,15 +129,15 @@ class DepositController extends Controller
                 session()->flash('flash.bannerStyle', 'danger');
         }
 
-//        $transaction = Transaction::create([
-//            'token' => $request['token'],
-//            'redirect_url' => $request['redirect_url'],
-//            'user_id' => $request['user_id'],
-//            'status_id' => $status_id,
-//            'category_id' => Transaction::DEPOSIT,
-//            'order_id' => $request['order_id'],
-//            'amount' => $request['amount'],
-//        ]);
+        $transaction = Transaction::create([
+            'token' => $request['token'],
+            'redirect_url' => $request['redirect_url'],
+            'user_id' => $request['user_id'],
+            'status_id' => $status_id,
+            'category_id' => Transaction::DEPOSIT,
+            'order_id' => $request['order_id'],
+            'amount' => $request['amount'],
+        ]);
 
         return to_route('dashboard');
 
