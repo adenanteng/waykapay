@@ -50,8 +50,8 @@ class HistoryController extends Controller
             $status_id = Transaction::CANCEL;
         } elseif ($response->object()->transaction_status == 'deny') {
             $status_id = Transaction::ERROR;
-        } elseif ($response->object()->transaction_status == 'expired') {
-            $status_id = Transaction::ERROR;
+        } elseif ($response->object()->transaction_status == 'expire') {
+            $status_id = Transaction::EXPIRED;
         } else {
             $status_id = Transaction::UNDEFINED;
         }

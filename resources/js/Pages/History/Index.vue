@@ -63,10 +63,10 @@ function formatPrice(value) {
 <!--                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />-->
                                                 Rp {{ formatPrice(history.amount) }}
                                             </p>
-<!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-<!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
-<!--                                                Remote-->
-<!--                                            </p>-->
+                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />
+                                                
+                                            </p>
                                         </div>
                                         <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                                             <i class="fa-regular fa-calendar text-gray-500 pr-2" />
