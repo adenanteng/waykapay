@@ -29,7 +29,7 @@ class HistoryController extends Controller
         $transaction = Transaction::where('id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
-        if ($transaction->status_id !== Transaction::SUCCESS) {
+        if ($transaction->status_id != Transaction::SUCCESS) {
 
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
