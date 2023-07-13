@@ -1,9 +1,13 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { Link } from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 
+const logout = () => {
+    router.post(route('logout'));
+};
 </script>
 
 <template>
@@ -28,6 +32,12 @@ import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
                 </li>
             </ul>
         </div>
+
+        <form method="POST" @submit.prevent="logout">
+            <DangerButton type="submit" class="w-full">
+                Keluar
+            </DangerButton>
+        </form>
 
         <MobileMenu />
     </AppLayout>

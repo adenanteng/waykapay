@@ -56,7 +56,6 @@ const confirm = () => {
             console.log('success');
             // console.log(result);
             deposit('success')
-
         },
         onPending: function(result){
             console.log('pending');
