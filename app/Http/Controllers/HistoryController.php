@@ -24,56 +24,118 @@ class HistoryController extends Controller
     }
 
     public function show($id) {
-//        dd(Transaction::where('id', $id)->first()->toArray());
-
         $transaction = Transaction::where('id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
-//        dd($transaction->status_id);
+        switch ($transaction->status_id) {
+            case (Transaction::SUCCESS):
+            case (Transaction::CLOSE):
+                session()->flash('flash.banner', 'tidak ada proses!');
+                session()->flash('flash.bannerStyle', 'danger');
 
-        if ($transaction->status_id != Transaction::SUCCESS) {
-            $response = Http::withHeaders([
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
-            ])->get('https://api.sandbox.midtrans.com/v2/' . $transaction->order_id . '/status');
+                break;
+            default:
+                $response = Http::withHeaders([
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
+                ])->get('https://api.sandbox.midtrans.com/v2/' . $transaction->order_id . '/status');
 
-            switch ($response->object()->transaction_status) {
-                case ('capture'):
-                case('settlement'):
-                    $status_id = Transaction::SUCCESS;
-                    $user->deposit($transaction->amount);
-                    break;
+                switch ($response->object()->transaction_status) {
+                    case ('capture'):
+                    case('settlement'):
+                        $status_id = Transaction::SUCCESS;
+                        $user->deposit($transaction->amount);
+                        break;
 
-                case ('pending'):
-                    $status_id = Transaction::PENDING;
-                    break;
+                    case ('pending'):
+                        $status_id = Transaction::PENDING;
+                        break;
 
-                case ('cancel'):
-                    $status_id = Transaction::CANCEL;
-                    break;
+                    case ('cancel'):
+                        $status_id = Transaction::CANCEL;
+                        break;
 
-                case ('deny'):
-                    $status_id = Transaction::DENY;
-                    break;
+                    case ('deny'):
+                        $status_id = Transaction::DENY;
+                        break;
 
-                case ('expire'):
-                    $status_id = Transaction::EXPIRE;
-                    break;
+                    case ('expire'):
+                        $status_id = Transaction::EXPIRE;
+                        break;
 
-                default:
-                    $status_id = Transaction::UNDEFINED;
-            }
+                    default:
+                        $status_id = Transaction::UNDEFINED;
+                }
 
-            $transaction->update([
-                'status_id' => $status_id,
-            ]);
+                $transaction->update([
+                    'status_id' => $status_id,
+                ]);
 
+                session()->flash('flash.banner', 'terproses ');
+                session()->flash('flash.bannerStyle', 'danger');
         }
 
-//        return to_route('history.index');
-        return redirect()->back();
+        return Inertia::render('History/Show', [
+            'history' => $transaction
+        ]);
     }
+
+//    public function confirm($id) {
+//        $transaction = Transaction::where('id', $id)->first();
+//        $user = User::where('id', $transaction->user_id)->first();
+//
+//        switch ($transaction->status_id) {
+//            case (Transaction::SUCCESS):
+//            case (Transaction::CLOSE):
+//                session()->flash('flash.banner', 'tidak ada proses!');
+//                session()->flash('flash.bannerStyle', 'danger');
+//
+//                break;
+//            default:
+//                $response = Http::withHeaders([
+//                    'Accept' => 'application/json',
+//                    'Content-Type' => 'application/json',
+//                    'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
+//                ])->get('https://api.sandbox.midtrans.com/v2/' . $transaction->order_id . '/status');
+//
+//                switch ($response->object()->transaction_status) {
+//                    case ('capture'):
+//                    case('settlement'):
+//                        $status_id = Transaction::SUCCESS;
+//                        $user->deposit($transaction->amount);
+//                        break;
+//
+//                    case ('pending'):
+//                        $status_id = Transaction::PENDING;
+//                        break;
+//
+//                    case ('cancel'):
+//                        $status_id = Transaction::CANCEL;
+//                        break;
+//
+//                    case ('deny'):
+//                        $status_id = Transaction::DENY;
+//                        break;
+//
+//                    case ('expire'):
+//                        $status_id = Transaction::EXPIRE;
+//                        break;
+//
+//                    default:
+//                        $status_id = Transaction::UNDEFINED;
+//                }
+//
+//                $transaction->update([
+//                    'status_id' => $status_id,
+//                ]);
+//
+//                session()->flash('flash.banner', 'terproses ');
+//                session()->flash('flash.bannerStyle', 'danger');
+//        }
+//
+//        return redirect()->back();
+//    }
 
 
 }

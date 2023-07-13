@@ -32,6 +32,11 @@ const page = usePage()
 
 const response = computed(() => page.props.response)
 
+function formatPrice(value) {
+    let val = (value/1).toFixed(0).replace('.', '')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
+
 const deposit = (status) => {
     form.status = status
     form.post(route('deposit.confirm', form), {
@@ -43,12 +48,6 @@ const deposit = (status) => {
         onFinish: () => console.log('finish'),
     });
 };
-
-
-function formatPrice(value) {
-    let val = (value/1).toFixed(0).replace('.', '')
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-}
 
 const confirm = () => {
     snap.pay(props.response.token, {
@@ -70,6 +69,7 @@ const confirm = () => {
         onClose: function(){
             console.log('customer closed the popup without finishing the payment');
             deposit('close')
+            // confirm()
         }
     })
 }

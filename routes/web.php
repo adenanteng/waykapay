@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/payment/error', [DepositController::class, 'error'])->name('deposit.error');
 
     Route::resource('/history', HistoryController::class)->names('history');
+//    Route::post('/history/confirm', [HistoryController::class, 'confirm'])->name('history.confirm');
 
     Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
 
