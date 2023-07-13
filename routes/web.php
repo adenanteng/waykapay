@@ -30,7 +30,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/deposit', [DepositController::class, 'create'])->name('deposit.create');
     Route::post('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
 
-    Route::post('/withdraw', [DepositController::class, 'withdraw'])->name('withdraw');
+    Route::get('/payment/finish', [DepositController::class, 'finish'])->name('deposit.finish');
+    Route::get('/payment/unfinish', [DepositController::class, 'unfinish'])->name('deposit.unfinish');
+    Route::get('/payment/error', [DepositController::class, 'error'])->name('deposit.error');
 
     Route::resource('/history', HistoryController::class)->names('history');
 

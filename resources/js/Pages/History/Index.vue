@@ -6,6 +6,7 @@ import MobileMenu from "@/Components/MobileMenu.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import SectionTitle from "@/Components/SectionTitle.vue";
+import ActionMessage from "@/Components/ActionMessage.vue";
 import moment from "moment";
 
 const props = defineProps({
@@ -18,6 +19,18 @@ const passwordInput = ref(null);
 const form = useForm({
     id: null,
 });
+
+const deposit = (status) => {
+    form.status = status
+    form.post(route('deposit.confirm', form), {
+        preserveScroll: true,
+        onSuccess: () => {
+            console.log('hahahaha')
+        },
+        // onError: () => passwordInput.value.focus(),
+        // onFinish: () => form.reset(),
+    });
+};
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y')

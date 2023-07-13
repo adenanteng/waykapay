@@ -143,25 +143,24 @@ class DepositController extends Controller
 
     }
 
-    public function withdraw(User $user) {
+    public function finish() {
+        session()->flash('flash.banner', 'Finish!');
+        session()->flash('flash.bannerStyle', 'danger');
 
-        $amount = 34000;
+        return to_route('dashboard');
+    }
 
-        try {
-            $user->withdraw($amount);
+    public function unfinish() {
+        session()->flash('flash.banner', 'unfinish!');
+        session()->flash('flash.bannerStyle', 'danger');
 
-//            activity()
-//                ->withProperties([
-//                    'amount' => $amount
-//                ])
-//                ->event('withdraw')
-//                ->log('withdraw');
+        return to_route('dashboard');
+    }
 
-        } catch (InsufficientFundException $e) {
-            report($e);
-            session()->flash('flash.banner', 'Saldo tidak mencukupi!');
-            session()->flash('flash.bannerStyle', 'danger');
-            return false;
-        }
+    public function error() {
+        session()->flash('flash.banner', 'error!');
+        session()->flash('flash.bannerStyle', 'danger');
+
+        return to_route('dashboard');
     }
 }

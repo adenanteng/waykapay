@@ -37,10 +37,10 @@ const deposit = (status) => {
     form.post(route('deposit.confirm', form), {
         preserveScroll: true,
         onSuccess: () => {
-            console.log('hahahaha')
+            console.log('sukses')
         },
-        // onError: () => passwordInput.value.focus(),
-        // onFinish: () => form.reset(),
+        onError: () => console.log('error'),
+        onFinish: () => console.log('finish'),
     });
 };
 
