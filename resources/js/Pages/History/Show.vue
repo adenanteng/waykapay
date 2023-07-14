@@ -102,6 +102,10 @@ function formatPrice(value) {
                         <dd class="mt-1 text-sm text-gray-900">{{ props.history.desc ?? '-' }}</dd>
                     </div>
                 </dl>
+
+                <a :href="props.history.redirect_url">
+                    jangan di klik
+                </a>
             </div>
         </div>
 
