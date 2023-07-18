@@ -218,7 +218,9 @@ const logout = () => {
                         </div>
 
                         <!-- Menu button -->
-                        <div class="absolute right-0 flex-shrink-0 lg:hidden nightwind-prevent-block">
+                        <div class="absolute right-0 flex-shrink-0 lg:hidden ">
+                            <DarkmodeToggle :darkMode="darkMode" @click="darkMode = ! darkMode"/>
+
                             <!-- Mobile menu button -->
 <!--                            <PopoverButton-->
 <!--                                class="bg-transparent p-2 rounded-3xl inline-flex items-center justify-center text-cyan-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">-->

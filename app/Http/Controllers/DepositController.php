@@ -77,7 +77,8 @@ class DepositController extends Controller
                 'users'     => User::where('id', $request['user_id'])->first(),
                 'response'  => $response->object(),
                 'amount'    => $request['amount'],
-                'order_id'  => $order_id
+                'order_id'  => $order_id,
+//                'transaction'   => $transaction
             ]);
 
         } else {
@@ -91,6 +92,8 @@ class DepositController extends Controller
 //        dd($request->toArray());
 
         $user = User::where('id', $request['user_id'])->first();
+        $transaction = Transaction::where('id', $request['id'])->first();
+//        dd($transaction);
 
         switch($request['status']) {
             case ('success'):
@@ -128,6 +131,10 @@ class DepositController extends Controller
                 session()->flash('flash.banner', 'Gatau lagi kami!');
                 session()->flash('flash.bannerStyle', 'danger');
         }
+
+//        $transaction->update([
+//            'status_id' => $status_id,
+//        ]);
 
         $transaction = Transaction::create([
             'token' => $request['token'],

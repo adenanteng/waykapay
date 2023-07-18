@@ -15,30 +15,29 @@ const props = defineProps({
     history: Object
 })
 
-// const confirm = () => {
-//     snap.pay(props.history.token, {
-//         onSuccess: function(result){
-//             console.log('success');
-//             // console.log(result);
-//             deposit('success')
-//         },
-//         onPending: function(result){
-//             console.log('pending');
-//             // console.log(result);
-//             deposit('pending')
-//         },
-//         onError: function(result){
-//             console.log('error');
-//             // console.log(result);
-//             deposit('error')
-//         },
-//         onClose: function(){
-//             console.log('customer closed the popup without finishing the payment');
-//             deposit('close')
-//             // confirm()
-//         }
-//     })
-// }
+const confirm = () => {
+    snap.pay(props.history.token, {
+        onSuccess: function(result){
+            console.log('success');
+            // console.log(result);
+            // deposit('success')
+        },
+        onPending: function(result){
+            console.log('pending');
+            // console.log(result);
+            // deposit('pending')
+        },
+        onError: function(result){
+            console.log('error');
+            // console.log(result);
+            // deposit('error')
+        },
+        onClose: function(){
+            console.log('customer closed the popup without finishing the payment');
+            // deposit('close')
+        }
+    })
+}
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y')
@@ -97,6 +96,10 @@ function formatPrice(value) {
                         <dt class="text-sm font-medium text-gray-500">Total Bayar</dt>
                         <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.history.amount) }}</dd>
                     </div>
+                    <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Id</dt>
+                        <dd class="mt-1 text-sm text-gray-900">{{ props.history.order_id }}</dd>
+                    </div>
                     <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500">Keterangan</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ props.history.desc ?? '-' }}</dd>
@@ -106,6 +109,10 @@ function formatPrice(value) {
                 <a :href="props.history.redirect_url">
                     jangan di klik
                 </a>
+
+                <PrimaryButton @click="confirm">
+                    Haaha
+                </PrimaryButton>
             </div>
         </div>
 

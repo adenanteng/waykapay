@@ -27,9 +27,10 @@ class HistoryController extends Controller
         $transaction = Transaction::where('id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
+//        dd($transaction);
         switch ($transaction->status_id) {
             case (Transaction::SUCCESS):
-            case (Transaction::CLOSE):
+//            case (Transaction::CLOSE):
                 session()->flash('flash.banner', 'tidak ada proses!');
                 session()->flash('flash.bannerStyle', 'danger');
 
@@ -77,7 +78,7 @@ class HistoryController extends Controller
         }
 
         return Inertia::render('History/Show', [
-            'history' => $transaction
+            'history' => $transaction,
         ]);
     }
 
