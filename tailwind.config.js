@@ -34,7 +34,6 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Poppins', ...defaultTheme.fontFamily.sans],
-                wedding: ['Parisienne', ...defaultTheme.fontFamily.sans],
             },
             backgroundImage: {
                 'glass': "url('/img/glass.png')",

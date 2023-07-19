@@ -27,9 +27,14 @@ import {Link} from "@inertiajs/vue3";
                     </h3>
                 </Link>
 
-                <Link href="#" class="group text-center">
-                    <i class="fa-regular fa-wallet text-xl text-gray-700" />
-                    <h3 class="text-sm text-gray-700">Dompet</h3>
+                <Link :href="route('information.index')" class="group text-center">
+                    <i class="fa-circle-info text-xl text-gray-700"
+                       :class="$page.url == '/information' ? 'fa-solid text-primary-700' : 'fa-regular' "
+                    />
+                    <h3 class="text-sm text-gray-700"
+                        :class="$page.url == '/information' ? 'font-semibold text-primary-700' : '' ">
+                        Informasi
+                    </h3>
                 </Link>
 
                 <Link :href="route('profile.index')" class="group text-center">
