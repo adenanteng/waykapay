@@ -49,4 +49,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
 
     Route::resource('/setting', AppSettingController::class)->names('setting');
+
+    Route::webhooks('webhook-url-1', 'application-one');
 });
