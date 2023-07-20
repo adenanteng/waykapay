@@ -8,6 +8,7 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,6 +24,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
+
+Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -49,6 +52,4 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
 
     Route::resource('/setting', AppSettingController::class)->names('setting');
-
-    Route::webhooks('webhook-url-1', 'application-one');
 });
