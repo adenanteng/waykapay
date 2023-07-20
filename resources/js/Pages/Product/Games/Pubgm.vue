@@ -72,12 +72,12 @@ const closeModal = () => {
 </script>
 
 <template>
-    <AppLayout title="Pulsa"
-               name="Pulsa"
-               desc="Masukkan nomor"
+    <AppLayout title="PUBG Mobile"
+               name="PUBG Mobile"
+               desc="Lorem ipsum"
     >
         <template #previous>
-            <PreviousButton :href="route('dashboard')" />
+            <PreviousButton :href="route('product.games')" />
         </template>
 
 <!--        <template #action>-->
@@ -95,7 +95,7 @@ const closeModal = () => {
 <!--        @submitted="storeInformation" -->
         <FormSection >
             <template #title>
-                Masukkan nomor HP
+                Masukkan id player
             </template>
 
             <template #description>
@@ -104,7 +104,7 @@ const closeModal = () => {
 
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Nomor HP"/>
+                    <InputLabel for="number" value="Id Player"/>
                     <TextInput
                         id="number"
                         v-model="form.number"
@@ -123,13 +123,13 @@ const closeModal = () => {
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
             <template v-for="data in props.response.data" >
-                <template v-if="data.category == 'Pulsa'">
+                <template v-if="data.category == 'Games'">
 
-                    <template v-if="data.brand == provider(form.number)">
+                    <template v-if="data.brand == 'PUBG MOBILE'">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
-                            </div>
+<!--                            <div class="flex-shrink-0">-->
+<!--                                <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">-->
+<!--                            </div>-->
                             <div class="flex-1 min-w-0">
                                 <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                     <span class="absolute inset-0" aria-hidden="true"></span>
@@ -159,7 +159,7 @@ const closeModal = () => {
                     </div>
 
                     <div class="">
-                        No. Tujuan
+                        Id Player
                     </div>
                     <div class="text-right font-medium">
                         {{ form.number }}
