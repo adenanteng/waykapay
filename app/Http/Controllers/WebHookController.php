@@ -15,12 +15,16 @@ class WebHookController extends Controller
 
 //        dd($transaction->toArray(), $user->toArray());
 
+        // In my own case, I will add the delay function
+        sleep(10); //this will delay the script for 50 seconds
+
         $transaction = Transaction::where('order_id', $request['order_id'])->first();
 //        $user = User::where('id', $transaction->user_id)->first();
 
         switch($request['status_code']) {
             case ('200'):
 //                $user->deposit($request['amount']);
+                $transaction->user->deposit($request['gross_amount']);
                 $status_id = Transaction::SUCCESS;
 
                 session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
@@ -52,8 +56,6 @@ class WebHookController extends Controller
             'status_id' => $status_id,
         ]);
 
-        // In my own case, I will add the delay function
-//        sleep(5); //this will delay the script for 50 seconds
         return response()->json('ok');
     }
 }

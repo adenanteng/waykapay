@@ -106,13 +106,13 @@ function formatPrice(value) {
                     </div>
                 </dl>
 
-                <a :href="props.history.redirect_url">
-                    jangan di klik
-                </a>
+<!--                <a :href="props.history.redirect_url">-->
+<!--                    jangan di klik-->
+<!--                </a>-->
 
-                <PrimaryButton @click="confirm">
-                    Haaha
-                </PrimaryButton>
+<!--                <PrimaryButton @click="confirm">-->
+<!--                    Haaha-->
+<!--                </PrimaryButton>-->
             </div>
         </div>
 
