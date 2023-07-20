@@ -169,7 +169,23 @@ const logout = () => {
                                             :active="$page.url == '/dashboard'"
                                             icon="fa-house"
                                         >
-                                            Dasbor
+                                            Beranda
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
+                                            :href="route('history.index')"
+                                            :active="$page.url == '/history'"
+                                            icon="fa-files"
+                                        >
+                                            Riwayat
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
+                                            :href="route('information.index')"
+                                            :active="$page.url == '/information'"
+                                            icon="fa-circle-info"
+                                        >
+                                            Informasi
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
@@ -181,11 +197,11 @@ const logout = () => {
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
-                                            :href="route('setting.index')"
-                                            :active="$page.url == '/setting'"
-                                            icon="fa-gear"
+                                            :href="route('profile.index')"
+                                            :active="$page.url == '/profile'"
+                                            icon="fa-user"
                                         >
-                                            Pengaturan
+                                            Saya
                                         </NavLinkAlt>
 
                                         <!--                                        <NavLinkAlt-->

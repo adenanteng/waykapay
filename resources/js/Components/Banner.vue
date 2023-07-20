@@ -65,7 +65,7 @@ watch(message, async () => {
                             @click.prevent="show = false"
                         >
                             <svg
-                                class="h-5 w-5 text-white"
+                                class="h-5 w-5 text-white dark:text-gray-900"
                                 :class="{ 'text-green-600': style == 'success', 'text-red-600': style == 'danger' }"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
