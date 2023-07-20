@@ -24,7 +24,7 @@ class WebHookController extends Controller
         switch($request['status_code']) {
             case ('200'):
 //                $user->deposit($request['amount']);
-                $transaction->user->deposit($request['gross_amount']);
+//                $transaction->user->deposit($request['gross_amount']);
                 $status_id = Transaction::SUCCESS;
 
                 session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
