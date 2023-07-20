@@ -2,6 +2,7 @@
 
 namespace App\Handler;
 
+use Illuminate\Support\Facades\Response;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
 
 class WebhookJobHandlerForAppOne extends ProcessWebhookJob
@@ -19,5 +20,7 @@ class WebhookJobHandlerForAppOne extends ProcessWebhookJob
         logger($this->webhookCall);
         sleep(10);
         logger("I am done");
+
+        return Response::json(['status' => 'ok'], 200);
     }
 }
