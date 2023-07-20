@@ -21,40 +21,42 @@ class WebHookController extends Controller
         $transaction = Transaction::where('order_id', $request['order_id'])->first();
         $user = User::where('id', $transaction['user_id'])->first();
 
-        switch($request['status_code']) {
-            case ('200'):
-                $user->deposit($request['gross_amount']);
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['status_code']) {
+                case ('200'):
+                    $user->deposit($request['gross_amount']);
 //                $transaction->user->deposit($request['gross_amount']);
-                $status_id = Transaction::SUCCESS;
+                    $status_id = Transaction::SUCCESS;
 
-                session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
-                session()->flash('flash.bannerStyle', 'success');
-                break;
+                    session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
+                    session()->flash('flash.bannerStyle', 'success');
+                    break;
 
-            case ('201'):
-                $status_id = Transaction::PENDING;
+                case ('201'):
+                    $status_id = Transaction::PENDING;
 
-                session()->flash('flash.banner', 'Deposit pending!');
-                session()->flash('flash.bannerStyle', 'danger');
-                break;
+                    session()->flash('flash.banner', 'Deposit pending!');
+                    session()->flash('flash.bannerStyle', 'danger');
+                    break;
 
-            case ('202'):
-                $status_id = Transaction::ERROR;
+                case ('202'):
+                    $status_id = Transaction::ERROR;
 
-                session()->flash('flash.banner', 'Deposit error!');
-                session()->flash('flash.bannerStyle', 'danger');
-                break;
+                    session()->flash('flash.banner', 'Deposit error!');
+                    session()->flash('flash.bannerStyle', 'danger');
+                    break;
 
-            default:
-                $status_id = Transaction::UNDEFINED;
+                default:
+                    $status_id = Transaction::UNDEFINED;
 
-                session()->flash('flash.banner', 'Gatau lagi kami!');
-                session()->flash('flash.bannerStyle', 'danger');
+                    session()->flash('flash.banner', 'Gatau lagi kami!');
+                    session()->flash('flash.bannerStyle', 'danger');
+            }
+
+            $transaction->update([
+                'status_id' => $status_id,
+            ]);
         }
-
-        $transaction->update([
-            'status_id' => $status_id,
-        ]);
 
         return response()->json('ok');
     }
