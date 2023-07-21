@@ -9,6 +9,13 @@
         <meta property="og:description" content="Kemudahan ada disini" />
         <meta property="og:url" content="https://waykapay.com/" />
         <meta property="og:image" content="/img/minion.jpg" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@waykapay.com" />
+        <meta name="twitter:title" content="Waykapay" />
+        <meta name="twitter:description" content="Kemudahan ada disini" />
+        <meta name="twitter:image" content="/img/minion.jpg" />
+
         <link rel="shortcut icon" type="image/jpg" href="/favicon.ico" />
 
 {{--        <title inertia>{{ config('app.name', 'Laravel') }}</title>--}}
