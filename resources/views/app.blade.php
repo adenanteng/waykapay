@@ -4,6 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta property="og:type" content="" />
+        <meta property="og:title" content="Waykapay" />
+        <meta property="og:description" content="Kemudahan ada disini" />
+        <meta property="og:url" content="https://waykapay.com/" />
+        <meta property="og:image" content="/img/minion.jpg" />
+        <link rel="shortcut icon" type="image/jpg" href="/favicon.ico" />
+
 {{--        <title inertia>{{ config('app.name', 'Laravel') }}</title>--}}
 
         <!-- Fonts -->
