@@ -35,7 +35,7 @@ const submit = () => {
 
     <AuthenticationCard>
         <template #logo>
-<!--                <AuthenticationCardLogo  />-->
+                <AuthenticationCardLogo  />
         </template>
 
         <template #title>
@@ -74,17 +74,17 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox v-model:checked="form.remember" name="remember" />
-                    <span class="ml-2 text-sm text-gray-600">Ingat saya</span>
-                </label>
-            </div>
+<!--            <div class="block mt-4">-->
+<!--                <label class="flex items-center">-->
+<!--                    <Checkbox v-model:checked="form.remember" name="remember" />-->
+<!--                    <span class="ml-2 text-sm text-gray-600">Ingat saya</span>-->
+<!--                </label>-->
+<!--            </div>-->
 
             <div class="flex items-center justify-end mt-4">
-<!--                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">-->
-<!--                    Lupa password?-->
-<!--                </Link>-->
+                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
+                    Lupa password?
+                </Link>
 
                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Masuk

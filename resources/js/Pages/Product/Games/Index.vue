@@ -34,7 +34,7 @@ const form = useForm({
                          class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
                     <Link :href="route('product.gamePubgm')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
-                <p class="mt-1 block text-lg font-medium text-gray-900 truncate pointer-events-none">PUBG-M</p>
+                <p class="mt-1 block text-lg font-medium text-gray-900 truncate pointer-events-none">PUBG Mobile</p>
             </li>
 
             <li class="relative">

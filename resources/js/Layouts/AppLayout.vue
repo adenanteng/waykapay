@@ -392,7 +392,7 @@ const logout = () => {
                     </div>
                 </TransitionRoot>
             </Popover>
-            <main class="-mt-24 pb-8 ">
+            <main class="-mt-24 ">
                 <div class="max-w-3xl lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Left column -->
                     <div class="">
@@ -443,7 +443,10 @@ const logout = () => {
             </main>
             <footer>
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
-                    <div class="border-t border-gray-300 py-8 text-sm text-gray-500 text-center sm:text-left" v-if="$page.props.appSetting">
+                    <div class="py-10 block lg:hidden">
+
+                    </div>
+                    <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block" v-if="$page.props.appSetting">
                         <span class="block sm:inline capitalize">&copy; 2023 {{ $page.props.appSetting.name }}. </span>
                         <span class="block sm:inline">All rights reserved.</span>
                     </div>

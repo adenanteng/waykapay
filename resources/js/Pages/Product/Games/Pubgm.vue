@@ -55,12 +55,16 @@ let productPrice = ref(null);
 let productDesc = ref(null);
 
 const confirmModal = (data) => {
-    confirmingModal.value = true;
-    productSku = data.buyer_sku_code;
-    productName = data.product_name;
-    productBrand = data.brand;
-    productPrice = data.price;
-    productDesc = data.desc;
+
+    if (form.number !== '') {
+        confirmingModal.value = true;
+        productSku = data.buyer_sku_code;
+        productName = data.product_name;
+        productBrand = data.brand;
+        productPrice = data.price;
+        productDesc = data.desc;
+    }
+
     // setTimeout(() => passwordInput.value.focus(), 250);
 };
 
@@ -110,7 +114,7 @@ const closeModal = () => {
                         v-model="form.number"
                         type="tel"
                         class="mt-1 block w-full"
-                        minlength="10"
+                        minlength="8"
                         required
                     />
                     <InputError :message="form.errors.number" class="mt-2"/>
@@ -127,9 +131,9 @@ const closeModal = () => {
 
                     <template v-if="data.brand == 'PUBG MOBILE'">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-<!--                            <div class="flex-shrink-0">-->
-<!--                                <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">-->
-<!--                            </div>-->
+                            <div class="flex-shrink-0">
+                                <img class="h-10 w-10" src="/img/games/icons/pubg.png" alt="">
+                            </div>
                             <div class="flex-1 min-w-0">
                                 <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                     <span class="absolute inset-0" aria-hidden="true"></span>
