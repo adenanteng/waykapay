@@ -60,6 +60,8 @@ class WebHookController extends Controller
             Log::info(json_decode($request->getContent(), true));
         }
 
+        dd($request->all());
+
         $transaction = Transaction::where('order_id', $request['order_id'])->first();
 //        $user = User::where('id', $transaction['user_id'])->first();
 
