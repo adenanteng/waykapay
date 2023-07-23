@@ -60,13 +60,17 @@ class WebHookController extends Controller
             Log::info(json_decode($request->getContent(), true));
         }
 
-        dd($request->all());
+        $req = $request->all();
 
-        $transaction = Transaction::where('order_id', $request['order_id'])->first();
-//        $user = User::where('id', $transaction['user_id'])->first();
+        $req = $req['data'];
+
+//        dd($req['status']);
+
+        $transaction = Transaction::where('order_id', $req['ref_id'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
 
         if ($transaction->status_id != Transaction::SUCCESS) {
-            switch($request['status']) {
+            switch($req['status']) {
                 case ('Sukses'):
 //                    $user->deposit($request['gross_amount']);
 //                $transaction->user->deposit($request['gross_amount']);

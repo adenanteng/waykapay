@@ -109,7 +109,7 @@ class HistoryController extends Controller
                         'status_id' => $status_id,
                     ]);
 
-                    session()->flash('flash.banner', 'terproses ');
+                    session()->flash('flash.banner', 'terproses');
                     session()->flash('flash.bannerStyle', 'danger');
             }
         }
