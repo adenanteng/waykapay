@@ -31,7 +31,7 @@ class ProductController extends Controller
             'testing' => true
         ]);
 
-//        dd($response->object());
+        dd($response->object());
 
         if ($response->successful()) {
 //            dd($response->object()->data->status);
@@ -85,7 +85,7 @@ class ProductController extends Controller
 //        ]);
 
         } else {
-            dd($response);
+            dd($response->status());
         }
     }
 
