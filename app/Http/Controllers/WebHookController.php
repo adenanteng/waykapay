@@ -10,11 +10,6 @@ class WebHookController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function webhookHandlerMidtrans(Request $request){
-        // We have access to the request body here
-        // So, you can perform any logic with the data
-
-//        dd($transaction->toArray(), $user->toArray());
-
         // In my own case, I will add the delay function
 //        sleep(10); //this will delay the script for 50 seconds
 
@@ -25,32 +20,55 @@ class WebHookController extends Controller
             switch($request['status_code']) {
                 case ('200'):
                     $user->deposit($request['gross_amount']);
-//                $transaction->user->deposit($request['gross_amount']);
                     $status_id = Transaction::SUCCESS;
-
-                    session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
-                    session()->flash('flash.bannerStyle', 'success');
                     break;
 
                 case ('201'):
                     $status_id = Transaction::PENDING;
-
-                    session()->flash('flash.banner', 'Deposit pending!');
-                    session()->flash('flash.bannerStyle', 'danger');
                     break;
 
                 case ('202'):
                     $status_id = Transaction::ERROR;
-
-                    session()->flash('flash.banner', 'Deposit error!');
-                    session()->flash('flash.bannerStyle', 'danger');
                     break;
 
                 default:
                     $status_id = Transaction::UNDEFINED;
+            }
 
-                    session()->flash('flash.banner', 'Gatau lagi kami!');
-                    session()->flash('flash.bannerStyle', 'danger');
+            $transaction->update([
+                'status_id' => $status_id,
+            ]);
+        }
+
+        return response()->json('ok');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function webhookHandlerDigiflazz(Request $request){
+        $transaction = Transaction::where('order_id', $request['order_id'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
+
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['status']) {
+                case ('Sukses'):
+                    $user->deposit($request['gross_amount']);
+//                $transaction->user->deposit($request['gross_amount']);
+                    $status_id = Transaction::SUCCESS;
+                    break;
+
+                case ('Pending'):
+                    $status_id = Transaction::PENDING;
+                    break;
+
+//                case ('202'):
+//                    $status_id = Transaction::ERROR;
+//                    break;
+
+                default:
+                    $status_id = Transaction::UNDEFINED;
             }
 
             $transaction->update([

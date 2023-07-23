@@ -118,7 +118,7 @@ function formatPrice(value) {
                                         <div class="sm:flex">
                                             <p class="flex items-center text-sm text-gray-900">
 <!--                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />-->
-                                                Rp {{ formatPrice(history.amount) }}
+                                                {{ history.category_id == 1 ? '+' : '-' }} Rp {{ formatPrice(history.amount) }}
                                             </p>
 <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
 <!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->

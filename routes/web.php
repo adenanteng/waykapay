@@ -26,6 +26,7 @@ use Inertia\Inertia;
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
 
 Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
+Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
