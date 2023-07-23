@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function topup(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $order_id = "tp-".$request['user_id']."-".\Illuminate\Support\Str::random(8);
 
         $response = Http::post('https://api.digiflazz.com/v1/transaction', [
