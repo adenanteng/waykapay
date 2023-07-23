@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 class WebHookController extends Controller
 {
     /**
@@ -48,6 +50,16 @@ class WebHookController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function webhookHandlerDigiflazz(Request $request){
+        $secret = 'waykapay';
+
+        $post_data = file_get_contents('php://input');
+        $signature = hash_hmac('sha1', $post_data, $secret);
+        Log::info($signature);
+
+        if ($request->header('X-Hub-Signature') == 'sha1='.$signature) {
+            Log::info(json_decode($request->getContent(), true));
+        }
+
         $transaction = Transaction::where('order_id', $request['order_id'])->first();
         $user = User::where('id', $transaction['user_id'])->first();
 
