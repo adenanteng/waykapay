@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
 
+    Route::post('/product/topup', [ProductController::class, 'topup'])->name('product.topup');
     Route::get('/product/pulsa', [ProductController::class, 'pulsa'])->name('product.pulsa');
     Route::get('/product/games', [ProductController::class, 'games'])->name('product.games');
     Route::get('/product/game/pubgm', [ProductController::class, 'gamePubgm'])->name('product.gamePubgm');

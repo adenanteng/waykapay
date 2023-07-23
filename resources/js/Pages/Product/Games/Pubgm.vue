@@ -20,13 +20,15 @@ const props = defineProps({
 });
 
 const form = useForm({
-    id: props.users.id ?? null,
-    number: '',
+    user_id: props.users.id ?? null,
+    customer_no: '',
+    product_name: '',
     sku: '',
+    amount: '',
 });
 
 const storeInformation = () => {
-    form.post(route('deposit.create', props.users), {
+    form.post(route('product.topup', form), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => closeModal(),
@@ -56,8 +58,12 @@ let productDesc = ref(null);
 
 const confirmModal = (data) => {
 
-    if (form.number !== '') {
+    if (form.customer_no !== '') {
         confirmingModal.value = true;
+        form.sku = data.buyer_sku_code;
+        form.amount = data.price;
+        form.product_name = data.product_name;
+
         productSku = data.buyer_sku_code;
         productName = data.product_name;
         productBrand = data.brand;
@@ -111,13 +117,13 @@ const closeModal = () => {
                     <InputLabel for="number" value="Id Player"/>
                     <TextInput
                         id="number"
-                        v-model="form.number"
+                        v-model="form.customer_no"
                         type="tel"
                         class="mt-1 block w-full"
                         minlength="8"
                         required
                     />
-                    <InputError :message="form.errors.number" class="mt-2"/>
+                    <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>
 
             </template>
@@ -166,7 +172,7 @@ const closeModal = () => {
                         Id Player
                     </div>
                     <div class="text-right font-medium">
-                        {{ form.number }}
+                        {{ form.customer_no }}
                     </div>
 
                     <div class="">

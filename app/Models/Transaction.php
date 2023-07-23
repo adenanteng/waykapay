@@ -18,11 +18,13 @@ class Transaction extends Model
      */
     protected $fillable = [
         'token',
-        'redirect_url',
+        'sku',
+        'order_id',
+        'product_name',
+        'customer_no',
         'user_id',
         'status_id',
         'category_id',
-        'order_id',
         'amount',
         'desc',
     ];

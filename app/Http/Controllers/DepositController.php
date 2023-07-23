@@ -44,7 +44,7 @@ class DepositController extends Controller
                     "id" => "DEPOSIT",
                     "price" => $request['amount'],
                     "quantity" => 1,
-                    "name" => "deposit",
+                    "name" => "Deposit",
                     "brand" => "Waykapay",
                     "category" => "payment",
                     "merchant_name" => "Waykapay",
@@ -92,7 +92,7 @@ class DepositController extends Controller
 //        dd($request->toArray());
 
         $user = User::where('id', $request['user_id'])->first();
-        $transaction = Transaction::where('id', $request['id'])->first();
+//        $transaction = Transaction::where('id', $request['id'])->first();
 //        dd($transaction);
 
         switch($request['status']) {
@@ -138,11 +138,13 @@ class DepositController extends Controller
 
         $transaction = Transaction::create([
             'token' => $request['token'],
-            'redirect_url' => $request['redirect_url'],
+            'sku' => '-',
+            'order_id' => $request['order_id'],
+            'product_name' => 'Deposit',
+            'customer_no' => '-',
             'user_id' => $request['user_id'],
             'status_id' => $status_id,
             'category_id' => Transaction::DEPOSIT,
-            'order_id' => $request['order_id'],
             'amount' => $request['amount'],
         ]);
 

@@ -16,14 +16,20 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('token');
-            $table->string('redirect_url')->nullable();
+            $table->string('sku');
+            $table->string('order_id');
+            $table->String('product_name');
+            $table->string('customer_no');
             $table->unsignedBigInteger('user_id');
             $table->integer('status_id');
             $table->integer('category_id');
-            $table->string('order_id');
             $table->integer('amount');
             $table->string('desc')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade')->onUpdate('cascade');
+//            $table->foreign('category_id')->on('blog_categories')->references('id')->onDelete('cascade')->onUpdate('cascade');
+
         });
     }
 

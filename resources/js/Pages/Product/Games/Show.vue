@@ -15,30 +15,6 @@ const props = defineProps({
     history: Object
 })
 
-const confirmMidtrans = () => {
-    snap.pay(props.history.token, {
-        onSuccess: function(result){
-            console.log('success');
-            // console.log(result);
-            // deposit('success')
-        },
-        onPending: function(result){
-            console.log('pending');
-            // console.log(result);
-            // deposit('pending')
-        },
-        onError: function(result){
-            console.log('error');
-            // console.log(result);
-            // deposit('error')
-        },
-        onClose: function(){
-            console.log('customer closed the popup without finishing the payment');
-            // deposit('close')
-        }
-    })
-}
-
 function formattedDate(value) {
     return moment(value).format('DD MMM Y')
 }
@@ -55,13 +31,13 @@ function formatPrice(value) {
 </script>
 
 <template>
-    <AppLayout :title="props.history.product_name"
-               :name="props.history.product_name"
+    <AppLayout title="Pembelian Berhasil"
+               name="Pembelian Berhasil"
                desc="lorem ipsum dolor sit"
     >
 
         <template #previous>
-            <PreviousButton :href="route('history.index')" />
+            <PreviousButton :href="route('games.index')" />
         </template>
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
@@ -85,20 +61,8 @@ function formatPrice(value) {
                         </dd>
                     </div>
                     <div class="sm:col-span-1">
-                        <dt class="text-sm font-medium text-gray-500">Produk</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ props.history.product_name }}</dd>
-                    </div>
-                    <div class="sm:col-span-1">
-                        <dt class="text-sm font-medium text-gray-500">Customer No</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ props.history.customer_no }}</dd>
-                    </div>
-                    <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Kategori</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ props.history.category }}</dd>
-                    </div>
-                    <div class="sm:col-span-1">
-                        <dt class="text-sm font-medium text-gray-500">Sku</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ props.history.sku }}</dd>
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Status</dt>
@@ -122,7 +86,7 @@ function formatPrice(value) {
 <!--                    jangan di klik-->
 <!--                </a>-->
 
-<!--                <PrimaryButton @click="confirmMidtrans">-->
+<!--                <PrimaryButton @click="confirm">-->
 <!--                    Haaha-->
 <!--                </PrimaryButton>-->
             </div>

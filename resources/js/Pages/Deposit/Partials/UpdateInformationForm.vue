@@ -28,7 +28,7 @@ const storeInformation = () => {
 
 const formReset = () => {
     form.defaults({
-        id: null,
+        user_id: null,
         amount: null,
     })
     form.reset()
@@ -54,6 +54,8 @@ const formReset = () => {
                     v-model="form.amount"
                     type="number"
                     class="mt-1 block w-full"
+                    min="1"
+                    max="9999999"
                     required
                 />
                 <InputError :message="form.errors.amount" class="mt-2"/>

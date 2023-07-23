@@ -105,7 +105,7 @@ function formatPrice(value) {
                             <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
-                                        <p class="font-medium text-primary-600 truncate">{{ history.category }}</p>
+                                        <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>
                                         <div class="ml-2 flex-shrink-0 flex">
                                             <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
                                                 :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
