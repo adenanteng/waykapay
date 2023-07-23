@@ -85,7 +85,7 @@ class ProductController extends Controller
 //        ]);
 
         } else {
-            dd($response->status());
+            dd($response);
         }
     }
 
