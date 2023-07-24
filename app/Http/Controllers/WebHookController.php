@@ -50,27 +50,33 @@ class WebHookController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function webhookHandlerDigiflazz(Request $request){
-        $secret = 'waykapay';
+//        $secret = 'waykapay';
+//
+//        $post_data = file_get_contents('php://input');
+//        $signature = hash_hmac('sha1', $post_data, $secret);
+//        Log::info($signature);
+//
+//        if ($request->header('X-Hub-Signature') == 'sha1='.$signature) {
+//            Log::info(json_decode($request->getContent(), true));
+//        }
 
-        $post_data = file_get_contents('php://input');
-        $signature = hash_hmac('sha1', $post_data, $secret);
-        Log::info($signature);
+        Log::info(json_decode($request->getContent(), true));
 
-        if ($request->header('X-Hub-Signature') == 'sha1='.$signature) {
-            Log::info(json_decode($request->getContent(), true));
-        }
+        $anj = json_decode($request->getContent());
 
-        $req = $request->all();
+//        dd($anj->data);
 
-        $req = $req['data'];
+//        $req = $request->all();
+//
+//        $req = $req['data'];
 
 //        dd($req['status']);
 
-        $transaction = Transaction::where('order_id', $req['ref_id'])->first();
+        $transaction = Transaction::where('order_id', $anj->data->ref_id)->first();
         $user = User::where('id', $transaction['user_id'])->first();
 
         if ($transaction->status_id != Transaction::SUCCESS) {
-            switch($req['status']) {
+            switch($anj->data->status) {
                 case ('Sukses'):
 //                    $user->deposit($request['gross_amount']);
 //                $transaction->user->deposit($request['gross_amount']);

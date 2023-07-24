@@ -25,6 +25,7 @@ class Transaction extends Model
         'user_id',
         'status_id',
         'category_id',
+//        'amount_last',
         'amount',
         'desc',
     ];

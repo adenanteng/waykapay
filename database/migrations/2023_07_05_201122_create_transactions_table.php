@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('status_id');
             $table->integer('category_id');
+//            $table->integer('amount_last');
             $table->integer('amount');
             $table->string('desc')->nullable();
             $table->timestamps();
