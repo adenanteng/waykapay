@@ -11,8 +11,8 @@ import FormSection from "@/Components/FormSection.vue";
 
 const props = defineProps({
     users: Object,
-    history: Object,
     response: Object,
+    transaction: Object,
     amount: String,
     order_id: String,
 })
@@ -20,6 +20,7 @@ const props = defineProps({
 const passwordInput = ref(null);
 
 const form = useForm({
+    id: props.transaction.id,
     user_id: props.users.id,
     amount: props.amount,
     token: props.response.token,

@@ -63,22 +63,24 @@ class DepositController extends Controller
 //        dd($response->object());
 
         if ($response->successful()) {
-//            $transaction = Transaction::create([
-//                'token' => $response->object()->token,
-//                'redirect_url' => $response->object()->redirect_url,
-//                'user_id' => $request['user_id'],
-//                'status_id' => Transaction::PENDING,
-//                'category_id' => Transaction::DEPOSIT,
-//                'order_id' => $order_id,
-//                'amount' => $request['amount'],
-//            ]);
+            $transaction = Transaction::create([
+                'token' => $response->object()->token,
+                'sku' => '-',
+                'order_id' => $order_id,
+                'product_name' => 'Deposit',
+                'customer_no' => '-',
+                'user_id' => $request['user_id'],
+                'status_id' => Transaction::PENDING,
+                'category_id' => Transaction::DEPOSIT,
+                'amount' => $request['amount'],
+            ]);
 
             return Inertia::render('Deposit/Confirm', [
                 'users'     => User::where('id', $request['user_id'])->first(),
                 'response'  => $response->object(),
                 'amount'    => $request['amount'],
                 'order_id'  => $order_id,
-//                'transaction'   => $transaction
+                'transaction'   => $transaction
             ]);
 
         } else {
@@ -91,8 +93,8 @@ class DepositController extends Controller
     public function confirm(Request $request) {
 //        dd($request->toArray());
 
+        $transaction = Transaction::where('id', $request['id'])->first();
         $user = User::where('id', $request['user_id'])->first();
-//        $transaction = Transaction::where('id', $request['id'])->first();
 //        dd($transaction);
 
         switch($request['status']) {
@@ -132,21 +134,21 @@ class DepositController extends Controller
                 session()->flash('flash.bannerStyle', 'danger');
         }
 
-//        $transaction->update([
-//            'status_id' => $status_id,
-//        ]);
-
-        $transaction = Transaction::create([
-            'token' => $request['token'],
-            'sku' => '-',
-            'order_id' => $request['order_id'],
-            'product_name' => 'Deposit',
-            'customer_no' => '-',
-            'user_id' => $request['user_id'],
+        $transaction->update([
             'status_id' => $status_id,
-            'category_id' => Transaction::DEPOSIT,
-            'amount' => $request['amount'],
         ]);
+
+//        $transaction = Transaction::create([
+//            'token' => $request['token'],
+//            'sku' => '-',
+//            'order_id' => $request['order_id'],
+//            'product_name' => 'Deposit',
+//            'customer_no' => '-',
+//            'user_id' => $request['user_id'],
+//            'status_id' => $status_id,
+//            'category_id' => Transaction::DEPOSIT,
+//            'amount' => $request['amount'],
+//        ]);
 
         return to_route('dashboard');
 

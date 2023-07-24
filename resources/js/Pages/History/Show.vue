@@ -85,6 +85,10 @@ function formatPrice(value) {
                         </dd>
                     </div>
                     <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Id</dt>
+                        <dd class="mt-1 text-sm text-gray-900">{{ props.history.order_id }}</dd>
+                    </div>
+                    <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Produk</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ props.history.product_name }}</dd>
                     </div>
@@ -107,10 +111,6 @@ function formatPrice(value) {
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Total Bayar</dt>
                         <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.history.amount) }}</dd>
-                    </div>
-                    <div class="sm:col-span-1">
-                        <dt class="text-sm font-medium text-gray-500">Id</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ props.history.order_id }}</dd>
                     </div>
                     <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500">Keterangan</dt>
