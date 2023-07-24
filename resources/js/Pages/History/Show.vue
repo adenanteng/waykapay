@@ -1,12 +1,6 @@
 <script setup>
 import {ref} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, useForm, router} from "@inertiajs/vue3";
-import MobileMenu from "@/Components/MobileMenu.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
-import SectionTitle from "@/Components/SectionTitle.vue";
-import ActionMessage from "@/Components/ActionMessage.vue";
 import moment from "moment";
 import PreviousButton from "@/Components/PreviousButton.vue";
 

@@ -153,25 +153,4 @@ class DepositController extends Controller
         return to_route('dashboard');
 
     }
-
-    public function finish() {
-        session()->flash('flash.banner', 'Finish!');
-        session()->flash('flash.bannerStyle', 'danger');
-
-        return to_route('dashboard');
-    }
-
-    public function unfinish() {
-        session()->flash('flash.banner', 'unfinish!');
-        session()->flash('flash.bannerStyle', 'danger');
-
-        return to_route('dashboard');
-    }
-
-    public function error() {
-        session()->flash('flash.banner', 'error!');
-        session()->flash('flash.bannerStyle', 'danger');
-
-        return to_route('dashboard');
-    }
 }

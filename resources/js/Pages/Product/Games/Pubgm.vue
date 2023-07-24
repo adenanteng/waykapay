@@ -192,14 +192,17 @@ const closeModal = () => {
             </template>
 
             <template #footer>
-                <SecondaryButton @click="closeModal">
-                    Batal
-                </SecondaryButton>
+<!--                <SecondaryButton @click="closeModal">-->
+<!--                    Batal-->
+<!--                </SecondaryButton>-->
+
+                <ActionMessage :on="$page.props.user.wallet_balance <= productPrice" class="mr-3">
+                    Saldo anda kurang
+                </ActionMessage>
 
                 <PrimaryButton
-                    class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
+                    :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"
                     @click="storeInformation"
                 >
                     Beli

@@ -6,6 +6,7 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
@@ -35,9 +36,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/deposit', [DepositController::class, 'create'])->name('deposit.create');
     Route::post('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
 
-    Route::get('/payment/finish', [DepositController::class, 'finish'])->name('deposit.finish');
-    Route::get('/payment/unfinish', [DepositController::class, 'unfinish'])->name('deposit.unfinish');
-    Route::get('/payment/error', [DepositController::class, 'error'])->name('deposit.error');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 
     Route::resource('/history', HistoryController::class)->names('history');
 //    Route::post('/history/confirm', [HistoryController::class, 'confirm'])->name('history.confirm');

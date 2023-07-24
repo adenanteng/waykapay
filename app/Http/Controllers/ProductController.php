@@ -34,29 +34,34 @@ class ProductController extends Controller
 //        dd($response->object());
 
         if ($response->successful()) {
-//            dd($response->object()->data->status);
-
             $user = User::where('id', $request['user_id'])->first();
 
-            switch($response->object()->data->status) {
-                case ('Sukses'):
-                    $user->withdraw($request['amount']);
-                    $status_id = Transaction::SUCCESS;
+            $status = Http::post('https://api.digiflazz.com/v1/transaction', [
+                'commands' => 'status-pasca',
+                'username' => Helper::api()->digiflazz_username,
+                'buyer_sku_code' => $request['sku'],
+                'customer_no' => $request['customer_no'],
+                'ref_id' => $order_id,
+                'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
+                'testing' => true
+            ]);
 
-                    session()->flash('flash.banner', 'Deposit sejumlah Rp ' . $request['amount'] . ' berhasil!');
+            switch($status->object()->data->status) {
+                case ('Sukses'):
+//                    $user->withdraw($request['amount']);
+                    $status_id = Transaction::SUCCESS;
+                    session()->flash('flash.banner', 'Topup ' . $request['product_name'] . ' berhasil!');
                     session()->flash('flash.bannerStyle', 'success');
                     break;
 
                 case ('Pending'):
                     $status_id = Transaction::PENDING;
-
-                    session()->flash('flash.banner', 'Deposit pending!');
+                    session()->flash('flash.banner', 'Topup pending!');
                     session()->flash('flash.bannerStyle', 'danger');
                     break;
 
                 default:
                     $status_id = Transaction::UNDEFINED;
-
                     session()->flash('flash.banner', 'Gatau lagi kami!');
                     session()->flash('flash.bannerStyle', 'danger');
             }
