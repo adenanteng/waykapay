@@ -62,8 +62,6 @@ class WebHookController extends Controller
 
         Log::info(json_decode($request->getContent(), true));
 
-        Log::info('anjenk');
-
         $anj = json_decode($request->getContent());
 
         $transaction = Transaction::where('order_id', $anj->data->ref_id)->first();
