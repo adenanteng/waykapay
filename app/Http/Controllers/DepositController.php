@@ -96,12 +96,14 @@ class DepositController extends Controller
                 'amount' => $request['amount'],
             ]);
 
-            $bank = TransactionBankTransfer::create([
-                'transaction_id' => $transaction->id,
-                'bank_id' => $request['method']['id'],
-                'va_number' => $response->object()->va_numbers[0]->va_number,
-                'exp_time' => $response->object()->expiry_time,
-            ]);
+            if ($payment_type == 'bank_transfer') {
+                $bank = TransactionBankTransfer::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'va_number' => $response->object()->va_numbers[0]->va_number,
+                    'exp_time' => $response->object()->expiry_time,
+                ]);
+            }
 
             return Inertia::render('Deposit/Confirm', [
                 'amount' => $response->object()->gross_amount,
