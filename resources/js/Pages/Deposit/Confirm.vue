@@ -10,69 +10,15 @@ import ActionMessage from "@/Components/ActionMessage.vue";
 import FormSection from "@/Components/FormSection.vue";
 
 const props = defineProps({
-    users: Object,
-    response: Object,
-    transaction: Object,
     amount: String,
-    order_id: String,
+    bank: String,
+    va_number: String,
+    exp_time: String,
 })
-
-const passwordInput = ref(null);
-
-const form = useForm({
-    id: props.transaction.id,
-    user_id: props.users.id,
-    amount: props.amount,
-    token: props.response.token,
-    redirect_url: props.response.redirect_url,
-    status: null,
-    order_id: props.order_id
-});
-
-const page = usePage()
-
-const response = computed(() => page.props.response)
 
 function formatPrice(value) {
     let val = (value/1).toFixed(0).replace('.', '')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-}
-
-const deposit = (status) => {
-    form.status = status
-    form.post(route('deposit.confirm', form), {
-        preserveScroll: true,
-        onSuccess: () => {
-            console.log('sukses')
-        },
-        onError: () => console.log('error'),
-        onFinish: () => console.log('finish'),
-    });
-};
-
-const confirm = () => {
-    snap.pay(props.response.token, {
-        onSuccess: function(result){
-            console.log('success');
-            // console.log(result);
-            deposit('success')
-        },
-        onPending: function(result){
-            console.log('pending');
-            // console.log(result);
-            deposit('pending')
-        },
-        onError: function(result){
-            console.log('error');
-            // console.log(result);
-            deposit('error')
-        },
-        onClose: function(){
-            console.log('customer closed the popup without finishing the payment');
-            deposit('close')
-            // confirm()
-        }
-    })
 }
 
 </script>
@@ -87,7 +33,7 @@ const confirm = () => {
             <PreviousButton :href="route('deposit.index')" />
         </template>
 
-        <FormSection @submitted="confirm">
+        <FormSection >
             <template #title>
                 Konfirmasi Deposit
             </template>
@@ -103,13 +49,28 @@ const confirm = () => {
                             Jumlah Pembayaran
                         </span>
                         <span class="block text-xl font-extrabold text-primary-600">
-                        Rp {{ formatPrice(props.amount) }}
+                            Rp {{ formatPrice(props.amount) }}
                         </span>
-<!--                        <span class="block text-sm font-medium text-gray-600">-->
-<!--                            {{ props.users.name }}-->
-<!--                        </span>-->
-                        <span class="block text-sm font-medium text-gray-600">
-                            {{ props.response.token }}
+
+                        <span class="block text-sm font-medium text-gray-600 mt-5">
+                            Bank
+                        </span>
+                        <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                            {{ props.bank }}
+                        </span>
+
+                        <span class="block text-sm font-medium text-gray-600 mt-5">
+                            No. Virtual Account
+                        </span>
+                        <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                            {{ props.va_number }}
+                        </span>
+
+                        <span class="block text-sm font-medium text-gray-600 mt-5">
+                            Kadaluarsa
+                        </span>
+                        <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                            {{ props.exp_time }}
                         </span>
                     </h2>
                 </div>
@@ -117,12 +78,12 @@ const confirm = () => {
             </template>
 
             <template #actions>
-                <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                    Berhasil disimpan.
-                </ActionMessage>
+<!--                <ActionMessage :on="form.recentlySuccessful" class="mr-3">-->
+<!--                    Berhasil disimpan.-->
+<!--                </ActionMessage>-->
 
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Bayar
+                <PrimaryButton as="a" :href="route('dashboard')">
+                    Kembali ke Beranda
                 </PrimaryButton>
             </template>
         </FormSection>

@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
+    Route::post('/deposit/method', [DepositController::class, 'method'])->name('deposit.method');
     Route::post('/deposit', [DepositController::class, 'create'])->name('deposit.create');
     Route::post('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
 

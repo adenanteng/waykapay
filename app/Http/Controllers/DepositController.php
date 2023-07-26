@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Transaction;
+use App\Models\TransactionBankTransfer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -13,49 +14,70 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Psy\Util\Str;
 use Stephenjude\Wallet\Exceptions\InsufficientFundException;
+use function Termwind\render;
 
 class DepositController extends Controller
 {
-    public function index() {
+    public function index()
+    {
 
         return Inertia::render('Deposit/CreateEdit', [
             'users' => auth()->user(),
-            'response'  => null,
+            'response' => null,
         ]);
     }
 
-    public function create(Request $request) {
+    public function method(Request $request)
+    {
+        return Inertia::render('Deposit/Bank', [
+            'users' => auth()->user(),
+            'amount' => $request['amount'],
+        ]);
+    }
 
+    public function create(Request $request)
+    {
 //        dd($request->all());
-        $order_id = "dp-".$request->id."-".\Illuminate\Support\Str::random(8);
+
+        $order_id = "dp-" . $request['user_id'] . "-" . \Illuminate\Support\Str::random(8);
+
+        $payment_type = match ($request['method']['id']) {
+            1, 2, 3 => 'bank_transfer',
+        };
+
+//        dd($data, $order_id, $payment_type);
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Authorization' => 'Basic '.base64_encode(Helper::api()->midtrans_server_key.':')
-        ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions',
+            'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
+        ])->post('https://api.sandbox.midtrans.com/v2/charge',
             [
-            "transaction_details" => [
-                "order_id" => $order_id,
-                "gross_amount" => $request['amount']
-            ],
-            "item_details" => [
-                [
-                    "id" => "DEPOSIT",
-                    "price" => $request['amount'],
-                    "quantity" => 1,
-                    "name" => "Deposit",
-                    "brand" => "Waykapay",
-                    "category" => "payment",
-                    "merchant_name" => "Waykapay",
-                    "url" => "https://waykapay.com"
-                ]
-            ],
-            "customer_details" => [
-                    "first_name" => $request->name,
+                "transaction_details" => [
+                    "order_id" => $order_id,
+                    "gross_amount" => $request['amount']
+                ],
+                "item_details" => [
+                    [
+                        "id" => "DEPOSIT",
+                        "price" => $request['amount'],
+                        "quantity" => 1,
+                        "name" => "Deposit",
+                        "brand" => "Waykapay",
+                        "category" => "deposit",
+                        "merchant_name" => "Waykapay",
+                        "url" => "https://waykapay.com"
+                    ]
+                ],
+                "customer_details" => [
+                    "first_name" => $request['name'],
                     "last_name" => "",
-                    "email" => $request->email,
-                    "phone" => $request->phone,
+                    "email" => $request['email'],
+                    "phone" => $request['phone'],
+                ],
+                "payment_type" => $payment_type,
+                "bank_transfer" => [
+                    "bank" => $request['method']['name'],
                 ],
             ],
         );
@@ -64,7 +86,6 @@ class DepositController extends Controller
 
         if ($response->successful()) {
             $transaction = Transaction::create([
-                'token' => $response->object()->token,
                 'sku' => '-',
                 'order_id' => $order_id,
                 'product_name' => 'Deposit',
@@ -75,12 +96,18 @@ class DepositController extends Controller
                 'amount' => $request['amount'],
             ]);
 
+            $bank = TransactionBankTransfer::create([
+                'transaction_id' => $transaction->id,
+                'bank_id' => $request['method']['id'],
+                'va_number' => $response->object()->va_numbers[0]->va_number,
+                'exp_time' => $response->object()->expiry_time,
+            ]);
+
             return Inertia::render('Deposit/Confirm', [
-                'users'     => User::where('id', $request['user_id'])->first(),
-                'response'  => $response->object(),
-                'amount'    => $request['amount'],
-                'order_id'  => $order_id,
-                'transaction'   => $transaction
+                'amount' => $response->object()->gross_amount,
+                'bank' => $response->object()->va_numbers[0]->bank,
+                'va_number' => $response->object()->va_numbers[0]->va_number,
+                'exp_time' => $response->object()->expiry_time
             ]);
 
         } else {
@@ -90,19 +117,20 @@ class DepositController extends Controller
 
     }
 
-    public function confirm(Request $request) {
+    public function confirm(Request $request)
+    {
 //        dd($request->toArray());
 
         $transaction = Transaction::where('id', $request['id'])->first();
         $user = User::where('id', $request['user_id'])->first();
 //        dd($transaction);
 
-        switch($request['status']) {
+        switch ($request['status']) {
             case ('success'):
                 $user->deposit($request['amount']);
                 $status_id = Transaction::SUCCESS;
 
-                session()->flash('flash.banner', 'Deposit sejumlah Rp '.$request['amount'].' berhasil!');
+                session()->flash('flash.banner', 'Deposit sejumlah Rp ' . $request['amount'] . ' berhasil!');
                 session()->flash('flash.bannerStyle', 'success');
                 break;
 

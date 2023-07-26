@@ -1,6 +1,6 @@
 <script setup>
-import { Link, useForm, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue'
+import {Link, useForm, usePage} from '@inertiajs/vue3';
+import {computed, ref} from 'vue'
 import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
@@ -10,19 +10,20 @@ import TextInput from '@/Components/TextInput.vue';
 
 const props = defineProps({
     users: Object | String,
-    response: Object | String
+    response: Object | String,
 });
 
 const form = useForm({
-    user_id: props.users.id ?? null,
+    // user_id: props.users.id ?? null,
     amount: null,
 });
 
 const storeInformation = () => {
-    form.post(route('deposit.create', props.users), {
+    form.post(route('deposit.method', form), {
         errorBag: 'storeInformation',
         preserveScroll: true,
-        onSuccess: () => {}
+        onSuccess: () => {
+        }
     });
 };
 

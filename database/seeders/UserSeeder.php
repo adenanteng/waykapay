@@ -22,7 +22,9 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Aden Anteng',
                 'email' => 'aden.anteng@gmail.com',
-                'password' => bcrypt('password'),
+                'phone' => '085156875180',
+                'password' => bcrypt('12345678'),
+                'role_id' => 1,
                 'email_verified_at' => now(),
 //                'user_type' => 'god',
             ],

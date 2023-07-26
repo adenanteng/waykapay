@@ -5,6 +5,8 @@ import SectionBorder from '@/Components/SectionBorder.vue';
 import UpdateInformationForm from "@/Pages/Deposit/Partials/UpdateInformationForm.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 
+import {ref} from "vue";
+
 </script>
 
 <template>
@@ -23,14 +25,6 @@ import PreviousButton from "@/Components/PreviousButton.vue";
         />
 
 <!--        <SectionBorder />-->
-
-<!--        <template v-if="$page.props.users">-->
-<!--            <PasswordResetForm :users="$page.props.users" />-->
-
-<!--            <SectionBorder />-->
-
-<!--            <DeleteForm :users="$page.props.users" />-->
-<!--        </template>-->
 
     </AppLayout>
 </template>

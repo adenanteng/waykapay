@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('token');
             $table->string('sku');
             $table->string('order_id');
             $table->String('product_name');

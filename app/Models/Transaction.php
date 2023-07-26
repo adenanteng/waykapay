@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Transaction extends Model
 {
@@ -17,7 +20,6 @@ class Transaction extends Model
      * @var string[]
      */
     protected $fillable = [
-        'token',
         'sku',
         'order_id',
         'product_name',
@@ -69,9 +71,15 @@ class Transaction extends Model
      */
     protected $appends = [
         'created',
-        'user',
+//        'user',
         'status',
         'category'
+    ];
+
+    protected $with = [
+        'user',
+        'bank',
+        'gopay'
     ];
 
     public function getCreatedAttribute()
@@ -79,10 +87,10 @@ class Transaction extends Model
         return date('d M Y', strtotime($this->created_at));
     }
 
-    public function getUserAttribute(): string
-    {
-        return User::where('id', $this->user_id)->first();
-    }
+//    public function getUserAttribute(): string
+//    {
+//        return User::where('id', $this->user_id)->first();
+//    }
 
     public function getStatusAttribute(): string
     {
@@ -92,5 +100,20 @@ class Transaction extends Model
     public function getCategoryAttribute(): string
     {
         return self::CATEGORY[$this->category_id];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function bank(): HasOne
+    {
+        return $this->hasOne(TransactionBankTransfer::class, 'transaction_id', 'id');
+    }
+
+    public function gopay(): HasOne
+    {
+        return $this->hasOne(TransactionGopay::class, 'transaction_id', 'id');
     }
 }

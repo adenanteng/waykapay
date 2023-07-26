@@ -2,36 +2,13 @@
 import {ref} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
-import PreviousButton from "@/Components/PreviousButton.vue";
+import PreviousButton from "@/Components/PreviousButton.vue"
+import Badge from "../../Components/Badge.vue";
 
 const props = defineProps({
     users: Object,
     history: Object
 })
-
-const confirmMidtrans = () => {
-    snap.pay(props.history.token, {
-        onSuccess: function(result){
-            console.log('success');
-            // console.log(result);
-            // deposit('success')
-        },
-        onPending: function(result){
-            console.log('pending');
-            // console.log(result);
-            // deposit('pending')
-        },
-        onError: function(result){
-            console.log('error');
-            // console.log(result);
-            // deposit('error')
-        },
-        onClose: function(){
-            console.log('customer closed the popup without finishing the payment');
-            // deposit('close')
-        }
-    })
-}
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y')
@@ -100,7 +77,7 @@ function formatPrice(value) {
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Status</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ props.history.status }}</dd>
+                        <dd class="mt-1 text-sm text-gray-900"><Badge :name="props.history.status" /> </dd>
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Total Bayar</dt>
@@ -122,6 +99,35 @@ function formatPrice(value) {
             </div>
         </div>
 
-<!--        <MobileMenu/>-->
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+            <div class="px-4 py-5 sm:px-6">
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Detail Pembayaran</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
+            </div>
+            <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+                    <template v-if="props.history.bank">
+                        <div class="sm:col-span-1">
+                            <dt class="text-sm font-medium text-gray-500">Bank</dt>
+                            <dd class="mt-1 text-sm text-gray-900 uppercase">{{ props.history.bank.bank }}</dd>
+                        </div>
+                        <div class="sm:col-span-1">
+                            <dt class="text-sm font-medium text-gray-500">Virtual Account</dt>
+                            <dd class="mt-1 text-sm text-gray-900">{{ props.history.bank.va_number }}</dd>
+                        </div>
+                    </template>
+                </dl>
+
+                <!--                <a :href="props.history.redirect_url">-->
+                <!--                    jangan di klik-->
+                <!--                </a>-->
+
+                <!--                <PrimaryButton @click="confirmMidtrans">-->
+                <!--                    Haaha-->
+                <!--                </PrimaryButton>-->
+            </div>
+        </div>
+
+        <!--        <MobileMenu/>-->
     </AppLayout>
 </template>

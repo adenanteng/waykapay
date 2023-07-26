@@ -27,6 +27,8 @@ class HistoryController extends Controller
         $transaction = Transaction::where('id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
+//        dd($transaction->toArray());
+
         if ($transaction->category_id == Transaction::DEPOSIT) {
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):
