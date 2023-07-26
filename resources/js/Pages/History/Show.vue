@@ -117,14 +117,6 @@ function formatPrice(value) {
                         </div>
                     </template>
                 </dl>
-
-                <!--                <a :href="props.history.redirect_url">-->
-                <!--                    jangan di klik-->
-                <!--                </a>-->
-
-                <!--                <PrimaryButton @click="confirmMidtrans">-->
-                <!--                    Haaha-->
-                <!--                </PrimaryButton>-->
             </div>
         </div>
 
