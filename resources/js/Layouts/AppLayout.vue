@@ -212,6 +212,8 @@ const logout = () => {
                                             :href="route('user.index')"
                                             :active="$page.url == '/user'"
                                             icon="fa-person"
+                                            v-if="$page.props.user.role_id==1"
+
                                         >
                                             Pengguna
                                         </NavLinkAlt>

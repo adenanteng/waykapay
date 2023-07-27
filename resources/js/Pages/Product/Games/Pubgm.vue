@@ -105,16 +105,16 @@ const closeModal = () => {
 <!--        @submitted="storeInformation" -->
         <FormSection >
             <template #title>
-                Masukkan id player
+                PUBG Mobile
             </template>
 
             <template #description>
-                Halo halo bandung.
+                Lorem ipsum dolor sit amet
             </template>
 
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Id Player"/>
+                    <InputLabel for="number" value="Id player"/>
                     <TextInput
                         id="number"
                         v-model="form.customer_no"
@@ -123,6 +123,7 @@ const closeModal = () => {
                         minlength="8"
                         required
                     />
+                    <InputLabel class="mt-1" :value="'Maksimal transaksi Rp '+formatPrice($page.props.user.wallet_balance)" />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>
 
