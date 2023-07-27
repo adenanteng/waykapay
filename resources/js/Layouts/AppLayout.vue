@@ -255,7 +255,7 @@ const logout = () => {
 
                         <!-- Menu button -->
                         <div class="absolute right-0 flex-shrink-0 lg:hidden ">
-<!--                            <DarkmodeToggle :darkMode="darkMode" @click="darkMode = ! darkMode"/>-->
+                            <DarkmodeToggle :darkMode="darkMode" @click="darkMode = ! darkMode"/>
 
                             <!-- Mobile menu button -->
 <!--                            <PopoverButton-->
