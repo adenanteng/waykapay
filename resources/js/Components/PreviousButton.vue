@@ -8,6 +8,6 @@ const props = defineProps({
 
 <template>
     <Link :href="props.href">
-        <i class="fa-regular fa-arrow-left text-lg text-white nightwind-prevent p-2" />
+        <i class="fa-regular fa-arrow-left text-lg text-gray-900 p-2" />
     </Link>
 </template>

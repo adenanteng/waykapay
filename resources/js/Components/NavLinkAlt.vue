@@ -20,8 +20,8 @@ const props = defineProps({
 
 const classes = computed(() => {
     return props.active
-        ? 'nightwind-prevent text-primary-300 text-sm font-medium rounded-3xl bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10'
-        : 'nightwind-prevent text-white text-sm font-medium rounded-3xl bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10';
+        ? ' text-primary-700 text-sm font-medium rounded-3xl bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10'
+        : ' text-gray-900 text-sm font-medium rounded-3xl bg-white bg-opacity-0 px-3 py-2 hover:bg-opacity-10';
 });
 </script>
 
