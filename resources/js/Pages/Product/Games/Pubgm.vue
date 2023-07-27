@@ -123,7 +123,7 @@ const closeModal = () => {
                         minlength="8"
                         required
                     />
-                    <InputLabel class="mt-1" :value="'Maksimal transaksi Rp '+formatPrice($page.props.user.wallet_balance)" />
+                    <InputLabel class="mt-1" :value="'* Maksimal transaksi Rp '+formatPrice($page.props.user.wallet_balance)" />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>
 
