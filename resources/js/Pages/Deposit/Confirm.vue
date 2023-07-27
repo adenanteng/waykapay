@@ -8,6 +8,8 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import FormSection from "@/Components/FormSection.vue";
+import { toClipboard } from '@soerenmartius/vue3-clipboard'
+import Popper from "vue3-popper";
 
 const props = defineProps({
     amount: String,
@@ -64,6 +66,15 @@ function formatPrice(value) {
                         </span>
                         <span class="block text-xl font-extrabold text-primary-600 uppercase">
                             {{ props.va_number }}
+                            <Popper class="text-sm text-gray-900 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
+                                <button class="" @click="toClipboard(props.va_number)">
+                                    <i class="fa-duotone fa-paste ml-2" />
+                                </button>
+                            </Popper>
+
+<!--                            <Popper content="This is the Popper content">-->
+<!--                                <button>Trigger element</button>-->
+<!--                          </Popper>-->
                         </span>
 
                         <span class="block text-sm font-medium text-gray-600 mt-5">
