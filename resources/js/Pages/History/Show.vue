@@ -4,6 +4,8 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
 import PreviousButton from "@/Components/PreviousButton.vue"
 import Badge from "../../Components/Badge.vue";
+import { toClipboard } from '@soerenmartius/vue3-clipboard'
+import Popper from "vue3-popper";
 
 const props = defineProps({
     users: Object,
@@ -113,7 +115,14 @@ function formatPrice(value) {
                         </div>
                         <div class="sm:col-span-1">
                             <dt class="text-sm font-medium text-gray-500">Virtual Account</dt>
-                            <dd class="mt-1 text-sm text-gray-900">{{ props.history.bank.va_number }}</dd>
+                            <dd class="mt-1 text-sm text-gray-900">
+                                {{ props.history.bank.va_number }}
+                                <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
+                                    <button class="" @click="toClipboard(props.history.bank.va_number)">
+                                        <i class="fa-duotone fa-paste ml-2" />
+                                    </button>
+                                </Popper>
+                            </dd>
                         </div>
                     </template>
                 </dl>
