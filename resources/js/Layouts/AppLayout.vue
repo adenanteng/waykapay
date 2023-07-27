@@ -100,10 +100,10 @@ const logout = () => {
 <!--                                    </div>-->
                                     <div class="mt-4 sm:mt-0 sm:pt-1 text-left">
 <!--                                        <p class="text-sm font-medium text-gray-600">{{ props.greeting }}</p>-->
-                                        <p class="text-xl font-bold text-gray-900 sm:text-2xl capitalize" v-if="props.greeting">
+                                        <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize" v-if="props.greeting">
                                             <span class="font-medium text-gray-600">Halo,</span> {{ split[0] }}.
                                         </p>
-                                        <p class="text-xl font-bold text-gray-900 sm:text-2xl capitalize" v-else>
+                                        <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize" v-else>
                                             {{ props.name }}.
                                         </p>
 <!--                                        <p class="text-sm font-medium text-gray-600">{{ props.desc }}</p>-->
