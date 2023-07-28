@@ -53,16 +53,16 @@ const mailingLists = [
 <template>
     <FormSection @submitted="storeInformation">
         <template #title>
-            Mau isi saldo berapa?
+            Pilih metode pembayaranmu.
         </template>
 
         <template #description>
-            Perbarui informasi profil akun dan alamat email pengguna.
+
         </template>
 
         <template #form>
             <div class="col-span-6">
-                <InputLabel for="amount" value="Jumlah Saldo"/>
+<!--                <InputLabel for="amount" value="Jumlah Saldo"/>-->
 
                 <RadioGroup v-model="form.method">
                     <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-4">

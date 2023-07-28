@@ -109,7 +109,7 @@ const closeModal = () => {
             </template>
 
             <template #description>
-                * Maksimal transaksi Rp {{ formatPrice($page.props.user.wallet_balance) }}
+                * Saldo Rekening Rp {{ formatPrice($page.props.user.wallet_balance) }}
             </template>
 
             <template #form>

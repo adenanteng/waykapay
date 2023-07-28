@@ -37,11 +37,11 @@ function formatPrice(value) {
 
         <FormSection >
             <template #title>
-                Konfirmasi Deposit
+                Pembayaran
             </template>
 
             <template #description>
-                Perbarui informasi profil akun dan alamat email pengguna.
+
             </template>
 
             <template #form>

@@ -44,7 +44,7 @@ const formReset = () => {
         </template>
 
         <template #description>
-            Perbarui informasi profil akun dan alamat email pengguna.
+
         </template>
 
         <template #form>
