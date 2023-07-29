@@ -17,11 +17,12 @@ import {ref} from "vue";
 const props = defineProps({
     users: Object,
     response: Object,
+    customer: Object,
 });
 
 const form = useForm({
     user_id: props.users.id ?? null,
-    customer_no: '',
+    customer_no: props.customer.data.customer_no,
     product_name: '',
     sku: '',
     amount: '',
@@ -40,15 +41,6 @@ const storeInformation = () => {
 function formatPrice(value) {
     let val = (value/1).toFixed(0).replace('.', '')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-}
-
-function provider(value) {
-    if (value.substring(0, 4) === '0822') { return 'TELKOMSEL' }
-    else if (value.substring(0, 4) === '0813') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0823') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0852') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0851') { return 'by.U'}
-    else if (value.substring(0, 4) === '0877') { return 'XL'}
 }
 
 const confirmingModal = ref(false);
@@ -90,7 +82,7 @@ const tabs = ref('Pulsa')
                desc="Masukkan nomor"
     >
         <template #previous>
-            <PreviousButton :href="route('dashboard')" />
+            <PreviousButton :href="route('product.pln')" />
         </template>
 
 <!--        <template #action>-->
@@ -108,7 +100,7 @@ const tabs = ref('Pulsa')
 <!--        @submitted="storeInformation" -->
         <FormSection >
             <template #title>
-                Masukkan nomor HP
+                Token PLN
             </template>
 
             <template #description>
@@ -117,17 +109,26 @@ const tabs = ref('Pulsa')
 
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Nomor HP"/>
-                    <TextInput
-                        id="number"
-                        v-model="form.customer_no"
-                        type="tel"
-                        class="mt-1 block w-full"
-                        minlength="10"
-                        required
-                    />
-                    <InputError :message="form.errors.customer_no" class="mt-2"/>
+                    <InputLabel for="number" value="No. Tujuan"/>
+                    <div class="font-semibold text-gray-900">
+                        {{ props.customer.data.customer_no }}
+                    </div>
                 </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <InputLabel for="number" value="Nama Pelanggan"/>
+                    <div class="font-semibold text-gray-900">
+                        {{ props.customer.data.name }}
+                    </div>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                    <InputLabel for="number" value="Stand Meter"/>
+                    <div class="font-semibold text-gray-900">
+                        {{ props.customer.data.segment_power }}
+                    </div>
+                </div>
+
 
             </template>
         </FormSection>
@@ -135,29 +136,29 @@ const tabs = ref('Pulsa')
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-            <div class="border-b border-gray-200">
-                <nav class="-mb-px flex" aria-label="Tabs">
-                    <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                            :class="tabs=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
-                            @click="tabs='Pulsa'"
-                    >
-                        Pulsa
-                    </button>
+<!--            <div class="border-b border-gray-200">-->
+<!--                <nav class="-mb-px flex" aria-label="Tabs">-->
+<!--                    <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"-->
+<!--                            :class="tabs=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "-->
+<!--                            @click="tabs='Pulsa'"-->
+<!--                    >-->
+<!--                        Pulsa-->
+<!--                    </button>-->
 
-                    <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                            :class="tabs=='Data' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
-                            @click="tabs='Data'"
-                    >
-                        Data
-                    </button>
-                </nav>
-            </div>
+<!--                    <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"-->
+<!--                            :class="tabs=='Data' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "-->
+<!--                            @click="tabs='Data'"-->
+<!--                    >-->
+<!--                        Data-->
+<!--                    </button>-->
+<!--                </nav>-->
+<!--            </div>-->
 
             <template v-for="data in props.response.data" >
 
-                <template v-if="tabs=='Pulsa'" >
-                    <template v-if="data.category == 'Pulsa'" >
-                        <template v-if="data.brand == provider(form.customer_no)">
+<!--                <template v-if="tabs=='Pulsa'" >-->
+                    <template v-if="data.category == 'PLN'" >
+<!--                        <template v-if="data.brand == provider(form.customer_no)">-->
                             <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                                 <div class="flex-shrink-0">
                                     <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
@@ -170,28 +171,28 @@ const tabs = ref('Pulsa')
                                     </button>
                                 </div>
                             </div>
-                        </template>
+<!--                        </template>-->
                     </template>
-                </template>
+<!--                </template>-->
 
-                <template v-if="tabs=='Data'" >
-                    <template v-if="data.category == 'Data'" >
-                    <template v-if="data.brand == provider(form.customer_no)">
-                        <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <button @click="confirmModal(data)" class="focus:outline-none text-left">
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                    <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(data.price) }}</p>
-                                </button>
-                            </div>
-                        </div>
-                    </template>
-                </template>
-                </template>
+<!--                <template v-if="tabs=='Data'" >-->
+                <!--                    <template v-if="data.category == 'Data'" >-->
+                <!--                    <template v-if="data.brand == provider(form.customer_no)">-->
+                <!--                        <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">-->
+                <!--                            <div class="flex-shrink-0">-->
+                <!--                                <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">-->
+                <!--                            </div>-->
+                <!--                            <div class="flex-1 min-w-0">-->
+                <!--                                <button @click="confirmModal(data)" class="focus:outline-none text-left">-->
+                <!--                                    <span class="absolute inset-0" aria-hidden="true"></span>-->
+                <!--                                    <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>-->
+                <!--                                    <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(data.price) }}</p>-->
+                <!--                                </button>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </template>-->
+                <!--                </template>-->
+<!--                </template>-->
             </template>
         </div>
 

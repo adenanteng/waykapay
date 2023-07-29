@@ -66,10 +66,10 @@ function formatPrice(value) {
                 <div class="grid grid-cols-4 gap-x-6 gap-y-10 xl:grid-cols-4 xl:gap-x-8">
                     <Link :href="route('product.pulsa')" class="group text-center">
                         <i class="fa-duotone fa-mobile text-4xl text-primary-600 group-hover:text-primary-800"/>
-                        <h3 class="mt-4 text-sm text-gray-700">Pulsa</h3>
+                        <h3 class="mt-4 text-sm text-gray-700">Pulsa & Data</h3>
                     </Link>
 
-                    <Link href="#" class="group text-center">
+                    <Link :href="route('product.pln')" class="group text-center">
                         <i class="fa-duotone fa-lightbulb text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-4 text-sm text-gray-700">Listrik</h3>
                     </Link>

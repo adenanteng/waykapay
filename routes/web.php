@@ -46,6 +46,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::post('/product/topup', [ProductController::class, 'topup'])->name('product.topup');
     Route::get('/product/pulsa', [ProductController::class, 'pulsa'])->name('product.pulsa');
+
+    Route::get('/product/pln', [ProductController::class, 'pln'])->name('product.pln');
+    Route::post('/product/pln-inquiry', [ProductController::class, 'plnInquiry'])->name('product.plnInquiry');
+
     Route::get('/product/games', [ProductController::class, 'games'])->name('product.games');
     Route::get('/product/game/pubgm', [ProductController::class, 'gamePubgm'])->name('product.gamePubgm');
     Route::get('/product/game/mobilelegends', [ProductController::class, 'gameML'])->name('product.gameML');

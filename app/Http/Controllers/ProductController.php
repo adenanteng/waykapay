@@ -123,6 +123,73 @@ class ProductController extends Controller
      *
      * @return \Inertia\Response
      */
+    public function pln()
+    {
+        return Inertia::render('Product/Pln/Index', [
+//            'users' => auth()->user(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function plnInquiry(Request $request)
+    {
+//        dd($request->all());
+        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
+            'cmd' => 'prepaid',
+            'username' => Helper::api()->digiflazz_username,
+            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+        ]);
+
+        $customer = Http::post('https://api.digiflazz.com/v1/transaction', [
+            'commands' => 'pln-subscribe',
+            'customer_no' => $request['customer_no'],
+        ]);
+
+        if ($customer->successful()) {
+            return Inertia::render('Product/Pln/CreateEdit', [
+                'users' => auth()->user(),
+                'customer' => $customer->object(),
+                'response'  => $response->object(),
+            ]);
+
+        } else {
+            dd($customer->status());
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function plnPriceList()
+    {
+        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
+            'cmd' => 'prepaid',
+            'username' => Helper::api()->digiflazz_username,
+            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+        ]);
+
+        if ($response->successful()) {
+            return Inertia::render('Product/Pln/Index', [
+                'users' => auth()->user(),
+                'response'  => $response->object(),
+            ]);
+
+        } else {
+            dd($response->status());
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
     public function games()
     {
         return Inertia::render('Product/Games/Index', [

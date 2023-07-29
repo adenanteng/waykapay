@@ -88,6 +88,7 @@ function formatPrice(value) {
                             </span>
                             <span class="block text-xl font-extrabold text-primary-600 uppercase">
                                 <a target="_blank" :href="props.gopay.qr_code" >Qr code</a>
+                                <img :src="props.gopay.qr_code"  alt="">
                             </span>
 
                             <span class="block text-sm font-medium text-gray-600 mt-5">
