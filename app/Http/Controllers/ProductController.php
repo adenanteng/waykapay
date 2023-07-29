@@ -28,7 +28,7 @@ class ProductController extends Controller
             'customer_no' => $request['customer_no'],
             'ref_id' => $order_id,
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
-            'testing' => true
+//            'testing' => true
         ]);
 
 //        dd($response->object()->data);
@@ -43,7 +43,7 @@ class ProductController extends Controller
                 'customer_no' => $request['customer_no'],
                 'ref_id' => $order_id,
                 'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
-                'testing' => true
+//                'testing' => true
             ]);
 
 //            dd($status->object()->data);
