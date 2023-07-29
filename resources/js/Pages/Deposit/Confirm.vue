@@ -12,10 +12,9 @@ import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
 
 const props = defineProps({
-    amount: String,
-    bank: String,
-    va_number: String,
-    exp_time: String,
+    transaction: Object,
+    bank: Object | String,
+    gopay: Object | String
 })
 
 function formatPrice(value) {
@@ -47,42 +46,78 @@ function formatPrice(value) {
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
                     <h2 class="tracking-tight">
-                        <span class="block text-sm font-medium text-gray-600">
-                            Jumlah Pembayaran
+                        <span class="block text-sm font-medium text-gray-600 mt-5">
+                            Total Pembayaran
                         </span>
+
                         <span class="block text-xl font-extrabold text-primary-600">
-                            Rp {{ formatPrice(props.amount) }}
+                            Rp {{ formatPrice(props.transaction.amount) }}
                         </span>
 
-                        <span class="block text-sm font-medium text-gray-600 mt-5">
-                            Bank
-                        </span>
-                        <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                            {{ props.bank }}
-                        </span>
+                        <template v-if="props.bank">
+                            <span class="block text-sm font-medium text-gray-600 mt-5">
+                                Bank
+                            </span>
+                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                                {{ props.bank.bank }}
+                            </span>
 
-                        <span class="block text-sm font-medium text-gray-600 mt-5">
-                            No. Virtual Account
-                        </span>
-                        <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                            {{ props.va_number }}
-                            <Popper class="text-sm text-gray-900 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
-                                <button class="" @click="toClipboard(props.va_number)">
-                                    <i class="fa-duotone fa-paste ml-2" />
-                                </button>
-                            </Popper>
+                            <span class="block text-sm font-medium text-gray-600 mt-5">
+                                No. Virtual Account
+                            </span>
+                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                                {{ props.bank.va_number }}
+                                <Popper class="text-sm text-gray-900 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
+                                    <button class="" @click="toClipboard(props.bank.va_number)">
+                                        <i class="fa-duotone fa-paste ml-2" />
+                                    </button>
+                                </Popper>
+                            </span>
 
-<!--                            <Popper content="This is the Popper content">-->
-<!--                                <button>Trigger element</button>-->
-<!--                          </Popper>-->
-                        </span>
+                            <span class="block text-sm font-medium text-gray-600 mt-5">
+                                Kadaluarsa
+                            </span>
+                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                                {{ props.bank.exp_time }}
+                            </span>
+                        </template>
 
-                        <span class="block text-sm font-medium text-gray-600 mt-5">
-                            Kadaluarsa
-                        </span>
-                        <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                            {{ props.exp_time }}
-                        </span>
+                        <template v-if="props.gopay">
+                            <span class="block text-sm font-medium text-gray-600 mt-5">
+                                Qr Code
+                            </span>
+                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                                <a target="_blank" :href="props.gopay.qr_code" >Qr code</a>
+                            </span>
+
+                            <span class="block text-sm font-medium text-gray-600 mt-5">
+                                Redirect
+                            </span>
+                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                                <a target="_blank" :href="props.gopay.deeplink_redirect" >Deeplink</a>
+                            </span>
+
+                            <span class="block text-sm font-medium text-gray-600 mt-5">
+                                Status
+                            </span>
+                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                                <a target="_blank" :href="props.gopay.status" >Status</a>
+                            </span>
+
+<!--                            <span class="block text-sm font-medium text-gray-600 mt-5">-->
+<!--                                Cancel-->
+<!--                            </span>-->
+<!--                            <span class="block text-xl font-extrabold text-primary-600 uppercase">-->
+<!--                                <Link target="_blank" method="post" as="button" type="button" :href="props.gopay.cancel" >Cancel</Link>-->
+<!--                            </span>-->
+
+                            <span class="block text-sm font-medium text-gray-600 mt-5">
+                                Kadaluarsa
+                            </span>
+                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
+                                {{ props.gopay.exp_time }}
+                            </span>
+                        </template>
                     </h2>
                 </div>
 

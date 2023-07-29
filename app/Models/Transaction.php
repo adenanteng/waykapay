@@ -29,6 +29,7 @@ class Transaction extends Model
         'category_id',
 //        'amount_last',
         'amount',
+        'admin_fee',
         'desc',
     ];
 
@@ -62,6 +63,17 @@ class Transaction extends Model
         self::DATA  => 'Data',
         self::GAMES => 'Games',
         self::PLN   => 'PLN'
+    ];
+
+    const BANKTRANSFER = 1;
+    const GOPAY = 2;
+    const SHOPEEPAY = 3;
+    const QRIS = 4;
+    const ADMINFEE = [
+        self::BANKTRANSFER => 4000,
+        self::GOPAY => 2,
+        self::SHOPEEPAY  => 2,
+        self::QRIS => 0.7,
     ];
 
     /**

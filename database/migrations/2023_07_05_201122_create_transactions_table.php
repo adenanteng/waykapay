@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('category_id');
 //            $table->integer('amount_last');
             $table->integer('amount');
+            $table->integer('admin_fee')->default(0);
             $table->string('desc')->nullable();
             $table->timestamps();
 

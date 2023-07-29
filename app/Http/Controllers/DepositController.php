@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\TransactionBankTransfer;
+use App\Models\TransactionGopay;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -43,9 +44,16 @@ class DepositController extends Controller
 
         $payment_type = match ($request['method']['id']) {
             1, 2, 3 => 'bank_transfer',
+            6 => 'gopay',
         };
 
-//        dd($data, $order_id, $payment_type);
+        $admin_fee = match ($payment_type) {
+            'bank_transfer' => 4000,
+            'gopay', 'shopeepay' => 2,
+            'qris' => 0.7
+        };
+
+//        dd($order_id, $payment_type, $admin_fee);
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
@@ -55,7 +63,7 @@ class DepositController extends Controller
             [
                 "transaction_details" => [
                     "order_id" => $order_id,
-                    "gross_amount" => $request['amount']
+                    "gross_amount" => $request['amount'],
                 ],
                 "item_details" => [
                     [
@@ -76,13 +84,13 @@ class DepositController extends Controller
                     "phone" => $request['phone'],
                 ],
                 "payment_type" => $payment_type,
-                "bank_transfer" => [
+                $payment_type => [
                     "bank" => $request['method']['name'],
                 ],
             ],
         );
 
-//        dd($response->object());
+//        dd($response->object()->actions[0]->url);
 
         if ($response->successful()) {
             $transaction = Transaction::create([
@@ -94,6 +102,7 @@ class DepositController extends Controller
                 'status_id' => Transaction::PENDING,
                 'category_id' => Transaction::DEPOSIT,
                 'amount' => $request['amount'],
+                'admin_fee' => $admin_fee,
             ]);
 
             if ($payment_type == 'bank_transfer') {
@@ -103,13 +112,26 @@ class DepositController extends Controller
                     'va_number' => $response->object()->va_numbers[0]->va_number,
                     'exp_time' => $response->object()->expiry_time,
                 ]);
+            } elseif ($payment_type == 'gopay') {
+                $gopay = TransactionGopay::create([
+                    'transaction_id' => $transaction->id,
+                    'qr_code' => $response->object()->actions[0]->url,
+                    'deeplink_redirect' => $response->object()->actions[1]->url,
+                    'status' => $response->object()->actions[2]->url,
+                    'cancel' => $response->object()->actions[3]->url,
+                    'exp_time' => $response->object()->expiry_time,
+                ]);
             }
 
             return Inertia::render('Deposit/Confirm', [
-                'amount' => $response->object()->gross_amount,
-                'bank' => $response->object()->va_numbers[0]->bank,
-                'va_number' => $response->object()->va_numbers[0]->va_number,
-                'exp_time' => $response->object()->expiry_time
+                'transaction' => $transaction,
+                'bank' => $bank ?? '',
+                'gopay' => $gopay ?? '',
+//                'amount' => (int)$response->object()->gross_amount,
+//                'admin_fee' => $admin_fee,
+//                'bank' => $response->object()->va_numbers[0]->bank,
+//                'va_number' => $response->object()->va_numbers[0]->va_number,
+//                'exp_time' => $response->object()->expiry_time
             ]);
 
         } else {

@@ -116,6 +116,8 @@ class HistoryController extends Controller
             }
         }
 
+//        dd($transaction->toArray());
+
         return Inertia::render('History/Show', [
             'history' => $transaction,
         ]);

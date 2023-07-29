@@ -26,7 +26,7 @@ const logout = () => {
                 </li>
 
                 <li>
-                    <Link :href="route('setting.index')" class="block px-6 py-4">
+                    <Link :href="route('setting.index')" class="block px-6 py-4" v-if="$page.props.user.role_id==1">
                         <p class="text-sm font-medium text-gray-900">Pengaturan Aplikasi</p>
                     </Link>
                 </li>

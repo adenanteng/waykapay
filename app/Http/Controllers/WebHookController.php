@@ -60,7 +60,7 @@ class WebHookController extends Controller
 //            Log::info(json_decode($request->getContent(), true));
 //        }
 
-        Log::info(json_decode($request->getContent(), true));
+//        Log::info(json_decode($request->getContent(), true));
 
         $anj = json_decode($request->getContent());
 

@@ -42,7 +42,7 @@ const faqs = [
     },
     {
         question: "Mengalami Kendala Deposit?",
-        answer: "Lorem ipsum dolor sit amet..",
+        answer: "Lorem ipsum dolor sit amet.",
     },
 ]
 
@@ -96,7 +96,7 @@ const faqs = [
                         <DisclosureButton class="flex w-full items-start justify-between text-left px-6 py-4">
                             <span class="text-sm font-medium text-gray-900">{{ faq.question }}</span>
                             <span class="ml-6 flex items-center">
-                                <i class="fa-regular" :class="open ? 'fa-minus' : 'fa-chevron-down' " />
+                                <i class="fa-regular text-gray-900" :class="open ? 'fa-minus' : 'fa-chevron-down' " />
                             </span>
                         </DisclosureButton>
                     </dt>

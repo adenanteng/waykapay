@@ -21,7 +21,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('deposit.create', props.users), {
+    form.post(route('deposit.create', form), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -41,12 +41,16 @@ import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } 
 import { CheckCircleIcon } from '@heroicons/vue/20/solid'
 
 const mailingLists = [
-    { id: 1, name: 'bca', logo: '/img/vendor/BCA.svg' },
-    { id: 2, name: 'bni', logo: '/img/vendor/BNI.svg' },
-    { id: 3, name: 'bri', logo: '/img/vendor/BRI.svg' },
+    { id: 1, name: 'bca', logo: '/img/vendor/BCA.svg', adminFee: 'Biaya admin Rp 4.000' },
+    { id: 2, name: 'bni', logo: '/img/vendor/BNI.svg', adminFee: 'Biaya admin Rp 4.000' },
+    { id: 3, name: 'bri', logo: '/img/vendor/BRI.svg', adminFee: 'Biaya admin Rp 4.000' },
+    { id: 6, name: 'gopay', logo: '/img/vendor/GOJEK.svg', adminFee: 'Biaya admin 2%' },
 ]
 
-// const selectedMailingLists = ref(mailingLists[0])
+function formatPrice(value) {
+    let val = (value/1).toFixed(0).replace('.', '')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
 
 </script>
 
@@ -69,10 +73,10 @@ const mailingLists = [
                         <RadioGroupOption as="template" v-for="mailingList in mailingLists" :key="mailingList.id" :value="mailingList" v-slot="{ checked, active }">
                             <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-indigo-500' : '', 'relative flex cursor-pointer rounded-3xl border p-4 shadow-sm focus:outline-none']">
                               <span class="flex flex-1">
-                                <span class="flex flex-col">
+                                <span class="flex flex-col ">
                                     <img :src="mailingList.logo" class="h-7" alt=""/>
-<!--                                  <RadioGroupLabel as="span" class="block text-sm font-medium text-gray-900">{{ mailingList.title }}</RadioGroupLabel>-->
-<!--                                  <RadioGroupDescription as="span" class="mt-1 flex items-center text-sm text-gray-500">{{ mailingList.description }}</RadioGroupDescription>-->
+<!--                                  <RadioGroupLabel as="span" class="block text-sm font-medium text-gray-900">Biaya admin {{ formatPrice(mailingList.adminFee) }}</RadioGroupLabel>-->
+                                    <RadioGroupDescription as="span" class="mt-1 flex text-sm text-gray-500">{{ mailingList.adminFee }}</RadioGroupDescription>
 <!--                                  <RadioGroupDescription as="span" class="mt-6 text-sm font-medium text-gray-900">{{ mailingList.users }}</RadioGroupDescription>-->
                                 </span>
                               </span>
