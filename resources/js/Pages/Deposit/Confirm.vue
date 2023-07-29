@@ -51,7 +51,7 @@ function formatPrice(value) {
                         </span>
 
                         <span class="block text-xl font-extrabold text-primary-600">
-                            Rp {{ formatPrice(props.transaction.amount) }}
+                            Rp {{ formatPrice(props.transaction.gross_amount) }}
                         </span>
 
                         <template v-if="props.bank">

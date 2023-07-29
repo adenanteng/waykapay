@@ -18,6 +18,7 @@ const props = defineProps({
     users: Object,
     response: Object,
     customer: Object,
+    fee: Number
 });
 
 const form = useForm({
@@ -26,6 +27,7 @@ const form = useForm({
     product_name: '',
     sku: '',
     amount: '',
+    category_id: '',
 });
 
 const storeInformation = () => {
@@ -57,11 +59,12 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
+        form.category_id = 5;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;
         productBrand = data.brand;
-        productPrice = data.price;
+        productPrice = data.price + props.fee;
         productDesc = data.desc;
     }
     // setTimeout(() => passwordInput.value.focus(), 250);
@@ -167,7 +170,7 @@ const tabs = ref('Pulsa')
                                     <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                         <span class="absolute inset-0" aria-hidden="true"></span>
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(data.price) }}</p>
+                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(data.price + props.fee) }}</p>
                                     </button>
                                 </div>
                             </div>

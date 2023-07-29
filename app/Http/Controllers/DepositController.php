@@ -39,6 +39,7 @@ class DepositController extends Controller
     public function create(Request $request)
     {
 //        dd($request->all());
+        $user = User::where('id', $request['user_id'])->first();
 
         $order_id = "dp-" . $request['user_id'] . "-" . \Illuminate\Support\Str::random(8);
 
@@ -47,12 +48,18 @@ class DepositController extends Controller
             6 => 'gopay',
         };
 
-        $admin_fee = match ($payment_type) {
-            'bank_transfer' => 4000,
-            'gopay', 'shopeepay' => 2,
-            'qris' => 0.7
-        };
+        if ($payment_type == 'bank_transfer') {
+            $admin_fee = 4000;
+            $gross_amount = $request['amount'] + $admin_fee;
+        } elseif ($payment_type == 'gopay') {
+            $admin_fee = (2 / 100) * $request['amount'];
+            $gross_amount = $request['amount'] + $admin_fee;
+        } else {
+            $admin_fee = 0;
+            $gross_amount = 0;
+        }
 
+//        dd($admin_fee);
 //        dd($order_id, $payment_type, $admin_fee);
 
         $response = Http::withHeaders([
@@ -63,12 +70,12 @@ class DepositController extends Controller
             [
                 "transaction_details" => [
                     "order_id" => $order_id,
-                    "gross_amount" => $request['amount'],
+                    "gross_amount" => $gross_amount,
                 ],
                 "item_details" => [
                     [
                         "id" => "DEPOSIT",
-                        "price" => $request['amount'],
+                        "price" => $gross_amount,
                         "quantity" => 1,
                         "name" => "Deposit",
                         "brand" => "Waykapay",
@@ -90,7 +97,7 @@ class DepositController extends Controller
             ],
         );
 
-//        dd($response->object()->actions[0]->url);
+//        dd($response->object());
 
         if ($response->successful()) {
             $transaction = Transaction::create([
@@ -102,6 +109,8 @@ class DepositController extends Controller
                 'status_id' => Transaction::PENDING,
                 'category_id' => Transaction::DEPOSIT,
                 'amount' => $request['amount'],
+                'gross_amount' => $gross_amount,
+                'last_amount' => $user->wallet_balance,
                 'admin_fee' => $admin_fee,
             ]);
 
@@ -127,15 +136,10 @@ class DepositController extends Controller
                 'transaction' => $transaction,
                 'bank' => $bank ?? '',
                 'gopay' => $gopay ?? '',
-//                'amount' => (int)$response->object()->gross_amount,
-//                'admin_fee' => $admin_fee,
-//                'bank' => $response->object()->va_numbers[0]->bank,
-//                'va_number' => $response->object()->va_numbers[0]->va_number,
-//                'exp_time' => $response->object()->expiry_time
             ]);
 
         } else {
-            dd($response->status());
+            dd($response->object());
         }
 
 

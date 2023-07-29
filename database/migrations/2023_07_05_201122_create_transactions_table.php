@@ -22,9 +22,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('status_id');
             $table->integer('category_id');
-//            $table->integer('amount_last');
             $table->integer('amount');
+            $table->integer('gross_amount');
             $table->integer('admin_fee')->default(0);
+            $table->integer('last_amount');
             $table->string('desc')->nullable();
             $table->timestamps();
 

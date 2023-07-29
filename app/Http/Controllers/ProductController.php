@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\AppSetting;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,7 +20,10 @@ class ProductController extends Controller
      */
     public function topup(Request $request)
     {
-//        dd($request->all());
+        $admin_fee = Helper::api()->fees;
+        $gross_amount = $request['amount'] + $admin_fee;
+
+//        dd($admin_fee);
         $order_id = "tp-".$request['user_id']."-".\Illuminate\Support\Str::random(8);
 
         $response = Http::post('https://api.digiflazz.com/v1/transaction', [
@@ -28,7 +32,7 @@ class ProductController extends Controller
             'customer_no' => $request['customer_no'],
             'ref_id' => $order_id,
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
-//            'testing' => true
+            'testing' => true
         ]);
 
 //        dd($response->object()->data);
@@ -43,7 +47,7 @@ class ProductController extends Controller
                 'customer_no' => $request['customer_no'],
                 'ref_id' => $order_id,
                 'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
-//                'testing' => true
+                'testing' => true
             ]);
 
 //            dd($status->object()->data);
@@ -69,15 +73,17 @@ class ProductController extends Controller
             }
 
             $transaction = Transaction::create([
-                'token' => '-',
                 'sku' => $request['sku'],
                 'order_id' => $order_id,
                 'product_name' => $request['product_name'],
                 'customer_no' => $request['customer_no'],
                 'user_id' => $request['user_id'],
                 'status_id' => $status_id,
-                'category_id' => Transaction::GAMES,
+                'category_id' => $request['category_id'],
                 'amount' => $request['amount'],
+                'gross_amount' => $gross_amount,
+                'last_amount' => $user->wallet_balance,
+                'admin_fee' => $admin_fee,
             ]);
 
             switch($status->object()->data->status) {
@@ -119,6 +125,7 @@ class ProductController extends Controller
             return Inertia::render('Product/Pulsa/Index', [
                 'users' => auth()->user(),
                 'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
             ]);
 
         } else {
@@ -162,6 +169,7 @@ class ProductController extends Controller
                 'users' => auth()->user(),
                 'customer' => $customer->object(),
                 'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
             ]);
 
         } else {
@@ -199,6 +207,7 @@ class ProductController extends Controller
             return Inertia::render('Product/Games/Pubgm', [
                 'users' => auth()->user(),
                 'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
             ]);
 
         } else {
@@ -223,6 +232,7 @@ class ProductController extends Controller
             return Inertia::render('Product/Games/MobileLegends', [
                 'users' => auth()->user(),
                 'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
             ]);
 
         } else {

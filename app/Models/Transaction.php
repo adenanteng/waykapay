@@ -27,8 +27,9 @@ class Transaction extends Model
         'user_id',
         'status_id',
         'category_id',
-//        'amount_last',
         'amount',
+        'gross_amount',
+        'last_amount',
         'admin_fee',
         'desc',
     ];
