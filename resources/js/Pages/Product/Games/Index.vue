@@ -41,19 +41,19 @@ const form = useForm({
                 <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">
                     <img src="/img/games/mobile-legends.jpg" alt=""
                          class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
-                    <Link :href="route('dashboard')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('product.gameML')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
                 <p class="mt-1 block text-lg font-medium text-gray-900 truncate pointer-events-none">Mobile Legends</p>
             </li>
 
-            <li class="relative">
-                <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">
-                    <img src="/img/games/free-fire.jpg" alt=""
-                         class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
-                    <Link :href="route('dashboard')" class="absolute inset-0 focus:outline-none"></Link>
-                </div>
-                <p class="mt-1 block text-lg font-medium text-gray-900 truncate pointer-events-none">Free Fire</p>
-            </li>
+<!--            <li class="relative">-->
+<!--                <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">-->
+<!--                    <img src="/img/games/free-fire.jpg" alt=""-->
+<!--                         class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">-->
+<!--                    <Link :href="route('dashboard')" class="absolute inset-0 focus:outline-none"></Link>-->
+<!--                </div>-->
+<!--                <p class="mt-1 block text-lg font-medium text-gray-900 truncate pointer-events-none">Free Fire</p>-->
+<!--            </li>-->
 
         </ul>
 

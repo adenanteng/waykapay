@@ -20,18 +20,20 @@ const props = defineProps({
 });
 
 const form = useForm({
-    id: props.users.id ?? null,
-    number: '',
+    user_id: props.users.id ?? null,
+    customer_no: '',
+    product_name: '',
     sku: '',
+    amount: '',
 });
 
 const storeInformation = () => {
-    form.post(route('deposit.create', props.users), {
+    form.post(route('product.topup', form), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => closeModal(),
         // onError: () => passwordInput.value.focus(),
-        onFinish: () => form.reset(),
+        // onFinish: () => form.reset(),
     });
 };
 
@@ -55,12 +57,19 @@ let productPrice = ref(null);
 let productDesc = ref(null);
 
 const confirmModal = (data) => {
-    confirmingModal.value = true;
-    productSku = data.buyer_sku_code;
-    productName = data.product_name;
-    productBrand = data.brand;
-    productPrice = data.price;
-    productDesc = data.desc;
+
+    if (form.customer_no !== '') {
+        confirmingModal.value = true;
+        form.sku = data.buyer_sku_code;
+        form.amount = data.price;
+        form.product_name = data.product_name;
+
+        productSku = data.buyer_sku_code;
+        productName = data.product_name;
+        productBrand = data.brand;
+        productPrice = data.price;
+        productDesc = data.desc;
+    }
     // setTimeout(() => passwordInput.value.focus(), 250);
 };
 
@@ -99,7 +108,7 @@ const closeModal = () => {
             </template>
 
             <template #description>
-                Halo halo bandung.
+                * Saldo Rekening Rp {{ formatPrice($page.props.user.wallet_balance) }}
             </template>
 
             <template #form>
@@ -107,13 +116,13 @@ const closeModal = () => {
                     <InputLabel for="number" value="Nomor HP"/>
                     <TextInput
                         id="number"
-                        v-model="form.number"
+                        v-model="form.customer_no"
                         type="tel"
                         class="mt-1 block w-full"
                         minlength="10"
                         required
                     />
-                    <InputError :message="form.errors.number" class="mt-2"/>
+                    <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>
 
             </template>
@@ -125,7 +134,7 @@ const closeModal = () => {
             <template v-for="data in props.response.data" >
                 <template v-if="data.category == 'Pulsa'">
 
-                    <template v-if="data.brand == provider(form.number)">
+                    <template v-if="data.brand == provider(form.customer_no)">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                             <div class="flex-shrink-0">
                                 <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
@@ -162,7 +171,7 @@ const closeModal = () => {
                         No. Tujuan
                     </div>
                     <div class="text-right font-medium">
-                        {{ form.number }}
+                        {{ form.customer_no }}
                     </div>
 
                     <div class="">
@@ -182,14 +191,18 @@ const closeModal = () => {
             </template>
 
             <template #footer>
-                <SecondaryButton @click="closeModal">
-                    Batal
-                </SecondaryButton>
+<!--                <SecondaryButton @click="closeModal">-->
+<!--                    Batal-->
+<!--                </SecondaryButton>-->
+
+                <ActionMessage :on="$page.props.user.wallet_balance <= productPrice" class="mr-3">
+                    Saldo anda kurang
+                </ActionMessage>
 
                 <PrimaryButton
                     class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
+                    :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"
                     @click="storeInformation"
                 >
                     Beli
