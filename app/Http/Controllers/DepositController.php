@@ -59,7 +59,7 @@ class DepositController extends Controller
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
-        ])->post('https://api.sandbox.midtrans.com/v2/charge',
+        ])->post('https://api.midtrans.com/v2/charge',
             [
                 "transaction_details" => [
                     "order_id" => $order_id,

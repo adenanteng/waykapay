@@ -40,7 +40,7 @@ class HistoryController extends Controller
                         'Accept' => 'application/json',
                         'Content-Type' => 'application/json',
                         'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
-                    ])->get('https://api.sandbox.midtrans.com/v2/' . $transaction->order_id . '/status');
+                    ])->get('https://api.midtrans.com/v2/' . $transaction->order_id . '/status');
 
                     switch ($response->object()->transaction_status) {
                         case ('capture'):
