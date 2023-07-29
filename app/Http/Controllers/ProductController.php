@@ -80,7 +80,13 @@ class ProductController extends Controller
                 'amount' => $request['amount'],
             ]);
 
-            $user->withdraw($transaction->amount);
+            switch($status->object()->data->status) {
+                case ('Pending'):
+                case ('Sukses'):
+                    $user->withdraw($transaction->amount);
+                    break;
+                default:
+            }
 
 //            dd($transaction->toArray());
 

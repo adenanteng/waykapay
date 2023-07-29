@@ -133,26 +133,25 @@ const tabs = ref('Pulsa')
         </FormSection>
 
 
+        <div class="border-b border-gray-200">
+            <nav class="-mb-px flex" aria-label="Tabs">
+                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tabs=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
+                        @click="tabs='Pulsa'"
+                >
+                    Pulsa
+                </button>
+
+                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tabs=='Data' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
+                        @click="tabs='Data'"
+                >
+                    Data
+                </button>
+            </nav>
+        </div>
+        
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-
-            <div class="border-b border-gray-200">
-                <nav class="-mb-px flex" aria-label="Tabs">
-                    <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                            :class="tabs=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
-                            @click="tabs='Pulsa'"
-                    >
-                        Pulsa
-                    </button>
-
-                    <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                            :class="tabs=='Data' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
-                            @click="tabs='Data'"
-                    >
-                        Data
-                    </button>
-                </nav>
-            </div>
-
             <template v-for="data in props.response.data" >
 
                 <template v-if="tabs=='Pulsa'" >
