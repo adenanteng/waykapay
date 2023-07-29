@@ -79,10 +79,10 @@ function formatPrice(value) {
                         <h3 class="mt-4 text-sm text-gray-700">Games</h3>
                     </Link>
 
-                    <Link href="#" class="group text-center">
-                        <i class="fa-duotone fa-mountain-city text-4xl text-primary-600 group-hover:text-primary-800"/>
-                        <h3 class="mt-4 text-sm text-gray-700">Paket Wisata</h3>
-                    </Link>
+<!--                    <Link href="#" class="group text-center">-->
+<!--                        <i class="fa-duotone fa-mountain-city text-4xl text-primary-600 group-hover:text-primary-800"/>-->
+<!--                        <h3 class="mt-4 text-sm text-gray-700">Paket Wisata</h3>-->
+<!--                    </Link>-->
                 </div>
             </div>
         </div>
