@@ -26,7 +26,14 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'role_id' => 1,
                 'email_verified_at' => now(),
-//                'user_type' => 'god',
+            ],
+            [
+                'name' => 'Agus Suryaman',
+                'email' => 'agusyaya@gmail.com',
+                'phone' => '082372892755',
+                'password' => bcrypt('wkpbaradatu1'),
+                'role_id' => 1,
+                'email_verified_at' => now(),
             ],
         ];
         foreach ($users as $key => $value) {
