@@ -31,7 +31,7 @@ class ProductController extends Controller
             'testing' => true
         ]);
 
-//        dd($response->object());
+//        dd($response->object()->data);
 
         if ($response->successful()) {
             $user = User::where('id', $request['user_id'])->first();
@@ -45,6 +45,8 @@ class ProductController extends Controller
                 'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
                 'testing' => true
             ]);
+
+//            dd($status->object()->data);
 
             switch($status->object()->data->status) {
                 case ('Sukses'):
@@ -158,30 +160,6 @@ class ProductController extends Controller
 
         } else {
             dd($customer->status());
-        }
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Inertia\Response
-     */
-    public function plnPriceList()
-    {
-        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
-            'cmd' => 'prepaid',
-            'username' => Helper::api()->digiflazz_username,
-            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-        ]);
-
-        if ($response->successful()) {
-            return Inertia::render('Product/Pln/Index', [
-                'users' => auth()->user(),
-                'response'  => $response->object(),
-            ]);
-
-        } else {
-            dd($response->status());
         }
     }
 
