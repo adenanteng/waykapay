@@ -72,7 +72,7 @@ const confirmModal = (data) => {
         productSku = data.buyer_sku_code;
         productName = data.product_name;
         productBrand = data.brand;
-        productPrice = parseInt(data.price) + props.fee;
+        productPrice = Number.parseInt(data.price) + props.fee;
         productDesc = data.desc;
     }
     // setTimeout(() => passwordInput.value.focus(), 250);
@@ -168,7 +168,7 @@ const tabs = ref('Pulsa')
                                     <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                         <span class="absolute inset-0" aria-hidden="true"></span>
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(parseInt(data.price) + props.fee) }}</p>
+                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number.parseInt(data.price) + props.fee) }}</p>
                                     </button>
                                 </div>
                             </div>
