@@ -26,7 +26,7 @@ const form = useForm({
             <PreviousButton :href="route('dashboard')"/>
         </template>
 
-        <ul role="list" class="grid grid-cols-1 gap-x-5 gap-y-5 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+        <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
 
             <li class="relative">
                 <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">
@@ -34,7 +34,7 @@ const form = useForm({
                          class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
                     <Link :href="route('product.gamePubgm')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
-                <p class="mt-1 block text-lg font-medium text-gray-900 truncate pointer-events-none">PUBG Mobile</p>
+                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">PUBG Mobile</p>
             </li>
 
             <li class="relative">
@@ -43,7 +43,7 @@ const form = useForm({
                          class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
                     <Link :href="route('product.gameML')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
-                <p class="mt-1 block text-lg font-medium text-gray-900 truncate pointer-events-none">Mobile Legends</p>
+                <p class="mt-1 block text-gray-900 truncate pointer-events-none">Mobile Legends</p>
             </li>
 
 <!--            <li class="relative">-->

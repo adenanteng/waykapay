@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
@@ -72,9 +73,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-//        return Inertia::render('Blog/Show', [
-//            'blog' => $blog
-//        ]);
+        return Inertia::render('User/Show', [
+            'users' => $user,
+            'history' => Transaction::where('user_id', $user->id)->get()
+        ]);
     }
 
     /**
@@ -129,7 +131,8 @@ class UserController extends Controller
     public function resetPassword(User $user)
     {
 //        dd($user);
-        $data = User::findOrFail($user);
+//        $data = User::findOrFail($user);
+        $data = $user;
 
         $data->password = bcrypt('12345678');
         // User user data...

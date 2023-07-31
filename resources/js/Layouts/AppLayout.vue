@@ -153,13 +153,13 @@ const logout = () => {
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('dashboard')">
-                                            Beranda
-                                        </DropdownLink>
+<!--                                        <DropdownLink :href="route('dashboard')">-->
+<!--                                            Beranda-->
+<!--                                        </DropdownLink>-->
 
-                                        <DropdownLink :href="route('profile.show')">
-                                            Profil
-                                        </DropdownLink>
+<!--                                        <DropdownLink :href="route('profile.show')">-->
+<!--                                            Profil-->
+<!--                                        </DropdownLink>-->
 
                                         <!--                                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"-->
                                         <!--                                                      :href="route('api-tokens.index')">-->

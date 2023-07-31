@@ -29,8 +29,6 @@ const gridColumns = [
     <AppLayout title="Pengguna"
                name="Pengguna"
                desc="lorem ipsum"
-               action="Tambah Pengguna"
-               :href="route('user.create')"
     >
 
 <!--        <Table :resource="props.users" >-->
@@ -46,7 +44,7 @@ const gridColumns = [
                 name="query"
                 v-model="searchQuery"
                 type="text"
-                class="mt-1 block w-96 mb-5 shadow"
+                class="mt-1 block w-full lg:w-96 mb-5 shadow"
                 placeholder="Cari disini"
             />
         </form>
@@ -58,7 +56,7 @@ const gridColumns = [
             :columns="gridColumns"
             :filter-key="searchQuery"
             routes="user"
-            :edit=true
+            :view=true
         />
 
     </AppLayout>

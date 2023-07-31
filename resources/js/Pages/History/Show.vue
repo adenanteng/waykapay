@@ -83,8 +83,16 @@ function formatPrice(value) {
                         <dd class="mt-1 text-sm text-gray-900"><Badge :name="props.history.status" /> </dd>
                     </div>
                     <div class="sm:col-span-1">
-                        <dt class="text-sm font-medium text-gray-500">Total Bayar</dt>
+                        <dt class="text-sm font-medium text-gray-500">Bayar</dt>
                         <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.history.amount) }}</dd>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Biaya Admin</dt>
+                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.history.admin_fee) }}</dd>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Total Bayar</dt>
+                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.history.gross_amount) }}</dd>
                     </div>
                     <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500">Keterangan</dt>
