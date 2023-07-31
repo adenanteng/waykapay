@@ -140,7 +140,7 @@ const closeModal = () => {
                                 <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                     <span class="absolute inset-0" aria-hidden="true"></span>
                                     <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                    <p class="text-sm text-gray-500 truncate">Rp {{ data.price + props.fee }}</p>
+                                    <p class="text-sm text-gray-500 truncate">Rp {{ Number(data.price) + props.fee }}</p>
                                 </button>
                             </div>
                         </div>
