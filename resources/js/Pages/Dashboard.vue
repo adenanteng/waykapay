@@ -87,97 +87,50 @@ function formatPrice(value) {
             </div>
         </div>
 
-<!--        <SectionTitle>-->
-<!--            <template #title>-->
-<!--                Riwayat Transaksi-->
-<!--            </template>-->
-<!--        </SectionTitle>-->
-
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="history in $page.props.history">
-                        <li>
-                            <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
-                                <div class="px-4 py-4 sm:px-6">
-                                    <div class="flex items-center justify-between">
-                                        <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>
-                                        <div class="ml-2 flex-shrink-0 flex">
-                                            <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                                :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
-                                            >
-                                                {{ history.status }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2 sm:flex sm:justify-between">
-                                        <div class="sm:flex">
-                                            <p class="flex items-center text-sm text-gray-900">
-<!--                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />-->
-                                                {{ history.category_id == 1 ? '+' : '-' }} Rp {{ formatPrice(history.amount) }}
-                                            </p>
-<!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-<!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
-<!--                                                Remote-->
-<!--                                            </p>-->
-                                        </div>
-                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                            <i class="fa-regular fa-calendar text-gray-500 pr-2" />
-                                            <p>
-                                                {{ formattedDate(history.created_at) }}
-                                            </p>
-                                            <p class="text-gray-900 ml-2">
-                                                {{ formattedTime(history.created_at) }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                        </li>
-
+<!--        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">-->
+<!--            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">-->
+<!--                <template v-for="history in $page.props.history">-->
 <!--                        <li>-->
-<!--                            <div class="relative pb-8">-->
-<!--                                <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>-->
-<!--                                <div class="relative flex space-x-5">-->
-<!--                                    <div>-->
-<!--                                        <span-->
-<!--                                            class="h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white nightwind-prevent"-->
-<!--                                            :class="history.event == 'deposit' ? 'bg-primary-600' : 'bg-gray-600' "-->
-<!--                                        >-->
-<!--                                            <i-->
-<!--                                                class="fa-solid text-white nightwind-prevent"-->
-<!--                                                :class="history.event == 'deposit' ? 'fa-coins' : 'fa-thumbs-up' "-->
-<!--                                            />-->
-<!--                                        </span>-->
-<!--                                    </div>-->
-<!--                                    <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">-->
-<!--                                        <div>-->
-<!--                                            <div class="text-lg text-gray-900">-->
-<!--                                                {{ history.description }}-->
-<!--                                            </div>-->
-<!--                                            <div class="text-xs text-gray-500">-->
-<!--                                                <time :datetime="history.properties.created">-->
-<!--                                                    {{ formattedDate(history.properties.created) }}-->
-<!--                                                </time>-->
-<!--                                                &#8226;-->
-<!--                                                <time :datetime="history.properties.created">-->
-<!--                                                    {{ formattedTime(history.properties.created) }}-->
-<!--                                                </time>-->
-<!--                                            </div>-->
-
+<!--                            <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >-->
+<!--                                <div class="px-4 py-4 sm:px-6">-->
+<!--                                    <div class="flex items-center justify-between">-->
+<!--                                        <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>-->
+<!--                                        <div class="ml-2 flex-shrink-0 flex">-->
+<!--                                            <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "-->
+<!--                                                :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"-->
+<!--                                            >-->
+<!--                                                {{ history.status }}-->
+<!--                                            </p>-->
 <!--                                        </div>-->
-<!--                                        <div class="text-right text-sm whitespace-nowrap">-->
-<!--                                            <span class="font-medium text-gray-900">-->
-<!--                                                Rp {{ formatPrice(history.properties.amount) }}-->
-<!--                                            </span>-->
+<!--                                    </div>-->
+<!--                                    <div class="mt-2 sm:flex sm:justify-between">-->
+<!--                                        <div class="sm:flex">-->
+<!--                                            <p class="flex items-center text-sm text-gray-900">-->
+<!--&lt;!&ndash;                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />&ndash;&gt;-->
+<!--                                                {{ history.category_id == 1 ? '+' : '-' }} Rp {{ formatPrice(history.amount) }}-->
+<!--                                            </p>-->
+<!--&lt;!&ndash;                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Remote&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </p>&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">-->
+<!--                                            <i class="fa-regular fa-calendar text-gray-500 pr-2" />-->
+<!--                                            <p>-->
+<!--                                                {{ formattedDate(history.created_at) }}-->
+<!--                                            </p>-->
+<!--                                            <p class="text-gray-900 ml-2">-->
+<!--                                                {{ formattedTime(history.created_at) }}-->
+<!--                                            </p>-->
 <!--                                        </div>-->
 <!--                                    </div>-->
 <!--                                </div>-->
-<!--                            </div>-->
+<!--                            </Link>-->
 <!--                        </li>-->
 
-                    </template>
-            </ul>
-        </div>
+<!--                    </template>-->
+<!--            </ul>-->
+<!--        </div>-->
 
         <MobileMenu/>
     </AppLayout>
