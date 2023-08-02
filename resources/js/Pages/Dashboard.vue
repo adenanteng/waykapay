@@ -41,8 +41,8 @@ const breakpoints = {
     },
     // 1024 and up
     1024: {
-        itemsToShow: 5,
-        snapAlign: 'start',
+        itemsToShow: 4,
+        snapAlign: 'center',
     },
 }
 
