@@ -84,11 +84,11 @@ function formatPrice(value) {
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Bayar</dt>
-                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.history.amount) }}</dd>
+                        <dd class="mt-1 text-sm text-gray-900">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</dd>
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Biaya Admin</dt>
-                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.history.admin_fee) }}</dd>
+                        <dd class="mt-1 text-sm text-gray-900">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</dd>
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Total Bayar</dt>
