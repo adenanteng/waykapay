@@ -89,7 +89,7 @@ class ProductController extends Controller
             switch($status->object()->data->status) {
                 case ('Pending'):
                 case ('Sukses'):
-                    $user->withdraw($transaction->amount);
+                    $user->withdraw($transaction->gross_amount);
                     break;
                 default:
             }
