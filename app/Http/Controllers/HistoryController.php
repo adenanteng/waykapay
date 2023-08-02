@@ -24,7 +24,7 @@ class HistoryController extends Controller
         return Inertia::render('History/Index', [
             'users' => auth()->user(),
             'history' => $history,
-            'in_count' => $history->where('category_id', 1)->where('status_id', 1)->sum('gross_amount'),
+            'in_count' => $history->where('category_id', 1)->where('status_id', 1)->sum('amount'),
             'out_count' => $history->where('category_id', '!=', 1)->where('status_id', 1)->sum('gross_amount'),
         ]);
     }
