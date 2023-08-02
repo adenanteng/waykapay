@@ -21,7 +21,7 @@ class WebHookController extends Controller
         if ($transaction->status_id != Transaction::SUCCESS) {
             switch($request['status_code']) {
                 case ('200'):
-                    $user->deposit($request['amount']);
+                    $user->deposit($transaction->amount);
                     $status_id = Transaction::SUCCESS;
                     break;
 
