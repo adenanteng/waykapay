@@ -17,9 +17,15 @@ class HistoryController extends Controller
 {
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
+        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get();
+
+//        dd($history->where('category_id', 1)->sum('gross_amount'));
+
         return Inertia::render('History/Index', [
             'users' => auth()->user(),
-            'history' => Transaction::where('user_id', auth()->user()->id)->latest()->get(),
+            'history' => $history,
+            'in_count' => $history->where('category_id', 1)->where('status_id', 1)->sum('gross_amount'),
+            'out_count' => $history->where('category_id', '!=', 1)->where('status_id', 1)->sum('gross_amount'),
         ]);
     }
 
