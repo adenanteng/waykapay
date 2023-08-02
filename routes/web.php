@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppSettingController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\HistoryController;
@@ -55,6 +56,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/game/mobilelegends', [ProductController::class, 'gameML'])->name('product.gameML');
 
     Route::resource('/information', InformationController::class)->names('information');
+
+    Route::resource('/carousel', CarouselController::class)->names('carousel');
 
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');

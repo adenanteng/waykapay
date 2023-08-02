@@ -157,14 +157,14 @@ const logout = () => {
 <!--                                            Beranda-->
 <!--                                        </DropdownLink>-->
 
-<!--                                        <DropdownLink :href="route('profile.show')">-->
-<!--                                            Profil-->
-<!--                                        </DropdownLink>-->
+                                        <DropdownLink :href="route('profile.show')">
+                                            Profil
+                                        </DropdownLink>
 
-                                        <!--                                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"-->
-                                        <!--                                                      :href="route('api-tokens.index')">-->
-                                        <!--                                            API Tokens-->
-                                        <!--                                        </DropdownLink>-->
+<!--                                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"-->
+<!--                                                      :href="route('api-tokens.index')">-->
+<!--                                            API Tokens-->
+<!--                                        </DropdownLink>-->
 
                                         <div class="border-t border-gray-100"/>
 
@@ -206,6 +206,15 @@ const logout = () => {
                                             icon="fa-circle-info"
                                         >
                                             Informasi
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
+                                            :href="route('carousel.index')"
+                                            :active="$page.url == '/carousel'"
+                                            icon="fa-images"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                            Carousel
                                         </NavLinkAlt>
 
                                         <NavLinkAlt

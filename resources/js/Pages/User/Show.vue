@@ -55,10 +55,9 @@ function formatPrice(value) {
 
                 </div>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">
-<!--                    <PrimaryButton as="a" :href="route('deposit.index')">-->
-<!--                        <i class="fa-regular fa-coins mr-1"/>-->
-<!--                        Deposit-->
-<!--                    </PrimaryButton>-->
+                    <PrimaryButton as="a" :href="route('user.edit', props.users)">
+                        Ubah Data
+                    </PrimaryButton>
 
                     <!--                    <SecondaryButton >-->
                     <!--                        <i class="fa-regular fa-coins mr-1"/>-->

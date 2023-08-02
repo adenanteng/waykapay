@@ -5,6 +5,7 @@ import SectionBorder from '@/Components/SectionBorder.vue';
 import UpdateInformationForm from "@/Pages/User/Partials/UpdateInformationForm.vue";
 import DeleteForm from "@/Pages/User/Partials/DeleteForm.vue";
 import PasswordResetForm from "@/Pages/User/Partials/PasswordResetForm.vue";
+import PreviousButton from "@/Components/PreviousButton.vue";
 
 </script>
 
@@ -16,6 +17,9 @@ import PasswordResetForm from "@/Pages/User/Partials/PasswordResetForm.vue";
                :href="route('user.index')"
     >
 
+        <template #previous>
+            <PreviousButton :href="route('user.index')" />
+        </template>
 
         <UpdateInformationForm :users="$page.props.users ?? '' " />
 

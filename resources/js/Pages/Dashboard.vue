@@ -7,10 +7,14 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import SectionTitle from "@/Components/SectionTitle.vue";
 import moment from "moment";
+import 'vue3-carousel/dist/carousel.css'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+
 
 const props = defineProps({
     users: Object,
-    history: Object
+    history: Object,
+    carousel: Object,
 })
 
 function formattedDate(value) {
@@ -24,6 +28,22 @@ function formattedTime(value) {
 function formatPrice(value) {
     let val = (value/1).toFixed(0).replace('.', '')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
+
+const breakpoints = {
+    500: {
+        itemsToShow: 2,
+        snapAlign: 'center',
+    },
+    700: {
+        itemsToShow: 3,
+        snapAlign: 'center',
+    },
+    // 1024 and up
+    1024: {
+        itemsToShow: 5,
+        snapAlign: 'start',
+    },
 }
 
 </script>
@@ -63,7 +83,7 @@ function formatPrice(value) {
         <div
             class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <div class="p-6">
-                <div class="grid grid-cols-3 gap-x-6 gap-y-10 xl:grid-cols-4 xl:gap-x-8">
+                <div class="grid grid-cols-4 gap-x-6 gap-y-10 xl:grid-cols-4 xl:gap-x-8">
                     <Link :href="route('product.pulsa')" class="group text-center">
                         <i class="fa-duotone fa-mobile text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-4 text-sm text-gray-700">Pulsa & Data</h3>
@@ -79,13 +99,26 @@ function formatPrice(value) {
                         <h3 class="mt-4 text-sm text-gray-700">Games</h3>
                     </Link>
 
-<!--                    <Link href="#" class="group text-center">-->
-<!--                        <i class="fa-duotone fa-mountain-city text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-4 text-sm text-gray-700">Public</h3>-->
-<!--                    </Link>-->
+                    <Link href="#" class="group text-center">
+                        <i class="fa-duotone fa-wallet text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-4 text-sm text-gray-700">E-Money</h3>
+                    </Link>
                 </div>
             </div>
         </div>
+
+        <carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">
+            <slide v-for="slide in props.carousel" :key="slide.id" class="">
+                <Link :href="slide.href">
+                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">
+                </Link>
+            </slide>
+
+<!--            <template #addons>-->
+<!--                <navigation />-->
+<!--                <pagination />-->
+<!--            </template>-->
+        </carousel>
 
 <!--        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">-->
 <!--            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">-->

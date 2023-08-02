@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\carousel;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard', [
             'users' => auth()->user(),
             'history' => Transaction::where('user_id', auth()->user()->id)->latest()->take(3)->get(),
+            'carousel' => carousel::all(),
         ]);
     }
 

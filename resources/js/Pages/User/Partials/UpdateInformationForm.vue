@@ -19,6 +19,7 @@ const form = useForm({
     id: props.users.id ?? null,
     name: props.users.name ?? null,
     email: props.users.email ?? null,
+    phone: props.users.phone ?? null,
     role_id: props.users.role_id ?? null,
 });
 
@@ -90,6 +91,19 @@ const formReset = () => {
                     required
                 />
                 <InputError :message="form.errors.email" class="mt-2"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-2">
+                <InputLabel for="phone" value="Telepon"/>
+                <TextInput
+                    id="phone"
+                    v-model="form.phone"
+                    type="tel"
+                    class="mt-1 block w-full"
+                    autocomplete="phone"
+                    required
+                />
+                <InputError :message="form.errors.phone" class="mt-2"/>
             </div>
 
             <div class="col-span-6 sm:col-span-2">

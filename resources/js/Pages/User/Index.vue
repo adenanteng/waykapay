@@ -3,6 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import TextInput from '@/Components/TextInput.vue';
 import {ref} from "vue";
 import Table from "@/Components/Table.vue";
+import PrimaryButton from "../../Components/PrimaryButton.vue";
 // import { Table } from "@protonemedia/inertiajs-tables-laravel-query-builder";
 
 const props = defineProps({
@@ -39,15 +40,24 @@ const gridColumns = [
 <!--            </template>-->
 <!--        </Table>-->
 
-        <form id="search">
-            <TextInput
-                name="query"
-                v-model="searchQuery"
-                type="text"
-                class="mt-1 block w-full lg:w-96 mb-5 shadow"
-                placeholder="Cari disini"
-            />
-        </form>
+        <div class="flex justify-between">
+            <div class="">
+                <form id="search">
+                    <TextInput
+                        name="query"
+                        v-model="searchQuery"
+                        type="text"
+                        class="mt-1 block w-full lg:w-96 mb-5 shadow"
+                        placeholder="Cari disini"
+                    />
+                </form>
+            </div>
+
+            <div class="">
+                <PrimaryButton as="a" :href="route('user.create')" >Tambah</PrimaryButton>
+            </div>
+        </div>
+
 
         <Table
             :title="gridTitle"
