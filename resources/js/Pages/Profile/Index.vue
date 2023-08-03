@@ -62,7 +62,7 @@ const logout = () => {
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
                     <Link :href="route('profile.show')" class="block px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Profil</p>
+                        <p class="text-sm font-medium text-gray-900">Pengaturan Profil</p>
                     </Link>
                 </li>
             </ul>
@@ -72,13 +72,13 @@ const logout = () => {
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
                     <Link :href="route('carousel.index')" class="block px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Carousel</p>
+                        <p class="text-sm font-medium text-gray-900">Pengaturan Carousel</p>
                     </Link>
                 </li>
 
                 <li>
                     <Link :href="route('user.index')" class="block px-6 py-4" >
-                        <p class="text-sm font-medium text-gray-900">Pengguna</p>
+                        <p class="text-sm font-medium text-gray-900">Pengaturan Pengguna</p>
                     </Link>
                 </li>
             </ul>
