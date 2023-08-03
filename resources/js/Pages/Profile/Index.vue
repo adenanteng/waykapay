@@ -62,13 +62,23 @@ const logout = () => {
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
                     <Link :href="route('profile.show')" class="block px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Pengaturan Profil</p>
+                        <p class="text-sm font-medium text-gray-900">Profil</p>
+                    </Link>
+                </li>
+            </ul>
+        </div>
+
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg" v-if="$page.props.user.role_id==1">
+            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                <li>
+                    <Link :href="route('carousel.index')" class="block px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Carousel</p>
                     </Link>
                 </li>
 
                 <li>
-                    <Link :href="route('setting.index')" class="block px-6 py-4" v-if="$page.props.user.role_id==1">
-                        <p class="text-sm font-medium text-gray-900">Pengaturan Aplikasi</p>
+                    <Link :href="route('user.index')" class="block px-6 py-4" >
+                        <p class="text-sm font-medium text-gray-900">Pengguna</p>
                     </Link>
                 </li>
             </ul>
