@@ -23,7 +23,7 @@ const form = useForm({
                desc="Summertime sadness"
     >
         <template #previous>
-            <PreviousButton :href="route('dashboard')"/>
+            <PreviousButton />
         </template>
 
         <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">

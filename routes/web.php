@@ -46,6 +46,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
 
     Route::post('/product/topup', [ProductController::class, 'topup'])->name('product.topup');
+
     Route::get('/product/pulsa', [ProductController::class, 'pulsa'])->name('product.pulsa');
 
     Route::get('/product/pln', [ProductController::class, 'pln'])->name('product.pln');
@@ -54,6 +55,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/games', [ProductController::class, 'games'])->name('product.games');
     Route::get('/product/game/pubgm', [ProductController::class, 'gamePubgm'])->name('product.gamePubgm');
     Route::get('/product/game/mobilelegends', [ProductController::class, 'gameML'])->name('product.gameML');
+
+    Route::get('/product/emoney', [ProductController::class, 'emoney'])->name('product.emoney');
+    Route::get('/product/emoney/dana', [ProductController::class, 'emoneyDana'])->name('product.emoneyDana');
+    Route::get('/product/emoney/gopay', [ProductController::class, 'emoneyGopay'])->name('product.emoneyGopay');
 
     Route::resource('/information', InformationController::class)->names('information');
 

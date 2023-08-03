@@ -18,7 +18,7 @@ import PreviousButton from "@/Components/PreviousButton.vue";
     >
 
         <template #previous>
-            <PreviousButton :href="route('user.index')" />
+            <PreviousButton />
         </template>
 
         <UpdateInformationForm :users="$page.props.users ?? '' " />

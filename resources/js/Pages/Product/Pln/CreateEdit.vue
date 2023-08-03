@@ -85,7 +85,7 @@ const tabs = ref('Pulsa')
                desc="Masukkan nomor"
     >
         <template #previous>
-            <PreviousButton :href="route('product.pln')" />
+            <PreviousButton />
         </template>
 
 <!--        <template #action>-->

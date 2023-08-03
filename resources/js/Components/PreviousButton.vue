@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <Link :href="props.href">
+    <Link href="" onclick="history.back();return false;">
         <i class="fa-regular fa-arrow-left text-lg text-gray-900 p-2" />
     </Link>
 </template>

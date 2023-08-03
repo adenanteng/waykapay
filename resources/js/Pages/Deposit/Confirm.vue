@@ -31,7 +31,7 @@ function formatPrice(value) {
     >
 
         <template #previous>
-            <PreviousButton :href="route('deposit.index')" />
+            <PreviousButton />
         </template>
 
         <FormSection >

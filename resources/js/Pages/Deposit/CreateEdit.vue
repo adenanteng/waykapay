@@ -16,7 +16,7 @@ import {ref} from "vue";
     >
 
         <template #previous>
-            <PreviousButton :href="route('dashboard')" />
+            <PreviousButton />
         </template>
 
         <UpdateInformationForm

@@ -47,7 +47,7 @@ const tabs = ref('Pulsa')
                desc="Masukkan nomor"
     >
         <template #previous>
-            <PreviousButton :href="route('dashboard')" />
+            <PreviousButton />
         </template>
 
 <!--        <template #action>-->

@@ -99,9 +99,9 @@ const breakpoints = {
                         <h3 class="mt-2 text-sm text-gray-700">Games</h3>
                     </Link>
 
-                    <Link href="#" class="group text-center">
+                    <Link :href="route('product.emoney')" class="group text-center">
                         <i class="fa-duotone fa-wallet text-4xl text-primary-600 group-hover:text-primary-800"/>
-                        <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>
+                        <h3 class="mt-2 text-sm text-gray-700">Topup</h3>
                     </Link>
                 </div>
             </div>

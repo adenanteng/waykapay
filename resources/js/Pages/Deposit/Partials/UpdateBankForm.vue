@@ -44,7 +44,7 @@ const mailingLists = [
     // { id: 1, name: 'bca', logo: '/img/vendor/BCA.svg', adminFee: 'Biaya admin Rp 4.000' },
     { id: 2, name: 'bni', logo: '/img/vendor/BNI.svg', adminFee: 'Biaya admin Rp 4.000' },
     { id: 3, name: 'bri', logo: '/img/vendor/BRI.svg', adminFee: 'Biaya admin Rp 4.000' },
-    { id: 6, name: 'gopay', logo: '/img/vendor/GOJEK.svg', adminFee: 'Biaya admin 2%' },
+    { id: 6, name: 'gopay', logo: '/img/vendor/GOPAY.svg', adminFee: 'Biaya admin 2%' },
 ]
 
 function formatPrice(value) {

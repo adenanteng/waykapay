@@ -15,7 +15,7 @@ import PreviousButton from "@/Components/PreviousButton.vue";
     >
 
         <template #previous>
-            <PreviousButton :href="route('profile.index')" />
+            <PreviousButton />
         </template>
 
         <UpdateProfileInformationForm :carousel="$page.props.carousel ?? '' " />

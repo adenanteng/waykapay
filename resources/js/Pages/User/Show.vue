@@ -35,7 +35,7 @@ function formatPrice(value) {
     >
 
         <template #previous>
-            <PreviousButton :href="route('user.index')" />
+            <PreviousButton />
         </template>
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">

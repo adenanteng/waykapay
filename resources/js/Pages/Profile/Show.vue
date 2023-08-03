@@ -23,7 +23,7 @@ defineProps({
     >
 
         <template #previous>
-            <PreviousButton :href="route('profile.index')" />
+            <PreviousButton />
         </template>
 
         <template v-if="$page.props.jetstream.canUpdateProfileInformation">

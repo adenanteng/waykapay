@@ -186,7 +186,6 @@ class ProductController extends Controller
     {
         return Inertia::render('Product/Games/Index', [
             'users' => auth()->user(),
-//                'response'  => $response->object(),
         ]);
     }
 
@@ -230,6 +229,68 @@ class ProductController extends Controller
 
         if ($response->successful()) {
             return Inertia::render('Product/Games/MobileLegends', [
+                'users' => auth()->user(),
+                'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+            dd($response->status());
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function emoney()
+    {
+        return Inertia::render('Product/Emoney/Index', [
+            'users' => auth()->user(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function emoneyDana()
+    {
+        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
+            'cmd' => 'prepaid',
+            'username' => Helper::api()->digiflazz_username,
+            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+        ]);
+
+        if ($response->successful()) {
+            return Inertia::render('Product/Emoney/Dana', [
+                'users' => auth()->user(),
+                'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+            dd($response->status());
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function emoneyGopay()
+    {
+        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
+            'cmd' => 'prepaid',
+            'username' => Helper::api()->digiflazz_username,
+            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+        ]);
+
+        if ($response->successful()) {
+            return Inertia::render('Product/Emoney/Gopay', [
                 'users' => auth()->user(),
                 'response'  => $response->object(),
                 'fee' => Helper::api()->fees,
