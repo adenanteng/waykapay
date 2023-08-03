@@ -13,7 +13,6 @@ import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 
 const props = defineProps({
     users: Object,
-    history: Object,
     carousel: Object,
 })
 
@@ -36,12 +35,12 @@ const breakpoints = {
         snapAlign: 'center',
     },
     700: {
-        itemsToShow: 3,
+        itemsToShow: 2,
         snapAlign: 'center',
     },
     // 1024 and up
     1024: {
-        itemsToShow: 4,
+        itemsToShow: 3,
         snapAlign: 'center',
     },
 }
@@ -110,7 +109,7 @@ const breakpoints = {
         <carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">
             <slide v-for="slide in props.carousel" :key="slide.id" class="">
                 <Link :href="slide.href">
-                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">
+                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl object-cover p-1">
                 </Link>
             </slide>
 
@@ -119,51 +118,6 @@ const breakpoints = {
 <!--                <pagination />-->
 <!--            </template>-->
         </carousel>
-
-<!--        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">-->
-<!--            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">-->
-<!--                <template v-for="history in $page.props.history">-->
-<!--                        <li>-->
-<!--                            <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >-->
-<!--                                <div class="px-4 py-4 sm:px-6">-->
-<!--                                    <div class="flex items-center justify-between">-->
-<!--                                        <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>-->
-<!--                                        <div class="ml-2 flex-shrink-0 flex">-->
-<!--                                            <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "-->
-<!--                                                :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"-->
-<!--                                            >-->
-<!--                                                {{ history.status }}-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div class="mt-2 sm:flex sm:justify-between">-->
-<!--                                        <div class="sm:flex">-->
-<!--                                            <p class="flex items-center text-sm text-gray-900">-->
-<!--&lt;!&ndash;                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />&ndash;&gt;-->
-<!--                                                {{ history.category_id == 1 ? '+' : '-' }} Rp {{ formatPrice(history.amount) }}-->
-<!--                                            </p>-->
-<!--&lt;!&ndash;                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />&ndash;&gt;-->
-<!--&lt;!&ndash;                                                Remote&ndash;&gt;-->
-<!--&lt;!&ndash;                                            </p>&ndash;&gt;-->
-<!--                                        </div>-->
-<!--                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">-->
-<!--                                            <i class="fa-regular fa-calendar text-gray-500 pr-2" />-->
-<!--                                            <p>-->
-<!--                                                {{ formattedDate(history.created_at) }}-->
-<!--                                            </p>-->
-<!--                                            <p class="text-gray-900 ml-2">-->
-<!--                                                {{ formattedTime(history.created_at) }}-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </Link>-->
-<!--                        </li>-->
-
-<!--                    </template>-->
-<!--            </ul>-->
-<!--        </div>-->
 
         <MobileMenu/>
     </AppLayout>

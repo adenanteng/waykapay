@@ -19,7 +19,6 @@ class DashboardController extends Controller
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
         return Inertia::render('Dashboard', [
             'users' => auth()->user(),
-            'history' => Transaction::where('user_id', auth()->user()->id)->latest()->take(3)->get(),
             'carousel' => carousel::all(),
         ]);
     }
