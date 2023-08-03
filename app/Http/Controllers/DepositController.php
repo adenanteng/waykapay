@@ -71,6 +71,7 @@ class DepositController extends Controller
                 "transaction_details" => [
                     "order_id" => $order_id,
                     "gross_amount" => $gross_amount,
+                    "payment_type" => $payment_type
                 ],
                 "item_details" => [
                     [
