@@ -144,12 +144,12 @@ function formatPrice(value) {
 <!--                    Berhasil disimpan.-->
 <!--                </ActionMessage>-->
 
-                <PrimaryButton as="a" :href="route('dashboard')">
-                    Kembali ke Beranda
-                </PrimaryButton>
+<!--                <PrimaryButton as="a" :href="route('dashboard')">-->
+<!--                    Kembali ke Beranda-->
+<!--                </PrimaryButton>-->
 
                 <PrimaryButton @click="storeInformation" >
-                    Cek Status
+                    Kembali ke Beranda
                 </PrimaryButton>
             </template>
         </FormSection>
