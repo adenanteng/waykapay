@@ -58,7 +58,7 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
-        form.category_id = 4;
+        form.category_id = 6;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;
@@ -110,7 +110,7 @@ const closeModal = () => {
 
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Nomor"/>
+                    <InputLabel for="number" value="Nomor HP"/>
                     <TextInput
                         id="number"
                         v-model="form.customer_no"

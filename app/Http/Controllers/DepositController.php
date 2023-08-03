@@ -148,63 +148,63 @@ class DepositController extends Controller
     public function confirm(Request $request)
     {
 //        dd($request->toArray());
+        $request = $request['transaction'];
 
         $transaction = Transaction::where('id', $request['id'])->first();
         $user = User::where('id', $request['user_id'])->first();
-//        dd($transaction);
+//        dd($request);
 
-        switch ($request['status']) {
-            case ('success'):
+        switch ($request['status_id']) {
+            case (Transaction::SUCCESS):
                 $user->deposit($request['amount']);
-                $status_id = Transaction::SUCCESS;
+                $transaction->update([
+                    'status_id' => Transaction::SUCCESS,
+                ]);
 
-                session()->flash('flash.banner', 'Deposit sejumlah Rp ' . $request['amount'] . ' berhasil!');
-                session()->flash('flash.bannerStyle', 'success');
+                return Inertia::render('Payment/Success', [
+                    'transaction'   => $transaction
+                ]);
                 break;
 
-            case ('pending'):
-                $status_id = Transaction::PENDING;
+            case (Transaction::PENDING):
+                $transaction->update([
+                    'status_id' => Transaction::PENDING,
+                ]);
 
-                session()->flash('flash.banner', 'Deposit pending!');
-                session()->flash('flash.bannerStyle', 'danger');
+                return Inertia::render('Payment/Pending', [
+                    'transaction'   => $transaction
+                ]);
                 break;
 
-            case ('error'):
-                $status_id = Transaction::ERROR;
+            case (Transaction::ERROR):
+                $transaction->update([
+                    'status_id' => Transaction::ERROR,
+                ]);
 
-                session()->flash('flash.banner', 'Deposit error!');
-                session()->flash('flash.bannerStyle', 'danger');
+                return Inertia::render('Payment/Error', [
+                    'transaction'   => $transaction
+                ]);
                 break;
 
-            case ('close'):
-                $status_id = Transaction::CLOSE;
+            case (Transaction::CLOSE):
+                $transaction->update([
+                    'status_id' => Transaction::CLOSE,
+                ]);
 
-                session()->flash('flash.banner', 'Deposit close!');
-                session()->flash('flash.bannerStyle', 'danger');
+                return Inertia::render('Payment/Error', [
+                    'transaction'   => $transaction
+                ]);
+
                 break;
 
             default:
-                $status_id = Transaction::UNDEFINED;
+                $transaction->update([
+                    'status_id' => Transaction::UNDEFINED,
+                ]);
 
                 session()->flash('flash.banner', 'Gatau lagi kami!');
                 session()->flash('flash.bannerStyle', 'danger');
         }
-
-        $transaction->update([
-            'status_id' => $status_id,
-        ]);
-
-//        $transaction = Transaction::create([
-//            'token' => $request['token'],
-//            'sku' => '-',
-//            'order_id' => $request['order_id'],
-//            'product_name' => 'Deposit',
-//            'customer_no' => '-',
-//            'user_id' => $request['user_id'],
-//            'status_id' => $status_id,
-//            'category_id' => Transaction::DEPOSIT,
-//            'amount' => $request['amount'],
-//        ]);
 
         return to_route('dashboard');
 

@@ -26,7 +26,7 @@ const form = useForm({
             <PreviousButton />
         </template>
 
-        <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+        <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-4 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
 
             <li class="relative">
                 <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">

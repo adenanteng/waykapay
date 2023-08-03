@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
     Route::post('/deposit/method', [DepositController::class, 'method'])->name('deposit.method');
     Route::post('/deposit', [DepositController::class, 'create'])->name('deposit.create');
-    Route::post('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
+    Route::put('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
 
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 
@@ -46,6 +46,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
 
     Route::post('/product/topup', [ProductController::class, 'topup'])->name('product.topup');
+    Route::put('/product/status', [ProductController::class, 'status'])->name('product.status');
 
     Route::get('/product/pulsa', [ProductController::class, 'pulsa'])->name('product.pulsa');
 

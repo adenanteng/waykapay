@@ -38,7 +38,7 @@ class HistoryController extends Controller
         if ($transaction->category_id == Transaction::DEPOSIT) {
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):
-                    session()->flash('flash.banner', 'tidak ada proses!');
+//                    session()->flash('flash.banner', 'tidak ada proses!');
                     break;
                 default:
                     $response = Http::withHeaders([
@@ -78,13 +78,13 @@ class HistoryController extends Controller
                         'status_id' => $status_id,
                     ]);
 
-                    session()->flash('flash.banner', 'terproses ');
-                    session()->flash('flash.bannerStyle', 'danger');
+//                    session()->flash('flash.banner', 'terproses ');
+//                    session()->flash('flash.bannerStyle', 'danger');
             }
         } else {
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):
-                    session()->flash('flash.banner', 'tidak ada proses!');
+//                    session()->flash('flash.banner', 'tidak ada proses!');
                     break;
                 default:
                     $response = Http::post('https://api.digiflazz.com/v1/transaction', [
@@ -116,8 +116,8 @@ class HistoryController extends Controller
                         'status_id' => $status_id,
                     ]);
 
-                    session()->flash('flash.banner', 'terproses');
-                    session()->flash('flash.bannerStyle', 'danger');
+//                    session()->flash('flash.banner', 'terproses');
+//                    session()->flash('flash.bannerStyle', 'danger');
             }
         }
 

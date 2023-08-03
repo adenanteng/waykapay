@@ -4,10 +4,12 @@ import {Link, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
 import DangerButton from "@/Components/DangerButton.vue";
+import {ref, watch} from "vue";
 
 const logout = () => {
     router.post(route('logout'));
 };
+
 </script>
 
 <template>

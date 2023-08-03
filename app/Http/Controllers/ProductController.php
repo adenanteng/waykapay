@@ -16,14 +16,14 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Inertia\Response
      */
     public function topup(Request $request)
     {
         $admin_fee = Helper::api()->fees;
         $gross_amount = $request['amount'] + $admin_fee;
 
-//        dd($admin_fee);
+//        dd($request->all());
         $order_id = "tp-".$request['user_id']."-".\Illuminate\Support\Str::random(8);
 
         $response = Http::post('https://api.digiflazz.com/v1/transaction', [
@@ -40,45 +40,13 @@ class ProductController extends Controller
         if ($response->successful()) {
             $user = User::where('id', $request['user_id'])->first();
 
-            $status = Http::post('https://api.digiflazz.com/v1/transaction', [
-                'commands' => 'status-pasca',
-                'username' => Helper::api()->digiflazz_username,
-                'buyer_sku_code' => $request['sku'],
-                'customer_no' => $request['customer_no'],
-                'ref_id' => $order_id,
-                'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
-                'testing' => true
-            ]);
-
-//            dd($status->object()->data);
-
-            switch($status->object()->data->status) {
-                case ('Sukses'):
-//                    $user->withdraw($request['amount']);
-                    $status_id = Transaction::SUCCESS;
-                    session()->flash('flash.banner', 'Topup ' . $request['product_name'] . ' berhasil!');
-                    session()->flash('flash.bannerStyle', 'success');
-                    break;
-
-                case ('Pending'):
-                    $status_id = Transaction::PENDING;
-                    session()->flash('flash.banner', 'Topup pending!');
-                    session()->flash('flash.bannerStyle', 'danger');
-                    break;
-
-                default:
-                    $status_id = Transaction::UNDEFINED;
-                    session()->flash('flash.banner', 'Gatau lagi kami!');
-                    session()->flash('flash.bannerStyle', 'danger');
-            }
-
             $transaction = Transaction::create([
                 'sku' => $request['sku'],
                 'order_id' => $order_id,
                 'product_name' => $request['product_name'],
                 'customer_no' => $request['customer_no'],
                 'user_id' => $request['user_id'],
-                'status_id' => $status_id,
+                'status_id' => Transaction::PENDING,
                 'category_id' => $request['category_id'],
                 'amount' => $request['amount'],
                 'gross_amount' => $gross_amount,
@@ -86,7 +54,9 @@ class ProductController extends Controller
                 'admin_fee' => $admin_fee,
             ]);
 
-            switch($status->object()->data->status) {
+//            $user->withdraw($transaction->gross_amount);
+
+            switch($response->object()->data->status) {
                 case ('Pending'):
                 case ('Sukses'):
                     $user->withdraw($transaction->gross_amount);
@@ -96,16 +66,76 @@ class ProductController extends Controller
 
 //            dd($transaction->toArray());
 
-            return to_route('dashboard');
+//            return to_route('dashboard');
 
-//        return Inertia::render('Product/Games/Show', [
-//            'users' => auth()->user(),
-//            'response'  => $response->object(),
-//        ]);
+        return Inertia::render('Payment/Pending', [
+            'transaction'   => $transaction
+        ]);
 
         } else {
             dd($response->status());
         }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function status(Request $request)
+    {
+//        dd($request->all());
+        $request = $request['transaction'];
+
+        $user = User::where('id', $request['user_id'])->first();
+        $transaction = Transaction::where('id', $request['id'])->first();
+
+        $status = Http::post('https://api.digiflazz.com/v1/transaction', [
+            'commands' => 'status-pasca',
+            'username' => Helper::api()->digiflazz_username,
+            'buyer_sku_code' => $request['sku'],
+            'customer_no' => $request['customer_no'],
+            'ref_id' => $request['order_id'],
+            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$request['order_id']),
+            'testing' => true
+        ]);
+
+//            dd($status->object()->data);
+
+        switch($status->object()->data->status) {
+            case ('Sukses'):
+//                    $user->withdraw($request['amount']);
+                $transaction->update([
+                    'status_id' => Transaction::SUCCESS,
+                ]);
+
+                return Inertia::render('Payment/Success', [
+                    'transaction'   => $transaction
+                ]);
+                break;
+
+            case ('Pending'):
+                $transaction->update([
+                    'status_id' => Transaction::PENDING,
+                ]);
+
+                return Inertia::render('Payment/Pending', [
+                    'transaction'   => $transaction
+                ]);
+                break;
+
+            default:
+                $transaction->update([
+                    'status_id' => Transaction::UNDEFINED,
+                ]);
+
+                return Inertia::render('Payment/Error', [
+                    'transaction'   => $transaction
+                ]);
+        }
+
+
+
     }
 
     /**

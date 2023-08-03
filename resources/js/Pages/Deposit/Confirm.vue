@@ -17,6 +17,21 @@ const props = defineProps({
     gopay: Object | String
 })
 
+const form = useForm({
+    transaction: props.transaction,
+    // bank: props.bank ?? null,
+    // gopay: props.gopay ?? null,
+});
+
+const storeInformation = () => {
+
+    form.put(route('deposit.confirm', form), {
+        errorBag: 'updateInformation',
+        preserveScroll: true,
+        onSuccess: () => {}
+    });
+};
+
 function formatPrice(value) {
     let val = (value/1).toFixed(0).replace('.', '')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
@@ -131,6 +146,10 @@ function formatPrice(value) {
 
                 <PrimaryButton as="a" :href="route('dashboard')">
                     Kembali ke Beranda
+                </PrimaryButton>
+
+                <PrimaryButton @click="storeInformation" >
+                    Cek Status
                 </PrimaryButton>
             </template>
         </FormSection>

@@ -58,12 +58,15 @@ class Transaction extends Model
     const DATA = 3;
     const GAMES = 4;
     const PLN = 5;
+    const EMONEY = 6;
+
     const CATEGORY = [
         self::DEPOSIT => 'Deposit',
         self::PULSA => 'Pulsa',
         self::DATA  => 'Data',
         self::GAMES => 'Games',
-        self::PLN   => 'PLN'
+        self::PLN   => 'PLN',
+        self::EMONEY => 'E-Money'
     ];
 
     const BANKTRANSFER = 1;

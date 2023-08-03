@@ -3,7 +3,6 @@ import '../css/app.css';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
-// import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { VueClipboard } from '@soerenmartius/vue3-clipboard'
@@ -23,7 +22,11 @@ createInertiaApp({
     },
     progress: {
         color: '#29d',
+
+        // // Whether to include the default NProgress styles...
+        // includeCSS: true,
+        //
+        // // Whether the NProgress spinner will be shown...
+        // showSpinner: true,
     },
 });
-
-// InertiaProgress.init({ color: '#4B5563' });
