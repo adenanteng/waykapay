@@ -106,7 +106,7 @@ const logout = () => {
                                         <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize" v-else>
                                             {{ props.name }}.
                                         </p>
-<!--                                        <p class="text-sm font-medium text-gray-600">{{ props.desc }}</p>-->
+                                        <p class="text-sm font-medium text-gray-600">{{ props.desc }}</p>
                                     </div>
                                 </div>
 
@@ -266,37 +266,36 @@ const logout = () => {
 
                         <!-- Menu button -->
                         <div class="absolute right-0 flex-shrink-0 lg:hidden ">
-                            <DarkmodeToggle :darkMode="darkMode" @click="darkMode = ! darkMode"/>
 
                             <!-- Mobile menu button -->
-<!--                            <PopoverButton-->
-<!--                                class="bg-transparent p-2 rounded-3xl inline-flex items-center justify-center text-cyan-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">-->
-<!--                                <button-->
-<!--                                    class="inline-flex items-center justify-center rounded-3xl text-white hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"-->
-<!--                                    @click="showingNavigationDropdown = ! showingNavigationDropdown">-->
-<!--                                    <svg-->
-<!--                                        class="h-6 w-6"-->
-<!--                                        stroke="currentColor"-->
-<!--                                        fill="none"-->
-<!--                                        viewBox="0 0 24 24"-->
-<!--                                    >-->
-<!--                                        <path-->
-<!--                                            :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"-->
-<!--                                            stroke-linecap="round"-->
-<!--                                            stroke-linejoin="round"-->
-<!--                                            stroke-width="2"-->
-<!--                                            d="M4 6h16M4 12h16M4 18h16"-->
-<!--                                        />-->
-<!--                                        <path-->
-<!--                                            :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"-->
-<!--                                            stroke-linecap="round"-->
-<!--                                            stroke-linejoin="round"-->
-<!--                                            stroke-width="2"-->
-<!--                                            d="M6 18L18 6M6 6l12 12"-->
-<!--                                        />-->
-<!--                                    </svg>-->
-<!--                                </button>-->
-<!--                            </PopoverButton>-->
+                            <PopoverButton
+                                class="bg-transparent p-2 rounded-3xl inline-flex items-center justify-center text-primary-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">
+                                <button
+                                    class="inline-flex items-center justify-center rounded-3xl text-gray-600 dark:text-primary-500 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
+                                    @click="showingNavigationDropdown = ! showingNavigationDropdown">
+                                    <svg
+                                        class="h-6 w-6"
+                                        stroke="currentColor"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 6h16M4 12h16M4 18h16"
+                                        />
+                                        <path
+                                            :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </button>
+                            </PopoverButton>
                         </div>
                     </div>
                 </div>
@@ -319,9 +318,10 @@ const logout = () => {
                                     <div class="pt-3 pb-2">
                                         <div class="flex items-center justify-between px-4">
                                             <div>
-                                                <Link :href="route('dashboard')">
-                                                    <ApplicationMark class="block h-9 w-auto"/>
-                                                </Link>
+<!--                                                <Link :href="route('dashboard')">-->
+<!--                                                    <ApplicationMark class="block h-9 w-auto"/>-->
+<!--                                                </Link>-->
+                                                <DarkmodeToggle :darkMode="darkMode" @click="darkMode = ! darkMode"/>
                                             </div>
 
                                             <div class="-mr-2">
@@ -356,22 +356,22 @@ const logout = () => {
                                             </div>
                                         </div>
                                         <div class="mt-3 px-2 space-y-1">
-                                            <ResponsiveNavLink :href="route('dashboard')"
-                                                               :active="route().current('dashboard')">
-                                                Dasbor
-                                            </ResponsiveNavLink>
+<!--                                            <ResponsiveNavLink :href="route('dashboard')"-->
+<!--                                                               :active="route().current('dashboard')">-->
+<!--                                                Dasbor-->
+<!--                                            </ResponsiveNavLink>-->
 
-                                            <ResponsiveNavLink :href="route('user.index')"
-                                                               :active="$page.url.startsWith('/user')"
-                                                               v-if="$page.props.user.role_id==1">
-                                                Pengguna
-                                            </ResponsiveNavLink>
+<!--                                            <ResponsiveNavLink :href="route('user.index')"-->
+<!--                                                               :active="$page.url.startsWith('/user')"-->
+<!--                                                               v-if="$page.props.user.role_id==1">-->
+<!--                                                Pengguna-->
+<!--                                            </ResponsiveNavLink>-->
 
-                                            <ResponsiveNavLink :href="route('setting.index')"
-                                                               :active="$page.url.startsWith('/setting')"
-                                                               v-if="$page.props.user.role_id==1">
-                                                Pengaturan
-                                            </ResponsiveNavLink>
+<!--                                            <ResponsiveNavLink :href="route('setting.index')"-->
+<!--                                                               :active="$page.url.startsWith('/setting')"-->
+<!--                                                               v-if="$page.props.user.role_id==1">-->
+<!--                                                Pengaturan-->
+<!--                                            </ResponsiveNavLink>-->
 
                                         </div>
                                     </div>
@@ -393,21 +393,21 @@ const logout = () => {
                                         </div>
                                         <div class="mt-3 px-2 space-y-1">
 
-                                            <ResponsiveNavLink :href="route('landing.welcome')"
-                                                               :active="route().current('landing.welcome')">
-                                                Beranda
-                                            </ResponsiveNavLink>
+<!--                                            <ResponsiveNavLink :href="route('landing.welcome')"-->
+<!--                                                               :active="route().current('landing.welcome')">-->
+<!--                                                Beranda-->
+<!--                                            </ResponsiveNavLink>-->
 
                                             <ResponsiveNavLink :href="route('profile.show')"
                                                                :active="route().current('profile.show')">
                                                 Profil
                                             </ResponsiveNavLink>
 
-                                            <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures"
-                                                               :href="route('api-tokens.index')"
-                                                               :active="route().current('api-tokens.index')">
-                                                API Tokens
-                                            </ResponsiveNavLink>
+<!--                                            <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures"-->
+<!--                                                               :href="route('api-tokens.index')"-->
+<!--                                                               :active="route().current('api-tokens.index')">-->
+<!--                                                API Tokens-->
+<!--                                            </ResponsiveNavLink>-->
 
                                             <!-- Authentication -->
                                             <form method="POST" @submit.prevent="logout">

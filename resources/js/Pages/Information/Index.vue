@@ -54,7 +54,6 @@ const faqs = [
                desc="Lorem ipsum dolor sit amet"
     >
 
-        <!--        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">-->
         <ul role="list" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <li v-for="item in data" :key="item.email"
                 class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">

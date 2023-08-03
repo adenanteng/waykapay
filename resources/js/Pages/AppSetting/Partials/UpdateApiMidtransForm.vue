@@ -38,7 +38,7 @@ const updateSettingInformation = () => {
         </template>
 
         <template #description>
-            Informasi umum tentang aplikasi
+            Informasi autentikasi API Midtrans
         </template>
 
         <template #form>
