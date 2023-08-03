@@ -47,7 +47,7 @@ const gridColumns = [
                         name="query"
                         v-model="searchQuery"
                         type="text"
-                        class="mt-1 block w-full lg:w-96 mb-5 shadow"
+                        class="block w-full lg:w-96 mb-5 shadow"
                         placeholder="Cari disini"
                     />
                 </form>
