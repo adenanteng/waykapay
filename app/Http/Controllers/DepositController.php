@@ -151,62 +151,36 @@ class DepositController extends Controller
         $request = $request['transaction'];
 
         $transaction = Transaction::where('id', $request['id'])->first();
-        $user = User::where('id', $request['user_id'])->first();
-//        dd($request);
 
-        switch ($request['status_id']) {
+        switch ($transaction->status_id) {
             case (Transaction::SUCCESS):
-                $user->deposit($request['amount']);
-                $transaction->update([
-                    'status_id' => Transaction::SUCCESS,
-                ]);
-
                 return Inertia::render('Payment/Success', [
                     'transaction'   => $transaction
                 ]);
                 break;
 
             case (Transaction::PENDING):
-                $transaction->update([
-                    'status_id' => Transaction::PENDING,
-                ]);
-
                 return Inertia::render('Payment/Pending', [
                     'transaction'   => $transaction
                 ]);
                 break;
 
-            case (Transaction::ERROR):
-                $transaction->update([
-                    'status_id' => Transaction::ERROR,
-                ]);
-
-                return Inertia::render('Payment/Error', [
-                    'transaction'   => $transaction
-                ]);
-                break;
-
             case (Transaction::CLOSE):
-                $transaction->update([
-                    'status_id' => Transaction::CLOSE,
-                ]);
-
+            case (Transaction::ERROR):
                 return Inertia::render('Payment/Error', [
                     'transaction'   => $transaction
                 ]);
-
                 break;
 
             default:
-                $transaction->update([
-                    'status_id' => Transaction::UNDEFINED,
-                ]);
 
                 session()->flash('flash.banner', 'Gatau lagi kami!');
                 session()->flash('flash.bannerStyle', 'danger');
         }
 
-        return to_route('dashboard');
+        return Inertia::render('Payment/Error', [
+            'transaction'   => $transaction
+        ]);
 
     }
 }
