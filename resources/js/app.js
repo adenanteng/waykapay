@@ -21,7 +21,7 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: '#1a753d',
+        color: '#0284c7',
 
         // // Whether to include the default NProgress styles...
         // includeCSS: true,

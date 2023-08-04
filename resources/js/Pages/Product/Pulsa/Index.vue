@@ -12,7 +12,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
 const props = defineProps({
     users: Object,
@@ -83,7 +83,12 @@ const closeModal = () => {
     // form.reset();
 };
 
-const tabs = ref('Pulsa')
+const tabPulsa = ref(JSON.parse(localStorage.getItem('tabPulsa')) ?? 'Pulsa')
+
+watch(tabPulsa, (newTabPulsa) => {
+    console.log(`tab is ${newTabPulsa}`)
+    localStorage.setItem('tabPulsa', JSON.stringify(newTabPulsa))
+})
 
 </script>
 
@@ -139,15 +144,15 @@ const tabs = ref('Pulsa')
         <div class="border-b border-gray-200">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabs=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
-                        @click="tabs='Pulsa'"
+                        :class="tabPulsa=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
+                        @click="tabPulsa='Pulsa'"
                 >
                     Pulsa
                 </button>
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabs=='Data' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
-                        @click="tabs='Data'"
+                        :class="tabPulsa=='Data' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
+                        @click="tabPulsa='Data'"
                 >
                     Data
                 </button>
@@ -157,7 +162,7 @@ const tabs = ref('Pulsa')
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <template v-for="data in props.response.data" >
 
-                <template v-if="tabs=='Pulsa'" >
+                <template v-if="tabPulsa=='Pulsa'" >
                     <template v-if="data.category == 'Pulsa'" >
                         <template v-if="data.brand == provider(form.customer_no)">
                             <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
@@ -176,7 +181,7 @@ const tabs = ref('Pulsa')
                     </template>
                 </template>
 
-                <template v-if="tabs=='Data'" >
+                <template v-if="tabPulsa=='Data'" >
                     <template v-if="data.category == 'Data'" >
                     <template v-if="data.brand == provider(form.customer_no)">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">

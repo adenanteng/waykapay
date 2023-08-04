@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
@@ -29,7 +29,12 @@ function formatPrice(value) {
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
-const tabs = ref(1)
+const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 1)
+
+watch(tabHistory, (newTabHistory) => {
+    console.log(`tab is ${newTabHistory}`)
+    localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
+})
 
 </script>
 
@@ -80,22 +85,22 @@ const tabs = ref(1)
         <div class="border-b border-gray-200">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabs==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
-                        @click="tabs=1"
+                        :class="tabHistory==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
+                        @click="tabHistory=1"
                 >
                     Sukses
                 </button>
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabs==2 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
-                        @click="tabs=2"
+                        :class="tabHistory==2 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
+                        @click="tabHistory=2"
                 >
                     Proses
                 </button>
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabs==null ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
-                        @click="tabs=null"
+                        :class="tabHistory==99 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
+                        @click="tabHistory=99"
                 >
                     Semua
                 </button>
@@ -105,7 +110,7 @@ const tabs = ref(1)
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="history in $page.props.history">
-                    <template v-if="history.status_id == tabs || tabs==null">
+                    <template v-if="history.status_id == tabHistory || tabHistory==99">
                         <li>
                             <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
                                 <div class="px-4 py-4 sm:px-6">
