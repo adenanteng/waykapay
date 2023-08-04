@@ -96,10 +96,10 @@ function formatPrice(value) {
                                 <div class="text-sm font-medium text-gray-500">Total Bayar</div>
                                 <div class="text-sm text-gray-900">Rp {{ formatPrice(props.transaction.gross_amount) }}</div>
                             </div>
-<!--                            <div class="sm:col-span-1 flex justify-between">-->
-<!--                                <div class="text-sm font-medium text-gray-500">Keterangan</div>-->
-<!--                                <div class="text-sm text-gray-900">{{ props.transaction.desc ?? '-' }}</div>-->
-<!--                            </div>-->
+                            <div class="sm:col-span-1 flex justify-between">
+                                <div class="text-sm font-medium text-gray-500">Keterangan</div>
+                                <div class="text-sm text-gray-900">{{ props.transaction.desc ?? '-' }}</div>
+                            </div>
                         </div>
 
                         <div class="mt-6 space-x-2">

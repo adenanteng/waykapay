@@ -32,7 +32,7 @@ class ProductController extends Controller
             'customer_no' => $request['customer_no'],
             'ref_id' => $order_id,
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
-            'testing' => true
+//            'testing' => true
         ]);
 
 //        dd($response->object()->data);
@@ -52,6 +52,7 @@ class ProductController extends Controller
                 'gross_amount' => $gross_amount,
                 'last_amount' => $user->wallet_balance,
                 'admin_fee' => $admin_fee,
+                'desc' => $response->object()->data->sn
             ]);
 
 //            $user->withdraw($transaction->gross_amount);
@@ -91,13 +92,12 @@ class ProductController extends Controller
         $transaction = Transaction::where('id', $request['id'])->first();
 
         $status = Http::post('https://api.digiflazz.com/v1/transaction', [
-            'commands' => 'status-pasca',
+//            'commands' => 'status-pasca',
             'username' => Helper::api()->digiflazz_username,
             'buyer_sku_code' => $request['sku'],
             'customer_no' => $request['customer_no'],
             'ref_id' => $request['order_id'],
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$request['order_id']),
-            'testing' => true
         ]);
 
 //            dd($status->object()->data);
@@ -107,6 +107,7 @@ class ProductController extends Controller
 //                    $user->withdraw($request['amount']);
                 $transaction->update([
                     'status_id' => Transaction::SUCCESS,
+                    'desc' => $status->object()->data->sn
                 ]);
 
                 return Inertia::render('Payment/Success', [
