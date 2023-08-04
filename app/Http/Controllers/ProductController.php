@@ -127,8 +127,10 @@ class ProductController extends Controller
 
             default:
                 $transaction->update([
-                    'status_id' => Transaction::UNDEFINED,
+                    'status_id' => Transaction::ERROR,
                 ]);
+
+                $user->deposit($transaction->gross_amount);
 
                 return Inertia::render('Payment/Error', [
                     'transaction'   => $transaction

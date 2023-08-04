@@ -101,21 +101,23 @@ class HistoryController extends Controller
 
                     switch ($response->object()->data->status) {
                         case ('Sukses'):
-                            $status_id = Transaction::SUCCESS;
+                            $transaction->update([
+                                'status_id' => Transaction::SUCCESS,
+                            ]);
+                            $user->deposit($transaction->gross_amount);
                             break;
 
                         case ('Pending'):
-                            $status_id = Transaction::PENDING;
+                            $transaction->update([
+                                'status_id' => Transaction::PENDING,
+                            ]);
                             break;
 
                         default:
-                            $status_id = Transaction::UNDEFINED;
+                            $transaction->update([
+                                'status_id' => Transaction::UNDEFINED,
+                            ]);
                     }
-
-                    $transaction->update([
-                        'status_id' => $status_id,
-                        'desc' => $response->object()->data->sn
-                    ]);
 
 //                    session()->flash('flash.banner', 'terproses');
 //                    session()->flash('flash.bannerStyle', 'danger');
