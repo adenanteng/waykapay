@@ -97,14 +97,14 @@ function formatPrice(value) {
                                 <div class="text-sm text-gray-900">Rp {{ formatPrice(props.transaction.gross_amount) }}</div>
                             </div>
                             <div class="sm:col-span-1 flex justify-between">
-                                <div class="text-sm font-medium text-gray-500">Keterangan</div>
+                                <div class="text-sm font-medium text-gray-500">Ket</div>
                                 <div class="text-sm text-gray-900">{{ props.transaction.desc ?? '-' }}</div>
                             </div>
                         </div>
 
                         <div class="mt-6 space-x-2">
                             <PrimaryButton as="a" :href="route('dashboard')" >
-                                Kembali ke Beranda
+                                Ke Beranda
                             </PrimaryButton>
 
                             <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" >

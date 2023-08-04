@@ -91,7 +91,7 @@ function formatPrice(value) {
                             <div class="text-sm text-gray-900">Rp {{ formatPrice(props.history.gross_amount) }}</div>
                         </div>
                         <div class="sm:col-span-2 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Keterangan</div>
+                            <div class="text-sm font-medium text-gray-500">Ket</div>
                             <div class="text-sm text-gray-900">{{ props.history.desc ?? '-' }}</div>
                         </div>
                     </div>
