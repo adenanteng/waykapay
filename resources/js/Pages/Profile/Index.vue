@@ -71,6 +71,12 @@ const logout = () => {
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg" v-if="$page.props.user.role_id==1">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
+                    <Link :href="route('setting.index')" class="block px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Pengaturan Aplikasi</p>
+                    </Link>
+                </li>
+
+                <li>
                     <Link :href="route('carousel.index')" class="block px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Pengaturan Carousel</p>
                     </Link>
