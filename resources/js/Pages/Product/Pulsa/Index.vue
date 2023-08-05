@@ -51,6 +51,7 @@ function provider(value) {
     else if (value.substring(0, 4) === '0852') { return 'TELKOMSEL'}
     else if (value.substring(0, 4) === '0851') { return 'by.U'}
     else if (value.substring(0, 4) === '0877') { return 'XL'}
+    else if (value.substring(0, 4) === '0878') { return 'XL'}
 }
 
 const confirmingModal = ref(false);
