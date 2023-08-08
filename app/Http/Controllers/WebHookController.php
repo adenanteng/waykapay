@@ -84,7 +84,7 @@ class WebHookController extends Controller
 //                    break;
 
                 default:
-                    $status_id = Transaction::UNDEFINED;
+                    $status_id = Transaction::ERROR;
             }
 
             $transaction->update([
