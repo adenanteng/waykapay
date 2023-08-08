@@ -57,17 +57,26 @@ const breakpoints = {
     >
 
 
-        <VueQrcode
-            value="00020101021226530012COM.DOKU.WWW0118936008990000004627020446270303UBE51440014ID.CO.QRIS.WWW0215ID10200480846270303UBE520446275303360540811000.00550202560105802ID5904FLIP6007Jakarta61059999962470703A0150364627991b797cb8944fcbacfb05299b77f4b463049679"
-            tag="svg"
-            :options="{
-                width: 200,
-                color: {
-                    dark: '#000',
-                    light: '#fff',
-                },
-            }"
-        ></VueQrcode>
+<!--        <VueQrcode-->
+<!--            value="00020101021226530012COM.DOKU.WWW0118936008990000004627020446270303UBE51440014ID.CO.QRIS.WWW0215ID10200480846270303UBE520446275303360540811000.00550202560105802ID5904FLIP6007Jakarta61059999962470703A0150364627991b797cb8944fcbacfb05299b77f4b463049679"-->
+<!--            tag="svg"-->
+<!--            :options="{-->
+<!--                width: 200,-->
+<!--                color: {-->
+<!--                    dark: '#000',-->
+<!--                    light: '#fff',-->
+<!--                },-->
+<!--            }"-->
+<!--        ></VueQrcode>-->
+
+        <iframe class="rounded-3xl" src="https://open.spotify.com/embed/track/4thzvWVzSQmOQGaRtM7xgi?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+        </iframe>
 
         <div
             class="rounded-3xl bg-gradient-to-bl from-primary-50 to-primary-300 bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg nightwind-prevent-block">

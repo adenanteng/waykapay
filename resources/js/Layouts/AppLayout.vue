@@ -186,15 +186,16 @@ const logout = () => {
                                     <nav class="flex space-x-4">
                                         <NavLinkAlt
                                             :href="route('dashboard')"
-                                            :active="$page.url == '/dashboard'"
+                                            :active="$page.component.startsWith('Dashboard')"
                                             icon="fa-house"
+                                            replace
                                         >
                                             Beranda
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
                                             :href="route('history.index')"
-                                            :active="$page.url == '/history'"
+                                            :active="$page.component.startsWith('History')"
                                             icon="fa-files"
                                         >
                                             Riwayat
@@ -202,7 +203,7 @@ const logout = () => {
 
                                         <NavLinkAlt
                                             :href="route('information.index')"
-                                            :active="$page.url == '/information'"
+                                            :active="$page.component.startsWith('Information')"
                                             icon="fa-circle-info"
                                         >
                                             Informasi
@@ -210,7 +211,7 @@ const logout = () => {
 
                                         <NavLinkAlt
                                             :href="route('carousel.index')"
-                                            :active="$page.url == '/carousel'"
+                                            :active="$page.component.startsWith('Carousel')"
                                             icon="fa-images"
                                             v-if="$page.props.user.role_id==1"
                                         >
@@ -219,7 +220,7 @@ const logout = () => {
 
                                         <NavLinkAlt
                                             :href="route('user.index')"
-                                            :active="$page.url == '/user'"
+                                            :active="$page.component.startsWith('User')"
                                             icon="fa-person"
                                             v-if="$page.props.user.role_id==1"
 
@@ -229,7 +230,7 @@ const logout = () => {
 
                                         <NavLinkAlt
                                             :href="route('profile.index')"
-                                            :active="$page.url == '/profile'"
+                                            :active="$page.component.startsWith('Profile')"
                                             icon="fa-user"
                                         >
                                             Saya
