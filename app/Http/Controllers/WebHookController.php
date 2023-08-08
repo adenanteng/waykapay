@@ -73,10 +73,12 @@ class WebHookController extends Controller
 //                    $user->deposit($request['gross_amount']);
 //                $transaction->user->deposit($request['gross_amount']);
                     $status_id = Transaction::SUCCESS;
+                    $rc = $anj->data->rc;
                     break;
 
                 case ('Pending'):
                     $status_id = Transaction::PENDING;
+                    $rc = $anj->data->rc;
                     break;
 
 //                case ('202'):
@@ -85,10 +87,12 @@ class WebHookController extends Controller
 
                 default:
                     $status_id = Transaction::ERROR;
+                    $rc = $anj->data->rc;
             }
 
             $transaction->update([
                 'status_id' => $status_id,
+                'desc' => $rc,
             ]);
         }
 
