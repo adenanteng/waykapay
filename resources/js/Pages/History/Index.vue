@@ -29,12 +29,14 @@ function formatPrice(value) {
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
-const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 1)
+const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 2)
 
 watch(tabHistory, (newTabHistory) => {
     console.log(`tab is ${newTabHistory}`)
     localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
 })
+
+router.reload({ only: ['history'] })
 
 </script>
 
@@ -84,12 +86,12 @@ watch(tabHistory, (newTabHistory) => {
 
         <div class="border-b border-gray-200">
             <nav class="-mb-px flex" aria-label="Tabs">
-                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabHistory==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
-                        @click="tabHistory=1"
-                >
-                    Sukses
-                </button>
+<!--                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"-->
+<!--                        :class="tabHistory==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "-->
+<!--                        @click="tabHistory=1"-->
+<!--                >-->
+<!--                    Sukses-->
+<!--                </button>-->
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tabHistory==2 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "

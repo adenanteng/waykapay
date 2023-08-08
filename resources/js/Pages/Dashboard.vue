@@ -69,15 +69,6 @@ const breakpoints = {
 <!--            }"-->
 <!--        ></VueQrcode>-->
 
-        <iframe class="rounded-3xl" src="https://open.spotify.com/embed/track/4thzvWVzSQmOQGaRtM7xgi?utm_source=generator"
-                width="100%"
-                height="352"
-                frameBorder="0"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy">
-        </iframe>
-
         <div
             class="rounded-3xl bg-gradient-to-bl from-primary-50 to-primary-300 bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg nightwind-prevent-block">
             <div class="py-4 px-4 sm:px-6 lg:py-8 lg:px-8 lg:flex lg:items-center lg:justify-between">
