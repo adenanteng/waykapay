@@ -103,6 +103,7 @@ class HistoryController extends Controller
                         case ('Sukses'):
                             $transaction->update([
                                 'status_id' => Transaction::SUCCESS,
+                                'desc' => $response->object()->data->sn
                             ]);
                             $user->deposit($transaction->gross_amount);
                             break;
@@ -110,12 +111,14 @@ class HistoryController extends Controller
                         case ('Pending'):
                             $transaction->update([
                                 'status_id' => Transaction::PENDING,
+                                'desc' => $response->object()->data->sn
                             ]);
                             break;
 
                         default:
                             $transaction->update([
-                                'status_id' => Transaction::UNDEFINED,
+                                'status_id' => Transaction::ERROR,
+                                'desc' => $response->object()->data->sn
                             ]);
                     }
 

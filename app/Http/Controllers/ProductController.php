@@ -118,6 +118,7 @@ class ProductController extends Controller
             case ('Pending'):
                 $transaction->update([
                     'status_id' => Transaction::PENDING,
+                    'desc' => $status->object()->data->sn
                 ]);
 
                 return Inertia::render('Payment/Pending', [
@@ -128,6 +129,7 @@ class ProductController extends Controller
             default:
                 $transaction->update([
                     'status_id' => Transaction::ERROR,
+                    'desc' => $status->object()->data->sn
                 ]);
 
                 $user->deposit($transaction->gross_amount);
