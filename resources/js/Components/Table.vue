@@ -62,7 +62,7 @@ function capitalize(str) {
 
 <template>
     <div class="bg-white bg-opacity-50 -mx-4 shadow-lg border border-gray-300 ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 rounded-3xl overflow-auto">
-        <table v-if="filteredData.length" class="min-w-full divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl">
+        <table v-if="filteredData.length" class="table-auto min-w-full divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl">
             <thead>
             <tr >
                 <th v-for="(key, index) in columns"
@@ -149,7 +149,7 @@ function capitalize(str) {
             </tr>
             </tbody>
         </table>
-        <p v-else class="p-2 text-gray-900">No matches found.</p>
+        <p v-else class="p-2 text-gray-900">Tidak ada data ditemukan.</p>
     </div>
 
     <div v-if="props.paginate" class="px-4 py-0 flex items-center justify-between sm:px-6">

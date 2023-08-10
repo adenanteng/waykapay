@@ -151,7 +151,6 @@ router.reload({ only: ['history'] })
                             </Link>
                         </li>
                     </template>
-
                 </template>
             </ul>
         </div>
