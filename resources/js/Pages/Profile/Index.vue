@@ -41,7 +41,7 @@ function formatPrice(value) {
     >
 
         <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
-            <div class="flex w-full items-center justify-between space-x-6 p-6">
+            <div class="flex w-full items-center justify-between space-x-6 px-6 py-4">
                 <div class="">
                     <img :src="$page.props.user.profile_photo_url" class="rounded-full h-12 w-12 object-cover">
                 </div>
@@ -50,9 +50,9 @@ function formatPrice(value) {
                         <h3 class="truncate text-sm font-medium text-gray-900">
                             {{ $page.props.user.name }}
                         </h3>
-                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
-                            Aktif
-                        </span>
+<!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
+<!--                            Aktif-->
+<!--                        </span>-->
                     </div>
                     <p class="mt-1 truncate text-sm text-gray-500">Lorem ipsum dolor</p>
                 </div>
