@@ -104,7 +104,7 @@ const logout = () => {
                                             <span class="font-medium text-gray-600">Halo,</span> {{ split[0] }}.
                                         </p>
                                         <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize" v-else>
-                                            {{ props.name }}.
+                                            {{ props.name }}{{ props.name ? '.' : '' }}
                                         </p>
                                         <p class="text-sm font-medium text-gray-600">{{ props.desc }}</p>
                                     </div>
