@@ -15,7 +15,7 @@ const data = [
     {
         name: 'Kontak Admin',
         title: 'Online 08.30 - 22.00',
-        role: 'Available',
+        role: 'Aktif',
         icon: 'fa-whatsapp text-green-500',
         btn: 'Admin 1',
         btn2: 'Admin 2',
@@ -25,7 +25,7 @@ const data = [
     {
         name: 'Grup Whatsapp',
         title: 'Join grup whatsapp',
-        role: 'Available',
+        role: 'Aktif',
         icon: 'fa-whatsapp text-green-500',
         btn: 'Grup 1',
         btn2: 'Grup 2',

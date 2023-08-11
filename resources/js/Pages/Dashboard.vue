@@ -80,7 +80,7 @@ const breakpoints = {
                 </h2>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">
                     <PrimaryButton as="a" :href="route('deposit.index')">
-                        <i class="fa-regular fa-coins mr-1"/>
+<!--                        <i class="fa-regular fa-coins mr-1"/>-->
                         Deposit
                     </PrimaryButton>
 

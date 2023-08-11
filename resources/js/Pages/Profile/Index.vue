@@ -59,19 +59,19 @@ function formatPrice(value) {
                 <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
                     <div class="flex w-0 flex-1">
                         <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
-                            <i class="fa-duotone fa-down text-primary-400"/>
+                            <i class="fa-duotone fa-money-bill-wave text-primary-400"/>
                             <div class="ml-3">
-                                <div class="text-xs text-gray-500">Uang masuk</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.in_count) }}</div>
+                                <div class="text-xs text-gray-500">Saldo Rekening</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice($page.props.user.wallet_balance) }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="-ml-px flex w-0 flex-1">
                         <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
-                            <i class="fa-duotone fa-up text-amber-400"/>
+                            <i class="fa-duotone fa-coins text-amber-400"/>
                             <div class="ml-3">
-                                <div class="text-xs text-gray-500">Uang Keluar</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.out_count) }}</div>
+                                <div class="text-xs text-gray-500">WKP Coin</div>
+                                <div class="text-sm font-medium text-gray-700">0</div>
                             </div>
                         </div>
                     </div>
