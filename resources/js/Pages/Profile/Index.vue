@@ -5,10 +5,31 @@ import MobileMenu from "@/Components/MobileMenu.vue";
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import {ref, watch} from "vue";
+import moment from "moment/moment";
+
+const props = defineProps({
+    users: Object,
+    history: Object,
+    in_count: Number,
+    out_count: Number
+})
 
 const logout = () => {
     router.post(route('logout'));
 };
+
+function formattedDate(value) {
+    return moment(value).format('DD MMM Y')
+}
+
+function formattedTime(value) {
+    return moment(value).format('HH:mm')
+}
+
+function formatPrice(value) {
+    let val = (value/1).toFixed(0).replace('.', '')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
 
 </script>
 
@@ -19,44 +40,46 @@ const logout = () => {
                :avatar="$page.props.user.profile_photo_url"
     >
 
-
-<!--        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">-->
-<!--            <div class="flex w-full items-center justify-between space-x-6 p-6">-->
-<!--                <div class="flex-1 truncate">-->
-<!--                    <div class="flex items-center space-x-3">-->
-<!--                        <h3 class="truncate text-sm font-medium text-gray-900">-->
-<!--                            Bla bla-->
-<!--                        </h3>-->
-<!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
-<!--                            lorem ipsum-->
-<!--                        </span>-->
-<!--                    </div>-->
-<!--                    <p class="mt-1 truncate text-sm text-gray-500">awww</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">-->
-<!--                    <div class="flex w-0 flex-1">-->
-<!--                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">-->
-<!--                            <i class="fa-duotone fa-down text-primary-400"/>-->
-<!--                            <div class="ml-3">-->
-<!--                                <div class="text-xs text-gray-500">Uang masuk</div>-->
-<!--                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.in_count) }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="-ml-px flex w-0 flex-1">-->
-<!--                        <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">-->
-<!--                            <i class="fa-duotone fa-up text-amber-400"/>-->
-<!--                            <div class="ml-3">-->
-<!--                                <div class="text-xs text-gray-500">Uang Keluar</div>-->
-<!--                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.out_count) }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+            <div class="flex w-full items-center justify-between space-x-6 p-6">
+                <div class="">
+                    <img :src="$page.props.user.profile_photo_url" class="rounded-full ">
+                </div>
+                <div class="flex-1 truncate">
+                    <div class="flex items-center space-x-3">
+                        <h3 class="truncate text-sm font-medium text-gray-900">
+                            {{ $page.props.user.name }}
+                        </h3>
+                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+                            Aktif
+                        </span>
+                    </div>
+                    <p class="mt-1 truncate text-sm text-gray-500">Lorem ipsum dolor</p>
+                </div>
+            </div>
+            <div>
+                <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
+                    <div class="flex w-0 flex-1">
+                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
+                            <i class="fa-duotone fa-down text-primary-400"/>
+                            <div class="ml-3">
+                                <div class="text-xs text-gray-500">Uang masuk</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.in_count) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                        <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
+                            <i class="fa-duotone fa-up text-amber-400"/>
+                            <div class="ml-3">
+                                <div class="text-xs text-gray-500">Uang Keluar</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.out_count) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">

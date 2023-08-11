@@ -9,6 +9,7 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Route;
@@ -43,8 +44,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/history', HistoryController::class)->names('history');
 //    Route::post('/history/confirm', [HistoryController::class, 'confirm'])->name('history.confirm');
 
-    Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
-
     Route::post('/product/topup', [ProductController::class, 'topup'])->name('product.topup');
     Route::put('/product/status', [ProductController::class, 'status'])->name('product.status');
 
@@ -67,6 +66,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
+
+//    Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::resource('/setting', AppSettingController::class)->names('setting');
 });
