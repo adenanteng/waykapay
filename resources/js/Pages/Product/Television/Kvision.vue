@@ -12,7 +12,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {ref, watch} from "vue";
+import {ref} from "vue";
 
 const props = defineProps({
     users: Object,
@@ -44,48 +44,6 @@ function formatPrice(value) {
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
-function provider(value) {
-    if (value.substring(0, 4) === '0852') { return 'TELKOMSEL' }
-    else if (value.substring(0, 4) === '0853') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0811') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0812') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0813') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0821') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0852') { return 'TELKOMSEL'}
-
-    else if (value.substring(0, 4) === '0851') { return 'by.U'}
-
-    else if (value.substring(0, 4) === '0857') { return 'INDOSAT'}
-    else if (value.substring(0, 4) === '0856') { return 'INDOSAT'}
-
-    else if (value.substring(0, 4) === '0896') { return 'TRI'}
-    else if (value.substring(0, 4) === '0895') { return 'TRI'}
-    else if (value.substring(0, 4) === '0897') { return 'TRI'}
-    else if (value.substring(0, 4) === '0898') { return 'TRI'}
-    else if (value.substring(0, 4) === '0899') { return 'TRI'}
-
-    else if (value.substring(0, 4) === '0817') { return 'XL'}
-    else if (value.substring(0, 4) === '0818') { return 'XL'}
-    else if (value.substring(0, 4) === '0819') { return 'XL'}
-    else if (value.substring(0, 4) === '0859') { return 'XL'}
-    else if (value.substring(0, 4) === '0877') { return 'XL'}
-    else if (value.substring(0, 4) === '0878') { return 'XL'}
-        
-    else if (value.substring(0, 4) === '0832') { return 'AXIS'}
-    else if (value.substring(0, 4) === '0833') { return 'AXIS'}
-    else if (value.substring(0, 4) === '0838') { return 'AXIS'}
-
-    else if (value.substring(0, 4) === '0881') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0882') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0883') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0884') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0885') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0886') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0887') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0888') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0889') { return 'SMARTFREN'}
-}
-
 const confirmingModal = ref(false);
 let productSku = ref(null);
 let productName = ref(null);
@@ -100,7 +58,7 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
-        form.category_id = 2;
+        form.category_id = 6;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;
@@ -108,6 +66,7 @@ const confirmModal = (data) => {
         productPrice = Number(data.price) + (Number((props.fee / 100) * data.price));
         productDesc = data.desc;
     }
+
     // setTimeout(() => passwordInput.value.focus(), 250);
 };
 
@@ -123,19 +82,12 @@ const closeModal = () => {
     // form.reset();
 };
 
-const tabPulsa = ref(JSON.parse(localStorage.getItem('tabPulsa')) ?? 'Pulsa')
-
-watch(tabPulsa, (newTabPulsa) => {
-    console.log(`tab is ${newTabPulsa}`)
-    localStorage.setItem('tabPulsa', JSON.stringify(newTabPulsa))
-})
-
 </script>
 
 <template>
-    <AppLayout title="Pulsa"
-               name="Pulsa"
-               desc="Masukkan nomor"
+    <AppLayout title="K-Vision"
+               name="K-Vision"
+               desc="Lorem ipsum"
     >
         <template #previous>
             <PreviousButton />
@@ -143,7 +95,7 @@ watch(tabPulsa, (newTabPulsa) => {
 
         <FormSection >
             <template #title>
-                Masukkan nomor HP
+                Dana
             </template>
 
             <template #description>
@@ -152,13 +104,13 @@ watch(tabPulsa, (newTabPulsa) => {
 
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Nomor HP"/>
+                    <InputLabel for="number" value="Nomor Pelanggan"/>
                     <TextInput
                         id="number"
                         v-model="form.customer_no"
                         type="tel"
                         class="mt-1 block w-full"
-                        minlength="10"
+                        minlength="8"
                         required
                     />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
@@ -168,52 +120,15 @@ watch(tabPulsa, (newTabPulsa) => {
         </FormSection>
 
 
-        <div class="border-b border-gray-200">
-            <nav class="-mb-px flex" aria-label="Tabs">
-                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabPulsa=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
-                        @click="tabPulsa='Pulsa'"
-                >
-                    Pulsa
-                </button>
-
-                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabPulsa=='Data' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
-                        @click="tabPulsa='Data'"
-                >
-                    Data
-                </button>
-            </nav>
-        </div>
-
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <template v-for="data in sort(props.response.data)" >
 
-                <template v-if="tabPulsa=='Pulsa'" >
-                    <template v-if="data.category == 'Pulsa'" >
-                        <template v-if="data.brand == provider(form.customer_no)">
-                            <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-                                <div class="flex-shrink-0">
-                                    <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <button @click="confirmModal(data)" class="focus:outline-none text-left">
-                                        <span class="absolute inset-0" aria-hidden="true"></span>
-                                        <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </template>
-                    </template>
-                </template>
+            <template v-for="data in sort(props.response.data)">
+                <template v-if="data.category == 'TV'">
 
-                <template v-if="tabPulsa=='Data'" >
-                    <template v-if="data.category == 'Data'" >
-                    <template v-if="data.brand == provider(form.customer_no)">
+                    <template v-if="data.brand == 'K-VISION dan GOL'">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                             <div class="flex-shrink-0">
-                                <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
+                                <img class="h-auto w-10" src="/img/vendor/K-VISION.png" alt="">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <button @click="confirmModal(data)" class="focus:outline-none text-left">
@@ -224,7 +139,7 @@ watch(tabPulsa, (newTabPulsa) => {
                             </div>
                         </div>
                     </template>
-                </template>
+
                 </template>
             </template>
         </div>
@@ -244,7 +159,7 @@ watch(tabPulsa, (newTabPulsa) => {
                     </div>
 
                     <div class="">
-                        No. Tujuan
+                        Id Player
                     </div>
                     <div class="text-right font-medium">
                         {{ form.customer_no }}
@@ -276,7 +191,6 @@ watch(tabPulsa, (newTabPulsa) => {
                 </ActionMessage>
 
                 <PrimaryButton
-                    class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"
                     @click="storeInformation"

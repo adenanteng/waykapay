@@ -61,6 +61,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/emoney/dana', [ProductController::class, 'emoneyDana'])->name('product.emoneyDana');
     Route::get('/product/emoney/gopay', [ProductController::class, 'emoneyGopay'])->name('product.emoneyGopay');
 
+    Route::get('/product/televison', [ProductController::class, 'television'])->name('product.television');
+    Route::get('/product/television/kvision', [ProductController::class, 'televisionKvision'])->name('product.televisionKvision');
+
     Route::resource('/information', InformationController::class)->names('information');
 
     Route::resource('/carousel', CarouselController::class)->names('carousel');

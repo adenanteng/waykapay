@@ -335,4 +335,41 @@ class ProductController extends Controller
             dd($response->status());
         }
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function television()
+    {
+        return Inertia::render('Product/Television/Index', [
+            'users' => auth()->user(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function televisionKvision()
+    {
+        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
+            'cmd' => 'prepaid',
+            'username' => Helper::api()->digiflazz_username,
+            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+        ]);
+
+        if ($response->successful()) {
+            return Inertia::render('Product/Television/Kvision', [
+                'users' => auth()->user(),
+                'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+            dd($response->status());
+        }
+    }
 }
