@@ -70,7 +70,7 @@ function provider(value) {
     else if (value.substring(0, 4) === '0859') { return 'XL'}
     else if (value.substring(0, 4) === '0877') { return 'XL'}
     else if (value.substring(0, 4) === '0878') { return 'XL'}
-        
+
     else if (value.substring(0, 4) === '0832') { return 'AXIS'}
     else if (value.substring(0, 4) === '0833') { return 'AXIS'}
     else if (value.substring(0, 4) === '0838') { return 'AXIS'}

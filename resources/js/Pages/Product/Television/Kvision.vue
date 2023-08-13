@@ -95,7 +95,7 @@ const closeModal = () => {
 
         <FormSection >
             <template #title>
-                Dana
+                K-Vision
             </template>
 
             <template #description>
