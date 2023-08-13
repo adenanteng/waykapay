@@ -7,7 +7,7 @@ import {Link} from "@inertiajs/vue3";
     <div class="rounded-t-3xl bg-white bg-opacity-50 backdrop-blur-2xl border-t border-gray-300 overflow-hidden shadow-lg fixed bottom-0 right-0 left-0 lg:hidden">
         <div class="pt-3 pb-2">
             <div class="grid grid-cols-4 max-w-7xl mx-auto">
-                <Link :href="route('dashboard')" class="group text-center" replace>
+                <Link :href="route('dashboard')" class="group text-center">
                     <i class="fa-home text-xl text-gray-700"
                        :class="$page.component.startsWith('Dashboard') ? 'fa-solid text-primary-700' : 'fa-regular' "
                     />
