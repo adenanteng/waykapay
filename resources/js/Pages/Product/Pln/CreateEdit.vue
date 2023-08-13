@@ -64,11 +64,18 @@ const confirmModal = (data) => {
         productSku = data.buyer_sku_code;
         productName = data.product_name;
         productBrand = data.brand;
-        productPrice = Number(data.price) + Number(props.fee);
+        productPrice = Number(data.price) + (Number((props.fee / 100) * data.price));
         productDesc = data.desc;
     }
     // setTimeout(() => passwordInput.value.focus(), 250);
 };
+
+function sort(arr) {
+    // Set slice() to avoid to generate an infinite loop!
+    return arr.slice().sort(function (a, b) {
+        return a.price - b.price;
+    });
+}
 
 const closeModal = () => {
     confirmingModal.value = false;
@@ -157,7 +164,7 @@ const tabs = ref('Pulsa')
 <!--                </nav>-->
 <!--            </div>-->
 
-            <template v-for="data in props.response.data" >
+            <template v-for="data in sort(props.response.data)" >
 
 <!--                <template v-if="tabs=='Pulsa'" >-->
                     <template v-if="data.category == 'PLN'" >
@@ -170,7 +177,7 @@ const tabs = ref('Pulsa')
                                     <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                         <span class="absolute inset-0" aria-hidden="true"></span>
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + Number(props.fee)) }}</p>
+                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
                                     </button>
                                 </div>
                             </div>
