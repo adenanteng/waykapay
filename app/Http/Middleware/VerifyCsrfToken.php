@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'webhook-midtrans',
         'webhook-digiflazz',
+        'webhook-flip-accept-payment'
     ];
 }
