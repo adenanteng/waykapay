@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\carousel;
+use App\Models\Carousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +18,7 @@ class CarouselController extends Controller
     public function index()
     {
         return Inertia::render('Carousel/Index', [
-            'carousel' => carousel::all(),
+            'carousel' => Carousel::all(),
         ]);
     }
 
@@ -47,7 +47,7 @@ class CarouselController extends Controller
             'photo' => ['required'],
         ])->validateWithBag('storeInformation');
 
-        $carousel = carousel::create($request->all());
+        $carousel = Carousel::create($request->all());
         $carousel->addMedia($request['photo'])->toMediaCollection();
 
         return Redirect::route('carousel.index');

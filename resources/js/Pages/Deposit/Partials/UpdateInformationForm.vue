@@ -50,15 +50,20 @@ const formReset = () => {
         <template #form>
             <div class="col-span-6 sm:col-span-3">
                 <InputLabel for="amount" value="Jumlah Saldo"/>
-                <TextInput
-                    id="amount"
-                    v-model="form.amount"
-                    type="number"
-                    class="mt-1 block w-full"
-                    min="1"
-                    max="9999999"
-                    required
-                />
+                <div class="flex">
+                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                        Rp
+                    </span>
+                    <TextInput
+                        id="amount"
+                        v-model="form.amount"
+                        type="number"
+                        class="mt-1 block w-full rounded-l-none"
+                        min="10000"
+                        max="9999999"
+                        required
+                    />
+                </div>
                 <InputError :message="form.errors.amount" class="mt-2"/>
             </div>
 

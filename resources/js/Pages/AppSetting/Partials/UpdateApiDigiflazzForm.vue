@@ -41,7 +41,7 @@ const updateSettingInformation = () => {
         </template>
 
         <template #form>
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6">
                 <InputLabel for="digiflazzUsername" value="Username" />
                 <TextInput
                     id="digiflazzUsername"
@@ -53,7 +53,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.digiflazz_username" class="mt-2" />
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6">
                 <InputLabel for="digiflazzKey" value="Key" />
                 <TextInput
                     id="digiflazzKey"

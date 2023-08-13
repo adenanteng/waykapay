@@ -19,16 +19,33 @@ class TransactionBankTransfer extends Model
         'transaction_id',
         'bank_id',
         'va_number',
+        'payment_url',
         'exp_time'
     ];
 
     const BCA = 1;
     const BNI = 2;
     const BRI = 3;
+    const MANDIRI = 4;
+    const PERMATA = 5;
+    const BSM = 6;
+    const QRIS = 7;
+    const OVO = 8;
+    const SHOPEEPAY = 9;
+    const LINKAJA = 10;
+    const DANA = 11;
     const BANK = [
-        self::BCA => 'bca',
-        self::BNI => 'bni',
-        self::BRI  => 'bri',
+        self::BCA => 'BCA',
+        self::BNI => 'BNI',
+        self::BRI  => 'BRI',
+        self::MANDIRI => 'MANDIRI',
+        self::PERMATA => 'PERMATA',
+        self::BSM  => 'BSI',
+        self::QRIS => 'QRIS',
+        self::OVO => 'OVO',
+        self::SHOPEEPAY  => 'SHOPEEPAY',
+        self::LINKAJA => 'LINKAJA',
+        self::DANA => 'DANA',
     ];
 
     protected $appends = [

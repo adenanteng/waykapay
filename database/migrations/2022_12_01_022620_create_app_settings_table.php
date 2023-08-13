@@ -17,13 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText('desc')->nullable();
-
             $table->integer('fees')->default(0);
-
-            $table->string('midtrans_id_merchant')->nullable();
-            $table->string('midtrans_client_key')->nullable();
-            $table->string('midtrans_server_key')->nullable();
-
+//            $table->string('midtrans_id_merchant')->nullable();
+//            $table->string('midtrans_client_key')->nullable();
+//            $table->string('midtrans_server_key')->nullable();
+            $table->string('flip_secret')->nullable();
+            $table->string('flip_token')->nullable();
             $table->string('digiflazz_username')->nullable();
             $table->string('digiflazz_key')->nullable();
             $table->timestamps();
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trips');
+        Schema::dropIfExists('app_settings');
     }
 };

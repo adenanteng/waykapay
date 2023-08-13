@@ -5,6 +5,7 @@ import PreviousButton from "@/Components/PreviousButton.vue";
 import SectionBorder from "@/Components/SectionBorder.vue";
 import UpdateApiMidtransForm from "./Partials/UpdateApiMidtransForm.vue";
 import UpdateApiDigiflazzForm from "./Partials/UpdateApiDigiflazzForm.vue";
+import UpdateApiFlipForm from "./Partials/UpdateApiFlipForm.vue";
 
 </script>
 
@@ -21,7 +22,8 @@ import UpdateApiDigiflazzForm from "./Partials/UpdateApiDigiflazzForm.vue";
 
         <SectionBorder />
 
-        <UpdateApiMidtransForm :setting="$page.props.setting" />
+<!--        <UpdateApiMidtransForm :setting="$page.props.setting" />-->
+        <UpdateApiFlipForm :setting="$page.props.setting" />
 
         <SectionBorder />
 

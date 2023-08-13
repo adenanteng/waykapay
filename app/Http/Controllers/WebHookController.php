@@ -11,25 +11,23 @@ class WebHookController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function webhookHandlerMidtrans(Request $request){
-        // In my own case, I will add the delay function
-//        sleep(10); //this will delay the script for 50 seconds
+    public function webhookHandlerFlipAcceptPayment(Request $request){
 
-        $transaction = Transaction::where('order_id', $request['order_id'])->first();
+        $transaction = Transaction::where('order_id', $request['bill_link_id'])->first();
         $user = User::where('id', $transaction['user_id'])->first();
 
         if ($transaction->status_id != Transaction::SUCCESS) {
-            switch($request['status_code']) {
-                case ('200'):
+            switch($request['status']) {
+                case ('SUCCESSFUL'):
                     $user->deposit($transaction->amount);
                     $status_id = Transaction::SUCCESS;
                     break;
 
-                case ('201'):
-                    $status_id = Transaction::PENDING;
+                case ('CANCELLED'):
+                    $status_id = Transaction::CANCEL;
                     break;
 
-                case ('202'):
+                case ('FAILED'):
                     $status_id = Transaction::ERROR;
                     break;
 
@@ -98,4 +96,43 @@ class WebHookController extends Controller
 
         return response()->json('ok');
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function webhookHandlerMidtrans(Request $request){
+        // In my own case, I will add the delay function
+//        sleep(10); //this will delay the script for 50 seconds
+
+        $transaction = Transaction::where('order_id', $request['order_id'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
+
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['status_code']) {
+                case ('200'):
+                    $user->deposit($transaction->amount);
+                    $status_id = Transaction::SUCCESS;
+                    break;
+
+                case ('201'):
+                    $status_id = Transaction::PENDING;
+                    break;
+
+                case ('202'):
+                    $status_id = Transaction::ERROR;
+                    break;
+
+                default:
+                    $status_id = Transaction::UNDEFINED;
+            }
+
+            $transaction->update([
+                'status_id' => $status_id,
+            ]);
+        }
+
+        return response()->json('ok');
+    }
+
 }

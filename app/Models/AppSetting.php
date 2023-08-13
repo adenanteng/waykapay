@@ -20,9 +20,11 @@ class AppSetting extends Model implements HasMedia
         'name',
         'desc',
         'fees',
-        'midtrans_id_merchant',
-        'midtrans_client_key',
-        'midtrans_server_key',
+//        'midtrans_id_merchant',
+//        'midtrans_client_key',
+//        'midtrans_server_key',
+        'flip_secret',
+        'flip_token',
         'digiflazz_username',
         'digiflazz_key'
     ];

@@ -7,6 +7,7 @@ import Badge from "../../Components/Badge.vue";
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
 import {Link} from "@inertiajs/vue3";
+import VueQrcode from "@chenfengyuan/vue-qrcode";
 
 const props = defineProps({
     users: Object,
@@ -107,17 +108,17 @@ function formatPrice(value) {
             <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
                 <dl class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2">
 
-                    <template v-if="props.history.bank">
+                    <template v-if="props.history.virtual_account">
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <dt class="text-sm font-medium text-gray-500">Bank</dt>
-                            <dd class="text-sm text-gray-900 uppercase">{{ props.history.bank.bank }}</dd>
+                            <dd class="text-sm text-gray-900 uppercase">{{ props.history.virtual_account.bank }}</dd>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <dt class="text-sm font-medium text-gray-500">No. VA</dt>
                             <dd class="text-sm text-gray-900">
-                                {{ props.history.bank.va_number }}
+                                {{ props.history.virtual_account.va_number }}
                                 <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
-                                    <button class="" @click="toClipboard(props.history.bank.va_number)">
+                                    <button class="" @click="toClipboard(props.history.virtual_account.va_number)">
                                         <i class="fa-duotone fa-paste ml-2" />
                                     </button>
                                 </Popper>
@@ -125,27 +126,31 @@ function formatPrice(value) {
                         </div>
                     </template>
 
-                    <template v-if="props.history.gopay">
+                    <template v-if="props.history.wallet_account">
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <dt class="text-sm font-medium text-gray-500">Metode Pembayaran</dt>
-                            <dd class="text-sm text-gray-900 uppercase">Gopay</dd>
+                            <dd class="text-sm text-gray-900 uppercase">{{ props.history.wallet_account.bank }}</dd>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">Qr Code</dt>
-                            <dd class="text-sm text-gray-900 uppercase"><a target="_blank" :href="props.history.gopay.qr_code" >Qr code</a></dd>
+                            <dt class="text-sm font-medium text-gray-500">Qris</dt>
+                            <dd class="text-sm text-gray-900 uppercase">
+                                    <VueQrcode
+                                    :value="props.history.wallet_account.qr_code"
+                                    tag="svg"
+                                    :options="{
+                                                width: 200,
+                                                color: {
+                                                    dark: '#000',
+                                                    light: '#fff',
+                                                },
+                                              }"
+                                ></VueQrcode>
+                            </dd>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <dt class="text-sm font-medium text-gray-500">Deeplink</dt>
-                            <dd class="text-sm text-gray-900 uppercase"><a target="_blank" :href="props.history.gopay.deeplink_redirect" >Deeplink</a></dd>
+                            <dd class="text-sm text-gray-900 uppercase"><a target="_blank" :href="props.history.wallet_account.payment_url" >Bayar</a></dd>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">Status</dt>
-                            <dd class="text-sm text-gray-900 uppercase"><a target="_blank" :href="props.history.gopay.status" >Status</a></dd>
-                        </div>
-<!--                        <div class="sm:col-span-1">-->
-<!--                            <dt class="text-sm font-medium text-gray-500">Cancel</dt>-->
-<!--                            <dd class="mt-1 text-sm text-gray-900 uppercase"><Link target="_blank" method="post" as="button" type="button" :href="props.history.gopay.cancel" >Cancel</Link></dd>-->
-<!--                        </div>-->
                     </template>
                 </dl>
             </div>

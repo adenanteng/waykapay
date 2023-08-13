@@ -44,42 +44,29 @@ class HistoryController extends Controller
                     $response = Http::withHeaders([
                         'Accept' => 'application/json',
                         'Content-Type' => 'application/json',
-                        'Authorization' => 'Basic ' . base64_encode(Helper::api()->midtrans_server_key . ':')
-                    ])->get('https://api.sandbox.midtrans.com/v2/' . $transaction->order_id . '/status');
+                        'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
+                    ])->get('https://bigflip.id/big_sandbox_api/v2/pwf/' . $transaction->order_id . '/payment');
 
-                    switch ($response->object()->transaction_status) {
-                        case ('capture'):
-                        case('settlement'):
+                    switch ($response->object()->data[0]->status) {
+                        case('SUCCESSFUL'):
                             $status_id = Transaction::SUCCESS;
                             $user->deposit($transaction->amount);
                             break;
 
-                        case ('pending'):
+                        case ('PENDING'):
                             $status_id = Transaction::PENDING;
                             break;
 
-                        case ('cancel'):
-                            $status_id = Transaction::CANCEL;
-                            break;
-
-                        case ('deny'):
-                            $status_id = Transaction::DENY;
-                            break;
-
-                        case ('expire'):
-                            $status_id = Transaction::EXPIRE;
+                        case ('FAILED'):
+                            $status_id = Transaction::ERROR;
                             break;
 
                         default:
                             $status_id = Transaction::UNDEFINED;
                     }
-
                     $transaction->update([
                         'status_id' => $status_id,
                     ]);
-
-//                    session()->flash('flash.banner', 'terproses ');
-//                    session()->flash('flash.bannerStyle', 'danger');
             }
         } else {
             switch ($transaction->status_id) {
@@ -121,9 +108,6 @@ class HistoryController extends Controller
                                 'desc' => $response->object()->data->sn
                             ]);
                     }
-
-//                    session()->flash('flash.banner', 'terproses');
-//                    session()->flash('flash.bannerStyle', 'danger');
             }
         }
 

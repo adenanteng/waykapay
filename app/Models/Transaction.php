@@ -69,17 +69,6 @@ class Transaction extends Model
         self::EMONEY => 'E-Money'
     ];
 
-    const BANKTRANSFER = 1;
-    const GOPAY = 2;
-    const SHOPEEPAY = 3;
-    const QRIS = 4;
-    const ADMINFEE = [
-        self::BANKTRANSFER => 4000,
-        self::GOPAY => 2,
-        self::SHOPEEPAY  => 2,
-        self::QRIS => 0.7,
-    ];
-
     /**
      * The accessors to append to the model's array form.
      *
@@ -94,8 +83,8 @@ class Transaction extends Model
 
     protected $with = [
         'user',
-        'bank',
-        'gopay'
+        'virtual_account',
+        'wallet_account'
     ];
 
     public function getCreatedAttribute()
@@ -123,13 +112,13 @@ class Transaction extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function bank(): HasOne
+    public function virtual_account(): HasOne
     {
         return $this->hasOne(TransactionBankTransfer::class, 'transaction_id', 'id');
     }
 
-    public function gopay(): HasOne
+    public function Wallet_account(): HasOne
     {
-        return $this->hasOne(TransactionGopay::class, 'transaction_id', 'id');
+        return $this->hasOne(TransactionQris::class, 'transaction_id', 'id');
     }
 }

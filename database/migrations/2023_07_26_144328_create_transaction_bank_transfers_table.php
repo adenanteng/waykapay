@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_id');
             $table->integer('bank_id');
             $table->string('va_number');
+            $table->string('payment_url');
             $table->date('exp_time');
             $table->timestamps();
 
