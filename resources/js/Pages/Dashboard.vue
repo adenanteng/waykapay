@@ -80,7 +80,7 @@ const breakpoints = {
         <div
             class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <div class="p-6">
-                <div class="grid grid-cols-4 gap-x-6 gap-y-10 xl:grid-cols-4 xl:gap-x-8">
+                <div class="grid grid-cols-4 gap-x-6 gap-y-10 lg:grid-cols-6 lg:gap-x-8">
                     <Link :href="route('product.pulsa')" class="group text-center">
                         <i class="fa-duotone fa-mobile text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>

@@ -124,6 +124,10 @@ function formatPrice(value) {
                                 </Popper>
                             </dd>
                         </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <dt class="text-sm font-medium text-gray-500">Deeplink</dt>
+                            <dd class="text-sm text-gray-900 uppercase"><a target="_blank" :href="props.history.virtual_account.payment_url" >Bayar</a></dd>
+                        </div>
                     </template>
 
                     <template v-if="props.history.wallet_account">
