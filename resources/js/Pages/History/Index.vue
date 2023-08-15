@@ -3,17 +3,15 @@ import {ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
-import SectionTitle from "@/Components/SectionTitle.vue";
-import ActionMessage from "@/Components/ActionMessage.vue";
 import moment from "moment";
+import { Vue3Lottie } from 'vue3-lottie'
 
 const props = defineProps({
     users: Object,
     history: Object,
     in_count: Number,
-    out_count: Number
+    out_count: Number,
+    on_process: Number
 })
 
 function formattedDate(value) {
@@ -154,6 +152,17 @@ router.reload({ only: ['history'] })
                 </template>
             </ul>
         </div>
+
+        <template v-if="!on_process" >
+            <div class="px-4 py-4 sm:px-6 text-center" v-if="tabHistory==2">
+                <Vue3Lottie
+                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                    :height="200"
+                    :width="200"
+                />
+                Tidak ada transaksi
+            </div>
+        </template>
 
         <MobileMenu/>
     </AppLayout>

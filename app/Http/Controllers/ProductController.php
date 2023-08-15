@@ -217,6 +217,47 @@ class ProductController extends Controller
      *
      * @return \Inertia\Response
      */
+    public function plnPasca()
+    {
+//        dd($request->all());
+        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
+            'cmd' => 'prepaid',
+            'username' => Helper::api()->digiflazz_username,
+            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+        ]);
+
+        $ref_id = 'coba';
+        $customer = Http::post('https://api.digiflazz.com/v1/transaction', [
+            'commands' => 'inq-pasca',
+            'customer_no' => '173720104158',
+            'buyer_sku_code' => 'pln-pasca',
+            'username' => Helper::api()->digiflazz_username,
+            'ref_id' => $ref_id,
+            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$ref_id),
+
+        ]);
+
+        dd($customer->object()->data);
+
+        if ($customer->successful()) {
+            return Inertia::render('Product/Pln/CreateEdit', [
+                'users' => auth()->user(),
+                'customer' => $customer->object(),
+                'response'  => $response->object(),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+            dd($customer->status());
+        }
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
     public function games()
     {
         return Inertia::render('Product/Games/Index', [

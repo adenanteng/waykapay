@@ -87,30 +87,17 @@ const tabs = ref('Pulsa')
 </script>
 
 <template>
-    <AppLayout title="Pulsa"
-               name="Pulsa"
+    <AppLayout title="PLN Prepaid"
+               name="PLN Prepaid"
                desc="Masukkan nomor"
     >
         <template #previous>
             <PreviousButton />
         </template>
 
-<!--        <template #action>-->
-<!--            <TextInput-->
-<!--                id="name"-->
-<!--                v-model="form.number"-->
-<!--                type="tel"-->
-<!--                class="mt-1 block w-full"-->
-<!--                placeholder="08xx-xxxx-xxxx"-->
-<!--                required-->
-<!--            />-->
-<!--            <InputError :message="form.errors.number" class="mt-2" />-->
-<!--        </template>-->
-
-<!--        @submitted="storeInformation" -->
         <FormSection >
             <template #title>
-                Token PLN
+                Token PLN Prepaid
             </template>
 
             <template #description>

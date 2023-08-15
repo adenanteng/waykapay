@@ -13,6 +13,7 @@ import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {ref, watch} from "vue";
+import {value} from "lodash/seq";
 
 const props = defineProps({
     users: Object,
@@ -45,45 +46,68 @@ function formatPrice(value) {
 }
 
 function provider(value) {
-    if (value.substring(0, 4) === '0852') { return 'TELKOMSEL' }
-    else if (value.substring(0, 4) === '0853') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0811') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0812') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0813') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0821') { return 'TELKOMSEL'}
-    else if (value.substring(0, 4) === '0852') { return 'TELKOMSEL'}
+    if (
+        value.substring(0, 4) === '0852' ||
+        value.substring(0, 4) === '0853' ||
+        value.substring(0, 4) === '0811' ||
+        value.substring(0, 4) === '0812' ||
+        value.substring(0, 4) === '0813' ||
+        value.substring(0, 4) === '0821' ||
+        value.substring(0, 4) === '0822' ||
+        value.substring(0, 4) === '0852'
+        )
+    { return 'TELKOMSEL' }
 
-    else if (value.substring(0, 4) === '0851') { return 'by.U'}
+    else if (
+        value.substring(0, 4) === '0851'
+        )
+    { return 'by.U'}
 
-    else if (value.substring(0, 4) === '0857') { return 'INDOSAT'}
-    else if (value.substring(0, 4) === '0856') { return 'INDOSAT'}
+    else if (
+        value.substring(0, 4) === '0857' ||
+        value.substring(0, 4) === '0856'
+        )
+    { return 'INDOSAT'}
 
-    else if (value.substring(0, 4) === '0896') { return 'TRI'}
-    else if (value.substring(0, 4) === '0895') { return 'TRI'}
-    else if (value.substring(0, 4) === '0897') { return 'TRI'}
-    else if (value.substring(0, 4) === '0898') { return 'TRI'}
-    else if (value.substring(0, 4) === '0899') { return 'TRI'}
 
-    else if (value.substring(0, 4) === '0817') { return 'XL'}
-    else if (value.substring(0, 4) === '0818') { return 'XL'}
-    else if (value.substring(0, 4) === '0819') { return 'XL'}
-    else if (value.substring(0, 4) === '0859') { return 'XL'}
-    else if (value.substring(0, 4) === '0877') { return 'XL'}
-    else if (value.substring(0, 4) === '0878') { return 'XL'}
+    else if (
+        value.substring(0, 4) === '0896' ||
+        value.substring(0, 4) === '0895' ||
+        value.substring(0, 4) === '0897' ||
+        value.substring(0, 4) === '0898' ||
+        value.substring(0, 4) === '0899'
+        )
+    { return 'TRI'}
 
-    else if (value.substring(0, 4) === '0832') { return 'AXIS'}
-    else if (value.substring(0, 4) === '0833') { return 'AXIS'}
-    else if (value.substring(0, 4) === '0838') { return 'AXIS'}
+    else if (
+        value.substring(0, 4) === '0817' ||
+        value.substring(0, 4) === '0818' ||
+        value.substring(0, 4) === '0819' ||
+        value.substring(0, 4) === '0859' ||
+        value.substring(0, 4) === '0877' ||
+        value.substring(0, 4) === '0878'
+        )
+    { return 'XL'}
 
-    else if (value.substring(0, 4) === '0881') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0882') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0883') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0884') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0885') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0886') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0887') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0888') { return 'SMARTFREN'}
-    else if (value.substring(0, 4) === '0889') { return 'SMARTFREN'}
+    else if (
+        value.substring(0, 4) === '0832' ||
+        value.substring(0, 4) === '0833' ||
+        value.substring(0, 4) === '0838'
+        )
+    { return 'AXIS'}
+
+    else if (
+        value.substring(0, 4) === '0881' ||
+        value.substring(0, 4) === '0882' ||
+        value.substring(0, 4) === '0883' ||
+        value.substring(0, 4) === '0884' ||
+        value.substring(0, 4) === '0885' ||
+        value.substring(0, 4) === '0886' ||
+        value.substring(0, 4) === '0887' ||
+        value.substring(0, 4) === '0888' ||
+        value.substring(0, 4) === '0889'
+        )
+    { return 'SMARTFREN'}
 }
 
 const confirmingModal = ref(false);
@@ -210,21 +234,21 @@ watch(tabPulsa, (newTabPulsa) => {
 
                 <template v-if="tabPulsa=='Data'" >
                     <template v-if="data.category == 'Data'" >
-                    <template v-if="data.brand == provider(form.customer_no)">
-                        <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
+                        <template v-if="data.brand == provider(form.customer_no)">
+                            <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
+                                <div class="flex-shrink-0">
+                                    <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <button @click="confirmModal(data)" class="focus:outline-none text-left">
+                                        <span class="absolute inset-0" aria-hidden="true"></span>
+                                        <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
+                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <button @click="confirmModal(data)" class="focus:outline-none text-left">
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                    <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
-                                </button>
-                            </div>
-                        </div>
+                        </template>
                     </template>
-                </template>
                 </template>
             </template>
         </div>

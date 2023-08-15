@@ -24,13 +24,13 @@ const data = [
     },
     {
         name: 'Grup Whatsapp',
-        title: 'Join grup whatsapp',
+        title: 'Gabung grup whatsapp',
         role: 'Aktif',
         icon: 'fa-whatsapp text-green-500',
-        btn: 'Grup 1',
-        btn2: 'Grup 2',
+        btn: 'Grup Whatsapp',
+        // btn2: 'Grup 2',
         link: 'https://wa.me/6285156875180',
-        link2: 'https://wa.me/6285156875180',
+        // link2: 'https://wa.me/6285156875180',
     },
 
 ]
@@ -77,7 +77,7 @@ const faqs = [
                                 <span class="ml-3">{{ item.btn }}</span>
                             </a>
                         </div>
-                        <div class="-ml-px flex w-0 flex-1">
+                        <div class="-ml-px flex w-0 flex-1" v-if="item.btn2">
                             <a :href="item.link2" target="_blank" class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
 <!--                                <i class="fa-duotone fa-circle-i text-gray-400"/>-->
                                 <span class="ml-3">{{ item.btn2 }}</span>

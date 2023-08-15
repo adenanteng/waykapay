@@ -42,9 +42,9 @@ const tabs = ref('Pulsa')
 </script>
 
 <template>
-    <AppLayout title="Pulsa"
-               name="Pulsa"
-               desc="Masukkan nomor"
+    <AppLayout title="PLN Prepaid"
+               name="PLN Prepaid"
+               desc="Masukkan nomor meter"
     >
         <template #previous>
             <PreviousButton />
@@ -65,7 +65,7 @@ const tabs = ref('Pulsa')
 <!--        @submitted="storeInformation" -->
         <FormSection @submitted="storeInformation">
             <template #title>
-                Token PLN
+                Token PLN Prepaid
             </template>
 
             <template #description>

@@ -52,6 +52,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/product/pln', [ProductController::class, 'pln'])->name('product.pln');
     Route::post('/product/pln-inquiry', [ProductController::class, 'plnInquiry'])->name('product.plnInquiry');
+    Route::get('/product/pln-pasca', [ProductController::class, 'plnPasca'])->name('product.plnPasca');
 
     Route::get('/product/games', [ProductController::class, 'games'])->name('product.games');
     Route::get('/product/game/pubgm', [ProductController::class, 'gamePubgm'])->name('product.gamePubgm');
