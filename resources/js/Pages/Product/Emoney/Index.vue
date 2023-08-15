@@ -32,7 +32,7 @@ const form = useForm({
                 <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">
                     <img src="/img/vendor/DANA.svg" alt=""
                          class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
-                    <Link :href="route('product.emoneyDana')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('emoney.dana')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
 <!--                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Dana</p>-->
             </li>
@@ -41,7 +41,7 @@ const form = useForm({
                 <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">
                     <img src="/img/vendor/GOPAY.svg" alt=""
                          class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
-                    <Link :href="route('product.emoneyGopay')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('emoney.gopay')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
 <!--                <p class="mt-1 block text-gray-900 truncate pointer-events-none">Gopay</p>-->
             </li>

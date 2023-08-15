@@ -81,27 +81,27 @@ const breakpoints = {
             class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <div class="p-6">
                 <div class="grid grid-cols-4 gap-x-6 gap-y-10 lg:grid-cols-6 lg:gap-x-8">
-                    <Link :href="route('product.pulsa')" class="group text-center">
+                    <Link :href="route('pulsa.index')" class="group text-center">
                         <i class="fa-duotone fa-mobile text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>
                     </Link>
 
-                    <Link :href="route('product.pln')" class="group text-center">
+                    <Link :href="route('pln.index')" class="group text-center">
                         <i class="fa-duotone fa-lightbulb text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Listrik</h3>
                     </Link>
 
-                    <Link :href="route('product.games')" class="group text-center">
+                    <Link :href="route('games.index')" class="group text-center">
                         <i class="fa-duotone fa-gamepad-modern text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Games</h3>
                     </Link>
 
-                    <Link :href="route('product.emoney')" class="group text-center">
+                    <Link :href="route('emoney.index')" class="group text-center">
                         <i class="fa-duotone fa-wallet text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Topup</h3>
                     </Link>
 
-                    <Link :href="route('product.television')" class="group text-center">
+                    <Link :href="route('television.index')" class="group text-center">
                         <i class="fa-duotone fa-tv text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">TV</h3>
                     </Link>

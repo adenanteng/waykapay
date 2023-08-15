@@ -32,7 +32,7 @@ const form = useForm({
                 <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">
                     <img src="/img/games/pubg.jpg" alt=""
                          class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
-                    <Link :href="route('product.gamePubgm')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('games.pubgm')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
                 <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">PUBG Mobile</p>
             </li>
@@ -41,7 +41,7 @@ const form = useForm({
                 <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">
                     <img src="/img/games/mobile-legends.jpg" alt=""
                          class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
-                    <Link :href="route('product.gameML')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('games.ml')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
                 <p class="mt-1 block text-gray-900 truncate pointer-events-none">Mobile Legends</p>
             </li>

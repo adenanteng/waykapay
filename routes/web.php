@@ -9,6 +9,11 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductEmoneyController;
+use App\Http\Controllers\ProductGamesController;
+use App\Http\Controllers\ProductPlnController;
+use App\Http\Controllers\ProductPulsaController;
+use App\Http\Controllers\ProductTelevisionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
@@ -48,22 +53,24 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/product/topup', [ProductController::class, 'topup'])->name('product.topup');
     Route::put('/product/status', [ProductController::class, 'status'])->name('product.status');
 
-    Route::get('/product/pulsa', [ProductController::class, 'pulsa'])->name('product.pulsa');
+    Route::get('/product/pulsa', [ProductPulsaController::class, 'index'])->name('pulsa.index');
 
-    Route::get('/product/pln', [ProductController::class, 'pln'])->name('product.pln');
-    Route::post('/product/pln-inquiry', [ProductController::class, 'plnInquiry'])->name('product.plnInquiry');
-    Route::get('/product/pln-pasca', [ProductController::class, 'plnPasca'])->name('product.plnPasca');
+    Route::get('/product/pln', [ProductPlnController::class, 'index'])->name('pln.index');
+    Route::get('/product/pln-prepaid', [ProductPlnController::class, 'prepaid'])->name('pln.prepaid.index');
+    Route::post('/product/pln-prepaid-inquiry', [ProductPlnController::class, 'inquiryPrepaid'])->name('pln.prepaid.inquiry');
+    Route::get('/product/pln-postpaid', [ProductPlnController::class, 'postpaid'])->name('pln.postpaid.index');
+    Route::post('/product/pln-postpaid-inquiry', [ProductPlnController::class, 'inquiryPostpaid'])->name('pln.postpaid.inquiry');
 
-    Route::get('/product/games', [ProductController::class, 'games'])->name('product.games');
-    Route::get('/product/game/pubgm', [ProductController::class, 'gamePubgm'])->name('product.gamePubgm');
-    Route::get('/product/game/mobilelegends', [ProductController::class, 'gameML'])->name('product.gameML');
+    Route::get('/product/games', [ProductGamesController::class, 'index'])->name('games.index');
+    Route::get('/product/game/pubgm', [ProductGamesController::class, 'pubgm'])->name('games.pubgm');
+    Route::get('/product/game/mobilelegends', [ProductGamesController::class, 'ml'])->name('games.ml');
 
-    Route::get('/product/emoney', [ProductController::class, 'emoney'])->name('product.emoney');
-    Route::get('/product/emoney/dana', [ProductController::class, 'emoneyDana'])->name('product.emoneyDana');
-    Route::get('/product/emoney/gopay', [ProductController::class, 'emoneyGopay'])->name('product.emoneyGopay');
+    Route::get('/product/emoney', [ProductEmoneyController::class, 'index'])->name('emoney.index');
+    Route::get('/product/emoney/dana', [ProductEmoneyController::class, 'dana'])->name('emoney.dana');
+    Route::get('/product/emoney/gopay', [ProductEmoneyController::class, 'gopay'])->name('emoney.gopay');
 
-    Route::get('/product/televison', [ProductController::class, 'television'])->name('product.television');
-    Route::get('/product/television/kvision', [ProductController::class, 'televisionKvision'])->name('product.televisionKvision');
+    Route::get('/product/televison', [ProductTelevisionController::class, 'index'])->name('television.index');
+    Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
 
     Route::resource('/information', InformationController::class)->names('information');
 

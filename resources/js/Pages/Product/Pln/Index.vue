@@ -18,87 +18,38 @@ const props = defineProps({
     users: Object,
 });
 
-const form = useForm({
-    customer_no: '',
-});
-
-const storeInformation = () => {
-    form.post(route('product.plnInquiry', form), {
-        errorBag: 'storeInformation',
-        preserveScroll: true,
-        // onSuccess: () => closeModal(),
-        // onError: () => passwordInput.value.focus(),
-        // onFinish: () => form.reset(),
-    });
-};
-
-function formatPrice(value) {
-    let val = (value/1).toFixed(0).replace('.', '')
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-}
-
-const tabs = ref('Pulsa')
-
 </script>
 
 <template>
-    <AppLayout title="PLN Prepaid"
-               name="PLN Prepaid"
+    <AppLayout title="PLN"
+               name="PLN"
                desc="Masukkan nomor meter"
     >
         <template #previous>
             <PreviousButton />
         </template>
 
-<!--        <template #action>-->
-<!--            <TextInput-->
-<!--                id="name"-->
-<!--                v-model="form.number"-->
-<!--                type="tel"-->
-<!--                class="mt-1 block w-full"-->
-<!--                placeholder="08xx-xxxx-xxxx"-->
-<!--                required-->
-<!--            />-->
-<!--            <InputError :message="form.errors.number" class="mt-2" />-->
-<!--        </template>-->
+        <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-4 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
 
-<!--        @submitted="storeInformation" -->
-        <FormSection @submitted="storeInformation">
-            <template #title>
-                Token PLN Prepaid
-            </template>
-
-            <template #description>
-                * Saldo Rekening Rp {{ formatPrice($page.props.user.wallet_balance) }}
-            </template>
-
-            <template #form>
-                <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Masukkan no. meter / id pelanggan"/>
-                    <TextInput
-                        id="number"
-                        v-model="form.customer_no"
-                        type="tel"
-                        class="mt-1 block w-full"
-                        minlength="10"
-                        required
-                    />
-                    <InputError :message="form.errors.customer_no" class="mt-2"/>
+            <li class="relative">
+                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">
+                    <img src="/img/vendor/PLN.svg" alt=""
+                         class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
+                    <Link :href="route('pln.prepaid.index')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
+                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Prabayar</p>
+            </li>
 
-            </template>
+            <li class="relative">
+                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">
+                    <img src="/img/vendor/PLN.svg" alt=""
+                         class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
+                    <Link :href="route('pln.postpaid.index')" class="absolute inset-0 focus:outline-none"></Link>
+                </div>
+                <p class="mt-1 block text-gray-900 truncate pointer-events-none">Pascabayar</p>
+            </li>
 
-            <template #actions>
-                <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                    Berhasil disimpan.
-                </ActionMessage>
+        </ul>
 
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Cek
-                </PrimaryButton>
-            </template>
-        </FormSection>
-
-<!--        <MobileMenu />-->
     </AppLayout>
 </template>
