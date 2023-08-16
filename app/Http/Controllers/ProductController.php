@@ -52,7 +52,7 @@ class ProductController extends Controller
                 'gross_amount' => $gross_amount,
                 'last_amount' => $user->wallet_balance,
                 'admin_fee' => $admin_fee,
-                'desc' => $response->object()->data->sn
+                'desc' => $response->object()->data->sn ?? $response->object()->data->rc.' '.$response->object()->data->message,
             ]);
 
 //            $user->withdraw($transaction->gross_amount);
@@ -65,12 +65,8 @@ class ProductController extends Controller
                 default:
             }
 
-//            dd($transaction->toArray());
-
-//            return to_route('dashboard');
-
         return Inertia::render('Payment/Pending', [
-            'transaction'   => $transaction
+            'transaction' => $transaction
         ]);
 
         } else {
