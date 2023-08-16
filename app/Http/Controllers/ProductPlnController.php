@@ -41,11 +41,7 @@ class ProductPlnController extends Controller
     public function inquiryPrepaid(Request $request)
     {
 //        dd($request->all());
-        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
-            'cmd' => 'prepaid',
-            'username' => Helper::api()->digiflazz_username,
-            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-        ]);
+        $response = Helper::pricelist();
 
         $customer = Http::post('https://api.digiflazz.com/v1/transaction', [
             'commands' => 'pln-subscribe',
@@ -89,11 +85,7 @@ class ProductPlnController extends Controller
     {
 //        dd($request->all());
         $user = auth()->user();
-        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
-            'cmd' => 'prepaid',
-            'username' => Helper::api()->digiflazz_username,
-            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-        ]);
+        $response = Helper::pricelist();
 
         $order_id = "post-".$user['id']."-".\Illuminate\Support\Str::random(8);
         $customer = Http::post('https://api.digiflazz.com/v1/transaction', [

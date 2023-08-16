@@ -70,12 +70,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/emoney/dana', [ProductEmoneyController::class, 'dana'])->name('emoney.dana');
     Route::get('/product/emoney/gopay', [ProductEmoneyController::class, 'gopay'])->name('emoney.gopay');
 
-    Route::get('/product/televison', [ProductTelevisionController::class, 'index'])->name('television.index');
+    Route::get('/product/television', [ProductTelevisionController::class, 'index'])->name('television.index');
     Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
 
     Route::get('/product/internet', [ProductInternetController::class, 'index'])->name('internet.index');
     Route::get('/product/internet/indihome', [ProductInternetController::class, 'indihome'])->name('internet.indihome.index');
     Route::post('/product/internet/indihome-inquiry', [ProductInternetController::class, 'indihomeInquiry'])->name('internet.indihome.inquiry');
+    Route::get('/product/internet/myrepublic', [ProductInternetController::class, 'myrepublic'])->name('internet.myrepublic.index');
+    Route::post('/product/internet/myrepublic-inquiry', [ProductInternetController::class, 'myrepublicInquiry'])->name('internet.myrepublic.inquiry');
 
 
     Route::resource('/information', InformationController::class)->names('information');

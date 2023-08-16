@@ -28,11 +28,7 @@ class ProductGamesController extends Controller
      */
     public function pubgm()
     {
-        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
-            'cmd' => 'prepaid',
-            'username' => Helper::api()->digiflazz_username,
-            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-        ]);
+        $response = Helper::pricelist();
 
         if ($response->successful()) {
             return Inertia::render('Product/Games/Pubgm', [
@@ -56,11 +52,7 @@ class ProductGamesController extends Controller
      */
     public function ml()
     {
-        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
-            'cmd' => 'prepaid',
-            'username' => Helper::api()->digiflazz_username,
-            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-        ]);
+        $response = Helper::pricelist();
 
         if ($response->successful()) {
             return Inertia::render('Product/Games/MobileLegends', [

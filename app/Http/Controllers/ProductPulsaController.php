@@ -16,11 +16,7 @@ class ProductPulsaController extends Controller
      */
     public function index()
     {
-        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
-            'cmd' => 'prepaid',
-            'username' => Helper::api()->digiflazz_username,
-            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-        ]);
+        $response = Helper::pricelist();
 
         if ($response->successful()) {
             return Inertia::render('Product/Pulsa/Index', [

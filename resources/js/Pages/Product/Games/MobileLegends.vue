@@ -23,6 +23,7 @@ const props = defineProps({
 const form = useForm({
     user_id: props.users.id ?? null,
     customer_no: '',
+    zone_no: '',
     product_name: '',
     sku: '',
     amount: '',
@@ -53,8 +54,9 @@ let productDesc = ref(null);
 
 const confirmModal = (data) => {
 
-    if (form.customer_no !== '') {
+    if (form.customer_no !== '' && form.zone_no !== '') {
         confirmingModal.value = true;
+        form.customer_no = form.customer_no + form.zone_no;
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
@@ -103,8 +105,8 @@ const closeModal = () => {
             </template>
 
             <template #form>
-                <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Id player"/>
+                <div class="col-span-4">
+                    <InputLabel for="number" value="Id Player"/>
                     <TextInput
                         id="number"
                         v-model="form.customer_no"
@@ -114,6 +116,19 @@ const closeModal = () => {
                         required
                     />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
+                </div>
+
+                <div class="col-span-2">
+                    <InputLabel for="number" value="Zona"/>
+                    <TextInput
+                        id="zone"
+                        v-model="form.zone_no"
+                        type="number"
+                        class="mt-1 block w-full"
+                        minlength="3"
+                        required
+                    />
+                    <InputError :message="form.errors.zone_no" class="mt-2"/>
                 </div>
 
             </template>
@@ -162,7 +177,7 @@ const closeModal = () => {
                         Id Player
                     </div>
                     <div class="text-right font-medium">
-                        {{ form.customer_no }}
+                        {{ form.customer_no }} ({{ form.zone_no }})
                     </div>
 
                     <div class="">

@@ -40,14 +40,14 @@ const props = defineProps({
                 <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Indihome</p>
             </li>
 
-<!--            <li class="relative">-->
-<!--                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">-->
-<!--                    <img src="/img/vendor/PLN.svg" alt=""-->
-<!--                         class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">-->
-<!--                    <Link :href="route('pln.postpaid.index')" class="absolute inset-0 focus:outline-none"></Link>-->
-<!--                </div>-->
-<!--                <p class="mt-1 block text-gray-900 truncate pointer-events-none">MyRepublic</p>-->
-<!--            </li>-->
+            <li class="relative">
+                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">
+                    <img src="/img/vendor/MYREPUBLIC.svg" alt=""
+                         class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
+                    <Link :href="route('internet.myrepublic.index')" class="absolute inset-0 focus:outline-none"></Link>
+                </div>
+                <p class="mt-1 block text-gray-900 truncate pointer-events-none">MyRepublic</p>
+            </li>
 
         </ul>
 
