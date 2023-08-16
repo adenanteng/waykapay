@@ -2,16 +2,16 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
 
-import UpdateInformationForm from "@/Pages/Deposit/Partials/UpdateInformationForm.vue";
+import UpdateInformationForm from "@/Pages/MoneyTransfer/Partials/UpdateInformationForm.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
+
 import {ref} from "vue";
-import UpdateBankForm from "@/Pages/Deposit/Partials/UpdateBankForm.vue";
 
 </script>
 
 <template>
-    <AppLayout title="Deposit"
-               name="Pilih Metode Pembayaran"
+    <AppLayout title="Kirim Uang"
+               name="Mau isi saldo berapa?"
                desc="lorem ipsum"
     >
 
@@ -19,10 +19,11 @@ import UpdateBankForm from "@/Pages/Deposit/Partials/UpdateBankForm.vue";
             <PreviousButton />
         </template>
 
-        <UpdateBankForm
+        <UpdateInformationForm
             :users="$page.props.users ?? '' "
             :response="$page.props.response ?? '' "
-            :amount="$page.props.amount ?? '' "
+            :bank="$page.props.bank ?? '' "
+            :account_no="$page.props.account_no ?? '' "
         />
 
 <!--        <SectionBorder />-->

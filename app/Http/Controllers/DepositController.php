@@ -23,7 +23,6 @@ class DepositController extends Controller
 {
     public function index()
     {
-
         return Inertia::render('Deposit/CreateEdit', [
             'users' => auth()->user(),
             'response' => null,

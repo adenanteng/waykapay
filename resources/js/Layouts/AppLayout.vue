@@ -98,6 +98,7 @@ const logout = () => {
 <!--                                        <img v-if="props.avatar" class="mx-auto h-20 w-20 object-cover rounded-full"-->
 <!--                                             :src="props.avatar" :alt="props.avatar"/>-->
 <!--                                    </div>-->
+<!--                                    <i class="fa-duotone fa-wallet text-primary-600 text-5xl" />-->
                                     <div class="mt-4 sm:mt-0 sm:pt-1 text-left">
 <!--                                        <p class="text-sm font-medium text-gray-600">{{ props.greeting }}</p>-->
                                         <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize" v-if="props.greeting">

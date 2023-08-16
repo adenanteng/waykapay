@@ -69,10 +69,10 @@ const breakpoints = {
                         Deposit
                     </PrimaryButton>
 
-<!--                    <SecondaryButton >-->
+                    <SecondaryButton as="a" :href="route('money-transfer.index')">
 <!--                        <i class="fa-regular fa-coins mr-1"/>-->
-<!--                        Withdraw-->
-<!--                    </SecondaryButton>-->
+                        Kirim Uang
+                    </SecondaryButton>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@ const breakpoints = {
 
                     <Link :href="route('emoney.index')" class="group text-center">
                         <i class="fa-regular fa-wallet text-4xl text-primary-600 group-hover:text-primary-800"/>
-                        <h3 class="mt-2 text-sm text-gray-700">Topup</h3>
+                        <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>
                     </Link>
 
                     <Link :href="route('television.index')" class="group text-center">
