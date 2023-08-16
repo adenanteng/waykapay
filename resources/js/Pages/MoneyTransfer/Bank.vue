@@ -20,6 +20,9 @@ import UpdateBankForm from "./Partials/UpdateBankForm.vue";
             :response="$page.props.response ?? '' "
         />
 
+        <div class="mb-80">
+
+        </div>
 <!--        <SectionBorder />-->
 
     </AppLayout>
