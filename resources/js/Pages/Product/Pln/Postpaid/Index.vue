@@ -67,7 +67,7 @@ const tabs = ref('Pulsa')
                         v-model="form.customer_no"
                         type="tel"
                         class="mt-1 block w-full"
-                        minlength="10"
+                        minlength="5"
                         required
                     />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>

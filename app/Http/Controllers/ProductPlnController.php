@@ -61,7 +61,10 @@ class ProductPlnController extends Controller
             ]);
 
         } else {
-            dd($customer->status());
+//            dd($customer->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $customer->object()->data,
+            ]);
         }
     }
 
@@ -102,19 +105,23 @@ class ProductPlnController extends Controller
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
         ]);
 
-        dd($customer->object()->data);
+//        dd($customer->object()->data);
 
-        if ($customer->successful()) {
-            return Inertia::render('Product/Pln/CreateEdit', [
-                'users' => auth()->user(),
-                'customer' => $customer->object(),
-                'response'  => $response->object(),
-                'fee' => Helper::api()->fees,
-            ]);
+        return Inertia::render('Payment/Info', [
+            'transaction' => $customer->object()->data,
+        ]);
 
-        } else {
-            dd($customer->status());
-        }
+//        if ($customer->successful()) {
+//            return Inertia::render('Product/Pln/CreateEdit', [
+//                'users' => auth()->user(),
+//                'customer' => $customer->object(),
+//                'response'  => $response->object(),
+//                'fee' => Helper::api()->fees,
+//            ]);
+//
+//        } else {
+//            dd($customer->status());
+//        }
     }
 
 }

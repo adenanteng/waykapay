@@ -42,7 +42,10 @@ class ProductEmoneyController extends Controller
             ]);
 
         } else {
-            dd($response->status());
+//            dd($response->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
         }
     }
 
@@ -67,7 +70,10 @@ class ProductEmoneyController extends Controller
             ]);
 
         } else {
-            dd($response->status());
+//            dd($response->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
         }
     }
 }

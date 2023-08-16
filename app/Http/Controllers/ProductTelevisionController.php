@@ -42,7 +42,10 @@ class ProductTelevisionController extends Controller
             ]);
 
         } else {
-            dd($response->status());
+//            dd($response->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
         }
     }
 }
