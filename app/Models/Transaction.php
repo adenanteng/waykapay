@@ -59,6 +59,20 @@ class Transaction extends Model
     const GAMES = 4;
     const PLN = 5;
     const EMONEY = 6;
+    const TV = 7;
+    const VOUCHER = 8;
+    const PASCA_PLN = 9;
+    const PASCA_PDAM = 10;
+    const PASCA_HP = 11;
+    const PASCA_INTERNET = 12;
+    const PASCA_TV = 13;
+    const PASCA_BPJSK = 14;
+    const PASCA_BPJSTK = 15;
+    const PASCA_BPJSTKPU = 16;
+    const PASCA_MULTIFINANCE = 17;
+    const PASCA_PBB = 18;
+    const PASCA_GASNEGARA = 19;
+    const PASCA_SAMSAT = 20;
 
     const CATEGORY = [
         self::DEPOSIT => 'Deposit',
@@ -66,7 +80,21 @@ class Transaction extends Model
         self::DATA  => 'Data',
         self::GAMES => 'Games',
         self::PLN   => 'PLN',
-        self::EMONEY => 'E-Money'
+        self::EMONEY => 'E-Money',
+        self::TV => 'TV',
+        self::VOUCHER => 'Voucher',
+        self::PASCA_PLN => 'Pasca PLN',
+        self::PASCA_PDAM => 'Pasca PDAM',
+        self::PASCA_HP => 'Pasca HP',
+        self::PASCA_INTERNET => 'Pasca internet',
+        self::PASCA_TV => 'Pasca TV',
+        self::PASCA_BPJSK => 'Pasca BPJS Kesehatan',
+        self::PASCA_BPJSTK => 'Pasca PBJS Ketenagakerjaan',
+        self::PASCA_BPJSTKPU => 'Pasca PBJS Ketenagakerjaan Penerima Upah',
+        self::PASCA_MULTIFINANCE => 'Pasca Multifinance',
+        self::PASCA_PBB => 'Pasca PBB',
+        self::PASCA_GASNEGARA => 'Pasca Gas Negara',
+        self::PASCA_SAMSAT => 'Pasca Samsat',
     ];
 
     /**

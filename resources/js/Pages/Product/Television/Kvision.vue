@@ -58,7 +58,7 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
-        form.category_id = 6;
+        form.category_id = 7;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;
@@ -108,7 +108,7 @@ const closeModal = () => {
                     <TextInput
                         id="number"
                         v-model="form.customer_no"
-                        type="tel"
+                        type="number"
                         class="mt-1 block w-full"
                         minlength="8"
                         required

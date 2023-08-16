@@ -124,7 +124,7 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
-        form.category_id = 2;
+        form.category_id = tabPulsa === 'Pulsa' ? 2 : 3;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;
@@ -180,7 +180,7 @@ watch(tabPulsa, (newTabPulsa) => {
                     <TextInput
                         id="number"
                         v-model="form.customer_no"
-                        type="tel"
+                        type="number"
                         class="mt-1 block w-full"
                         minlength="10"
                         required

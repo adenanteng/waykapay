@@ -93,19 +93,6 @@ const closeModal = () => {
             <PreviousButton />
         </template>
 
-<!--        <template #action>-->
-<!--            <TextInput-->
-<!--                id="name"-->
-<!--                v-model="form.number"-->
-<!--                type="tel"-->
-<!--                class="mt-1 block w-full"-->
-<!--                placeholder="08xx-xxxx-xxxx"-->
-<!--                required-->
-<!--            />-->
-<!--            <InputError :message="form.errors.number" class="mt-2" />-->
-<!--        </template>-->
-
-<!--        @submitted="storeInformation" -->
         <FormSection >
             <template #title>
                 Gopay
@@ -121,7 +108,7 @@ const closeModal = () => {
                     <TextInput
                         id="number"
                         v-model="form.customer_no"
-                        type="tel"
+                        type="number"
                         class="mt-1 block w-full"
                         minlength="8"
                         required

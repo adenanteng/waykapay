@@ -65,7 +65,7 @@ const tabs = ref('Pulsa')
                     <TextInput
                         id="number"
                         v-model="form.customer_no"
-                        type="tel"
+                        type="number"
                         class="mt-1 block w-full"
                         minlength="5"
                         required
