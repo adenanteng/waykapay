@@ -63,6 +63,7 @@ class ProductController extends Controller
                     $user->withdraw($transaction->gross_amount);
                     break;
                 default:
+                    dd($response->object()->data);
             }
 
         return Inertia::render('Payment/Pending', [
