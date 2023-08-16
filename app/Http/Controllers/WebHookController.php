@@ -86,6 +86,8 @@ class WebHookController extends Controller
                 default:
                     $status_id = Transaction::ERROR;
                     $rc = $anj->data->rc;
+
+                    $user->deposit($transaction->gross_amount);
             }
 
             $transaction->update([
