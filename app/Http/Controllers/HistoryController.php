@@ -99,14 +99,14 @@ class HistoryController extends Controller
                         case ('Pending'):
                             $transaction->update([
                                 'status_id' => Transaction::PENDING,
-                                'desc' => $response->object()->data->sn
+                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
                             ]);
                             break;
 
                         default:
                             $transaction->update([
                                 'status_id' => Transaction::ERROR,
-                                'desc' => $response->object()->data->sn
+                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
                             ]);
                     }
             }
