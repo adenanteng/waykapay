@@ -68,32 +68,26 @@ class WebHookController extends Controller
         if ($transaction->status_id != Transaction::SUCCESS) {
             switch($anj->data->status) {
                 case ('Sukses'):
-//                    $user->deposit($request['gross_amount']);
-//                $transaction->user->deposit($request['gross_amount']);
-                    $status_id = Transaction::SUCCESS;
-                    $rc = $anj->data->rc;
+                    $transaction->update([
+                        'status_id' => Transaction::SUCCESS,
+                        'desc' => $anj->data->sn,
+                    ]);
                     break;
 
                 case ('Pending'):
-                    $status_id = Transaction::PENDING;
-                    $rc = $anj->data->rc;
+                    $transaction->update([
+                        'status_id' => Transaction::PENDING,
+                        'desc' => $anj->data->rc.' '.$anj->data->message,
+                    ]);
                     break;
 
-//                case ('202'):
-//                    $status_id = Transaction::ERROR;
-//                    break;
-
                 default:
-                    $status_id = Transaction::ERROR;
-                    $rc = $anj->data->rc;
-
                     $user->deposit($transaction->gross_amount);
+                    $transaction->update([
+                        'status_id' => Transaction::ERROR,
+                        'desc' => $anj->data->rc.' '.$anj->data->message,
+                    ]);
             }
-
-            $transaction->update([
-                'status_id' => $status_id,
-                'desc' => $rc,
-            ]);
         }
 
         return response()->json('ok');
