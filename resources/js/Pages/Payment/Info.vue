@@ -64,13 +64,13 @@ function formatPrice(value) {
                         </div>
 
                         <div class="mt-6 space-x-2">
-                            <PrimaryButton as="a" :href="route('dashboard')" >
-                                Ke Beranda
-                            </PrimaryButton>
-
-<!--                            <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" >-->
-<!--                                Cek Status-->
+<!--                            <PrimaryButton as="a" :href="route('dashboard')" >-->
+<!--                                Ke Beranda-->
 <!--                            </PrimaryButton>-->
+
+                            <PrimaryButton onclick="history.back();return false;">
+                                Kembali
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('pln.postpaid.inquiry', form), {
+    form.post(route('internet.indihome.inquiry', form), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         // onSuccess: () => closeModal(),
@@ -37,13 +37,11 @@ function formatPrice(value) {
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
-const tabs = ref('Pulsa')
-
 </script>
 
 <template>
-    <AppLayout title="PLN Postpaid"
-               name="PLN Postpaid"
+    <AppLayout title="Indihome"
+               name="Indihome"
                desc="Masukkan nomor meter"
     >
         <template #previous>
@@ -52,7 +50,7 @@ const tabs = ref('Pulsa')
 
         <FormSection @submitted="storeInformation">
             <template #title>
-                PLN Postpaid
+                Indihome
             </template>
 
             <template #description>
@@ -61,7 +59,7 @@ const tabs = ref('Pulsa')
 
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Masukkan no. meter / id pelanggan"/>
+                    <InputLabel for="number" value="Masukkan id pelanggan"/>
                     <TextInput
                         id="number"
                         v-model="form.customer_no"

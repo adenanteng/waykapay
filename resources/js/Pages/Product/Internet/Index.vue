@@ -21,8 +21,8 @@ const props = defineProps({
 </script>
 
 <template>
-    <AppLayout title="PLN"
-               name="PLN"
+    <AppLayout title="Internet Pascabayar"
+               name="Internet Pascabayar"
                desc="Masukkan nomor meter"
     >
         <template #previous>
@@ -33,21 +33,21 @@ const props = defineProps({
 
             <li class="relative">
                 <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">
-                    <img src="/img/vendor/PLN.svg" alt=""
+                    <img src="/img/vendor/INDIHOME.svg" alt=""
                          class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
-                    <Link :href="route('pln.prepaid.index')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('internet.indihome.index')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
-                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Prabayar</p>
+                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Indihome</p>
             </li>
 
-            <li class="relative">
-                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">
-                    <img src="/img/vendor/PLN.svg" alt=""
-                         class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
-                    <Link :href="route('pln.postpaid.index')" class="absolute inset-0 focus:outline-none"></Link>
-                </div>
-                <p class="mt-1 block text-gray-900 truncate pointer-events-none">Pascabayar</p>
-            </li>
+<!--            <li class="relative">-->
+<!--                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg">-->
+<!--                    <img src="/img/vendor/PLN.svg" alt=""-->
+<!--                         class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">-->
+<!--                    <Link :href="route('pln.postpaid.index')" class="absolute inset-0 focus:outline-none"></Link>-->
+<!--                </div>-->
+<!--                <p class="mt-1 block text-gray-900 truncate pointer-events-none">MyRepublic</p>-->
+<!--            </li>-->
 
         </ul>
 

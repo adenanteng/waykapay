@@ -102,8 +102,13 @@ const breakpoints = {
                     </Link>
 
                     <Link :href="route('television.index')" class="group text-center">
-                        <i class="fa-duotone fa-tv text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <i class="fa-duotone fa-tv-retro text-4xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">TV</h3>
+                    </Link>
+
+                    <Link :href="route('internet.index')" class="group text-center">
+                        <i class="fa-duotone fa-router text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-2 text-sm text-gray-700">Internet</h3>
                     </Link>
                 </div>
             </div>

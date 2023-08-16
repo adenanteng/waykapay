@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductEmoneyController;
 use App\Http\Controllers\ProductGamesController;
+use App\Http\Controllers\ProductInternetController;
 use App\Http\Controllers\ProductPlnController;
 use App\Http\Controllers\ProductPulsaController;
 use App\Http\Controllers\ProductTelevisionController;
@@ -71,6 +72,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/product/televison', [ProductTelevisionController::class, 'index'])->name('television.index');
     Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
+
+    Route::get('/product/internet', [ProductInternetController::class, 'index'])->name('internet.index');
+    Route::get('/product/internet/indihome', [ProductInternetController::class, 'indihome'])->name('internet.indihome.index');
+    Route::post('/product/internet/indihome-inquiry', [ProductInternetController::class, 'indihomeInquiry'])->name('internet.indihome.inquiry');
+
 
     Route::resource('/information', InformationController::class)->names('information');
 
