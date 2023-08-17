@@ -56,6 +56,8 @@ class UserController extends Controller
 //        dd($request->toArray());
         Validator::make($request->toArray(), [
             'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'unique:users'],
+            'phone' => ['required', 'unique:users'],
         ])->validateWithBag('storeInformation');
 
         $request['password'] = bcrypt(12345678);
