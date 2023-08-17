@@ -1,1 +1,0 @@
-import{o as e,c as r,w as t,u as a,j as s,a as o}from"./app.6f1ae637.js";const c=o("i",{class:"fa-regular fa-arrow-left text-lg text-gray-900 p-2"},null,-1),f={__name:"PreviousButton",props:{href:String},setup(n){return(_,l)=>(e(),r(a(s),{href:"",onclick:"history.back();return false;"},{default:t(()=>[c]),_:1}))}};export{f as _};

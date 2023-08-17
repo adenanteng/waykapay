@@ -61,7 +61,7 @@ const showPasswordConfirm = ref(false)
                         ref="currentPasswordInput"
                         v-model="form.current_password"
                         type="password"
-                        class="mt-1 block w-full"
+                        class="mt-1 block w-full rounded-r-none"
                         autocomplete="current-password"
                     />
                     <button type="button"
@@ -81,7 +81,7 @@ const showPasswordConfirm = ref(false)
                         ref="passwordInput"
                         v-model="form.password"
                         type="password"
-                        class="mt-1 block w-full"
+                        class="mt-1 block w-full rounded-r-none"
                         autocomplete="new-password"
                     />
                     <button type="button"
@@ -100,7 +100,7 @@ const showPasswordConfirm = ref(false)
                         id="password_confirmation"
                         v-model="form.password_confirmation"
                         type="password"
-                        class="mt-1 block w-full"
+                        class="mt-1 block w-full rounded-r-none"
                         autocomplete="new-password"
                     />
                     <button type="button"
