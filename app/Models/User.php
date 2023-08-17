@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Stephenjude\Wallet\Interfaces\Wallet;
 use Stephenjude\Wallet\Traits\HasWallet;
 
-class User extends Authenticatable implements Wallet
+class User extends Authenticatable implements Wallet, MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
