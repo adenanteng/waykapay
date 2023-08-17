@@ -60,7 +60,7 @@ const showPasswordConfirm = ref(false)
                         id="current_password"
                         ref="currentPasswordInput"
                         v-model="form.current_password"
-                        type="password"
+                        :type="showPassword ? 'text' : 'password'"
                         class="mt-1 block w-full rounded-r-none"
                         autocomplete="current-password"
                     />
@@ -80,7 +80,7 @@ const showPasswordConfirm = ref(false)
                         id="password"
                         ref="passwordInput"
                         v-model="form.password"
-                        type="password"
+                        :type="showPasswordNew ? 'text' : 'password'"
                         class="mt-1 block w-full rounded-r-none"
                         autocomplete="new-password"
                     />
@@ -99,7 +99,7 @@ const showPasswordConfirm = ref(false)
                     <TextInput
                         id="password_confirmation"
                         v-model="form.password_confirmation"
-                        type="password"
+                        :type="showPasswordConfirm ? 'text' : 'password'"
                         class="mt-1 block w-full rounded-r-none"
                         autocomplete="new-password"
                     />
