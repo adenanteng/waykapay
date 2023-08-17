@@ -56,6 +56,13 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 <!--                    >-->
 <!--                        Log Out-->
 <!--                    </Link>-->
+
+                    <Link
+                        :href="route('login')"
+                        class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"
+                    >
+                        Login
+                    </Link>
                 </div>
             </div>
         </form>
