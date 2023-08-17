@@ -15,13 +15,11 @@ import UpdateBankForm from "./Partials/UpdateBankForm.vue";
             <PreviousButton />
         </template>
 
-        <UpdateBankForm
-            :users="$page.props.users ?? '' "
-            :response="$page.props.response ?? '' "
-        />
-
         <div class="min-h-screen mb-80">
-            
+            <UpdateBankForm
+                :users="$page.props.users ?? '' "
+                :response="$page.props.response ?? '' "
+            />
         </div>
 <!--        <SectionBorder />-->
 
