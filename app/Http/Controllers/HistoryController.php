@@ -73,6 +73,17 @@ class HistoryController extends Controller
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):
 //                    session()->flash('flash.banner', 'tidak ada proses!');
+                    $response = Http::post('https://api.digiflazz.com/v1/transaction', [
+//                        'commands' => 'status-pasca',
+                        'username' => Helper::api()->digiflazz_username,
+                        'buyer_sku_code' => $transaction->sku,
+                        'customer_no' => $transaction->customer_no,
+                        'ref_id' => $transaction->order_id,
+                        'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id),
+//                        'testing' => true
+                    ]);
+
+                    dd($response->object()->data);
                     break;
                 default:
                     $response = Http::post('https://api.digiflazz.com/v1/transaction', [
