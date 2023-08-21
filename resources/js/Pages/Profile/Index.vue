@@ -11,7 +11,9 @@ const props = defineProps({
     users: Object,
     history: Object,
     in_count: Number,
-    out_count: Number
+    out_count: Number,
+    flip_saldo: Number,
+    digiflazz_saldo: Number
 })
 
 const logout = () => {
@@ -76,6 +78,31 @@ function formatPrice(value) {
                     </Link>
                 </li>
             </ul>
+        </div>
+
+        <div class="col-span-1 divide-y md:divide-none divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+            <div>
+                <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
+                    <div class="flex w-0 flex-1">
+                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
+                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>
+                            <div class="ml-3">
+                                <div class="text-xs text-gray-500">Flip Saldo</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.flip_saldo) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="-ml-px flex w-0 flex-1">
+                        <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
+                            <i class="fa-duotone fa-money-bill-1-wave text-green-400"/>
+                            <div class="ml-3">
+                                <div class="text-xs text-gray-500">Digiflazz Saldo</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.digiflazz_saldo) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg" v-if="$page.props.user.role_id==1">

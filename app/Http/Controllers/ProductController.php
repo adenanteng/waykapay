@@ -61,6 +61,7 @@ class ProductController extends Controller
                 case ('Pending'):
                 case ('Sukses'):
                     $user->withdraw($transaction->gross_amount);
+                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
                     break;
                 default:
 //                    dd($response->object()->data);

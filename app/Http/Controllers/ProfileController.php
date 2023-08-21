@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,6 +23,8 @@ class ProfileController extends Controller
 //            'history' => $history,
             'in_count' => $history->where('category_id', 1)->where('status_id', 1)->sum('amount'),
             'out_count' => $history->where('category_id', '!=', 1)->where('status_id', 1)->sum('gross_amount'),
+            'flip_saldo' => Helper::flip_saldo(),
+            'digiflazz_saldo' => Helper::digiflazz_saldo(),
         ]);
     }
 }

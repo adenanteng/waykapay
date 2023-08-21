@@ -226,6 +226,12 @@ watch(tabPulsa, (newTabPulsa) => {
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
                                         <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
                                     </button>
+
+<!--                                    <div class="focus:outline-none text-left">-->
+<!--                                        <span class="absolute inset-0" aria-hidden="true"></span>-->
+<!--                                        <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>-->
+<!--                                        <p class="text-sm text-gray-500 truncate">Tidak tersedia</p>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </template>

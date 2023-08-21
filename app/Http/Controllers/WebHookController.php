@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -89,6 +90,8 @@ class WebHookController extends Controller
                     ]);
             }
         }
+
+        Helper::update_digiflazz_saldo($anj->data->buyer_last_saldo);
 
         return response()->json('ok');
     }

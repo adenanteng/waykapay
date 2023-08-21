@@ -25,8 +25,10 @@ class AppSetting extends Model implements HasMedia
 //        'midtrans_server_key',
         'flip_secret',
         'flip_token',
+        'flip_saldo',
         'digiflazz_username',
-        'digiflazz_key'
+        'digiflazz_key',
+        'digiflazz_saldo'
     ];
 
     protected $with = ['media'];
