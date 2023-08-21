@@ -80,7 +80,7 @@ function formatPrice(value) {
             </ul>
         </div>
 
-        <div class="col-span-1 divide-y md:divide-none divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+        <div class="col-span-1 divide-y md:divide-none divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300" v-if="$page.props.user.role_id==1">
             <div>
                 <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
                     <div class="flex w-0 flex-1">
