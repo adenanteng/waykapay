@@ -48,21 +48,21 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 <!--                        Edit Profile-->
 <!--                    </Link>-->
 
-<!--                    <Link-->
-<!--                        :href="route('logout')"-->
-<!--                        method="post"-->
-<!--                        as="button"-->
-<!--                        class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"-->
-<!--                    >-->
-<!--                        Log Out-->
-<!--                    </Link>-->
-
                     <Link
-                        :href="route('login')"
+                        :href="route('logout')"
+                        method="post"
+                        as="button"
                         class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"
                     >
-                        Login
+                        Log Out
                     </Link>
+
+<!--                    <Link-->
+<!--                        :href="route('login')"-->
+<!--                        class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"-->
+<!--                    >-->
+<!--                        Login-->
+<!--                    </Link>-->
                 </div>
             </div>
         </form>
