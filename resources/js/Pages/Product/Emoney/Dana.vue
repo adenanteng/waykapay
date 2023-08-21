@@ -131,11 +131,20 @@ const closeModal = () => {
                                 <img class="h-10 w-10" src="/img/vendor/icon/DANA.svg" alt="">
                             </div>
                             <div class="flex-1 min-w-0">
-                                <button @click="confirmModal(data)" class="focus:outline-none text-left">
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                    <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
-                                </button>
+                                <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)">
+                                    <button @click="confirmModal(data)" class="focus:outline-none text-left">
+                                        <span class="absolute inset-0" aria-hidden="true"></span>
+                                        <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
+                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
+                                    </button>
+                                </template>
+
+                                <template v-else>
+                                    <div class="focus:outline-none text-left">
+                                        <p class="text-sm font-medium text-gray-500">{{ data.product_name }}</p>
+                                        <p class="text-sm text-gray-500 truncate">Tidak tersedia</p>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                     </template>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\Helper;
 use App\Models\AppSetting;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -41,7 +42,8 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'appSetting' => AppSetting::get()->first(),
-
+            'fee' => Helper::api()->fees,
+            'digiflazz_saldo' => Helper::digiflazz_saldo()
         ]);
     }
 }
