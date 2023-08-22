@@ -155,18 +155,18 @@ const onSlideChange = () => {
             </template>
         </swiper>
 
-<!--        <carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">-->
-<!--            <slide v-for="slide in props.carousel" :key="slide.id" class="">-->
-<!--                <Link :href="slide.href">-->
-<!--                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">-->
-<!--                </Link>-->
-<!--            </slide>-->
+        <carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">
+            <slide v-for="slide in props.carousel" :key="slide.id" class="">
+                <Link :href="slide.href">
+                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">
+                </Link>
+            </slide>
 
-<!--            <template #addons>-->
-<!--                <navigation />-->
-<!--                <pagination />-->
-<!--            </template>-->
-<!--        </carousel>-->
+            <template #addons>
+                <navigation />
+                <pagination />
+            </template>
+        </carousel>
 
         <MobileMenu/>
     </AppLayout>
