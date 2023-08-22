@@ -126,34 +126,34 @@ const onSlideChange = () => {
             </div>
         </div>
 
-        <swiper
-            :slides-per-view="1"
-            :space-between="10"
-            @swiper="onSwiper"
-            @slideChange="onSlideChange"
-            :breakpoints="{
-                '640': {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                '768': {
-                    slidesPerView: 2,
-                    spaceBetween: 10,
-                },
-                '1024': {
-                    slidesPerView: 3,
-                    spaceBetween: 10,
-                },
-            }"
-        >
-            <template v-for="slide in props.carousel" :key="slide.id">
-                <swiper-slide>
-                    <Link :href="slide.href">
-                        <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">
-                    </Link>
-                </swiper-slide>
-            </template>
-        </swiper>
+<!--        <swiper-->
+<!--            :slides-per-view="1"-->
+<!--            :space-between="10"-->
+<!--            @swiper="onSwiper"-->
+<!--            @slideChange="onSlideChange"-->
+<!--            :breakpoints="{-->
+<!--                '640': {-->
+<!--                    slidesPerView: 2,-->
+<!--                    spaceBetween: 10,-->
+<!--                },-->
+<!--                '768': {-->
+<!--                    slidesPerView: 2,-->
+<!--                    spaceBetween: 10,-->
+<!--                },-->
+<!--                '1024': {-->
+<!--                    slidesPerView: 3,-->
+<!--                    spaceBetween: 10,-->
+<!--                },-->
+<!--            }"-->
+<!--        >-->
+<!--            <template v-for="slide in props.carousel" :key="slide.id">-->
+<!--                <swiper-slide>-->
+<!--                    <Link :href="slide.href">-->
+<!--                        <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">-->
+<!--                    </Link>-->
+<!--                </swiper-slide>-->
+<!--            </template>-->
+<!--        </swiper>-->
 
         <carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">
             <slide v-for="slide in props.carousel" :key="slide.id" class="">

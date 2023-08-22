@@ -50,7 +50,7 @@ function formatPrice(value) {
 <template>
     <FormSection @submitted="storeInformation">
         <template #title>
-            Pilih Bank.
+            Bank dan nomor rekening
         </template>
 
         <template #description>
