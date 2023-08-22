@@ -74,6 +74,7 @@ class HistoryController extends Controller
         } else {
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):
+                case (Transaction::ERROR):
 //                    session()->flash('flash.banner', 'tidak ada proses!');
                     break;
                 default:
