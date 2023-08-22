@@ -9,6 +9,8 @@ import SectionTitle from "@/Components/SectionTitle.vue";
 import moment from "moment";
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
 
 const props = defineProps({
     users: Object,
@@ -44,6 +46,13 @@ const breakpoints = {
     },
 }
 
+const onSwiper = (swiper) => {
+    // console.log(swiper);
+};
+const onSlideChange = () => {
+    // console.log('slide change');
+};
+
 </script>
 
 <template>
@@ -53,6 +62,9 @@ const breakpoints = {
                :desc="$page.props.user.email"
                :avatar="$page.props.user.profile_photo_url"
     >
+
+
+
 
         <div
             class="rounded-3xl bg-gradient-to-bl from-primary-50 to-primary-300 bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg nightwind-prevent-block">
@@ -114,18 +126,47 @@ const breakpoints = {
             </div>
         </div>
 
-        <carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">
-            <slide v-for="slide in props.carousel" :key="slide.id" class="">
-                <Link :href="slide.href">
-                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">
-                </Link>
-            </slide>
+        <swiper
+            :slides-per-view="1"
+            :space-between="10"
+            @swiper="onSwiper"
+            @slideChange="onSlideChange"
+            :breakpoints="{
+                '640': {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                '768': {
+                    slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                '1024': {
+                    slidesPerView: 3,
+                    spaceBetween: 10,
+                },
+            }"
+        >
+            <template v-for="slide in props.carousel" :key="slide.id">
+                <swiper-slide>
+                    <Link :href="slide.href">
+                        <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">
+                    </Link>
+                </swiper-slide>
+            </template>
+        </swiper>
+
+<!--        <carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">-->
+<!--            <slide v-for="slide in props.carousel" :key="slide.id" class="">-->
+<!--                <Link :href="slide.href">-->
+<!--                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">-->
+<!--                </Link>-->
+<!--            </slide>-->
 
 <!--            <template #addons>-->
 <!--                <navigation />-->
 <!--                <pagination />-->
 <!--            </template>-->
-        </carousel>
+<!--        </carousel>-->
 
         <MobileMenu/>
     </AppLayout>

@@ -118,7 +118,7 @@ const closeModal = () => {
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>
 
-                <div class="col-span-2">
+                <div class="col-span-2 -ml-3">
                     <InputLabel for="number" value="Zona"/>
                     <TextInput
                         id="zone"

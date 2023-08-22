@@ -39,6 +39,7 @@ class HistoryController extends Controller
         if ($transaction->category_id == Transaction::DEPOSIT) {
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):
+                case (Transaction::ERROR):
 //                    session()->flash('flash.banner', 'tidak ada proses!');
                     break;
                 default:
@@ -68,6 +69,7 @@ class HistoryController extends Controller
                     $transaction->update([
                         'status_id' => $status_id,
                     ]);
+
             }
         } else {
             switch ($transaction->status_id) {
