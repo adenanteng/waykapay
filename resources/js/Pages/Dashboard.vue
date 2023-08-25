@@ -59,7 +59,7 @@ const menus = [
         bg: 'from-amber-600'
     },
     {
-        name: 'Topup Diamond Games',
+        name: 'Diamond Games',
         href: 'games.index',
         icon: 'fa-gamepad-modern',
         bg: 'from-blue-600'
