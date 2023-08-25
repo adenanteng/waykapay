@@ -47,7 +47,7 @@ const breakpoints = {
 
 const menus = [
     {
-        name: 'Isi ulang pulsa & Data',
+        name: 'Isi ulang pulsa',
         href: 'pulsa.index',
         icon: 'fa-mobile',
         bg: 'from-green-600'
@@ -77,7 +77,7 @@ const menus = [
         bg: 'from-indigo-600'
     },
     {
-        name: 'Bayar Tagihan Internet',
+        name: 'Tagihan Internet',
         href: 'internet.index',
         icon: 'fa-router',
         bg: 'from-primary-600'
@@ -171,8 +171,7 @@ const onSlideChange = () => {
 <!--        </carousel>-->
 
         <swiper
-            :modules="modules"
-            :slides-per-view="2.5"
+            slides-per-view="2.5"
             :space-between="10"
             :breakpoints="{
                 '640': {
@@ -190,11 +189,11 @@ const onSlideChange = () => {
             }"
         >
             <template v-for="menu in menus" :key="menu.name">
-                <SwiperSlide >
+                <SwiperSlide>
                     <Link :href="route(menu.href)" class="text-right" >
-                        <div class="px-5 py-3 rounded-3xl bg-gradient-to-br overflow-hidden nightwind-prevent-block" :class="menu.bg">
+                        <div class="px-5 py-3 rounded-3xl bg-gradient-to-br overflow-hidden nightwind-prevent-block aspect-square sm:aspect-auto relative" :class="menu.bg">
                             <h3 class="text-sm text-white text-left font-semibold">{{ menu.name }}</h3>
-                            <i class="mt-2 fa-regular text-4xl text-white" :class="menu.icon" />
+                            <i class="mt-2 fa-regular text-4xl text-white absolute sm:relative bottom-5 sm:bottom-0 right-5 sm:right-0" :class="menu.icon" />
                         </div>
                     </Link>
                 </SwiperSlide>

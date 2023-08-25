@@ -192,7 +192,7 @@ watch(tabPulsa, (newTabPulsa) => {
         </FormSection>
 
 
-        <div class="border-b border-gray-200">
+        <div class="border-b border-gray-200" v-show="form.customer_no.length >= 4 ">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tabPulsa=='Pulsa' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
