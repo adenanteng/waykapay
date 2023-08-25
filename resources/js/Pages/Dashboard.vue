@@ -47,7 +47,7 @@ const breakpoints = {
 
 const menus = [
     {
-        name: 'Isi ulang pulsa',
+        name: 'Isi ulang pulsa & Data',
         href: 'pulsa.index',
         icon: 'fa-mobile',
         bg: 'from-green-600'
@@ -59,25 +59,25 @@ const menus = [
         bg: 'from-amber-600'
     },
     {
-        name: 'Topup Games',
+        name: 'Topup Diamond Games',
         href: 'games.index',
         icon: 'fa-gamepad-modern',
         bg: 'from-blue-600'
     },
     {
-        name: 'Topup E-Money',
+        name: 'Topup Saldo E-Money',
         href: 'emoney.index',
         icon: 'fa-wallet',
         bg: 'from-red-600'
     },
     {
-        name: 'Langganan TV',
+        name: 'TV Berlangganan',
         href: 'television.index',
         icon: 'fa-tv-retro',
         bg: 'from-indigo-600'
     },
     {
-        name: 'Tagihan Internet',
+        name: 'Bayar Tagihan Internet',
         href: 'internet.index',
         icon: 'fa-router',
         bg: 'from-primary-600'
@@ -191,7 +191,7 @@ const onSlideChange = () => {
         >
             <template v-for="menu in menus" :key="menu.name">
                 <SwiperSlide >
-                    <Link :href="route(menu.href)" class="text-right">
+                    <Link :href="route(menu.href)" class="text-right" >
                         <div class="px-5 py-3 rounded-3xl bg-gradient-to-br overflow-hidden nightwind-prevent-block" :class="menu.bg">
                             <h3 class="text-sm text-white text-left font-semibold">{{ menu.name }}</h3>
                             <i class="mt-2 fa-regular text-4xl text-white" :class="menu.icon" />
