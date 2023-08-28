@@ -56,10 +56,7 @@ function formatPrice(value) {
 
                         <div class="">
                             <div class="text-sm text-gray-900">
-                                <span class="class text-gray-600">
-                                    ({{ props.transaction.rc }})
-                                </span>
-                                {{ props.transaction.message }}
+                                {{ props.transaction.desc }}
                             </div>
                         </div>
 
