@@ -65,6 +65,10 @@ function formatPrice(value) {
                                 Ke Beranda
                             </PrimaryButton>
 
+                            <PrimaryButton onclick="history.back();return false;" replace>
+                                Kembali
+                            </PrimaryButton>
+
 <!--                            <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" >-->
 <!--                                Cek Status-->
 <!--                            </PrimaryButton>-->
