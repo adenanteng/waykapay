@@ -1,5 +1,6 @@
 <script setup>
 import {ref} from "vue";
+import {Link} from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
 import PreviousButton from "@/Components/PreviousButton.vue";
@@ -62,6 +63,8 @@ function formatPrice(value) {
                             <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" replace>
                                 Cek Status
                             </PrimaryButton>
+
+                            <Link @click="storeInformation" replace>idk</Link>
                         </div>
                     </div>
                 </div>
