@@ -49,10 +49,10 @@ function formatPrice(value) {
                 <div class="flex flex-shrink-0 justify-center">
                     <ApplicationLogo />
                 </div>
-                <div class="py-16">
+                <div class="mt-5">
                     <div class="text-center">
 <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
-                        <h1 class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Transaksi Berhasil</h1>
+                        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Transaksi Berhasil</h1>
 
                         <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-1 mt-5">
                             <div class="sm:col-span-1 flex justify-between">
@@ -102,7 +102,7 @@ function formatPrice(value) {
                             </div>
                         </div>
 
-                        <div class="mt-6 space-x-2">
+                        <div class="mt-5 space-x-2">
                             <PrimaryButton as="a" :href="route('dashboard')" >
                                 Ke Beranda
                             </PrimaryButton>

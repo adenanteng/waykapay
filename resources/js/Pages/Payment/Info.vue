@@ -49,12 +49,12 @@ function formatPrice(value) {
                 <div class="flex flex-shrink-0 justify-center">
                     <ApplicationLogo />
                 </div>
-                <div class="py-16">
+                <div class="mt-5">
                     <div class="text-center">
 <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
-                        <h1 class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Info</h1>
+                        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Info</h1>
 
-                        <div class="mt-5">
+                        <div class="">
                             <div class="text-sm text-gray-900">
                                 <span class="class text-gray-600">
                                     ({{ props.transaction.rc }})
@@ -63,7 +63,7 @@ function formatPrice(value) {
                             </div>
                         </div>
 
-                        <div class="mt-6 space-x-2">
+                        <div class="mt-5 space-x-2">
 <!--                            <PrimaryButton as="a" :href="route('dashboard')" >-->
 <!--                                Ke Beranda-->
 <!--                            </PrimaryButton>-->

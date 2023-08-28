@@ -42,21 +42,28 @@ function formatPrice(value) {
 </script>
 
 <template>
-    <BlankLayout title="Pending" >
+    <BlankLayout title="Gagal" >
 
         <div class="pt-16 pb-12">
             <main class="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-6 lg:px-8">
                 <div class="flex flex-shrink-0 justify-center">
                     <ApplicationLogo />
                 </div>
-                <div class="py-16">
+                <div class="mt-5">
                     <div class="text-center">
 <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
-                        <h1 class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Transaksi Gagal</h1>
+                        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Transaksi Gagal</h1>
 
+                        <div class="">
+                            <div class="text-sm text-gray-900">
+                                <span class="class text-gray-600">
+                                    ({{ props.transaction.rc }})
+                                </span>
+                                {{ props.transaction.message }}
+                            </div>
+                        </div>
 
-
-                        <div class="mt-6 space-x-2">
+                        <div class="mt-5 space-x-2">
                             <PrimaryButton as="a" :href="route('dashboard')" >
                                 Ke Beranda
                             </PrimaryButton>
