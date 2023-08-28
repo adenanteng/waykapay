@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
@@ -9,7 +9,9 @@ import moment from "moment";
 import 'vue3-carousel/dist/carousel.css'
 // import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/free-mode';
 
 const props = defineProps({
     users: Object,
@@ -85,12 +87,13 @@ const menus = [
 ]
 
 const onSwiper = (swiper) => {
-    // console.log(swiper);
+    // console.log(swipeMenu);
 };
-const onSlideChange = () => {
-    // console.log('slide change');
+const onSlideChange = (swiper) => {
+    // console.log(swipeMenu);
 };
 
+const viewSaldo = ref(false)
 </script>
 
 <template>
@@ -102,10 +105,17 @@ const onSlideChange = () => {
     >
         <div class="rounded-3xl bg-gradient-to-br from-primary-600 overflow-hidden shadow-lg">
             <div class="py-4 px-4 sm:px-6 lg:py-8 lg:px-8 lg:flex lg:items-center lg:justify-between">
-                <h2 class="tracking-tight nightwind-prevent-block">
-                    <span class="block text-sm font-medium text-gray-200">Saldo Rekening</span>
-                    <span class="block text-xl font-extrabold text-white">
+                <h2 class="tracking-tight nightwind-prevent-block" >
+                    <span class="block text-sm font-medium text-gray-200">Saldo Rekening
+                        <button @click="viewSaldo=!viewSaldo">
+                            <i class="ml-1 text-xs fa-regular" :class="viewSaldo ? 'fa-eye' : 'fa-eye-slash' " />
+                        </button>
+                    </span>
+                    <span v-if="viewSaldo" class="block text-xl font-extrabold text-white">
                         Rp {{ formatPrice($page.props.user.wallet_balance) }}
+                    </span>
+                    <span v-else class="block text-xl font-extrabold text-white">
+                        Rp xxxx
                     </span>
                 </h2>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">
@@ -171,8 +181,12 @@ const onSlideChange = () => {
 <!--        </carousel>-->
 
         <swiper
+            :modules="[FreeMode]"
             slides-per-view="2.5"
             :space-between="10"
+            @swiper="onSwiper"
+            @slideChange="onSlideChange"
+            :freeMode="true"
             :breakpoints="{
                 '640': {
                     slidesPerView: 3,
@@ -198,14 +212,11 @@ const onSlideChange = () => {
                     </Link>
                 </SwiperSlide>
             </template>
-
         </swiper>
 
         <swiper
             :slides-per-view="1"
             :space-between="10"
-            @swiper="onSwiper"
-            @slideChange="onSlideChange"
             :breakpoints="{
                 '640': {
                     slidesPerView: 2,
