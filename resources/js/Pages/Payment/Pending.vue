@@ -60,11 +60,9 @@ function formatPrice(value) {
                                 Ke Beranda
                             </PrimaryButton>
 
-                            <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" replace>
+                            <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" >
                                 Cek Status
                             </PrimaryButton>
-
-                            <Link @click="storeInformation" replace>idk</Link>
                         </div>
                     </div>
                 </div>
