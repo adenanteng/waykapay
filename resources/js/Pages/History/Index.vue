@@ -5,18 +5,19 @@ import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import moment from "moment";
 import { Vue3Lottie } from 'vue3-lottie'
+import Badge from "../../Components/Badge.vue";
 
 const props = defineProps({
-    users: Object,
     history: undefined,
     in_count: undefined,
     out_count: undefined,
-    on_process: undefined
+    on_process: undefined,
+    all_process: undefined
 })
 
 onMounted(() => {
     console.log('history');
-    router.reload({ only: ['history', 'in_count', 'out_count', 'on_process'] })
+    router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
 })
 
 function formattedDate(value) {
@@ -95,40 +96,41 @@ watch(tabHistory, (newTabHistory) => {
 <!--                </button>-->
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabHistory==2 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
+                        :class="tabHistory==2 ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
                         @click="tabHistory=2"
                 >
-                    Proses
+                    Proses <Badge class="ml-1 bg-primary-600 text-white" :name="props.on_process" />
                 </button>
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabHistory==99 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
+                        :class="tabHistory==99 ? 'border-green-600 text-green-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
                         @click="tabHistory=99"
                 >
-                    Semua
+                    Semua <Badge class="ml-1 bg-green-600 text-white" :name="props.all_process" />
                 </button>
             </nav>
         </div>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-if="props.history === undefined">
-                    <li>
-                        <div class="px-4 py-4 sm:px-6">
-                            <div class="flex items-center justify-center">
-                                <p class="text-sm font-medium text-gray-500">Tunggu sebentar</p>
-                            </div>
-                        </div>
-                    </li>
-                </template>
+        <template v-if="props.history === undefined">
+            <div class="px-4 py-4 sm:px-6">
+                <div class="flex items-center justify-center">
+                    <p class="text-sm font-medium text-gray-500">Tunggu sebentar</p>
+                </div>
+            </div>
+        </template>
 
-                <template v-else v-for="history in $page.props.history">
+        <div v-else class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                <template v-for="history in $page.props.history" :key="history.id">
                     <template v-if="history.status_id == tabHistory || tabHistory==99">
                         <li>
                             <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
-                                        <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>
+                                        <p class="font-medium truncate"
+                                           :class="history.status_id == 1 ? 'text-primary-600' : 'text-gray-500'">
+                                            {{ history.product_name }}
+                                        </p>
                                         <div class="ml-2 flex-shrink-0 flex">
                                             <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
                                                 :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
@@ -139,21 +141,20 @@ watch(tabHistory, (newTabHistory) => {
                                     </div>
                                     <div class="mt-2 sm:flex sm:justify-between">
                                         <div class="sm:flex">
-                                            <p class="flex items-center text-sm text-gray-900">
-    <!--                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />-->
+                                            <p class="flex items-center text-sm" :class="history.status_id == 1 ? 'text-gray-900' : 'text-gray-500'">
                                                 {{ history.category_id == 1 ? '+' : '-' }} Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                             </p>
-    <!--                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-    <!--&lt;!&ndash;                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />&ndash;&gt;-->
-    <!--                                            {{ history.order_id }}-->
-    <!--                                        </p>-->
+<!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
+<!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
+<!--                                                {{ history.customer_no }}-->
+<!--                                            </p>-->
                                         </div>
-                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                            <i class="fa-regular fa-calendar text-gray-500 pr-2" />
+                                        <div class="mt-2 flex items-center text-sm sm:mt-0" :class="history.status_id == 1 ? 'text-gray-900' : 'text-gray-500'">
+                                            <i class="fa-regular fa-calendar pr-2" />
                                             <p>
                                                 {{ formattedDate(history.created_at) }}
                                             </p>
-                                            <p class="text-gray-900 ml-2">
+                                            <p class="ml-2" >
                                                 {{ formattedTime(history.created_at) }}
                                             </p>
                                         </div>

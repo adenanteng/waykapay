@@ -1,7 +1,7 @@
 <script setup>
 
 const props = defineProps({
-    name: String,
+    name: String | Number,
     class: {
         type: String,
         default: "bg-primary-100 text-primary-800"

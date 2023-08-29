@@ -8,10 +8,7 @@ import {onMounted, ref, watch} from "vue";
 import moment from "moment/moment";
 
 const props = defineProps({
-    users: Object,
     history: Object,
-    // in_count: Number,
-    // out_count: Number,
     flip_saldo: undefined,
     digiflazz_saldo: undefined
 })

@@ -22,9 +22,9 @@ class HistoryController extends Controller
 //        dd($history->where('category_id', 1)->sum('gross_amount'));
 
         return Inertia::render('History/Index', [
-            'users' => auth()->user(),
             'history'=> Inertia::lazy(fn () => $history),
             'on_process' => Inertia::lazy(fn () => $history->where('status_id', Transaction::PENDING)->count()),
+            'all_process' => Inertia::lazy(fn () => $history->count()),
             'in_count' => Inertia::lazy(fn () => $history->where('category_id', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('amount')),
             'out_count' => Inertia::lazy(fn () => $history->where('category_id', '!=', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('gross_amount')),
         ]);
