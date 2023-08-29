@@ -4,16 +4,21 @@ import {Link, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import moment from "moment/moment";
 
 const props = defineProps({
     users: Object,
     history: Object,
-    in_count: Number,
-    out_count: Number,
-    flip_saldo: Number,
-    digiflazz_saldo: Number
+    // in_count: Number,
+    // out_count: Number,
+    flip_saldo: undefined,
+    digiflazz_saldo: undefined
+})
+
+onMounted(() => {
+    // console.log('dana');
+    router.reload({ only: ['flip_saldo', 'digiflazz_saldo'] })
 })
 
 const logout = () => {

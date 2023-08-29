@@ -22,7 +22,7 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    console.log('dana');
+    // console.log('dana');
     router.reload({ only: ['response'] })
 })
 

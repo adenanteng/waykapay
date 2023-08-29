@@ -30,10 +30,10 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Index', [
             'users' => auth()->user(),
 //            'history' => $history,
-            'in_count' => $history->where('category_id', 1)->where('status_id', 1)->sum('amount'),
-            'out_count' => $history->where('category_id', '!=', 1)->where('status_id', 1)->sum('gross_amount'),
-            'flip_saldo' => $flip_saldo,
-            'digiflazz_saldo' => $digiflazz_saldo,
+//            'in_count' => $history->where('category_id', 1)->where('status_id', 1)->sum('amount'),
+//            'out_count' => $history->where('category_id', '!=', 1)->where('status_id', 1)->sum('gross_amount'),
+            'flip_saldo' => Inertia::lazy(fn () => $flip_saldo),
+            'digiflazz_saldo' => Inertia::lazy(fn () => $digiflazz_saldo),
         ]);
     }
 }
