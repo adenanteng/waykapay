@@ -9,14 +9,14 @@ import { Vue3Lottie } from 'vue3-lottie'
 const props = defineProps({
     users: Object,
     history: undefined,
-    in_count: Number,
-    out_count: Number,
-    on_process: Number
+    in_count: undefined,
+    out_count: undefined,
+    on_process: undefined
 })
 
 onMounted(() => {
     console.log('history');
-    router.reload({ only: ['history'] })
+    router.reload({ only: ['history', 'in_count', 'out_count', 'on_process'] })
 })
 
 function formattedDate(value) {

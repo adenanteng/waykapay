@@ -24,9 +24,9 @@ class HistoryController extends Controller
         return Inertia::render('History/Index', [
             'users' => auth()->user(),
             'history'=> Inertia::lazy(fn () => $history),
-            'on_process' => $history->where('status_id', Transaction::PENDING)->count(),
-            'in_count' => $history->where('category_id', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('amount'),
-            'out_count' => $history->where('category_id', '!=', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('gross_amount'),
+            'on_process' => Inertia::lazy(fn () => $history->where('status_id', Transaction::PENDING)->count()),
+            'in_count' => Inertia::lazy(fn () => $history->where('category_id', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('amount')),
+            'out_count' => Inertia::lazy(fn () => $history->where('category_id', '!=', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('gross_amount')),
         ]);
     }
 
