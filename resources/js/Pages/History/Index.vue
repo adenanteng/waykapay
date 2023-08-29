@@ -116,7 +116,7 @@ watch(tabHistory, (newTabHistory) => {
                     <li>
                         <div class="px-4 py-4 sm:px-6">
                             <div class="flex items-center justify-center">
-                                <p class="font-medium text-gray-600 truncate">Tunggu sebentar</p>
+                                <p class="text-sm font-medium text-gray-500">Tunggu sebentar</p>
                             </div>
                         </div>
                     </li>
