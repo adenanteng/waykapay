@@ -60,7 +60,7 @@ const formReset = () => {
                         type="number"
                         class="mt-1 block w-full rounded-l-none"
                         min="10000"
-                        max="9999999"
+                        max="5000000"
                         required
                     />
                 </div>

@@ -45,11 +45,11 @@ const storeInformation = () => {
         </template>
 
         <template #content>
-            <div class="flex items-center px-5">
+            <div class="flex items-center px-2">
                 <div class="flex-shrink-0">
-                    <img class="h-12 w-12 rounded-full object-cover"
-                         :src="$page.props.user.profile_photo_url"
-                         :alt="$page.props.user.name"/>
+                    <img class="h-5 w-full"
+                         :src="props.bank.logo"
+                         :alt="props.bank.name" />
                 </div>
                 <div class="ml-3 min-w-0 flex-1">
                     <div class="text-base font-medium text-gray-800 truncate capitalize">
@@ -86,7 +86,7 @@ const storeInformation = () => {
                         type="number"
                         class="mt-1 block w-full rounded-l-none"
                         min="10000"
-                        max="9999999"
+                        max="5000000"
                         required
                     />
                 </div>

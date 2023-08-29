@@ -79,16 +79,16 @@ function formatPrice(value) {
                 <RadioGroup v-model="form.method">
                     <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
                         <RadioGroupOption as="template" v-for="mailingList in mailingLists" :key="mailingList.id" :value="mailingList" v-slot="{ checked, active }">
-                            <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-indigo-500' : '', 'relative flex cursor-pointer rounded-3xl border p-4 shadow-sm focus:outline-none']">
-                              <span class="flex flex-1 justify-center">
-                                <span class="flex flex-col items-center">
+                            <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-primary-500' : '', 'relative flex cursor-pointer rounded-3xl border p-4 shadow-sm focus:outline-none']">
+                                <div class="flex flex-1 justify-center">
+                                <div class="flex flex-col items-center">
                                     <img :src="mailingList.logo" class="h-7" alt="" />
 <!--                                  <RadioGroupLabel as="span" class="block text-sm font-medium text-gray-900">Biaya admin {{ formatPrice(mailingList.adminFee) }}</RadioGroupLabel>-->
                                     <RadioGroupDescription as="span" class="mt-1 flex text-xs text-gray-500">{{ mailingList.adminFee }}</RadioGroupDescription>
 <!--                                  <RadioGroupDescription as="span" class="mt-6 text-sm font-medium text-gray-900">{{ mailingList.users }}</RadioGroupDescription>-->
-                                </span>
-                              </span>
-                                <CheckCircleIcon :class="[!checked ? 'invisible' : '', 'h-5 w-5 text-indigo-600']" aria-hidden="true" />
+                                </div>
+                                </div>
+                                <CheckCircleIcon :class="[!checked ? 'invisible' : '', 'h-5 w-5 text-primary-600']" aria-hidden="true" />
                                 <span :class="[active ? 'border' : 'border-2', checked ? 'border-primary-500' : 'border-transparent', 'pointer-events-none absolute -inset-px rounded-3xl']" aria-hidden="true" />
                             </div>
                         </RadioGroupOption>

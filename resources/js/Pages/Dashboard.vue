@@ -6,8 +6,6 @@ import MobileMenu from "@/Components/MobileMenu.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import moment from "moment";
-import 'vue3-carousel/dist/carousel.css'
-// import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
@@ -106,7 +104,7 @@ const viewSaldo = ref(false)
         <div class="rounded-3xl bg-gradient-to-br from-primary-600 overflow-hidden shadow-lg">
             <div class="py-4 px-4 sm:px-6 lg:py-8 lg:px-8 lg:flex lg:items-center lg:justify-between">
                 <h2 class="tracking-tight nightwind-prevent-block" >
-                    <span class="block text-sm font-medium text-gray-200">Saldo Rekening
+                    <span class="block text-sm font-medium text-white">Saldo Rekening
                         <button @click="viewSaldo=!viewSaldo">
                             <i class="ml-1 text-xs fa-regular" :class="viewSaldo ? 'fa-eye' : 'fa-eye-slash' " />
                         </button>
@@ -169,17 +167,6 @@ const viewSaldo = ref(false)
 <!--            </div>-->
 <!--        </div>-->
 
-<!--        <carousel :items-to-show="1" :breakpoints="breakpoints">-->
-<!--            <slide>-->
-<!--                <Link :href="route('pulsa.index')" class="group rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
-<!--                    <div class="">-->
-<!--                        <i class="fa-regular fa-tv-retro text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">TV</h3>-->
-<!--                    </div>-->
-<!--                </Link>-->
-<!--            </slide>-->
-<!--        </carousel>-->
-
         <swiper
             :modules="[FreeMode]"
             slides-per-view="2.5"
@@ -204,7 +191,7 @@ const viewSaldo = ref(false)
         >
             <template v-for="menu in menus" :key="menu.name">
                 <SwiperSlide>
-                    <Link :href="route(menu.href)" class="text-right" >
+                    <Link :href="route(menu.href)" class="text-right" preserve-scroll>
                         <div class="px-5 py-3 rounded-3xl bg-gradient-to-br overflow-hidden nightwind-prevent-block aspect-square sm:aspect-auto relative" :class="menu.bg">
                             <h3 class="text-sm text-white text-left font-semibold">{{ menu.name }}</h3>
                             <i class="mt-2 fa-regular text-4xl text-white absolute sm:relative bottom-5 sm:bottom-0 right-5 sm:right-0" :class="menu.icon" />
@@ -234,26 +221,12 @@ const viewSaldo = ref(false)
         >
             <template v-for="slide in props.carousel" :key="slide.id" >
                 <SwiperSlide>
-                    <Link :href="slide.href">
-                        <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">
+                    <Link :href="slide.href" >
+                        <img :src="slide.media[0].original_url" alt="" class="rounded-3xl w-full h-auto aspect-video object-cover p-1">
                     </Link>
                 </SwiperSlide>
             </template>
-
         </swiper>
-
-<!--        <Carousel :items-to-show="1" :wrapAround=true :autoplay=5000 :breakpoints="breakpoints">-->
-<!--            <Slide v-for="slide in props.carousel" :key="slide.id" class="">-->
-<!--                <Link :href="slide.href">-->
-<!--                    <img :src="slide.media[0].original_url"  alt="" class="rounded-3xl aspect-video object-cover p-1">-->
-<!--                </Link>-->
-<!--            </Slide>-->
-
-<!--            <template #addons>-->
-<!--&lt;!&ndash;                <navigation />&ndash;&gt;-->
-<!--&lt;!&ndash;                <pagination />&ndash;&gt;-->
-<!--            </template>-->
-<!--        </Carousel>-->
 
         <MobileMenu/>
     </AppLayout>
