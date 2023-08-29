@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, useForm} from "@inertiajs/vue3";
+import {Link, router, useForm} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
@@ -12,14 +12,20 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {value} from "lodash/seq";
+import Loading from "../Loading.vue";
 
 const props = defineProps({
     users: Object,
-    response: Object,
+    response: undefined,
     fee: Number,
 });
+
+onMounted(() => {
+    // console.log('dana');
+    router.reload({ only: ['response'] })
+})
 
 const form = useForm({
     user_id: props.users.id ?? null,
@@ -211,7 +217,11 @@ watch(tabPulsa, (newTabPulsa) => {
         </div>
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <template v-for="data in sort(props.response.data)" >
+            <template v-if="props.response === undefined">
+                <Loading />
+            </template>
+
+            <template v-else v-for="data in sort(props.response.data)" >
 
                 <template v-if="tabPulsa=='Pulsa'" >
                     <template v-if="data.category == 'Pulsa'" >

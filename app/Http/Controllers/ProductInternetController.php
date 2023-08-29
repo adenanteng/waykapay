@@ -61,7 +61,7 @@ class ProductInternetController extends Controller
 //            return Inertia::render('Product/Pln/CreateEdit', [
 //                'users' => auth()->user(),
 //                'customer' => $customer->object(),
-//                'response'  => $response->object(),
+//                'response'  => Inertia::lazy(fn () => $response->object()),
 //                'fee' => Helper::api()->fees,
 //            ]);
 //
@@ -110,7 +110,7 @@ class ProductInternetController extends Controller
 //            return Inertia::render('Product/Pln/CreateEdit', [
 //                'users' => auth()->user(),
 //                'customer' => $customer->object(),
-//                'response'  => $response->object(),
+//                'response'  => Inertia::lazy(fn () => $response->object()),
 //                'fee' => Helper::api()->fees,
 //            ]);
 //

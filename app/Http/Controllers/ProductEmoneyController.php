@@ -33,7 +33,7 @@ class ProductEmoneyController extends Controller
         if ($response->successful()) {
             return Inertia::render('Product/Emoney/Dana', [
                 'users' => auth()->user(),
-                'response'  => $response->object(),
+                'response' => Inertia::lazy(fn () => $response->object()),
                 'fee' => Helper::api()->fees,
             ]);
 
@@ -57,7 +57,7 @@ class ProductEmoneyController extends Controller
         if ($response->successful()) {
             return Inertia::render('Product/Emoney/Gopay', [
                 'users' => auth()->user(),
-                'response'  => $response->object(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
                 'fee' => Helper::api()->fees,
             ]);
 

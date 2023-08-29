@@ -33,7 +33,7 @@ class ProductGamesController extends Controller
         if ($response->successful()) {
             return Inertia::render('Product/Games/Pubgm', [
                 'users' => auth()->user(),
-                'response'  => $response->object(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
                 'fee' => Helper::api()->fees,
             ]);
 
@@ -57,7 +57,7 @@ class ProductGamesController extends Controller
         if ($response->successful()) {
             return Inertia::render('Product/Games/MobileLegends', [
                 'users' => auth()->user(),
-                'response'  => $response->object(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
                 'fee' => Helper::api()->fees,
             ]);
 

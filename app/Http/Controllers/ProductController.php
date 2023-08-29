@@ -24,7 +24,7 @@ class ProductController extends Controller
         $gross_amount = $request['amount'] + $admin_fee;
 
 //        dd($request->all());
-        $order_id = "pre-".$request['user_id']."-".\Illuminate\Support\Str::random(8);
+        $order_id = "inv-".$request['user_id']."-".\Illuminate\Support\Str::random(8);
 
         $response = Http::post('https://api.digiflazz.com/v1/transaction', [
             'username' => Helper::api()->digiflazz_username,

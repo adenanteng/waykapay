@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
@@ -8,10 +8,15 @@ import { Vue3Lottie } from 'vue3-lottie'
 
 const props = defineProps({
     users: Object,
-    history: Object,
+    history: undefined,
     in_count: Number,
     out_count: Number,
     on_process: Number
+})
+
+onMounted(() => {
+    console.log('history');
+    router.reload({ only: ['history'] })
 })
 
 function formattedDate(value) {
@@ -33,8 +38,6 @@ watch(tabHistory, (newTabHistory) => {
     console.log(`tab is ${newTabHistory}`)
     localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
 })
-
-router.reload({ only: ['history'] })
 
 </script>
 
@@ -109,7 +112,17 @@ router.reload({ only: ['history'] })
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="history in $page.props.history">
+                <template v-if="props.history === undefined">
+                    <li>
+                        <div class="px-4 py-4 sm:px-6">
+                            <div class="flex items-center justify-center">
+                                <p class="font-medium text-gray-600 truncate">Tunggu sebentar</p>
+                            </div>
+                        </div>
+                    </li>
+                </template>
+
+                <template v-else v-for="history in $page.props.history">
                     <template v-if="history.status_id == tabHistory || tabHistory==99">
                         <li>
                             <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >

@@ -52,7 +52,7 @@ class ProductPlnController extends Controller
             return Inertia::render('Product/Pln/Prepaid/CreateEdit', [
                 'users' => auth()->user(),
                 'customer' => $customer->object(),
-                'response'  => $response->object(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
                 'fee' => Helper::api()->fees,
             ]);
 

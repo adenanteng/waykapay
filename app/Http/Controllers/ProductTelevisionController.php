@@ -33,7 +33,7 @@ class ProductTelevisionController extends Controller
         if ($response->successful()) {
             return Inertia::render('Product/Television/Kvision', [
                 'users' => auth()->user(),
-                'response'  => $response->object(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
                 'fee' => Helper::api()->fees,
             ]);
 

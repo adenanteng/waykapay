@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, useForm} from "@inertiajs/vue3";
+import {Link, router, useForm} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
@@ -12,13 +12,19 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import Loading from "../Loading.vue";
 
 const props = defineProps({
     users: Object,
-    response: Object,
+    response: undefined,
     fee: Number
 });
+
+onMounted(() => {
+    console.log('dana');
+    router.reload({ only: ['response'] })
+})
 
 const form = useForm({
     user_id: props.users.id ?? null,
@@ -122,9 +128,12 @@ const closeModal = () => {
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-            <template v-for="data in sort(props.response.data)">
-                <template v-if="data.category == 'E-Money'">
+            <template v-if="props.response === undefined">
+                <Loading />
+            </template>
 
+            <template v-else v-for="data in sort(props.response.data)">
+                <template v-if="data.category == 'E-Money'">
                     <template v-if="data.brand == 'DANA'">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                             <div class="flex-shrink-0">
@@ -148,7 +157,6 @@ const closeModal = () => {
                             </div>
                         </div>
                     </template>
-
                 </template>
             </template>
         </div>
