@@ -86,7 +86,7 @@ watch(tabHistory, (newTabHistory) => {
             </div>
         </div>
 
-        <div class="sticky top-20 lg:top-40 left-0 right-0 z-50 backdrop-blur border-b border-gray-200">
+        <div class="sticky top-20 lg:top-40 left-0 right-0 z-40 backdrop-blur border-b border-gray-200">
             <nav class="-mb-px flex" aria-label="Tabs">
 <!--                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"-->
 <!--                        :class="tabHistory==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "-->
