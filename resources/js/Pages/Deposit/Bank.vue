@@ -1,10 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import SectionBorder from '@/Components/SectionBorder.vue';
-
-import UpdateInformationForm from "@/Pages/Deposit/Partials/UpdateInformationForm.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";3
-import {ref} from "vue";
 import UpdateBankForm from "@/Pages/Deposit/Partials/UpdateBankForm.vue";
 
 </script>

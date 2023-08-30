@@ -118,7 +118,7 @@ watch(tabHistory, (newTabHistory) => {
 <!--                </div>-->
 <!--            </div>-->
 
-            <div v-for="loader in 2" class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300">
+            <div v-for="loader in 4" class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300">
                 <div class="px-4 py-4 sm:px-6">
                     <div class="flex items-center justify-between">
                         <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
@@ -145,12 +145,12 @@ watch(tabHistory, (newTabHistory) => {
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
                                         <p class="font-medium truncate"
-                                           :class="history.status_id == 1 ? 'text-primary-600' : 'text-gray-500'">
+                                           :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
                                             {{ history.product_name }}
                                         </p>
                                         <div class="ml-2 flex-shrink-0 flex">
                                             <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                                :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+                                                :class="history.status_id == 1 || history.status_id == 2 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
                                             >
                                                 {{ history.status }}
                                             </p>
@@ -158,7 +158,7 @@ watch(tabHistory, (newTabHistory) => {
                                     </div>
                                     <div class="mt-2 sm:flex sm:justify-between">
                                         <div class="sm:flex">
-                                            <p class="flex items-center text-sm" :class="history.status_id == 1 ? 'text-gray-900' : 'text-gray-500'">
+                                            <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                 {{ history.category_id == 1 ? '+' : '-' }} Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                             </p>
 <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
@@ -166,7 +166,7 @@ watch(tabHistory, (newTabHistory) => {
 <!--                                                {{ history.customer_no }}-->
 <!--                                            </p>-->
                                         </div>
-                                        <div class="mt-2 flex items-center text-sm sm:mt-0" :class="history.status_id == 1 ? 'text-gray-900' : 'text-gray-500'">
+                                        <div class="mt-2 flex items-center text-sm sm:mt-0" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                             <i class="fa-regular fa-calendar pr-2" />
                                             <p>
                                                 {{ formattedDate(history.created_at) }}

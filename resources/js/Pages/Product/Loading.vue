@@ -15,7 +15,7 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div v-for="loader in 2" class="animate-pulse relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3">
+    <div v-for="loader in 4" class="animate-pulse relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3">
         <div class="flex-shrink-0">
             <div class="h-10 w-10 rounded-full bg-gray-300" ></div>
         </div>
