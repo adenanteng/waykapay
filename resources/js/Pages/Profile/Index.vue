@@ -10,12 +10,19 @@ import moment from "moment/moment";
 const props = defineProps({
     history: Object,
     flip_saldo: undefined,
-    digiflazz_saldo: undefined
+    digiflazz_saldo: undefined,
 })
 
 onMounted(() => {
     // console.log('dana');
     router.reload({ only: ['flip_saldo', 'digiflazz_saldo'] })
+})
+
+const darkMode = ref(JSON.parse(localStorage.getItem('darkmode')) ?? false)
+
+watch(darkMode, (newDarkMode) => {
+    console.log(`darkmode is ${newDarkMode}`)
+    localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
 })
 
 const logout = () => {
@@ -75,8 +82,15 @@ function formatPrice(value) {
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
-                    <Link :href="route('profile.show')" class="block px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Pengaturan Profil</p>
+                    <Link :href="route('profile.show')" class="flex justify-between px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Ubah data profil</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
+                    </Link>
+                </li>
+                <li>
+                    <Link :href="route('profile.index')" @click="darkMode=!darkMode" class="flex justify-between px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Mode {{ darkMode ? 'gelap' : 'terang' }}</p>
+                        <i class="fa-regular text-gray-900" :class="darkMode ? 'fa-moon' : 'fa-sun-bright' " />
                     </Link>
                 </li>
             </ul>
@@ -110,20 +124,23 @@ function formatPrice(value) {
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg" v-if="$page.props.user.role_id==1">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
-                    <Link :href="route('setting.index')" class="block px-6 py-4">
+                    <Link :href="route('setting.index')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Pengaturan Aplikasi</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
 
                 <li>
-                    <Link :href="route('carousel.index')" class="block px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Pengaturan Carousel</p>
+                    <Link :href="route('carousel.index')" class="flex justify-between px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Carousel</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
 
                 <li>
-                    <Link :href="route('user.index')" class="block px-6 py-4" >
-                        <p class="text-sm font-medium text-gray-900">Pengaturan Pengguna</p>
+                    <Link :href="route('user.index')" class="flex justify-between px-6 py-4" >
+                        <p class="text-sm font-medium text-gray-900">Data Pengguna</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
             </ul>

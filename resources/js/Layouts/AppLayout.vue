@@ -469,7 +469,7 @@ const logout = () => {
 
                         <!-- Page Content -->
                         <main class="max-w-7xl mx-auto py-5 space-y-5 relative">
-                            <slot/>
+                            <slot />
                         </main>
 
                     </div>

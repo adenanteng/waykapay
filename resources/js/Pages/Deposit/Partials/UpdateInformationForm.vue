@@ -62,6 +62,7 @@ const formReset = () => {
                         min="10000"
                         max="5000000"
                         required
+                        autofocus
                     />
                 </div>
                 <InputError :message="form.errors.amount" class="mt-2"/>

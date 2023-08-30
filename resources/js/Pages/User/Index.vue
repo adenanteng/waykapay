@@ -40,7 +40,7 @@ const gridColumns = [
 <!--            </template>-->
 <!--        </Table>-->
 
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-3">
             <div class="">
                 <form id="search">
                     <TextInput
