@@ -69,7 +69,7 @@ watch(tabHistory, (newTabHistory) => {
                             <i class="fa-duotone fa-down text-primary-400"/>
                             <div class="ml-3">
                                 <div class="text-xs text-gray-500">Uang masuk</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.in_count) }}</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.in_count ?? 0) }}</div>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ watch(tabHistory, (newTabHistory) => {
                             <i class="fa-duotone fa-up text-amber-400"/>
                             <div class="ml-3">
                                 <div class="text-xs text-gray-500">Uang Keluar</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.out_count) }}</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.out_count ?? 0) }}</div>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@ watch(tabHistory, (newTabHistory) => {
             </div>
         </div>
 
-        <div class="border-b border-gray-200">
+        <div class="sticky top-20 lg:top-40 left-0 right-0 z-50 backdrop-blur border-b border-gray-200">
             <nav class="-mb-px flex" aria-label="Tabs">
 <!--                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"-->
 <!--                        :class="tabHistory==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "-->
@@ -96,17 +96,17 @@ watch(tabHistory, (newTabHistory) => {
 <!--                </button>-->
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabHistory==2 ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "
+                        :class="tabHistory==2 ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-300' "
                         @click="tabHistory=2"
                 >
-                    Proses <Badge class="ml-1 bg-primary-600 text-white" :name="props.on_process" />
+                    Proses <Badge class="ml-1 bg-primary-600 text-white" :name="props.on_process ?? 0" />
                 </button>
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabHistory==99 ? 'border-green-600 text-green-600' : 'border-transparent text-gray-500 hover:border-gray-300 ' "
+                        :class="tabHistory==99 ? 'border-green-600 text-green-600' : 'text-gray-500 border-gray-300 ' "
                         @click="tabHistory=99"
                 >
-                    Semua <Badge class="ml-1 bg-green-600 text-white" :name="props.all_process" />
+                    Semua <Badge class="ml-1 bg-green-600 text-white" :name="props.all_process ?? 0" />
                 </button>
             </nav>
         </div>
@@ -184,8 +184,8 @@ watch(tabHistory, (newTabHistory) => {
             </ul>
         </div>
 
-        <template v-if="!on_process" >
-            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" v-if="tabHistory==2">
+        <template v-if="!on_process && on_process!==undefined && tabHistory===2" >
+            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >
                 <Vue3Lottie
                     animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
                     :height="200"

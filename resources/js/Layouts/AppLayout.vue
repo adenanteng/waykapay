@@ -83,7 +83,7 @@ const logout = () => {
 
         <div class="min-h-screen bg-gray-100 bg-glass bg-fixed ">
 <!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
-            <Popover as="header" class="" v-slot="{ open }">
+            <Popover as="header" class="sticky top-0 left-0 right-0 z-50 backdrop-blur" v-slot="{ open }">
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div class="relative flex flex-wrap items-center justify-center lg:justify-between">
                         <!-- Logo -->
