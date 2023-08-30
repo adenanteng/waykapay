@@ -91,7 +91,6 @@ const onSlideChange = (swiper) => {
     // console.log(swipeMenu);
 };
 
-const viewSaldo = ref(false)
 </script>
 
 <template>
@@ -103,19 +102,14 @@ const viewSaldo = ref(false)
     >
         <div class="rounded-3xl bg-gradient-to-br from-primary-600 overflow-hidden shadow-lg">
             <div class="py-4 px-4 sm:px-6 lg:py-8 lg:px-8 lg:flex lg:items-center lg:justify-between">
-                <button @click="viewSaldo=!viewSaldo">
-                    <div class="tracking-tight nightwind-prevent-block text-left" >
-                        <span class="block text-sm font-medium text-white">Saldo Rekening
-                            <i class="ml-1 text-xs fa-regular" :class="viewSaldo ? 'fa-eye' : 'fa-eye-slash' " />
-                        </span>
-                        <span v-if="viewSaldo" class="block text-xl font-extrabold text-white">
-                            Rp {{ formatPrice($page.props.user.wallet_balance) }}
-                        </span>
-                        <span v-else class="block text-xl font-extrabold text-white">
-                            Rp xxxxx
-                        </span>
-                    </div>
-                </button>
+                <div class="tracking-tight nightwind-prevent-block" >
+                    <span class="block text-sm font-medium text-white">
+                        Saldo Rekening
+                    </span>
+                    <span class="block text-xl font-extrabold text-white">
+                        Rp {{ formatPrice($page.props.user.wallet_balance) }}
+                    </span>
+                </div>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">
                     <PrimaryButton as="a" :href="route('deposit.index')" class="">
 <!--                        <i class="fa-regular fa-coins mr-1"/>-->
