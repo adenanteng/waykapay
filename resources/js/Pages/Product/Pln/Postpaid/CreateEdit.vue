@@ -95,7 +95,7 @@ const tabs = ref('Pulsa')
             <PreviousButton />
         </template>
 
-        <FormSection >
+        <FormSection class="sticky top-0 z-40">
             <template #title>
                 PLN Postpaid
             </template>

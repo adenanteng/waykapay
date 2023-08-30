@@ -99,7 +99,7 @@ const closeModal = () => {
             <PreviousButton />
         </template>
 
-        <FormSection >
+        <FormSection class="sticky top-0 z-40">
             <template #title>
                 Token PLN Prepaid
             </template>

@@ -171,7 +171,7 @@ watch(tabPulsa, (newTabPulsa) => {
             <PreviousButton />
         </template>
 
-        <FormSection >
+        <FormSection class="sticky top-0 z-40">
             <template #title>
                 Masukkan nomor HP
             </template>

@@ -83,7 +83,7 @@ const logout = () => {
 
         <div class="min-h-screen bg-gray-100 bg-glass bg-fixed ">
 <!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
-            <Popover as="header" class="sticky top-0 left-0 right-0 z-40 backdrop-blur" v-slot="{ open }">
+            <Popover as="header" class="" v-slot="{ open }">
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div class="relative flex flex-wrap items-center justify-center lg:justify-between">
                         <!-- Logo -->
@@ -270,34 +270,34 @@ const logout = () => {
                         <div class="absolute right-0 flex-shrink-0 lg:hidden ">
 
                             <!-- Mobile menu button -->
-                            <PopoverButton
-                                class="bg-transparent p-2 rounded-3xl inline-flex items-center justify-center text-primary-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">
-                                <button
-                                    class="inline-flex items-center justify-center rounded-3xl text-gray-600 dark:text-primary-500 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
-                                    @click="showingNavigationDropdown = ! showingNavigationDropdown">
-                                    <svg
-                                        class="h-6 w-6"
-                                        stroke="currentColor"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M4 6h16M4 12h16M4 18h16"
-                                        />
-                                        <path
-                                            :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12"
-                                        />
-                                    </svg>
-                                </button>
-                            </PopoverButton>
+<!--                            <PopoverButton-->
+<!--                                class="bg-transparent p-2 rounded-3xl inline-flex items-center justify-center text-primary-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">-->
+<!--                                <button-->
+<!--                                    class="inline-flex items-center justify-center rounded-3xl text-gray-600 dark:text-primary-500 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"-->
+<!--                                    @click="showingNavigationDropdown = ! showingNavigationDropdown">-->
+<!--                                    <svg-->
+<!--                                        class="h-6 w-6"-->
+<!--                                        stroke="currentColor"-->
+<!--                                        fill="none"-->
+<!--                                        viewBox="0 0 24 24"-->
+<!--                                    >-->
+<!--                                        <path-->
+<!--                                            :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"-->
+<!--                                            stroke-linecap="round"-->
+<!--                                            stroke-linejoin="round"-->
+<!--                                            stroke-width="2"-->
+<!--                                            d="M4 6h16M4 12h16M4 18h16"-->
+<!--                                        />-->
+<!--                                        <path-->
+<!--                                            :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"-->
+<!--                                            stroke-linecap="round"-->
+<!--                                            stroke-linejoin="round"-->
+<!--                                            stroke-width="2"-->
+<!--                                            d="M6 18L18 6M6 6l12 12"-->
+<!--                                        />-->
+<!--                                    </svg>-->
+<!--                                </button>-->
+<!--                            </PopoverButton>-->
                         </div>
                     </div>
                 </div>
