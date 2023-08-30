@@ -20,7 +20,7 @@ setTimeout(() => {
         preserveScroll: true,
         onSuccess: () => {}
     });
-}, 500)
+}, 200)
 
 const form = useForm({
     transaction: props.transaction,
@@ -68,9 +68,9 @@ function formatPrice(value) {
                                 Ke Beranda
                             </PrimaryButton>
 
-                            <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" >
-                                Cek Status
-                            </PrimaryButton>
+<!--                            <PrimaryButton v-if="props.transaction.category_id != 1" @click="storeInformation" >-->
+<!--                                Cek Status-->
+<!--                            </PrimaryButton>-->
                         </div>
                     </div>
                 </div>
