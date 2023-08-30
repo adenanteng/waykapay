@@ -190,6 +190,7 @@ watch(tabPulsa, (newTabPulsa) => {
                         class="mt-1 block w-full"
                         minlength="10"
                         required
+                        autofocus
                     />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>
