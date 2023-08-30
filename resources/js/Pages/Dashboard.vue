@@ -130,76 +130,76 @@ const viewSaldo = ref(false)
             </div>
         </div>
 
-<!--        <div-->
-<!--            class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
-<!--            <div class="p-6">-->
-<!--                <div class="grid grid-cols-4 gap-x-6 gap-y-10 lg:grid-cols-6 lg:gap-x-8">-->
-<!--                    <Link :href="route('pulsa.index')" class="group text-center">-->
-<!--                        <i class="fa-regular fa-mobile text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('pln.index')" class="group text-center">-->
-<!--                        <i class="fa-regular fa-lightbulb text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Listrik</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('games.index')" class="group text-center">-->
-<!--                        <i class="fa-regular fa-gamepad-modern text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Games</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('emoney.index')" class="group text-center">-->
-<!--                        <i class="fa-regular fa-wallet text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('television.index')" class="group text-center">-->
-<!--                        <i class="fa-regular fa-tv-retro text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">TV</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('internet.index')" class="group text-center">-->
-<!--                        <i class="fa-regular fa-router text-4xl text-primary-600 group-hover:text-primary-800"/>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Internet</h3>-->
-<!--                    </Link>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-        <swiper
-            :modules="[FreeMode]"
-            slides-per-view="2.5"
-            :space-between="10"
-            @swiper="onSwiper"
-            @slideChange="onSlideChange"
-            :freeMode="true"
-            :breakpoints="{
-                '640': {
-                    slidesPerView: 3,
-                    spaceBetween: 10,
-                },
-                '768': {
-                    slidesPerView: 4,
-                    spaceBetween: 10,
-                },
-                '1024': {
-                    slidesPerView: 5,
-                    spaceBetween: 10,
-                },
-            }"
-        >
-            <template v-for="menu in menus" :key="menu.name">
-                <SwiperSlide>
-                    <Link :href="route(menu.href)" class="text-right" preserve-scroll>
-                        <div class="px-5 py-3 rounded-3xl bg-gradient-to-br overflow-hidden nightwind-prevent-block aspect-square sm:aspect-auto relative" :class="menu.bg">
-                            <h3 class="text-sm text-white text-left font-semibold">{{ menu.name }}</h3>
-                            <i class="mt-2 fa-regular text-4xl text-white absolute sm:relative bottom-5 sm:bottom-0 right-5 sm:right-0" :class="menu.icon" />
-                        </div>
+        <div
+            class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+            <div class="p-6">
+                <div class="grid grid-cols-4 gap-x-6 gap-y-10 lg:grid-cols-6 lg:gap-x-8">
+                    <Link :href="route('pulsa.index')" class="group text-center">
+                        <i class="fa-regular fa-mobile text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>
                     </Link>
-                </SwiperSlide>
-            </template>
-        </swiper>
+
+                    <Link :href="route('pln.index')" class="group text-center">
+                        <i class="fa-regular fa-lightbulb text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-2 text-sm text-gray-700">Listrik</h3>
+                    </Link>
+
+                    <Link :href="route('games.index')" class="group text-center">
+                        <i class="fa-regular fa-gamepad-modern text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-2 text-sm text-gray-700">Games</h3>
+                    </Link>
+
+                    <Link :href="route('emoney.index')" class="group text-center">
+                        <i class="fa-regular fa-wallet text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>
+                    </Link>
+
+                    <Link :href="route('television.index')" class="group text-center">
+                        <i class="fa-regular fa-tv-retro text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-2 text-sm text-gray-700">TV</h3>
+                    </Link>
+
+                    <Link :href="route('internet.index')" class="group text-center">
+                        <i class="fa-regular fa-router text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <h3 class="mt-2 text-sm text-gray-700">Internet</h3>
+                    </Link>
+                </div>
+            </div>
+        </div>
+
+<!--        <swiper-->
+<!--            :modules="[FreeMode]"-->
+<!--            slides-per-view="2.5"-->
+<!--            :space-between="10"-->
+<!--            @swiper="onSwiper"-->
+<!--            @slideChange="onSlideChange"-->
+<!--            :freeMode="true"-->
+<!--            :breakpoints="{-->
+<!--                '640': {-->
+<!--                    slidesPerView: 3,-->
+<!--                    spaceBetween: 10,-->
+<!--                },-->
+<!--                '768': {-->
+<!--                    slidesPerView: 4,-->
+<!--                    spaceBetween: 10,-->
+<!--                },-->
+<!--                '1024': {-->
+<!--                    slidesPerView: 5,-->
+<!--                    spaceBetween: 10,-->
+<!--                },-->
+<!--            }"-->
+<!--        >-->
+<!--            <template v-for="menu in menus" :key="menu.name">-->
+<!--                <SwiperSlide>-->
+<!--                    <Link :href="route(menu.href)" class="text-right" preserve-scroll>-->
+<!--                        <div class="px-5 py-3 rounded-3xl bg-gradient-to-br overflow-hidden nightwind-prevent-block aspect-square sm:aspect-auto relative" :class="menu.bg">-->
+<!--                            <h3 class="text-sm text-white text-left font-semibold">{{ menu.name }}</h3>-->
+<!--                            <i class="mt-2 fa-regular text-4xl text-white absolute sm:relative bottom-5 sm:bottom-0 right-5 sm:right-0" :class="menu.icon" />-->
+<!--                        </div>-->
+<!--                    </Link>-->
+<!--                </SwiperSlide>-->
+<!--            </template>-->
+<!--        </swiper>-->
 
         <swiper
             :slides-per-view="1"
