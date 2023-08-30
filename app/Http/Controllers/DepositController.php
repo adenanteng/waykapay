@@ -251,6 +251,34 @@ class DepositController extends Controller
         $request = $request['transaction'];
 
         $transaction = Transaction::where('id', $request['id'])->first();
+        $user = User::where('id', $request['user_id'])->first();
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
+        ])->get('https://bigflip.id/big_sandbox_api/v2/pwf/' . $transaction->order_id . '/payment');
+
+        switch ($response->object()->data[0]->status) {
+            case('SUCCESSFUL'):
+                $status_id = Transaction::SUCCESS;
+                $user->deposit($transaction->amount);
+                break;
+
+            case ('PENDING'):
+                $status_id = Transaction::PENDING;
+                break;
+
+            case ('FAILED'):
+                $status_id = Transaction::ERROR;
+                break;
+
+            default:
+                $status_id = Transaction::UNDEFINED;
+        }
+        $transaction->update([
+            'status_id' => $status_id,
+        ]);
 
         switch ($transaction->status_id) {
             case (Transaction::SUCCESS):

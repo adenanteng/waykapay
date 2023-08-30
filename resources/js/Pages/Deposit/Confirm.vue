@@ -3,7 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router, usePage} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
@@ -17,6 +17,15 @@ const props = defineProps({
     transaction: Object,
     virtual_account: Object | String,
     wallet_account: Object | String
+})
+
+onMounted(() => {
+    console.log(`the component is now mounted.`)
+    if (props.virtual_account.payment_url) {
+        window.open(props.virtual_account.payment_url)
+    } else if (props.wallet_account.payment_url) {
+        window.open(props.wallet_account.payment_url)
+    }
 })
 
 const form = useForm({

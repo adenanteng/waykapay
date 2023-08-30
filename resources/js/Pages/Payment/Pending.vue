@@ -14,6 +14,14 @@ const props = defineProps({
     transaction: Object
 })
 
+setTimeout(() => {
+    form.put(route('product.status', form), {
+        errorBag: 'updateInformation',
+        preserveScroll: true,
+        onSuccess: () => {}
+    });
+}, 500)
+
 const form = useForm({
     transaction: props.transaction,
 });
