@@ -120,6 +120,7 @@ const closeModal = () => {
                         class="mt-1 block w-full"
                         minlength="8"
                         required
+                        autofocus
                     />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>

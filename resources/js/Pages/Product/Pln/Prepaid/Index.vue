@@ -69,6 +69,7 @@ const tabs = ref('Pulsa')
                         class="mt-1 block w-full"
                         minlength="5"
                         required
+                        autofocus
                     />
                     <InputError :message="form.errors.customer_no" class="mt-2"/>
                 </div>

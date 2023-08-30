@@ -150,7 +150,7 @@ watch(tabHistory, (newTabHistory) => {
                                         </p>
                                         <div class="ml-2 flex-shrink-0 flex">
                                             <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                                :class="history.status_id == 1 || history.status_id == 2 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+                                                :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
                                             >
                                                 {{ history.status }}
                                             </p>

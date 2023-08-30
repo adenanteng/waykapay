@@ -219,7 +219,7 @@ watch(tabPulsa, (newTabPulsa) => {
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <template v-if="props.response === undefined">
-                <Loading />
+<!--                <Loading />-->
             </template>
 
             <template v-else v-for="data in sort(props.response.data)" >
