@@ -14,7 +14,7 @@ const props = defineProps({
     transaction: Object
 })
 
-setTimeout(() => {
+setInterval(() => {
     form.put(route('product.status', form), {
         errorBag: 'updateInformation',
         preserveScroll: true,
