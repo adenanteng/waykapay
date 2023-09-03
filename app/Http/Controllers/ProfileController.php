@@ -29,8 +29,8 @@ class ProfileController extends Controller
 
             $app = AppSetting::first();
             $app->update([
-                'flip_saldo' => $flip_saldo,
-                'digiflazz_saldo' => $digiflazz_saldo
+                'flip_saldo' => Helper::flip_saldo(),
+                'digiflazz_saldo' => Helper::digiflazz_saldo()
             ]);
         }
 
