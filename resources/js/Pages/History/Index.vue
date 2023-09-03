@@ -23,7 +23,7 @@ onMounted(() => {
 setInterval(() => {
     console.log('interval');
     router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
-}, 1000)
+}, 5000)
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y')
