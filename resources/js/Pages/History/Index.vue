@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref, watch} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
@@ -20,10 +20,14 @@ onMounted(() => {
     router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
 })
 
-// setInterval(() => {
-//     console.log('interval');
-//     router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
-// }, 5000)
+onUnmounted(() => {
+    clearInterval(interval)
+})
+
+const interval = setInterval(() => {
+    console.log('interval');
+    router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
+}, 5000)
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y')

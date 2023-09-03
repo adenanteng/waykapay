@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {onUnmounted, ref} from "vue";
 import {Link} from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
@@ -14,7 +14,11 @@ const props = defineProps({
     transaction: Object
 })
 
-setInterval(() => {
+onUnmounted(() => {
+    clearInterval(interval)
+})
+
+const interval = setInterval(() => {
     form.put(route('product.status', form), {
         errorBag: 'updateInformation',
         preserveScroll: true,
