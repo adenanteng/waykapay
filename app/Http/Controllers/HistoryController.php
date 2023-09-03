@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -17,7 +18,7 @@ class HistoryController extends Controller
 {
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
-        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get();
+        $history = Transaction::where('user_id', auth()->user()->id)->whereDate('created_at', Carbon::today())->latest()->get();
 
 //        dd($history->where('category_id', 1)->sum('gross_amount'));
 
