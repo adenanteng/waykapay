@@ -10,7 +10,7 @@ class Helper
     public static function api()
     {
         if (AppSetting::first() != null) {
-            return AppSetting::all()->first();
+            return AppSetting::first();
         }
     }
 
