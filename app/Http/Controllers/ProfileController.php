@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\AppSetting;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,6 +26,12 @@ class ProfileController extends Controller
         } else {
             $flip_saldo = Inertia::lazy(fn () => Helper::flip_saldo());
             $digiflazz_saldo = Inertia::lazy(fn () => Helper::digiflazz_saldo());
+
+            $app = AppSetting::first();
+            $app->update([
+                'flip_saldo' => $flip_saldo,
+                'digiflazz_saldo' => $digiflazz_saldo
+            ]);
         }
 
         return Inertia::render('Profile/Index', [
