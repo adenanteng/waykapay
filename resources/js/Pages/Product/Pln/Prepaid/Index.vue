@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('pln.prepaid.inquiry', form), {
+    form.get(route('pln.prepaid.inquiry', form), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         // onSuccess: () => closeModal(),

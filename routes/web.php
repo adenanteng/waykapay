@@ -63,9 +63,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/product/pln', [ProductPlnController::class, 'index'])->name('pln.index');
     Route::get('/product/pln-prepaid', [ProductPlnController::class, 'prepaid'])->name('pln.prepaid.index');
-    Route::post('/product/pln-prepaid-inquiry', [ProductPlnController::class, 'inquiryPrepaid'])->name('pln.prepaid.inquiry');
+    Route::get('/product/pln-prepaid-inquiry', [ProductPlnController::class, 'inquiryPrepaid'])->name('pln.prepaid.inquiry');
     Route::get('/product/pln-postpaid', [ProductPlnController::class, 'postpaid'])->name('pln.postpaid.index');
-    Route::post('/product/pln-postpaid-inquiry', [ProductPlnController::class, 'inquiryPostpaid'])->name('pln.postpaid.inquiry');
+    Route::get('/product/pln-postpaid-inquiry', [ProductPlnController::class, 'inquiryPostpaid'])->name('pln.postpaid.inquiry');
 
     Route::get('/product/games', [ProductGamesController::class, 'index'])->name('games.index');
     Route::get('/product/games/pubgm', [ProductGamesController::class, 'pubgm'])->name('games.pubgm');

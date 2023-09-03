@@ -125,7 +125,7 @@ function formatPrice(value) {
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
                     <Link :href="route('setting.index')" class="flex justify-between px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Pengaturan Aplikasi</p>
+                        <p class="text-sm font-medium text-gray-900">Pengaturan aplikasi</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
@@ -139,7 +139,7 @@ function formatPrice(value) {
 
                 <li>
                     <Link :href="route('user.index')" class="flex justify-between px-6 py-4" >
-                        <p class="text-sm font-medium text-gray-900">Data Pengguna</p>
+                        <p class="text-sm font-medium text-gray-900">Data pengguna</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>

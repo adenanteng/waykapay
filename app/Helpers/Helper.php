@@ -41,6 +41,8 @@ class Helper
          $app->update([
             'digiflazz_saldo' => $saldo
          ]);
+
+         return true;
     }
 
     public static function pricelist()
