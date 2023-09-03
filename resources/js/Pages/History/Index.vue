@@ -106,7 +106,7 @@ watch(tabHistory, (newTabHistory) => {
                         :class="tabHistory==99 ? 'border-green-600 text-green-600' : 'text-gray-500 border-gray-300 ' "
                         @click="tabHistory=99"
                 >
-                    Semua <Badge class="ml-1 bg-green-600 text-white" :name="props.all_process ?? 0" />
+                    Hari ini <Badge class="ml-1 bg-green-600 text-white" :name="props.all_process ?? 0" />
                 </button>
             </nav>
         </div>
