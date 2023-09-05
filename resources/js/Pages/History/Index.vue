@@ -121,13 +121,7 @@ watch(tabHistory, (newTabHistory) => {
         </div>
 
         <template v-if="props.history === undefined">
-<!--            <div class="px-4 py-4 sm:px-6">-->
-<!--                <div class="flex items-center justify-center">-->
-<!--                    <p class="text-sm font-medium text-gray-500">Tunggu sebentar</p>-->
-<!--                </div>-->
-<!--            </div>-->
-
-            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300">
+            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
                 <div v-for="loader in 4" class="px-4 py-4 sm:px-6">
                     <div class="flex items-center justify-between">
                         <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
@@ -136,10 +130,7 @@ watch(tabHistory, (newTabHistory) => {
                         </div>
                     </div>
                     <div class="mt-2 sm:flex sm:justify-between">
-                        <div class="sm:flex">
-                            <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
-                        </div>
-                        <div class="mt-2 flex items-center bg-gray-300 text-gray-300 sm:mt-0 w-2/3 rounded-3xl" >d</div>
+                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
                     </div>
                 </div>
             </div>
