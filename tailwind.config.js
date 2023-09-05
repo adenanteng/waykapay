@@ -67,6 +67,6 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('tailwindcss-hero-patterns'),
-        require("nightwind")
+        require("nightwind"),
     ],
 };

@@ -8,6 +8,9 @@ import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
 import {Link} from "@inertiajs/vue3";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
+import ApplicationLogo from "../../Components/ApplicationLogo.vue";
+import ApplicationMark from "../../Components/ApplicationMark.vue";
+import SectionBorder from "../../Components/SectionBorder.vue";
 
 const props = defineProps({
     users: Object,
@@ -15,7 +18,7 @@ const props = defineProps({
 })
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
+    return moment(value).format('DD MMM Y | HH:mm')
 }
 
 function formattedTime(value) {
@@ -39,126 +42,232 @@ function formatPrice(value) {
             <PreviousButton />
         </template>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Detail Transaksi</h3>
-<!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
-            </div>
-            <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2">
+        <template v-if="props.history.status_id === 1">
+            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
+                    <ApplicationMark class="block sm:hidden" />
+                    <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Berhasil</h3>
+                    <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
+                </div>
+                <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
+                    <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Waktu Transaksi</div>
-                            <div class="text-sm text-gray-900">
-                                <div class="flex items-center text-sm text-gray-500 sm:mt-0">
-                                    <p>
-                                        {{ formattedDate(props.history.created_at) }}
-                                    </p>
-                                    <p class="text-gray-900 ml-2">
-                                        {{ formattedTime(props.history.created_at) }}
-                                    </p>
-                                </div>
-                            </div>
+                            <div class="text-sm ">Tanggal</div>
+                            <div class="text-sm font-medium">{{ formattedDate(props.history.updated_at) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Id Transaksi</div>
-                            <div class="text-sm text-gray-900">{{ props.history.order_id }}</div>
+                            <div class="text-sm ">No. Referensi</div>
+                            <div class="text-sm font-medium ">{{ props.history.order_id }}</div>
                         </div>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Kategori</div>
-                            <div class="text-sm text-gray-900">{{ props.history.category }}</div>
+                            <div class="text-sm ">Kategori</div>
+                            <div class="text-sm font-medium">{{ props.history.category }}</div>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Produk</div>
-                            <div class="text-sm text-gray-900">{{ props.history.product_name }}</div>
+
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id === 1">
+                            <div class="text-sm ">Sumber Dana</div>
+                            <template v-if="props.history.virtual_account">
+                                <div class="text-sm font-medium uppercase">{{ props.history.virtual_account.bank }}</div>
+                            </template>
+                            <template v-if="props.history.wallet_account">
+                                <div class="text-sm font-medium uppercase">{{ props.history.wallet_account.bank }}</div>
+                            </template>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">No. Kustomer</div>
-                            <div class="text-sm text-gray-900">{{ props.history.customer_no }}</div>
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
+                            <div class="text-sm ">Produk</div>
+                            <div class="text-sm font-medium">{{ props.history.product_name }}</div>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Status</div>
-                            <div class="text-sm text-gray-900"><Badge :name="props.history.status" /></div>
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
+                            <div class="text-sm ">No. Kustomer</div>
+                            <div class="text-sm font-medium">{{ props.history.customer_no }}</div>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Bayar</div>
-                            <div class="text-sm text-gray-900">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Biaya Admin</div>
-                            <div class="text-sm text-gray-900">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Total Bayar</div>
-                            <div class="text-sm text-gray-900">Rp {{ formatPrice(props.history.gross_amount) }}</div>
-                        </div>
+                        <!--                        <div class="sm:col-span-1 flex sm:block justify-between">-->
+                        <!--                            <div class="text-sm ">Status</div>-->
+                        <!--                            <div class="text-sm font-medium"><Badge :name="props.history.status" /></div>-->
+                        <!--                        </div>-->
                         <div class="sm:col-span-2 flex sm:block justify-between">
-                            <div class="text-sm font-medium text-gray-500">Ket</div>
-                            <div class="text-sm text-gray-900">{{ props.history.desc ?? '-' }}</div>
+                            <div class="text-sm ">Keterangan</div>
+                            <div class="text-sm font-medium">{{ props.history.desc ?? '-' }}</div>
+                        </div>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Nominal</div>
+                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Biaya Admin</div>
+                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
+                        </div>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm font-bold">Total</div>
+                            <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
                         </div>
                     </div>
-
+                </div>
             </div>
-        </div>
+        </template>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Detail Pembayaran</h3>
-<!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
-            </div>
-            <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                <dl class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2">
+        <template v-else-if="props.history.status_id === 2">
+            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
+                    <ApplicationMark class="block sm:hidden" />
+                    <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Pending</h3>
+                    <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
+                </div>
+                <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
+                    <dl class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
 
-                    <template v-if="props.history.virtual_account">
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">Bank</dt>
-                            <dd class="text-sm text-gray-900 uppercase">{{ props.history.virtual_account.bank }}</dd>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">No. VA</dt>
-                            <dd class="text-sm text-gray-900">
-                                {{ props.history.virtual_account.va_number }}
-                                <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
-                                    <button class="" @click="toClipboard(props.history.virtual_account.va_number)">
-                                        <i class="fa-duotone fa-paste ml-2" />
-                                    </button>
-                                </Popper>
-                            </dd>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">Deeplink</dt>
-                            <dd class="text-sm text-gray-900 uppercase"><a target="_blank" :href="props.history.virtual_account.payment_url" >Bayar</a></dd>
-                        </div>
-                    </template>
+                        <template v-if="props.history.virtual_account">
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">Bank</div>
+                                <div class="text-sm font-medium uppercase">{{ props.history.virtual_account.bank }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">No. VA</div>
+                                <div class="text-sm font-medium">
+                                    {{ props.history.virtual_account.va_number }}
+                                    <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
+                                        <button class="" @click="toClipboard(props.history.virtual_account.va_number)">
+                                            <i class="fa-duotone fa-paste ml-2" />
+                                        </button>
+                                    </Popper>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">Deeplink</div>
+                                <div class="text-sm font-medium text-primary-600 underline">
+                                    <a target="_blank" :href="props.history.virtual_account.payment_url" >
+                                        Bayar
+                                    </a>
+                                </div>
+                            </div>
+                        </template>
 
-                    <template v-if="props.history.wallet_account">
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">Metode Pembayaran</dt>
-                            <dd class="text-sm text-gray-900 uppercase">{{ props.history.wallet_account.bank }}</dd>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">Qris</dt>
-                            <dd class="text-sm text-gray-900 uppercase">
+                        <template v-if="props.history.wallet_account">
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">Metode Pembayaran</div>
+                                <div class="text-sm font-medium uppercase">{{ props.history.wallet_account.bank }}</div>
+                            </div>
+                            <div class="sm:col-span-2 flex flex-col items-center my-5 gap-3">
+                                <div class="text-sm ">
+                                    <img src="/img/vendor/QRIS.svg" class="h-8 w-auto" alt="QRIS">
+                                </div>
+                                <div class="text-sm">
                                     <VueQrcode
-                                    :value="props.history.wallet_account.qr_code"
-                                    tag="svg"
-                                    :options="{
+                                        :value="props.history.wallet_account.qr_code"
+                                        tag="svg"
+                                        :options="{
                                                 width: 200,
                                                 color: {
                                                     dark: '#000',
                                                     light: '#fff',
                                                 },
                                               }"
-                                ></VueQrcode>
-                            </dd>
+                                    ></VueQrcode>
+                                </div>
+                                <!--                            <div class="text-sm">-->
+                                <!--                                Bayar Sebelum {{ props.history.wallet_account.created_at }}-->
+                                <!--                            </div>-->
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">Deeplink</div>
+                                <div class="text-sm font-medium text-primary-600 underline">
+                                    <a target="_blank" :href="props.history.wallet_account.payment_url" >
+                                        Bayar
+                                    </a>
+                                </div>
+                            </div>
+                        </template>
+                    </dl>
+                </div>
+            </div>
+        </template>
+
+        <template v-else-if="props.history.status_id === 3">
+            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
+                    <ApplicationMark class="block sm:hidden" />
+                    <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Gagal</h3>
+                    <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
+                </div>
+                <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
+                    <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Tanggal</div>
+                            <div class="text-sm font-medium">{{ formattedDate(props.history.updated_at) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <dt class="text-sm font-medium text-gray-500">Deeplink</dt>
-                            <dd class="text-sm text-gray-900 uppercase"><a target="_blank" :href="props.history.wallet_account.payment_url" >Bayar</a></dd>
+                            <div class="text-sm ">No. Referensi</div>
+                            <div class="text-sm font-medium ">{{ props.history.order_id }}</div>
                         </div>
-                    </template>
-                </dl>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Kategori</div>
+                            <div class="text-sm font-medium">{{ props.history.category }}</div>
+                        </div>
+
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id === 1">
+                            <div class="text-sm ">Sumber Dana</div>
+                            <template v-if="props.history.virtual_account">
+                                <div class="text-sm font-medium uppercase">{{ props.history.virtual_account.bank }}</div>
+                            </template>
+                            <template v-if="props.history.wallet_account">
+                                <div class="text-sm font-medium uppercase">{{ props.history.wallet_account.bank }}</div>
+                            </template>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
+                            <div class="text-sm ">Produk</div>
+                            <div class="text-sm font-medium">{{ props.history.product_name }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
+                            <div class="text-sm ">No. Kustomer</div>
+                            <div class="text-sm font-medium">{{ props.history.customer_no }}</div>
+                        </div>
+                        <!--                        <div class="sm:col-span-1 flex sm:block justify-between">-->
+                        <!--                            <div class="text-sm ">Status</div>-->
+                        <!--                            <div class="text-sm font-medium"><Badge :name="props.history.status" /></div>-->
+                        <!--                        </div>-->
+                        <div class="sm:col-span-2 flex sm:block justify-between">
+                            <div class="text-sm ">Keterangan</div>
+                            <div class="text-sm font-medium">{{ props.history.desc ?? '-' }}</div>
+                        </div>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Nominal</div>
+                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Biaya Admin</div>
+                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
+                        </div>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm font-bold">Total</div>
+                            <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </template>
+
+        <template v-else>
+            {{ props.history.status }}
+        </template>
+
 
         <!--        <MobileMenu/>-->
     </AppLayout>
