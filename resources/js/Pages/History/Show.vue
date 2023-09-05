@@ -191,7 +191,7 @@ function formatPrice(value) {
             </div>
         </template>
 
-        <template v-else-if="props.history.status_id == 3">
+        <template v-else-if="props.history.status_id == 6">
             <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                     <ApplicationLogo class="block sm:hidden" />
@@ -265,7 +265,7 @@ function formatPrice(value) {
         </template>
 
         <template v-else>
-            {{ props.history.status_id }}
+            {{ props.history.status }}
         </template>
 
 
