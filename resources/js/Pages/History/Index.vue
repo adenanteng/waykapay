@@ -139,7 +139,7 @@ watch(tabHistory, (newTabHistory) => {
                         <div class="sm:flex">
                             <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
                         </div>
-<!--                        <div class="mt-2 flex items-center bg-gray-300 text-gray-300 sm:mt-0 w-2/3 rounded-3xl" >d</div>-->
+                        <div class="mt-2 flex items-center bg-gray-300 text-gray-300 sm:mt-0 w-2/3 rounded-3xl" >d</div>
                     </div>
                 </div>
             </div>
