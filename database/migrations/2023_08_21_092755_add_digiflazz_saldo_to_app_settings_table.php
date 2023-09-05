@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('app_settings', function (Blueprint $table) {
-            $table->integer('digiflazz_saldo')->nullable()->after('digiflazz_key');
+            $table->bigInteger('digiflazz_saldo')->nullable()->after('digiflazz_key');
         });
     }
 

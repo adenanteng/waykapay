@@ -18,7 +18,8 @@ class HistoryController extends Controller
 {
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
-        $history = Transaction::where('user_id', auth()->user()->id)->whereDate('created_at', Carbon::today())->latest()->get();
+//        ->whereDate('created_at', Carbon::today())
+        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get(['id','product_name','amount','gross_amount','status_id', 'category_id','created_at']);
 
 //        dd($history->where('category_id', 1)->sum('gross_amount'));
 

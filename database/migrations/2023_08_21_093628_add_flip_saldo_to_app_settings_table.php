@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('app_settings', function (Blueprint $table) {
-            $table->integer('flip_saldo')->nullable()->after('flip_token');
+            $table->bigInteger('flip_saldo')->nullable()->after('flip_token');
         });
     }
 
