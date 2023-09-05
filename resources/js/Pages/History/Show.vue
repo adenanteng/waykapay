@@ -67,7 +67,7 @@ function formatPrice(value) {
                             <div class="text-sm font-semibold">{{ props.history.category }}</div>
                         </div>
 
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id === 1">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 1">
                             <div class="text-sm ">Sumber Dana</div>
                             <template v-if="props.history.virtual_account">
                                 <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
@@ -226,7 +226,7 @@ function formatPrice(value) {
                             <div class="text-sm font-semibold">{{ props.history.category }}</div>
                         </div>
 
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id === 1">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 1">
                             <div class="text-sm ">Sumber Dana</div>
                             <template v-if="props.history.virtual_account">
                                 <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>

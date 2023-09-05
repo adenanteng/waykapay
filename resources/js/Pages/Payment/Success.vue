@@ -68,7 +68,7 @@ function formatPrice(value) {
                         <div class="text-sm font-semibold">{{ props.transaction.category }}</div>
                     </div>
 
-                    <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id === 1">
+                    <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id == 1">
                         <div class="text-sm ">Sumber Dana</div>
                         <template v-if="props.transaction.virtual_account">
                             <div class="text-sm font-semibold uppercase">{{ props.transaction.virtual_account.bank }}</div>
@@ -77,11 +77,11 @@ function formatPrice(value) {
                             <div class="text-sm font-semibold uppercase">{{ props.transaction.wallet_account.bank }}</div>
                         </template>
                     </div>
-                    <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id !== 1">
+                    <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id != 1">
                         <div class="text-sm ">Produk</div>
                         <div class="text-sm font-semibold">{{ props.transaction.product_name }}</div>
                     </div>
-                    <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id !== 1">
+                    <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id != 1">
                         <div class="text-sm ">No. Kustomer</div>
                         <div class="text-sm font-semibold">{{ props.transaction.customer_no }}</div>
                     </div>
@@ -151,7 +151,7 @@ function formatPrice(value) {
 <!--                                <div class="text-sm ">Kategori</div>-->
 <!--                                <div class="text-sm font-semibold">{{ props.transaction.category }}</div>-->
 <!--                            </div>-->
-<!--                            <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id === 1">-->
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.transaction.category_id == 1">-->
 <!--                                <div class="text-sm ">Sumber Dana</div>-->
 <!--                                <template v-if="props.transaction.virtual_account">-->
 <!--                                    <div class="text-sm font-semibold uppercase">{{ props.transaction.virtual_account.bank }}</div>-->
