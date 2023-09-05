@@ -59,7 +59,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 
                     <Link
                         :href="route('login')"
-                        methods="get"
+                        method="get"
                         as="button"
                         class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"
                     >
