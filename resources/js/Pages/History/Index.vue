@@ -27,7 +27,7 @@ onUnmounted(() => {
 const interval = setInterval(() => {
     console.log('interval');
     router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
-}, 5000)
+}, 10000)
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y')

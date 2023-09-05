@@ -24,7 +24,7 @@ const interval = setInterval(() => {
         preserveScroll: true,
         onSuccess: () => {}
     });
-}, 2000)
+}, 5000)
 
 const form = useForm({
     transaction: props.transaction,
