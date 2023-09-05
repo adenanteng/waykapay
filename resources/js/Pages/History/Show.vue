@@ -53,55 +53,55 @@ function formatPrice(value) {
                     <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Tanggal</div>
-                            <div class="text-sm font-medium">{{ formattedDate(props.history.updated_at) }}</div>
+                            <div class="text-sm font-semibold">{{ formattedDate(props.history.updated_at) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">No. Referensi</div>
-                            <div class="text-sm font-medium ">{{ props.history.order_id }}</div>
+                            <div class="text-sm font-semibold ">{{ props.history.order_id }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Kategori</div>
-                            <div class="text-sm font-medium">{{ props.history.category }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.category }}</div>
                         </div>
 
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id === 1">
                             <div class="text-sm ">Sumber Dana</div>
                             <template v-if="props.history.virtual_account">
-                                <div class="text-sm font-medium uppercase">{{ props.history.virtual_account.bank }}</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
                             </template>
                             <template v-if="props.history.wallet_account">
-                                <div class="text-sm font-medium uppercase">{{ props.history.wallet_account.bank }}</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
                             </template>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
                             <div class="text-sm ">Produk</div>
-                            <div class="text-sm font-medium">{{ props.history.product_name }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.product_name }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
                             <div class="text-sm ">No. Kustomer</div>
-                            <div class="text-sm font-medium">{{ props.history.customer_no }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
                         </div>
                         <!--                        <div class="sm:col-span-1 flex sm:block justify-between">-->
                         <!--                            <div class="text-sm ">Status</div>-->
-                        <!--                            <div class="text-sm font-medium"><Badge :name="props.history.status" /></div>-->
+                        <!--                            <div class="text-sm font-semibold"><Badge :name="props.history.status" /></div>-->
                         <!--                        </div>-->
                         <div class="sm:col-span-2 flex sm:block justify-between">
                             <div class="text-sm ">Keterangan</div>
-                            <div class="text-sm font-medium">{{ props.history.desc ?? '-' }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Nominal</div>
-                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
+                            <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Biaya Admin</div>
-                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
+                            <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
@@ -128,11 +128,11 @@ function formatPrice(value) {
                         <template v-if="props.history.virtual_account">
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">Bank</div>
-                                <div class="text-sm font-medium uppercase">{{ props.history.virtual_account.bank }}</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">No. VA</div>
-                                <div class="text-sm font-medium">
+                                <div class="text-sm font-semibold">
                                     {{ props.history.virtual_account.va_number }}
                                     <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
                                         <button class="" @click="toClipboard(props.history.virtual_account.va_number)">
@@ -143,7 +143,7 @@ function formatPrice(value) {
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">Deeplink</div>
-                                <div class="text-sm font-medium text-primary-600 underline">
+                                <div class="text-sm font-semibold text-primary-600 underline">
                                     <a target="_blank" :href="props.history.virtual_account.payment_url" >
                                         Bayar
                                     </a>
@@ -154,7 +154,7 @@ function formatPrice(value) {
                         <template v-if="props.history.wallet_account">
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">Metode Pembayaran</div>
-                                <div class="text-sm font-medium uppercase">{{ props.history.wallet_account.bank }}</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
                             </div>
                             <div class="sm:col-span-2 flex flex-col items-center my-5 gap-3">
                                 <div class="text-sm ">
@@ -179,7 +179,7 @@ function formatPrice(value) {
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">Deeplink</div>
-                                <div class="text-sm font-medium text-primary-600 underline">
+                                <div class="text-sm font-semibold text-primary-600 underline">
                                     <a target="_blank" :href="props.history.wallet_account.payment_url" >
                                         Bayar
                                     </a>
@@ -202,55 +202,55 @@ function formatPrice(value) {
                     <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Tanggal</div>
-                            <div class="text-sm font-medium">{{ formattedDate(props.history.updated_at) }}</div>
+                            <div class="text-sm font-semibold">{{ formattedDate(props.history.updated_at) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">No. Referensi</div>
-                            <div class="text-sm font-medium ">{{ props.history.order_id }}</div>
+                            <div class="text-sm font-semibold ">{{ props.history.order_id }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Kategori</div>
-                            <div class="text-sm font-medium">{{ props.history.category }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.category }}</div>
                         </div>
 
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id === 1">
                             <div class="text-sm ">Sumber Dana</div>
                             <template v-if="props.history.virtual_account">
-                                <div class="text-sm font-medium uppercase">{{ props.history.virtual_account.bank }}</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
                             </template>
                             <template v-if="props.history.wallet_account">
-                                <div class="text-sm font-medium uppercase">{{ props.history.wallet_account.bank }}</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
                             </template>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
                             <div class="text-sm ">Produk</div>
-                            <div class="text-sm font-medium">{{ props.history.product_name }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.product_name }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
                             <div class="text-sm ">No. Kustomer</div>
-                            <div class="text-sm font-medium">{{ props.history.customer_no }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
                         </div>
                         <!--                        <div class="sm:col-span-1 flex sm:block justify-between">-->
                         <!--                            <div class="text-sm ">Status</div>-->
-                        <!--                            <div class="text-sm font-medium"><Badge :name="props.history.status" /></div>-->
+                        <!--                            <div class="text-sm font-semibold"><Badge :name="props.history.status" /></div>-->
                         <!--                        </div>-->
                         <div class="sm:col-span-2 flex sm:block justify-between">
                             <div class="text-sm ">Keterangan</div>
-                            <div class="text-sm font-medium">{{ props.history.desc ?? '-' }}</div>
+                            <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Nominal</div>
-                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
+                            <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Biaya Admin</div>
-                            <div class="text-sm font-medium">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
+                            <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
