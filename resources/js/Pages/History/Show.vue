@@ -235,11 +235,11 @@ function formatPrice(value) {
                                 <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
                             </template>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
                             <div class="text-sm ">Produk</div>
                             <div class="text-sm font-semibold">{{ props.history.product_name }}</div>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id !== 1">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
                             <div class="text-sm ">No. Kustomer</div>
                             <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
                         </div>
