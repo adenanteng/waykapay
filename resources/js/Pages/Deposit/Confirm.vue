@@ -74,85 +74,73 @@ function formattedDateTime(value) {
             </template>
 
             <template #form>
-                <div class="col-span-6 sm:col-span-3">
-                    <h2 class="tracking-tight">
-                        <span class="block text-sm font-medium text-gray-600 mt-5">
-                            Total Pembayaran
-                        </span>
-
-                        <span class="block text-xl font-extrabold text-primary-600">
-                            Rp {{ formatPrice(props.transaction.gross_amount) }}
-                        </span>
+                <div class="col-span-6 ">
+                    <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Total</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.gross_amount) }}</div>
+                        </div>
 
                         <template v-if="props.virtual_account">
-                            <span class="block text-sm font-medium text-gray-600 mt-5">
-                                Bank
-                            </span>
-                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                                {{ props.virtual_account.bank }}
-                            </span>
-
-                            <span class="block text-sm font-medium text-gray-600 mt-5">
-                                No. Virtual Account
-                            </span>
-                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                                {{ props.virtual_account.va_number }}
-                                <Popper class="text-sm text-gray-900 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
-                                    <button class="" @click="toClipboard(props.virtual_account.va_number)">
-                                        <i class="fa-duotone fa-paste ml-2" />
-                                    </button>
-                                </Popper>
-                            </span>
-                            <span class="block text-sm font-medium text-gray-600 mt-5">
-                                Redirect
-                            </span>
-                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                                <a target="_blank" :href="props.virtual_account.payment_url" >Bayar</a>
-                            </span>
-
-<!--                            <span class="block text-sm font-medium text-gray-600 mt-5">-->
-<!--                                Kadaluarsa-->
-<!--                            </span>-->
-<!--                            <span class="block text-xl font-extrabold text-primary-600 uppercase">-->
-<!--                                {{ formattedDateTime(props.virtual_account.exp_time) }}-->
-<!--                            </span>-->
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Bank</div>
+                                <div class="text-sm font-semibold ">{{ props.virtual_account.bank }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">No. Virtual Account</div>
+                                <div class="text-sm font-semibold ">{{ props.virtual_account.va_number }}
+                                    <Popper class="text-sm text-primary-900 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
+                                        <button class="" @click="toClipboard(props.virtual_account.va_number)">
+                                            <i class="fa-duotone fa-paste ml-2" />
+                                        </button>
+                                    </Popper>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Deeplink</div>
+                                <div class="text-sm font-semibold text-primary-600 underline">
+                                    <a target="_blank" :href="props.virtual_account.payment_url" >Bayar</a>
+                                </div>
+                            </div>
                         </template>
 
                         <template v-if="props.wallet_account">
                             <template v-if="props.wallet_account.qr_code !== '-'">
-                                <span class="block text-sm font-medium text-gray-600 mt-5">
-                                    Qr Code
-                                </span>
-                                <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                                    <VueQrcode
-                                        :value="props.wallet_account.qr_code"
-                                        tag="svg"
-                                        :options="{
+                                <div class="sm:col-span-2 flex flex-col items-center my-5 gap-3">
+                                    <div class="text-sm ">
+                                        <img src="/img/vendor/QRIS.svg" class="h-8 w-auto" alt="QRIS">
+                                    </div>
+                                    <div class="text-sm font-semibold ">
+                                        <VueQrcode
+                                            :value="props.wallet_account.qr_code"
+                                            tag="svg"
+                                            :options="{
                                             width: 200,
                                             color: {
                                                 dark: '#000',
                                                 light: '#fff',
                                             },
                                         }"
-                                    ></VueQrcode>
-                                </span>
+                                        ></VueQrcode>
+                                    </div>
+                                </div>
                             </template>
 
-                            <span class="block text-sm font-medium text-gray-600 mt-5">
-                                Redirect
-                            </span>
-                            <span class="block text-xl font-extrabold text-primary-600 uppercase">
-                                <a target="_blank" :href="props.wallet_account.payment_url" >Bayar</a>
-                            </span>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Deeplink</div>
+                                <div class="text-sm font-semibold text-primary-600 underline">
+                                    <a target="_blank" :href="props.wallet_account.payment_url" >Bayar</a>
+                                </div>
+                            </div>
 
-<!--                            <span class="block text-sm font-medium text-gray-600 mt-5">-->
-<!--                                Kadaluarsa-->
-<!--                            </span>-->
-<!--                            <span class="block text-xl font-extrabold text-primary-600 uppercase">-->
-<!--                                {{ formattedDateTime(props.wallet_account.exp_time) }}-->
-<!--                            </span>-->
+                            <!--                            <span class="block text-sm font-medium text-gray-600 mt-5">-->
+                            <!--                                Kadaluarsa-->
+                            <!--                            </span>-->
+                            <!--                            <span class="block text-xl font-extrabold text-primary-600 uppercase">-->
+                            <!--                                {{ formattedDateTime(props.wallet_account.exp_time) }}-->
+                            <!--                            </span>-->
                         </template>
-                    </h2>
+                    </div>
                 </div>
 
             </template>

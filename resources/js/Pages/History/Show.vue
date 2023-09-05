@@ -131,7 +131,7 @@ function formatPrice(value) {
                                 <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm">No. VA</div>
+                                <div class="text-sm">No. Virtual Account</div>
                                 <div class="text-sm font-semibold">
                                     {{ props.history.virtual_account.va_number }}
                                     <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
@@ -148,6 +148,11 @@ function formatPrice(value) {
                                         Bayar
                                     </a>
                                 </div>
+                            </div>
+                            <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm font-bold">Total</div>
+                                <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
                             </div>
                         </template>
 
@@ -184,6 +189,11 @@ function formatPrice(value) {
                                         Bayar
                                     </a>
                                 </div>
+                            </div>
+                            <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm font-bold">Total</div>
+                                <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
                             </div>
                         </template>
                     </dl>

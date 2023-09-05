@@ -65,7 +65,7 @@ function formatPrice(value) {
                 <div class="mt-5">
                     <div class="text-center">
 <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
-                        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Transaksi Sedang Diproses</h1>
+                        <h1 class="text-lg font-bold tracking-tight text-gray-900">Transaksi Sedang Diproses</h1>
 
                         <div class="mt-5 space-x-2">
                             <PrimaryButton as="a" :href="route('dashboard')" >

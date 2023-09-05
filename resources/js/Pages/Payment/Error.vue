@@ -52,7 +52,7 @@ function formatPrice(value) {
                 <div class="mt-5">
                     <div class="text-center">
 <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
-                        <h1 class="text-2xl font-bold tracking-tight text-gray-900">Transaksi Gagal</h1>
+                        <h1 class="text-lg font-bold tracking-tight text-gray-900">Transaksi Gagal</h1>
 
                         <div class="">
                             <div class="text-sm text-gray-900">
