@@ -30,7 +30,7 @@ const interval = setInterval(() => {
 }, 10000)
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
+    return moment(value).format('DD MMM Y HH:mm')
 }
 
 function formattedTime(value) {
@@ -153,9 +153,11 @@ watch(tabHistory, (newTabHistory) => {
                             <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
-                                        <p class="font-medium truncate"
+                                        <p class="font-medium truncate uppercase"
                                            :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
                                             {{ history.product_name }}
+                                            <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
+                                            <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
                                         </p>
                                         <div class="ml-2 flex-shrink-0 flex">
                                             <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
@@ -165,8 +167,8 @@ watch(tabHistory, (newTabHistory) => {
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="mt-2 sm:flex sm:justify-between">
-                                        <div class="sm:flex">
+                                    <div class="mt-2 flex justify-between">
+                                        <div class="flex">
                                             <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                 {{ history.category_id == 1 ? '+' : '-' }} Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                             </p>
@@ -175,14 +177,9 @@ watch(tabHistory, (newTabHistory) => {
 <!--                                                {{ history.customer_no }}-->
 <!--                                            </p>-->
                                         </div>
-                                        <div class="mt-2 flex items-center text-sm sm:mt-0" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                            <i class="fa-regular fa-calendar pr-2" />
-                                            <p>
-                                                {{ formattedDate(history.created_at) }}
-                                            </p>
-                                            <p class="ml-2" >
-                                                {{ formattedTime(history.created_at) }}
-                                            </p>
+                                        <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+<!--                                            <i class="fa-regular fa-calendar pr-2" />-->
+                                            {{ formattedDate(history.updated_at) }}
                                         </div>
                                     </div>
                                 </div>

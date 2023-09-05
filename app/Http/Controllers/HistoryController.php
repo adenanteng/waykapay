@@ -19,9 +19,9 @@ class HistoryController extends Controller
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
-        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get(['id','product_name','amount','gross_amount','status_id', 'category_id','created_at']);
+        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get(['id','product_name','amount','gross_amount','status_id', 'category_id','updated_at']);
 
-//        dd($history->where('category_id', 1)->sum('gross_amount'));
+//        dd($history);
 
         return Inertia::render('History/Index', [
             'history'=> Inertia::lazy(fn () => $history),
