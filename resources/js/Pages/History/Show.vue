@@ -45,7 +45,7 @@ function formatPrice(value) {
         <template v-if="props.history.status_id == 1">
             <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
-                    <ApplicationMark class="block sm:hidden" />
+                    <ApplicationLogo class="block sm:hidden" />
                     <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Berhasil</h3>
                     <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
                 </div>
@@ -118,7 +118,7 @@ function formatPrice(value) {
         <template v-else-if="props.history.status_id == 2">
             <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
-                    <ApplicationMark class="block sm:hidden" />
+                    <ApplicationLogo class="block sm:hidden" />
                     <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Pending</h3>
                     <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
                 </div>
@@ -194,7 +194,7 @@ function formatPrice(value) {
         <template v-else-if="props.history.status_id == 3">
             <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
-                    <ApplicationMark class="block sm:hidden" />
+                    <ApplicationLogo class="block sm:hidden" />
                     <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Gagal</h3>
                     <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
                 </div>
