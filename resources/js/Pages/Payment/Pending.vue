@@ -19,7 +19,7 @@ onUnmounted(() => {
 })
 
 const interval = setInterval(() => {
-    form.put(route('product.status', form), {
+    form.get(route('product.status', form), {
         errorBag: 'updateInformation',
         preserveScroll: true,
         onSuccess: () => {}
@@ -32,7 +32,7 @@ const form = useForm({
 
 const storeInformation = () => {
 
-    form.put(route('product.status', form), {
+    form.get(route('product.status', form), {
         errorBag: 'updateInformation',
         preserveScroll: true,
         onSuccess: () => {}

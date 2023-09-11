@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('pln.postpaid.inquiry', form), {
+    form.get(route('pln.postpaid.inquiry', form), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         // onSuccess: () => closeModal(),
@@ -36,8 +36,6 @@ function formatPrice(value) {
     let val = (value/1).toFixed(0).replace('.', '')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
-
-const tabs = ref('Pulsa')
 
 </script>
 

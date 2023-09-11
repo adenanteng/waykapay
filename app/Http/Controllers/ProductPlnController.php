@@ -87,11 +87,11 @@ class ProductPlnController extends Controller
         $user = auth()->user();
         $response = Helper::pricelist();
 
-        $order_id = "post-".$user['id']."-".\Illuminate\Support\Str::random(8);
+        $order_id = \Illuminate\Support\Str::random(8);
         $customer = Http::post('https://api.digiflazz.com/v1/transaction', [
             'commands' => 'inq-pasca',
             'customer_no' => $request['customer_no'],
-            'buyer_sku_code' => 'pln-pasca',
+            'buyer_sku_code' => 'pln',
             'username' => Helper::api()->digiflazz_username,
             'ref_id' => $order_id,
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
@@ -99,21 +99,23 @@ class ProductPlnController extends Controller
 
 //        dd($customer->object()->data);
 
-        return Inertia::render('Payment/Info', [
-            'transaction' => $customer->object()->data,
-        ]);
+//        return Inertia::render('Payment/Info', [
+//            'transaction' => $customer->object()->data,
+//        ]);
 
-//        if ($customer->successful()) {
-//            return Inertia::render('Product/Pln/CreateEdit', [
-//                'users' => auth()->user(),
-//                'customer' => $customer->object(),
-//                'response'  => $response->object(),
-//                'fee' => Helper::api()->fees,
-//            ]);
-//
-//        } else {
-//            dd($customer->status());
-//        }
+        if ($customer->successful()) {
+            return Inertia::render('Product/Pln/Postpaid/CreateEdit', [
+                'users' => auth()->user(),
+                'customer' => $customer->object(),
+//                'response'  => Inertia::lazy(fn () => $response->object()),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+            return Inertia::render('Payment/Info', [
+                'transaction' => $customer->object()->data,
+            ]);
+        }
     }
 
 }

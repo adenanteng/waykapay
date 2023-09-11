@@ -24,7 +24,7 @@ class ProductController extends Controller
         $gross_amount = $request['amount'] + $admin_fee;
 
 //        dd($request->all());
-        $order_id = "inv-".$request['user_id']."-".\Illuminate\Support\Str::random(8);
+        $order_id = \Illuminate\Support\Str::random(8);
 
         $response = Http::post('https://api.digiflazz.com/v1/transaction', [
             'username' => Helper::api()->digiflazz_username,
@@ -87,6 +87,76 @@ class ProductController extends Controller
      *
      * @return \Inertia\Response
      */
+    public function topupPasca(Request $request)
+    {
+//        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
+//        $gross_amount = $request['amount'] + $admin_fee;
+
+//        dd($request->all());
+//        $order_id = \Illuminate\Support\Str::random(8);
+
+        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
+            "commands" => "pay-pasca",
+            'username' => Helper::api()->digiflazz_username,
+            'buyer_sku_code' => $request['sku'],
+            'customer_no' => $request['customer_no'],
+            'ref_id' => $request['order_id'],
+            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$request['order_id']),
+        ]);
+
+//        dd($response->object()->data);
+
+        if ($response->successful()) {
+            $user = User::where('id', $request['user_id'])->first();
+
+            $transaction = Transaction::create([
+                'sku' => $request['sku'],
+                'order_id' => $request['order_id'],
+                'product_name' => $request['sku'].' '.$request['customer_name'],
+                'customer_no' => $request['customer_no'],
+                'user_id' => $request['user_id'],
+                'status_id' => Transaction::PENDING,
+                'category_id' => $request['category_id'],
+                'amount' => $request['price'],
+                'gross_amount' => $request['selling_price'],
+                'last_amount' => $user->wallet_balance,
+                'admin_fee' => $request['admin'],
+                'desc' => $response->object()->data->sn ?? $response->object()->data->rc.' '.$response->object()->data->message,
+            ]);
+
+//            $user->withdraw($transaction->gross_amount);
+
+            switch($response->object()->data->status) {
+                case ('Pending'):
+                case ('Sukses'):
+                    $user->withdraw($transaction->gross_amount);
+                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo ?? $user->wallet_balance);
+                    break;
+                default:
+//                    dd($response->object()->data);
+                    return Inertia::render('Payment/Info', [
+                        'transaction' => $response->object()->data,
+                    ]);
+            }
+
+            return Inertia::render('Payment/Pending', [
+                'transaction' => $transaction
+            ]);
+
+        } else {
+//            dd($response->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
+        }
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
     public function status(Request $request)
     {
 //        dd($request->all());
@@ -95,14 +165,25 @@ class ProductController extends Controller
         $user = User::where('id', $request['user_id'])->first();
         $transaction = Transaction::where('id', $request['id'])->first();
 
-        $status = Http::post('https://api.digiflazz.com/v1/transaction', [
+        if ($transaction->category_id < 8) {
+            $status = Http::post('https://api.digiflazz.com/v1/transaction', [
 //            'commands' => 'status-pasca',
-            'username' => Helper::api()->digiflazz_username,
-            'buyer_sku_code' => $request['sku'],
-            'customer_no' => $request['customer_no'],
-            'ref_id' => $request['order_id'],
-            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$request['order_id']),
-        ]);
+                'username' => Helper::api()->digiflazz_username,
+                'buyer_sku_code' => $request['sku'],
+                'customer_no' => $request['customer_no'],
+                'ref_id' => $request['order_id'],
+                'sign' => md5(Helper::api()->digiflazz_username . Helper::api()->digiflazz_key . $request['order_id']),
+            ]);
+        } else {
+            $status = Http::post('https://api.digiflazz.com/v1/transaction', [
+            'commands' => 'status-pasca',
+                'username' => Helper::api()->digiflazz_username,
+                'buyer_sku_code' => $request['sku'],
+                'customer_no' => $request['customer_no'],
+                'ref_id' => $request['order_id'],
+                'sign' => md5(Helper::api()->digiflazz_username . Helper::api()->digiflazz_key . $request['order_id']),
+            ]);
+        }
 
 //            dd($status->object()->data);
 

@@ -157,32 +157,32 @@ const onSlideChange = (swiper) => {
             <div class="p-6">
                 <div class="grid grid-cols-4 gap-x-6 gap-y-10 lg:grid-cols-6 lg:gap-x-8">
                     <Link :href="route('pulsa.index')" class="group text-center">
-                        <i class="fa-duotone fa-mobile text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <i class="fa-duotone fa-mobile text-3xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>
                     </Link>
 
                     <Link :href="route('pln.index')" class="group text-center">
-                        <i class="fa-duotone fa-lightbulb text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <i class="fa-duotone fa-lightbulb text-3xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Listrik</h3>
                     </Link>
 
                     <Link :href="route('games.index')" class="group text-center">
-                        <i class="fa-duotone fa-gamepad-modern text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <i class="fa-duotone fa-gamepad-modern text-3xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Games</h3>
                     </Link>
 
                     <Link :href="route('emoney.index')" class="group text-center">
-                        <i class="fa-duotone fa-wallet text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <i class="fa-duotone fa-wallet text-3xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>
                     </Link>
 
                     <Link :href="route('television.index')" class="group text-center">
-                        <i class="fa-duotone fa-tv-retro text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <i class="fa-duotone fa-tv-retro text-3xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">TV</h3>
                     </Link>
 
                     <Link :href="route('internet.index')" class="group text-center">
-                        <i class="fa-duotone fa-router text-4xl text-primary-600 group-hover:text-primary-800"/>
+                        <i class="fa-duotone fa-router text-3xl text-primary-600 group-hover:text-primary-800"/>
                         <h3 class="mt-2 text-sm text-gray-700">Internet</h3>
                     </Link>
                 </div>

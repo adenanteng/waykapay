@@ -57,7 +57,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/history', HistoryController::class)->names('history');
 
     Route::post('/product/topup', [ProductController::class, 'topup'])->name('product.topup');
-    Route::put('/product/status', [ProductController::class, 'status'])->name('product.status');
+    Route::post('/product/topup-pasca', [ProductController::class, 'topupPasca'])->name('product.topup.pasca');
+    Route::get('/product/status', [ProductController::class, 'status'])->name('product.status');
 
     Route::get('/product/pulsa', [ProductPulsaController::class, 'index'])->name('pulsa.index');
 
