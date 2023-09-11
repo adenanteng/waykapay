@@ -181,7 +181,18 @@ watch(tabHistory, (newTabHistory) => {
             </ul>
         </div>
 
-        <template v-if="!on_process && on_process!==undefined && tabHistory===2" >
+        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >
+            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >
+                <Vue3Lottie
+                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                    :height="200"
+                    :width="200"
+                />
+                Tidak ada transaksi
+            </div>
+        </template>
+
+        <template v-if="!history && true && tabHistory==99" >
             <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >
                 <Vue3Lottie
                     animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"

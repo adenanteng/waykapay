@@ -156,7 +156,7 @@ function formatPrice(value) {
                             </div>
                         </template>
 
-                        <template v-if="props.history.wallet_account">
+                        <template v-else-if="props.history.wallet_account">
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">Metode Pembayaran</div>
                                 <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>

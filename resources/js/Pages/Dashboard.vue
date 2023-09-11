@@ -10,6 +10,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
     users: Object,
@@ -124,8 +125,24 @@ const onSlideChange = (swiper) => {
             </div>
         </div>
 
-        <div
-            class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+            <div class="p-6 flex gap-6">
+                <div class="flex-none flex items-center">
+<!--                    <Vue3Lottie-->
+<!--                        animation-link="https://lottie.host/2931601b-3cd5-49f3-a709-ebb26aeab426/60gPnD5Xwz.json"-->
+<!--                        :height="80"-->
+<!--                    />-->
+                    <i class="fa-duotone fa-ghost text-7xl text-primary-600" />
+                </div>
+                <div class="grow">
+                    <h4 class="text-gray-900 font-semibold">Selamat Bergabung!</h4>
+                    <p class="text-sm text-gray-600">Yuk, ikutin panduan untuk mulai menggunakan aplikasi Waykapay!</p>
+                    <Link href="" class="text-sm text-primary-600 font-medium">Mulai Misi Pertamamu <i class="fa-regular fa-arrow-right" /></Link>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <div class="p-6">
                 <div class="grid grid-cols-4 gap-x-6 gap-y-10 lg:grid-cols-6 lg:gap-x-8">
                     <Link :href="route('pulsa.index')" class="group text-center">
