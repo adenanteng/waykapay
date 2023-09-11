@@ -108,18 +108,28 @@ const onSlideChange = (swiper) => {
                     <span class="block text-sm font-medium text-white">
                         Saldo Rekening
                     </span>
-                    <span class="block text-xl font-extrabold text-white">
-                        Rp {{ formatPrice($page.props.user.wallet_balance) }}
+                    <span class="block text-lg font-bold text-white">
+                        <span class="text-sm font-medium">Rp</span> {{ formatPrice($page.props.user.wallet_balance) }}
                     </span>
                 </div>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">
-                    <PrimaryButton as="a" :href="route('deposit.index')" class="">
-<!--                        <i class="fa-regular fa-coins mr-1"/>-->
+<!--                    <Link :href="route('deposit.index')" class="text-white text-sm gap-y-1 flex flex-col justify-center items-center">-->
+<!--                        <i class="fa-solid fa-circle-plus text-xl" />-->
+<!--                        Top Up-->
+<!--                    </Link>-->
+
+<!--                    <Link :href="route('money-transfer.index')" class="text-white text-sm gap-y-1 flex flex-col justify-center items-center">-->
+<!--                        <i class="fa-solid fa-circle-up text-xl" />-->
+<!--                        Transfer-->
+<!--                    </Link>-->
+
+                    <PrimaryButton as="a" :href="route('deposit.index')" class="text-sm">
+                        <i class="fa-solid fa-circle-plus mr-2" />
                         Isi Ulang
                     </PrimaryButton>
 
-                    <SecondaryButton as="a" :href="route('money-transfer.index')" class="nightwind-prevent">
-<!--                        <i class="fa-regular fa-coins mr-1"/>-->
+                    <SecondaryButton as="a" :href="route('money-transfer.index')" class="text-sm nightwind-prevent">
+                        <i class="fa-solid fa-circle-up mr-2" />
                         Kirim Uang
                     </SecondaryButton>
                 </div>
@@ -137,13 +147,13 @@ const onSlideChange = (swiper) => {
                 </div>
                 <div class="grow">
                     <h4 class="text-gray-900 font-semibold">Selamat Bergabung!</h4>
-                    <p class="text-sm text-gray-600">Yuk, ikutin panduan untuk mulai menggunakan aplikasi Waykapay!</p>
-                    <Link href="" class="text-sm text-primary-600 font-medium">Mulai Misi Pertamamu <i class="fa-regular fa-arrow-right" /></Link>
+                    <p class="text-sm text-gray-600">Yuk, upgrade ke Waykapay Premium! Nikmatin akses dan benefit lengkap dari Waykapay!</p>
+                    <Link href="" class="text-sm text-primary-600 font-medium">Upgrade <i class="fa-regular fa-arrow-right" /></Link>
                 </div>
             </div>
         </div>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+        <div class="">
             <div class="p-6">
                 <div class="grid grid-cols-4 gap-x-6 gap-y-10 lg:grid-cols-6 lg:gap-x-8">
                     <Link :href="route('pulsa.index')" class="group text-center">

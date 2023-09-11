@@ -87,7 +87,7 @@ function formatPrice(value) {
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
-                <li>
+                <li class="block lg:hidden">
                     <Link :href="route('profile.index')" @click="darkMode=!darkMode" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Mode {{ darkMode ? 'gelap' : 'terang' }}</p>
                         <i class="fa-regular text-gray-900" :class="darkMode ? 'fa-moon' : 'fa-sun-bright' " />

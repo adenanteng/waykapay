@@ -34,13 +34,23 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
             Tautan verifikasi baru telah dikirim ke alamat email kamu.
         </div>
 
-        <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
+        <div class="mt-4 flex items-center justify-between">
+            <form @submit.prevent="submit">
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Kirim ulang email verifikasi
+                    Kirim email verifikasi
                 </PrimaryButton>
 
-                <div>
+                <Link
+                    :href="route('logout')"
+                    method="post"
+                    as="button"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 ml-5"
+                >
+                    Log Out
+                </Link>
+            </form>
+
+            <div>
 <!--                    <Link-->
 <!--                        :href="route('profile.show')"-->
 <!--                        class="underline text-sm text-gray-600 hover:text-gray-900"-->
@@ -48,25 +58,15 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 <!--                        Edit Profile-->
 <!--                    </Link>-->
 
-                    <Link
-                        :href="route('logout')"
-                        method="post"
-                        as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"
-                    >
-                        Log Out
-                    </Link>
+
 
 <!--                    <Link-->
 <!--                        :href="route('login')"-->
-<!--                        method="get"-->
-<!--                        as="button"-->
 <!--                        class="underline text-sm text-gray-600 hover:text-gray-900 ml-2"-->
 <!--                    >-->
 <!--                        Login-->
 <!--                    </Link>-->
-                </div>
             </div>
-        </form>
+        </div>
     </AuthenticationCard>
 </template>
