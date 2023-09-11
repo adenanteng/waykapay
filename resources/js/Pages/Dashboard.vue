@@ -7,9 +7,10 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import moment from "moment";
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { FreeMode } from 'swiper/modules';
+import { FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import 'swiper/css/autoplay';
 import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
@@ -213,8 +214,13 @@ const onSlideChange = (swiper) => {
 <!--        </swiper>-->
 
         <swiper
+            :modules="[Autoplay]"
             :slides-per-view="1"
             :space-between="10"
+            :autoplay="{
+                delay: 5000,
+                disableOnInteraction: false,
+            }"
             :breakpoints="{
                 '640': {
                     slidesPerView: 2,
