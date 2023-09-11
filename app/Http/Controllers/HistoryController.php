@@ -126,7 +126,7 @@ class HistoryController extends Controller
                             ]);
                     }
 
-                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
+//                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
             }
         }
 
