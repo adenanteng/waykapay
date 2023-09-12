@@ -78,7 +78,7 @@ function formatPrice(value) {
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
                             <div class="text-sm ">Produk</div>
-                            <div class="text-sm font-semibold">{{ props.history.product_name }}</div>
+                            <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
                             <div class="text-sm ">No. Kustomer</div>
@@ -97,11 +97,15 @@ function formatPrice(value) {
 
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Nominal</div>
-                            <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
+                            <div class="text-sm font-semibold">
+                                Rp {{ props.history.category_id == 1 || props.history.category_id > 8 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}
+                            </div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Biaya Admin</div>
-                            <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
+                            <div class="text-sm font-semibold">
+                                Rp {{ props.history.category_id == 1 || props.history.category_id > 8 ? formatPrice(props.history.admin_fee) : '0' }}
+                            </div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
@@ -123,8 +127,7 @@ function formatPrice(value) {
                     <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
                 </div>
                 <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
-                    <dl class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
-
+                    <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
                         <template v-if="props.history.virtual_account">
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">Bank</div>
@@ -196,7 +199,7 @@ function formatPrice(value) {
                                 <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
                             </div>
                         </template>
-                    </dl>
+                    </div>
                 </div>
             </div>
         </template>

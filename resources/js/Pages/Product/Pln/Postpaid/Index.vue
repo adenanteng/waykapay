@@ -50,7 +50,7 @@ function formatPrice(value) {
 
         <FormSection @submitted="storeInformation">
             <template #title>
-                PLN Postpaid
+                Tagihan PLN Postpaid
             </template>
 
             <template #description>

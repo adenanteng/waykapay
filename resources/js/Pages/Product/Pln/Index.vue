@@ -37,7 +37,7 @@ const props = defineProps({
                          class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
                     <Link :href="route('pln.prepaid.index')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
-                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Prabayar</p>
+                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Token PLN</p>
             </li>
 
             <li class="relative">
@@ -46,7 +46,7 @@ const props = defineProps({
                          class="h-full w-full pointer-events-none group-hover:opacity-75 p-3">
                     <Link :href="route('pln.postpaid.index')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
-                <p class="mt-1 block text-gray-900 truncate pointer-events-none">Pascabayar</p>
+                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Tagihan PLN</p>
             </li>
 
         </ul>
