@@ -103,7 +103,7 @@ const closeModal = () => {
 
         <FormSection class="sticky top-0 z-40">
             <template #title>
-                PUBG Mobile
+                Mobile Legends
             </template>
 
             <template #description>

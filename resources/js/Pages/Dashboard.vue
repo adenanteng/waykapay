@@ -155,9 +155,9 @@ const onSlideChange = (swiper) => {
 
         <div class="">
             <div class="py-6">
-                <div class="gap-x-6 gap-y-10 grid grid-cols-4 lg:grid-cols-6 lg:gap-x-8 ">
+                <div class="gap-x-6 gap-y-10 grid grid-cols-4 lg:grid-cols-6 lg:gap-x-8">
                     <Link :href="route('pulsa.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center">
+                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
                             <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-sky-300 to-sky-50"></i>
                             <i class="fa-stack-1x fa-duotone fa-mobile text-sky-600 group-hover:text-sky-800"></i>
                         </span>
@@ -165,7 +165,7 @@ const onSlideChange = (swiper) => {
                     </Link>
 
                     <Link :href="route('pln.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center">
+                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
                             <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-amber-300 to-amber-50"></i>
                             <i class="fa-stack-1x fa-duotone fa-lightbulb text-amber-600 group-hover:text-amber-800"></i>
                         </span>
@@ -173,7 +173,7 @@ const onSlideChange = (swiper) => {
                     </Link>
 
                     <Link :href="route('games.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center">
+                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
                             <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-teal-50"></i>
                             <i class="fa-stack-1x fa-duotone fa-gamepad-modern text-teal-600 group-hover:text-teal-800"></i>
                         </span>
@@ -181,7 +181,7 @@ const onSlideChange = (swiper) => {
                     </Link>
 
                     <Link :href="route('emoney.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center">
+                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
                             <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-blue-300 to-blue-50"></i>
                             <i class="fa-stack-1x fa-duotone fa-wallet text-blue-600 group-hover:text-blue-800"></i>
                         </span>
@@ -189,7 +189,7 @@ const onSlideChange = (swiper) => {
                     </Link>
 
                     <Link :href="route('television.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center">
+                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
                             <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-green-300 to-green-50"></i>
                             <i class="fa-stack-1x fa-duotone fa-tv-retro text-green-600 group-hover:text-green-800"></i>
                         </span>
@@ -197,7 +197,7 @@ const onSlideChange = (swiper) => {
                     </Link>
 
                     <Link :href="route('internet.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center">
+                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
                             <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-red-300 to-red-50"></i>
                             <i class="fa-stack-1x fa-duotone fa-router text-red-600 group-hover:text-red-800"></i>
                         </span>
