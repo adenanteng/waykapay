@@ -60,6 +60,7 @@ function provider(value) {
         value.substring(0, 4) === '0813' ||
         value.substring(0, 4) === '0821' ||
         value.substring(0, 4) === '0822' ||
+        value.substring(0, 4) === '0823' ||
         value.substring(0, 4) === '0852'
         )
     { return 'TELKOMSEL' }

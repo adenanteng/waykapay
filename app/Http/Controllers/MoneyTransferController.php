@@ -43,7 +43,7 @@ class MoneyTransferController extends Controller
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':'),
             'idempotency-key' => $idempotency_key
-        ])->post('https://bigflip.id/big_sandbox_api/v3/special-disbursement',
+        ])->post('https://bigflip.id/api/v3/special-disbursement',
             [
                 "account_number" => $request['account_no'],
                 "bank_code" => $request['bank']['name'],

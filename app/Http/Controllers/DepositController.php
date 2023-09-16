@@ -72,7 +72,7 @@ class DepositController extends Controller
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
-        ])->post('https://bigflip.id/big_sandbox_api/v2/pwf/bill',
+        ])->post('https://bigflip.id/api/v2/pwf/bill',
             [
                 "title" => "Deposit-".$user['id'],
                 "type" => "SINGLE",
@@ -257,7 +257,7 @@ class DepositController extends Controller
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
-        ])->get('https://bigflip.id/big_sandbox_api/v2/pwf/' . $transaction->order_id . '/payment');
+        ])->get('https://bigflip.id/api/v2/pwf/' . $transaction->order_id . '/payment');
 
         switch ($response->object()->data[0]->status) {
             case('SUCCESSFUL'):
