@@ -19,7 +19,7 @@ class Helper
         $response = Http::withHeaders([
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
-        ])->get('https://bigflip.id/api/v2/general/balance');
+        ])->get('https://bigflip.id/big_sandbox_api/v2/general/balance');
 
         return $response->object()->balance;
     }
