@@ -1,0 +1,1 @@
+import{o,e as t,f as a}from"./app.db06b18a.js";const r=["src"],c={__name:"AuthenticationCardLogo",setup(n){return(e,p)=>e.$page.props.appSetting!=null?(o(),t("img",{key:0,src:e.$page.props.appSetting.media[0].original_url,class:"h-20 w-auto"},null,8,r)):a("",!0)}};export{c as _};

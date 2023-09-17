@@ -211,6 +211,15 @@ const logout = () => {
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
+                                            :href="route('transaction.index')"
+                                            :active="$page.component.startsWith('Transaction')"
+                                            icon="fa-money-from-bracket"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                            Transaksi
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
                                             :href="route('carousel.index')"
                                             :active="$page.component.startsWith('Carousel')"
                                             icon="fa-images"

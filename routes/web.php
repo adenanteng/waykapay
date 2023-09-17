@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductPlnController;
 use App\Http\Controllers\ProductPulsaController;
 use App\Http\Controllers\ProductTelevisionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Route;
@@ -90,6 +91,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::resource('/carousel', CarouselController::class)->names('carousel');
 
+    Route::resource('/transaction', TransactionController::class)->names('transaction');
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
 
