@@ -4,7 +4,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
     users: Object,
@@ -90,7 +89,7 @@ const faqs = [
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg ">
             <div class="divide-y divide-gray-300 dark:divide-gray-600">
-                <Disclosure as="div" v-for="faq in faqs" :key="faq.question" class="" v-slot="{ open }">
+                <Disclosure as="div" v-for="faq in faqs" :key="faq.question" class="" v-slot="{ open }" >
                     <dt>
                         <DisclosureButton class="flex w-full items-start justify-between text-left px-6 py-4">
                             <span class="text-sm font-medium text-gray-900">{{ faq.question }}</span>

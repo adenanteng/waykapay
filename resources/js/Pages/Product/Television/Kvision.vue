@@ -201,10 +201,6 @@ const closeModal = () => {
             </template>
 
             <template #footer>
-<!--                <SecondaryButton @click="closeModal">-->
-<!--                    Batal-->
-<!--                </SecondaryButton>-->
-
                 <ActionMessage :on="$page.props.user.wallet_balance <= productPrice" class="mr-3">
                     Saldo anda kurang
                 </ActionMessage>
