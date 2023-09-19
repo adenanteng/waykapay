@@ -11,7 +11,7 @@ class TransactionController extends Controller
     public function index() {
 //        dd(Transaction::all());
         return Inertia::render('Transaction/Index', [
-            'transaction' => Inertia::lazy(fn () => Transaction::all())
+            'transaction' => Inertia::lazy(fn () => Transaction::latest()->all())
         ]);
     }
 }
