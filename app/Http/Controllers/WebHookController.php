@@ -14,12 +14,11 @@ class WebHookController extends Controller
      */
     public function webhookHandlerFlipAcceptPayment(Request $request){
 
-        $transaction = Transaction::where('order_id', $request['link_id'])->first();
-        dd($transaction);
+        $transaction = Transaction::where('order_id', $request['bill_link_id'])->first();
         $user = User::where('id', $transaction['user_id'])->first();
 
         if ($transaction->status_id != Transaction::SUCCESS) {
-            switch($request['bill_payment']['status']) {
+            switch($request['status']) {
                 case ('SUCCESSFUL'):
                     $user->deposit($transaction->amount);
                     $status_id = Transaction::SUCCESS;
