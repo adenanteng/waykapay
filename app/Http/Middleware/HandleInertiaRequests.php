@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'appSetting' => AppSetting::get()->first(),
 //            'fee' => fn () => Helper::api()->fees,
-            'digiflazz_saldo' => Helper::api()->digiflazz_saldo
+            'digiflazz_saldo' => Helper::api()->digiflazz_saldo,
         ]);
     }
 }

@@ -29,18 +29,36 @@ const form = useForm({
         <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
 
             <li class="relative">
-                <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">
-                    <img src="/img/games/pubg.jpg" alt=""
-                         class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
+                <div class="group w-full aspect-video rounded-3xl overflow-hidden shadow-lg flex justify-center items-center p-4 border border-gray-300">
+                    <img src="/img/games/google-play.png" alt=""
+                         class="w-full object-cover pointer-events-none group-hover:opacity-75">
+                    <Link :href="route('games.googlePlay')" class="absolute inset-0 focus:outline-none"></Link>
+                </div>
+                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Google Play</p>
+            </li>
+
+            <li class="relative">
+                <div class="group w-full aspect-video rounded-3xl overflow-hidden shadow-lg flex justify-center items-center p-4 border border-gray-300">
+                    <img src="/img/games/steam.svg" alt=""
+                         class="w-full object-cover pointer-events-none group-hover:opacity-75">
+                    <Link :href="route('games.steam')" class="absolute inset-0 focus:outline-none"></Link>
+                </div>
+                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">Steam</p>
+            </li>
+
+            <li class="relative">
+                <div class="group w-full aspect-video rounded-3xl overflow-hidden shadow-lg flex justify-center items-center p-4 border border-gray-300">
+                    <img src="/img/games/pubg.png" alt=""
+                         class="w-full object-cover pointer-events-none group-hover:opacity-75">
                     <Link :href="route('games.pubgm')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
                 <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">PUBG Mobile</p>
             </li>
 
             <li class="relative">
-                <div class="group block w-full aspect-video rounded-3xl overflow-hidden shadow-lg">
-                    <img src="/img/games/mobile-legends.jpg" alt=""
-                         class="h-full w-full object-cover pointer-events-none group-hover:opacity-75">
+                <div class="group w-full aspect-video rounded-3xl overflow-hidden shadow-lg flex justify-center items-center p-4 border border-gray-300">
+                    <img src="/img/games/mobile-legends.png" alt=""
+                         class="w-full object-cover pointer-events-none group-hover:opacity-75">
                     <Link :href="route('games.ml')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
                 <p class="mt-1 block text-gray-900 truncate pointer-events-none">Mobile Legends</p>

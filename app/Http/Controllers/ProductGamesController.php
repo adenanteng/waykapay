@@ -69,4 +69,52 @@ class ProductGamesController extends Controller
         }
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function googlePlay()
+    {
+        $response = Helper::pricelist();
+
+        if ($response->successful()) {
+            return Inertia::render('Product/Games/GooglePlay', [
+                'users' => auth()->user(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+//            dd($response->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function steam()
+    {
+        $response = Helper::pricelist();
+
+        if ($response->successful()) {
+            return Inertia::render('Product/Games/Steam', [
+                'users' => auth()->user(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+//            dd($response->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
+        }
+    }
+
 }

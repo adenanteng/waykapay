@@ -72,6 +72,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/games', [ProductGamesController::class, 'index'])->name('games.index');
     Route::get('/product/games/pubgm', [ProductGamesController::class, 'pubgm'])->name('games.pubgm');
     Route::get('/product/games/mobilelegends', [ProductGamesController::class, 'ml'])->name('games.ml');
+    Route::get('/product/games/googleplay', [ProductGamesController::class, 'googlePlay'])->name('games.googlePlay');
+    Route::get('/product/games/steam', [ProductGamesController::class, 'steam'])->name('games.steam');
 
     Route::get('/product/emoney', [ProductEmoneyController::class, 'index'])->name('emoney.index');
     Route::get('/product/emoney/dana', [ProductEmoneyController::class, 'dana'])->name('emoney.dana');

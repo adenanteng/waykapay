@@ -28,6 +28,7 @@ class ProfileController extends Controller
             $digiflazz_saldo = Inertia::lazy(fn () => Helper::digiflazz_saldo());
 
             $app = AppSetting::first();
+
             $app->update([
                 'flip_saldo' => Helper::flip_saldo(),
                 'digiflazz_saldo' => Helper::digiflazz_saldo()

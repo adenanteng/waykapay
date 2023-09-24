@@ -12,18 +12,17 @@ const props = defineProps({
 })
 
 onMounted(() => {
-    console.log('history');
     router.reload({ only: ['transaction'] })
 })
 
-onUnmounted(() => {
-    clearInterval(interval)
-})
+// onUnmounted(() => {
+//     clearInterval(interval)
+// })
 
-const interval = setInterval(() => {
-    console.log('interval');
-    router.reload({ only: ['transaction'] })
-}, 10000)
+// const interval = setInterval(() => {
+//     console.log('interval');
+//     router.reload({ only: ['transaction'] })
+// }, 10000)
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
