@@ -96,13 +96,18 @@ function formatPrice(value) {
                         </template>
 
                         <template v-if="props.history.category_id == 5">
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Nama Kustomer</div>
+                                <div class="text-sm font-semibold">{{ props.history.desc.split('/')[1] }}</div>
+                            </div>
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">Stroom</div>
-                                <div class="text-sm font-semibold">{{ props.history.desc.split('/')[0] }}</div>
-                            </div>
-                            <div class="sm:col-span-2 flex sm:block justify-between">
-                                <div class="text-sm ">Keterangan</div>
-                                <div class="text-sm font-semibold">{{ props.history.desc.split('/')[1] }}</div>
+                                <div class="text-sm font-bold">{{ props.history.desc.split('/')[0] }}</div>
+                                <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
+                                    <button class="" @click="toClipboard(props.history.desc.split('/')[0])">
+                                        <i class="fa-duotone fa-paste ml-2" />
+                                    </button>
+                                </Popper>
                             </div>
                         </template>
 
