@@ -11,6 +11,7 @@ import VueQrcode from "@chenfengyuan/vue-qrcode";
 import ApplicationLogo from "../../Components/ApplicationLogo.vue";
 import ApplicationMark from "../../Components/ApplicationMark.vue";
 import SectionBorder from "../../Components/SectionBorder.vue";
+import PrimaryButton from "../../Components/PrimaryButton.vue";
 
 const props = defineProps({
     users: Object,
@@ -103,11 +104,6 @@ function formatPrice(value) {
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">Stroom</div>
                                 <div class="text-sm font-bold">{{ props.history.desc.split('/')[0] }}</div>
-                                <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
-                                    <button class="" @click="toClipboard(props.history.desc.split('/')[0])">
-                                        <i class="fa-duotone fa-paste ml-2" />
-                                    </button>
-                                </Popper>
                             </div>
                         </template>
 
@@ -142,6 +138,18 @@ function formatPrice(value) {
                     </div>
                 </div>
             </div>
+
+            <template v-if="props.history.category_id == 5">
+                <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
+                    <PrimaryButton
+                        @click="toClipboard(props.history.desc.split('/')[0])"
+                        class="flex w-full justify-center items-center"
+                    >
+                        Copy Kode Stroom
+                    </PrimaryButton>
+                </Popper>
+            </template>
+
         </template>
 
         <template v-else-if="props.history.status_id == 2">
