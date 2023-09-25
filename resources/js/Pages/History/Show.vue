@@ -103,7 +103,17 @@ function formatPrice(value) {
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">Stroom</div>
-                                <div class="text-sm font-bold">{{ props.history.desc.split('/')[0] }}</div>
+                                <div class="text-sm font-bold">
+                                    <Popper content="Sukses Copy" arrow placement="right-end">
+                                        <button
+                                            @click="toClipboard(props.history.desc.split('/')[0])"
+                                            class=""
+                                        >
+                                            {{ props.history.desc.split('/')[0] }}
+                                        </button>
+                                    </Popper>
+
+                                </div>
                             </div>
                         </template>
 
