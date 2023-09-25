@@ -62,7 +62,7 @@ function formatPrice(value) {
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
-                        <div class="sm:col-span-1 flex sm:block justify-between">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 1">
                             <div class="text-sm ">Kategori</div>
                             <div class="text-sm font-semibold">{{ props.history.category }}</div>
                         </div>
@@ -84,10 +84,10 @@ function formatPrice(value) {
                             <div class="text-sm ">No. Kustomer</div>
                             <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
                         </div>
-                        <!--                        <div class="sm:col-span-1 flex sm:block justify-between">-->
-                        <!--                            <div class="text-sm ">Status</div>-->
-                        <!--                            <div class="text-sm font-semibold"><Badge :name="props.history.status" /></div>-->
-                        <!--                        </div>-->
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 5">
+                            <div class="text-sm ">Stroom</div>
+                            <div class="text-sm font-semibold">{{ props.history.desc.split('/')[0] }}</div>
+                        </div>
                         <div class="sm:col-span-2 flex sm:block justify-between">
                             <div class="text-sm ">Keterangan</div>
                             <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
