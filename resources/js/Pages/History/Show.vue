@@ -62,36 +62,56 @@ function formatPrice(value) {
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 1">
-                            <div class="text-sm ">Kategori</div>
-                            <div class="text-sm font-semibold">{{ props.history.category }}</div>
-                        </div>
+                        <template v-if="props.history.category_id == 1">
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">Kategori</div>
+                                <div class="text-sm font-semibold">{{ props.history.category }}</div>
+                            </div>
+                        </template>
 
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 1">
-                            <div class="text-sm ">Sumber Dana</div>
-                            <template v-if="props.history.virtual_account">
-                                <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
-                            </template>
-                            <template v-if="props.history.wallet_account">
-                                <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
-                            </template>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
-                            <div class="text-sm ">Produk</div>
-                            <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
-                            <div class="text-sm ">No. Kustomer</div>
-                            <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 5">
-                            <div class="text-sm ">Stroom</div>
-                            <div class="text-sm font-semibold">{{ props.history.desc.split('/')[0] }}</div>
-                        </div>
-                        <div class="sm:col-span-2 flex sm:block justify-between">
-                            <div class="text-sm ">Keterangan</div>
-                            <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
-                        </div>
+                        <template v-if="props.history.category_id == 1">
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">Sumber Dana</div>
+                                <template v-if="props.history.virtual_account">
+                                    <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
+                                </template>
+                                <template v-if="props.history.wallet_account">
+                                    <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
+                                </template>
+                            </div>
+                        </template>
+
+                        <template v-if="props.history.category_id != 1">
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">Produk</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
+                            </div>
+                        </template>
+
+                        <template v-if="props.history.category_id != 1">
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">No. Kustomer</div>
+                                <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
+                            </div>
+                        </template>
+
+                        <template v-if="props.history.category_id == 5">
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">Stroom</div>
+                                <div class="text-sm font-semibold">{{ props.history.desc.split('/')[0] }}</div>
+                            </div>
+                            <div class="sm:col-span-2 flex sm:block justify-between">
+                                <div class="text-sm ">Keterangan</div>
+                                <div class="text-sm font-semibold">{{ props.history.desc.split('/')[1] }}</div>
+                            </div>
+                        </template>
+
+                        <template v-else >
+                            <div class="sm:col-span-2 flex sm:block justify-between">
+                                <div class="text-sm ">Keterangan</div>
+                                <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
+                            </div>
+                        </template>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
