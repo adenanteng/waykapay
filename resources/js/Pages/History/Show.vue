@@ -139,16 +139,16 @@ function formatPrice(value) {
                 </div>
             </div>
 
-            <template v-if="props.history.category_id == 5">
-                <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
-                    <PrimaryButton
-                        @click="toClipboard(props.history.desc.split('/')[0])"
-                        class="flex w-full justify-center items-center"
-                    >
-                        Copy Kode Stroom
-                    </PrimaryButton>
-                </Popper>
-            </template>
+<!--            <template v-if="props.history.category_id == 5">-->
+<!--                <Popper class="w-full mt-5" content="Sukses Copy" arrow placement="right-end">-->
+<!--                    <PrimaryButton-->
+<!--                        @click="toClipboard(props.history.desc.split('/')[0])"-->
+<!--                        class="flex w-full justify-center items-center"-->
+<!--                    >-->
+<!--                        Copy Kode Stroom-->
+<!--                    </PrimaryButton>-->
+<!--                </Popper>-->
+<!--            </template>-->
 
         </template>
 
