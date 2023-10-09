@@ -58,7 +58,7 @@ class ProductInternetController extends Controller
 //        ]);
 
         if ($customer->successful()) {
-            return Inertia::render('Product/Pln/CreateEdit', [
+            return Inertia::render('Product/Internet/Indihome/CreateEdit', [
                 'users' => auth()->user(),
                 'customer' => $customer->object(),
 //                'response'  => Inertia::lazy(fn () => $response->object()),
