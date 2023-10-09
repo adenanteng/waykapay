@@ -53,21 +53,23 @@ class ProductInternetController extends Controller
 
 //        dd($customer->object()->data);
 
-        return Inertia::render('Payment/Info', [
-            'transaction' => $customer->object()->data,
-        ]);
+//        return Inertia::render('Payment/Info', [
+//            'transaction' => $customer->object()->data,
+//        ]);
 
-//        if ($customer->successful()) {
-//            return Inertia::render('Product/Pln/CreateEdit', [
-//                'users' => auth()->user(),
-//                'customer' => $customer->object(),
+        if ($customer->successful()) {
+            return Inertia::render('Product/Pln/CreateEdit', [
+                'users' => auth()->user(),
+                'customer' => $customer->object(),
 //                'response'  => Inertia::lazy(fn () => $response->object()),
-//                'fee' => Helper::api()->fees,
-//            ]);
-//
-//        } else {
-//            dd($customer->status());
-//        }
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+            return Inertia::render('Payment/Info', [
+                'transaction' => $customer->object()->data,
+            ]);
+        }
     }
 
     /**
