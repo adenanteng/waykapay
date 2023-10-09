@@ -77,7 +77,7 @@ function sort(arr) {
 
             <template #form>
                 <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="No. Tujuan"/>
+                    <InputLabel for="number" value="No. Pelanggan"/>
                     <div class="font-semibold text-gray-900">
                         {{ props.customer.data.customer_no }}
                     </div>
