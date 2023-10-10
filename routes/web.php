@@ -81,6 +81,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/product/television', [ProductTelevisionController::class, 'index'])->name('television.index');
     Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
+    Route::get('/product/television/nex', [ProductTelevisionController::class, 'nex'])->name('television.nex');
 
     Route::get('/product/internet', [ProductInternetController::class, 'index'])->name('internet.index');
     Route::get('/product/internet/indihome', [ProductInternetController::class, 'indihome'])->name('internet.indihome.index');

@@ -44,4 +44,28 @@ class ProductTelevisionController extends Controller
             ]);
         }
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function nex()
+    {
+        $response = Helper::pricelist();
+
+        if ($response->successful()) {
+            return Inertia::render('Product/Television/Nex', [
+                'users' => auth()->user(),
+                'response'  => Inertia::lazy(fn () => $response->object()),
+                'fee' => Helper::api()->fees,
+            ]);
+
+        } else {
+//            dd($response->status());
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
+        }
+    }
 }
