@@ -90,8 +90,8 @@ const closeModal = () => {
 </script>
 
 <template>
-    <AppLayout title="Nex TV"
-               name="Nex TV"
+    <AppLayout title="Nex Parabola"
+               name="Nex Parabola"
                desc="Lorem ipsum"
     >
         <template #previous>
@@ -100,7 +100,7 @@ const closeModal = () => {
 
         <FormSection class="sticky top-0 z-40">
             <template #title>
-                Next TV
+                Nex Parabola
             </template>
 
             <template #description>
@@ -137,7 +137,7 @@ const closeModal = () => {
                     <template v-if="data.brand == 'Nex Parabola'">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                             <div class="flex-shrink-0">
-                                <img class="h-auto w-10" src="" alt="Nex">
+                                <img class="h-auto w-10" src="/img/vendor/NEX.png" alt="Nex">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)">

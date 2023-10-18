@@ -29,7 +29,7 @@ const form = useForm({
         <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-4 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">
 
             <li class="relative">
-                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg flex items-center">
+                <div class="group w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg flex items-center">
                     <img src="/img/vendor/K-VISION.png" alt=""
                          class="h-auto w-full pointer-events-none group-hover:opacity-75 p-3">
                     <Link :href="route('television.kvision')" class="absolute inset-0 focus:outline-none"></Link>
@@ -38,8 +38,8 @@ const form = useForm({
             </li>
 
             <li class="relative">
-                <div class="group block w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg flex items-center">
-                    <img src="" alt="Nex"
+                <div class="group w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg flex items-center">
+                    <img src="/img/vendor/NEX.png" alt=""
                          class="h-auto w-full pointer-events-none group-hover:opacity-75 p-3">
                     <Link :href="route('television.nex')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
