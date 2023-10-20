@@ -19,14 +19,14 @@ const props = defineProps({
     wallet_account: Object | String
 })
 
-onMounted(() => {
-    console.log(`the component is now mounted.`)
-    if (props.virtual_account.payment_url) {
-        window.open(props.virtual_account.payment_url)
-    } else if (props.wallet_account.payment_url) {
-        window.open(props.wallet_account.payment_url)
-    }
-})
+// onMounted(() => {
+//     console.log(`the component is now mounted.`)
+//     if (props.virtual_account.payment_url) {
+//         window.open(props.virtual_account.payment_url)
+//     } else if (props.wallet_account.payment_url) {
+//         window.open(props.wallet_account.payment_url)
+//     }
+// })
 
 const form = useForm({
     transaction: props.transaction,
@@ -105,7 +105,7 @@ function formattedDateTime(value) {
                                 </div>
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm ">Deeplink</div>
+                                <div class="text-sm ">Cara bayar</div>
                                 <div class="text-sm font-semibold text-primary-600 underline">
                                     <a target="_blank" :href="props.virtual_account.payment_url" >Bayar</a>
                                 </div>
