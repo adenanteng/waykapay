@@ -68,7 +68,7 @@ class DepositController extends Controller
 
         $requestBody = array(
             'order' => array(
-                'amount' => $request['amount'],
+                'amount' => $request['amount'] + $admin_fee,
                 'invoice_number' => $requestId,
             ),
             'virtual_account_info' => array(
