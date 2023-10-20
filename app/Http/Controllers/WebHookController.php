@@ -12,6 +12,42 @@ class WebHookController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+    public function webhookHandlerDokuAcceptPayment(Request $request){
+
+        $transaction = Transaction::where('order_id', $request['order']['invoice_number'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
+
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['transaction']['status']) {
+                case ('SUCCESS'):
+                    $user->deposit($transaction->amount);
+                    $status_id = Transaction::SUCCESS;
+                    break;
+
+                case ('CANCEL'):
+                    $status_id = Transaction::CANCEL;
+                    break;
+
+                case ('FAILED'):
+                    $status_id = Transaction::ERROR;
+                    break;
+
+                default:
+                    $status_id = Transaction::UNDEFINED;
+            }
+
+            $transaction->update([
+                'status_id' => $status_id,
+            ]);
+        }
+
+        return response()->json('ok');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function webhookHandlerFlipAcceptPayment(Request $request){
 
         $transaction = Transaction::where('order_id', $request['bill_link_id'])->first();

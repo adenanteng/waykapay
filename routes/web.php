@@ -36,6 +36,7 @@ use Inertia\Inertia;
 
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
 
+Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
 Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);

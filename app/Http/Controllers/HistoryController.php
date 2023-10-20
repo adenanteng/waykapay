@@ -45,32 +45,67 @@ class HistoryController extends Controller
 //                    session()->flash('flash.banner', 'tidak ada proses!');
                     break;
                 default:
-                    $response = Http::withHeaders([
-                        'Accept' => 'application/json',
-                        'Content-Type' => 'application/json',
-                        'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
-                    ])->get('https://bigflip.id/big_sandbox_api/v2/pwf/' . $transaction->order_id . '/payment');
 
-                    switch ($response->object()->data[0]->status) {
-                        case('SUCCESSFUL'):
-                            $status_id = Transaction::SUCCESS;
-                            $user->deposit($transaction->amount);
-                            break;
-
-                        case ('PENDING'):
-                            $status_id = Transaction::PENDING;
-                            break;
-
-                        case ('FAILED'):
-                            $status_id = Transaction::ERROR;
-                            break;
-
-                        default:
-                            $status_id = Transaction::UNDEFINED;
-                    }
-                    $transaction->update([
-                        'status_id' => $status_id,
-                    ]);
+//                    $clientId = "BRN-0207-1696486292133";
+//                    $secretKey = "SK-tJPSFOkRG0WHG8PIuzso";
+//                    $requestId = $transaction->order_id;
+//                    $requestDate = Carbon::now('UTC')->toIso8601ZuluString();
+//                    $getUrl = 'https://api-sandbox.doku.com';
+//                    $targetPath = '/orders/v1/status/';
+//                    $url = $getUrl . $targetPath . $transaction->order_id;
+//
+//                    // Prepare signature component
+//                    $componentSignature = "Client-Id:".$clientId ."\n".
+//                        "Request-Id:".$requestId . "\n".
+//                        "Request-Timestamp:".$requestDate ."\n".
+//                        "Request-Target:".$targetPath;
+//
+//                    // Generate signature
+//                    $signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+//
+//                    // Execute request
+//                    $ch = curl_init($url);
+////                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
+//                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+//                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//
+//                    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//                        'Content-Type: application/json',
+//                        'Client-Id:' . $clientId,
+//                        'Request-Id:' . $requestId,
+//                        'Request-Timestamp:' . $requestDate,
+//                        'Signature:' . "HMACSHA256=" . $signature,
+//                    ));
+//
+//                    // Set response json
+//                    $responseJson = curl_exec($ch);
+//                    $response = json_decode($responseJson);
+//                    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+//
+//                    curl_close($ch);
+//
+//                    dd($response);
+//
+//                    switch ($response->object()->data[0]->status) {
+//                        case('SUCCESSFUL'):
+//                            $status_id = Transaction::SUCCESS;
+//                            $user->deposit($transaction->amount);
+//                            break;
+//
+//                        case ('PENDING'):
+//                            $status_id = Transaction::PENDING;
+//                            break;
+//
+//                        case ('FAILED'):
+//                            $status_id = Transaction::ERROR;
+//                            break;
+//
+//                        default:
+//                            $status_id = Transaction::UNDEFINED;
+//                    }
+//                    $transaction->update([
+//                        'status_id' => $status_id,
+//                    ]);
 
             }
         } else {

@@ -45,83 +45,147 @@ class DepositController extends Controller
 
     public function create(Request $request)
     {
-        // Instantiate class
-        $DOKUClient = new Client();
-        // Set your Client ID
-        $DOKUClient->setClientID('BRN-0207-1696486292133');
-        // Set your Shared Key
-        $DOKUClient->setSharedKey('SK-tJPSFOkRG0WHG8PIuzso');
-        // Call this function for production use
-        $DOKUClient->isProduction(false);
-        // Setup VA payment request data
-        $params = array(
-            'customerEmail' => 'aden.anteng@gmail.com',
-            'customerName' => 'Aden',
-            'amount' => 15000,
-            'invoiceNumber' => Str::random(8),
-            'expiryTime' => Carbon::tomorrow('UTC')->toIso8601ZuluString(),
-            'info1' => 'Lorem',
-            'info2' => 'Ipsum',
-            'info3' => 'Dolor',
-            'reusableStatus' => false
+//        dd($request->all());
+        $user = User::where('id', $request['user_id'])->first();
+
+        $sender_bank_type = match ($request['method']['id']) {
+            1 => $targetPath = "/bca-virtual-account/v2/payment-code",
+            2 => $targetPath = "/bni-virtual-account/v2/payment-code",
+            3 => $targetPath = "/bri-virtual-account/v2/payment-code",
+            4 => $targetPath = "/mandiri-virtual-account/v2/payment-code",
+            5 => $targetPath = "/permata-virtual-account/v2/payment-code",
+            6 => $targetPath = "/bsm-virtual-account/v2/payment-code",
+        };
+
+        $admin_fee = 4000;
+
+        $clientId = "BRN-0207-1696486292133";
+        $secretKey = "SK-tJPSFOkRG0WHG8PIuzso";
+        $requestId = Str::random(8);
+        $requestDate = Carbon::now('UTC')->toIso8601ZuluString();
+        $getUrl = 'https://api-sandbox.doku.com';
+        $url = $getUrl . $targetPath;
+
+        $requestBody = array(
+            'order' => array(
+                'amount' => $request['amount'],
+                'invoice_number' => $requestId,
+            ),
+            'virtual_account_info' => array(
+                "billing_type" => "FIX_BILL",
+                'expired_time' => 60,
+                'reusable_status' => false,
+                'info1' => 'Lorem ipsum dolor sit amet',
+            ),
+            'customer' => array(
+                'name' => $user->name,
+                'email' => $user->email,
+            ),
         );
-        $DOKUClient->generateMandiriVa($params);
-        dd($DOKUClient);
 
+        // Generate digest
+        $digestValue = base64_encode(hash('sha256', json_encode($requestBody), true));
 
-//        $clientId = "BRN-0207-1696486292133";
-//        $requestId = Str::random(8);
-//        $requestDate = Carbon::now('UTC')->toIso8601ZuluString();;
-//        $targetPath = "bca-virtual-account/v2/payment-code"; // For merchant request to Jokul, use Jokul path here. For HTTP Notification, use merchant path here
-//        $secretKey = "SK-tJPSFOkRG0WHG8PIuzso";
-//        $requestBody = array(
-//            'order' => array(
-//                'amount' => 15000,
-//                'invoice_number' => 'INV-20210124-0001',
-//            ),
-//            'virtual_account_info' => array(
-//                "billing_type" => "FIX_BILL",
-//                'expired_time' => 60,
-//                'reusable_status' => false,
-//                'info1' => 'Merchant Demo Store',
-//            ),
-//            'customer' => array(
-//                'name' => 'Taufik Ismail',
-//                'email' => 'taufik@example.com',
-//            ),
-//        );
-//
-//        // Generate Digest
-//        $digestValue = base64_encode(hash('sha256', json_encode($requestBody), true));
-//
-//        // Prepare Signature Component
-//        $componentSignature = "Client-Id:" . $clientId . "\n" .
-//            "Request-Id:" . $requestId . "\n" .
-//            "Request-Timestamp:" . $requestDate . "\n" .
-//            "Request-Target:" . $targetPath . "\n" .
-//            "Digest:" . $digestValue;
-//
-//        // Calculate HMAC-SHA256 base64 from all the components above
-//        $signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
-//
-////        dd($requestDate, $secretKey, $digestValue, $componentSignature, $signature);
-////        dd("HMACSHA256=".$signature);
-//
-//        $response = Http::withHeaders([
-//            'Client-Id' => $clientId,
-//            'Request-Id' => $requestId,
-//            'Request-Timestamp' => $requestDate,
-//            'Signature' => 'HMACSHA256='.$signature
-//        ])->post('https://api-sandbox.doku.com/'.$targetPath, $requestBody);
-//
-////        dd($response->object());
-//
-//        if ($response->successful()) {
-//            dd('asli');
-//        } else {
-//            dd($response->object());
-//        }
+        // Prepare signature component
+        $componentSignature = "Client-Id:".$clientId ."\n".
+            "Request-Id:".$requestId . "\n".
+            "Request-Timestamp:".$requestDate ."\n".
+            "Request-Target:".$targetPath ."\n".
+            "Digest:".$digestValue;
 
+        // Generate signature
+        $signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+
+        // Execute request
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Client-Id:' . $clientId,
+            'Request-Id:' . $requestId,
+            'Request-Timestamp:' . $requestDate,
+            'Signature:' . "HMACSHA256=" . $signature,
+        ));
+
+        // Set response json
+        $responseJson = curl_exec($ch);
+        $response = json_decode($responseJson);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        curl_close($ch);
+
+        // Echo the response
+        if (is_string($responseJson) && $httpCode == 200) {
+//            dd(json_decode($responseJson));
+            $transaction = Transaction::create([
+                'sku' => '-',
+                'order_id' => $response->order->invoice_number,
+                'product_name' => 'Deposit',
+                'customer_no' => '-',
+                'user_id' => $request['user_id'],
+                'status_id' => Transaction::PENDING,
+                'category_id' => Transaction::DEPOSIT,
+                'amount' => $request['amount'],
+                'gross_amount' => $request['amount'] + $admin_fee,
+                'last_amount' => $user->wallet_balance,
+                'admin_fee' => $admin_fee,
+            ]);
+
+            $virtual_account = TransactionBankTransfer::create([
+                'transaction_id' => $transaction->id,
+                'bank_id' => $request['method']['id'],
+                'va_number' => $response->virtual_account_info->virtual_account_number,
+                'payment_url' => $response->virtual_account_info->how_to_pay_page,
+                'exp_time' => Carbon::tomorrow(),
+            ]);
+
+            return Inertia::render('Deposit/Confirm', [
+                'transaction' => $transaction,
+                'virtual_account' => $virtual_account ?? '',
+                'wallet_account' => $wallet_account ?? '',
+            ]);
+
+        } else {
+            dd($responseJson);
+        }
+
+    }
+
+    public function createOke(Request $request)
+    {
+        $merchantCode = "OK1168432";
+        $merchantOrderId = Str::random(8);
+        $paymentAmount = 20000;
+        $mKey = "836753316901900731168432OKCTFB6944D5EE66C810AF962674B3A8C7AF";
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ])->post('https://gateway.okeconnect.com/api/va/inquiry',
+            [
+                "merchantCode" => $merchantCode,
+                "paymentAmount" => $paymentAmount,
+                "merchantOrderId" => $merchantOrderId,
+                "productDetails" => "Lorem ipsum",
+                "email" => "aden.anteng@gmail.com",
+                "bank" => "MANDIRI",
+                "phoneNumber" => "082280031916",
+                "returnUrl" => "https://waykapay.com",
+                "callbackUrl" => "https://waykapay.com",
+                "signature" => md5($merchantCode.$merchantOrderId.$paymentAmount.$mKey),
+            ],
+        );
+
+//        dd($response->object());
+
+        if ($response->successful()) {
+            dd($response->object());
+        } else {
+            dd("gagal");
+        }
     }
 
     public function createFlip(Request $request)

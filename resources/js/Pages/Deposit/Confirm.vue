@@ -77,6 +77,14 @@ function formattedDateTime(value) {
                 <div class="col-span-6 ">
                     <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
                         <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Nominal</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.amount) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Biaya Admin</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.admin_fee) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Total</div>
                             <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.gross_amount) }}</div>
                         </div>
