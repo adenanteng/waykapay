@@ -75,7 +75,7 @@ class DepositController extends Controller
                 "billing_type" => "FIX_BILL",
                 'expired_time' => 60,
                 'reusable_status' => false,
-                'info1' => 'Lorem ipsum dolor sit amet',
+                'info1' => 'Waykapay',
             ),
             'customer' => array(
                 'name' => $user->name,
