@@ -59,11 +59,11 @@ class DepositController extends Controller
 
         $admin_fee = 4000;
 
-        $clientId = "BRN-0207-1696486292133";
-        $secretKey = "SK-tJPSFOkRG0WHG8PIuzso";
+        $clientId = "BRN-0288-1690798735800";
+        $secretKey = "SK-CIiJ0QDZmqNAhpfxFVbt";
         $requestId = Str::random(8);
         $requestDate = Carbon::now('UTC')->toIso8601ZuluString();
-        $getUrl = 'https://api-sandbox.doku.com';
+        $getUrl = 'https://api.doku.com';
         $url = $getUrl . $targetPath;
 
         $requestBody = array(
