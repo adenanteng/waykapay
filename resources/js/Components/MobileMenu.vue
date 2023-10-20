@@ -37,7 +37,7 @@ import {Link} from "@inertiajs/vue3";
                     </h3>
                 </Link>
 
-                <Link :href="route('profile.index')" class="group text-center">
+                <Link :href="route('profile.index')" class="group grid justify-center text-center">
                     <i class="fa-user text-xl text-gray-700"
                        :class="$page.component.startsWith('Profile') ? 'fa-solid text-primary-700' : 'fa-regular' "
                     />

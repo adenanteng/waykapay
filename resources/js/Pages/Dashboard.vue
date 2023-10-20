@@ -188,6 +188,14 @@ const onSlideChange = (swiper) => {
                         <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>
                     </Link>
 
+                    <Link :href="route('voucher.index')" class="group flex flex-col justify-center items-center">
+                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
+                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-violet-300 to-violet-50"></i>
+                            <i class="fa-stack-1x fa-duotone fa-ticket text-violet-600 group-hover:text-violet-800"></i>
+                        </span>
+                        <h3 class="mt-2 text-sm text-gray-700">Voucher</h3>
+                    </Link>
+
                     <Link :href="route('television.index')" class="group flex flex-col justify-center items-center">
                         <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
                             <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-green-300 to-green-50"></i>

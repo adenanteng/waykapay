@@ -16,6 +16,7 @@ use App\Http\Controllers\ProductInternetController;
 use App\Http\Controllers\ProductPlnController;
 use App\Http\Controllers\ProductPulsaController;
 use App\Http\Controllers\ProductTelevisionController;
+use App\Http\Controllers\ProductVoucherController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -71,18 +72,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/pln-postpaid-inquiry', [ProductPlnController::class, 'inquiryPostpaid'])->name('pln.postpaid.inquiry');
 
     Route::get('/product/games', [ProductGamesController::class, 'index'])->name('games.index');
-    Route::get('/product/games/pubgm', [ProductGamesController::class, 'pubgm'])->name('games.pubgm');
-    Route::get('/product/games/mobilelegends', [ProductGamesController::class, 'ml'])->name('games.ml');
-    Route::get('/product/games/googleplay', [ProductGamesController::class, 'googlePlay'])->name('games.googlePlay');
-    Route::get('/product/games/steam', [ProductGamesController::class, 'steam'])->name('games.steam');
+    Route::get('/product/games/{product}', [ProductGamesController::class, 'show'])->name('games.show');
 
     Route::get('/product/emoney', [ProductEmoneyController::class, 'index'])->name('emoney.index');
-    Route::get('/product/emoney/dana', [ProductEmoneyController::class, 'dana'])->name('emoney.dana');
-    Route::get('/product/emoney/gopay', [ProductEmoneyController::class, 'gopay'])->name('emoney.gopay');
+    Route::get('/product/emoney/{product}', [ProductEmoneyController::class, 'show'])->name('emoney.show');
+
+    Route::get('/voucher/emoney', [ProductVoucherController::class, 'index'])->name('voucher.index');
+    Route::get('/voucher/emoney/{product}', [ProductVoucherController::class, 'show'])->name('voucher.show');
 
     Route::get('/product/television', [ProductTelevisionController::class, 'index'])->name('television.index');
-    Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
-    Route::get('/product/television/nex', [ProductTelevisionController::class, 'nex'])->name('television.nex');
+    Route::get('/product/television/{product}', [ProductTelevisionController::class, 'show'])->name('television.show');
+//    Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
+//    Route::get('/product/television/nex', [ProductTelevisionController::class, 'nex'])->name('television.nex');
 
     Route::get('/product/internet', [ProductInternetController::class, 'index'])->name('internet.index');
     Route::get('/product/internet/indihome', [ProductInternetController::class, 'indihome'])->name('internet.indihome.index');

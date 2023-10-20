@@ -30,18 +30,18 @@ const form = useForm({
 
             <li class="relative">
                 <div class="group w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg flex items-center">
-                    <img src="/img/vendor/K-VISION.png" alt=""
+                    <img src="/img/vendor/K-VISION%20dan%20GOL.svg" alt=""
                          class="h-auto w-full pointer-events-none group-hover:opacity-75 p-3">
-                    <Link :href="route('television.kvision')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('television.show', 'K-VISION dan GOL')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
 <!--                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">K-Vision</p>-->
             </li>
 
             <li class="relative">
                 <div class="group w-full aspect-video border border-gray-300 rounded-3xl overflow-hidden shadow-lg flex items-center">
-                    <img src="/img/vendor/NEX.png" alt=""
+                    <img src="/img/vendor/Nex%20Parabola.svg" alt=""
                          class="h-auto w-full pointer-events-none group-hover:opacity-75 p-3">
-                    <Link :href="route('television.nex')" class="absolute inset-0 focus:outline-none"></Link>
+                    <Link :href="route('television.show', 'Nex Parabola')" class="absolute inset-0 focus:outline-none"></Link>
                 </div>
                 <!--                <p class="mt-1 block text-sm text-gray-900 truncate pointer-events-none">K-Vision</p>-->
             </li>

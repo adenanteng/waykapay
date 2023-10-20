@@ -26,39 +26,16 @@ class ProductEmoneyController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function dana()
+    public function show($product)
     {
         $response = Helper::pricelist();
 
         if ($response->successful()) {
-            return Inertia::render('Product/Emoney/Dana', [
+            return Inertia::render('Product/Emoney/Show', [
                 'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => $response->object()),
                 'fee' => Helper::api()->fees,
-            ]);
-
-        } else {
-//            dd($response->status());
-            return Inertia::render('Payment/Info', [
-                'transaction' => $response->object()->data,
-            ]);
-        }
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Inertia\Response
-     */
-    public function gopay()
-    {
-        $response = Helper::pricelist();
-
-        if ($response->successful()) {
-            return Inertia::render('Product/Emoney/Gopay', [
-                'users' => auth()->user(),
-                'response'  => Inertia::lazy(fn () => $response->object()),
-                'fee' => Helper::api()->fees,
+                'product' => $product
             ]);
 
         } else {
