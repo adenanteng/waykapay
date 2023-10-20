@@ -45,7 +45,7 @@ class ProductInternetController extends Controller
         $customer = Http::post('https://api.digiflazz.com/v1/transaction', [
             'commands' => 'inq-pasca',
             'customer_no' => $request['customer_no'],
-            'buyer_sku_code' => 'net-indihome',
+            'buyer_sku_code' => 'indihome',
             'username' => Helper::api()->digiflazz_username,
             'ref_id' => $order_id,
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
@@ -96,7 +96,7 @@ class ProductInternetController extends Controller
         $customer = Http::post('https://api.digiflazz.com/v1/transaction', [
             'commands' => 'inq-pasca',
             'customer_no' => $request['customer_no'],
-            'buyer_sku_code' => 'net-myrepublic',
+            'buyer_sku_code' => 'myrepublic',
             'username' => Helper::api()->digiflazz_username,
             'ref_id' => $order_id,
             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$order_id),
