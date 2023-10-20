@@ -55,6 +55,7 @@ class DepositController extends Controller
             4 => $targetPath = "/mandiri-virtual-account/v2/payment-code",
             5 => $targetPath = "/permata-virtual-account/v2/payment-code",
             6 => $targetPath = "/bsm-virtual-account/v2/payment-code",
+            13 => $targetPath = "/alfa-virtual-account/v2/payment-code",
         };
 
         $admin_fee = 4000;
@@ -66,22 +67,40 @@ class DepositController extends Controller
         $getUrl = 'https://api.doku.com';
         $url = $getUrl . $targetPath;
 
-        $requestBody = array(
-            'order' => array(
-                'amount' => $request['amount'] + $admin_fee,
-                'invoice_number' => $requestId,
-            ),
-            'virtual_account_info' => array(
-                "billing_type" => "FIX_BILL",
-                'expired_time' => 60,
-                'reusable_status' => false,
-                'info1' => 'Waykapay',
-            ),
-            'customer' => array(
-                'name' => $user->name,
-                'email' => $user->email,
-            ),
-        );
+        if ($request['method']['id'] <= 6){
+            $requestBody = array(
+                'order' => array(
+                    'amount' => $request['amount'] + $admin_fee,
+                    'invoice_number' => $requestId,
+                ),
+                'virtual_account_info' => array(
+                    "billing_type" => "FIX_BILL",
+                    'expired_time' => 60,
+                    'reusable_status' => false,
+                    'info1' => 'Waykapay',
+                ),
+                'customer' => array(
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ),
+            );
+        } else {
+            $requestBody = array(
+                'order' => array(
+                    'amount' => $request['amount'] + $admin_fee,
+                    'invoice_number' => $requestId,
+                ),
+                'online_to_offline_info' => array(
+                    'expired_time' => 60,
+                    'reusable_status' => false,
+                    'info' => 'Waykapay',
+                ),
+                'customer' => array(
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ),
+            );
+        }
 
         // Generate digest
         $digestValue = base64_encode(hash('sha256', json_encode($requestBody), true));
@@ -149,7 +168,7 @@ class DepositController extends Controller
             ]);
 
         } else {
-            dd($responseJson);
+            dd(json_decode($responseJson));
         }
 
     }
