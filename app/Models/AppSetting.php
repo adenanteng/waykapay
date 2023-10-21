@@ -23,9 +23,9 @@ class AppSetting extends Model implements HasMedia
 //        'midtrans_id_merchant',
 //        'midtrans_client_key',
 //        'midtrans_server_key',
-        'flip_secret',
-        'flip_token',
-        'flip_saldo',
+//        'flip_secret',
+//        'flip_token',
+//        'flip_saldo',
         'digiflazz_username',
         'digiflazz_key',
         'digiflazz_saldo'

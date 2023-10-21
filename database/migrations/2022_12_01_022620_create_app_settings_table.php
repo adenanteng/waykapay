@@ -21,10 +21,11 @@ return new class extends Migration
 //            $table->string('midtrans_id_merchant')->nullable();
 //            $table->string('midtrans_client_key')->nullable();
 //            $table->string('midtrans_server_key')->nullable();
-            $table->string('flip_secret')->nullable();
-            $table->string('flip_token')->nullable();
+//            $table->string('flip_secret')->nullable();
+//            $table->string('flip_token')->nullable();
             $table->string('digiflazz_username')->nullable();
             $table->string('digiflazz_key')->nullable();
+            $table->bigInteger('digiflazz_saldo')->nullable();
             $table->timestamps();
 
         });

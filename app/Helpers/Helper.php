@@ -14,15 +14,15 @@ class Helper
         }
     }
 
-    public static function flip_saldo()
-    {
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/x-www-form-urlencoded',
-            'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
-        ])->get('https://bigflip.id/big_sandbox_api/v2/general/balance');
-
-        return $response->object()->balance;
-    }
+//    public static function flip_saldo()
+//    {
+//        $response = Http::withHeaders([
+//            'Content-Type' => 'application/x-www-form-urlencoded',
+//            'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
+//        ])->get('https://bigflip.id/big_sandbox_api/v2/general/balance');
+//
+//        return $response->object()->balance;
+//    }
 
     public static function digiflazz_saldo()
     {

@@ -30,14 +30,16 @@
     </head>
     <body class="antialiased">
         <div class="relative flex justify-center min-h-screen items-center sm:pt-0 bg-glass">
-            <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_dzgblnlt.json"
-                               background="transparent"
-                               speed="1"
-                               style="width: 300px; height: 300px;"
-                               loop
-                               autoplay
-                ></lottie-player>
+            <div class="max-w-xl mx-auto sm:px-6 lg:px-8 flex-col justify-center">
+                <div class="px-4">
+                    <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_dzgblnlt.json"
+                                   background="transparent"
+                                   speed="1"
+                                   loop
+                                   autoplay
+                    ></lottie-player>
+                </div>
+
                 <div class="flex items-center pt-8 justify-center sm:pt-0">
                     <div class="px-4 text-lg text-gray-500 border-r border-gray-500 tracking-wider">
                         @yield('code')

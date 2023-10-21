@@ -60,8 +60,8 @@ class DepositController extends Controller
 
         $admin_fee = 4000;
 
-        $clientId = "BRN-0288-1690798735800";
-        $secretKey = "SK-CIiJ0QDZmqNAhpfxFVbt";
+        $clientId = 'BRN-0207-1696486292133';
+        $secretKey = 'SK-tJPSFOkRG0WHG8PIuzso';
         $requestId = Str::random(8);
         $requestDate = Carbon::now('UTC')->toIso8601ZuluString();
         $getUrl = 'https://api.doku.com';
@@ -91,6 +91,7 @@ class DepositController extends Controller
                     'invoice_number' => $requestId,
                 ),
                 'online_to_offline_info' => array(
+                    'payment_code' => $user->phone,
                     'expired_time' => 60,
                     'reusable_status' => false,
                     'info' => 'Waykapay',
@@ -138,7 +139,7 @@ class DepositController extends Controller
 
         // Echo the response
         if (is_string($responseJson) && $httpCode == 200) {
-//            dd(json_decode($responseJson));
+            dd($response);
             $transaction = Transaction::create([
                 'sku' => '-',
                 'order_id' => $response->order->invoice_number,
@@ -168,7 +169,7 @@ class DepositController extends Controller
             ]);
 
         } else {
-            dd(json_decode($responseJson));
+            dd($response);
         }
 
     }

@@ -57,6 +57,15 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         self::USER => 'Jelata',
     ];
 
+    const ACTIVE = 1;
+    const NONACTIVE = 2;
+    const BANNED = 3;
+    const STATUS = [
+        self::ACTIVE => 'Aktif',
+        self::NONACTIVE => 'Nonaktif',
+        self::BANNED => 'Blokir',
+    ];
+
     /**
      * The attributes that should be cast.
      *

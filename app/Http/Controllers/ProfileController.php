@@ -21,22 +21,22 @@ class ProfileController extends Controller
 //        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get();
 
         if (auth()->user()->role_id == User::USER) {
-            $flip_saldo = 0;
+//            $flip_saldo = 0;
             $digiflazz_saldo = 0;
         } else {
-            $flip_saldo = Inertia::lazy(fn () => Helper::flip_saldo());
+//            $flip_saldo = Inertia::lazy(fn () => Helper::flip_saldo());
             $digiflazz_saldo = Inertia::lazy(fn () => Helper::digiflazz_saldo());
 
             $app = AppSetting::first();
 
             $app->update([
-                'flip_saldo' => Helper::flip_saldo(),
+//                'flip_saldo' => Helper::flip_saldo(),
                 'digiflazz_saldo' => Helper::digiflazz_saldo()
             ]);
         }
 
         return Inertia::render('Profile/Index', [
-            'flip_saldo' =>  $flip_saldo,
+//            'flip_saldo' =>  $flip_saldo,
             'digiflazz_saldo' => $digiflazz_saldo,
         ]);
     }
