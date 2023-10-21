@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Transaction;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Artisan;
@@ -18,7 +19,14 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command(Artisan::call('down'))->daily();
-        $schedule->command(Artisan::call('up'))->dailyAt('00:23');
+
+        $schedule->command(
+            Transaction::where('category_id', Transaction::DEPOSIT)
+                ->where('status_id', Transaction::PENDING)
+                ->update(['status_id' => Transaction::CANCEL]))
+            ->dailyAt('00:30');
+
+        $schedule->command(Artisan::call('up'))->dailyAt('00:10');
     }
 
     /**
