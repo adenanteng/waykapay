@@ -53,6 +53,17 @@ class Transaction extends Model
         self::UNDEFINED => 'Undefined',
     ];
 
+    const COLOR = [
+        self::SUCCESS => 'bg-green-100 text-green-800',
+        self::PENDING => 'bg-amber-100 text-amber-800',
+        self::CANCEL => 'bg-gray-100 text-gray-800',
+        self::DENY => 'bg-gray-100 text-gray-800',
+        self::EXPIRE => 'bg-gray-100 text-gray-800',
+        self::ERROR =>  'bg-red-100 text-red-800',
+        self::CLOSE => 'bg-gray-100 text-gray-800',
+        self::UNDEFINED => 'bg-gray-100 text-gray-800',
+    ];
+
     const DEPOSIT = 1;
     const PULSA = 2;
     const DATA = 3;
@@ -106,6 +117,7 @@ class Transaction extends Model
         'created',
 //        'user',
         'status',
+        'color',
         'category'
     ];
 
@@ -128,6 +140,11 @@ class Transaction extends Model
     public function getStatusAttribute(): string
     {
         return self::STATUS[$this->status_id];
+    }
+
+    public function getColorAttribute(): string
+    {
+        return self::COLOR[$this->status_id];
     }
 
     public function getCategoryAttribute(): string

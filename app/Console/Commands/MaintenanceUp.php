@@ -2,17 +2,17 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Transaction;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
-class ExpireTransaction extends Command
+class MaintenanceUp extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:expire-transaction';
+    protected $signature = 'app:maintenance-up';
 
     /**
      * The console command description.
@@ -26,8 +26,6 @@ class ExpireTransaction extends Command
      */
     public function handle()
     {
-        Transaction::where('category_id', Transaction::DEPOSIT)
-            ->where('status_id', Transaction::PENDING)
-            ->update(['status_id' => Transaction::EXPIRE]);
+        Artisan::call('up');
     }
 }

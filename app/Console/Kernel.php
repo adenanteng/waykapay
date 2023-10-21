@@ -18,11 +18,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-//        $schedule->command(Artisan::call('down'))->daily();
-
-        $schedule->command('app:expire-transaction')->dailyAt('00:45');
-
-//        $schedule->command(Artisan::call('up'))->dailyAt('00:10');
+        $schedule->command('app:maintenance-down')->daily();
+        $schedule->command('app:expire-transaction')->dailyAt('00:01');
+        $schedule->command('app:maintenance-up')->dailyAt('00:10');
     }
 
     /**
