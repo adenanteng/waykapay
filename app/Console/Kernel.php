@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Artisan;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,8 +17,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('app:maintenance-down')->dailyAt('23:20');
-        $schedule->command('app:maintenance-up')->dailyAt('00:10');
+        $schedule->command(Artisan::call('down'))->daily();
+        $schedule->command(Artisan::call('up'))->dailyAt('00:10');
     }
 
     /**
