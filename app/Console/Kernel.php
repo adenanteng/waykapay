@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command(Artisan::call('down'))->daily();
-        $schedule->command(Artisan::call('up'))->dailyAt('00:10');
+        $schedule->command(Artisan::call('up'))->dailyAt('00:20');
     }
 
     /**
