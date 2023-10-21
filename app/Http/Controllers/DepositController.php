@@ -139,7 +139,7 @@ class DepositController extends Controller
 
         // Echo the response
         if (is_string($responseJson) && $httpCode == 200) {
-            dd($response);
+//            dd($response);
             $transaction = Transaction::create([
                 'sku' => '-',
                 'order_id' => $response->order->invoice_number,
