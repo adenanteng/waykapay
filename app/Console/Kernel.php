@@ -19,8 +19,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('app:maintenance-down')->daily();
-        $schedule->command('app:expire-transaction')->dailyAt('00:01');
-        $schedule->command('app:maintenance-up')->dailyAt('00:10');
+        $schedule->command('app:expire-transaction')->dailyAt('00:01')->evenInMaintenanceMode();
+        $schedule->command('app:maintenance-up')->dailyAt('00:10')->evenInMaintenanceMode();
     }
 
     /**
