@@ -154,100 +154,114 @@ const onSlideChange = (swiper) => {
         </div>
 
         <div class="">
-            <div class="py-6">
-                <div class="gap-x-6 gap-y-10 grid grid-cols-4 lg:grid-cols-6 lg:gap-x-8">
-                    <Link :href="route('pulsa.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
-                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-sky-300 to-sky-50"></i>
-                            <i class="fa-stack-1x fa-duotone fa-mobile text-sky-600 group-hover:text-sky-800"></i>
-                        </span>
-                        <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>
-                    </Link>
+            <div class="grid grid-cols-3 grid-rows-6 grid-flow-col gap-4">
+                <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center rounded-3xl bg-gradient-to-br from-sky-300 dark:from-sky-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-mobile text-5xl text-sky-600 dark:text-gray-900" />
+                        <p class="text-xs text-sky-600 dark:text-gray-900">Pulsa</p>
+                    </div>
+                </Link>
+                <Link :href="route('pln.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-amber-300 dark:from-amber-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-lightbulb text-2xl text-amber-600 dark:text-gray-900" />
+                        <p class="text-xs text-amber-600 dark:text-gray-900">Listrik</p>
+                    </div>
+                </Link>
+                <Link :href="route('games.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-teal-300 dark:from-teal-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-gamepad-modern text-2xl text-teal-600 dark:text-gray-900" />
+                        <p class="text-xs text-teal-600 dark:text-gray-900">Games</p>
+                    </div>
+                </Link>
+                <Link :href="route('voucher.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-violet-300 dark:from-violet-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-ticket text-2xl text-violet-600 dark:text-gray-900" />
+                        <p class="text-xs text-violet-600 dark:text-gray-900">Voucher</p>
+                    </div>
+                </Link>
+                <Link :href="route('emoney.index')" class="row-span-2  col-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-blue-300 dark:from-blue-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-wallet text-2xl text-blue-600 dark:text-gray-900" />
+                        <p class="text-xs text-blue-600 dark:text-gray-900">E-Money</p>
+                    </div>
+                </Link>
+                <Link :href="route('television.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-green-300 dark:from-green-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-tv-retro text-2xl text-green-600 dark:text-gray-900" />
+                        <p class="text-xs text-green-600 dark:text-gray-900">TV</p>
+                    </div>
+                </Link>
 
-                    <Link :href="route('pln.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
-                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-amber-300 to-amber-50"></i>
-                            <i class="fa-stack-1x fa-duotone fa-lightbulb text-amber-600 group-hover:text-amber-800"></i>
-                        </span>
-                        <h3 class="mt-2 text-sm text-gray-700">Listrik</h3>
-                    </Link>
-
-                    <Link :href="route('games.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
-                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-teal-50"></i>
-                            <i class="fa-stack-1x fa-duotone fa-gamepad-modern text-teal-600 group-hover:text-teal-800"></i>
-                        </span>
-                        <h3 class="mt-2 text-sm text-gray-700">Games</h3>
-                    </Link>
-
-                    <Link :href="route('emoney.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
-                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-blue-300 to-blue-50"></i>
-                            <i class="fa-stack-1x fa-duotone fa-wallet text-blue-600 group-hover:text-blue-800"></i>
-                        </span>
-                        <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>
-                    </Link>
-
-                    <Link :href="route('voucher.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
-                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-violet-300 to-violet-50"></i>
-                            <i class="fa-stack-1x fa-duotone fa-ticket text-violet-600 group-hover:text-violet-800"></i>
-                        </span>
-                        <h3 class="mt-2 text-sm text-gray-700">Voucher</h3>
-                    </Link>
-
-                    <Link :href="route('television.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
-                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-green-300 to-green-50"></i>
-                            <i class="fa-stack-1x fa-duotone fa-tv-retro text-green-600 group-hover:text-green-800"></i>
-                        </span>
-                        <h3 class="mt-2 text-sm text-gray-700">TV</h3>
-                    </Link>
-
-                    <Link :href="route('internet.index')" class="group flex flex-col justify-center items-center">
-                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">
-                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-red-300 to-red-50"></i>
-                            <i class="fa-stack-1x fa-duotone fa-router text-red-600 group-hover:text-red-800"></i>
-                        </span>
-                        <h3 class="mt-2 text-sm text-gray-700">Internet</h3>
-                    </Link>
-                </div>
+                <Link :href="route('internet.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-router text-2xl text-red-600 dark:text-gray-900" />
+                        <p class="text-xs text-red-600 dark:text-gray-900">Internet</p>
+                    </div>
+                </Link>
             </div>
         </div>
 
-<!--        <swiper-->
-<!--            :modules="[FreeMode]"-->
-<!--            slides-per-view="2.5"-->
-<!--            :space-between="10"-->
-<!--            @swiper="onSwiper"-->
-<!--            @slideChange="onSlideChange"-->
-<!--            :freeMode="true"-->
-<!--            :breakpoints="{-->
-<!--                '640': {-->
-<!--                    slidesPerView: 3,-->
-<!--                    spaceBetween: 10,-->
-<!--                },-->
-<!--                '768': {-->
-<!--                    slidesPerView: 4,-->
-<!--                    spaceBetween: 10,-->
-<!--                },-->
-<!--                '1024': {-->
-<!--                    slidesPerView: 5,-->
-<!--                    spaceBetween: 10,-->
-<!--                },-->
-<!--            }"-->
-<!--        >-->
-<!--            <template v-for="menu in menus" :key="menu.name">-->
-<!--                <SwiperSlide>-->
-<!--                    <Link :href="route(menu.href)" class="text-right" preserve-scroll>-->
-<!--                        <div class="px-5 py-3 rounded-3xl bg-gradient-to-br overflow-hidden nightwind-prevent-block aspect-square sm:aspect-auto relative" :class="menu.bg">-->
-<!--                            <h3 class="text-sm text-white text-left font-semibold">{{ menu.name }}</h3>-->
-<!--                            <i class="mt-2 fa-regular text-4xl text-white absolute sm:relative bottom-5 sm:bottom-0 right-5 sm:right-0" :class="menu.icon" />-->
-<!--                        </div>-->
+<!--        <div class="">-->
+<!--            <div class="py-6">-->
+<!--                <div class="gap-x-6 gap-y-10 grid grid-cols-4 lg:grid-cols-6 lg:gap-x-8">-->
+<!--                    <Link :href="route('pulsa.index')" class="group flex flex-col justify-center items-center">-->
+<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
+<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-sky-300 to-sky-50"></i>-->
+<!--                            <i class="fa-stack-1x fa-duotone fa-mobile text-sky-600 group-hover:text-sky-800"></i>-->
+<!--                        </span>-->
+<!--                        <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>-->
 <!--                    </Link>-->
-<!--                </SwiperSlide>-->
-<!--            </template>-->
-<!--        </swiper>-->
+
+<!--                    <Link :href="route('pln.index')" class="group flex flex-col justify-center items-center">-->
+<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
+<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-amber-300 to-amber-50"></i>-->
+<!--                            <i class="fa-stack-1x fa-duotone fa-lightbulb text-amber-600 group-hover:text-amber-800"></i>-->
+<!--                        </span>-->
+<!--                        <h3 class="mt-2 text-sm text-gray-700">Listrik</h3>-->
+<!--                    </Link>-->
+
+<!--                    <Link :href="route('games.index')" class="group flex flex-col justify-center items-center">-->
+<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
+<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-teal-50"></i>-->
+<!--                            <i class="fa-stack-1x fa-duotone fa-gamepad-modern text-teal-600 group-hover:text-teal-800"></i>-->
+<!--                        </span>-->
+<!--                        <h3 class="mt-2 text-sm text-gray-700">Games</h3>-->
+<!--                    </Link>-->
+
+<!--                    <Link :href="route('emoney.index')" class="group flex flex-col justify-center items-center">-->
+<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
+<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-blue-300 to-blue-50"></i>-->
+<!--                            <i class="fa-stack-1x fa-duotone fa-wallet text-blue-600 group-hover:text-blue-800"></i>-->
+<!--                        </span>-->
+<!--                        <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>-->
+<!--                    </Link>-->
+
+<!--                    <Link :href="route('voucher.index')" class="group flex flex-col justify-center items-center">-->
+<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
+<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-violet-300 to-violet-50"></i>-->
+<!--                            <i class="fa-stack-1x fa-duotone fa-ticket text-violet-600 group-hover:text-violet-800"></i>-->
+<!--                        </span>-->
+<!--                        <h3 class="mt-2 text-sm text-gray-700">Voucher</h3>-->
+<!--                    </Link>-->
+
+<!--                    <Link :href="route('television.index')" class="group flex flex-col justify-center items-center">-->
+<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
+<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-green-300 to-green-50"></i>-->
+<!--                            <i class="fa-stack-1x fa-duotone fa-tv-retro text-green-600 group-hover:text-green-800"></i>-->
+<!--                        </span>-->
+<!--                        <h3 class="mt-2 text-sm text-gray-700">TV</h3>-->
+<!--                    </Link>-->
+
+<!--                    <Link :href="route('internet.index')" class="group flex flex-col justify-center items-center">-->
+<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
+<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-red-300 to-red-50"></i>-->
+<!--                            <i class="fa-stack-1x fa-duotone fa-router text-red-600 group-hover:text-red-800"></i>-->
+<!--                        </span>-->
+<!--                        <h3 class="mt-2 text-sm text-gray-700">Internet</h3>-->
+<!--                    </Link>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <swiper
             :modules="[Autoplay]"

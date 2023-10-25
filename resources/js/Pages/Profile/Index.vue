@@ -124,25 +124,23 @@ function formatPrice(value) {
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg" v-if="$page.props.user.role_id==1">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
+                    <Link :href="route('setting.index')" class="flex justify-between px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Pengaturan aplikasi</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
+                    </Link>
+                </li>
+                <li>
                     <Link :href="route('transaction.index')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Transaksi</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
                 <li>
-                    <Link :href="route('setting.index')" class="flex justify-between px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Pengaturan aplikasi</p>
-                        <i class="fa-regular fa-angle-right text-gray-900" />
-                    </Link>
-                </li>
-
-                <li>
                     <Link :href="route('carousel.index')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Carousel</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
-
                 <li>
                     <Link :href="route('user.index')" class="flex justify-between px-6 py-4" >
                         <p class="text-sm font-medium text-gray-900">Data pengguna</p>

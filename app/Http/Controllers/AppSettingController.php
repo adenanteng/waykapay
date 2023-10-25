@@ -69,6 +69,7 @@ class AppSettingController extends Controller
                 $setting->addMedia($request['photo'])->toMediaCollection();
             }
         }
+
     }
 
     /**
