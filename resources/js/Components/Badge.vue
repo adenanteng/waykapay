@@ -21,4 +21,11 @@ const props = defineProps({
         </svg>
         {{ name }}
     </span>
+
+    <template>
+        <div class="bg-green-100 text-green-800" />
+        <div class="bg-amber-100 text-amber-800" />
+        <div class="bg-red-100 text-red-800" />
+        <div class="bg-gray-100 text-gray-800" />
+    </template>
 </template>

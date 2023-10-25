@@ -171,6 +171,7 @@ function formatPrice(value) {
                 </div>
                 <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
                     <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
+
                         <template v-if="props.history.virtual_account">
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm">Bank</div>
@@ -188,17 +189,12 @@ function formatPrice(value) {
                                 </div>
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm">Deeplink</div>
+                                <div class="text-sm">Cara bayar</div>
                                 <div class="text-sm font-semibold text-primary-600 underline">
                                     <a target="_blank" :href="props.history.virtual_account.payment_url" >
                                         Bayar
                                     </a>
                                 </div>
-                            </div>
-                            <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm font-bold">Total</div>
-                                <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
                             </div>
                         </template>
 
@@ -236,12 +232,21 @@ function formatPrice(value) {
                                     </a>
                                 </div>
                             </div>
-                            <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm font-bold">Total</div>
-                                <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
-                            </div>
                         </template>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Nominal</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.amount) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Biaya Admin</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.admin_fee) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Total</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.gross_amount) }}</div>
+                        </div>
                     </div>
                 </div>
             </div>

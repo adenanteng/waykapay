@@ -56,7 +56,7 @@ class Transaction extends Model
     const COLOR = [
         self::SUCCESS => 'bg-green-100 text-green-800',
         self::PENDING => 'bg-amber-100 text-amber-800',
-        self::CANCEL => 'bg-gray-100 text-gray-800',
+        self::CANCEL => 'bg-red-100 text-red-800',
         self::DENY => 'bg-gray-100 text-gray-800',
         self::EXPIRE => 'bg-gray-100 text-gray-800',
         self::ERROR =>  'bg-red-100 text-red-800',

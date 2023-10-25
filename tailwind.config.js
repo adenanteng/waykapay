@@ -17,7 +17,6 @@ module.exports = {
             primary: colors.sky,
             transparent: 'transparent',
             current: 'currentColor',
-            neutral: colors.neutral,
             black: colors.black,
             white: colors.white,
             gray: colors.gray,

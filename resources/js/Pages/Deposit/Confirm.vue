@@ -76,18 +76,6 @@ function formattedDateTime(value) {
             <template #form>
                 <div class="col-span-6 ">
                     <div class="grid grid-cols-1 gap-x-4 gap-y-2 sm:gap-y-8 sm:grid-cols-2 text-gray-900">
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm ">Nominal</div>
-                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.amount) }}</div>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm ">Biaya Admin</div>
-                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.admin_fee) }}</div>
-                        </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm ">Total</div>
-                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.gross_amount) }}</div>
-                        </div>
 
                         <template v-if="props.virtual_account">
                             <div class="sm:col-span-1 flex sm:block justify-between">
@@ -112,7 +100,7 @@ function formattedDateTime(value) {
                             </div>
                         </template>
 
-                        <template v-if="props.wallet_account">
+                        <template v-else-if="props.wallet_account">
                             <template v-if="props.wallet_account.qr_code !== '-'">
                                 <div class="sm:col-span-2 flex flex-col items-center my-5 gap-3">
                                     <div class="text-sm ">
@@ -148,6 +136,20 @@ function formattedDateTime(value) {
                             <!--                                {{ formattedDateTime(props.wallet_account.exp_time) }}-->
                             <!--                            </span>-->
                         </template>
+
+                        <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Nominal</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.amount) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Biaya Admin</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.admin_fee) }}</div>
+                        </div>
+                        <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Total</div>
+                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.gross_amount) }}</div>
+                        </div>
                     </div>
                 </div>
 

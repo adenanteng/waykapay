@@ -23,9 +23,9 @@ import UpdateApiFlipForm from "./Partials/UpdateApiFlipForm.vue";
         <SectionBorder />
 
 <!--        <UpdateApiMidtransForm :setting="$page.props.setting" />-->
-        <UpdateApiFlipForm :setting="$page.props.setting" />
+<!--        <UpdateApiFlipForm :setting="$page.props.setting" />-->
 
-        <SectionBorder />
+<!--        <SectionBorder />-->
 
         <UpdateApiDigiflazzForm :setting="$page.props.setting" />
 
