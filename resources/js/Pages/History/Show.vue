@@ -252,11 +252,11 @@ function formatPrice(value) {
             </div>
         </template>
 
-        <template v-else-if="props.history.status_id == 6">
+        <template v-else>
             <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                     <ApplicationLogo class="block sm:hidden" />
-                    <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Gagal</h3>
+                    <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi {{ props.history.status }}</h3>
                     <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
                 </div>
                 <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
@@ -325,9 +325,9 @@ function formatPrice(value) {
             </div>
         </template>
 
-        <template v-else>
-            {{ props.history.status }}
-        </template>
+<!--        <template v-else>-->
+<!--            {{ props.history.status }}-->
+<!--        </template>-->
 
 
         <!--        <MobileMenu/>-->
