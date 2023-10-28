@@ -173,7 +173,7 @@ function formatPrice(value) {
                 </div>
             </div>
 
-            <div v-if="$page.props.user.role_id!=3" class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300 pb-80 lg:pb-0">
+            <div v-if="props.history.category_id!=1 && $page.props.user.role_id!=3" class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300 pb-80 lg:pb-0">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                     <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Komisi Agen</h3>
                 </div>
