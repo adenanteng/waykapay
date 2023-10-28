@@ -81,7 +81,7 @@ const logout = () => {
         <Banner/>
         </div>
 
-        <div class="min-h-screen bg-gray-100 bg-glass bg-fixed ">
+        <div class="min-h-screen bg-gray-100 bg-glass bg-fixed">
 <!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
             <Popover as="header" class="" v-slot="{ open }">
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -484,12 +484,13 @@ const logout = () => {
                     </div>
                 </div>
             </main>
+
             <footer>
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
                     <div class="py-10 block lg:hidden">
 
                     </div>
-                    <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block" v-if="$page.props.appSetting">
+                    <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block">
                         <span class="block sm:inline capitalize">&copy; 2023 {{ $page.props.appSetting.name }}. </span>
                         <span class="block sm:inline">All rights reserved.</span>
                     </div>
