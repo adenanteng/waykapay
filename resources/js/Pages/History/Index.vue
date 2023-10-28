@@ -158,7 +158,7 @@ watch(tabHistory, (newTabHistory) => {
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="mt-2 flex justify-between">
+                                    <div class="flex justify-between">
                                         <div class="flex">
                                             <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                 {{ history.category_id == 1 ? '+' : '-' }} Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}

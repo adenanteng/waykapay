@@ -34,6 +34,8 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'email',
         'password',
         'role_id',
+        'status_id',
+        'coin'
     ];
 
     /**
@@ -66,6 +68,12 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         self::BANNED => 'Blokir',
     ];
 
+    const COLOR = [
+        self::ACTIVE => 'bg-green-100 text-green-800',
+        self::NONACTIVE => 'bg-amber-100 text-amber-800',
+        self::BANNED => 'bg-red-100 text-red-800',
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -84,6 +92,8 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
         'created',
+        'status',
+        'color',
         'role',
     ];
 
@@ -91,7 +101,14 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
     {
         return date('d M Y', strtotime($this->created_at));
     }
-
+    public function getStatusAttribute(): string
+    {
+        return self::STATUS[$this->status_id];
+    }
+    public function getColorAttribute(): string
+    {
+        return self::COLOR[$this->status_id];
+    }
     public function getRoleAttribute(): string
     {
         return self::ROLE[$this->role_id];

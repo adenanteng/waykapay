@@ -29,10 +29,11 @@ class ProfileController extends Controller
 
             $app = AppSetting::first();
 
-            $app->update([
-//                'flip_saldo' => Helper::flip_saldo(),
-                'digiflazz_saldo' => Helper::digiflazz_saldo()
-            ]);
+            if ($app) {
+                $app->update([
+                    'digiflazz_saldo' => Helper::digiflazz_saldo()
+                ]);
+            }
         }
 
         return Inertia::render('Profile/Index', [

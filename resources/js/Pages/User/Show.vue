@@ -39,16 +39,16 @@ function formatPrice(value) {
         </template>
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <div class="py-4 px-4 sm:px-6 lg:py-8 lg:px-8 lg:flex lg:items-center lg:justify-between">
+            <div class="py-4 px-4 lg:flex lg:items-center lg:justify-between">
                 <div class="tracking-tight flex gap-5 items-center">
                     <div class="">
-                        <img v-if="props.users.profile_photo_url" class="mx-auto h-20 w-20 object-cover rounded-full"
+                        <img v-if="props.users.profile_photo_url" class="mx-auto h-12 w-12 object-cover rounded-full"
                              :src="props.users.profile_photo_url" :alt="props.users.name" />
                     </div>
 
                     <div class="">
-                        <span class="block text-xl font-bold text-gray-900 sm:text-2xl capitalize">{{ props.users.name }}</span>
-                        <span class="block text-lg font-extrabold text-primary-600">
+                        <span class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }}</span>
+                        <span class="block font-semibold text-primary-600">
                             Rp {{ formatPrice(props.users.wallet_balance) }}
                         </span>
                     </div>
@@ -74,34 +74,33 @@ function formatPrice(value) {
                         <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
-                                    <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>
+                                    <p class="font-medium truncate uppercase"
+                                       :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
+                                        {{ history.product_name }}
+                                        <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
+                                        <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                    </p>
                                     <div class="ml-2 flex-shrink-0 flex">
                                         <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                           :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+                                           :class="history.color"
                                         >
                                             {{ history.status }}
                                         </p>
                                     </div>
                                 </div>
-                                <div class="mt-2 sm:flex sm:justify-between">
-                                    <div class="sm:flex">
-                                        <p class="flex items-center text-sm text-gray-900">
-                                            <!--                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />-->
-                                            {{ history.category_id == 1 ? '+' : '-' }} Rp {{ formatPrice(history.gross_amount) }}
+                                <div class="flex justify-between">
+                                    <div class="flex">
+                                        <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                            {{ history.category_id == 1 ? '+' : '-' }} Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                         </p>
-                                        <!--                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-                                        <!--&lt;!&ndash;                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />&ndash;&gt;-->
-                                        <!--                                            {{ history.order_id }}-->
-                                        <!--                                        </p>-->
+                                        <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
+                                        <!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
+                                        <!--                                                {{ history.customer_no }}-->
+                                        <!--                                            </p>-->
                                     </div>
-                                    <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                        <i class="fa-regular fa-calendar text-gray-500 pr-2" />
-                                        <p>
-                                            {{ formattedDate(history.created_at) }}
-                                        </p>
-                                        <p class="text-gray-900 ml-2">
-                                            {{ formattedTime(history.created_at) }}
-                                        </p>
+                                    <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                        <!--                                            <i class="fa-regular fa-calendar pr-2" />-->
+                                        {{ formattedDate(history.updated_at) }}
                                     </div>
                                 </div>
                             </div>
