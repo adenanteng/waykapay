@@ -190,7 +190,7 @@ function formatPrice(value) {
                                     v-model="form.agent_commission"
                                     type="number"
                                     class="mt-1 block w-full rounded-l-none"
-                                    :min="props.history.gross_amount"
+                                    :min="Number(props.history.gross_amount)"
                                     max="100000"
                                     required
                                 />
