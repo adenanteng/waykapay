@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\AppSetting;
 use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
 
 class Helper
 {
@@ -32,7 +33,14 @@ class Helper
             'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'depo')
         ]);
 
-        return $response->object()->data->deposit;
+        if ($response->successful()) {
+            return $response->object()->data->deposit;
+        } else {
+            dd('refresh halaman');
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
+        }
     }
 
     public static function update_digiflazz_saldo($saldo)
@@ -47,10 +55,19 @@ class Helper
 
     public static function pricelist()
     {
-        return Http::post('https://api.digiflazz.com/v1/price-list', [
+        $response = Http::post('https://api.digiflazz.com/v1/price-list', [
             'cmd' => 'prepaid',
             'username' => Helper::api()->digiflazz_username,
             'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
         ]);
+
+        if ($response->successful()) {
+            return $response->object()->data->deposit;
+        } else {
+            dd('refresh halaman');
+            return Inertia::render('Payment/Info', [
+                'transaction' => $response->object()->data,
+            ]);
+        }
     }
 }
