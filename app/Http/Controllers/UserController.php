@@ -79,7 +79,7 @@ class UserController extends Controller
     {
         return Inertia::render('User/Show', [
             'users' => $user,
-            'history' => Transaction::where('user_id', $user->id)->get()
+            'history' => Transaction::where('user_id', $user->id)->latest()->get()
         ]);
     }
 
