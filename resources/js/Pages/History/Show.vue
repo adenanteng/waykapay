@@ -167,7 +167,7 @@ function formatPrice(value) {
 
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm font-bold">Total</div>
-                            <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount + props.history.agent_commission) }}</div>
+                            <div class="text-sm font-bold">Rp {{ formatPrice(Number(props.history.gross_amount) + Number(props.history.agent_commission)) }}</div>
                         </div>
                     </div>
                 </div>
