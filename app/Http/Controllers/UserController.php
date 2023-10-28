@@ -42,6 +42,7 @@ class UserController extends Controller
     public function create(): Response
     {
         return Inertia::render('User/CreateEdit', [
+            'selectStatus' => User::STATUS,
             'selectRole' => User::ROLE
         ]);
     }
@@ -95,6 +96,7 @@ class UserController extends Controller
         return Inertia::render('User/CreateEdit',
             [
                 'users' => User::find($id),
+                'selectStatus' => User::STATUS,
                 'selectRole' => User::ROLE
             ]);
     }

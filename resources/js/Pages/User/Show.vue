@@ -14,11 +14,7 @@ const props = defineProps({
 });
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
-}
-
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
+    return moment(value).format('DD MMM Y HH:mm')
 }
 
 function formatPrice(value) {
@@ -29,8 +25,8 @@ function formatPrice(value) {
 </script>
 
 <template>
-    <AppLayout title="Pengguna"
-               name="Pengguna"
+    <AppLayout :title="props.users.name"
+               :name="props.users.name"
                desc="lorem ipsum"
     >
 
@@ -47,7 +43,7 @@ function formatPrice(value) {
                     </div>
 
                     <div class="">
-                        <span class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }}</span>
+                        <span class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }} <span class="text-sm font-medium ml-2 text-gray-500">#{{ props.users.id }}</span></span>
                         <span class="block font-semibold text-primary-600">
                             Rp {{ formatPrice(props.users.wallet_balance) }}
                         </span>

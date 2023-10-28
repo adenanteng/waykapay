@@ -20,6 +20,7 @@ const form = useForm({
     name: props.users.name ?? null,
     email: props.users.email ?? null,
     phone: props.users.phone ?? null,
+    status_id: props.users.status_id ?? null,
     role_id: props.users.role_id ?? null,
 });
 
@@ -104,6 +105,17 @@ const formReset = () => {
                     required
                 />
                 <InputError :message="form.errors.phone" class="mt-2"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-2">
+                <InputLabel value="Status" />
+                <SelectInput
+                    v-model:model-value.number="form.status_id"
+                    :option="$page.props.selectStatus"
+                    class="mt-1 block w-full"
+                    required
+                />
+                <InputError :message="form.errors.status_id" class="mt-2" />
             </div>
 
             <div class="col-span-6 sm:col-span-2">

@@ -129,7 +129,7 @@ watch(tabHistory, (newTabHistory) => {
                             <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>
                         </div>
                     </div>
-                    <div class="mt-2 sm:flex sm:justify-between">
+                    <div class="sm:flex sm:justify-between">
                         <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
                     </div>
                 </div>
