@@ -51,11 +51,11 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
     ];
 
     const SUPERADMIN = 1;
-    const ADMIN = 2;
+    const AGENT = 2;
     const USER = 3;
     const ROLE = [
-        self::SUPERADMIN => 'Super Admin',
-        self::ADMIN => 'Admin',
+        self::SUPERADMIN => 'Admin',
+        self::AGENT => 'Agen',
         self::USER => 'Jelata',
     ];
 

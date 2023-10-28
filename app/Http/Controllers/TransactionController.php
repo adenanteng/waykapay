@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class TransactionController extends Controller
@@ -13,5 +16,33 @@ class TransactionController extends Controller
         return Inertia::render('Transaction/Index', [
             'transaction' => Inertia::lazy(fn () => Transaction::latest()->get())
         ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @param Transaction $transaction
+     * @return void
+     */
+    public function update(Request $request, Transaction $transaction)
+    {
+
+//        dd($request->all(), $transaction);
+        if ($request['agent_commission']) {
+            Validator::make($request->toArray(), [
+                'agent_commission' => ['required', 'integer', 'gte:'.$transaction['gross_amount']],
+            ])->validateWithBag('storeInformation');
+
+            $commission = $request['agent_commission'] - $transaction['gross_amount'];
+
+            $transaction->update([
+                'agent_commission' => $commission,
+//                'gross_amount' => $transaction['gross_amount'] + $commission
+            ]);
+        }
+
+
+//        return Redirect::route('user.index');
     }
 }

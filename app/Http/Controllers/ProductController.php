@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -155,7 +156,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Inertia\Response
+     * @return \Illuminate\Http\RedirectResponse|\Inertia\Response
      */
     public function status(Request $request)
     {
@@ -195,9 +196,11 @@ class ProductController extends Controller
                     'desc' => $status->object()->data->sn
                 ]);
 
-                return Inertia::render('Payment/Success', [
-                    'transaction'   => $transaction
-                ]);
+//                return Inertia::render('Payment/Success', [
+//                    'transaction'   => $transaction
+//                ]);
+
+                return Redirect::route('history.show', $transaction);
                 break;
 
             case ('Pending'):

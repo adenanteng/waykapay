@@ -6,17 +6,34 @@ import PreviousButton from "@/Components/PreviousButton.vue"
 import Badge from "../../Components/Badge.vue";
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
-import {Link} from "@inertiajs/vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
-import ApplicationLogo from "../../Components/ApplicationLogo.vue";
-import ApplicationMark from "../../Components/ApplicationMark.vue";
-import SectionBorder from "../../Components/SectionBorder.vue";
-import PrimaryButton from "../../Components/PrimaryButton.vue";
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import ActionMessage from "@/Components/ActionMessage.vue";
+
 
 const props = defineProps({
     users: Object,
     history: Object
 })
+
+const form = useForm({
+    agent_commission: null,
+});
+
+const storeInformation = () => {
+    form.patch(route('transaction.update', props.history), {
+        errorBag: 'storeInformation',
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset()
+        }
+    });
+};
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y | HH:mm')
@@ -44,6 +61,7 @@ function formatPrice(value) {
         </template>
 
         <template v-if="props.history.status_id == 1">
+
             <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                     <ApplicationLogo class="block sm:hidden" />
@@ -129,13 +147,19 @@ function formatPrice(value) {
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Nominal</div>
                             <div class="text-sm font-semibold">
-                                Rp {{ props.history.category_id == 1 || props.history.category_id > 8 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}
+                                Rp {{ props.history.category_id == 1 || props.history.category_id >= 8 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}
                             </div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Biaya Admin</div>
                             <div class="text-sm font-semibold">
-                                Rp {{ props.history.category_id == 1 || props.history.category_id > 8 ? formatPrice(props.history.admin_fee) : '0' }}
+                                Rp {{ props.history.category_id == 1 || props.history.category_id >= 8 ? formatPrice(props.history.admin_fee) : '0' }}
+                            </div>
+                        </div>
+                        <div v-if="props.history.agent_commission" class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="text-sm ">Komisi</div>
+                            <div class="text-sm font-semibold">
+                                Rp {{ formatPrice(props.history.agent_commission) }}
                             </div>
                         </div>
 
@@ -143,22 +167,50 @@ function formatPrice(value) {
 
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm font-bold">Total</div>
-                            <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
+                            <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount + props.history.agent_commission) }}</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-<!--            <template v-if="props.history.category_id == 5">-->
-<!--                <Popper class="w-full mt-5" content="Sukses Copy" arrow placement="right-end">-->
-<!--                    <PrimaryButton-->
-<!--                        @click="toClipboard(props.history.desc.split('/')[0])"-->
-<!--                        class="flex w-full justify-center items-center"-->
-<!--                    >-->
-<!--                        Copy Kode Stroom-->
-<!--                    </PrimaryButton>-->
-<!--                </Popper>-->
-<!--            </template>-->
+            <div v-if="$page.props.user.role_id!=3" class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300 pb-80 lg:pb-0">
+                <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
+                    <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Komisi Agen</h3>
+                </div>
+                <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
+                    <div class="grid grid-cols-6">
+                        <div class="col-span-6 sm:col-span-3">
+                            <InputLabel for="amount" value="Harga Jual"/>
+                            <div class="flex">
+                            <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                                Rp
+                            </span>
+                                <TextInput
+                                    id="amount"
+                                    v-model="form.agent_commission"
+                                    type="number"
+                                    class="mt-1 block w-full rounded-l-none"
+                                    :min="props.history.gross_amount"
+                                    max="100000"
+                                    required
+                                />
+                            </div>
+                            <InputError :message="form.errors.agent_commission" class="mt-2"/>
+                        </div>
+
+                        <div class="col-span-6 mt-3 flex justify-between items-center">
+                            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                Berhasil disimpan.
+                            </ActionMessage>
+
+                            <PrimaryButton @click="storeInformation" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                Konfirmasi
+                            </PrimaryButton>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
         </template>
 
