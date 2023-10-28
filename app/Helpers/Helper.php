@@ -62,7 +62,7 @@ class Helper
         ]);
 
         if ($response->successful()) {
-            return $response->object()->data->deposit;
+            return $response->object()->data;
         } else {
             dd('refresh halaman');
             return Inertia::render('Payment/Info', [
