@@ -27,9 +27,9 @@ const props = defineProps({
 onMounted(() => {
     window.print()
 })
-const printInvoice = () => {
-    window.print()
-}
+// const printInvoice = () => {
+//     window.print()
+// }
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')

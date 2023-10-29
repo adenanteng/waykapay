@@ -36,8 +36,16 @@ const storeInformation = () => {
     });
 };
 
-const printInvoice = () => {
-    window.print()
+const printDiv = (divName) => {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+
 }
 
 function formattedDate(value) {
@@ -63,7 +71,7 @@ function formatPrice(value) {
 
         <template v-if="props.history.status_id == 1">
 
-            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+            <div id='printMe' class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                     <ApplicationLogo class="block sm:hidden" />
                     <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Berhasil</h3>
@@ -219,6 +227,7 @@ function formatPrice(value) {
             <div class="flex justify-center gap-2">
                 <SecondaryButton as="a" :href="route('dashboard')" class="justify-center w-full">Beranda</SecondaryButton>
                 <PrimaryButton as="a" :href="route('transaction.print', props.history)" class="justify-center w-full">Bagikan</PrimaryButton>
+<!--                <PrimaryButton @click="printDiv('printMe')">Print</PrimaryButton>-->
             </div>
 
 
