@@ -35,7 +35,8 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'password',
         'role_id',
         'status_id',
-        'coin'
+        'coin',
+        'pin_code'
     ];
 
     /**

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id')->default(1);
             $table->unsignedBigInteger('role_id');
             $table->integer('coin')->unsigned()->default(0);
+            $table->string('pin')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });

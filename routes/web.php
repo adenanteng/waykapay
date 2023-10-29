@@ -97,6 +97,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/carousel', CarouselController::class)->names('carousel');
 
     Route::resource('/transaction', TransactionController::class)->names('transaction');
+    Route::get('/transaction/print/{transaction}', [TransactionController::class, 'print'])->name('transaction.print');
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
 

@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1.0",
+        "ext-curl": "*",
         "doku/jokul-php-library": "^2.0",
         "guzzlehttp/guzzle": "^7.7.0",
         "inertiajs/inertia-laravel": "^0.6.9",
@@ -17,8 +18,7 @@
         "spatie/laravel-medialibrary": "^10.11.3",
         "spatie/laravel-query-builder": "^5.2.0",
         "stephenjude/laravel-wallet": "^1.0.0",
-        "tightenco/ziggy": "^1.6.1",
-        "ext-curl": "*"
+        "tightenco/ziggy": "^1.6.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23.0",

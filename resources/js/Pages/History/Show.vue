@@ -14,6 +14,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
+import SecondaryButton from "../../Components/SecondaryButton.vue";
 
 
 const props = defineProps({
@@ -35,12 +36,12 @@ const storeInformation = () => {
     });
 };
 
-function formattedDate(value) {
-    return moment(value).format('DD MMM Y | HH:mm')
+const printInvoice = () => {
+    window.print()
 }
 
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
+function formattedDate(value) {
+    return moment(value).format('DD MMM Y HH:mm')
 }
 
 function formatPrice(value) {
@@ -179,44 +180,49 @@ function formatPrice(value) {
                         <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Komisi Agen</h3>
                     </div>
                     <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
-                        <div class="grid grid-cols-6">
-                            <div class="col-span-6 sm:col-span-3">
-                                <InputLabel for="amount" value="Harga Jual"/>
-                                <div class="flex">
-                            <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
-                                Rp
-                            </span>
-                                    <TextInput
-                                        id="amount"
-                                        v-model="form.agent_commission"
-                                        type="number"
-                                        class="mt-1 block w-full rounded-l-none"
-                                        :min="Number(props.history.gross_amount)"
-                                        max="100000"
-                                        required
-                                    />
+                        <form @submit.prevent="storeInformation">
+                            <div class="grid grid-cols-6">
+                                <div class="col-span-6 sm:col-span-3">
+                                    <InputLabel for="amount" value="Harga Jual"/>
+                                    <div class="flex">
+                                        <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                                            Rp
+                                        </span>
+                                        <TextInput
+                                            id="amount"
+                                            v-model="form.agent_commission"
+                                            type="number"
+                                            class="mt-1 block w-full rounded-l-none"
+                                            :min="Number(props.history.gross_amount)"
+                                            max="100000"
+                                            required
+                                        />
+                                    </div>
+                                    <InputError :message="form.errors.agent_commission" class="mt-2"/>
                                 </div>
-                                <InputError :message="form.errors.agent_commission" class="mt-2"/>
+
+                                <div class="col-span-6 mt-3 flex justify-between items-center">
+                                    <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                        Berhasil disimpan.
+                                    </ActionMessage>
+
+                                    <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                        Konfirmasi
+                                    </PrimaryButton>
+                                </div>
                             </div>
-
-                            <div class="col-span-6 mt-3 flex justify-between items-center">
-                                <ActionMessage :on="form.recentlySuccessful" class="mr-3">
-                                    Berhasil disimpan.
-                                </ActionMessage>
-
-                                <PrimaryButton @click="storeInformation" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                    Konfirmasi
-                                </PrimaryButton>
-                            </div>
-                        </div>
-
+                        </form>
                     </div>
                 </div>
-
-                <div class="pb-80 lg:pb-0" />
             </template>
 
+            <div class="flex justify-center gap-2">
+                <SecondaryButton as="a" :href="route('dashboard')" class="justify-center w-full">Beranda</SecondaryButton>
+                <PrimaryButton as="a" :href="route('transaction.print', props.history)" class="justify-center w-full">Bagikan</PrimaryButton>
+            </div>
 
+
+            <div class="pb-80 lg:pb-0" />
 
         </template>
 

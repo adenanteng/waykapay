@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use LaravelDaily\Invoices\Invoice;
+use LaravelDaily\Invoices\Classes\Buyer;
+use LaravelDaily\Invoices\Classes\InvoiceItem;
 
 class TransactionController extends Controller
 {
@@ -44,5 +47,37 @@ class TransactionController extends Controller
 
 
 //        return Redirect::route('user.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Transaction $transaction
+     */
+    public function print(Transaction $transaction) {
+//        dd($transaction);
+//        $customer = new Buyer([
+//            'name'          => 'John Doe',
+//            'custom_fields' => [
+//                'email' => 'test@example.com',
+//            ],
+//        ]);
+//
+//        $item = (new InvoiceItem())->title('Service 1')->pricePerUnit(2);
+//
+//        $invoice = Invoice::make()
+//            ->buyer($customer)
+//            ->discountByPercent(10)
+//            ->taxRate(15)
+//            ->shipping(1.99)
+//            ->addItem($item);
+
+//        return $invoice->download();
+
+//        return view('print', compact('invoice'));
+
+        return Inertia::render('History/Print', [
+            'history' => $transaction,
+        ]);
     }
 }

@@ -8,7 +8,7 @@
         <meta property="og:title" content="Waykapay" />
         <meta property="og:description" content="Kemudahan ada disini" />
         <meta property="og:url" content="https://waykapay.com/" />
-        <meta property="og:image" content="/img/minion.jpg" />
+        <meta property="og:image" content="/img/logo.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@waykapay.com" />
@@ -34,13 +34,6 @@
             //     document.documentElement.classList.remove('dark')
             // }
         </script>
-
-{{--        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>--}}
-
-{{--        <script type="text/javascript"--}}
-{{--                src="https://app.sandbox.midtrans.com/snap/snap.js"--}}
-{{--                data-client-key="{{ Helper::api()->midtrans_client_key ?? '' }}"--}}
-{{--        ></script>--}}
 
         <!-- Scripts -->
         @routes

@@ -171,5 +171,4 @@ class HistoryController extends Controller
             'history' => $transaction,
         ]);
     }
-
 }
