@@ -69,13 +69,7 @@ const logout = () => {
 
 <template>
     <div class="transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
-        <template v-if="$page.props.appSetting">
-            <Head :title="title + ' - ' + $page.props.appSetting.name"/>
-        </template>
-
-        <template v-else>
-            <Head :title="title"/>
-        </template>
+        <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
         <div class="sticky top-0 z-50">
         <Banner/>
@@ -491,7 +485,7 @@ const logout = () => {
 
                     </div>
                     <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block">
-                        <span class="block sm:inline capitalize">&copy; 2023 {{ $page.props.appSetting.name }}. </span>
+                        <span class="block sm:inline capitalize">&copy; 2023 {{ $page.props.appSetting?.name }}. </span>
                         <span class="block sm:inline">All rights reserved.</span>
                     </div>
                 </div>
