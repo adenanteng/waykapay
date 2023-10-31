@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class ExpireTransaction extends Command
@@ -28,6 +29,7 @@ class ExpireTransaction extends Command
     {
         Transaction::where('category_id', Transaction::DEPOSIT)
             ->where('status_id', Transaction::PENDING)
+            ->where('created_at', '<', Carbon::yesterday())
             ->update(['status_id' => Transaction::EXPIRE]);
     }
 }

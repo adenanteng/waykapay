@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MyEvent;
 use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\User;

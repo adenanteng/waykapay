@@ -26,6 +26,7 @@ const props = defineProps({
 
 onMounted(() => {
     window.print()
+    // document.execCommand('print');
 })
 // const printInvoice = () => {
 //     window.print()

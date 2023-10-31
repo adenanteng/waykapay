@@ -307,6 +307,32 @@ function formatPrice(value) {
                             </div>
                         </template>
 
+                        <template v-else-if="props.history.offline_account">
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">Metode Pembayaran</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.offline_account.bank }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">No. Pembayaran</div>
+                                <div class="text-sm font-semibold">
+                                    {{ props.history.offline_account.payment_code }}
+                                    <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
+                                        <button class="" @click="toClipboard(props.history.offline_account.payment_code)">
+                                            <i class="fa-duotone fa-paste ml-2" />
+                                        </button>
+                                    </Popper>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm">Cara bayar</div>
+                                <div class="text-sm font-semibold text-primary-600 underline">
+                                    <a target="_blank" :href="props.history.offline_account.payment_url" >
+                                        Bayar
+                                    </a>
+                                </div>
+                            </div>
+                        </template>
+
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Nominal</div>

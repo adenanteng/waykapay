@@ -66,7 +66,7 @@ module.exports = {
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
-        require('tailwindcss-hero-patterns'),
+        // require('tailwindcss-hero-patterns'),
         require("nightwind"),
     ],
 };

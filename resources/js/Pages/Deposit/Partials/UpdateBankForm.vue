@@ -53,7 +53,7 @@ const mailingLists = [
     // { id: 10, name: 'linkaja_app', logo: '/img/vendor/LINKAJA.svg', adminFee: 'Biaya admin 2%' },
     // { id: 11, name: 'dana', logo: '/img/vendor/DANA.svg', adminFee: 'Biaya admin 2%' },
     // { id: 12, name: 'gopay', logo: '/img/vendor/GOPAY.svg', adminFee: 'Biaya admin 2%' },
-    // { id: 13, name: 'alfamart', logo: '/img/vendor/ALFAMART.png', adminFee: 'Biaya admin Rp 5.000' },
+    { id: 13, name: 'alfamart', logo: '/img/vendor/ALFAMART.svg', adminFee: 'Biaya admin Rp 5.000' },
 ]
 
 function formatPrice(value) {

@@ -125,7 +125,8 @@ class Transaction extends Model
     protected $with = [
         'user',
         'virtual_account',
-        'wallet_account'
+        'wallet_account',
+        'offline_account'
     ];
 
     public function getCreatedAttribute()
@@ -163,8 +164,13 @@ class Transaction extends Model
         return $this->hasOne(TransactionBankTransfer::class, 'transaction_id', 'id');
     }
 
-    public function Wallet_account(): HasOne
+    public function wallet_account(): HasOne
     {
         return $this->hasOne(TransactionQris::class, 'transaction_id', 'id');
+    }
+
+    public function offline_account(): HasOne
+    {
+        return $this->hasOne(TransactionOffline::class, 'transaction_id', 'id');
     }
 }

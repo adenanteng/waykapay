@@ -16,7 +16,8 @@ import moment from "moment/moment";
 const props = defineProps({
     transaction: Object,
     virtual_account: Object | String,
-    wallet_account: Object | String
+    wallet_account: Object | String,
+    offline_account: Object | String
 })
 
 // onMounted(() => {
@@ -135,6 +136,29 @@ function formattedDateTime(value) {
                             <!--                            <span class="block text-xl font-extrabold text-primary-600 uppercase">-->
                             <!--                                {{ formattedDateTime(props.wallet_account.exp_time) }}-->
                             <!--                            </span>-->
+                        </template>
+
+                        <template v-else-if="props.offline_account">
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Metode Pembayaran</div>
+                                <div class="text-sm font-semibold ">{{ props.offline_account.bank }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">No. Pembayaran</div>
+                                <div class="text-sm font-semibold ">{{ props.offline_account.payment_code }}
+                                    <Popper class="text-sm text-primary-900 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
+                                        <button class="" @click="toClipboard(props.offline_account.payment_code)">
+                                            <i class="fa-duotone fa-paste ml-2" />
+                                        </button>
+                                    </Popper>
+                                </div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Cara bayar</div>
+                                <div class="text-sm font-semibold text-primary-600 underline">
+                                    <a target="_blank" :href="props.offline_account.payment_url" >Bayar</a>
+                                </div>
+                            </div>
                         </template>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />

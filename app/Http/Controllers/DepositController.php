@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\TransactionBankTransfer;
+use App\Models\TransactionOffline;
 use App\Models\TransactionQris;
 use App\Models\User;
 use DOKU\Client;
@@ -55,10 +56,13 @@ class DepositController extends Controller
             4 => $targetPath = "/mandiri-virtual-account/v2/payment-code",
             5 => $targetPath = "/permata-virtual-account/v2/payment-code",
             6 => $targetPath = "/bsm-virtual-account/v2/payment-code",
-            13 => $targetPath = "/alfa-virtual-account/v2/payment-code",
+            13 => $targetPath = "/alfa-online-to-offline/v2/payment-code",
         };
 
-        $admin_fee = 4000;
+        $sender_bank_type = match ($request['method']['id']) {
+            1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
+            13 => $admin_fee = 5000,
+        };
 
         $clientId = 'BRN-0288-1690798735800';
         $secretKey = 'SK-CIiJ0QDZmqNAhpfxFVbt';
@@ -84,14 +88,13 @@ class DepositController extends Controller
                     'email' => $user->email,
                 ),
             );
-        } else {
+        } elseif ($request['method']['id'] == 13) {
             $requestBody = array(
                 'order' => array(
                     'amount' => $request['amount'] + $admin_fee,
                     'invoice_number' => $requestId,
                 ),
                 'online_to_offline_info' => array(
-                    'payment_code' => $user->phone,
                     'expired_time' => 60,
                     'reusable_status' => false,
                     'info' => 'Waykapay',
@@ -154,18 +157,31 @@ class DepositController extends Controller
                 'admin_fee' => $admin_fee,
             ]);
 
-            $virtual_account = TransactionBankTransfer::create([
-                'transaction_id' => $transaction->id,
-                'bank_id' => $request['method']['id'],
-                'va_number' => $response->virtual_account_info->virtual_account_number,
-                'payment_url' => $response->virtual_account_info->how_to_pay_page,
-                'exp_time' => Carbon::tomorrow(),
-            ]);
+            if ($request['method']['id'] <= 6) {
+                $virtual_account = TransactionBankTransfer::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'va_number' => $response->virtual_account_info->virtual_account_number,
+                    'payment_url' => $response->virtual_account_info->how_to_pay_page,
+                    'exp_time' => Carbon::tomorrow(),
+                ]);
+            } elseif ($request['method']['id'] == 13) {
+                $offline_account = TransactionOffline::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'payment_code' => $response->online_to_offline_info->payment_code,
+                    'payment_url' => $response->online_to_offline_info->how_to_pay_page,
+                    'exp_time' => Carbon::tomorrow(),
+                ]);
+            } else {
+                dd('error');
+            }
 
             return Inertia::render('Deposit/Confirm', [
                 'transaction' => $transaction,
                 'virtual_account' => $virtual_account ?? '',
                 'wallet_account' => $wallet_account ?? '',
+                'offline_account' => $offline_account ?? '',
             ]);
 
         } else {

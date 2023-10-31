@@ -34,6 +34,7 @@ class TransactionBankTransfer extends Model
     const SHOPEEPAY = 9;
     const LINKAJA = 10;
     const DANA = 11;
+    const ALFAMART = 13;
     const BANK = [
         self::BCA => 'BCA',
         self::BNI => 'BNI',
@@ -46,6 +47,7 @@ class TransactionBankTransfer extends Model
         self::SHOPEEPAY  => 'SHOPEEPAY',
         self::LINKAJA => 'LINKAJA',
         self::DANA => 'DANA',
+        self::ALFAMART => 'Alfamart'
     ];
 
     protected $appends = [
