@@ -106,6 +106,9 @@ function formatPrice(value) {
                                 <template v-if="props.history.wallet_account">
                                     <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
                                 </template>
+                                <template v-if="props.history.offline_account">
+                                    <div class="text-sm font-semibold uppercase">{{ props.history.offline_account.bank }}</div>
+                                </template>
                             </div>
                         </template>
 
