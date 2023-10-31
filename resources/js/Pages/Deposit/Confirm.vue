@@ -184,13 +184,13 @@ function formattedDateTime(value) {
 <!--                    Berhasil disimpan.-->
 <!--                </ActionMessage>-->
 
-<!--                <PrimaryButton as="a" :href="route('dashboard')">-->
-<!--                    Kembali ke Beranda-->
-<!--                </PrimaryButton>-->
-
-                <PrimaryButton @click="storeInformation" >
+                <PrimaryButton as="a" :href="route('dashboard')">
                     Kembali ke Beranda
                 </PrimaryButton>
+
+<!--                <PrimaryButton @click="storeInformation" >-->
+<!--                    Kembali ke Beranda-->
+<!--                </PrimaryButton>-->
             </template>
         </FormSection>
 
