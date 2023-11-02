@@ -20,7 +20,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('money-transfer.amount', form), {
+    form.post(route('money-transfer.amount'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -32,12 +32,13 @@ import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } 
 import { CheckCircleIcon } from '@heroicons/vue/20/solid'
 
 const mailingLists = [
-    { id: 1, name: 'bca', logo: '/img/vendor/BCA.svg', adminFee: 'Biaya admin Rp 4.000' },
-    { id: 2, name: 'bni', logo: '/img/vendor/BNI.svg', adminFee: 'Biaya admin Rp 4.000' },
-    { id: 3, name: 'bri', logo: '/img/vendor/BRI.svg', adminFee: 'Biaya admin Rp 4.000' },
-    { id: 4, name: 'mandiri', logo: '/img/vendor/MANDIRI.svg', adminFee: 'Biaya admin Rp 4.000' },
-    { id: 5, name: 'permata', logo: '/img/vendor/PERMATA.svg', adminFee: 'Biaya admin Rp 4.000' },
-    { id: 6, name: 'bsm', logo: '/img/vendor/BSI.svg', adminFee: 'Biaya admin Rp 4.000' },
+    { id: 1, name: 'wkp', logo: '/img/vendor/WAYKAPAY.svg', admin: 0, disabled: false },
+    { id: 2, name: 'bca', logo: '/img/vendor/BCA.svg', admin: 4000, disabled: true },
+    { id: 3, name: 'bni', logo: '/img/vendor/BNI.svg', admin: 4000, disabled: true },
+    { id: 4, name: 'bri', logo: '/img/vendor/BRI.svg', admin: 4000, disabled: true },
+    { id: 5, name: 'mandiri', logo: '/img/vendor/MANDIRI.svg', admin: 4000, disabled: true },
+    { id: 6, name: 'permata', logo: '/img/vendor/PERMATA.svg', admin: 4000, disabled: true },
+    { id: 7, name: 'bsm', logo: '/img/vendor/BSI.svg', admin: 4000, disabled: true },
 ]
 
 function formatPrice(value) {
@@ -63,15 +64,22 @@ function formatPrice(value) {
 
                 <RadioGroup v-model="form.bank">
                     <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
-                        <RadioGroupOption as="template" v-for="mailingList in mailingLists" :key="mailingList.id" :value="mailingList" v-slot="{ checked, active }">
-                            <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-primary-500' : '', 'relative flex cursor-pointer rounded-3xl border p-4 shadow-sm focus:outline-none']">
-                                <div class="flex flex-1 justify-center">
-<!--                                <div class="flex flex-col items-center">-->
-                                    <img :src="mailingList.logo" class="h-7" alt=""/>
-<!--                                  <RadioGroupLabel as="span" class="block text-sm font-medium text-gray-900">Biaya admin {{ formatPrice(mailingList.adminFee) }}</RadioGroupLabel>-->
-<!--                                    <RadioGroupDescription as="span" class="mt-1 flex text-sm text-gray-500">{{ mailingList.adminFee }}</RadioGroupDescription>-->
-<!--                                  <RadioGroupDescription as="span" class="mt-6 text-sm font-medium text-gray-900">{{ mailingList.users }}</RadioGroupDescription>-->
-<!--                                </div>-->
+                        <RadioGroupOption
+                            as="template"
+                            v-for="item in mailingLists"
+                            :key="item.id"
+                            :value="item"
+                            v-slot="{ checked, active }"
+                            :disabled="item.disabled"
+                            :class="item.disabled ? 'bg-gray-200 opacity-75' : '' "
+                        >
+                            <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-primary-500' : '', 'relative flex py-4 px-2 cursor-pointer rounded-3xl border shadow-sm focus:outline-none']">
+                                <div class="flex flex-1 justify-center items-center h-full">
+<!--                                    <div class="flex flex-col items-center">-->
+                                        <img :src="item.logo" class="h-7" alt=""/>
+    <!--                                    <RadioGroupDescription as="span" class="mt-1 flex text-sm text-gray-500">{{ item.adminFee }}</RadioGroupDescription>-->
+    <!--                                    <RadioGroupDescription as="span" class="mt-1 flex text-sm text-gray-500">{{ mailingList.adminFee }}</RadioGroupDescription>-->
+<!--                                    </div>-->
                                 </div>
                                 <CheckCircleIcon :class="[!checked ? 'invisible' : '', 'h-5 w-5 text-primary-600']" aria-hidden="true" />
                                 <span :class="[active ? 'border' : 'border-2', checked ? 'border-primary-500' : 'border-transparent', 'pointer-events-none absolute -inset-px rounded-3xl']" aria-hidden="true" />

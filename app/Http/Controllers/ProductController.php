@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -25,7 +26,7 @@ class ProductController extends Controller
         $gross_amount = $request['amount'] + $admin_fee;
 
 //        dd($request->all());
-        $order_id = \Illuminate\Support\Str::random(8);
+        $order_id = strtolower(Str::random(8));
 
         $response = Http::post('https://api.digiflazz.com/v1/transaction', [
             'username' => Helper::api()->digiflazz_username,

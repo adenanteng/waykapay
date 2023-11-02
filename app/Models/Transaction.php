@@ -65,6 +65,7 @@ class Transaction extends Model
         self::UNDEFINED => 'bg-gray-100 text-gray-800',
     ];
 
+    const TRANSFER = 0;
     const DEPOSIT = 1;
     const PULSA = 2;
     const DATA = 3;
@@ -87,6 +88,7 @@ class Transaction extends Model
     const PASCA_SAMSAT = 20;
 
     const CATEGORY = [
+        self::TRANSFER => 'Kirim Uang',
         self::DEPOSIT => 'Deposit',
         self::PULSA => 'Pulsa',
         self::DATA  => 'Data',
@@ -126,7 +128,8 @@ class Transaction extends Model
         'user',
         'virtual_account',
         'wallet_account',
-        'offline_account'
+        'offline_account',
+        'money_transfer'
     ];
 
     public function getCreatedAttribute()
@@ -159,6 +162,10 @@ class Transaction extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function money_transfer(): HasOne
+    {
+        return $this->hasOne(TransactionMoneyTransfer::class, 'transaction_id', 'id');
+    }
     public function virtual_account(): HasOne
     {
         return $this->hasOne(TransactionBankTransfer::class, 'transaction_id', 'id');

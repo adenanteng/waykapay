@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\MyEvent;
 use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\User;
@@ -20,7 +19,7 @@ class HistoryController extends Controller
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
-        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get(['id','product_name','amount','gross_amount','status_id', 'category_id','updated_at']);
+        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get(['id','product_name','order_id','amount','gross_amount','status_id', 'category_id','updated_at']);
 
 //        dd($history);
 
@@ -34,7 +33,7 @@ class HistoryController extends Controller
     }
 
     public function show($id) {
-        $transaction = Transaction::where('id', $id)->first();
+        $transaction = Transaction::where('order_id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
 //        dd($transaction->toArray());
@@ -109,6 +108,8 @@ class HistoryController extends Controller
 //                    ]);
 
             }
+        } elseif ($transaction->category_id == Transaction::TRANSFER) {
+
         } else {
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):

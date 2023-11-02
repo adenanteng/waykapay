@@ -128,10 +128,10 @@ const onSlideChange = (swiper) => {
                         Isi Ulang
                     </PrimaryButton>
 
-<!--                    <SecondaryButton as="a" :href="route('money-transfer.index')" class="text-sm nightwind-prevent">-->
-<!--                        <i class="fa-solid fa-circle-up mr-2" />-->
-<!--                        Kirim Uang-->
-<!--                    </SecondaryButton>-->
+                    <SecondaryButton as="a" :href="route('money-transfer.index')" class="text-sm nightwind-prevent">
+                        <i class="fa-solid fa-circle-up mr-2" />
+                        Kirim Uang
+                    </SecondaryButton>
                 </div>
             </div>
         </div>

@@ -150,7 +150,7 @@ function formatPrice(value) {
                         <template v-else >
                             <div class="sm:col-span-2 flex sm:block justify-between">
                                 <div class="text-sm ">Keterangan</div>
-                                <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
+                                <div class="text-sm font-semibold text-right">{{ props.history.desc ?? '-' }}</div>
                             </div>
                         </template>
 
@@ -185,7 +185,7 @@ function formatPrice(value) {
                 </div>
             </div>
 
-            <template v-if="props.history.category_id!=1 && $page.props.user.role_id!=3">
+            <template v-if="props.history.category_id!=0 && props.history.category_id!=1 && $page.props.user.role_id!=3">
                 <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                     <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                         <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Komisi Agen</h3>
@@ -405,7 +405,7 @@ function formatPrice(value) {
                         <!--                        </div>-->
                         <div class="sm:col-span-2 flex sm:block justify-between">
                             <div class="text-sm ">Keterangan</div>
-                            <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
+                            <div class="text-sm font-semibold text-right">{{ props.history.desc ?? '-' }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />

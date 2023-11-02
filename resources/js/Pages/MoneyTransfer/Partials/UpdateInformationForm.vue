@@ -24,7 +24,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('money-transfer.confirm', form), {
+    form.post(route('money-transfer.confirm'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -32,6 +32,10 @@ const storeInformation = () => {
     });
 };
 
+function formatPrice(value) {
+    let val = (value/1).toFixed(0).replace('.', '')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
 </script>
 
 <template>
@@ -54,7 +58,7 @@ const storeInformation = () => {
                 <div class="ml-3 min-w-0 flex-1">
                     <div class="text-base font-medium text-gray-800 truncate capitalize">
 <!--                        {{ $page.props.user.name }}-->
-                        John Doe
+                        {{ props.users.name }}
                     </div>
                     <div class="text-sm font-medium text-gray-500 truncate">
                         {{ props.account_no }}
@@ -70,7 +74,7 @@ const storeInformation = () => {
         </template>
 
         <template #description>
-
+<!--            * Saldo Rekening Rp {{ formatPrice($page.props.user.wallet_balance) }}-->
         </template>
 
         <template #form>
@@ -85,12 +89,16 @@ const storeInformation = () => {
                         v-model="form.amount"
                         type="number"
                         class="mt-1 block w-full rounded-l-none"
-                        min="10000"
-                        max="5000000"
+                        min="1000"
+                        :max="Number($page.props.user.wallet_balance) <= 2000000 ? $page.props.user.wallet_balance : 2000000"
                         required
                     />
                 </div>
                 <InputError :message="form.errors.amount" class="mt-2"/>
+                <p class="mt-1 text-xs text-gray-600">
+                    Nominal Rp 1.000 - Rp {{ Number($page.props.user.wallet_balance) <= 2000000 ?
+                    formatPrice($page.props.user.wallet_balance) : '2.000.000' }}
+                </p>
             </div>
 
         </template>

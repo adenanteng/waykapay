@@ -141,7 +141,7 @@ watch(tabHistory, (newTabHistory) => {
                 <template v-for="history in $page.props.history" :key="history.id">
                     <template v-if="history.status_id == tabHistory || tabHistory==99">
                         <li>
-                            <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
+                            <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
                                         <p class="font-medium truncate uppercase"

@@ -69,7 +69,7 @@ function formatPrice(value) {
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="history in $page.props.history">
                     <li>
-                        <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
+                        <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
                                     <p class="font-medium truncate uppercase"
