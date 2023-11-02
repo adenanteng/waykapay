@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +31,15 @@ class UserController extends Controller
     {
 //        dd(User::latest()->paginate(20));
         return Inertia::render('User/Index', [
-            'users' => User::latest()->get(),
+//            'users' => User::latest()->get(),
+            'users' => User::query()
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->OrWhere('email', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
+            'filters' => Req::only(['search'])
         ]);
     }
 
@@ -62,7 +71,10 @@ class UserController extends Controller
             'phone' => ['required', 'unique:users'],
         ])->validateWithBag('storeInformation');
 
+        $request['slug'] = rand(100000,999999);
         $request['password'] = bcrypt(12345678);
+
+//        dd($request->all());
 
         return Redirect::route('user.index', [
             'users' => User::create($request->all()),

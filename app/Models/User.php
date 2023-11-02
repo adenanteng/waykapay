@@ -29,6 +29,7 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
      * @var string[]
      */
     protected $fillable = [
+        'slug',
         'name',
         'phone',
         'email',
@@ -98,6 +99,10 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'role',
     ];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
     public function getCreatedAttribute()
     {
         return date('d M Y', strtotime($this->created_at));

@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
+                'slug' => '000001',
                 'name' => 'Aden Anteng',
                 'email' => 'aden.anteng@gmail.com',
                 'phone' => '085156875180',
@@ -28,6 +29,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
             ],
             [
+                'slug' => '000002',
                 'name' => 'Agus Suryaman',
                 'email' => 'agusyaya@gmail.com',
                 'phone' => '082372892755',

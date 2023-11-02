@@ -43,7 +43,9 @@ function formatPrice(value) {
                     </div>
 
                     <div class="">
-                        <span class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }} <span class="text-sm font-medium ml-2 text-gray-500">#{{ props.users.id }}</span></span>
+                        <span class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }}
+                            <span class="text-sm font-medium ml-2 text-gray-500">#{{ props.users.slug }}</span>
+                        </span>
                         <span class="block font-semibold text-primary-600">
                             Rp {{ formatPrice(props.users.wallet_balance) }}
                         </span>
