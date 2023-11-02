@@ -19,7 +19,9 @@ class HistoryController extends Controller
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
-        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get(['id','product_name','order_id','amount','gross_amount','status_id', 'category_id','updated_at']);
+        $history = Transaction::where('user_id', auth()->user()->id)
+            ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
+            ->get();
 
 //        dd($history);
 

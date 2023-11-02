@@ -40,6 +40,10 @@ class TransactionMoneyTransfer extends Model
         self::BSM => 'BSI',
     ];
 
+    protected $with = [
+        'to'
+    ];
+
     public function getBankAttribute(): string
     {
         return self::BANK[$this->bank_id];

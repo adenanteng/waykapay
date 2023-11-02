@@ -150,7 +150,7 @@ function formatPrice(value) {
                         <template v-else >
                             <div class="sm:col-span-2 flex sm:block justify-between">
                                 <div class="text-sm ">Keterangan</div>
-                                <div class="text-sm font-semibold text-right">{{ props.history.desc ?? '-' }}</div>
+                                <div class="text-sm font-semibold text-right sm:text-left">{{ props.history.desc ?? '-' }}</div>
                             </div>
                         </template>
 
@@ -379,23 +379,26 @@ function formatPrice(value) {
                             <div class="text-sm font-semibold">{{ props.history.category }}</div>
                         </div>
 
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 1">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 0 || props.history.category_id != 1">
                             <div class="text-sm ">Sumber Dana</div>
                             <template v-if="props.history.virtual_account">
                                 <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
                             </template>
-                            <template v-if="props.history.wallet_account">
+                            <template v-else-if="props.history.wallet_account">
                                 <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
                             </template>
-                            <template v-if="props.history.offline_account">
+                            <template v-else-if="props.history.offline_account">
                                 <div class="text-sm font-semibold uppercase">{{ props.history.offline_account.bank }}</div>
                             </template>
+<!--                            <template v-else-if="props.history.offline_account">-->
+<!--                                <div class="text-sm font-semibold uppercase">{{ props.history.offline_account.bank }}</div>-->
+<!--                            </template>-->
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 0 || props.history.category_id != 1">
                             <div class="text-sm ">Produk</div>
                             <div class="text-sm font-semibold">{{ props.history.product_name }}</div>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 0 || props.history.category_id != 1">
                             <div class="text-sm ">No. Kustomer</div>
                             <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
                         </div>
@@ -405,7 +408,7 @@ function formatPrice(value) {
                         <!--                        </div>-->
                         <div class="sm:col-span-2 flex sm:block justify-between">
                             <div class="text-sm ">Keterangan</div>
-                            <div class="text-sm font-semibold text-right">{{ props.history.desc ?? '-' }}</div>
+                            <div class="text-sm font-semibold text-right sm:text-left">{{ props.history.desc ?? '-' }}</div>
                         </div>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />

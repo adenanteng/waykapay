@@ -149,6 +149,14 @@ watch(tabHistory, (newTabHistory) => {
                                             {{ history.product_name }}
                                             <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                             <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                            <template v-else-if="history.money_transfer">
+                                                <template v-if="history.user_id == $page.props.user.id">
+                                                    ke {{ history.money_transfer.to.name }}
+                                                </template>
+                                                <template v-else>
+                                                    dari {{ history.user.name }}
+                                                </template>
+                                            </template>
                                         </p>
                                         <div class="ml-2 flex-shrink-0 flex">
                                             <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
@@ -170,7 +178,7 @@ watch(tabHistory, (newTabHistory) => {
                                         </div>
                                         <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
 <!--                                            <i class="fa-regular fa-calendar pr-2" />-->
-                                            {{ formattedDate(history.updated_at) }}
+                                            {{ formattedDate(history.created_at) }}
                                         </div>
                                     </div>
                                 </div>
