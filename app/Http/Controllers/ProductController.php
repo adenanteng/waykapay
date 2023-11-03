@@ -201,7 +201,7 @@ class ProductController extends Controller
 //                    'transaction'   => $transaction
 //                ]);
 
-                return Redirect::route('history.show', $transaction);
+                return Redirect::route('history.show', $transaction->order_id);
                 break;
 
             case ('Pending'):

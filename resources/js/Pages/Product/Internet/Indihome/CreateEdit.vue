@@ -34,7 +34,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('product.topup.pasca', form), {
+    form.post(route('product.topup.pasca'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         // onSuccess: () => closeModal(),
