@@ -34,4 +34,16 @@ class LandingController extends Controller
 //        ]);
         return Redirect::route('dashboard');
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function upgrade(): Response
+    {
+        return Inertia::render('Upgrade', [
+//            'trip' => Trip::all()
+        ]);
+    }
 }

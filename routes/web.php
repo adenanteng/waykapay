@@ -36,11 +36,12 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
+Route::get('/upgrade', [LandingController::class, 'upgrade'])->name('landing.upgrade');
 
 Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
-Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
-Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
+//Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
+//Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

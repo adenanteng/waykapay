@@ -12,7 +12,7 @@ defineProps({
 });
 
 const classes = computed(() => {
-    return 'inline-flex items-center px-4 py-2 border border-gray-300 rounded-full font-semibold text-base bg-white text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:text-gray-800 disabled:opacity-25 transition';
+    return 'inline-flex items-center px-4 py-2 rounded-full font-semibold text-base text-gray-900 dark:text-white hover:text-gray-500 active:text-gray-800 disabled:opacity-25 transition';
 });
 </script>
 
@@ -20,9 +20,11 @@ const classes = computed(() => {
 
     <Link v-if="as === 'a'" :href="href" :class="classes" >
         <slot />
+<!--        <i class="fa-solid fa-arrow-right text-xs ml-1" />-->
     </Link>
 
     <button v-else :type="type" :class="classes" >
         <slot />
+<!--        <i class="fa-solid fa-arrow-right text-xs ml-1" />-->
     </button>
 </template>

@@ -98,7 +98,7 @@ function formatPrice(value) {
                                     </div>
                                     <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                         <!--                                            <i class="fa-regular fa-calendar pr-2" />-->
-                                        {{ formattedDate(history.updated_at) }}
+                                        {{ formattedDate(history.created_at) }}
                                     </div>
                                 </div>
                             </div>

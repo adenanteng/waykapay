@@ -19,11 +19,7 @@ const props = defineProps({
 })
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
-}
-
-function formattedTime(value) {
-    return moment(value).format('HH:m')
+    return moment(value).format('DD MMM Y HH:m')
 }
 
 function formatPrice(value) {
@@ -46,45 +42,6 @@ const breakpoints = {
         snapAlign: 'center',
     },
 }
-
-const menus = [
-    {
-        name: 'Isi ulang pulsa',
-        href: 'pulsa.index',
-        icon: 'fa-mobile',
-        bg: 'from-green-600'
-    },
-    {
-        name: 'Beli Token Listrik',
-        href: 'pln.index',
-        icon: 'fa-lightbulb',
-        bg: 'from-amber-600'
-    },
-    {
-        name: 'Diamond Games',
-        href: 'games.index',
-        icon: 'fa-gamepad-modern',
-        bg: 'from-blue-600'
-    },
-    {
-        name: 'Topup Saldo E-Money',
-        href: 'emoney.index',
-        icon: 'fa-wallet',
-        bg: 'from-red-600'
-    },
-    {
-        name: 'TV Berlangganan',
-        href: 'television.index',
-        icon: 'fa-tv-retro',
-        bg: 'from-indigo-600'
-    },
-    {
-        name: 'Tagihan Internet',
-        href: 'internet.index',
-        icon: 'fa-router',
-        bg: 'from-primary-600'
-    },
-]
 
 const onSwiper = (swiper) => {
     // console.log(swipeMenu);
@@ -138,18 +95,21 @@ const onSlideChange = (swiper) => {
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <div class="p-6 flex gap-6">
-                <div class="flex-none flex items-center">
-<!--                    <Vue3Lottie-->
-<!--                        animation-link="https://lottie.host/2931601b-3cd5-49f3-a709-ebb26aeab426/60gPnD5Xwz.json"-->
-<!--                        :height="80"-->
-<!--                    />-->
-                    <i class="fa-duotone fa-ghost text-7xl text-primary-600" />
-                </div>
-                <div class="grow">
-                    <h4 class="text-gray-900 font-semibold">Selamat Bergabung!</h4>
-                    <p class="text-sm text-gray-600">Yuk, upgrade ke Waykapay Premium! Nikmatin akses dan benefit lengkap dari Waykapay!</p>
-                    <Link href="" class="text-sm text-primary-600 font-medium">Upgrade <i class="fa-regular fa-arrow-right" /></Link>
-                </div>
+<!--                <template v-if="$page.props.user.role_id==3">-->
+                    <div class="flex-none flex items-center">
+                        <Vue3Lottie
+                            animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                            :height="80"
+                            :width="80"
+                        />
+                    </div>
+                    <div class="grow">
+                        <h4 class="text-gray-900 font-semibold">Selamat Bergabung!</h4>
+                        <p class="text-sm text-gray-600">Yuk, upgrade ke Waykapay Premium! Nikmatin akses dan benefit lengkap dari Waykapay!</p>
+                        <Link :href="route('landing.upgrade')" class="text-sm text-primary-600 font-medium">Upgrade <i class="fa-regular fa-arrow-right" /></Link>
+                    </div>
+<!--                </template>-->
+
             </div>
         </div>
 
