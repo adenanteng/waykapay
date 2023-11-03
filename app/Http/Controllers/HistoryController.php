@@ -35,6 +35,7 @@ class HistoryController extends Controller
     }
 
     public function show($id) {
+        dd($id);
         $transaction = Transaction::where('order_id', $id)->first();
         $user = User::where('id', $transaction->user_id)->first();
 
