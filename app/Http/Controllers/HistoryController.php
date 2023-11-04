@@ -27,10 +27,19 @@ class HistoryController extends Controller
 
         return Inertia::render('History/Index', [
             'history'=> Inertia::lazy(fn () => $history),
-            'on_process' => Inertia::lazy(fn () => $history->where('status_id', Transaction::PENDING)->count()),
+            'on_process' => Inertia::lazy(fn () => $history
+                                                    ->where('status_id', Transaction::PENDING)->count()),
             'all_process' => Inertia::lazy(fn () => $history->count()),
-            'in_count' => Inertia::lazy(fn () => $history->where('category_id', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('amount')),
-            'out_count' => Inertia::lazy(fn () => $history->where('category_id', '!=', Transaction::DEPOSIT)->where('status_id', Transaction::SUCCESS)->sum('gross_amount')),
+            'in_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                                                    ->where('category_id', Transaction::DEPOSIT)
+                                                    ->orWhere('category_id', Transaction::TRANSFER)
+                                                    ->whereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+                                                    ->where('status_id', Transaction::SUCCESS)->sum('amount')),
+            'out_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                                                    ->where('category_id', '!=', Transaction::DEPOSIT)
+                                                    ->orWhere('category_id', '!=', Transaction::TRANSFER)
+                                                    ->whereRelation('money_transfer', 'to_id', '!=', auth()->user()->id)
+                                                    ->where('status_id', Transaction::SUCCESS)->sum('gross_amount')),
         ]);
     }
 

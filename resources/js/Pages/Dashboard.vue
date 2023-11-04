@@ -118,7 +118,7 @@ const onSlideChange = (swiper) => {
                 <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center rounded-3xl bg-gradient-to-br from-sky-300 dark:from-sky-700 shadow-lg">
                     <div class="text-center">
                         <i class="fa-regular fa-mobile text-5xl text-sky-600 dark:text-gray-900" />
-                        <p class="text-xs text-sky-600 dark:text-gray-900">Pulsa</p>
+                        <p class="text-xs text-sky-600 dark:text-gray-900 mt-1">Pulsa & Data</p>
                     </div>
                 </Link>
                 <Link :href="route('pln.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-amber-300 dark:from-amber-700 shadow-lg">

@@ -14,7 +14,9 @@ class TransactionController extends Controller
     public function index() {
 //        dd(Transaction::all());
         return Inertia::render('Transaction/Index', [
-            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get())
+            'transaction' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
+                ->get())
         ]);
     }
 

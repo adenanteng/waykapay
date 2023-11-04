@@ -80,6 +80,14 @@ function formatPrice(value) {
                                         {{ history.product_name }}
                                         <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                         <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                        <template v-else-if="history.money_transfer">
+                                            <template v-if="history.user_id == $page.props.user.id">
+                                                ke {{ history.money_transfer.to.name }}
+                                            </template>
+                                            <template v-else>
+                                                dari {{ history.user.name }}
+                                            </template>
+                                        </template>
                                     </p>
                                     <div class="ml-2 flex-shrink-0 flex">
                                         <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
@@ -92,9 +100,8 @@ function formatPrice(value) {
                                 <div class=" flex justify-between">
                                     <div class="flex">
                                         <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                            {{ history.user.name }} #{{ history.user.slug }} <br>
-
-                                            {{ history.category_id == 1 ? '+' : '-' }} Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
+                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
+                                            Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                         </p>
 <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
 <!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->

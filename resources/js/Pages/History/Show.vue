@@ -112,14 +112,33 @@ function formatPrice(value) {
                             </div>
                         </template>
 
-                        <template v-if="props.history.category_id != 1">
+                        <template v-if="props.history.category_id == 0">
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">Jenis Transaksi</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">Bank Tujuan</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.bank }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">Nama Tujuan</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.name }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="text-sm ">No. Rekening Tujuan</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.slug }}</div>
+                            </div>
+                        </template>
+
+                        <template v-if="props.history.category_id != 0 && props.history.category_id != 1">
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">Produk</div>
                                 <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
                             </div>
                         </template>
 
-                        <template v-if="props.history.category_id != 1">
+                        <template v-if="props.history.category_id != 0 && props.history.category_id != 1">
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">No. Kustomer</div>
                                 <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
@@ -228,9 +247,22 @@ function formatPrice(value) {
             </template>
 
             <div class="flex justify-center gap-2">
-                <SecondaryButton as="a" :href="route('dashboard')" class="justify-center w-full">Beranda</SecondaryButton>
-                <PrimaryButton as="a" :href="route('transaction.print', props.history)" class="justify-center w-full">Bagikan</PrimaryButton>
-<!--                <PrimaryButton @click="printDiv('printMe')">Print</PrimaryButton>-->
+                <SecondaryButton
+                    as="a"
+                    :href="route('dashboard')"
+                    class="justify-center w-full border border-gray-300 nightwind-prevent"
+                >
+                    Beranda
+                </SecondaryButton>
+
+                <PrimaryButton
+                    v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1"
+                    as="a"
+                    :href="route('transaction.print', props.history)"
+                    class="justify-center w-full"
+                >
+                    Bagikan
+                </PrimaryButton>
             </div>
 
 

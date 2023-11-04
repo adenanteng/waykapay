@@ -63,7 +63,7 @@ class MoneyTransferController extends Controller
             'gross_amount' => $request['amount'] + $request['bank']['admin'],
             'last_amount' => $user->wallet_balance,
             'admin_fee' => $request['bank']['admin'],
-            'desc' => 'Kirim uang dari '.$user->name.' ke '.$to->name.' sejumlah Rp '.$request['amount'],
+            'desc' => $request['desc'],
         ]);
 
         $money_transfer = TransactionMoneyTransfer::create([

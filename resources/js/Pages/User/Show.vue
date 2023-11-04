@@ -1,17 +1,21 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import TextInput from '@/Components/TextInput.vue';
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import Table from "@/Components/Table.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import moment from "moment/moment";
 
 const props = defineProps({
     users: Object | String,
-    history: Object,
+    history: undefined,
 });
+
+onMounted(() => {
+    router.reload({ only: ['history'] })
+})
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -65,7 +69,23 @@ function formatPrice(value) {
             </div>
         </div>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+        <template v-if="props.history === undefined">
+            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
+                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">
+                    <div class="flex items-center justify-between">
+                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
+                        <div class="ml-2 flex-shrink-0 flex">
+                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>
+                        </div>
+                    </div>
+                    <div class="sm:flex sm:justify-between">
+                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <div v-else class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="history in $page.props.history">
                     <li>
@@ -77,6 +97,14 @@ function formatPrice(value) {
                                         {{ history.product_name }}
                                         <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                         <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                        <template v-else-if="history.money_transfer">
+                                            <template v-if="history.user_id == $page.props.user.id">
+                                                ke {{ history.money_transfer.to.name }}
+                                            </template>
+                                            <template v-else>
+                                                dari {{ history.user.name }}
+                                            </template>
+                                        </template>
                                     </p>
                                     <div class="ml-2 flex-shrink-0 flex">
                                         <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
@@ -89,7 +117,8 @@ function formatPrice(value) {
                                 <div class="flex justify-between">
                                     <div class="flex">
                                         <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                            {{ history.category_id == 1 ? '+' : '-' }} Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
+                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
+                                            Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                         </p>
                                         <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
                                         <!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->

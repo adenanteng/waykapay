@@ -44,6 +44,10 @@ class TransactionMoneyTransfer extends Model
         'to'
     ];
 
+    protected $appends = [
+        'bank'
+    ];
+
     public function getBankAttribute(): string
     {
         return self::BANK[$this->bank_id];

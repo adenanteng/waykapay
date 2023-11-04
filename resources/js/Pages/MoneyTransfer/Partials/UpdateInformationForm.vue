@@ -8,6 +8,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import ActionSection from "../../../Components/ActionSection.vue";
+import TextAreaInput from "../../../Components/TextAreaInput.vue";
 
 const props = defineProps({
     users: Object | String,
@@ -21,6 +22,7 @@ const form = useForm({
     amount: null,
     bank: props.bank,
     account_no: props.account_no,
+    desc: null
 });
 
 const storeInformation = () => {
@@ -99,6 +101,18 @@ function formatPrice(value) {
                     Nominal Rp 1.000 - Rp {{ Number($page.props.user.wallet_balance) <= 2000000 ?
                     formatPrice($page.props.user.wallet_balance) : '2.000.000' }}
                 </p>
+            </div>
+
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="amount" value="Keterangan"/>
+                <TextAreaInput
+                    id="desc"
+                    v-model="form.desc"
+                    type="text"
+                    class="mt-1 block w-full"
+                    rows="1"
+                />
+                <InputError :message="form.errors.desc" class="mt-2"/>
             </div>
 
         </template>

@@ -84,10 +84,32 @@ function formatPrice(value) {
                             <template v-if="props.history.wallet_account">
                                 <div class="text-sm font-semibold uppercase">{{ props.history.wallet_account.bank }}</div>
                             </template>
+                            <template v-if="props.history.offline_account">
+                                <div class="text-sm font-semibold uppercase">{{ props.history.offline_account.bank }}</div>
+                            </template>
                         </div>
                     </template>
 
-                    <template v-if="props.history.category_id != 1">
+                    <template v-if="props.history.category_id == 0">
+                        <div class="flex justify-between" >
+                            <div class="text-sm ">Jenis Transaksi</div>
+                            <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
+                        </div>
+                        <div class="flex justify-between" >
+                            <div class="text-sm ">Bank Tujuan</div>
+                            <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.bank }}</div>
+                        </div>
+                        <div class="flex justify-between" >
+                            <div class="text-sm ">Nama Tujuan</div>
+                            <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.name }}</div>
+                        </div>
+                        <div class="flex justify-between" >
+                            <div class="text-sm ">No. Rekening Tujuan</div>
+                            <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.slug }}</div>
+                        </div>
+                    </template>
+
+                    <template v-if="props.history.category_id != 0 && props.history.category_id != 1">
                         <div class="flex justify-between" >
                             <div class="text-sm ">Produk</div>
                             <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
@@ -125,7 +147,7 @@ function formatPrice(value) {
                     <template v-else >
                         <div class="flex justify-between">
                             <div class="text-sm ">Keterangan</div>
-                            <div class="text-sm font-semibold">{{ props.history.desc ?? '-' }}</div>
+                            <div class="text-sm font-semibold text-right">{{ props.history.desc ?? '-' }}</div>
                         </div>
                     </template>
 
