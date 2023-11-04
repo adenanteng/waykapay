@@ -55,9 +55,12 @@ function formatPrice(value) {
             <div class="md:hidden relative">
                 <img :src="$page.props.user.profile_photo_url" class="w-full object-cover rounded-t-3xl aspect-video">
                 <div class="absolute inset-0 bg-gradient-to-tl from-gray-50 dark:from-gray-900 via-transparent via-35% flex justify-end items-end rounded-t-3xl">
-                    <h3 class="font-semibold text-gray-900 pb-2 pr-5">
-                        # {{ $page.props.user.slug }}
-                    </h3>
+                    <div class="pb-2 pr-5">
+                        <h3 class="font-semibold text-gray-900 ">
+                            # {{ $page.props.user.slug }}
+                        </h3>
+                        <p class="text-xs text-gray-700">Akun {{ $page.props.user.role }}</p>
+                    </div>
 
                 </div>
             </div>

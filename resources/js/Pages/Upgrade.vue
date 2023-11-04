@@ -69,6 +69,6 @@ function formatPrice(value) {
             </div>
         </div>
 
-        <MobileMenu/>
+<!--        <MobileMenu/>-->
     </BlankLayout>
 </template>
