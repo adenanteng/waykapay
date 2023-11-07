@@ -91,9 +91,7 @@ class UserController extends Controller
     {
         return Inertia::render('User/Show', [
             'users' => $user,
-            'history' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
-                ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
-                ->get())
+            'history' => Transaction::where('user_id', $user->id)->latest()->get()
         ]);
     }
 
