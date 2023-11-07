@@ -10,7 +10,10 @@ import moment from "moment/moment";
 
 const props = defineProps({
     users: Object | String,
-    history: undefined,
+    history: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
 onMounted(() => {
