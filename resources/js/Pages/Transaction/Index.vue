@@ -81,12 +81,12 @@ function formatPrice(value) {
                                         <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                         <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
                                         <template v-else-if="history.money_transfer">
-                                            <template v-if="history.user_id == $page.props.user.id">
+<!--                                            <template v-if="history.user_id == $page.props.user.id">-->
                                                 ke {{ history.money_transfer.to.name }}
-                                            </template>
-                                            <template v-else>
-                                                dari {{ history.user.name }}
-                                            </template>
+<!--                                            </template>-->
+<!--                                            <template v-else>-->
+<!--                                                dari {{ history.user.name }}-->
+<!--                                            </template>-->
                                         </template>
                                     </p>
                                     <div class="ml-2 flex-shrink-0 flex">
@@ -97,8 +97,13 @@ function formatPrice(value) {
                                         </p>
                                     </div>
                                 </div>
+                                <div class="flex items-end">
+                                    <p class="font-medium text-gray-900">{{ history.user.name }}</p>
+                                    <p class="text-sm text-gray-900 ml-2">#{{ history.user.slug }}</p>
+                                </div>
                                 <div class=" flex justify-between">
                                     <div class="flex">
+
                                         <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                             {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
                                             Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
