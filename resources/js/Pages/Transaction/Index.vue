@@ -8,15 +8,12 @@ import { Vue3Lottie } from 'vue3-lottie'
 import Badge from "../../Components/Badge.vue";
 
 const props = defineProps({
-    transaction: {
-        type: Object,
-        default: () => ({}),
-    },
+    transaction: undefined,
 })
 
-// onMounted(() => {
-//     router.reload({ only: ['transaction'] })
-// })
+onMounted(() => {
+    router.reload({ only: ['transaction'] })
+})
 
 // onUnmounted(() => {
 //     clearInterval(interval)
