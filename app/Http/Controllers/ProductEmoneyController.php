@@ -34,8 +34,15 @@ class ProductEmoneyController extends Controller
             return Inertia::render('Product/Emoney/Show', [
                 'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => $response->object()),
-                'fee' => Helper::api()->fees,
-                'product' => $product
+                'product' => $product,
+                'fee_25' => Helper::fee()->emoney_25,
+                'fee_50' => Helper::fee()->emoney_50,
+                'fee_75' => Helper::fee()->emoney_75,
+                'fee_100' => Helper::fee()->emoney_100,
+                'fee_200' => Helper::fee()->emoney_200,
+                'fee_500' => Helper::fee()->emoney_500,
+                'fee_1000' => Helper::fee()->emoney_1000,
+                'fee_max' => Helper::fee()->emoney_max,
             ]);
 
         } else {

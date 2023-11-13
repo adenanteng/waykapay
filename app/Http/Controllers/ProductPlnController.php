@@ -53,7 +53,14 @@ class ProductPlnController extends Controller
                 'users' => auth()->user(),
                 'customer' => $customer->object(),
                 'response'  => Inertia::lazy(fn () => $response->object()),
-                'fee' => Helper::api()->fees,
+                'fee_25' => Helper::fee()->pln_25,
+                'fee_50' => Helper::fee()->pln_50,
+                'fee_75' => Helper::fee()->pln_75,
+                'fee_100' => Helper::fee()->pln_100,
+                'fee_200' => Helper::fee()->pln_200,
+                'fee_500' => Helper::fee()->pln_500,
+                'fee_1000' => Helper::fee()->pln_1000,
+                'fee_max' => Helper::fee()->pln_max,
             ]);
 
         } else {

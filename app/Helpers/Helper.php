@@ -53,4 +53,12 @@ class Helper
             'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
         ]);
     }
+
+    public static function fee()
+    {
+        if (AppSetting::first() != null) {
+
+            return AppSetting::first();
+        }
+    }
 }

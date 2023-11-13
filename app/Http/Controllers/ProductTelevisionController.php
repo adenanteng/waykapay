@@ -34,8 +34,15 @@ class ProductTelevisionController extends Controller
             return Inertia::render('Product/Television/Show', [
                 'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => $response->object()),
-                'fee' => Helper::api()->fees,
-                'product' => $product
+                'product' => $product,
+                'fee_25' => Helper::fee()->tv_25,
+                'fee_50' => Helper::fee()->tv_50,
+                'fee_75' => Helper::fee()->tv_75,
+                'fee_100' => Helper::fee()->tv_100,
+                'fee_200' => Helper::fee()->tv_200,
+                'fee_500' => Helper::fee()->tv_500,
+                'fee_1000' => Helper::fee()->tv_1000,
+                'fee_max' => Helper::fee()->tv_max,
             ]);
 
         } else {

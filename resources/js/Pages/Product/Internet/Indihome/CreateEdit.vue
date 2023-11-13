@@ -67,7 +67,7 @@ const confirmModal = (data) => {
         productSku = data.buyer_sku_code;
         productName = data.product_name;
         productBrand = data.brand;
-        productPrice = Number(data.price) + (Number((props.fee / 100) * data.price));
+        productPrice = Number(data.price);
         productDesc = data.desc;
     }
     // setTimeout(() => passwordInput.value.focus(), 250);
@@ -85,13 +85,11 @@ const closeModal = () => {
     // form.reset();
 };
 
-const tabs = ref('Pulsa')
-
 </script>
 
 <template>
-    <AppLayout title="PLN Postpaid"
-               name="PLN Postpaid"
+    <AppLayout title="Indihome"
+               name="Indihome"
                desc="Masukkan nomor"
     >
         <template #previous>
@@ -100,7 +98,7 @@ const tabs = ref('Pulsa')
 
         <FormSection >
             <template #title>
-                PLN Postpaid
+                Indihome
             </template>
 
             <template #description>

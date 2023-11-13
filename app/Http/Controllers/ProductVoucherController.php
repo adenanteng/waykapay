@@ -34,8 +34,15 @@ class ProductVoucherController extends Controller
             return Inertia::render('Product/Voucher/Show', [
                 'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => $response->object()),
-                'fee' => Helper::api()->fees,
-                'product' => $product
+                'product' => $product,
+                'fee_25' => Helper::fee()->voucher_25,
+                'fee_50' => Helper::fee()->voucher_50,
+                'fee_75' => Helper::fee()->voucher_75,
+                'fee_100' => Helper::fee()->voucher_100,
+                'fee_200' => Helper::fee()->voucher_200,
+                'fee_500' => Helper::fee()->voucher_500,
+                'fee_1000' => Helper::fee()->voucher_1000,
+                'fee_max' => Helper::fee()->voucher_max,
             ]);
 
         } else {

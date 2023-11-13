@@ -21,7 +21,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('deposit.create', form), {
+    form.post(route('deposit.create'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {

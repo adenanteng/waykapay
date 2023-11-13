@@ -22,8 +22,8 @@ class ProductController extends Controller
      */
     public function topup(Request $request)
     {
-        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
-        $gross_amount = $request['amount'] + $admin_fee;
+//        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
+        $gross_amount = $request['amount'] + $request['fee'];
 
 //        dd($request->all());
         $order_id = strtolower(Str::random(8));
@@ -53,7 +53,7 @@ class ProductController extends Controller
                 'amount' => $request['amount'],
                 'gross_amount' => $gross_amount,
                 'last_amount' => $user->wallet_balance,
-                'admin_fee' => $admin_fee,
+                'admin_fee' => $request['fee'],
                 'desc' => $response->object()->data->sn ?? $response->object()->data->rc.' '.$response->object()->data->message,
             ]);
 

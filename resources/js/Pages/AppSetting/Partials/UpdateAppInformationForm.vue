@@ -21,7 +21,7 @@ const form = useForm({
     name: props.setting.name ?? null,
     desc: props.setting.desc ?? null,
     photo: null,
-    fees: props.setting.fees ?? null,
+    // fees: props.setting.fees ?? null,
 
     // midtrans_id_merchant: props.setting.midtrans_id_merchant ?? null,
     // midtrans_client_key: props.setting.midtrans_client_key ?? null,
@@ -149,21 +149,21 @@ const clearPhotoFileInput = () => {
                 <InputError :message="form.errors.desc" class="mt-2" />
             </div>
 
-            <div class="col-span-3">
-                <InputLabel for="fees" value="Margin Keuntungan" />
-                <div class="flex">
-                    <TextInput
-                        id="fees"
-                        v-model="form.fees"
-                        type="number"
-                        class="mt-1 block w-full rounded-r-none"
-                    />
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-l-0 rounded-3xl rounded-l-none shadow-sm mt-1 px-3 ">
-                        <i class="fa-regular fa-percent" />
-                    </span>
-                </div>
-                <InputError :message="form.errors.fees" class="mt-2" />
-            </div>
+<!--            <div class="col-span-3">-->
+<!--                <InputLabel for="fees" value="Margin Keuntungan" />-->
+<!--                <div class="flex">-->
+<!--                    <TextInput-->
+<!--                        id="fees"-->
+<!--                        v-model="form.fees"-->
+<!--                        type="number"-->
+<!--                        class="mt-1 block w-full rounded-r-none"-->
+<!--                    />-->
+<!--                    <span class="flex items-center bg-white text-black border border-gray-300 border-l-0 rounded-3xl rounded-l-none shadow-sm mt-1 px-3 ">-->
+<!--                        <i class="fa-regular fa-percent" />-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--                <InputError :message="form.errors.fees" class="mt-2" />-->
+<!--            </div>-->
 
         </template>
 

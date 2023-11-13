@@ -18,8 +18,15 @@ import Loading from "../Loading.vue";
 const props = defineProps({
     users: Object,
     response: undefined,
-    fee: Number,
-    product: String
+    product: String,
+    fee_25: Number,
+    fee_50: Number,
+    fee_75: Number,
+    fee_100: Number,
+    fee_200: Number,
+    fee_500: Number,
+    fee_1000: Number,
+    fee_max: Number,
 });
 
 onMounted(() => {
@@ -34,9 +41,14 @@ const form = useForm({
     sku: '',
     amount: '',
     category_id: '',
+    fee: null
 });
 
 const storeInformation = () => {
+    if (fee.value != null) {
+        form.fee = fee.value
+    }
+
     form.post(route('product.topup'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
@@ -70,7 +82,26 @@ const confirmModal = (data) => {
         productSku = data.buyer_sku_code;
         productName = data.product_name;
         productBrand = data.brand;
-        productPrice = Number(data.price) + (Number((props.fee / 100) * data.price));
+
+        if (Number(data.price) < 25000) {
+            fee.value = Number(data.price) + Number(props.fee_25)
+        } else if (Number(data.price) < 50000) {
+            fee.value = Number(data.price) + Number(props.fee_50)
+        } else if (Number(data.price) < 75000) {
+            fee.value = Number(data.price) + Number(props.fee_75)
+        } else if (Number(data.price) < 100000) {
+            fee.value = Number(data.price) + Number(props.fee_100)
+        } else if (Number(data.price) < 200000) {
+            fee.value = Number(data.price) + Number(props.fee_200)
+        } else if (Number(data.price) < 500000) {
+            fee.value = Number(data.price) + Number(props.fee_500)
+        } else if (Number(data.price) < 1000000) {
+            fee.value = Number(data.price) + Number(props.fee_1000)
+        } else {
+            fee.value = Number(data.price) + Number(props.fee_max)
+        }
+
+        productPrice = fee.value;
         productDesc = data.desc;
     }
 
@@ -144,7 +175,32 @@ const closeModal = () => {
                                     <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                         <span class="absolute inset-0" aria-hidden="true"></span>
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                        <p class="text-sm text-gray-500 truncate">Rp {{ formatPrice(Number(data.price) + (Number((props.fee / 100) * data.price))) }}</p>
+                                        <p class="text-sm text-gray-500 truncate">
+                                            <template v-if="Number(data.price) < 25000">
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_25)) }}
+                                            </template>
+                                            <template v-else-if="Number(data.price) < 50000">
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_50)) }}
+                                            </template>
+                                            <template v-else-if="Number(data.price) < 75000">
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_75)) }}
+                                            </template>
+                                            <template v-else-if="Number(data.price) < 100000">
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_100)) }}
+                                            </template>
+                                            <template v-else-if="Number(data.price) < 200000">
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_200)) }}
+                                            </template>
+                                            <template v-else-if="Number(data.price) < 500000">
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_500)) }}
+                                            </template>
+                                            <template v-else-if="Number(data.price) < 1000000">
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_1000)) }}
+                                            </template>
+                                            <template v-else>
+                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_max)) }}
+                                            </template>
+                                        </p>
                                     </button>
                                 </template>
 
