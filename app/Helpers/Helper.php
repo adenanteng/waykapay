@@ -69,9 +69,7 @@ class Helper
         $cached = Redis::get('pricelist');
 
         if(isset($cached)) {
-//            $data = json_decode($cached, FALSE);
-
-            return $cached;
+            return json_decode($cached, FALSE);
         }else {
             $data = Http::post('https://api.digiflazz.com/v1/price-list', [
                 'cmd' => 'prepaid',
@@ -84,7 +82,7 @@ class Helper
 //            $cached = Redis::get('pricelist');
 
 //            dd(json_decode($data));
-            return json_decode($data);
+            return json_decode($data, FALSE);
 
         }
     }
