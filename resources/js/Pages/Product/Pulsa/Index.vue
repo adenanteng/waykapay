@@ -15,6 +15,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {onMounted, ref, watch} from "vue";
 import {value} from "lodash/seq";
 import Loading from "../Loading.vue";
+import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
     users: Object,
@@ -257,7 +258,12 @@ watch(tabPulsa, (newTabPulsa) => {
             </template>
 
             <template v-else-if="props.response.data.rc==83">
-                <span class="text-gray-700">Ada yang salah, coba beberapa saat lagi</span>
+                <Vue3Lottie
+                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                    :height="200"
+                    :width="200"
+                />
+                <span class="text-sm text-gray-600">Ada yang salah, coba beberapa saat lagi.</span>
             </template>
 
             <template v-else v-for="data in sort(props.response.data)" >
