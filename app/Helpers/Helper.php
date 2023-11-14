@@ -83,8 +83,8 @@ class Helper
             Redis::set('pricelist', $data,'EX', 360);
 //            $cached = Redis::get('pricelist');
 
-            dd(json_decode($data));
-            return $data;
+//            dd(json_decode($data));
+            return json_decode($data);
 
         }
     }
