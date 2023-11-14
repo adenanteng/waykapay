@@ -60,7 +60,9 @@ class Helper
             ]);
         });
 
-        return $data;
+//        dd($data->toArray());
+
+        return response()->json($data);
     }
 
     public static function fee()
