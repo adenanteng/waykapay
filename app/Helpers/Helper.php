@@ -65,12 +65,13 @@ class Helper
 
 //        return response()->json($data);
 
+
         $cached = Redis::get('pricelist');
-//
+        dd($cached);
         if(isset($cached)) {
             $data = json_decode($cached, FALSE);
 
-            dd($data);
+//            dd($data);
             return $data;
         }else {
             $data = Http::post('https://api.digiflazz.com/v1/price-list', [
@@ -79,7 +80,7 @@ class Helper
                 'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
             ]);
 
-            Redis::set('pricelist', $data,'EX', 10);
+            Redis::set('pricelist', $data,'EX', 3600);
             return $data;
 
 //            dd($data->object());
