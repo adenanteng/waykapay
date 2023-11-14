@@ -19,8 +19,6 @@ class ProductPulsaController extends Controller
     {
         $response = Helper::pricelist();
 
-//        dd($response);
-//        dd(Helper::fee()->pulsa_25);
 //        if ($response->successful()) {
             return Inertia::render('Product/Pulsa/Index', [
                 'users' => auth()->user(),

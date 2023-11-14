@@ -162,6 +162,7 @@ const closeModal = () => {
 
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {{ props.response }}
             <template v-if="props.response === undefined">
                 <Loading />
             </template>

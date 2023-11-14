@@ -30,6 +30,7 @@ class ProductEmoneyController extends Controller
     {
         $response = Helper::pricelist();
 
+//        dd($response);
 //        if ($response->successful()) {
             return Inertia::render('Product/Emoney/Show', [
                 'users' => auth()->user(),
