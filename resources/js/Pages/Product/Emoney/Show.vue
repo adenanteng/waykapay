@@ -167,7 +167,7 @@ const closeModal = () => {
             </template>
 
             <template v-else>
-                {{ props.response }}
+                {{ props.response.data }}
             </template>
 
 <!--            <template v-else-if="props.response.data?.rc==83">-->
