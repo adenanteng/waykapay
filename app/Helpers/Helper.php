@@ -68,26 +68,18 @@ class Helper
         $cached = Redis::get('pricelist');
 
         if(isset($cached)) {
-            $blog = json_decode($cached, FALSE);
+            $data = json_decode($cached, FALSE);
 
-            return response()->json([
-                'status_code' => 200,
-                'message' => 'mengambil data dari redis',
-                'data' => $blog,
-            ]);
+            return $data;
         }else {
-            $blog = Http::post('https://api.digiflazz.com/v1/price-list', [
+            $data = Http::post('https://api.digiflazz.com/v1/price-list', [
                 'cmd' => 'prepaid',
                 'username' => Helper::api()->digiflazz_username,
                 'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
             ]);
-            Redis::set('pricelist', 'EX', 3600);
+            Redis::set('pricelist', $data,'EX', 3600);
 
-            return response()->json([
-                'status_code' => 200,
-                'message' => 'mengambil data dari database',
-                'data' => $blog,
-            ]);
+            return $data;
         }
     }
 
