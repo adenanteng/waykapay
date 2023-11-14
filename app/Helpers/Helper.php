@@ -81,10 +81,10 @@ class Helper
 
 
             Redis::set('pricelist', $data,'EX', 360);
-            $cached = Redis::get('pricelist');
+//            $cached = Redis::get('pricelist');
 
-            return $cached;
-
+            dd(json_decode($data));
+            return $data;
 
         }
     }
