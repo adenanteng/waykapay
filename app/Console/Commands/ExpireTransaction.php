@@ -29,7 +29,7 @@ class ExpireTransaction extends Command
     {
         Transaction::where('category_id', Transaction::DEPOSIT)
             ->where('status_id', Transaction::PENDING)
-            ->where('created_at', '<', Carbon::yesterday())
+            ->where('created_at', '<=', Carbon::yesterday())
             ->update(['status_id' => Transaction::EXPIRE]);
     }
 }

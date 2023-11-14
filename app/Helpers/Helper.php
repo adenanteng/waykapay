@@ -47,11 +47,20 @@ class Helper
 
     public static function pricelist()
     {
-        return Http::post('https://api.digiflazz.com/v1/price-list', [
-            'cmd' => 'prepaid',
-            'username' => Helper::api()->digiflazz_username,
-            'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-        ]);
+
+        $key = 'pricelist';
+        $minutes = 60; // Waktu cache dalam menit
+
+        $data = cache()->remember($key, $minutes, function () {
+            // Logika untuk mendapatkan data dari sumbernya
+            return Http::post('https://api.digiflazz.com/v1/price-list', [
+                'cmd' => 'prepaid',
+                'username' => Helper::api()->digiflazz_username,
+                'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+            ]);
+        });
+
+        return $data;
     }
 
     public static function fee()
