@@ -78,7 +78,7 @@ class Helper
                 'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
             ]);
 
-            if ($data->object()->data->rc == 83) {
+            if ($data->object()->data?->rc == 83) {
                 return false;
             } else {
                 Redis::set('pricelist', $data,'EX', 3600);
