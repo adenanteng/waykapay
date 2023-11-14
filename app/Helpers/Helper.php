@@ -80,7 +80,9 @@ class Helper
                 'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
             ]);
 
-            Redis::set('pricelist', $data,'EX', 3600);
+            if (is_null($data->object()->data->sn)) {
+                Redis::set('pricelist', $data,'EX', 3600);
+            }
             return $data;
 
 //            dd($data->object());
