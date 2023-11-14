@@ -178,56 +178,56 @@ const closeModal = () => {
 <!--                </div>-->
 <!--            </template>-->
 
-            <template v-else v-for="data in sort(props.response.data)" >
-                <template v-if="data.brand == props.product">
-                        <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-                            <div class="flex-shrink-0">
-                                <img class="w-10" :src="'/img/vendor/' + props.product + '.svg'" alt="">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)">
-                                    <button @click="confirmModal(data)" class="focus:outline-none text-left">
-                                        <span class="absolute inset-0" aria-hidden="true"></span>
-                                        <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                        <p class="text-sm text-gray-500 truncate">
-                                            <template v-if="Number(data.price) < 25000">
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_25)) }}
-                                            </template>
-                                            <template v-else-if="Number(data.price) < 50000">
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_50)) }}
-                                            </template>
-                                            <template v-else-if="Number(data.price) < 75000">
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_75)) }}
-                                            </template>
-                                            <template v-else-if="Number(data.price) < 100000">
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_100)) }}
-                                            </template>
-                                            <template v-else-if="Number(data.price) < 200000">
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_200)) }}
-                                            </template>
-                                            <template v-else-if="Number(data.price) < 500000">
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_500)) }}
-                                            </template>
-                                            <template v-else-if="Number(data.price) < 1000000">
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_1000)) }}
-                                            </template>
-                                            <template v-else>
-                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_max)) }}
-                                            </template>
-                                        </p>
-                                    </button>
-                                </template>
+<!--            <template v-else v-for="data in sort(props.response.data)" >-->
+<!--                <template v-if="data.brand == props.product">-->
+<!--                        <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">-->
+<!--                            <div class="flex-shrink-0">-->
+<!--                                <img class="w-10" :src="'/img/vendor/' + props.product + '.svg'" alt="">-->
+<!--                            </div>-->
+<!--                            <div class="flex-1 min-w-0">-->
+<!--                                <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)">-->
+<!--                                    <button @click="confirmModal(data)" class="focus:outline-none text-left">-->
+<!--                                        <span class="absolute inset-0" aria-hidden="true"></span>-->
+<!--                                        <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>-->
+<!--                                        <p class="text-sm text-gray-500 truncate">-->
+<!--                                            <template v-if="Number(data.price) < 25000">-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_25)) }}-->
+<!--                                            </template>-->
+<!--                                            <template v-else-if="Number(data.price) < 50000">-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_50)) }}-->
+<!--                                            </template>-->
+<!--                                            <template v-else-if="Number(data.price) < 75000">-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_75)) }}-->
+<!--                                            </template>-->
+<!--                                            <template v-else-if="Number(data.price) < 100000">-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_100)) }}-->
+<!--                                            </template>-->
+<!--                                            <template v-else-if="Number(data.price) < 200000">-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_200)) }}-->
+<!--                                            </template>-->
+<!--                                            <template v-else-if="Number(data.price) < 500000">-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_500)) }}-->
+<!--                                            </template>-->
+<!--                                            <template v-else-if="Number(data.price) < 1000000">-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_1000)) }}-->
+<!--                                            </template>-->
+<!--                                            <template v-else>-->
+<!--                                                Rp {{ formatPrice(Number(data.price) + Number(props.fee_max)) }}-->
+<!--                                            </template>-->
+<!--                                        </p>-->
+<!--                                    </button>-->
+<!--                                </template>-->
 
-                                <template v-else>
-                                    <div class="focus:outline-none text-left">
-                                        <p class="text-sm font-medium text-gray-500">{{ data.product_name }}</p>
-                                        <p class="text-sm text-gray-500 truncate">Tidak tersedia</p>
-                                    </div>
-                                </template>
-                            </div>
-                        </div>
-                </template>
-            </template>
+<!--                                <template v-else>-->
+<!--                                    <div class="focus:outline-none text-left">-->
+<!--                                        <p class="text-sm font-medium text-gray-500">{{ data.product_name }}</p>-->
+<!--                                        <p class="text-sm text-gray-500 truncate">Tidak tersedia</p>-->
+<!--                                    </div>-->
+<!--                                </template>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                </template>-->
+<!--            </template>-->
         </div>
 
         <DialogModal :show="confirmingModal" @close="closeModal">
