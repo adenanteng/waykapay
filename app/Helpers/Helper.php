@@ -65,13 +65,13 @@ class Helper
 
 //        return response()->json($data);
 
-        $cached = Redis::get('pricelist');
-
-        if(isset($cached)) {
-            $data = json_decode($cached, FALSE);
-
-            return $data;
-        }else {
+//        $cached = Redis::get('pricelist');
+//
+//        if(isset($cached)) {
+//            $data = json_decode($cached, FALSE);
+//
+//            return $data;
+//        }else {
             $data = Http::post('https://api.digiflazz.com/v1/price-list', [
                 'cmd' => 'prepaid',
                 'username' => Helper::api()->digiflazz_username,
@@ -80,7 +80,7 @@ class Helper
             Redis::set('pricelist', $data,'EX', 3600);
 
             return $data;
-        }
+//        }
     }
 
     public static function fee()
