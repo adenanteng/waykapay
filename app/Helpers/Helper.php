@@ -71,7 +71,7 @@ class Helper
         if(isset($cached)) {
             $data = json_decode($cached, FALSE);
 
-//            dd($data);
+            dd($cached);
             return $data;
         }else {
             $data = Http::post('https://api.digiflazz.com/v1/price-list', [
