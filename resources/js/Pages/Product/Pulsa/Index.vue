@@ -256,6 +256,10 @@ watch(tabPulsa, (newTabPulsa) => {
 <!--                <Loading />-->
             </template>
 
+            <template v-if="props.response.data.rc==83">
+                Refresh halaman
+            </template>
+
             <template v-else v-for="data in sort(props.response.data)" >
 
                 <template v-if="tabPulsa=='Pulsa'" >
