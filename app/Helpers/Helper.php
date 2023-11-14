@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\AppSetting;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
 
 class Helper
 {
@@ -48,21 +49,46 @@ class Helper
     public static function pricelist()
     {
 
-        $key = 'pricelist';
-        $minutes = 60; // Waktu cache dalam menit
+//        $key = 'pricelist';
+//        $minutes = 60; // Waktu cache dalam menit
+//
+//        $data = cache()->remember($key, $minutes, function () {
+//            // Logika untuk mendapatkan data dari sumbernya
+//            return Http::post('https://api.digiflazz.com/v1/price-list', [
+//                'cmd' => 'prepaid',
+//                'username' => Helper::api()->digiflazz_username,
+//                'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
+//            ]);
+//        });
 
-        $data = cache()->remember($key, $minutes, function () {
-            // Logika untuk mendapatkan data dari sumbernya
-            return Http::post('https://api.digiflazz.com/v1/price-list', [
+//        dd($data->toArray());
+
+//        return response()->json($data);
+
+        $cached = Redis::get('pricelist');
+
+        if(isset($cached)) {
+            $blog = json_decode($cached, FALSE);
+
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'mengambil data dari redis',
+                'data' => $blog,
+            ]);
+        }else {
+            $blog = Http::post('https://api.digiflazz.com/v1/price-list', [
                 'cmd' => 'prepaid',
                 'username' => Helper::api()->digiflazz_username,
                 'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
             ]);
-        });
+            Redis::set('pricelist', 'EX', 3600);
 
-//        dd($data->toArray());
-
-        return response()->json($data);
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'mengambil data dari database',
+                'data' => $blog,
+            ]);
+        }
     }
 
     public static function fee()
