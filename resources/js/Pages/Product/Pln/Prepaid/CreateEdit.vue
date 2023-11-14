@@ -14,6 +14,7 @@ import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {onMounted, ref} from "vue";
 import Loading from "../../Loading.vue";
+import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
     users: Object,
@@ -168,6 +169,17 @@ const closeModal = () => {
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <template v-if="props.response === undefined">
                 <Loading />
+            </template>
+
+            <template v-else-if="props.response.data.rc==83">
+                <div class="grid justify-center">
+                    <Vue3Lottie
+                        animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                        :height="200"
+                        :width="200"
+                    />
+                    <span class="text-sm text-gray-600 text-center">Ada yang salah, coba beberapa saat lagi.</span>
+                </div>
             </template>
 
             <template v-else v-for="data in sort(props.response.data)" >
