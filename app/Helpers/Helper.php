@@ -79,6 +79,7 @@ class Helper
             ]);
             Redis::set('pricelist', $data,'EX', 3600);
 
+//            dd($data->object());
             return $data;
 //        }
     }
