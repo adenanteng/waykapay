@@ -65,13 +65,13 @@ class Helper
 
 //        return response()->json($data);
 
-
+        Redis::del('pricelist');
         $cached = Redis::get('pricelist');
-        dd($cached);
+//        dd($cached);
         if(isset($cached)) {
             $data = json_decode($cached, FALSE);
 
-//            dd($data);
+            dd($data);
             return $data;
         }else {
             $data = Http::post('https://api.digiflazz.com/v1/price-list', [
