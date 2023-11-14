@@ -21,10 +21,10 @@ class ProductPulsaController extends Controller
 
 //        dd($response);
 //        dd(Helper::fee()->pulsa_25);
-        if ($response->successful()) {
+//        if ($response->successful()) {
             return Inertia::render('Product/Pulsa/Index', [
                 'users' => auth()->user(),
-                'response' => Inertia::lazy(fn () => $response->object()),
+                'response' => Inertia::lazy(fn () => $response),
                 'fee_25' => Helper::fee()->pulsa_25,
                 'fee_50' => Helper::fee()->pulsa_50,
                 'fee_75' => Helper::fee()->pulsa_75,
@@ -35,12 +35,12 @@ class ProductPulsaController extends Controller
                 'fee_max' => Helper::fee()->pulsa_max,
             ]);
 
-        } else {
-//            dd($response->status());
-            return Inertia::render('Payment/Info', [
-                'transaction' => $response->object()->data,
-            ]);
-        }
+//        } else {
+////            dd($response->status());
+//            return Inertia::render('Payment/Info', [
+//                'transaction' => $response->object()->data,
+//            ]);
+//        }
     }
 
 }
