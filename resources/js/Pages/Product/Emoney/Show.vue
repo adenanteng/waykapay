@@ -166,7 +166,7 @@ const closeModal = () => {
                 <Loading />
             </template>
 
-            <template v-else-if="props.response.data.rc==83">
+            <template v-else-if="props.response.data?.rc==83">
                 <div class="grid justify-center">
                     <Vue3Lottie
                         animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
