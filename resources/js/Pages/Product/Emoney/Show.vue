@@ -166,10 +166,6 @@ const closeModal = () => {
                 <Loading />
             </template>
 
-<!--            <template v-else>-->
-<!--                {{ props.response.data }}-->
-<!--            </template>-->
-
 <!--            <template v-else-if="props.response.data?.rc==83">-->
 <!--                <div class="grid justify-center">-->
 <!--                    <Vue3Lottie-->

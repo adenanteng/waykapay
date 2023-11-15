@@ -30,10 +30,10 @@ class ProductGamesController extends Controller
     {
         $response = Helper::pricelist();
 
-        if ($response->successful()) {
+//        if ($response->successful()) {
             return Inertia::render('Product/Games/Show', [
                 'users' => auth()->user(),
-                'response' => Inertia::lazy(fn () => $response->object()),
+                'response' => Inertia::lazy(fn () => $response),
                 'product' => $product,
                 'fee_25' => Helper::fee()->games_25,
                 'fee_50' => Helper::fee()->games_50,
@@ -45,11 +45,11 @@ class ProductGamesController extends Controller
                 'fee_max' => Helper::fee()->games_max,
             ]);
 
-        } else {
-//            dd($response->status());
-            return Inertia::render('Payment/Info', [
-                'transaction' => $response->object()->data,
-            ]);
-        }
+//        } else {
+////            dd($response->status());
+//            return Inertia::render('Payment/Info', [
+//                'transaction' => $response->object()->data,
+//            ]);
+//        }
     }
 }
