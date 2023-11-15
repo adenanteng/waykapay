@@ -48,27 +48,11 @@ class Helper
 
     public static function pricelist()
     {
-
-//        $key = 'pricelist';
-//        $minutes = 60; // Waktu cache dalam menit
-//
-//        $data = cache()->remember($key, $minutes, function () {
-//            // Logika untuk mendapatkan data dari sumbernya
-//            return Http::post('https://api.digiflazz.com/v1/price-list', [
-//                'cmd' => 'prepaid',
-//                'username' => Helper::api()->digiflazz_username,
-//                'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
-//            ]);
-//        });
-
-//        dd($data->toArray());
-
-//        return response()->json($data);
-
 //        Redis::del('pricelist');
         $cached = Redis::get('pricelist');
 
         if(isset($cached)) {
+//            dd(json_decode($cached));
             return json_decode($cached, FALSE);
         }else {
             $data = Http::post('https://api.digiflazz.com/v1/price-list', [
@@ -77,7 +61,7 @@ class Helper
                 'sign'  => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.'pricelist')
             ]);
 
-
+//            dd($data->status());
             Redis::set('pricelist', $data,'EX', 360);
 //            $cached = Redis::get('pricelist');
 

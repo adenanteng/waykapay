@@ -178,7 +178,7 @@ const closeModal = () => {
 <!--            </template>-->
 
             <template v-else v-for="data in sort(props.response.data)" >
-                <template v-if="data.brand == props.product">
+                <template v-if="data.brand == props.product && data.buyer_product_status">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                             <div class="flex-shrink-0">
                                 <img class="w-10" :src="'/img/vendor/' + props.product + '.svg'" alt="">
