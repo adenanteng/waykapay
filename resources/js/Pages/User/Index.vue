@@ -50,7 +50,7 @@ function formattedDate(value) {
                     type="text"
                     v-model="search"
                     placeholder="Cari disini"
-                    class="block w-full lg:w-96 mb-5 shadow"
+                    class="block w-full lg:w-96 shadow"
                 />
             </div>
 
@@ -61,7 +61,7 @@ function formattedDate(value) {
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="item in $page.props.users.data" :key="item.id">
+                <template v-for="item in props.users.data" :key="item.id">
                     <li>
                         <Link preserve-scroll :href="route('user.show', item.slug)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">

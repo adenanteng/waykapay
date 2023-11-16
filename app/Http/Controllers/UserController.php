@@ -39,6 +39,7 @@ class UserController extends Controller
                         ->OrWhere('email', 'like', '%' . $search . '%');
                 })->paginate(8)
                 ->withQueryString(),
+
             'filters' => Req::only(['search'])
         ]);
     }
@@ -91,9 +92,20 @@ class UserController extends Controller
     {
         return Inertia::render('User/Show', [
             'users' => $user,
-            'history' => Inertia::lazy(fn () => Transaction::where('user_id', $user->id)
-                ->orWhereRelation('money_transfer', 'to_id', '=', $user->id)->latest()
-                ->get())
+//            'history' => Transaction::where('user_id', $user->id)
+//                ->orWhereRelation('money_transfer', 'to_id', '=', $user->id)->latest()
+//                ->get(),
+            'history' => Transaction::query()->where('user_id', $user->id)
+                ->orWhereRelation('money_transfer', 'to_id', '=', $user->id)
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('order_id', 'like', '%' . $search . '%')
+                        ->OrWhere('product_name', 'like', '%' . $search . '%');
+//                        ->orWhereRelation('user', 'slug', '=', $user->id);
+                })->paginate(8)
+                ->withQueryString(),
+
+            'filters' => Req::only(['search'])
         ]);
     }
 

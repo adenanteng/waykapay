@@ -1,12 +1,13 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import TextInput from '@/Components/TextInput.vue';
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import Table from "@/Components/Table.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 import {Link, router} from "@inertiajs/vue3";
 import moment from "moment/moment";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
     users: Object | String,
@@ -14,11 +15,27 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    filters: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-onMounted(() => {
-    router.reload({ only: ['history'] })
-})
+// onMounted(() => {
+//     router.reload({ only: ['history'] })
+// })
+
+let search = ref(props.filters.search);
+watch(search, (value) => {
+    router.get(
+        route('user.show', props.users),
+        { search: value },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+});
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -53,7 +70,7 @@ function formatPrice(value) {
                         <span class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }}
                             <span class="text-sm font-medium ml-2 text-gray-500">#{{ props.users.slug }}</span>
                         </span>
-                        <span class="block font-semibold text-primary-600">
+                        <span class="block font-medium text-gray-600">
                             Rp {{ formatPrice(props.users.wallet_balance) }}
                         </span>
                     </div>
@@ -72,25 +89,40 @@ function formatPrice(value) {
             </div>
         </div>
 
-        <template v-if="props.history === undefined">
-            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
-                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">
-                    <div class="flex items-center justify-between">
-                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
-                        <div class="ml-2 flex-shrink-0 flex">
-                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>
-                        </div>
-                    </div>
-                    <div class="sm:flex sm:justify-between">
-                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
-                    </div>
-                </div>
+        <div class="flex justify-between gap-3">
+            <div class="">
+<!--                <TextInput-->
+<!--                    type="text"-->
+<!--                    v-model="search"-->
+<!--                    placeholder="Cari disini"-->
+<!--                    class="block w-full lg:w-96 mb-5 shadow"-->
+<!--                />-->
             </div>
-        </template>
 
-        <div v-else class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+            <div class="">
+                <!--                <PrimaryButton as="a" :href="route('user.create')" >Tambah</PrimaryButton>-->
+            </div>
+        </div>
+
+<!--        <template v-if="props.history.data === undefined">-->
+<!--            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">-->
+<!--                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">-->
+<!--                    <div class="flex items-center justify-between">-->
+<!--                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>-->
+<!--                        <div class="ml-2 flex-shrink-0 flex">-->
+<!--                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="sm:flex sm:justify-between">-->
+<!--                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </template>-->
+
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="history in $page.props.history">
+                <template v-for="history in props.history.data">
                     <li>
                         <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">
@@ -101,7 +133,7 @@ function formatPrice(value) {
                                         <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                         <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
                                         <template v-else-if="history.money_transfer">
-                                            <template v-if="history.user_id == $page.props.user.id">
+                                            <template v-if="history.user_id == props.users.id">
                                                 ke {{ history.money_transfer.to.name }}
                                             </template>
                                             <template v-else>
@@ -119,6 +151,9 @@ function formatPrice(value) {
                                 </div>
                                 <div class="flex justify-between">
                                     <div class="flex">
+                                        <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                            #{{ history.order_id }}
+                                        </p>
                                         <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
 <!--                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}-->
                                             Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
@@ -140,7 +175,7 @@ function formatPrice(value) {
                 </template>
             </ul>
         </div>
-
+        <Pagination :pagination="props.history" />
 
     </AppLayout>
 

@@ -16,7 +16,6 @@ const props = defineProps({
 })
 
 onMounted(() => {
-    console.log('history');
     router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
 })
 

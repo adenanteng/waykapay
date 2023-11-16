@@ -6,15 +6,30 @@ use App\Models\Transaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
     public function index() {
-//        dd(Transaction::all());
+//        dd(Transaction::all()->toArray());
+        $trx = Transaction::where('status_id', Transaction::SUCCESS);
+
         return Inertia::render('Transaction/Index', [
-            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get())
+//            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
+            'transaction' => Transaction::query()
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('order_id', 'like', '%' . $search . '%')
+                        ->OrWhere('customer_no', 'like', '%' . $search . '%')
+                        ->OrWhere('product_name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
+
+            'amount' => Inertia::lazy(fn () => $trx->sum('amount')),
+            'gross_amount' => Inertia::lazy(fn () => $trx->sum('gross_amount')),
+            'filters' => Req::only(['search'])
         ]);
     }
 

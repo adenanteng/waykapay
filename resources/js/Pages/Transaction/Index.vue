@@ -6,30 +6,43 @@ import MobileMenu from "@/Components/MobileMenu.vue";
 import moment from "moment";
 import { Vue3Lottie } from 'vue3-lottie'
 import Badge from "../../Components/Badge.vue";
+import PrimaryButton from "../../Components/PrimaryButton.vue";
+import TextInput from "../../Components/TextInput.vue";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
-    transaction: undefined,
+    // transaction: undefined,
+    transaction: {
+        type: Object,
+        default: () => ({}),
+    },
+    filters: {
+        type: Object,
+        default: () => ({}),
+    },
+    amount: undefined,
+    gross_amount: undefined,
 })
 
 onMounted(() => {
-    router.reload({ only: ['transaction'] })
+    router.reload({ only: ['amount', 'gross_amount'] })
 })
 
-// onUnmounted(() => {
-//     clearInterval(interval)
-// })
+let search = ref(props.filters.search);
+watch(search, (value) => {
+    router.get(
+        route('transaction.index'),
+        { search: value },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+});
 
-// const interval = setInterval(() => {
-//     console.log('interval');
-//     router.reload({ only: ['transaction'] })
-// }, 10000)
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
-}
-
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
 }
 
 function formatPrice(value) {
@@ -52,25 +65,77 @@ function formatPrice(value) {
                desc="Lorem ipsum dolor sit amet"
     >
 
-        <template v-if="props.transaction === undefined">
-            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
-                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">
-                    <div class="flex items-center justify-between">
-                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
-                        <div class="ml-2 flex-shrink-0 flex">
-                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>
+        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+            <div class="flex w-full items-center justify-between space-x-6 p-6">
+                <div class="flex-1 truncate">
+                    <div class="flex items-center space-x-3">
+                        <h3 class="truncate text-sm text-gray-600">Total Laba</h3>
+<!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
+<!--                            halo-->
+<!--                        </span>-->
+                    </div>
+                    <p class="mt-1 truncate text-sm font-medium text-gray-900">Rp {{ formatPrice(Number(props.gross_amount) - Number(props.amount)) }}</p>
+                </div>
+                <i class="fa-duotone fa-money-bill-1-wave text-green-600 text-3xl flex-shrink-0" />
+            </div>
+            <div>
+                <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
+                    <div class="flex w-0 flex-1">
+                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
+<!--                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>-->
+                            <div class="ml-3">
+                                <div class="text-xs text-gray-500">Modal</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.amount) }}</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-2 sm:flex sm:justify-between">
-                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
+                    <div class="flex w-0 flex-1">
+                        <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
+<!--                            <i class="fa-duotone fa-coins text-amber-400"/>-->
+                            <div class="ml-3">
+                                <div class="text-xs text-gray-500">Omzet</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.gross_amount) }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </template>
+        </div>
 
-        <div v-else class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+        <div class="flex justify-between gap-3">
+<!--            <div class="">-->
+                <TextInput
+                    type="text"
+                    v-model="search"
+                    placeholder="Cari disini"
+                    class="block w-full lg:w-96 shadow"
+                />
+<!--            </div>-->
+
+<!--            <div class="">-->
+<!--                <PrimaryButton as="a" :href="route('user.create')" >Tambah</PrimaryButton>-->
+<!--            </div>-->
+        </div>
+
+<!--        <template v-if="props.transaction === undefined">-->
+<!--            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">-->
+<!--                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">-->
+<!--                    <div class="flex items-center justify-between">-->
+<!--                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>-->
+<!--                        <div class="ml-2 flex-shrink-0 flex">-->
+<!--                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="mt-2 sm:flex sm:justify-between">-->
+<!--                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </template>-->
+
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="history in $page.props.transaction" :key="history.id">
+                <template v-for="history in props.transaction.data" :key="history.id">
                     <li>
                         <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">
@@ -97,13 +162,15 @@ function formatPrice(value) {
                                         </p>
                                     </div>
                                 </div>
-                                <div class="flex items-end">
-                                    <p class="font-medium text-gray-900">{{ history.user.name }}</p>
-                                    <p class="text-sm text-gray-900 ml-2">#{{ history.user.slug }}</p>
+                                <div class="flex items-end" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                    <p class="font-medium mr-2">{{ history.user.name }}</p>
+                                    <p class="text-sm">#{{ history.user.slug }}</p>
                                 </div>
                                 <div class=" flex justify-between">
                                     <div class="flex">
-
+                                        <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                            #{{ history.order_id }}
+                                        </p>
                                         <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
 <!--                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}-->
                                             Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
@@ -124,6 +191,8 @@ function formatPrice(value) {
                 </template>
             </ul>
         </div>
+
+        <Pagination :pagination="props.transaction" />
 
 <!--        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >-->
 <!--            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >-->
