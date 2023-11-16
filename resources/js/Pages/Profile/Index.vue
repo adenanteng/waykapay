@@ -80,7 +80,7 @@ function formatPrice(value) {
                             <i class="fa-duotone fa-coins text-amber-400"/>
                             <div class="ml-3">
                                 <div class="text-xs text-gray-500">Poin</div>
-                                <div class="text-sm font-medium text-gray-700">0</div>
+                                <div class="text-sm font-medium text-gray-700">{{ formatPrice($page.props.user.coin) }}</div>
                             </div>
                         </div>
                     </div>

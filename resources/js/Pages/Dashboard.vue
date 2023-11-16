@@ -94,13 +94,12 @@ const onSlideChange = (swiper) => {
         </div>
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
-            <div class="p-6 flex gap-6">
+            <div class="py-6 pl-2 pr-6 flex ">
 <!--                <template v-if="$page.props.user.role_id==3">-->
                     <div class="flex-none flex items-center">
                         <Vue3Lottie
                             animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
                             :height="80"
-                            :width="80"
                         />
                     </div>
                     <div class="grow">

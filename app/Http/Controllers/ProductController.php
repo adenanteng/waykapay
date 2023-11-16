@@ -7,6 +7,7 @@ use App\Models\AppSetting;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -63,6 +64,9 @@ class ProductController extends Controller
                 case ('Pending'):
                 case ('Sukses'):
                     $user->withdraw($transaction->gross_amount);
+                    $user->update(
+                        [ 'coin'=> DB::raw('coin+6') ]
+                    );
                     Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
                     break;
                 default:
@@ -132,6 +136,9 @@ class ProductController extends Controller
                 case ('Pending'):
                 case ('Sukses'):
                     $user->withdraw($transaction->gross_amount);
+                    $user->update(
+                        [ 'coin'=> DB::raw('coin+6') ]
+                    );
                     Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo ?? $user->wallet_balance);
                     break;
                 default:

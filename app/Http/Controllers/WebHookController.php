@@ -4,6 +4,7 @@ use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class WebHookController extends Controller
@@ -109,6 +110,10 @@ class WebHookController extends Controller
                         'status_id' => Transaction::SUCCESS,
                         'desc' => $anj->data->sn,
                     ]);
+
+                    $user->update(
+                        [ 'coin'=> DB::raw('coin+6') ]
+                    );
                     break;
 
                 case ('Pending'):
