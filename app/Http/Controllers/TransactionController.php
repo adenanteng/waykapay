@@ -24,12 +24,18 @@ class TransactionController extends Controller
                     $query->where('order_id', 'like', '%' . $search . '%')
                         ->OrWhere('customer_no', 'like', '%' . $search . '%')
                         ->OrWhere('product_name', 'like', '%' . $search . '%');
-                })->paginate(8)
+                })
+                ->when(Req::input('filter'), function ($query, $filter) {
+                    $query->where('category_id', $filter);
+                })
+                ->paginate(8)
                 ->withQueryString(),
 
             'amount' => Inertia::lazy(fn () => $trx->sum('amount')),
             'gross_amount' => Inertia::lazy(fn () => $trx->sum('gross_amount')),
-            'filters' => Req::only(['search'])
+
+            'filters' => Req::only(['search', 'filter']),
+            'selectCategory' => Transaction::CATEGORY,
         ]);
     }
 

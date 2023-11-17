@@ -49,12 +49,11 @@ defineProps({
         <LogoutOtherBrowserSessionsForm
             :sessions="sessions" />
 
-        <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">
-            <SectionBorder />
+<!--        <template v-if="$page.props.jetstream.hasAccountDeletionFeatures">-->
+<!--            <SectionBorder />-->
 
-            <DeleteUserForm />
-        </template>
+<!--            <DeleteUserForm />-->
+<!--        </template>-->
 
-<!--        <MobileMenu />-->
     </AppLayout>
 </template>

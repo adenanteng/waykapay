@@ -146,7 +146,7 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
-        form.category_id = tabPulsa === 'Pulsa' ? 2 : 3;
+        form.category_id = tabPulsa.value === 'Pulsa' ? 2 : 3;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;
@@ -331,7 +331,7 @@ watch(tabPulsa, (newTabPulsa) => {
                                     <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)">
+                                    <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)  && data.buyer_product_status">
                                         <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                             <span class="absolute inset-0" aria-hidden="true"></span>
                                             <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
@@ -405,6 +405,13 @@ watch(tabPulsa, (newTabPulsa) => {
                     <div class="text-right font-medium">
                         Rp {{ formatPrice(productPrice) }}
                     </div>
+
+<!--                    <div class="">-->
+<!--                        Kategori-->
+<!--                    </div>-->
+<!--                    <div class="text-right font-medium">-->
+<!--                        {{ form.category_id }}-->
+<!--                    </div>-->
 
                     <div class="">
                         Detail Produk

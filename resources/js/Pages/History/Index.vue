@@ -53,7 +53,7 @@ watch(tabHistory, (newTabHistory) => {
 <template>
     <AppLayout title="Riwayat"
                name="Riwayat"
-               desc="Lorem ipsum dolor sit amet"
+               desc="Riwayat transaksi kamu"
     >
 
         <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">

@@ -9,6 +9,7 @@ import Badge from "../../Components/Badge.vue";
 import PrimaryButton from "../../Components/PrimaryButton.vue";
 import TextInput from "../../Components/TextInput.vue";
 import Pagination from "../../Components/Pagination.vue";
+import SelectInput from "../../Components/SelectInput.vue";
 
 const props = defineProps({
     // transaction: undefined,
@@ -29,16 +30,29 @@ onMounted(() => {
 })
 
 let search = ref(props.filters.search);
-watch(search, (value) => {
+let filter = ref(props.filters.filter);
+watch([search, filter], ([value, valueF]) => {
     router.get(
         route('transaction.index'),
-        { search: value },
+        { search: value, filter: valueF },
         {
             preserveState: true,
             replace: true,
         }
-    );
+    )
 });
+
+
+// watch(filter, (value) => {
+//     router.get(
+//         route('transaction.index'),
+//         { filter: value },
+//         {
+//             preserveState: true,
+//             replace: true,
+//         }
+//     );
+// });
 
 
 function formattedDate(value) {
@@ -60,9 +74,9 @@ function formatPrice(value) {
 </script>
 
 <template>
-    <AppLayout title="Riwayat Transaksi"
-               name="Riwayat Transaksi"
-               desc="Lorem ipsum dolor sit amet"
+    <AppLayout title="Transaksi"
+               name="Transaksi"
+               desc="Riwayat transaksi semua pengguna"
     >
 
         <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
@@ -71,7 +85,7 @@ function formatPrice(value) {
                     <div class="flex items-center space-x-3">
                         <h3 class="truncate text-sm text-gray-600">Total Laba</h3>
 <!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
-<!--                            halo-->
+<!--                            {{ props.transaction.total }} Transaksi-->
 <!--                        </span>-->
                     </div>
                     <p class="mt-1 truncate text-sm font-medium text-gray-900">Rp {{ formatPrice(Number(props.gross_amount) - Number(props.amount)) }}</p>
@@ -103,18 +117,23 @@ function formatPrice(value) {
         </div>
 
         <div class="flex justify-between gap-3">
-<!--            <div class="">-->
+            <div class="">
                 <TextInput
                     type="text"
                     v-model="search"
                     placeholder="Cari disini"
                     class="block w-full lg:w-96 shadow"
                 />
-<!--            </div>-->
+            </div>
 
-<!--            <div class="">-->
+            <div class="">
+                <SelectInput
+                    v-model:model-value.number="filter"
+                    :option="$page.props.selectCategory"
+                    class="block w-full lg:w-96 shadow"
+                />
 <!--                <PrimaryButton as="a" :href="route('user.create')" >Tambah</PrimaryButton>-->
-<!--            </div>-->
+            </div>
         </div>
 
 <!--        <template v-if="props.transaction === undefined">-->

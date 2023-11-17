@@ -28,9 +28,9 @@ import PreviousButton from "@/Components/PreviousButton.vue";
         <template v-if="$page.props.users">
             <PasswordResetForm :users="$page.props.users" />
 
-            <SectionBorder />
+<!--            <SectionBorder />-->
 
-            <DeleteForm :users="$page.props.users" />
+<!--            <DeleteForm :users="$page.props.users" />-->
         </template>
 
     </AppLayout>

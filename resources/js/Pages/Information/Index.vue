@@ -37,11 +37,11 @@ const data = [
 const faqs = [
     {
         question: "Mengalami Kendala Transaksi?",
-        answer: "Lorem ipsum dolor sit amet.",
+        answer: "Konten belum tersedia.",
     },
     {
         question: "Mengalami Kendala Deposit?",
-        answer: "Lorem ipsum dolor sit amet.",
+        answer: "Konten belum tersedia.",
     },
 ]
 
@@ -50,7 +50,7 @@ const faqs = [
 <template>
     <AppLayout title="Informasi"
                name="Informasi"
-               desc="Lorem ipsum dolor sit amet"
+               desc="Pusat informasi"
     >
 
         <ul role="list" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

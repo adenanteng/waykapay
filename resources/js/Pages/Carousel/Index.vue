@@ -16,10 +16,9 @@ const logout = () => {
 </script>
 
 <template>
-    <AppLayout title="Saya"
-               :name="$page.props.user.name"
-               :desc="$page.props.user.email"
-               :avatar="$page.props.user.profile_photo_url"
+    <AppLayout title="Carousel"
+               name="Carousel"
+               desc="Carousel slider"
     >
 
         <div class="flex justify-between">

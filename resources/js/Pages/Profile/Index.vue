@@ -30,11 +30,7 @@ const logout = () => {
 };
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
-}
-
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
+    return moment(value).format('DD MMM Y HH:mm')
 }
 
 function formatPrice(value) {
@@ -93,6 +89,12 @@ function formatPrice(value) {
                 <li>
                     <Link :href="route('profile.show')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Ubah data profil</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
+                    </Link>
+                </li>
+                <li>
+                    <Link :href="route('pricing.index')" class="flex justify-between px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Daftar Harga</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>

@@ -9,6 +9,7 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MoneyTransferController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductEmoneyController;
 use App\Http\Controllers\ProductGamesController;
@@ -92,7 +93,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/internet/myrepublic', [ProductInternetController::class, 'myrepublic'])->name('internet.myrepublic.index');
     Route::post('/product/internet/myrepublic-inquiry', [ProductInternetController::class, 'myrepublicInquiry'])->name('internet.myrepublic.inquiry');
 
-
     Route::resource('/information', InformationController::class)->names('information');
 
     Route::resource('/carousel', CarouselController::class)->names('carousel');
@@ -103,6 +103,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
 
 //    Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
+    Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 

@@ -41,7 +41,7 @@ function formattedDate(value) {
 <template>
     <AppLayout title="Pengguna"
                name="Pengguna"
-               desc="lorem ipsum"
+               desc="Data pengguna"
     >
 
         <div class="flex justify-between gap-3">
