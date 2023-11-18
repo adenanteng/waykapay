@@ -92,7 +92,7 @@ const clearPhotoFileInput = () => {
                     @change="updatePhotoPreview"
                 >
 
-                <InputLabel for="photo" value="Photo" />
+                <InputLabel for="photo" value="Logo" />
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
@@ -109,7 +109,7 @@ const clearPhotoFileInput = () => {
                     />
                 </div>
 
-                <SecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
+                <SecondaryButton class="mt-2 mr-2 nightwind-prevent" type="button" @click.prevent="selectNewPhoto">
                     Ubah Logo
                 </SecondaryButton>
 

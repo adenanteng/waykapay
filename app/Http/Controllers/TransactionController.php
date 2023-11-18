@@ -15,6 +15,7 @@ class TransactionController extends Controller
 {
     public function index() {
 //        dd(Transaction::all()->toArray());
+
 //        $magic = Transaction::query()
 //            ->latest()
 //            ->when(Req::input('search'), function ($query, $search) {
@@ -25,11 +26,11 @@ class TransactionController extends Controller
 //            ->when(Req::input('filter'), function ($query, $filter) {
 //                $query->where('category_id', $filter);
 //            })
-//            ->paginate(8)
-//            ->withQueryString()
+//            ->get()
 //            ->groupBy(function ($val) {
 //                return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
-//            });
+//            })
+//            ;
 //
 //        dd($magic->toArray());
 
@@ -47,8 +48,9 @@ class TransactionController extends Controller
                 ->when(Req::input('filter'), function ($query, $filter) {
                     $query->where('category_id', $filter);
                 })
-                ->paginate(8)
-                ->withQueryString()
+//                ->paginate(8)
+//                ->withQueryString()
+                ->get()
                 ->groupBy(function ($val) {
                     return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
                 }),

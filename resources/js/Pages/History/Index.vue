@@ -135,9 +135,9 @@ watch(tabHistory, (newTabHistory) => {
             </div>
         </template>
 
-        <div v-else class="pt-5">
+        <div v-else class="">
             <template v-for="(date, index) in props.history">
-                <h3 class="text-md text-gray-900 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>
+                <h3 class="text-sm text-gray-900 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>
                 <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
 
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
@@ -195,7 +195,7 @@ watch(tabHistory, (newTabHistory) => {
                 </div>
             </template>
 
-            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >
+            <div class="px-4 py-4 sm:px-6 text-center text-gray-900 text-sm" >
                 <Vue3Lottie
                     animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
                     :height="200"

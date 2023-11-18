@@ -151,9 +151,9 @@ function formatPrice(value) {
 <!--            </div>-->
 <!--        </template>-->
 
-        <div class="pt-5">
+        <div class="">
             <template v-for="(date, index) in props.transaction">
-                <h3 class="text-md text-gray-900 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>
+                <h3 class="text-sm text-gray-900 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>
                 <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                         <template v-for="history in date" :key="history.id">
