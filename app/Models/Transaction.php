@@ -64,8 +64,6 @@ class Transaction extends Model
         self::CLOSE => 'bg-gray-100 text-gray-800',
         self::UNDEFINED => 'bg-gray-100 text-gray-800',
     ];
-
-    const ALL = null;
     const TRANSFER = 0;
     const DEPOSIT = 1;
     const PULSA = 2;
@@ -89,7 +87,6 @@ class Transaction extends Model
     const PASCA_SAMSAT = 20;
 
     const CATEGORY = [
-        self::ALL => 'Semua',
         self::TRANSFER => 'Kirim Uang',
         self::DEPOSIT => 'Deposit',
         self::PULSA => 'Pulsa',
@@ -123,7 +120,7 @@ class Transaction extends Model
 //        'user',
         'status',
         'color',
-        'category'
+        'category',
     ];
 
     protected $with = [
@@ -131,7 +128,7 @@ class Transaction extends Model
         'virtual_account',
         'wallet_account',
         'offline_account',
-        'money_transfer'
+        'money_transfer',
     ];
 
     public function getCreatedAttribute()

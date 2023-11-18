@@ -117,7 +117,7 @@ function formatPrice(value) {
         </div>
 
         <div class="flex justify-between gap-3">
-            <div class="">
+            <div class="w-1/2">
                 <TextInput
                     type="text"
                     v-model="search"
@@ -126,13 +126,12 @@ function formatPrice(value) {
                 />
             </div>
 
-            <div class="">
+            <div class="w-1/2">
                 <SelectInput
                     v-model:model-value.number="filter"
                     :option="$page.props.selectCategory"
                     class="block w-full lg:w-96 shadow"
                 />
-<!--                <PrimaryButton as="a" :href="route('user.create')" >Tambah</PrimaryButton>-->
             </div>
         </div>
 
@@ -152,66 +151,73 @@ function formatPrice(value) {
 <!--            </div>-->
 <!--        </template>-->
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="history in props.transaction.data" :key="history.id">
-                    <li>
-                        <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
-                            <div class="px-4 py-4 sm:px-6">
-                                <div class="flex items-center justify-between">
-                                    <p class="font-medium truncate uppercase"
-                                       :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
-                                        {{ history.product_name }}
-                                        <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
-                                        <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
-                                        <template v-else-if="history.money_transfer">
-<!--                                            <template v-if="history.user_id == $page.props.user.id">-->
-                                                ke {{ history.money_transfer.to.name }}
-<!--                                            </template>-->
-<!--                                            <template v-else>-->
-<!--                                                dari {{ history.user.name }}-->
-<!--                                            </template>-->
-                                        </template>
-                                    </p>
-                                    <div class="ml-2 flex-shrink-0 flex">
-                                        <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                            :class="history.color"
-                                        >
-                                            {{ history.status }}
-                                        </p>
+        <div class="pt-5">
+            <template v-for="(date, index) in props.transaction">
+                <h3 class="text-md text-gray-900 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>
+                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                    <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                        <template v-for="history in date" :key="history.id">
+                            <li>
+                                <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
+                                    <div class="px-4 py-4 sm:px-6">
+                                        <div class="flex items-center justify-between">
+                                            <p class="font-medium truncate uppercase"
+                                               :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
+                                                {{ history.product_name }}
+                                                <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
+                                                <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                                <template v-else-if="history.money_transfer">
+                                                    <!--                                            <template v-if="history.user_id == $page.props.user.id">-->
+                                                    ke {{ history.money_transfer.to.name }}
+                                                    <!--                                            </template>-->
+                                                    <!--                                            <template v-else>-->
+                                                    <!--                                                dari {{ history.user.name }}-->
+                                                    <!--                                            </template>-->
+                                                </template>
+                                            </p>
+                                            <div class="ml-2 flex-shrink-0 flex">
+                                                <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
+                                                   :class="history.color"
+                                                >
+                                                    {{ history.status }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-end" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                            <p class="font-medium mr-2">{{ history.user.name }}</p>
+                                            <p class="text-sm">#{{ history.user.slug }}</p>
+                                        </div>
+                                        <div class=" flex justify-between">
+                                            <div class="flex">
+                                                <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                    #{{ history.order_id }}
+                                                </p>
+                                                <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                    <!--                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}-->
+                                                    Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
+                                                </p>
+                                                <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
+                                                <!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
+                                                <!--                                                {{ history.customer_no }}-->
+                                                <!--                                            </p>-->
+                                            </div>
+                                            <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                <!--                                            <i class="fa-regular fa-calendar pr-2" />-->
+                                                {{ formattedDate(history.created_at) }}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex items-end" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                    <p class="font-medium mr-2">{{ history.user.name }}</p>
-                                    <p class="text-sm">#{{ history.user.slug }}</p>
-                                </div>
-                                <div class=" flex justify-between">
-                                    <div class="flex">
-                                        <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                            #{{ history.order_id }}
-                                        </p>
-                                        <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-<!--                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}-->
-                                            Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
-                                        </p>
-<!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-<!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
-<!--                                                {{ history.customer_no }}-->
-<!--                                            </p>-->
-                                    </div>
-                                    <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-<!--                                            <i class="fa-regular fa-calendar pr-2" />-->
-                                        {{ formattedDate(history.created_at) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                    </li>
-                </template>
-            </ul>
+                                </Link>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+
+            </template>
         </div>
 
-        <Pagination :pagination="props.transaction" />
+
+<!--        <Pagination :pagination="props.transaction" />-->
 
 <!--        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >-->
 <!--            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >-->

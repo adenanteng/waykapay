@@ -94,30 +94,30 @@ watch(tabHistory, (newTabHistory) => {
             </div>
         </div>
 
-        <div class="sticky top-0 z-40 backdrop-blur border-b border-gray-200">
-            <nav class="-mb-px flex" aria-label="Tabs">
+<!--        <div class="sticky top-0 z-40 backdrop-blur border-b border-gray-200">-->
+<!--            <nav class="-mb-px flex" aria-label="Tabs">-->
+<!--&lt;!&ndash;                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"&ndash;&gt;-->
+<!--&lt;!&ndash;                        :class="tabHistory==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "&ndash;&gt;-->
+<!--&lt;!&ndash;                        @click="tabHistory=1"&ndash;&gt;-->
+<!--&lt;!&ndash;                >&ndash;&gt;-->
+<!--&lt;!&ndash;                    Sukses&ndash;&gt;-->
+<!--&lt;!&ndash;                </button>&ndash;&gt;-->
+
 <!--                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"-->
-<!--                        :class="tabHistory==1 ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:border-gray-300' "-->
-<!--                        @click="tabHistory=1"-->
+<!--                        :class="tabHistory==2 ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-300' "-->
+<!--                        @click="tabHistory=2"-->
 <!--                >-->
-<!--                    Sukses-->
+<!--                    Proses <Badge class="ml-1 bg-primary-600 text-white" :name="props.on_process ?? 0" />-->
 <!--                </button>-->
 
-                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabHistory==2 ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-300' "
-                        @click="tabHistory=2"
-                >
-                    Proses <Badge class="ml-1 bg-primary-600 text-white" :name="props.on_process ?? 0" />
-                </button>
-
-                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabHistory==99 ? 'border-green-600 text-green-600' : 'text-gray-500 border-gray-300 ' "
-                        @click="tabHistory=99"
-                >
-                    Semua <Badge class="ml-1 bg-green-600 text-white" :name="props.all_process ?? 0" />
-                </button>
-            </nav>
-        </div>
+<!--                <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"-->
+<!--                        :class="tabHistory==99 ? 'border-green-600 text-green-600' : 'text-gray-500 border-gray-300 ' "-->
+<!--                        @click="tabHistory=99"-->
+<!--                >-->
+<!--                    Semua <Badge class="ml-1 bg-green-600 text-white" :name="props.all_process ?? 0" />-->
+<!--                </button>-->
+<!--            </nav>-->
+<!--        </div>-->
 
         <template v-if="props.history === undefined">
             <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
@@ -135,81 +135,98 @@ watch(tabHistory, (newTabHistory) => {
             </div>
         </template>
 
-        <div v-else class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="history in $page.props.history" :key="history.id">
-                    <template v-if="history.status_id == tabHistory || tabHistory==99">
-                        <li>
-                            <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
-                                <div class="px-4 py-4 sm:px-6">
-                                    <div class="flex items-center justify-between">
-                                        <p class="font-medium truncate uppercase"
-                                           :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
-                                            {{ history.product_name }}
-                                            <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
-                                            <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
-                                            <template v-else-if="history.money_transfer">
-                                                <template v-if="history.user_id == $page.props.user.id">
-                                                    ke {{ history.money_transfer.to.name }}
-                                                </template>
-                                                <template v-else>
-                                                    dari {{ history.user.name }}
-                                                </template>
-                                            </template>
-                                        </p>
-                                        <div class="ml-2 flex-shrink-0 flex">
-                                            <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                                :class="history.color"
-                                            >
-                                                {{ history.status }}
-                                            </p>
+        <div v-else class="pt-5">
+            <template v-for="(date, index) in props.history">
+                <h3 class="text-md text-gray-900 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>
+                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+
+                    <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                        <template v-for="history in date" :key="history.id">
+<!--                            <template v-if="history.status_id == tabHistory || tabHistory==99">-->
+                                <li>
+                                    <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
+                                        <div class="px-4 py-4 sm:px-6">
+                                            <div class="flex items-center justify-between">
+                                                <p class="font-medium truncate uppercase"
+                                                   :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
+                                                    {{ history.product_name }}
+                                                    <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
+                                                    <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                                    <template v-else-if="history.money_transfer">
+                                                        <template v-if="history.user_id == $page.props.user.id">
+                                                            ke {{ history.money_transfer.to.name }}
+                                                        </template>
+                                                        <template v-else>
+                                                            dari {{ history.user.name }}
+                                                        </template>
+                                                    </template>
+                                                </p>
+                                                <div class="ml-2 flex-shrink-0 flex">
+                                                    <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
+                                                       :class="history.color"
+                                                    >
+                                                        {{ history.status }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <div class="flex">
+                                                    <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                        {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
+                                                        Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
+                                                    </p>
+                                                    <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
+                                                    <!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
+                                                    <!--                                                {{ history.customer_no }}-->
+                                                    <!--                                            </p>-->
+                                                </div>
+                                                <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                    <!--                                            <i class="fa-regular fa-calendar pr-2" />-->
+                                                    {{ formattedDate(history.created_at) }}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <div class="flex">
-                                            <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
-                                                Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
-                                            </p>
-<!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-<!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
-<!--                                                {{ history.customer_no }}-->
-<!--                                            </p>-->
-                                        </div>
-                                        <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-<!--                                            <i class="fa-regular fa-calendar pr-2" />-->
-                                            {{ formattedDate(history.created_at) }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                        </li>
-                    </template>
-                </template>
-            </ul>
+                                    </Link>
+                                </li>
+<!--                            </template>-->
+                        </template>
+                    </ul>
+
+                </div>
+            </template>
+
+            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >
+                <Vue3Lottie
+                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                    :height="200"
+                    :width="200"
+                />
+                Eits, udah mentok hehe
+            </div>
         </div>
 
-        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >
-            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >
-                <Vue3Lottie
-                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
-                    :height="200"
-                    :width="200"
-                />
-                Tidak ada transaksi
-            </div>
-        </template>
 
-        <template v-if="!all_process && all_process!==undefined && tabHistory==99" >
-            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >
-                <Vue3Lottie
-                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
-                    :height="200"
-                    :width="200"
-                />
-                Tidak ada transaksi
-            </div>
-        </template>
+<!--        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >-->
+<!--            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >-->
+<!--                <Vue3Lottie-->
+<!--                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"-->
+<!--                    :height="200"-->
+<!--                    :width="200"-->
+<!--                />-->
+<!--                Tidak ada transaksi-->
+<!--            </div>-->
+<!--        </template>-->
+
+<!--        <template v-if="!all_process && all_process!==undefined && tabHistory==99" >-->
+<!--            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >-->
+<!--                <Vue3Lottie-->
+<!--                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"-->
+<!--                    :height="200"-->
+<!--                    :width="200"-->
+<!--                />-->
+<!--                Tidak ada transaksi-->
+<!--            </div>-->
+<!--        </template>-->
 
         <MobileMenu/>
     </AppLayout>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -14,6 +15,24 @@ class TransactionController extends Controller
 {
     public function index() {
 //        dd(Transaction::all()->toArray());
+//        $magic = Transaction::query()
+//            ->latest()
+//            ->when(Req::input('search'), function ($query, $search) {
+//                $query->where('order_id', 'like', '%' . $search . '%')
+//                    ->OrWhere('customer_no', 'like', '%' . $search . '%')
+//                    ->OrWhere('product_name', 'like', '%' . $search . '%');
+//            })
+//            ->when(Req::input('filter'), function ($query, $filter) {
+//                $query->where('category_id', $filter);
+//            })
+//            ->paginate(8)
+//            ->withQueryString()
+//            ->groupBy(function ($val) {
+//                return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
+//            });
+//
+//        dd($magic->toArray());
+
         $trx = Transaction::where('status_id', Transaction::SUCCESS)->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
 
         return Inertia::render('Transaction/Index', [
@@ -29,7 +48,10 @@ class TransactionController extends Controller
                     $query->where('category_id', $filter);
                 })
                 ->paginate(8)
-                ->withQueryString(),
+                ->withQueryString()
+                ->groupBy(function ($val) {
+                    return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
+                }),
 
             'amount' => Inertia::lazy(fn () => $trx->sum('amount')),
             'gross_amount' => Inertia::lazy(fn () => $trx->sum('gross_amount')),

@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -21,9 +22,12 @@ class HistoryController extends Controller
 //        ->whereDate('created_at', Carbon::today())
         $history = Transaction::where('user_id', auth()->user()->id)
             ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
-            ->get();
+            ->get()
+            ->groupBy(function ($val) {
+                return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
+            });
 
-//        dd($history);
+//        dd($history->toArray());
 
         return Inertia::render('History/Index', [
             'history'=> Inertia::lazy(fn () => $history),
