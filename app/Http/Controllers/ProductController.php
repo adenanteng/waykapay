@@ -23,6 +23,7 @@ class ProductController extends Controller
      */
     public function topup(Request $request)
     {
+//        dd($request->toArray());
 //        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
         $gross_amount = $request['amount'] + $request['fee'];
 

@@ -86,24 +86,24 @@ const confirmModal = (data) => {
         productBrand = data.brand;
 
         if (Number(data.price) < 25000) {
-            fee.value = Number(data.price) + Number(props.fee_25)
+            fee.value = Number(props.fee_25)
         } else if (Number(data.price) < 50000) {
-            fee.value = Number(data.price) + Number(props.fee_50)
+            fee.value = Number(props.fee_50)
         } else if (Number(data.price) < 75000) {
-            fee.value = Number(data.price) + Number(props.fee_75)
+            fee.value = Number(props.fee_75)
         } else if (Number(data.price) < 100000) {
-            fee.value = Number(data.price) + Number(props.fee_100)
+            fee.value = Number(props.fee_100)
         } else if (Number(data.price) < 200000) {
-            fee.value = Number(data.price) + Number(props.fee_200)
+            fee.value = Number(props.fee_200)
         } else if (Number(data.price) < 500000) {
-            fee.value = Number(data.price) + Number(props.fee_500)
+            fee.value = Number(props.fee_500)
         } else if (Number(data.price) < 1000000) {
-            fee.value = Number(data.price) + Number(props.fee_1000)
+            fee.value = Number(props.fee_1000)
         } else {
-            fee.value = Number(data.price) + Number(props.fee_max)
+            fee.value = Number(props.fee_max)
         }
 
-        productPrice = fee.value;
+        productPrice = Number(fee.value) + Number(data.price);
         productDesc = data.desc;
     }
     // setTimeout(() => passwordInput.value.focus(), 250);
