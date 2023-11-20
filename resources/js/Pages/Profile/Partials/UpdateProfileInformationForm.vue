@@ -113,14 +113,14 @@ const clearPhotoFileInput = () => {
                     />
                 </div>
 
-                <SecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
+                <SecondaryButton class="mt-2 mr-2 nightwind-prevent" type="button" @click.prevent="selectNewPhoto">
                     Ubah Avatar
                 </SecondaryButton>
 
                 <SecondaryButton
                     v-if="user.profile_photo_path"
                     type="button"
-                    class="mt-2"
+                    class="mt-2 nightwind-prevent"
                     @click.prevent="deletePhoto"
                 >
                     Hapus Avatar
