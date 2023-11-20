@@ -1,22 +1,10 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
-import PreviousButton from "@/Components/PreviousButton.vue"
-import Badge from "../../Components/Badge.vue";
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
-import {Link, useForm} from "@inertiajs/vue3";
-import VueQrcode from "@chenfengyuan/vue-qrcode";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputError from "@/Components/InputError.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import ActionMessage from "@/Components/ActionMessage.vue";
-import SecondaryButton from "../../Components/SecondaryButton.vue";
-import BlankLayout from "../../Layouts/BlankLayout.vue";
-import PrintLayout from "../../Layouts/PrintLayout.vue";
+import PrintLayout from "@/Layouts/PrintLayout.vue";
+import ApplicationLogoTitle from "@/Components/ApplicationLogoTitle.vue";
 
 
 const props = defineProps({
@@ -51,7 +39,8 @@ function formatPrice(value) {
 
         <div class="border border-gray-300">
             <div class="px-4 py-5 flex flex-col justify-center items-center ">
-                <ApplicationLogo class="" />
+<!--                <ApplicationLogo class="" />-->
+                <ApplicationLogoTitle />
                 <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Berhasil</h3>
                 <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
             </div>
@@ -62,7 +51,7 @@ function formatPrice(value) {
                         <div class="text-sm font-semibold">{{ formattedDate(props.history.updated_at) }}</div>
                     </div>
                     <div class=" flex justify-between">
-                        <div class="text-sm ">No. Referensi</div>
+                        <div class="text-sm ">Kode Referensi</div>
                         <div class="text-sm font-semibold ">{{ props.history.order_id }}</div>
                     </div>
 

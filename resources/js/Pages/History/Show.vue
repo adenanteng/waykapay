@@ -15,6 +15,7 @@ import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
+import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 
 
 const props = defineProps({
@@ -73,7 +74,8 @@ function formatPrice(value) {
 
             <div id='printMe' class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
-                    <ApplicationLogo class="block sm:hidden" />
+<!--                    <ApplicationLogo class="block sm:hidden" />-->
+                    <ApplicationLogoTitle class="block sm:hidden" />
                     <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Berhasil</h3>
                     <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
                 </div>
@@ -84,7 +86,7 @@ function formatPrice(value) {
                             <div class="text-sm font-semibold">{{ formattedDate(props.history.updated_at) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm ">No. Referensi</div>
+                            <div class="text-sm ">Kode Referensi</div>
                             <div class="text-sm font-semibold ">{{ props.history.order_id }}</div>
                         </div>
 
@@ -252,15 +254,17 @@ function formatPrice(value) {
                     :href="route('dashboard')"
                     class="justify-center w-full border border-gray-300 nightwind-prevent"
                 >
+                    <i class="fa-regular fa-home mr-2" />
                     Beranda
                 </SecondaryButton>
 
                 <PrimaryButton
                     v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1"
                     as="a"
-                    :href="route('transaction.print', props.history)"
+                    :href="route('transaction.print', props.history.order_id)"
                     class="justify-center w-full"
                 >
+                    <i class="fa-regular fa-share-nodes mr-2" />
                     Bagikan
                 </PrimaryButton>
             </div>
@@ -400,7 +404,7 @@ function formatPrice(value) {
                             <div class="text-sm font-semibold">{{ formattedDate(props.history.updated_at) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm ">No. Referensi</div>
+                            <div class="text-sm ">Kode Referensi</div>
                             <div class="text-sm font-semibold ">{{ props.history.order_id }}</div>
                         </div>
 

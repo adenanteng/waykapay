@@ -96,8 +96,8 @@ class TransactionController extends Controller
      *
      * @param Transaction $transaction
      */
-    public function print(Transaction $transaction) {
-//        dd($transaction);
+    public function print($id) {
+//        dd($id);
 //        $customer = new Buyer([
 //            'name'          => 'John Doe',
 //            'custom_fields' => [
@@ -117,9 +117,10 @@ class TransactionController extends Controller
 //        return $invoice->download();
 
 //        return view('print', compact('invoice'));
+        $trx = Transaction::where('order_id', $id)->first();
 
         return Inertia::render('History/Print', [
-            'history' => $transaction,
+            'history' => $trx,
         ]);
     }
 }

@@ -38,6 +38,7 @@ use Inertia\Inertia;
 
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
 Route::get('/upgrade', [LandingController::class, 'upgrade'])->name('landing.upgrade');
+Route::get('/transaction/print/{transaction}', [TransactionController::class, 'print'])->name('transaction.print');
 
 Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
@@ -98,7 +99,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/carousel', CarouselController::class)->names('carousel');
 
     Route::resource('/transaction', TransactionController::class)->names('transaction');
-    Route::get('/transaction/print/{transaction}', [TransactionController::class, 'print'])->name('transaction.print');
+
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
 
