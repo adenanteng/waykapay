@@ -318,7 +318,7 @@ class DepositController extends Controller
         curl_close($curl);
 //        dd($response['code'][$sender_bank_type]);
 
-        dd($response);
+//        dd($response);
 
         if ($response['status'] && $httpCode == 200) {
             $transaction = Transaction::create([
