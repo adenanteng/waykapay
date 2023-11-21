@@ -323,6 +323,7 @@ class DepositController extends Controller
         if ($response['status'] && $httpCode == 200) {
             $transaction = Transaction::create([
                 'sku' => '-',
+//                'order_id' => $merchantOrderId,
                 'order_id' => $merchantOrderId,
                 'product_name' => 'Deposit',
                 'customer_no' => '-',
