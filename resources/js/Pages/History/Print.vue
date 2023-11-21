@@ -134,7 +134,7 @@ function formatPrice(value) {
                     </template>
 
                     <template v-else >
-                        <div class="flex justify-between">
+                        <div class="flex justify-between gap-5">
                             <div class="text-sm ">Keterangan</div>
                             <div class="text-sm font-semibold text-right truncate">{{ props.history.desc ?? '-' }}</div>
                         </div>
