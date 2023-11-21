@@ -308,14 +308,17 @@ class DepositController extends Controller
             ),
         ));
 
-        $response = curl_exec($curl);
+        // Set response json
+        $responseJson = curl_exec($curl);
+        $response = json_decode($responseJson);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         curl_close($curl);
 //        dd($response);
 
 //        dd($response->object());
 
-        if ($response['status']) {
+        if ($response['status'] && $httpCode == 200) {
             $transaction = Transaction::create([
                 'sku' => '-',
                 'order_id' => $merchantOrderId,
