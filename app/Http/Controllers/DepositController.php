@@ -44,151 +44,151 @@ class DepositController extends Controller
         ]);
     }
 
-    public function create(Request $request)
-    {
-//        dd($request->all());
-        $user = User::where('id', $request['user_id'])->first();
-
-        $sender_bank_type = match ($request['method']['id']) {
-            1 => $targetPath = "/bca-virtual-account/v2/payment-code",
-            2 => $targetPath = "/bni-virtual-account/v2/payment-code",
-            3 => $targetPath = "/bri-virtual-account/v2/payment-code",
-            4 => $targetPath = "/mandiri-virtual-account/v2/payment-code",
-            5 => $targetPath = "/permata-virtual-account/v2/payment-code",
-            6 => $targetPath = "/bsm-virtual-account/v2/payment-code",
-            13 => $targetPath = "/alfa-online-to-offline/v2/payment-code",
-        };
-
-        $sender_bank_type = match ($request['method']['id']) {
-            1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
-            13 => $admin_fee = 5000,
-        };
-
-        $clientId = 'BRN-0288-1690798735800';
-        $secretKey = 'SK-CIiJ0QDZmqNAhpfxFVbt';
-        $requestId = strtolower(Str::random(8));
-        $requestDate = Carbon::now('UTC')->toIso8601ZuluString();
-        $getUrl = 'https://api.doku.com';
-        $url = $getUrl . $targetPath;
-
-        if ($request['method']['id'] <= 6){
-            $requestBody = array(
-                'order' => array(
-                    'amount' => $request['amount'] + $admin_fee,
-                    'invoice_number' => $requestId,
-                ),
-                'virtual_account_info' => array(
-                    "billing_type" => "FIX_BILL",
-                    'expired_time' => 60,
-                    'reusable_status' => false,
-                    'info1' => 'Waykapay',
-                ),
-                'customer' => array(
-                    'name' => $user->name,
-                    'email' => $user->email,
-                ),
-            );
-        } elseif ($request['method']['id'] == 13) {
-            $requestBody = array(
-                'order' => array(
-                    'amount' => $request['amount'] + $admin_fee,
-                    'invoice_number' => $requestId,
-                ),
-                'online_to_offline_info' => array(
-                    'expired_time' => 60,
-                    'reusable_status' => false,
-                    'info' => 'Waykapay',
-                ),
-                'customer' => array(
-                    'name' => $user->name,
-                    'email' => $user->email,
-                ),
-            );
-        }
-
-        // Generate digest
-        $digestValue = base64_encode(hash('sha256', json_encode($requestBody), true));
-
-        // Prepare signature component
-        $componentSignature = "Client-Id:".$clientId ."\n".
-            "Request-Id:".$requestId . "\n".
-            "Request-Timestamp:".$requestDate ."\n".
-            "Request-Target:".$targetPath ."\n".
-            "Digest:".$digestValue;
-
-        // Generate signature
-        $signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
-
-        // Execute request
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json',
-            'Client-Id:' . $clientId,
-            'Request-Id:' . $requestId,
-            'Request-Timestamp:' . $requestDate,
-            'Signature:' . "HMACSHA256=" . $signature,
-        ));
-
-        // Set response json
-        $responseJson = curl_exec($ch);
-        $response = json_decode($responseJson);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-
-        // Echo the response
-        if (is_string($responseJson) && $httpCode == 200) {
+//    public function create(Request $request)
+//    {
+////        dd($request->all());
+//        $user = User::where('id', $request['user_id'])->first();
+//
+//        $sender_bank_type = match ($request['method']['id']) {
+//            1 => $targetPath = "/bca-virtual-account/v2/payment-code",
+//            2 => $targetPath = "/bni-virtual-account/v2/payment-code",
+//            3 => $targetPath = "/bri-virtual-account/v2/payment-code",
+//            4 => $targetPath = "/mandiri-virtual-account/v2/payment-code",
+//            5 => $targetPath = "/permata-virtual-account/v2/payment-code",
+//            6 => $targetPath = "/bsm-virtual-account/v2/payment-code",
+//            13 => $targetPath = "/alfa-online-to-offline/v2/payment-code",
+//        };
+//
+//        $sender_bank_type = match ($request['method']['id']) {
+//            1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
+//            13 => $admin_fee = 5000,
+//        };
+//
+//        $clientId = 'BRN-0288-1690798735800';
+//        $secretKey = 'SK-CIiJ0QDZmqNAhpfxFVbt';
+//        $requestId = strtolower(Str::random(8));
+//        $requestDate = Carbon::now('UTC')->toIso8601ZuluString();
+//        $getUrl = 'https://api.doku.com';
+//        $url = $getUrl . $targetPath;
+//
+//        if ($request['method']['id'] <= 6){
+//            $requestBody = array(
+//                'order' => array(
+//                    'amount' => $request['amount'] + $admin_fee,
+//                    'invoice_number' => $requestId,
+//                ),
+//                'virtual_account_info' => array(
+//                    "billing_type" => "FIX_BILL",
+//                    'expired_time' => 60,
+//                    'reusable_status' => false,
+//                    'info1' => 'Waykapay',
+//                ),
+//                'customer' => array(
+//                    'name' => $user->name,
+//                    'email' => $user->email,
+//                ),
+//            );
+//        } elseif ($request['method']['id'] == 13) {
+//            $requestBody = array(
+//                'order' => array(
+//                    'amount' => $request['amount'] + $admin_fee,
+//                    'invoice_number' => $requestId,
+//                ),
+//                'online_to_offline_info' => array(
+//                    'expired_time' => 60,
+//                    'reusable_status' => false,
+//                    'info' => 'Waykapay',
+//                ),
+//                'customer' => array(
+//                    'name' => $user->name,
+//                    'email' => $user->email,
+//                ),
+//            );
+//        }
+//
+//        // Generate digest
+//        $digestValue = base64_encode(hash('sha256', json_encode($requestBody), true));
+//
+//        // Prepare signature component
+//        $componentSignature = "Client-Id:".$clientId ."\n".
+//            "Request-Id:".$requestId . "\n".
+//            "Request-Timestamp:".$requestDate ."\n".
+//            "Request-Target:".$targetPath ."\n".
+//            "Digest:".$digestValue;
+//
+//        // Generate signature
+//        $signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
+//
+//        // Execute request
+//        $ch = curl_init($url);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+//            'Content-Type: application/json',
+//            'Client-Id:' . $clientId,
+//            'Request-Id:' . $requestId,
+//            'Request-Timestamp:' . $requestDate,
+//            'Signature:' . "HMACSHA256=" . $signature,
+//        ));
+//
+//        // Set response json
+//        $responseJson = curl_exec($ch);
+//        $response = json_decode($responseJson);
+//        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+//
+//        curl_close($ch);
+//
+//        // Echo the response
+//        if (is_string($responseJson) && $httpCode == 200) {
+////            dd($response);
+//            $transaction = Transaction::create([
+//                'sku' => '-',
+//                'order_id' => $response->order->invoice_number,
+//                'product_name' => 'Deposit',
+//                'customer_no' => '-',
+//                'user_id' => $request['user_id'],
+//                'status_id' => Transaction::PENDING,
+//                'category_id' => Transaction::DEPOSIT,
+//                'amount' => $request['amount'],
+//                'gross_amount' => $request['amount'] + $admin_fee,
+//                'last_amount' => $user->wallet_balance,
+//                'admin_fee' => $admin_fee,
+//            ]);
+//
+//            if ($request['method']['id'] <= 6) {
+//                $virtual_account = TransactionBankTransfer::create([
+//                    'transaction_id' => $transaction->id,
+//                    'bank_id' => $request['method']['id'],
+//                    'va_number' => $response->virtual_account_info->virtual_account_number,
+//                    'payment_url' => $response->virtual_account_info->how_to_pay_page,
+//                    'exp_time' => Carbon::tomorrow(),
+//                ]);
+//            } elseif ($request['method']['id'] == 13) {
+//                $offline_account = TransactionOffline::create([
+//                    'transaction_id' => $transaction->id,
+//                    'bank_id' => $request['method']['id'],
+//                    'payment_code' => $response->online_to_offline_info->payment_code,
+//                    'payment_url' => $response->online_to_offline_info->how_to_pay_page,
+//                    'exp_time' => Carbon::tomorrow(),
+//                ]);
+//            } else {
+//                dd('error');
+//            }
+//
+//            return Inertia::render('Deposit/Confirm', [
+//                'transaction' => $transaction,
+//                'virtual_account' => $virtual_account ?? '',
+//                'wallet_account' => $wallet_account ?? '',
+//                'offline_account' => $offline_account ?? '',
+//            ]);
+//
+//        } else {
 //            dd($response);
-            $transaction = Transaction::create([
-                'sku' => '-',
-                'order_id' => $response->order->invoice_number,
-                'product_name' => 'Deposit',
-                'customer_no' => '-',
-                'user_id' => $request['user_id'],
-                'status_id' => Transaction::PENDING,
-                'category_id' => Transaction::DEPOSIT,
-                'amount' => $request['amount'],
-                'gross_amount' => $request['amount'] + $admin_fee,
-                'last_amount' => $user->wallet_balance,
-                'admin_fee' => $admin_fee,
-            ]);
-
-            if ($request['method']['id'] <= 6) {
-                $virtual_account = TransactionBankTransfer::create([
-                    'transaction_id' => $transaction->id,
-                    'bank_id' => $request['method']['id'],
-                    'va_number' => $response->virtual_account_info->virtual_account_number,
-                    'payment_url' => $response->virtual_account_info->how_to_pay_page,
-                    'exp_time' => Carbon::tomorrow(),
-                ]);
-            } elseif ($request['method']['id'] == 13) {
-                $offline_account = TransactionOffline::create([
-                    'transaction_id' => $transaction->id,
-                    'bank_id' => $request['method']['id'],
-                    'payment_code' => $response->online_to_offline_info->payment_code,
-                    'payment_url' => $response->online_to_offline_info->how_to_pay_page,
-                    'exp_time' => Carbon::tomorrow(),
-                ]);
-            } else {
-                dd('error');
-            }
-
-            return Inertia::render('Deposit/Confirm', [
-                'transaction' => $transaction,
-                'virtual_account' => $virtual_account ?? '',
-                'wallet_account' => $wallet_account ?? '',
-                'offline_account' => $offline_account ?? '',
-            ]);
-
-        } else {
-            dd($response);
-        }
-
-    }
+//        }
+//
+//    }
 
     public function confirm(Request $request)
     {
@@ -257,39 +257,110 @@ class DepositController extends Controller
 
     }
 
-    //    public function createOke(Request $request)
-//    {
-//        $merchantCode = "OK1168432";
-//        $merchantOrderId = Str::random(8);
-//        $paymentAmount = 20000;
-//        $mKey = "836753316901900731168432OKCTFB6944D5EE66C810AF962674B3A8C7AF";
-//
-//        $response = Http::withHeaders([
-//            'Accept' => 'application/json',
-//            'Content-Type' => 'application/json',
-//        ])->post('https://gateway.okeconnect.com/api/va/inquiry',
-//            [
-//                "merchantCode" => $merchantCode,
-//                "paymentAmount" => $paymentAmount,
-//                "merchantOrderId" => $merchantOrderId,
-//                "productDetails" => "Lorem ipsum",
-//                "email" => "aden.anteng@gmail.com",
-//                "bank" => "MANDIRI",
-//                "phoneNumber" => "082280031916",
-//                "returnUrl" => "https://waykapay.com",
-//                "callbackUrl" => "https://waykapay.com",
-//                "signature" => md5($merchantCode.$merchantOrderId.$paymentAmount.$mKey),
-//            ],
-//        );
-//
-////        dd($response->object());
-//
-//        if ($response->successful()) {
-//            dd($response->object());
-//        } else {
-//            dd("gagal");
-//        }
-//    }
+    public function create(Request $request)
+    {
+//        dd($request->toArray());
+
+        $user = User::where('id', $request['user_id'])->first();
+        $merchantCode = "OK1168432";
+        $merchantOrderId = Str::random(8);
+        $paymentAmount = $request['amount'];
+        $mKey = "836753316901900731168432OKCTFB6944D5EE66C810AF962674B3A8C7AF";
+
+        $sender_bank_type = match ($request['method']['id']) {
+            1 => $bank = "BCA",
+            2 => $bank = "BNI",
+            3 => $bank = "BRI",
+            4 => $bank = "MANDIRI",
+            5 => $bank = "PERMATA",
+            6 => $bank = "BSI",
+//            13 => $bank = "/alfa-online-to-offline/v2/payment-code",
+        };
+
+        $sender_bank_fee = match ($request['method']['id']) {
+            1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
+            13 => $admin_fee = 5000,
+        };
+
+//        dd($sender_bank_type);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://gateway.okeconnect.com/api/va/inquiry',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array(
+                'merchantCode' => $merchantCode,
+                'paymentAmount' => $paymentAmount + $admin_fee,
+                'merchantOrderId' => $merchantOrderId,
+                'productDetails' => 'Pembayaran Deposit Waykapay',
+                'email' => 'aden.anteng@gmail.com',
+                'phoneNumber' => '085156875180',
+                'bank' => $bank,
+                'returnUrl' => 'https://waykapay.com',
+                'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                'signature' => md5($merchantCode . $merchantOrderId . $paymentAmount + $admin_fee . $mKey)
+            ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+//        dd($response);
+
+//        dd($response->object());
+
+        if ($response['status']) {
+            $transaction = Transaction::create([
+                'sku' => '-',
+                'order_id' => $merchantOrderId,
+                'product_name' => 'Deposit',
+                'customer_no' => '-',
+                'user_id' => $request['user_id'],
+                'status_id' => Transaction::PENDING,
+                'category_id' => Transaction::DEPOSIT,
+                'amount' => $request['amount'],
+                'gross_amount' => $request['amount'] + $admin_fee,
+                'last_amount' => $user->wallet_balance,
+                'admin_fee' => $admin_fee,
+                'desc' => $response['id']
+            ]);
+
+            if ($request['method']['id'] <= 6) {
+
+                $virtual_account = TransactionBankTransfer::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'va_number' => $response[$sender_bank_type],
+                    'payment_url' => '-',
+                    'exp_time' => Carbon::tomorrow(),
+                ]);
+            } elseif ($request['method']['id'] == 13) {
+                $offline_account = TransactionOffline::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'payment_code' => $response[$sender_bank_type],
+                    'payment_url' => '-',
+                    'exp_time' => Carbon::tomorrow(),
+                ]);
+            }
+
+        } else {
+            dd('error');
+        }
+
+        return Inertia::render('Deposit/Confirm', [
+            'transaction' => $transaction,
+            'virtual_account' => $virtual_account ?? '',
+            'wallet_account' => $wallet_account ?? '',
+            'offline_account' => $offline_account ?? '',
+        ]);
+    }
 
 //    public function createFlip(Request $request)
 //    {

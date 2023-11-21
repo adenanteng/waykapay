@@ -13,6 +13,43 @@ class WebHookController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
+    public function webhookHandlerOkeConnect(Request $request){
+
+        $transaction = Transaction::where('order_id', $request['merchantOrderId'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
+
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['status']) {
+                case ('SUCCESS'):
+                    $user->deposit($request['amount']);
+                    $status_id = Transaction::SUCCESS;
+                    break;
+
+                case ('CANCEL'):
+                    $status_id = Transaction::CANCEL;
+                    break;
+
+                case ('FAILED'):
+                    $status_id = Transaction::ERROR;
+                    break;
+
+                default:
+                    $status_id = Transaction::UNDEFINED;
+            }
+
+            $transaction->update([
+                'status_id' => $status_id,
+                'desc' => $request['payment_reff']
+            ]);
+        }
+
+        return response()->json('ok');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function webhookHandlerDokuAcceptPayment(Request $request){
 
         $transaction = Transaction::where('order_id', $request['order']['invoice_number'])->first();

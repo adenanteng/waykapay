@@ -17,7 +17,6 @@ import ActionMessage from "@/Components/ActionMessage.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 
-
 const props = defineProps({
     users: Object,
     history: Object
@@ -267,6 +266,7 @@ function formatPrice(value) {
                     <i class="fa-regular fa-share-nodes mr-2" />
                     Bagikan
                 </PrimaryButton>
+
             </div>
 
 

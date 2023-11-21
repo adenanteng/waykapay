@@ -40,6 +40,7 @@ Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
 Route::get('/upgrade', [LandingController::class, 'upgrade'])->name('landing.upgrade');
 Route::get('/transaction/print/{transaction}', [TransactionController::class, 'print'])->name('transaction.print');
 
+Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
 Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
 //Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);

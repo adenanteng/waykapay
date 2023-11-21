@@ -63,7 +63,7 @@ function formattedDate(value) {
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="item in props.users.data" :key="item.id">
                     <li>
-                        <Link preserve-scroll :href="route('user.show', item.slug)" class="block hover:bg-primary-50" >
+                        <Link :href="route('user.show', item.slug)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
                                     <p class="font-medium truncate capitalize text-gray-900">
