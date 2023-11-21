@@ -314,7 +314,7 @@ class DepositController extends Controller
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         curl_close($curl);
-//        dd($response);
+//        dd($response['code'][$sender_bank_type]);
 
 //        dd($response->object());
 
@@ -339,7 +339,7 @@ class DepositController extends Controller
                 $virtual_account = TransactionBankTransfer::create([
                     'transaction_id' => $transaction->id,
                     'bank_id' => $request['method']['id'],
-                    'va_number' => $response[$sender_bank_type],
+                    'va_number' => $response['code'][$sender_bank_type],
                     'payment_url' => '-',
                     'exp_time' => Carbon::tomorrow(),
                 ]);
@@ -347,7 +347,7 @@ class DepositController extends Controller
                 $offline_account = TransactionOffline::create([
                     'transaction_id' => $transaction->id,
                     'bank_id' => $request['method']['id'],
-                    'payment_code' => $response[$sender_bank_type],
+                    'payment_code' => $response['code'][$sender_bank_type],
                     'payment_url' => '-',
                     'exp_time' => Carbon::tomorrow(),
                 ]);
