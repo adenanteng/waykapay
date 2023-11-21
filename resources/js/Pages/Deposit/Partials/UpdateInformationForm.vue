@@ -59,7 +59,7 @@ const formReset = () => {
                         v-model="form.amount"
                         type="number"
                         class="mt-1 block w-full rounded-l-none"
-                        min="10000"
+                        min="1"
                         max="5000000"
                         required
                         autofocus
