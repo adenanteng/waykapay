@@ -67,15 +67,19 @@ function formatPrice(value) {
                     </div>
 
                     <div class="">
-                        <span class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }}
+                        <div class="block text-xl font-bold text-gray-900 capitalize">{{ props.users.name }}
                             <span class="text-sm font-medium ml-2 text-gray-500">#{{ props.users.slug }}</span>
-                        </span>
-                        <span class="block text-sm font-medium text-gray-600">
+                        </div>
+                        <div class="block text-sm font-medium text-gray-600 space-x-2">
+                            <span><i class="fa-regular fa-mobile mr-1" />{{ props.users.phone }}</span>
+                            <span><i class="fa-regular fa-envelope mr-1" />{{ props.users.email }}</span>
+                        </div>
+                        <div class="block text-sm font-medium text-gray-600">
                             Akun {{ props.users.role }}
-                        </span>
-                        <span class="block text-sm font-medium text-primary-600">
+                        </div>
+                        <div class="block text-sm font-medium text-primary-600">
                             Rp {{ formatPrice(props.users.wallet_balance) }}
-                        </span>
+                        </div>
                     </div>
 
                 </div>

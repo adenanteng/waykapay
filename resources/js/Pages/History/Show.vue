@@ -300,14 +300,14 @@ function formatPrice(value) {
                                     </Popper>
                                 </div>
                             </div>
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm">Cara bayar</div>
-                                <div class="text-sm font-semibold text-primary-600 underline">
-                                    <a target="_blank" :href="props.history.virtual_account.payment_url" >
-                                        Bayar
-                                    </a>
-                                </div>
-                            </div>
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                <div class="text-sm">Cara bayar</div>-->
+<!--                                <div class="text-sm font-semibold text-primary-600 underline">-->
+<!--                                    <a target="_blank" :href="props.history.virtual_account.payment_url" >-->
+<!--                                        Bayar-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </template>
 
                         <template v-else-if="props.history.wallet_account">

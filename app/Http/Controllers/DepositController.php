@@ -274,41 +274,67 @@ class DepositController extends Controller
             4 => $bank = "MANDIRI",
             5 => $bank = "PERMATA",
             6 => $bank = "BSI",
-//            13 => $bank = "/alfa-online-to-offline/v2/payment-code",
+            13 => $bank = "ALFAMART",
         };
 
         $sender_bank_fee = match ($request['method']['id']) {
             1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
-            13 => $admin_fee = 5000,
+            13 => $admin_fee = 4000,
         };
 
         $grossAmount = $request['amount'] + $admin_fee;
 
-//        dd($sender_bank_type);
         $curl = curl_init();
+//        dd($sender_bank_type);
+        if ($request['method']['id'] <=6) {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://gateway.okeconnect.com/api/va/inquiry',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array(
+                    'merchantCode' => $merchantCode,
+                    'paymentAmount' => $grossAmount,
+                    'merchantOrderId' => $merchantOrderId,
+                    'productDetails' => 'Pembayaran Deposit Waykapay',
+                    'email' => $user->email,
+                    'phoneNumber' => $user->phone,
+                    'bank' => $bank,
+                    'returnUrl' => 'https://waykapay.com',
+                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
+                ),
+            ));
+        } else {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://gateway.okeconnect.com/api/retail/inquiry',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array(
+                    'merchantCode' => $merchantCode,
+                    'paymentAmount' => $grossAmount,
+                    'paymentFee' => '0',
+                    'merchantOrderId' => $merchantOrderId,
+                    'productDetails' => 'Pembayaran Deposit Waykapay',
+                    'email' => $user->email,
+                    'phoneNumber' => $user->phone,
+                    'channel' => $bank,
+                    'returnUrl' => 'https://waykapay.com',
+                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
+                ),
+            ));
+        }
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://gateway.okeconnect.com/api/va/inquiry',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array(
-                'merchantCode' => $merchantCode,
-                'paymentAmount' => $grossAmount,
-                'merchantOrderId' => $merchantOrderId,
-                'productDetails' => 'Pembayaran Deposit Waykapay',
-                'email' => $user->email,
-                'phoneNumber' => $user->phone,
-                'bank' => $bank,
-                'returnUrl' => 'https://waykapay.com',
-                'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
-                'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
-            ),
-        ));
 
         // Set response json
         $responseJson = curl_exec($curl);
@@ -320,7 +346,7 @@ class DepositController extends Controller
 
 //        dd($response);
 
-        if ($response['status'] && $httpCode == 200) {
+        if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
             $transaction = Transaction::create([
                 'sku' => '-',
 //                'order_id' => $merchantOrderId,
@@ -334,11 +360,10 @@ class DepositController extends Controller
                 'gross_amount' => $request['amount'] + $admin_fee,
                 'last_amount' => $user->wallet_balance,
                 'admin_fee' => $admin_fee,
-                'desc' => $response['id']
+                'desc' => isset($response['id']) ?? isset($response['deposit_id'])
             ]);
 
             if ($request['method']['id'] <= 6) {
-
                 $virtual_account = TransactionBankTransfer::create([
                     'transaction_id' => $transaction->id,
                     'bank_id' => $request['method']['id'],
@@ -350,7 +375,7 @@ class DepositController extends Controller
                 $offline_account = TransactionOffline::create([
                     'transaction_id' => $transaction->id,
                     'bank_id' => $request['method']['id'],
-                    'payment_code' => $response['code'][$sender_bank_type],
+                    'payment_code' => $response['response']['alfamart']['code'],
                     'payment_url' => '-',
                     'exp_time' => Carbon::tomorrow(),
                 ]);

@@ -64,6 +64,8 @@ class Transaction extends Model
         self::CLOSE => 'bg-gray-100 text-gray-800',
         self::UNDEFINED => 'bg-gray-100 text-gray-800',
     ];
+
+    const ALL = null;
     const TRANSFER = 99;
     const DEPOSIT = 1;
     const PULSA = 2;
@@ -87,6 +89,7 @@ class Transaction extends Model
     const PASCA_SAMSAT = 20;
 
     const CATEGORY = [
+        self::ALL => 'Semua',
         self::TRANSFER => 'Kirim Uang',
         self::DEPOSIT => 'Deposit',
         self::PULSA => 'Pulsa',
@@ -96,18 +99,19 @@ class Transaction extends Model
         self::EMONEY => 'E-Money',
         self::TV => 'TV',
         self::VOUCHER => 'Voucher',
-        self::PASCA_PLN => 'Pasca PLN',
-        self::PASCA_PDAM => 'Pasca PDAM',
-        self::PASCA_HP => 'Pasca HP',
-        self::PASCA_INTERNET => 'Pasca internet',
-        self::PASCA_TV => 'Pasca TV',
-        self::PASCA_BPJSK => 'Pasca BPJS Kesehatan',
-        self::PASCA_BPJSTK => 'Pasca PBJS Ketenagakerjaan',
-        self::PASCA_BPJSTKPU => 'Pasca PBJS Ketenagakerjaan Penerima Upah',
-        self::PASCA_MULTIFINANCE => 'Pasca Multifinance',
-        self::PASCA_PBB => 'Pasca PBB',
-        self::PASCA_GASNEGARA => 'Pasca Gas Negara',
-        self::PASCA_SAMSAT => 'Pasca Samsat',
+
+        self::PASCA_PLN => 'PLN Pascabayar',
+//        self::PASCA_PDAM => 'Pasca PDAM',
+//        self::PASCA_HP => 'Pasca HP',
+        self::PASCA_INTERNET => 'Internet',
+        self::PASCA_TV => 'TV Pascabayar',
+//        self::PASCA_BPJSK => 'BPJS Kesehatan',
+//        self::PASCA_BPJSTK => 'PBJS Ketenagakerjaan',
+//        self::PASCA_BPJSTKPU => 'PBJS Ketenagakerjaan Penerima Upah',
+//        self::PASCA_MULTIFINANCE => 'Multifinance',
+//        self::PASCA_PBB => 'Pasca PBB',
+//        self::PASCA_GASNEGARA => 'Pasca Gas Negara',
+//        self::PASCA_SAMSAT => 'Pasca Samsat',
     ];
 
     /**

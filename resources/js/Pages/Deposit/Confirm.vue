@@ -93,12 +93,12 @@ function formattedDateTime(value) {
                                     </Popper>
                                 </div>
                             </div>
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm ">Cara bayar</div>
-                                <div class="text-sm font-semibold text-primary-600 underline">
-                                    <a target="_blank" :href="props.virtual_account.payment_url" >Bayar</a>
-                                </div>
-                            </div>
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                <div class="text-sm ">Cara bayar</div>-->
+<!--                                <div class="text-sm font-semibold text-primary-600 underline">-->
+<!--                                    <a target="_blank" :href="props.virtual_account.payment_url" >Bayar</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </template>
 
                         <template v-else-if="props.wallet_account">
@@ -123,12 +123,12 @@ function formattedDateTime(value) {
                                 </div>
                             </template>
 
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm ">Deeplink</div>
-                                <div class="text-sm font-semibold text-primary-600 underline">
-                                    <a target="_blank" :href="props.wallet_account.payment_url" >Bayar</a>
-                                </div>
-                            </div>
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                <div class="text-sm ">Deeplink</div>-->
+<!--                                <div class="text-sm font-semibold text-primary-600 underline">-->
+<!--                                    <a target="_blank" :href="props.wallet_account.payment_url" >Bayar</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
                             <!--                            <span class="block text-sm font-medium text-gray-600 mt-5">-->
                             <!--                                Kadaluarsa-->
@@ -153,12 +153,12 @@ function formattedDateTime(value) {
                                     </Popper>
                                 </div>
                             </div>
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm ">Cara bayar</div>
-                                <div class="text-sm font-semibold text-primary-600 underline">
-                                    <a target="_blank" :href="props.offline_account.payment_url" >Bayar</a>
-                                </div>
-                            </div>
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                <div class="text-sm ">Cara bayar</div>-->
+<!--                                <div class="text-sm font-semibold text-primary-600 underline">-->
+<!--                                    <a target="_blank" :href="props.offline_account.payment_url" >Bayar</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </template>
 
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />

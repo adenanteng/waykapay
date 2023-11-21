@@ -84,12 +84,16 @@ function formattedDate(value) {
                                     </div>
                                 </div>
                                 <div class="flex justify-between">
-                                    <div class="flex">
+                                    <div class="sm:flex gap-3">
+                                        <p class="flex items-center text-sm text-gray-600" >
+                                            {{ item.phone }}
+                                        </p>
                                         <p class="flex items-center text-sm text-gray-600" >
                                             {{ item.email }}
                                         </p>
+
                                     </div>
-                                    <div class="flex items-center text-sm text-gray-600" >
+                                    <div class="flex items-end text-sm text-gray-600" >
 <!--                                        <i class="fa-regular fa-calendar pr-2" />-->
                                         {{ formattedDate(item.updated_at) }}
                                     </div>
