@@ -310,7 +310,7 @@ class DepositController extends Controller
 
         // Set response json
         $responseJson = curl_exec($curl);
-        $response = json_decode($responseJson);
+        $response = json_decode($responseJson, true);
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         curl_close($curl);
