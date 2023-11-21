@@ -170,7 +170,7 @@ function formatPrice(value) {
                         <template v-else >
                             <div class="sm:col-span-2 flex sm:block justify-between">
                                 <div class="text-sm ">Keterangan</div>
-                                <div class="text-sm font-semibold text-right sm:text-left">{{ props.history.desc ?? '-' }}</div>
+                                <div class="text-sm font-semibold text-right sm:text-left truncate">{{ props.history.desc ?? '-' }}</div>
                             </div>
                         </template>
 
