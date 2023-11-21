@@ -27,7 +27,7 @@ class MoneyTransferController extends Controller
 //        dd($request->toArray());
         Validator::make($request->toArray(), [
             'bank' => ['required'],
-            'account_no' => ['required', 'integer'],
+            'account_no' => ['required'],
         ])->validateWithBag('storeInformation');
 
         $to = User::where('slug', $request['account_no'])->first();

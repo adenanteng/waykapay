@@ -20,6 +20,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
+    // form.account_no = '08'+form.account_no
     form.post(route('money-transfer.amount'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
@@ -91,15 +92,20 @@ function formatPrice(value) {
                 <InputError :message="form.errors.bank" class="mt-2"/>
             </div>
 
-            <div class="col-span-6">
-                <InputLabel for="amount" value="Nomor Rekening"/>
-                <TextInput
-                    id="account_no"
-                    v-model="form.account_no"
-                    type="number"
-                    class="mt-1 block w-full"
-                    required
-                />
+            <div class="col-span-6" v-if="form.bank?.id==1">
+                <InputLabel for="amount" value="Nomor handphone tujuan"/>
+<!--                <div class="flex">-->
+<!--                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">-->
+<!--                        08-->
+<!--                    </span>-->
+                    <TextInput
+                        id="account_no"
+                        v-model="form.account_no"
+                        type="number"
+                        class="mt-1 block w-full"
+                        required
+                    />
+<!--                </div>-->
                 <InputError :message="form.errors.account_no" class="mt-2"/>
             </div>
 
