@@ -48,7 +48,7 @@ class MoneyTransferController extends Controller
     public function confirm(Request $request)
     {
 //        dd($request->toArray());
-        $to = User::where('slug', $request['account_no'])->first();
+        $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();
 
         $transaction = Transaction::create([
