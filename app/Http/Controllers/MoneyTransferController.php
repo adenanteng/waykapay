@@ -30,7 +30,7 @@ class MoneyTransferController extends Controller
             'account_no' => ['required'],
         ])->validateWithBag('storeInformation');
 
-        $to = User::where('slug', $request['account_no'])->first();
+        $to = User::where('phone', $request['account_no'])->first();
 
         if ($to && $to->id != auth()->user()->id) {
             $users = $to;
