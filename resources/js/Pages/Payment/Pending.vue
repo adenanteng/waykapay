@@ -68,7 +68,7 @@ function formatPrice(value) {
                 <div class="mt-5">
                     <div class="text-center justify-center">
 <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
-                        <div class="px-4 py-4 sm:px-6 text-center text-gray-900 text-sm" >
+                        <div class="px-4 sm:px-6 text-center text-gray-900 text-sm" >
                             <Vue3Lottie
                                 animation-link="https://lottie.host/6fea85f2-ef6f-4d4b-aac5-6e9ef6521950/iNhXM2CBCy.json"
                                 :height="200"

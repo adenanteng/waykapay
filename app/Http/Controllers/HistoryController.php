@@ -21,7 +21,8 @@ class HistoryController extends Controller
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
         $history = Transaction::where('user_id', auth()->user()->id)
-            ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
+            ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+            ->latest()
             ->get()
             ->groupBy(function ($val) {
                 return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');

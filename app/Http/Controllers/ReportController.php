@@ -21,6 +21,7 @@ class ReportController extends Controller
 //            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
             'transaction' => Transaction::query()
                 ->where('user_id', auth()->user()->id)
+//                ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
                 ->latest()
                 ->when(Req::input('search'), function ($query, $search) {
                     $query->where('order_id', 'like', '%' . $search . '%')
@@ -39,7 +40,9 @@ class ReportController extends Controller
 
             'gross_amount' => Inertia::lazy(fn () => $trx->sum('gross_amount')),
             'agent_commission' => Inertia::lazy(fn () => $trx->sum('agent_commission')),
-            'transaction_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)->where('status_id', Transaction::SUCCESS)->count()),
+            'transaction_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                                                        ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
+                                                        ->where('status_id', Transaction::SUCCESS)->get()->count()),
 
             'filters' => Req::only(['search', 'filter']),
             'selectCategory' => Transaction::CATEGORY,

@@ -84,7 +84,7 @@ function formatPrice(value) {
             <div class="flex w-full items-center justify-between space-x-6 p-6">
                 <div class="flex-1 truncate">
                     <div class="flex items-center space-x-3">
-                        <h3 class="truncate text-sm text-gray-600">Total Laba</h3>
+                        <h3 class="truncate text-sm text-gray-600">Laba</h3>
 <!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
 <!--                            {{ props.transaction.total }} Transaksi-->
 <!--                        </span>-->
@@ -168,12 +168,12 @@ function formatPrice(value) {
                                                 <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                                 <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
                                                 <template v-else-if="history.money_transfer">
-                                                    <!--                                            <template v-if="history.user_id == $page.props.user.id">-->
-                                                    ke {{ history.money_transfer.to.name }}
-                                                    <!--                                            </template>-->
-                                                    <!--                                            <template v-else>-->
-                                                    <!--                                                dari {{ history.user.name }}-->
-                                                    <!--                                            </template>-->
+                                                    <template v-if="history.user_id == $page.props.user.id">
+                                                        ke {{ history.money_transfer.to.name }}
+                                                    </template>
+                                                    <template v-else>
+                                                        dari {{ history.user.name }}
+                                                    </template>
                                                 </template>
                                             </p>
                                             <div class="ml-2 flex-shrink-0 flex">
