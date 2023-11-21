@@ -64,7 +64,7 @@ class Transaction extends Model
         self::CLOSE => 'bg-gray-100 text-gray-800',
         self::UNDEFINED => 'bg-gray-100 text-gray-800',
     ];
-    const TRANSFER = 0;
+    const TRANSFER = 99;
     const DEPOSIT = 1;
     const PULSA = 2;
     const DATA = 3;
