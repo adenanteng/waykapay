@@ -282,6 +282,8 @@ class DepositController extends Controller
             13 => $admin_fee = 5000,
         };
 
+        $grossAmount = $request['amount'] + $admin_fee;
+
 //        dd($sender_bank_type);
         $curl = curl_init();
 
@@ -296,15 +298,15 @@ class DepositController extends Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'merchantCode' => $merchantCode,
-                'paymentAmount' => $paymentAmount + $admin_fee,
+                'paymentAmount' => $grossAmount,
                 'merchantOrderId' => $merchantOrderId,
                 'productDetails' => 'Pembayaran Deposit Waykapay',
-                'email' => 'agusyaya@gmail.com',
-                'phoneNumber' => '082372892755',
+                'email' => $user->email,
+                'phoneNumber' => $user->phone,
                 'bank' => $bank,
                 'returnUrl' => 'https://waykapay.com',
                 'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
-                'signature' => md5($merchantCode . $merchantOrderId . $paymentAmount + $admin_fee . $mKey)
+                'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
             ),
         ));
 
@@ -316,7 +318,7 @@ class DepositController extends Controller
         curl_close($curl);
 //        dd($response['code'][$sender_bank_type]);
 
-//        dd($response->object());
+        dd($response);
 
         if ($response['status'] && $httpCode == 200) {
             $transaction = Transaction::create([
