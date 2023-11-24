@@ -21,6 +21,7 @@ use App\Http\Controllers\ProductVoucherController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UpgradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +39,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
-Route::get('/upgrade', [LandingController::class, 'upgrade'])->name('landing.upgrade');
+Route::get('/premium', [LandingController::class, 'upgrade'])->name('landing.upgrade');
 Route::get('/transaction/print/{transaction}', [TransactionController::class, 'print'])->name('transaction.print');
 
 Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
@@ -102,6 +103,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::resource('/transaction', TransactionController::class)->names('transaction');
     Route::resource('/report', ReportController::class)->names('report');
+
+    Route::resource('/upgrade', UpgradeController::class)->names('upgrade');
 
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');

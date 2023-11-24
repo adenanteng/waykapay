@@ -113,7 +113,7 @@ function formatPrice(value) {
                             </div>
                         </template>
 
-                        <template v-if="props.history.category_id == 0">
+                        <template v-if="props.history.category_id == 99">
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">Jenis Transaksi</div>
                                 <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
@@ -128,18 +128,18 @@ function formatPrice(value) {
                             </div>
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">No. Rekening Tujuan</div>
-                                <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.slug }}</div>
+                                <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.phone }}</div>
                             </div>
                         </template>
 
-                        <template v-if="props.history.category_id != 0 && props.history.category_id != 1">
+                        <template v-if="props.history.category_id != 99 && props.history.category_id != 1">
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">Produk</div>
                                 <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
                             </div>
                         </template>
 
-                        <template v-if="props.history.category_id != 0 && props.history.category_id != 1">
+                        <template v-if="props.history.category_id != 99 && props.history.category_id != 1">
                             <div class="sm:col-span-1 flex sm:block justify-between" >
                                 <div class="text-sm ">No. Kustomer</div>
                                 <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
@@ -205,7 +205,7 @@ function formatPrice(value) {
                 </div>
             </div>
 
-            <template v-if="props.history.category_id!=0 && props.history.category_id!=1 && $page.props.user.role_id!=3">
+            <template v-if="props.history.category_id!=0 && props.history.category_id!=1 && $page.props.user.role_id!=3 && props.history.user_id == $page.props.user.id">
                 <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                     <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                         <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Komisi Agen</h3>

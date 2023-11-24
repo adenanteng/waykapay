@@ -42,7 +42,7 @@ class LandingController extends Controller
      */
     public function upgrade(): Response
     {
-        return Inertia::render('Upgrade', [
+        return Inertia::render('Upgrade/Index', [
 //            'trip' => Trip::all()
         ]);
     }

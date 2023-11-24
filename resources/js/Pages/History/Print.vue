@@ -79,7 +79,7 @@ function formatPrice(value) {
                         </div>
                     </template>
 
-                    <template v-if="props.history.category_id == 0">
+                    <template v-if="props.history.category_id == 99">
                         <div class="flex justify-between" >
                             <div class="text-sm ">Jenis Transaksi</div>
                             <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
@@ -94,11 +94,11 @@ function formatPrice(value) {
                         </div>
                         <div class="flex justify-between" >
                             <div class="text-sm ">No. Rekening Tujuan</div>
-                            <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.slug }}</div>
+                            <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.phone }}</div>
                         </div>
                     </template>
 
-                    <template v-if="props.history.category_id != 0 && props.history.category_id != 1">
+                    <template v-if="props.history.category_id != 99 && props.history.category_id != 1">
                         <div class="flex justify-between" >
                             <div class="text-sm ">Produk</div>
                             <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>

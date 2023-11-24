@@ -54,8 +54,8 @@ class MoneyTransferController extends Controller
         $transaction = Transaction::create([
             'sku' => '-',
             'order_id' => strtolower(Str::random(8)),
-            'product_name' => 'Transfer',
-            'customer_no' => '-',
+            'product_name' => 'Kirim uang',
+            'customer_no' => $to->phone,
             'user_id' => $user->id,
             'status_id' => Transaction::PENDING,
             'category_id' => Transaction::TRANSFER,
@@ -69,8 +69,8 @@ class MoneyTransferController extends Controller
         $money_transfer = TransactionMoneyTransfer::create([
             'transaction_id' => $transaction->id,
             'bank_id' => $request['bank']['id'],
-            'to_name' => null,
-            'to_number' => null,
+            'to_name' => $to->name,
+            'to_number' => $to->phone,
             'to_id' => $to->id,
         ]);
 

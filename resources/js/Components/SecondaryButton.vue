@@ -12,7 +12,7 @@ defineProps({
 });
 
 const classes = computed(() => {
-    return 'inline-flex items-center px-4 py-2 rounded-full font-semibold text-base text-gray-900 dark:text-white hover:text-gray-500 active:text-gray-800 disabled:opacity-25 transition';
+    return 'inline-flex items-center px-4 py-2 rounded-full font-semibold text-base text-gray-900 dark:text-white hover:text-gray-500 active:text-gray-800 disabled:opacity-25 transition nightwind-prevent';
 });
 </script>
 

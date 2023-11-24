@@ -118,7 +118,7 @@ const clearPhotoFileInput = () => {
                     />
                 </div>
 
-                <SecondaryButton class="mt-2 mr-2" type="button" @click.prevent="selectNewPhoto">
+                <SecondaryButton class="mt-2 mr-2 nightwind-prevent" type="button" @click.prevent="selectNewPhoto">
                     Ubah Foto
                 </SecondaryButton>
 
