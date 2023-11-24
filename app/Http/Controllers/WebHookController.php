@@ -14,7 +14,7 @@ class WebHookController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function webhookHandlerOkeConnect(Request $request){
-//        Log::debug($request);
+        Log::debug($request);
 
         $transaction = Transaction::where('desc', $request['merchantOrderId'])->first();
         $user = User::where('id', $transaction['user_id'])->first();
