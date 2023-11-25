@@ -53,7 +53,7 @@ class ProductController extends Controller
 //        dd($response->object()->data);
 
         if ($response->successful()) {
-            $user = User::where('id', $request['user_id'])->first();
+            $user = User::where('id', auth()->user()->id)->first();
 
             $transaction = Transaction::create([
                 'sku' => $request['sku'],
@@ -125,7 +125,7 @@ class ProductController extends Controller
 //        dd($response->object()->data);
 
         if ($response->successful()) {
-            $user = User::where('id', $request['user_id'])->first();
+            $user = User::where('id', auth()->user()->id)->first();
 
             $transaction = Transaction::create([
                 'sku' => $request['sku'],
@@ -183,7 +183,7 @@ class ProductController extends Controller
 //        dd($request->all());
         $request = $request['transaction'];
 
-        $user = User::where('id', $request['user_id'])->first();
+        $user = User::where('id', auth()->user()->id)->first();
         $transaction = Transaction::where('id', $request['id'])->first();
 
         if ($transaction->category_id < 8) {
