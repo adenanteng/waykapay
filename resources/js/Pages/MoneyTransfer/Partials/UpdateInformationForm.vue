@@ -91,7 +91,7 @@ function formatPrice(value) {
                         v-model="form.amount"
                         type="number"
                         class="mt-1 block w-full rounded-l-none"
-                        min="1000"
+                        min="1"
                         :max="Number($page.props.user.wallet_balance) <= 2000000 ? $page.props.user.wallet_balance : 2000000"
                         required
                     />
