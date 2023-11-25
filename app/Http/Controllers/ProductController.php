@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 
@@ -23,6 +24,16 @@ class ProductController extends Controller
      */
     public function topup(Request $request)
     {
+        if (auth()->user()->pin != null) {
+            Validator::make($request->toArray(), [
+                'pin' => ['required', 'numeric'],
+            ])->validateWithBag('storeInformation');
+
+            if (!Hash::check($request['pin'], auth()->user()->pin)) {
+                dd('pin salah');
+            }
+        }
+
 //        dd($request->toArray());
 //        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
         $gross_amount = $request['amount'] + $request['fee'];

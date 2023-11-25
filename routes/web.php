@@ -9,6 +9,7 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MoneyTransferController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PinController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductEmoneyController;
@@ -60,7 +61,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/money-transfer/amount', [MoneyTransferController::class, 'amount'])->name('money-transfer.amount');
     Route::post('/money-transfer/confirm', [MoneyTransferController::class, 'confirm'])->name('money-transfer.confirm');
 
-
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 
     Route::resource('/history', HistoryController::class)->names('history');
@@ -105,6 +105,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/report', ReportController::class)->names('report');
 
     Route::resource('/upgrade', UpgradeController::class)->names('upgrade');
+
+    Route::resource('/pin', PinController::class)->names('pin');
+
+    Route::post('/pin-money-transfer', [PinController::class, 'confirmMoneyTransfer'])->name('pin.moneyTransfer');
+    Route::post('/pin-topup', [PinController::class, 'confirmTopup'])->name('pin.topup');
+    Route::post('/pin-topup-pasca', [PinController::class, 'confirmTopupPasca'])->name('pin.topupPasca');
 
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');

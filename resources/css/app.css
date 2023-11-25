@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.otp-input {
+    @apply w-10 h-10 rounded-full text-sm font-medium p-2 border border-gray-300 text-center mx-0.5;
+}
+
+.otp-input.is-complete {
+    @apply bg-primary-200;
+}
+
 /*.bg-opacity-50 {*/
 /*    @apply bg-opacity-100;*/
 /*}*/

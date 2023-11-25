@@ -50,7 +50,7 @@ const storeInformation = () => {
         form.fee = fee.value
     }
 
-    form.post(route('product.topup'), {
+    form.post(route('pin.topup'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => closeModal(),
@@ -85,7 +85,9 @@ const confirmModal = (data) => {
         productName = data.product_name;
         productBrand = data.brand;
 
-        if (Number(data.price) < 25000) {
+        if (Number(data.price) < 1000) {
+            fee.value = 0
+        } else if (Number(data.price) < 25000) {
             fee.value = Number(props.fee_25)
         } else if (Number(data.price) < 50000) {
             fee.value = Number(props.fee_50)
@@ -189,7 +191,10 @@ const closeModal = () => {
                                         <span class="absolute inset-0" aria-hidden="true"></span>
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
                                         <p class="text-sm text-gray-500 truncate">
-                                            <template v-if="Number(data.price) < 25000">
+                                            <template v-if="Number(data.price) < 1000">
+                                                Rp {{ formatPrice(Number(data.price)) }}
+                                            </template>
+                                            <template v-else-if="Number(data.price) < 25000">
                                                 Rp {{ formatPrice(Number(data.price) + Number(props.fee_25)) }}
                                             </template>
                                             <template v-else-if="Number(data.price) < 50000">

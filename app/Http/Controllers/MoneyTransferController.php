@@ -7,7 +7,9 @@ use App\Models\Transaction;
 use App\Models\TransactionMoneyTransfer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -47,7 +49,16 @@ class MoneyTransferController extends Controller
 
     public function confirm(Request $request)
     {
-//        dd($request->toArray());
+        if (auth()->user()->pin != null) {
+            Validator::make($request->toArray(), [
+                'pin' => ['required', 'numeric'],
+            ])->validateWithBag('storeInformation');
+
+            if (!Hash::check($request['pin'], auth()->user()->pin)) {
+                dd('pin salah');
+            }
+        }
+
         $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();
 

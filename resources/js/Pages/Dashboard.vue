@@ -112,6 +112,21 @@ const onSlideChange = (swiper) => {
             </div>
         </div>
 
+        <div class="border-l-4 border-yellow-400 bg-yellow-100 rounded-3xl p-4" v-if="$page.props.user.pin==null">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="fa-regular fa-triangle-exclamation text-yellow-400 h-5 w-5" />
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                        Pin kamu belum aktif
+                        {{ ' ' }}
+                        <Link :href="route('pin.create')" class="font-medium text-yellow-700 underline hover:text-yellow-600">Buat pin untuk keamanan transaksi.</Link>
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <div class="">
             <div class="grid grid-cols-3 grid-rows-6 grid-flow-col gap-4">
                 <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center rounded-3xl bg-gradient-to-br from-sky-300 dark:from-sky-700 shadow-lg">

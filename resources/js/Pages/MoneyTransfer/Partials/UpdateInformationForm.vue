@@ -26,7 +26,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    form.post(route('money-transfer.confirm'), {
+    form.post(route('pin.moneyTransfer'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
