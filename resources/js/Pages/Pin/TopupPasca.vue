@@ -16,7 +16,7 @@ const props = defineProps({
 })
 
 const form = useForm({
-    user_id: props.request.users.id ?? null,
+    // user_id: props.request.users.id ?? null,
     customer_no: props.request.customer_no,
     product_name: props.request.product_name,
     sku: props.request.sku,
