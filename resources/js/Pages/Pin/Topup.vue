@@ -71,7 +71,7 @@ const handleOnComplete = (value) => {
     //         },
     //     }
     // );
-    // storeInformation()
+    storeInformation()
 };
 
 const handleOnChange = (value) => {
