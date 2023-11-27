@@ -136,6 +136,7 @@ const closeModal = () => {
     // form.reset();
 };
 
+const tab = ref('Umum')
 </script>
 
 <template>
@@ -174,6 +175,24 @@ const closeModal = () => {
             </template>
         </FormSection>
 
+        <div class="border-b border-gray-300" >
+            <nav class="-mb-px flex" aria-label="Tabs">
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Umum'"
+                >
+                    Umum
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Membership' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Membership'"
+                        v-if="props.product == 'MOBILE LEGENDS' "
+                >
+                    Membership
+                </button>
+            </nav>
+        </div>
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <template v-if="props.response === undefined">
@@ -193,6 +212,7 @@ const closeModal = () => {
 
             <template v-else v-for="data in sort(props.response.data)" >
                 <template v-if="data.brand == props.product">
+                    <template v-if="data.type == tab">
                         <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
                             <div class="flex-shrink-0">
                                 <img class="w-10" :src="'/img/games/icons/' + props.product + '.png'" alt="">
@@ -242,6 +262,7 @@ const closeModal = () => {
                                 </template>
                             </div>
                         </div>
+                    </template>
                 </template>
             </template>
         </div>

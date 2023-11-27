@@ -14,7 +14,25 @@ import UpdateFeeInternetForm from "./Partials/UpdateFeeInternetForm.vue";
 import UpdateFeePlnForm from "./Partials/UpdateFeePlnForm.vue";
 import UpdateFeeTVForm from "./Partials/UpdateFeeTVForm.vue";
 import UpdateFeeVoucherForm from "./Partials/UpdateFeeVoucherForm.vue";
+import SecondaryButton from "../../Components/SecondaryButton.vue";
+import {useForm, usePage} from "@inertiajs/vue3";
+import DangerButton from "../../Components/DangerButton.vue";
+import {computed} from "vue";
 
+const form = useForm({
+    // password: '',
+});
+
+const {...userInfo} = computed(() => usePage().props.appSetting).value;
+
+const deleteRedis = () => {
+    form.delete(route('setting.destroy', userInfo), {
+        preserveScroll: true,
+        // onSuccess: () => closeModal(),
+        // onError: () => passwordInput.value.focus(),
+        // onFinish: () => form.reset(),
+    });
+};
 </script>
 
 <template>
@@ -63,7 +81,23 @@ import UpdateFeeVoucherForm from "./Partials/UpdateFeeVoucherForm.vue";
 
         <UpdateFeeVoucherForm :setting="$page.props.setting" />
 
-        <SectionBorder />
+<!--        <SectionBorder />-->
+
+
+        <div class="relative py-8">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-gray-300"/>
+            </div>
+            <div class="relative flex justify-center">
+                <DangerButton
+                    class=""
+                    @click="deleteRedis"
+                >
+                    <i class="fa-regular fa-trash mr-2"/>
+                    Hapus Cache
+                </DangerButton>
+            </div>
+        </div>
 
         <UpdateApiDigiflazzForm :setting="$page.props.setting" />
 

@@ -10,8 +10,24 @@ class Helper
 {
     public static function api()
     {
-        if (AppSetting::first() != null) {
-            return AppSetting::first();
+//        if (AppSetting::first() != null) {
+//            return AppSetting::first();
+//        }
+        //        Redis::del('pricelist');
+        $cached = Redis::get('appsetting');
+
+        if(isset($cached)) {
+//            dd(json_decode($cached));
+            return json_decode($cached, FALSE);
+        }else {
+            $data = AppSetting::first();
+
+//            dd($data->status());
+            Redis::set('appsetting', $data,'EX', 360);
+//            $cached = Redis::get('pricelist');
+
+//            dd(json_decode($data));
+            return json_decode($data, FALSE);
         }
     }
 
@@ -73,9 +89,28 @@ class Helper
 
     public static function fee()
     {
-        if (AppSetting::first() != null) {
+        //        Redis::del('pricelist');
+        $cached = Redis::get('appsetting');
 
-            return AppSetting::first();
+        if(isset($cached)) {
+//            dd(json_decode($cached));
+            return json_decode($cached, FALSE);
+        }else {
+            $data = AppSetting::first();
+
+//            dd($data->status());
+            Redis::set('appsetting', $data,'EX', 360);
+//            $cached = Redis::get('pricelist');
+
+//            dd(json_decode($data));
+            return json_decode($data, FALSE);
+
         }
+    }
+
+    public static function delRedis()
+    {
+        Redis::del('pricelist');
+        Redis::del('appsetting');
     }
 }

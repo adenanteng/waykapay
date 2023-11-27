@@ -133,7 +133,7 @@ function formatPrice(value) {
                             <i class="fa-duotone fa-money-bill-1-wave text-green-400"/>
                             <div class="ml-3">
                                 <div class="text-xs text-gray-500">Digiflazz Saldo</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.digiflazz_saldo ?? 0) }}</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.digiflazz_saldo) }}</div>
                             </div>
                         </div>
                     </div>

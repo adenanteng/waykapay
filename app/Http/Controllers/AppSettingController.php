@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\AppSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -114,6 +115,6 @@ class AppSettingController extends Controller
      */
     public function destroy(AppSetting $appSetting)
     {
-
+        Helper::delRedis();
     }
 }

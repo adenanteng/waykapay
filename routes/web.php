@@ -26,7 +26,7 @@ use App\Http\Controllers\UpgradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use \Spatie\ResponseCache\Middlewares\CacheResponse;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +52,10 @@ Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigi
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
-    Route::post('/deposit/method', [DepositController::class, 'method'])->name('deposit.method');
-    Route::post('/deposit', [DepositController::class, 'create'])->name('deposit.create');
-    Route::put('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
+    Route::get('/deposit', [DepositController::class, 'index'])->middleware(CacheResponse::class)->name('deposit.index');
+    Route::post('/deposit/method', [DepositController::class, 'method'])->middleware(CacheResponse::class)->name('deposit.method');
+    Route::post('/deposit', [DepositController::class, 'create'])->middleware(CacheResponse::class)->name('deposit.create');
+    Route::put('/deposit/confirm', [DepositController::class, 'confirm'])->middleware(CacheResponse::class)->name('deposit.confirm');
 
     Route::get('/money-transfer', [MoneyTransferController::class, 'index'])->name('money-transfer.index');
     Route::post('/money-transfer/amount', [MoneyTransferController::class, 'amount'])->name('money-transfer.amount');
@@ -69,7 +69,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/product/topup-pasca', [ProductController::class, 'topupPasca'])->name('product.topup.pasca');
     Route::get('/product/status', [ProductController::class, 'status'])->name('product.status');
 
-    Route::get('/product/pulsa', [ProductPulsaController::class, 'index'])->name('pulsa.index');
+    Route::get('/product/pulsa', [ProductPulsaController::class, 'index'])->middleware(CacheResponse::class)->name('pulsa.index');
 
     Route::get('/product/pln', [ProductPlnController::class, 'index'])->name('pln.index');
     Route::get('/product/pln-prepaid', [ProductPlnController::class, 'prepaid'])->name('pln.prepaid.index');
@@ -77,17 +77,17 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/pln-postpaid', [ProductPlnController::class, 'postpaid'])->name('pln.postpaid.index');
     Route::get('/product/pln-postpaid-inquiry', [ProductPlnController::class, 'inquiryPostpaid'])->name('pln.postpaid.inquiry');
 
-    Route::get('/product/games', [ProductGamesController::class, 'index'])->name('games.index');
-    Route::get('/product/games/{product}', [ProductGamesController::class, 'show'])->name('games.show');
+    Route::get('/product/games', [ProductGamesController::class, 'index'])->middleware(CacheResponse::class)->name('games.index');
+    Route::get('/product/games/{product}', [ProductGamesController::class, 'show'])->middleware(CacheResponse::class)->name('games.show');
 
-    Route::get('/product/emoney', [ProductEmoneyController::class, 'index'])->name('emoney.index');
-    Route::get('/product/emoney/{product}', [ProductEmoneyController::class, 'show'])->name('emoney.show');
+    Route::get('/product/emoney', [ProductEmoneyController::class, 'index'])->middleware(CacheResponse::class)->name('emoney.index');
+    Route::get('/product/emoney/{product}', [ProductEmoneyController::class, 'show'])->middleware(CacheResponse::class)->name('emoney.show');
 
-    Route::get('/voucher/emoney', [ProductVoucherController::class, 'index'])->name('voucher.index');
-    Route::get('/voucher/emoney/{product}', [ProductVoucherController::class, 'show'])->name('voucher.show');
+    Route::get('/voucher/emoney', [ProductVoucherController::class, 'index'])->middleware(CacheResponse::class)->name('voucher.index');
+    Route::get('/voucher/emoney/{product}', [ProductVoucherController::class, 'show'])->middleware(CacheResponse::class)->name('voucher.show');
 
-    Route::get('/product/television', [ProductTelevisionController::class, 'index'])->name('television.index');
-    Route::get('/product/television/{product}', [ProductTelevisionController::class, 'show'])->name('television.show');
+    Route::get('/product/television', [ProductTelevisionController::class, 'index'])->middleware(CacheResponse::class)->name('television.index');
+    Route::get('/product/television/{product}', [ProductTelevisionController::class, 'show'])->middleware(CacheResponse::class)->name('television.show');
 //    Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
 //    Route::get('/product/television/nex', [ProductTelevisionController::class, 'nex'])->name('television.nex');
 

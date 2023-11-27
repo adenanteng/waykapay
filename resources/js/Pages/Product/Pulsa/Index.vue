@@ -202,7 +202,9 @@ const closeModal = () => {
     // form.reset();
 };
 
-const tabPulsa = ref('Pulsa')
+const tab = ref('Pulsa')
+
+const tabData = ref('Umum')
 
 // const tabPulsa = ref(JSON.parse(localStorage.getItem('tabPulsa')) ?? 'Pulsa')
 //
@@ -250,20 +252,47 @@ const tabPulsa = ref('Pulsa')
         </FormSection>
 
 
-        <div class="border-b border-gray-200" v-show="form.customer_no.length >= 4 ">
+        <div class="border-b border-gray-300" v-show="form.customer_no.length >= 4 ">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabPulsa=='Pulsa' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
-                        @click="tabPulsa='Pulsa'"
+                        :class="tab=='Pulsa' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Pulsa'"
                 >
                     Pulsa
                 </button>
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
-                        :class="tabPulsa=='Data' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
-                        @click="tabPulsa='Data'"
+                        :class="tab=='Data' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Data'"
                 >
                     Data
+                </button>
+            </nav>
+        </div>
+
+        <div class="border-b border-gray-300" v-if="tab=='Data'">
+            <nav class="-mb-px flex" aria-label="Tabs">
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tabData=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tabData='Umum'"
+                >
+                    Umum
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tabData=='Combo Sakti' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tabData='Combo Sakti'"
+                        v-if="provider(form.customer_no) == 'TELKOMSEL' "
+                >
+                    Combo Sakti
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tabData=='Internet Sakti' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tabData='Internet Sakti'"
+                        v-if="provider(form.customer_no) == 'TELKOMSEL' "
+                >
+                    Internet Sakti
                 </button>
             </nav>
         </div>
@@ -286,7 +315,7 @@ const tabPulsa = ref('Pulsa')
 
             <template v-else v-for="data in sort(props.response.data)" >
 
-                <template v-if="tabPulsa=='Pulsa'" >
+                <template v-if="tab=='Pulsa'" >
                     <template v-if="data.category == 'Pulsa'" >
                         <template v-if="data.brand == provider(form.customer_no)">
                             <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
@@ -342,58 +371,61 @@ const tabPulsa = ref('Pulsa')
                     </template>
                 </template>
 
-                <template v-if="tabPulsa=='Data'" >
+                <template v-if="tab=='Data'" >
                     <template v-if="data.category == 'Data'" >
                         <template v-if="data.brand == provider(form.customer_no)">
-                            <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
-                                <div class="flex-shrink-0">
-                                    <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)  && data.buyer_product_status">
-                                        <button @click="confirmModal(data)" class="focus:outline-none text-left">
-                                            <span class="absolute inset-0" aria-hidden="true"></span>
-                                            <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
-                                            <p class="text-sm text-gray-500 truncate">
-                                                <template v-if="Number(data.price) < 1000">
-                                                    Rp {{ formatPrice(Number(data.price)) }}
-                                                </template>
-                                                <template v-else-if="Number(data.price) < 25000">
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_25)) }}
-                                                </template>
-                                                <template v-else-if="Number(data.price) < 50000">
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_50)) }}
-                                                </template>
-                                                <template v-else-if="Number(data.price) < 75000">
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_75)) }}
-                                                </template>
-                                                <template v-else-if="Number(data.price) < 100000">
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_100)) }}
-                                                </template>
-                                                <template v-else-if="Number(data.price) < 200000">
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_200)) }}
-                                                </template>
-                                                <template v-else-if="Number(data.price) < 500000">
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_500)) }}
-                                                </template>
-                                                <template v-else-if="Number(data.price) < 1000000">
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_1000)) }}
-                                                </template>
-                                                <template v-else>
-                                                    Rp {{ formatPrice(Number(data.price) + Number(props.fee_max)) }}
-                                                </template>
-                                            </p>
-                                        </button>
-                                    </template>
+                            <template v-if="data.type == tabData">
+                                <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
+                                    <div class="flex-shrink-0">
+                                        <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)  && data.buyer_product_status">
+                                            <button @click="confirmModal(data)" class="focus:outline-none text-left">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
+                                                <p class="text-sm text-gray-500 truncate">
+                                                    <template v-if="Number(data.price) < 1000">
+                                                        Rp {{ formatPrice(Number(data.price)) }}
+                                                    </template>
+                                                    <template v-else-if="Number(data.price) < 25000">
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_25)) }}
+                                                    </template>
+                                                    <template v-else-if="Number(data.price) < 50000">
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_50)) }}
+                                                    </template>
+                                                    <template v-else-if="Number(data.price) < 75000">
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_75)) }}
+                                                    </template>
+                                                    <template v-else-if="Number(data.price) < 100000">
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_100)) }}
+                                                    </template>
+                                                    <template v-else-if="Number(data.price) < 200000">
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_200)) }}
+                                                    </template>
+                                                    <template v-else-if="Number(data.price) < 500000">
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_500)) }}
+                                                    </template>
+                                                    <template v-else-if="Number(data.price) < 1000000">
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_1000)) }}
+                                                    </template>
+                                                    <template v-else>
+                                                        Rp {{ formatPrice(Number(data.price) + Number(props.fee_max)) }}
+                                                    </template>
+                                                </p>
+                                            </button>
+                                        </template>
 
-                                    <template v-else>
-                                        <div class="focus:outline-none text-left">
-                                            <p class="text-sm font-medium text-gray-500">{{ data.product_name }}</p>
-                                            <p class="text-sm text-gray-500 truncate">Tidak tersedia</p>
-                                        </div>
-                                    </template>
+                                        <template v-else>
+                                            <div class="focus:outline-none text-left">
+                                                <p class="text-sm font-medium text-gray-500">{{ data.product_name }}</p>
+                                                <p class="text-sm text-gray-500 truncate">Tidak tersedia</p>
+                                            </div>
+                                        </template>
+                                    </div>
                                 </div>
-                            </div>
+                            </template>
+
                         </template>
                     </template>
                 </template>
