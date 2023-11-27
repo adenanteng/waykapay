@@ -30,6 +30,7 @@ const storeInformation = () => {
     form.post(route('money-transfer.confirm'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
+        replace: true,
         onSuccess: () => {
 
         }
@@ -47,12 +48,12 @@ const otpInput = ref(VOtpInput | null);
 const bindModal = ref("");
 
 const handleOnComplete = (value) => {
-    console.log("OTP completed: ", value);
+    // console.log("OTP completed: ", value);
     storeInformation()
 };
 
 const handleOnChange = (value) => {
-    console.log("OTP changed: ", value);
+    // console.log("OTP changed: ", value);
 };
 
 const clearInput = () => {
@@ -60,7 +61,7 @@ const clearInput = () => {
 };
 
 const fillInput = (value) => {
-    console.log(value);
+    // console.log(value);
     otpInput.value?.fillInput(value);
 };
 
@@ -98,8 +99,8 @@ function formatPrice(value) {
                     <!--                            </span>-->
                     <!--                        </a>-->
                     <!--                    </div>-->
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan pin</h1>
-                    <p class="text-sm leading-8 text-gray-600">Lorem ipsum</p>
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan Pin</h1>
+                    <p class="text-sm text-gray-600">Masukkan pin transaksi kamu</p>
                     <div class="mt-10">
                         <div class="">
                             <!--                            :placeholder="['*', '*', '*', '*']"-->

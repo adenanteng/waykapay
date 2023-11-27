@@ -45,7 +45,7 @@ const showPasswordConfirm = ref(false)
 <template>
     <FormSection @submitted="updatePassword">
         <template #title>
-            Ubah Password
+            Password
         </template>
 
         <template #description>

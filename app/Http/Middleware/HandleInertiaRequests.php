@@ -44,7 +44,7 @@ class HandleInertiaRequests extends Middleware
 //            'appSetting' => AppSetting::get()->first(),
             'appSetting' => Helper::api(),
 //            'fee' => fn () => Helper::api()->fees,
-//            'digiflazz_saldo' => Helper::api()->digiflazz_saldo ?? 0,
+            'digiflazz_saldo' => Helper::api()->digiflazz_saldo ?? 0,
         ]);
     }
 }

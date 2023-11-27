@@ -8,6 +8,7 @@ import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue'
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
 import MobileMenu from "@/Components/MobileMenu.vue";
 import PreviousButton from "../../Components/PreviousButton.vue";
+import UpdatePinForm from "@/Pages/Profile/Partials/UpdatePinForm.vue";
 
 defineProps({
     confirmsTwoFactorAuthentication: Boolean,
@@ -31,6 +32,10 @@ defineProps({
 
             <SectionBorder />
         </template>
+
+        <UpdatePinForm />
+
+        <SectionBorder />
 
         <template v-if="$page.props.jetstream.canUpdatePassword">
             <UpdatePasswordForm />

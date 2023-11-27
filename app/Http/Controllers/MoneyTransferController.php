@@ -37,7 +37,10 @@ class MoneyTransferController extends Controller
         if ($to && $to->id != auth()->user()->id) {
             $users = $to;
         } else {
-            dd('Nomor rekening tidak valid');
+//            dd('Nomor rekening tidak valid');
+            session()->flash('flash.banner', 'Nomor rekening tidak valid!');
+            session()->flash('flash.bannerStyle', 'danger');
+            return \redirect()->back();
         }
 
         return Inertia::render('MoneyTransfer/CreateEdit', [
@@ -56,6 +59,9 @@ class MoneyTransferController extends Controller
 
             if (!Hash::check($request['pin'], auth()->user()->pin)) {
                 dd('pin salah');
+//                session()->flash('flash.banner', 'Pin tidak valid');
+//                session()->flash('flash.bannerStyle', 'danger');
+//                return \redirect()->back();
             }
         }
 

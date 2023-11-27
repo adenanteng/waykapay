@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\AppSetting;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Rules\PinValidationRules;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -20,16 +21,21 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Inertia\Response
+     * @return \Illuminate\Http\RedirectResponse|\Inertia\Response
      */
     public function topup(Request $request)
     {
+//        dd('halo');
         if (auth()->user()->pin != null) {
             Validator::make($request->toArray(), [
                 'pin' => ['required', 'numeric'],
             ])->validateWithBag('storeInformation');
 
+//            dd('lewat');
+
             if (!Hash::check($request['pin'], auth()->user()->pin)) {
+//                session()->flash('flash.banner', 'Pin tidak valid');
+//                session()->flash('flash.bannerStyle', 'danger');
                 dd('pin salah');
             }
         }

@@ -40,6 +40,7 @@ const storeInformation = () => {
     form.put(route('deposit.confirm', form), {
         errorBag: 'updateInformation',
         preserveScroll: true,
+        replace: true,
         onSuccess: () => {}
     });
 };

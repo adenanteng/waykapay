@@ -28,16 +28,17 @@ const form = useForm({
 
 // console.log(props.request)
 
-const storeInformation = () => {
-    form.pin = bindModal.value
-    form.post(route('product.topup'), {
-        errorBag: 'storeInformation',
-        preserveScroll: true,
-        onSuccess: () => {
-
-        }
-    });
-};
+// const storeInformation = () => {
+//     form.pin = bindModal.value
+//     form.post(route('product.topup'), {
+//         errorBag: 'storeInformation',
+//         preserveScroll: true,
+//         replace: true,
+//         onSuccess: () => {
+//
+//         }
+//     });
+// };
 
 const formReset = () => {
     form.defaults({
@@ -50,12 +51,31 @@ const otpInput = ref(VOtpInput | null);
 const bindModal = ref("");
 
 const handleOnComplete = (value) => {
-    console.log("OTP completed: ", value);
-    storeInformation()
+    // console.log("OTP completed: ", value);
+    // router.get(
+    //     route('pin.confirm'),
+    //     { pin: value },
+    //     {
+    //         preserveState: true,
+    //         replace: true,
+    //         onSuccess: () => {
+    //             // storeInformation()
+    //             console.log('berhasil')
+    //         },
+    //         onError: () => {
+    //             msgError.value=true
+    //             console.log('anjing')
+    //         },
+    //         onFinish: () => {
+    //             console.log('badut')
+    //         },
+    //     }
+    // );
+    // storeInformation()
 };
 
 const handleOnChange = (value) => {
-    console.log("OTP changed: ", value);
+    // console.log("OTP changed: ", value);
 };
 
 const clearInput = () => {
@@ -63,9 +83,11 @@ const clearInput = () => {
 };
 
 const fillInput = (value) => {
-    console.log(value);
+    // console.log(value);
     otpInput.value?.fillInput(value);
 };
+
+const msgError = ref(false);
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:m')
@@ -101,8 +123,8 @@ function formatPrice(value) {
                     <!--                            </span>-->
                     <!--                        </a>-->
                     <!--                    </div>-->
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan pin</h1>
-                    <p class="text-sm leading-8 text-gray-600">Lorem ipsum</p>
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan Pin</h1>
+                    <p class="text-sm text-gray-600">Masukkan pin transaksi kamu</p>
                     <div class="mt-10">
                         <div class="">
                             <!--                            :placeholder="['*', '*', '*', '*']"-->
@@ -119,6 +141,7 @@ function formatPrice(value) {
                                 @on-complete="handleOnComplete"
                             />
                             <InputError :message="form.errors.pin" class="mt-2"/>
+                            <p v-if="msgError" class="text-sm text-red-600 mt-2">Pin salah</p>
 
                             <!--                            <button @click="clearInput()">Clear Input</button>-->
                             <!--                            <button @click="fillInput('2929')">Fill Input</button>-->

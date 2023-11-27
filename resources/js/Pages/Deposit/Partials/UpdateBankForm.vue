@@ -24,6 +24,7 @@ const storeInformation = () => {
     form.post(route('deposit.create'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
+        replace: true,
         onSuccess: () => {
         }
     });

@@ -36,8 +36,8 @@ class PinController extends Controller
     public function create(): Response
     {
         return Inertia::render('Pin/CreateEdit', [
-            'selectStatus' => User::STATUS,
-            'selectRole' => User::ROLE
+//            'selectStatus' => User::STATUS,
+//            'selectRole' => User::ROLE
         ]);
     }
 
@@ -60,7 +60,7 @@ class PinController extends Controller
         $user = auth()->user();
         $user->update($request->all());
 
-        session()->flash('flash.banner', 'pin berhasil dibuat!');
+        session()->flash('flash.banner', 'Pin berhasil dibuat!');
 
         return Redirect::route('dashboard', [
 
@@ -92,5 +92,11 @@ class PinController extends Controller
 //            'users' => User::latest()->get(),
             'request' => $request->all()
         ]);
+    }
+
+    public function confirmPin()
+    {
+//        dd($request->all());
+//        return Hash::check($request['pin'], auth()->user()->pin);
     }
 }

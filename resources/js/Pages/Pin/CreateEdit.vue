@@ -25,6 +25,7 @@ const storeInformation = () => {
     form.post(route('pin.store'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
+        replace: true,
         onSuccess: () => {
 
         }
@@ -42,12 +43,12 @@ const otpInput = ref(VOtpInput | null);
 const bindModal = ref("");
 
 const handleOnComplete = (value) => {
-    console.log("OTP completed: ", value);
+    // console.log("OTP completed: ", value);
     storeInformation()
 };
 
 const handleOnChange = (value) => {
-    console.log("OTP changed: ", value);
+    // console.log("OTP changed: ", value);
 };
 
 const clearInput = () => {
@@ -55,7 +56,7 @@ const clearInput = () => {
 };
 
 const fillInput = (value) => {
-    console.log(value);
+    // console.log(value);
     otpInput.value?.fillInput(value);
 };
 
@@ -71,7 +72,7 @@ function formatPrice(value) {
 </script>
 
 <template>
-    <BlankLayout title="Pin">
+    <BlankLayout title="Pin Transaksi">
         <div class="relative isolate overflow-hidden">
 <!--            <svg class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">-->
 <!--                <defs>-->
@@ -94,7 +95,7 @@ function formatPrice(value) {
 <!--                        </a>-->
 <!--                    </div>-->
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Buat Pin Transaksi</h1>
-                    <p class="text-sm leading-8 text-gray-600">Lorem ipsum</p>
+                    <p class="text-sm text-gray-600">Pastikan akun kamu menggunakan pin acak agar tetap aman.</p>
                     <div class="mt-10">
                         <div class="">
 <!--                            :placeholder="['*', '*', '*', '*']"-->

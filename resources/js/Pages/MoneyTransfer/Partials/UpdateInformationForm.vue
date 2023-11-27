@@ -33,6 +33,7 @@ const storeInformation = () => {
         form.post(route('pin.moneyTransfer'), {
             errorBag: 'storeInformation',
             preserveScroll: true,
+            replace: true,
             onSuccess: () => {
             }
         });
@@ -40,6 +41,7 @@ const storeInformation = () => {
         form.post(route('money-transfer.confirm'), {
             errorBag: 'storeInformation',
             preserveScroll: true,
+            replace: true,
             onSuccess: () => {
             }
         });

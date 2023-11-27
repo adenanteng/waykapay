@@ -33,6 +33,7 @@ const storeInformation = () => {
     form.post(route('product.topup.pasca'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
+        replace: true,
         onSuccess: () => {
 
         }
@@ -101,8 +102,8 @@ function formatPrice(value) {
                     <!--                            </span>-->
                     <!--                        </a>-->
                     <!--                    </div>-->
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan pin</h1>
-                    <p class="text-sm leading-8 text-gray-600">Lorem ipsum</p>
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan Pin</h1>
+                    <p class="text-sm text-gray-600">Masukkan pin transaksi kamu</p>
                     <div class="mt-10">
                         <div class="">
                             <!--                            :placeholder="['*', '*', '*', '*']"-->
