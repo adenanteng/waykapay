@@ -119,9 +119,9 @@ const onSlideChange = (swiper) => {
                 </div>
                 <div class="ml-3">
                     <p class="text-sm text-yellow-700">
-                        Pin kamu belum aktif
+                        Pin kamu belum aktif,
                         {{ ' ' }}
-                        <Link :href="route('pin.create')" class="font-medium text-yellow-700 underline hover:text-yellow-600">Buat pin untuk keamanan transaksi.</Link>
+                        <Link :href="route('pin.create')" class="font-medium text-yellow-700 underline hover:text-yellow-600">buat pin untuk keamanan transaksi.</Link>
                     </p>
                 </div>
             </div>

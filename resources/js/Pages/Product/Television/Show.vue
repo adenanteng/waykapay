@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, router, useForm} from "@inertiajs/vue3";
+import {Link, router, useForm, usePage} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
@@ -12,7 +12,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import Loading from "../Loading.vue";
 import {Vue3Lottie} from "vue3-lottie";
 
@@ -45,18 +45,30 @@ const form = useForm({
     fee: null
 });
 
+const {...userInfo} = computed(() => usePage().props.user).value;
+// console.log(userInfo.name); // Show my user name
+
 const storeInformation = () => {
     if (fee.value != null) {
         form.fee = fee.value
     }
 
-    form.post(route('pin.topup'), {
-        errorBag: 'storeInformation',
-        preserveScroll: true,
-        onSuccess: () => closeModal(),
-        // onError: () => passwordInput.value.focus(),
-        // onFinish: () => form.reset(),
-    });
+    if (userInfo.pin) {
+        form.post(route('pin.topup'), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            onSuccess: () => closeModal(),
+            // onError: () => passwordInput.value.focus(),
+            // onFinish: () => form.reset(),
+        });
+    } else {
+        form.post(route('product.topup'), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            onSuccess: () => closeModal()
+        });
+    }
+
 };
 
 function formatPrice(value) {

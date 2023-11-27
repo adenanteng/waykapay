@@ -23,7 +23,7 @@ const form = useForm({
     pin: null,
 });
 
-console.log(props.request)
+// console.log(props.request)
 
 const storeInformation = () => {
     form.pin = bindModal.value
