@@ -202,12 +202,14 @@ const closeModal = () => {
     // form.reset();
 };
 
-const tabPulsa = ref(JSON.parse(localStorage.getItem('tabPulsa')) ?? 'Pulsa')
+const tabPulsa = ref('Pulsa')
 
-watch(tabPulsa, (newTabPulsa) => {
-    console.log(`tab is ${newTabPulsa}`)
-    localStorage.setItem('tabPulsa', JSON.stringify(newTabPulsa))
-})
+// const tabPulsa = ref(JSON.parse(localStorage.getItem('tabPulsa')) ?? 'Pulsa')
+//
+// watch(tabPulsa, (newTabPulsa) => {
+//     console.log(`tab is ${newTabPulsa}`)
+//     localStorage.setItem('tabPulsa', JSON.stringify(newTabPulsa))
+// })
 
 </script>
 
