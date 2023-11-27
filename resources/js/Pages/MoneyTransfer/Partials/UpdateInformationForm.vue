@@ -25,13 +25,25 @@ const form = useForm({
     desc: null
 });
 
+const {...userInfo} = computed(() => usePage().props.user).value;
+// console.log(userInfo.name); // Show my user name
+
 const storeInformation = () => {
-    form.post(route('pin.moneyTransfer'), {
-        errorBag: 'storeInformation',
-        preserveScroll: true,
-        onSuccess: () => {
-        }
-    });
+    if (userInfo.pin) {
+        form.post(route('pin.moneyTransfer'), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            onSuccess: () => {
+            }
+        });
+    } else {
+        form.post(route('money-transfer.confirm'), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            onSuccess: () => {
+            }
+        });
+    }
 };
 
 function formatPrice(value) {
