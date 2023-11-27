@@ -30,7 +30,7 @@ const storeInformation = () => {
     form.post(route('money-transfer.confirm'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
-        replace: true,
+        // replace: true,
         onSuccess: () => {
 
         }

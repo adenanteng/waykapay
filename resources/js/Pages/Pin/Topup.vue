@@ -28,17 +28,17 @@ const form = useForm({
 
 // console.log(props.request)
 
-// const storeInformation = () => {
-//     form.pin = bindModal.value
-//     form.post(route('product.topup'), {
-//         errorBag: 'storeInformation',
-//         preserveScroll: true,
-//         replace: true,
-//         onSuccess: () => {
-//
-//         }
-//     });
-// };
+const storeInformation = () => {
+    form.pin = bindModal.value
+    form.post(route('product.topup'), {
+        errorBag: 'storeInformation',
+        preserveScroll: true,
+        // replace: true,
+        onSuccess: () => {
+
+        }
+    });
+};
 
 const formReset = () => {
     form.defaults({

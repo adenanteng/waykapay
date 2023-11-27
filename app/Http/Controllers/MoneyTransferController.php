@@ -54,14 +54,15 @@ class MoneyTransferController extends Controller
     {
         if (auth()->user()->pin != null) {
             Validator::make($request->toArray(), [
-                'pin' => ['required', 'numeric'],
+                'pin' => ['required'],
             ])->validateWithBag('storeInformation');
 
             if (!Hash::check($request['pin'], auth()->user()->pin)) {
-                dd('pin salah');
+//                dd('pin salah');
 //                session()->flash('flash.banner', 'Pin tidak valid');
 //                session()->flash('flash.bannerStyle', 'danger');
 //                return \redirect()->back();
+                return to_route('pin.wrong');
             }
         }
 
@@ -104,6 +105,11 @@ class MoneyTransferController extends Controller
 //            'transaction' => $transaction,
 //        ]);
 
-        return to_route('history.show', $transaction->order_id);
+        return Inertia::render('History/Show', [
+            'history' => $transaction,
+            'goBack' => false,
+        ]);
+
+//        return to_route('history.show', $transaction->order_id);
     }
 }

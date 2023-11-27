@@ -8,6 +8,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Badge from "../../Components/Badge.vue";
 import {useForm} from "@inertiajs/vue3";
+import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 
 const props = defineProps({
     transaction: Object
@@ -47,7 +48,8 @@ function formatPrice(value) {
         <div class="pt-16 pb-12">
             <main class="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-6 lg:px-8">
                 <div class="flex flex-shrink-0 justify-center">
-                    <ApplicationLogo />
+<!--                    <ApplicationLogo />-->
+                    <ApplicationLogoTitle />
                 </div>
                 <div class="mt-5">
                     <div class="text-center">

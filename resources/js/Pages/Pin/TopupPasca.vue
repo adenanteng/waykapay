@@ -33,7 +33,7 @@ const storeInformation = () => {
     form.post(route('product.topup.pasca'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
-        replace: true,
+        // replace: true,
         onSuccess: () => {
 
         }

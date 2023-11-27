@@ -18,8 +18,12 @@ import SecondaryButton from "../../Components/SecondaryButton.vue";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 
 const props = defineProps({
-    users: Object,
-    history: Object
+    // users: Object,
+    history: Object,
+    goBack: {
+        type: Boolean,
+        default: true
+    }
 })
 
 const form = useForm({
@@ -66,7 +70,7 @@ function formatPrice(value) {
     >
 
         <template #previous>
-            <PreviousButton />
+            <PreviousButton v-if="props.goBack" />
         </template>
 
         <template v-if="props.history.status_id == 1">
@@ -249,6 +253,7 @@ function formatPrice(value) {
 
             <div class="flex justify-center gap-2">
                 <SecondaryButton
+                    v-if="!props.goBack"
                     as="a"
                     :href="route('dashboard')"
                     class="justify-center w-full border border-gray-300 nightwind-prevent"

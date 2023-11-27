@@ -28,7 +28,7 @@ class ProductController extends Controller
 //        dd('halo');
         if (auth()->user()->pin != null) {
             Validator::make($request->toArray(), [
-                'pin' => ['required', 'numeric'],
+                'pin' => ['required'],
             ])->validateWithBag('storeInformation');
 
 //            dd('lewat');
@@ -36,7 +36,8 @@ class ProductController extends Controller
             if (!Hash::check($request['pin'], auth()->user()->pin)) {
 //                session()->flash('flash.banner', 'Pin tidak valid');
 //                session()->flash('flash.bannerStyle', 'danger');
-                dd('pin salah');
+//                dd('pin salah');
+                return to_route('pin.wrong');
             }
         }
 
@@ -222,11 +223,12 @@ class ProductController extends Controller
                     'desc' => $status->object()->data->sn
                 ]);
 
-//                return Inertia::render('Payment/Success', [
-//                    'transaction'   => $transaction
-//                ]);
+                return Inertia::render('History/Show', [
+                    'history' => $transaction,
+                    'goBack' => false,
+                ]);
 
-                return Redirect::route('history.show', $transaction->order_id);
+//                return Redirect::route('history.show', $transaction->order_id);
                 break;
 
             case ('Pending'):

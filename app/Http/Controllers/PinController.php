@@ -94,9 +94,13 @@ class PinController extends Controller
         ]);
     }
 
-    public function confirmPin()
+    public function wrong()
     {
 //        dd($request->all());
 //        return Hash::check($request['pin'], auth()->user()->pin);
+        return Inertia::render('Pin/Wrong', [
+//            'users' => User::latest()->get(),
+//            'request' => $request->all()
+        ]);
     }
 }
