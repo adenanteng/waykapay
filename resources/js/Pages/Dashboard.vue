@@ -93,24 +93,24 @@ const onSlideChange = (swiper) => {
             </div>
         </div>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
-            <div class="py-6 pl-2 pr-6 flex ">
-<!--                <template v-if="$page.props.user.role_id==3">-->
-                    <div class="flex-none flex items-center">
-                        <Vue3Lottie
-                            animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
-                            :height="80"
-                        />
-                    </div>
-                    <div class="grow">
-                        <h4 class="text-gray-900 font-semibold">Selamat Bergabung!</h4>
-                        <p class="text-sm text-gray-600">Yuk, upgrade ke Waykapay Premium! Nikmatin akses dan benefit lengkap dari Waykapay!</p>
-                        <Link :href="route('landing.upgrade')" class="text-sm text-primary-600 font-medium">Upgrade <i class="fa-regular fa-arrow-right" /></Link>
-                    </div>
-<!--                </template>-->
+<!--        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
+<!--            <div class="py-6 pl-2 pr-6 flex ">-->
+<!--&lt;!&ndash;                <template v-if="$page.props.user.role_id==3">&ndash;&gt;-->
+<!--                    <div class="flex-none flex items-center">-->
+<!--                        <Vue3Lottie-->
+<!--                            animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"-->
+<!--                            :height="80"-->
+<!--                        />-->
+<!--                    </div>-->
+<!--                    <div class="grow">-->
+<!--                        <h4 class="text-gray-900 font-semibold">Selamat Bergabung!</h4>-->
+<!--                        <p class="text-sm text-gray-600">Yuk, upgrade ke Waykapay Premium! Nikmatin akses dan benefit lengkap dari Waykapay!</p>-->
+<!--                        <Link :href="route('landing.upgrade')" class="text-sm text-primary-600 font-medium">Upgrade <i class="fa-regular fa-arrow-right" /></Link>-->
+<!--                    </div>-->
+<!--&lt;!&ndash;                </template>&ndash;&gt;-->
 
-            </div>
-        </div>
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="border-l-4 border-yellow-400 bg-yellow-100 rounded-3xl p-4" v-if="$page.props.user.pin==null">
             <div class="flex">

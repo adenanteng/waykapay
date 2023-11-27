@@ -283,7 +283,7 @@ onMounted(() => {
                 <slot />
             </main>
 
-            <div class="fixed inset-x-0 bottom-0 nightwind-prevent-block">
+            <div class="sticky inset-x-0 bottom-0 nightwind-prevent-block">
                 <div class="bg-primary-600 bg-opacity-50 backdrop-blur">
                     <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
                         <div class="flex items-center justify-between flex-wrap">
@@ -301,7 +301,7 @@ onMounted(() => {
                 </div>
             </div>
 
-            <Footer />
+<!--            <Footer />-->
         </div>
     </div>
 </template>
