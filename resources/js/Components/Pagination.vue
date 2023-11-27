@@ -28,9 +28,9 @@ const props = defineProps({
             </div>
 
             <div class="flex justify-between">
-                <Link :href="props.pagination.prev_page_url ?? ''"
+                <Link replace :href="props.pagination.prev_page_url ?? ''"
                       class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-full shadow-lg text-gray-700 bg-white hover:bg-gray-50"> Previous </Link>
-                <Link :href="props.pagination.next_page_url ?? ''"
+                <Link replace :href="props.pagination.next_page_url ?? ''"
                       class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-full shadow-lg text-gray-700 bg-white hover:bg-gray-50"> Next </Link>
             </div>
         </div>
@@ -58,6 +58,7 @@ const props = defineProps({
 
                     <template v-for="link in props.pagination.links">
                         <Link
+                            replace
                             :href="link.url ?? '' "
                             class="relative inline-flex items-center px-4 py-2 border text-sm font-medium rounded-full shadow-lg"
                             :class="link.active ? 'z-10 bg-primary-50 border-primary-500 text-primary-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50 ' "
