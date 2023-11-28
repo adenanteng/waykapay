@@ -211,11 +211,11 @@ const footerNavigation = {
         <main>
             <!-- Hero section -->
             <div class="relative pt-24 sm:pt-32">
-                <div class="mx-auto max-w-7xl">
-                    <div class="relative shadow-xl sm:overflow-hidden sm:rounded-3xl">
+                <div class="mx-auto max-w-7xl px-3 xl:px-0">
+                    <div class="relative shadow-xl sm:overflow-hidden rounded-3xl">
                         <div class="absolute inset-0">
 <!--                            <img class="h-full w-full object-cover" src="/img/destination/sindoro.jpg" alt="" />-->
-                            <div class="absolute inset-0 bg-gradient-to-r from-primary-800 to-primary-400 mix-blend-multiply" />
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary-800 to-primary-400 mix-blend-multiply rounded-3xl" />
                         </div>
                         <div class="relative py-16 px-6 sm:py-24 lg:py-32 lg:px-8">
                             <h1 class="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -266,7 +266,7 @@ const footerNavigation = {
                         <div class="mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
                             <div>
                                 <div>
-                                  <span class="flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-primary-600">
+                                  <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">
                                       <i class="fa-regular fa-inbox text-xl text-white nightwind-prevent" />
                                   </span>
                                 </div>
@@ -296,7 +296,7 @@ const footerNavigation = {
                         </div>
                         <div class="mt-12 sm:mt-16 lg:mt-0">
                             <div class="-mr-48 pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                                <img class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-1.jpg" alt="Inbox user interface" />
+                                <img class="w-full rounded-3xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-1.jpg" alt="Inbox user interface" />
                             </div>
                         </div>
                     </div>
@@ -306,7 +306,7 @@ const footerNavigation = {
                         <div class="mx-auto max-w-xl px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
                             <div>
                                 <div>
-                                  <span class="flex h-12 w-12 items-center justify-center rounded-md bg-gradient-to-r from-blue-600 to-primary-600">
+                                  <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">
                                       <i class="fa-regular fa-inbox text-xl text-white nightwind-prevent" />
                                   </span>
                                 </div>
@@ -321,7 +321,7 @@ const footerNavigation = {
                         </div>
                         <div class="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
                             <div class="-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                                <img class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-2.jpg" alt="Customer profile user interface" />
+                                <img class="w-full rounded-3xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-2.jpg" alt="Customer profile user interface" />
                             </div>
                         </div>
                     </div>
@@ -336,7 +336,7 @@ const footerNavigation = {
                     <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
                         <div v-for="feature in features" :key="feature.name">
                             <div>
-                                <span class="flex h-12 w-12 items-center justify-center rounded-md bg-white bg-opacity-10">
+                                <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-white bg-opacity-10">
                                   <component :is="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />
                                 </span>
                             </div>
