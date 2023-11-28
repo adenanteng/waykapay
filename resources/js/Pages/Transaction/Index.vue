@@ -45,7 +45,12 @@ watch([search, filter, date], ([value, valueF, valueD]) => {
     // console.log(date)
     router.get(
         route('transaction.index'),
-        { search: value, filter: valueF, date_start: valueD ? valueD[0] : null, date_end: valueD ? valueD[1] : null },
+        {
+            search: value,
+            filter: valueF,
+            date_start: valueD ? valueD[0] : null,
+            date_end: valueD ? valueD[1] : null
+        },
         {
             preserveState: true,
             replace: true,
@@ -151,7 +156,7 @@ function formatPrice(value) {
             </div>
         </div>
 
-        <div class="flex justify-between gap-3">
+        <div class="grid lg:flex space-y-5 lg:space-y-0 lg:gap-3">
             <div class="w-full ">
                 <!--                <VueDatePicker-->
                 <!--                    v-model="date"-->
@@ -166,7 +171,7 @@ function formatPrice(value) {
 
                 <vue-tailwind-datepicker
                     v-model="date"
-                    input-classes="block text-sm font-medium text-gray-900 nightwind-prevent nightwind-prevent-block rounded-full border border-gray-300"
+                    input-classes="bg-white text-black border border-gray-300 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 rounded-3xl shadow-sm rounded-full "
                     :options="options"
                     placeholder="Bulan"
                     separator=" - "
@@ -176,7 +181,7 @@ function formatPrice(value) {
                 />
             </div>
 
-            <div class="w-1/2">
+            <div class="w-full">
                 <SelectInput
                     v-model:model-value.number="filter"
                     :option="$page.props.selectCategory"
