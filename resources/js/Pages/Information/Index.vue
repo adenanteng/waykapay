@@ -4,17 +4,23 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import moment from "moment/moment";
 
 const props = defineProps({
-    users: Object,
-    history: Object
+    // users: Object,
+    // history: Object
 })
+
+const clock = moment().format('HH')
+
+console.log(clock)
 
 const data = [
     {
         name: 'Kontak Admin',
         title: 'Online 08.30 - 22.00',
-        role: 'Aktif',
+        role: clock.value>=22 ? 'Nonaktif' : 'Aktif',
+        roleClass: clock.value>=22 ? 'text-red-800 bg-red-100' : 'text-green-800 bg-green-100',
         icon: 'fa-whatsapp text-green-500',
         btn: 'Admin 1',
         btn2: 'Admin 2',
@@ -25,6 +31,7 @@ const data = [
         name: 'Grup Whatsapp',
         title: 'Gabung grup whatsapp',
         role: 'Aktif',
+        roleClass: 'text-green-800 bg-green-100',
         icon: 'fa-whatsapp text-green-500',
         btn: 'Grup Whatsapp',
         // btn2: 'Grup 2',
@@ -45,6 +52,25 @@ const faqs = [
     },
 ]
 
+const info = [
+    {
+        name: 'Admin Waykapay',
+        desc: 'Semua transaksi terpantau lancar bosku.',
+        role: 'fa-circle-info',
+        roleClass: 'text-green-800',
+    },
+    {
+        name: 'Admin Waykapay',
+        desc: 'Sesuai syarat dan ketentuan Waykapay tidak pernah menerima dana isi ulang atas pencairan paylater dalam bentuk apapun, maka dari itu mohon dipatuhi dan diikuti bosku.',
+        role: 'fa-megaphone',
+        roleClass: 'text-green-800',
+    },
+
+]
+function formattedDate(value) {
+    return moment(value).format('DD MMM Y HH:mm')
+}
+
 </script>
 
 <template>
@@ -54,13 +80,13 @@ const faqs = [
     >
 
         <ul role="list" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <li v-for="item in data" :key="item.email"
+            <li v-for="item in data" :key="item.name"
                 class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
                     <div class="flex-1 truncate">
                         <div class="flex items-center space-x-3">
                             <h3 class="truncate text-sm font-medium text-gray-900">{{ item.name }}</h3>
-                            <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+                            <span class="inline-block flex-shrink-0 rounded-full px-2 py-0.5 text-xs font-medium" :class="item.roleClass">
                                 {{ item.role }}
                             </span>
                         </div>
@@ -104,6 +130,24 @@ const faqs = [
                 </Disclosure>
             </div>
         </div>
+
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300 divide-y divide-gray-300 dark:divide-gray-600">
+            <li v-for="item in info" :key="item.name" class="">
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <div class="flex-1 ">
+                        <div class="flex items-center space-x-2">
+                            <span class="inline-block flex-shrink-0 rounded-full text-sm font-medium" :class="item.roleClass">
+<!--                                {{ item.role }}-->
+                                <i class="fa-regular w-4" :class="item.role" />
+                            </span>
+                            <h3 class="truncate text-sm font-medium text-gray-900">{{ item.name }}</h3>
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">{{ item.desc }}</p>
+                    </div>
+<!--                    <i class="fa-brands text-3xl flex-shrink-0" :class="item.icon"/>-->
+                </div>
+            </li>
+        </ul>
 
         <MobileMenu/>
     </AppLayout>

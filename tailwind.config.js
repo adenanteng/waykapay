@@ -10,6 +10,7 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
         './node_modules/@protonemedia/inertiajs-tables-laravel-query-builder/**/*.{js,vue}',
+        "./node_modules/vue-tailwind-datepicker/**/*.js",
     ],
     darkMode: 'class',
     theme: {
@@ -30,7 +31,9 @@ module.exports = {
             amber: colors.amber,
             red: colors.red,
             violet: colors.violet,
-            yellow: colors.yellow
+            yellow: colors.yellow,
+            "vtd-primary": colors.sky, // Light mode Datepicker color
+            "vtd-secondary": colors.gray, // Dark mode Datepicker color
         },
         extend: {
             fontFamily: {

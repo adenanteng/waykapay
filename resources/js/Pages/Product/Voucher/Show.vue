@@ -91,7 +91,7 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
-        form.category_id = 6;
+        form.category_id = 8;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;

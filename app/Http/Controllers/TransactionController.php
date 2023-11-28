@@ -48,6 +48,12 @@ class TransactionController extends Controller
                 ->when(Req::input('filter'), function ($query, $filter) {
                     $query->where('category_id', $filter);
                 })
+                ->when(Req::input('date_start'), function ($query, $date_start) {
+                    $query->whereDate('created_at', '>=', $date_start);
+                })
+                ->when(Req::input('date_end'), function ($query, $date_end) {
+                    $query->whereDate('created_at', '<=', $date_end);
+                })
 //                ->paginate(8)
 //                ->withQueryString()
                 ->get()

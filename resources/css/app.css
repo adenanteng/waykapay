@@ -10,6 +10,15 @@
     @apply bg-primary-600 text-white font-semibold text-lg;
 }
 
+.dp-custom-input {
+    @apply text-red-600 rounded-full;
+
+}
+
+.dp-custom-menu {
+    @apply shadow-lg;
+}
+
 /*.bg-opacity-50 {*/
 /*    @apply bg-opacity-100;*/
 /*}*/
