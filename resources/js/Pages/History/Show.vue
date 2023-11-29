@@ -27,7 +27,7 @@ const props = defineProps({
     },
     goSuccess: {
         type: Boolean,
-        default: true
+        default: false
     }
 })
 
