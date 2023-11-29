@@ -108,6 +108,7 @@ class MoneyTransferController extends Controller
         return Inertia::render('History/Show', [
             'history' => $transaction,
             'goBack' => false,
+            'goSuccess' => true
         ]);
 
 //        return to_route('history.show', $transaction->order_id);

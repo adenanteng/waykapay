@@ -10,6 +10,7 @@ import PrimaryButton from "../../Components/PrimaryButton.vue";
 import TextInput from "../../Components/TextInput.vue";
 import Pagination from "../../Components/Pagination.vue";
 import SelectInput from "../../Components/SelectInput.vue";
+import VueTailwindDatepicker from "vue-tailwind-datepicker";
 
 const props = defineProps({
     // transaction: undefined,
@@ -21,21 +22,28 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
-    gross_amount: undefined,
-    agent_commission: undefined,
-    transaction_count: undefined
+    gross_amount: Number,
+    agent_commission: Number,
+    transaction_count: Number
 })
 
 onMounted(() => {
-    router.reload({ only: ['gross_amount', 'agent_commission', 'transaction_count'] })
+    // router.reload({ only: ['gross_amount', 'agent_commission', 'transaction_count'] })
 })
 
 let search = ref(props.filters.search);
 let filter = ref(props.filters.filter);
-watch([search, filter], ([value, valueF]) => {
+const date = ref([]);
+
+watch([search, filter, date], ([value, valueF, valueD]) => {
     router.get(
         route('report.index'),
-        { search: value, filter: valueF },
+        {
+            search: value,
+            filter: valueF,
+            date_start: valueD ? valueD[0] : null,
+            date_end: valueD ? valueD[1] : null
+        },
         {
             preserveState: true,
             replace: true,
@@ -55,6 +63,24 @@ watch([search, filter], ([value, valueF]) => {
 //     );
 // });
 
+const formatter = ref({
+    date: 'YYYY-MM-DD',
+    month: 'MMM',
+})
+
+const options = ref({
+    shortcuts: {
+        today: "Hari ini",
+        yesterday: "Kemarin",
+        past: (period) => period + " hari terakhir",
+        currentMonth: "Bulan ini",
+        pastMonth: "Bulan lalu",
+    },
+    footer: {
+        apply: "Terapkan",
+        cancel: "Batal",
+    },
+});
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -117,8 +143,8 @@ function formatPrice(value) {
             </div>
         </div>
 
-        <div class="flex justify-between gap-3">
-            <div class="w-1/2">
+        <div class="">
+            <div class="w-full">
                 <TextInput
                     type="text"
                     v-model="search"
@@ -126,12 +152,28 @@ function formatPrice(value) {
                     class="block w-full lg:w-96 shadow"
                 />
             </div>
+        </div>
 
-            <div class="w-1/2">
+        <div class="grid lg:flex space-y-5 lg:space-y-0 lg:gap-3">
+            <div class="w-full ">
+                <vue-tailwind-datepicker
+                    v-model="date"
+                    input-classes="bg-white text-black border border-gray-300 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 rounded-3xl shadow-sm rounded-full "
+                    :options="options"
+                    :formatter="formatter"
+                    placeholder="Bulan"
+                    separator=" - "
+                    use-range
+                    as-single
+                    i18n="id"
+                />
+            </div>
+
+            <div class="w-full">
                 <SelectInput
                     v-model:model-value.number="filter"
                     :option="$page.props.selectCategory"
-                    class="block w-full lg:w-96 shadow"
+                    class="block w-full shadow"
                 />
             </div>
         </div>

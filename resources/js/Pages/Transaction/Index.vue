@@ -25,16 +25,16 @@ const props = defineProps({
         default: () => ({}),
     },
 
-    amount: undefined,
-    gross_amount: undefined,
+    amount: Number,
+    gross_amount: Number,
 })
 
-const date = ref([]);
 let search = ref(props.filters.search);
 let filter = ref(props.filters.filter);
+const date = ref([]);
 
 onMounted(() => {
-    router.reload({ only: ['amount', 'gross_amount'] })
+    // router.reload({ only: ['amount', 'gross_amount'] })
 
     // const endDate = new Date();
     // const startDate = new Date(new Date().setDate(endDate.getDate() - 7));
@@ -69,6 +69,11 @@ watch([search, filter, date], ([value, valueF, valueD]) => {
 //         }
 //     );
 // });
+
+const formatter = ref({
+    date: 'YYYY-MM-DD',
+    month: 'MMM',
+})
 
 const options = ref({
     shortcuts: {
@@ -173,11 +178,12 @@ function formatPrice(value) {
                     v-model="date"
                     input-classes="bg-white text-black border border-gray-300 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 rounded-3xl shadow-sm rounded-full "
                     :options="options"
+                    :formatter="formatter"
                     placeholder="Bulan"
                     separator=" - "
                     use-range
+                    as-single
                     i18n="id"
-
                 />
             </div>
 

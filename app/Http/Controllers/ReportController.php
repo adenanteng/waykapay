@@ -31,6 +31,12 @@ class ReportController extends Controller
                 ->when(Req::input('filter'), function ($query, $filter) {
                     $query->where('category_id', $filter);
                 })
+                ->when(Req::input('date_start'), function ($query, $date_start) {
+                    $query->whereDate('created_at', '>=', $date_start);
+                })
+                ->when(Req::input('date_end'), function ($query, $date_end) {
+                    $query->whereDate('created_at', '<=', $date_end);
+                })
 //                ->paginate(8)
 //                ->withQueryString()
                 ->get()
@@ -38,13 +44,13 @@ class ReportController extends Controller
                     return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
                 }),
 
-            'gross_amount' => Inertia::lazy(fn () => $trx->sum('gross_amount')),
-            'agent_commission' => Inertia::lazy(fn () => $trx->sum('agent_commission')),
-            'transaction_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
-                                                        ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
-                                                        ->where('status_id', Transaction::SUCCESS)->get()->count()),
+            'gross_amount' => $trx->sum('gross_amount'),
+            'agent_commission' => $trx->sum('agent_commission'),
+            'transaction_count' => Transaction::where('user_id', auth()->user()->id)
+                ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
+                ->where('status_id', Transaction::SUCCESS)->get()->count(),
 
-            'filters' => Req::only(['search', 'filter']),
+            'filters' => Req::only(['search', 'filter', 'date_start', 'date_end']),
             'selectCategory' => Transaction::CATEGORY,
         ]);
     }

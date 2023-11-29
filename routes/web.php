@@ -26,7 +26,6 @@ use App\Http\Controllers\UpgradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
 use Illuminate\Support\Facades\Route;
-use \Spatie\ResponseCache\Middlewares\CacheResponse;
 
 /*
 |--------------------------------------------------------------------------

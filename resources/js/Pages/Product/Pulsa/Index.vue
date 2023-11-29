@@ -252,7 +252,7 @@ const tabData = ref('Umum')
         </FormSection>
 
 
-        <div class="border-b border-gray-300" v-show="form.customer_no.length >= 4 ">
+        <div class="border-b border-gray-300" v-show="form.customer_no.length >= 4">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tab=='Pulsa' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
@@ -270,7 +270,7 @@ const tabData = ref('Umum')
             </nav>
         </div>
 
-        <div class="border-b border-gray-300" v-if="tab=='Data'">
+        <div class="border-b border-gray-300" v-show="tab=='Data' && form.customer_no.length >= 4">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tabData=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "

@@ -226,6 +226,7 @@ class ProductController extends Controller
                 return Inertia::render('History/Show', [
                     'history' => $transaction,
                     'goBack' => false,
+                    'goSuccess' => true
                 ]);
 
 //                return Redirect::route('history.show', $transaction->order_id);

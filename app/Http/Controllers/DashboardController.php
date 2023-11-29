@@ -17,6 +17,7 @@ class DashboardController extends Controller
 {
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
+//        dd(Carousel::all()->toArray());
         return Inertia::render('Dashboard', [
             'users' => auth()->user(),
             'carousel' => Carousel::all(),

@@ -61,10 +61,10 @@ class TransactionController extends Controller
                     return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
                 }),
 
-            'amount' => Inertia::lazy(fn () => $trx->sum('amount')),
-            'gross_amount' => Inertia::lazy(fn () => $trx->sum('gross_amount')),
+            'amount' => $trx->sum('amount'),
+            'gross_amount' => $trx->sum('gross_amount'),
 
-            'filters' => Req::only(['search', 'filter']),
+            'filters' => Req::only(['search', 'filter', 'date_start', 'date_end']),
             'selectCategory' => Transaction::CATEGORY,
         ]);
     }

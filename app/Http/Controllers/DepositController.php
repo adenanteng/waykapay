@@ -44,7 +44,210 @@ class DepositController extends Controller
         ]);
     }
 
-//    public function create(Request $request)
+    public function create(Request $request)
+    {
+//        dd($request->toArray());
+
+        $user = User::where('id', $request['user_id'])->first();
+        $merchantCode = "OK1168432";
+        $merchantOrderId = Str::random(8);
+        $paymentAmount = $request['amount'];
+        $mKey = "836753316901900731168432OKCTFB6944D5EE66C810AF962674B3A8C7AF";
+
+        $sender_bank_type = match ($request['method']['id']) {
+            1 => $bank = "BCA",
+            2 => $bank = "BNI",
+            3 => $bank = "BRI",
+            4 => $bank = "MANDIRI",
+            5 => $bank = "PERMATA",
+            6 => $bank = "BSI",
+            13 => $bank = "ALFAMART",
+        };
+
+        $sender_bank_fee = match ($request['method']['id']) {
+            1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
+            13 => $admin_fee = 4000,
+        };
+
+        $grossAmount = $request['amount'] + $admin_fee;
+
+        $curl = curl_init();
+//        dd($sender_bank_type);
+        if ($request['method']['id'] <=6) {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://gateway.okeconnect.com/api/va/inquiry',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array(
+                    'merchantCode' => $merchantCode,
+                    'paymentAmount' => $grossAmount,
+                    'merchantOrderId' => $merchantOrderId,
+                    'productDetails' => 'Pembayaran Deposit Waykapay',
+                    'email' => $user->email,
+                    'phoneNumber' => $user->phone,
+                    'bank' => $bank,
+                    'returnUrl' => 'https://waykapay.com',
+                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
+                ),
+            ));
+        } else {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://gateway.okeconnect.com/api/retail/inquiry',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => array(
+                    'merchantCode' => $merchantCode,
+                    'paymentAmount' => $grossAmount,
+                    'paymentFee' => '0',
+                    'merchantOrderId' => $merchantOrderId,
+                    'productDetails' => 'Pembayaran Deposit Waykapay',
+                    'email' => $user->email,
+                    'phoneNumber' => $user->phone,
+                    'channel' => $bank,
+                    'returnUrl' => 'https://waykapay.com',
+                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
+                ),
+            ));
+        }
+
+
+        // Set response json
+        $responseJson = curl_exec($curl);
+        $response = json_decode($responseJson, true);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        curl_close($curl);
+//        dd($response['code'][$sender_bank_type]);
+
+//        dd($response);
+
+        if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
+            $transaction = Transaction::create([
+                'sku' => '-',
+//                'order_id' => $merchantOrderId,
+                'order_id' => $merchantOrderId,
+                'product_name' => 'Deposit',
+                'customer_no' => '-',
+                'user_id' => $request['user_id'],
+                'status_id' => Transaction::PENDING,
+                'category_id' => Transaction::DEPOSIT,
+                'amount' => $request['amount'],
+                'gross_amount' => $request['amount'] + $admin_fee,
+                'last_amount' => $user->wallet_balance,
+                'admin_fee' => $admin_fee,
+                'desc' => isset($response['id']) ?? isset($response['deposit_id'])
+            ]);
+
+            if ($request['method']['id'] <= 6) {
+                $virtual_account = TransactionBankTransfer::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'va_number' => $response['code'][$sender_bank_type],
+                    'payment_url' => '-',
+                    'exp_time' => Carbon::tomorrow(),
+                ]);
+            } elseif ($request['method']['id'] == 13) {
+                $offline_account = TransactionOffline::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'payment_code' => $response['response']['alfamart']['code'],
+                    'payment_url' => '-',
+                    'exp_time' => Carbon::tomorrow(),
+                ]);
+            }
+
+        } else {
+            dd('error');
+        }
+
+        return Inertia::render('Deposit/Confirm', [
+            'transaction' => $transaction,
+            'virtual_account' => $virtual_account ?? '',
+            'wallet_account' => $wallet_account ?? '',
+            'offline_account' => $offline_account ?? '',
+        ]);
+    }
+
+    public function confirm(Request $request)
+    {
+//        dd($request->toArray());
+        $request = $request['transaction'];
+
+        $transaction = Transaction::where('id', $request['id'])->first();
+        $user = User::where('id', $request['user_id'])->first();
+
+//        $response = Http::withHeaders([
+//            'Accept' => 'application/json',
+//            'Content-Type' => 'application/json',
+//            'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
+//        ])->get('https://bigflip.id/api/v2/pwf/' . $transaction->order_id . '/payment');
+
+//        switch ($response->object()->data[0]->status) {
+//            case('SUCCESSFUL'):
+//                $status_id = Transaction::SUCCESS;
+//                $user->deposit($transaction->amount);
+//                break;
+//
+//            case ('PENDING'):
+//                $status_id = Transaction::PENDING;
+//                break;
+//
+//            case ('FAILED'):
+//                $status_id = Transaction::ERROR;
+//                break;
+//
+//            default:
+//                $status_id = Transaction::UNDEFINED;
+//        }
+//        $transaction->update([
+//            'status_id' => $status_id,
+//        ]);
+
+        switch ($transaction->status_id) {
+            case (Transaction::SUCCESS):
+                return Inertia::render('Payment/Success', [
+                    'transaction' => $transaction
+                ]);
+                break;
+
+            case (Transaction::PENDING):
+                return Inertia::render('Payment/Pending', [
+                    'transaction' => $transaction
+                ]);
+                break;
+
+            case (Transaction::CLOSE):
+            case (Transaction::ERROR):
+                return Inertia::render('Payment/Error', [
+                    'transaction' => $transaction
+                ]);
+                break;
+
+            default:
+
+                session()->flash('flash.banner', 'Gatau lagi kami!');
+                session()->flash('flash.bannerStyle', 'danger');
+        }
+
+        return Inertia::render('Payment/Error', [
+            'transaction' => $transaction
+        ]);
+
+    }
+
+    //    public function create(Request $request)
 //    {
 ////        dd($request->all());
 //        $user = User::where('id', $request['user_id'])->first();
@@ -189,209 +392,6 @@ class DepositController extends Controller
 //        }
 //
 //    }
-
-    public function confirm(Request $request)
-    {
-//        dd($request->toArray());
-        $request = $request['transaction'];
-
-        $transaction = Transaction::where('id', $request['id'])->first();
-        $user = User::where('id', $request['user_id'])->first();
-
-//        $response = Http::withHeaders([
-//            'Accept' => 'application/json',
-//            'Content-Type' => 'application/json',
-//            'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
-//        ])->get('https://bigflip.id/api/v2/pwf/' . $transaction->order_id . '/payment');
-
-//        switch ($response->object()->data[0]->status) {
-//            case('SUCCESSFUL'):
-//                $status_id = Transaction::SUCCESS;
-//                $user->deposit($transaction->amount);
-//                break;
-//
-//            case ('PENDING'):
-//                $status_id = Transaction::PENDING;
-//                break;
-//
-//            case ('FAILED'):
-//                $status_id = Transaction::ERROR;
-//                break;
-//
-//            default:
-//                $status_id = Transaction::UNDEFINED;
-//        }
-//        $transaction->update([
-//            'status_id' => $status_id,
-//        ]);
-
-        switch ($transaction->status_id) {
-            case (Transaction::SUCCESS):
-                return Inertia::render('Payment/Success', [
-                    'transaction' => $transaction
-                ]);
-                break;
-
-            case (Transaction::PENDING):
-                return Inertia::render('Payment/Pending', [
-                    'transaction' => $transaction
-                ]);
-                break;
-
-            case (Transaction::CLOSE):
-            case (Transaction::ERROR):
-                return Inertia::render('Payment/Error', [
-                    'transaction' => $transaction
-                ]);
-                break;
-
-            default:
-
-                session()->flash('flash.banner', 'Gatau lagi kami!');
-                session()->flash('flash.bannerStyle', 'danger');
-        }
-
-        return Inertia::render('Payment/Error', [
-            'transaction' => $transaction
-        ]);
-
-    }
-
-    public function create(Request $request)
-    {
-//        dd($request->toArray());
-
-        $user = User::where('id', $request['user_id'])->first();
-        $merchantCode = "OK1168432";
-        $merchantOrderId = Str::random(8);
-        $paymentAmount = $request['amount'];
-        $mKey = "836753316901900731168432OKCTFB6944D5EE66C810AF962674B3A8C7AF";
-
-        $sender_bank_type = match ($request['method']['id']) {
-            1 => $bank = "BCA",
-            2 => $bank = "BNI",
-            3 => $bank = "BRI",
-            4 => $bank = "MANDIRI",
-            5 => $bank = "PERMATA",
-            6 => $bank = "BSI",
-            13 => $bank = "ALFAMART",
-        };
-
-        $sender_bank_fee = match ($request['method']['id']) {
-            1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
-            13 => $admin_fee = 4000,
-        };
-
-        $grossAmount = $request['amount'] + $admin_fee;
-
-        $curl = curl_init();
-//        dd($sender_bank_type);
-        if ($request['method']['id'] <=6) {
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://gateway.okeconnect.com/api/va/inquiry',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array(
-                    'merchantCode' => $merchantCode,
-                    'paymentAmount' => $grossAmount,
-                    'merchantOrderId' => $merchantOrderId,
-                    'productDetails' => 'Pembayaran Deposit Waykapay',
-                    'email' => $user->email,
-                    'phoneNumber' => $user->phone,
-                    'bank' => $bank,
-                    'returnUrl' => 'https://waykapay.com',
-                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
-                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
-                ),
-            ));
-        } else {
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://gateway.okeconnect.com/api/retail/inquiry',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array(
-                    'merchantCode' => $merchantCode,
-                    'paymentAmount' => $grossAmount,
-                    'paymentFee' => '0',
-                    'merchantOrderId' => $merchantOrderId,
-                    'productDetails' => 'Pembayaran Deposit Waykapay',
-                    'email' => $user->email,
-                    'phoneNumber' => $user->phone,
-                    'channel' => $bank,
-                    'returnUrl' => 'https://waykapay.com',
-                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
-                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
-                ),
-            ));
-        }
-
-
-        // Set response json
-        $responseJson = curl_exec($curl);
-        $response = json_decode($responseJson, true);
-        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-        curl_close($curl);
-//        dd($response['code'][$sender_bank_type]);
-
-//        dd($response);
-
-        if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
-            $transaction = Transaction::create([
-                'sku' => '-',
-//                'order_id' => $merchantOrderId,
-                'order_id' => $merchantOrderId,
-                'product_name' => 'Deposit',
-                'customer_no' => '-',
-                'user_id' => $request['user_id'],
-                'status_id' => Transaction::PENDING,
-                'category_id' => Transaction::DEPOSIT,
-                'amount' => $request['amount'],
-                'gross_amount' => $request['amount'] + $admin_fee,
-                'last_amount' => $user->wallet_balance,
-                'admin_fee' => $admin_fee,
-                'desc' => isset($response['id']) ?? isset($response['deposit_id'])
-            ]);
-
-            if ($request['method']['id'] <= 6) {
-                $virtual_account = TransactionBankTransfer::create([
-                    'transaction_id' => $transaction->id,
-                    'bank_id' => $request['method']['id'],
-                    'va_number' => $response['code'][$sender_bank_type],
-                    'payment_url' => '-',
-                    'exp_time' => Carbon::tomorrow(),
-                ]);
-            } elseif ($request['method']['id'] == 13) {
-                $offline_account = TransactionOffline::create([
-                    'transaction_id' => $transaction->id,
-                    'bank_id' => $request['method']['id'],
-                    'payment_code' => $response['response']['alfamart']['code'],
-                    'payment_url' => '-',
-                    'exp_time' => Carbon::tomorrow(),
-                ]);
-            }
-
-        } else {
-            dd('error');
-        }
-
-        return Inertia::render('Deposit/Confirm', [
-            'transaction' => $transaction,
-            'virtual_account' => $virtual_account ?? '',
-            'wallet_account' => $wallet_account ?? '',
-            'offline_account' => $offline_account ?? '',
-        ]);
-    }
 
 //    public function createFlip(Request $request)
 //    {
