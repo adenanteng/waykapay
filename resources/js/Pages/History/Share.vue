@@ -28,7 +28,7 @@ const props = defineProps({
 const { share, isSupported } = useShare()
 
 onMounted(() => {
-    isSupported ? startShare() : ''
+    setTimeout(() => startShare(), 500);
 })
 
 function startShare() {
