@@ -7,7 +7,6 @@
     "require": {
         "php": "^8.1.0",
         "ext-curl": "*",
-        "doku/jokul-php-library": "^2.0",
         "guzzlehttp/guzzle": "^7.7.0",
         "inertiajs/inertia-laravel": "^0.6.9",
         "laravel/framework": "^10.17.1",
@@ -15,7 +14,6 @@
         "laravel/sanctum": "^3.2.5",
         "laravel/tinker": "^2.8.1",
         "predis/predis": "^2.2",
-        "protonemedia/inertiajs-tables-laravel-query-builder": "^2.2.0",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-medialibrary": "^10.11.3",
         "spatie/laravel-query-builder": "^5.2.0",

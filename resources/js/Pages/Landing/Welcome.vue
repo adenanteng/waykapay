@@ -224,7 +224,7 @@ const footerNavigation = {
                             </h1>
                             <p class="mx-auto mt-6 max-w-lg text-center text-lg text-primary-200 sm:max-w-3xl">Semua kemudahan ada disini.</p>
                             <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
-                                <div class="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-1 sm:gap-5 sm:space-y-0">
+                                <div class="flex justify-center items-center">
                                     <PrimaryButton as="a" :href="route('dashboard')">Dashboard</PrimaryButton>
 <!--                                    <SecondaryButton class="text-white">Lalalal</SecondaryButton>-->
                                </div>

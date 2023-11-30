@@ -170,21 +170,21 @@ function formatPrice(value) {
             </ul>
         </div>
 
-<!--        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
-<!--            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">-->
-<!--                <li>-->
-<!--                    <Link :href="route('terms.show')" class="block px-6 py-4">-->
-<!--                        <p class="text-sm font-medium text-gray-900">Ketentuan Layanan</p>-->
-<!--                    </Link>-->
-<!--                </li>-->
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                <li>
+                    <Link :href="route('terms.show')" class="block px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Ketentuan Layanan</p>
+                    </Link>
+                </li>
 
-<!--                <li>-->
-<!--                    <Link :href="route('policy.show')" class="block px-6 py-4">-->
-<!--                        <p class="text-sm font-medium text-gray-900">Kebijakan Privasi</p>-->
-<!--                    </Link>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
+                <li>
+                    <Link :href="route('policy.show')" class="block px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Kebijakan Privasi</p>
+                    </Link>
+                </li>
+            </ul>
+        </div>
 
         <form method="POST" @submit.prevent="logout">
             <DangerButton type="submit" class="w-full">

@@ -158,7 +158,7 @@ function formatPrice(value) {
             <div class="w-full ">
                 <vue-tailwind-datepicker
                     v-model="date"
-                    input-classes="bg-white text-black border border-gray-300 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 rounded-3xl shadow-sm rounded-full "
+                    input-classes="bg-white text-black border border-gray-300 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 rounded-3xl shadow-sm rounded-full"
                     :options="options"
                     :formatter="formatter"
                     placeholder="Bulan"

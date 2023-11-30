@@ -17,6 +17,7 @@ import ActionMessage from "@/Components/ActionMessage.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 import {Vue3Lottie} from "vue3-lottie";
+import { useShare } from '@vueuse/core'
 
 const props = defineProps({
     // users: Object,
@@ -50,6 +51,16 @@ const timerSuccess = ref(props.goSuccess)
 onMounted(() => {
     setTimeout(() => timerSuccess.value=false, 5000);
 })
+
+const { share, isSupported } = useShare()
+
+function startShare() {
+    share({
+        title: 'Hello',
+        text: 'Hello my friend!',
+        url: location.href,
+    })
+}
 
 const shareData = {
     title: "MDN",
@@ -306,6 +317,7 @@ function formatPrice(value) {
                         <i class="fa-regular fa-home mr-2" />
                         Beranda
                     </SecondaryButton>
+
                     <PrimaryButton
                         v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1"
                         as="a"
@@ -316,14 +328,15 @@ function formatPrice(value) {
                         Cetak
                     </PrimaryButton>
 
-<!--                    <button-->
-<!--                        v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1"-->
-<!--                        @click="shareButton()"-->
-<!--                        class="justify-center w-full"-->
-<!--                    >-->
-<!--                        <i class="fa-regular fa-share-nodes mr-2" />-->
-<!--                        Bagikan-->
-<!--                    </button>-->
+                    <button
+                        v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1 && isSupported"
+                        :disabled="!isSupported"
+                        @click="startShare"
+                        class="justify-center w-full"
+                    >
+                        <i class="fa-regular fa-share-nodes mr-2" />
+                        Bagikan
+                    </button>
 
                 </div>
 
