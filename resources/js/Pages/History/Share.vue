@@ -2,23 +2,15 @@
 import {onMounted, ref} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
-import PreviousButton from "@/Components/PreviousButton.vue"
-import Badge from "../../Components/Badge.vue";
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
 import {Link, useForm} from "@inertiajs/vue3";
-import VueQrcode from "@chenfengyuan/vue-qrcode";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputError from "@/Components/InputError.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import ActionMessage from "@/Components/ActionMessage.vue";
-import SecondaryButton from "../../Components/SecondaryButton.vue";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 import {Vue3Lottie} from "vue3-lottie";
 import { useShare } from '@vueuse/core'
-import BlankLayout from "../../Layouts/BlankLayout.vue";
+import BlankLayout from "@/Layouts/BlankLayout.vue";
+import SecondaryButton from "../../Components/SecondaryButton.vue";
+import PrimaryButton from "../../Components/PrimaryButton.vue";
 
 const props = defineProps({
     // users: Object,
@@ -196,6 +188,17 @@ function formatPrice(value) {
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="flex justify-center gap-2">
+            <PrimaryButton
+                @click="startShare"
+                class="justify-center w-full"
+            >
+                <i class="fa-regular fa-share-nodes mr-2" />
+                Bagikan
+            </PrimaryButton>
+
         </div>
         <!--        <MobileMenu/>-->
     </BlankLayout>

@@ -17,7 +17,6 @@ import ActionMessage from "@/Components/ActionMessage.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 import {Vue3Lottie} from "vue3-lottie";
-import { useShare } from '@vueuse/core'
 
 const props = defineProps({
     // users: Object,
@@ -51,26 +50,6 @@ const timerSuccess = ref(props.goSuccess)
 onMounted(() => {
     setTimeout(() => timerSuccess.value=false, 5000);
 })
-
-const { share, isSupported } = useShare()
-
-function startShare() {
-    share({
-        title: 'Hello',
-        text: 'Hello my friend!',
-        url: location.href,
-    })
-}
-
-const shareData = {
-    title: "MDN",
-    text: "Learn web development on MDN!",
-    url: "https://developer.mozilla.org",
-};
-
-function shareButton() {
-    navigator.share(shareData)
-}
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
