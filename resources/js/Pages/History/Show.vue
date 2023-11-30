@@ -51,6 +51,16 @@ onMounted(() => {
     setTimeout(() => timerSuccess.value=false, 5000);
 })
 
+const shareData = {
+    title: "MDN",
+    text: "Learn web development on MDN!",
+    url: "https://developer.mozilla.org",
+};
+
+function shareButton() {
+    navigator.share(shareData)
+}
+
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
@@ -302,9 +312,19 @@ function formatPrice(value) {
                         :href="route('transaction.print', props.history.order_id)"
                         class="justify-center w-full"
                     >
-                        <i class="fa-regular fa-share-nodes mr-2" />
-                        Bagikan
+                        <i class="fa-regular fa-print mr-2" />
+                        Cetak
                     </PrimaryButton>
+
+<!--                    <button-->
+<!--                        v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1"-->
+<!--                        @click="shareButton()"-->
+<!--                        class="justify-center w-full"-->
+<!--                    >-->
+<!--                        <i class="fa-regular fa-share-nodes mr-2" />-->
+<!--                        Bagikan-->
+<!--                    </button>-->
+
                 </div>
 
                 <div class="pb-80 lg:pb-0" />

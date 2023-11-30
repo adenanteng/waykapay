@@ -158,7 +158,7 @@ const confirmModal = (data) => {
         form.sku = data.buyer_sku_code;
         form.amount = data.price;
         form.product_name = data.product_name;
-        form.category_id = tabPulsa.value === 'Pulsa' ? 2 : 3;
+        form.category_id = tab.value === 'Pulsa' ? 2 : 3;
 
         productSku = data.buyer_sku_code;
         productName = data.product_name;
