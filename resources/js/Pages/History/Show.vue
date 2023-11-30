@@ -328,15 +328,15 @@ function formatPrice(value) {
                         Cetak
                     </PrimaryButton>
 
-                    <button
-                        v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1 && isSupported"
-                        :disabled="!isSupported"
-                        @click="startShare"
+                    <PrimaryButton
+                        v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1"
+                        as="a"
+                        :href="route('transaction.share', props.history.order_id)"
                         class="justify-center w-full"
                     >
                         <i class="fa-regular fa-share-nodes mr-2" />
                         Bagikan
-                    </button>
+                    </PrimaryButton>
 
                 </div>
 

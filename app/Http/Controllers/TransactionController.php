@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class TransactionController extends Controller
 {
@@ -100,32 +101,29 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Transaction $transaction
+     * @param $id
+     * @return Response
      */
     public function print($id) {
 //        dd($id);
-//        $customer = new Buyer([
-//            'name'          => 'John Doe',
-//            'custom_fields' => [
-//                'email' => 'test@example.com',
-//            ],
-//        ]);
-//
-//        $item = (new InvoiceItem())->title('Service 1')->pricePerUnit(2);
-//
-//        $invoice = Invoice::make()
-//            ->buyer($customer)
-//            ->discountByPercent(10)
-//            ->taxRate(15)
-//            ->shipping(1.99)
-//            ->addItem($item);
-
-//        return $invoice->download();
-
-//        return view('print', compact('invoice'));
         $trx = Transaction::where('order_id', $id)->first();
 
         return Inertia::render('History/Print', [
+            'history' => $trx,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param $id
+     * @return Response
+     */
+    public function share($id) {
+//        dd($id);
+        $trx = Transaction::where('order_id', $id)->first();
+
+        return Inertia::render('History/Share', [
             'history' => $trx,
         ]);
     }

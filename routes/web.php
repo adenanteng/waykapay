@@ -40,7 +40,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
 Route::get('/premium', [LandingController::class, 'upgrade'])->name('landing.upgrade');
-Route::get('/transaction/print/{transaction}', [TransactionController::class, 'print'])->name('transaction.print');
+Route::get('/print/{transaction}', [TransactionController::class, 'print'])->name('transaction.print');
+Route::get('/share/{transaction}', [TransactionController::class, 'share'])->name('transaction.share');
 
 Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
 Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
