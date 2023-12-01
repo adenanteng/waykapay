@@ -66,7 +66,11 @@ function imm() {
             if (navigator.canShare({files})) {
                 try {
                     await navigator.share({
-                        files,
+                        files: [
+                            new File([files.value], 'image.png', {
+                                type: files.type,
+                            }),
+                        ],
                         title: "Images",
                         text: "Beautiful images",
                     });
