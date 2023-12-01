@@ -66,11 +66,11 @@ function imm() {
             // if (navigator.canShare({file})) {
                 try {
                     await navigator.share({
-                        // files: [
-                        //     new File([file.value], 'image.jpeg', {
-                        //         type: 'image/jpeg',
-                        //     }),
-                        // ],
+                        files: [
+                            new File([file.value], 'image.png', {
+                                type: 'image/png',
+                            }),
+                        ],
                         title: "Images",
                         text: "Beautiful images",
                         url: window.location.href
