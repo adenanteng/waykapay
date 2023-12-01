@@ -67,7 +67,7 @@ function imm() {
                 try {
                     await navigator.share({
                         files: [
-                            new File([anj, img.innerHTML], 'image.png', {
+                            new File([img.innerHTML], 'image.png', {
                                 type: 'image/png',
                             }),
                         ],
