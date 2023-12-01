@@ -79,7 +79,7 @@ function imm() {
                     output.value = `Error: ${error.message}`;
                 }
             } else {
-                output.value = 'Your system doesnt support sharing these files.' + img + img.src + img.type + img.sizes;
+                output.value = 'Your system doesnt support sharing these files.' + img + img.src;
             }
         })
         .catch(function (error) {
@@ -108,7 +108,7 @@ function formatPrice(value) {
     >
 
         <div class="">
-            <div class="" >
+            <div class="max-w-sm" >
                 {{ output }}
             </div>
 
