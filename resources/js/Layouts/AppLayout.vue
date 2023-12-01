@@ -1,6 +1,5 @@
 <script setup>
 import {computed, ref, useSlots, watch} from 'vue';
-// import {Inertia} from '@inertiajs/inertia';
 import {router, Head, Link} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -11,6 +10,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
 import FlyoutMenu from "@/Components/FlyoutMenu.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+
 import {
     Menu,
     MenuButton,
@@ -23,6 +23,7 @@ import {
     TransitionChild,
     TransitionRoot,
 } from '@headlessui/vue'
+import OnlineStatus from "../Components/OnlineStatus.vue";
 
 const props = defineProps({
     title: String,
@@ -72,7 +73,11 @@ const logout = () => {
         <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
         <div class="sticky top-0 z-50">
-        <Banner/>
+            <OnlineStatus />
+        </div>
+
+        <div class="sticky top-0 z-50">
+            <Banner />
         </div>
 
         <div class="min-h-screen bg-gray-100 bg-glass bg-fixed">

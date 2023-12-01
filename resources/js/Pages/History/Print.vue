@@ -42,7 +42,6 @@ function formatPrice(value) {
 <!--                <ApplicationLogo class="" />-->
                 <ApplicationLogoTitle />
                 <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Berhasil</h3>
-                <!--                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>-->
             </div>
             <div class="border-t border-gray-600 border-dashed px-4 py-5 ">
                 <div class="grid grid-cols-1 gap-x-4 gap-y-2 w-72 text-gray-900">
@@ -105,7 +104,7 @@ function formatPrice(value) {
                         </div>
                     </template>
 
-                    <template v-if="props.history.category_id != 1">
+                    <template v-if="props.history.category_id != 99 && props.history.category_id != 1">
                         <div class="flex justify-between" >
                             <div class="text-sm">No. Kustomer</div>
                             <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
