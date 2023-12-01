@@ -63,7 +63,7 @@ function imm() {
                 return;
             }
 
-            if (navigator.canShare({file})) {
+            // if (navigator.canShare({file})) {
                 try {
                     await navigator.share({
                         // files: [
@@ -79,9 +79,9 @@ function imm() {
                 } catch (error) {
                     output.value = `Error: ${error.message}`;
                 }
-            } else {
-                output.value = 'Your system doesnt support sharing these files.' + file.value;
-            }
+            // } else {
+            //     output.value = 'Your system doesnt support sharing these files.' + file.value;
+            // }
         })
         .catch(function (error) {
             console.error('oops, something went wrong!', error);
