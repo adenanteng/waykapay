@@ -80,7 +80,7 @@ function imm() {
                     output.value = `Error: ${error.message}`;
                 }
             } else {
-                output.value = `Your system doesn't support sharing these files.`;
+                output.value = 'Your system doesnt support sharing these files.' + file.value + file.value.type;
             }
         })
         .catch(function (error) {
