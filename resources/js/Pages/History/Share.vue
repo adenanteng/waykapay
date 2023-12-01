@@ -38,7 +38,7 @@ function startShare() {
 
 const babi = ref(null)
 const output = ref(null)
-const files = ref(null)
+const file = ref(null)
 
 function imm() {
     // domtoimage
@@ -56,23 +56,24 @@ function imm() {
             var img = new Image();
             img.src = dataUrl;
             document.body.appendChild(img);
-            files.value = img;
+            file.value = img;
 
             if (!navigator.canShare) {
                 output.value = `Your browser doesn't support the Web Share API.`;
                 return;
             }
 
-            if (navigator.canShare({files})) {
+            if (navigator.canShare({file})) {
                 try {
                     await navigator.share({
                         files: [
-                            new File([files.value], 'image.png', {
-                                type: files.type,
+                            new File([file.value], 'image.png', {
+                                type: file.value.type,
                             }),
                         ],
                         title: "Images",
                         text: "Beautiful images",
+                        url: location.href
                     });
                     output.value = "Shared!";
                 } catch (error) {
