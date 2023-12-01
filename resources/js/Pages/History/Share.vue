@@ -37,6 +37,7 @@ function startShare() {
 }
 
 const babi = ref(null)
+const output = ref(null);
 
 function imm() {
     // domtoimage
@@ -50,16 +51,30 @@ function imm() {
 
     domtoimage
         .toPng(babi.value)
-        .then(function (dataUrl) {
+        .then(async function (dataUrl) {
             var img = new Image();
             img.src = dataUrl;
             document.body.appendChild(img);
             const files = img;
-            share({
-                title: 'Hello',
-                text: 'Hello my friend!',
-                files,
-            })
+            if (!navigator.canShare) {
+                output.textContent = `Your browser doesn't support the Web Share API.`;
+                return;
+            }
+
+            if (navigator.canShare({files})) {
+                try {
+                    await navigator.share({
+                        files,
+                        title: "Images",
+                        text: "Beautiful images",
+                    });
+                    output.textContent = "Shared!";
+                } catch (error) {
+                    output.textContent = `Error: ${error.message}`;
+                }
+            } else {
+                output.textContent = `Your system doesn't support sharing these files.`;
+            }
         })
         .catch(function (error) {
             console.error('oops, something went wrong!', error);
@@ -86,6 +101,10 @@ function formatPrice(value) {
     >
 
         <div class="">
+            <div class="" ref="output">
+
+            </div>
+
             <div ref="babi" class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 flex flex-col justify-center items-center ">
                     <!--                <ApplicationLogo class="" />-->
