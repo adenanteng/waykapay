@@ -25,7 +25,7 @@ const ss = ref(null)
 onMounted(() => {
     setTimeout(() => startShare(), 500);
     console.log(babi.value)
-    imm()
+    // imm()
 })
 
 function startShare() {
@@ -51,7 +51,7 @@ function imm() {
     //     });
 
     domtoimage
-        .toJpeg(babi.value)
+        .toPng(babi.value)
         .then(async function (dataUrl) {
             var img = new Image();
             img.src = dataUrl;
@@ -251,7 +251,7 @@ function formatPrice(value) {
 
             <div class="flex justify-center gap-2 mt-5">
                 <PrimaryButton
-                    @click="startShare"
+                    @click="imm"
                     class="justify-center w-full"
                 >
                     <i class="fa-regular fa-share-nodes mr-2" />
