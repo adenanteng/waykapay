@@ -57,7 +57,7 @@ function imm() {
             document.body.appendChild(img);
             const files = img;
             if (!navigator.canShare) {
-                output.textContent = `Your browser doesn't support the Web Share API.`;
+                output.value = `Your browser doesn't support the Web Share API.`;
                 return;
             }
 
@@ -68,16 +68,17 @@ function imm() {
                         title: "Images",
                         text: "Beautiful images",
                     });
-                    output.textContent = "Shared!";
+                    output.value = "Shared!";
                 } catch (error) {
-                    output.textContent = `Error: ${error.message}`;
+                    output.value = `Error: ${error.message}`;
                 }
             } else {
-                output.textContent = `Your system doesn't support sharing these files.`;
+                output.value = `Your system doesn't support sharing these files.`;
             }
         })
         .catch(function (error) {
             console.error('oops, something went wrong!', error);
+            output.value = error
         });
 }
 
@@ -101,8 +102,8 @@ function formatPrice(value) {
     >
 
         <div class="">
-            <div class="" ref="output">
-
+            <div class="" >
+                {{ output }}
             </div>
 
             <div ref="babi" class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
