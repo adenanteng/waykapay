@@ -51,7 +51,7 @@ function imm() {
     //     });
 
     domtoimage
-        .toPng(babi.value)
+        .toJpeg(babi.value)
         .then(async function (dataUrl) {
             var img = new Image();
             img.src = dataUrl;
@@ -67,20 +67,20 @@ function imm() {
                 try {
                     await navigator.share({
                         files: [
-                            new File([file.value], 'image.png', {
-                                type: 'image/png',
+                            new File([file.value], 'image.jpeg', {
+                                type: 'image/jpeg',
                             }),
                         ],
                         title: "Images",
                         text: "Beautiful images",
-                        url: location.href
+                        url: window.location.href
                     });
                     output.value = "Shared!";
                 } catch (error) {
                     output.value = `Error: ${error.message}`;
                 }
             } else {
-                output.value = 'Your system doesnt support sharing these files.' + file.value + file.value.type;
+                output.value = 'Your system doesnt support sharing these files.' + file.value;
             }
         })
         .catch(function (error) {
