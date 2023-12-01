@@ -54,10 +54,11 @@ function imm() {
             var img = new Image();
             img.src = dataUrl;
             document.body.appendChild(img);
+            const files = img;
             share({
                 title: 'Hello',
                 text: 'Hello my friend!',
-                files: img.src,
+                files,
             })
         })
         .catch(function (error) {
