@@ -56,14 +56,13 @@ function imm() {
             var img = new Image();
             img.src = dataUrl;
             document.body.appendChild(img);
-            file.value = img;
 
             if (!navigator.canShare) {
                 output.value = `Your browser doesn't support the Web Share API.`;
                 return;
             }
 
-            // if (navigator.canShare({img})) {
+            if (navigator.canShare({img})) {
                 try {
                     await navigator.share({
                         files: [
@@ -79,9 +78,9 @@ function imm() {
                 } catch (error) {
                     output.value = `Error: ${error.message}`;
                 }
-            // } else {
-            //     output.value = 'Your system doesnt support sharing these files.' + img;
-            // }
+            } else {
+                output.value = 'Your system doesnt support sharing these files.' + img + img.src + img.type + img.sizes;
+            }
         })
         .catch(function (error) {
             console.error('oops, something went wrong!', error);
