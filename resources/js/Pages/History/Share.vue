@@ -63,11 +63,11 @@ function imm() {
                 return;
             }
 
-            if (navigator.canShare({anj})) {
+            // if (navigator.canShare({anj})) {
                 try {
                     await navigator.share({
                         files: [
-                            new File([anj], 'image.png', {
+                            new File([anj, img.innerHTML], 'image.png', {
                                 type: 'image/png',
                             }),
                         ],
@@ -79,9 +79,9 @@ function imm() {
                 } catch (error) {
                     output.value = `Error: ${error.message}`;
                 }
-            } else {
-                output.value = 'Your system doesnt support sharing these files.' + anj;
-            }
+            // } else {
+            //     output.value = 'Your system doesnt support sharing these files.' + anj;
+            // }
         })
         .catch(function (error) {
             console.error('oops, something went wrong!', error);
