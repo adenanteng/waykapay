@@ -22,72 +22,63 @@ const props = defineProps({
 const { share, isSupported } = useShare()
 const ss = ref(null)
 
-onMounted(() => {
-    setTimeout(() => startShare(), 500);
-    console.log(babi.value)
-    // imm()
-})
+// onMounted(() => {
+//     setTimeout(() => startShare(), 500);
+//     console.log(babi.value)
+//     // imm()
+// })
 
-function startShare() {
-    share({
-        title: 'Hello',
-        text: 'Hello my friend!',
-        // files: window.print(),
-    })
-}
+// function startShare() {
+//     share({
+//         title: 'Hello',
+//         text: 'Hello my friend!',
+//         // files: window.print(),
+//     })
+// }
 
 const babi = ref(null)
 const output = ref(null)
 const file = ref(null)
 
-function imm() {
-    // domtoimage
-    //     .toJpeg(babi.value, { quality: 0.95 })
-    //     .then(function (dataUrl) {
-    //         var link = document.createElement('a');
-    //         link.download = 'my-image-name.jpeg';
-    //         link.href = dataUrl;
-    //         link.click();
-    //     });
-
-    domtoimage
-        .toPng(babi.value)
-        .then(async function (dataUrl) {
-            var img = new Image();
-            img.src = dataUrl;
-            document.body.appendChild(img);
-            var anj = img.innerHTML
-
-            if (!navigator.canShare) {
-                output.value = `Your browser doesn't support the Web Share API.`;
-                return;
-            }
-
-            // if (navigator.canShare({anj})) {
-                try {
-                    await navigator.share({
-                        files: [
-                            new File([img.innerHTML], 'image.png', {
-                                type: 'image/png',
-                            }),
-                        ],
-                        title: "Images",
-                        text: "Beautiful images",
-                        url: window.location.href
-                    });
-                    output.value = "Shared!";
-                } catch (error) {
-                    output.value = `Error: ${error.message}`;
-                }
-            // } else {
-            //     output.value = 'Your system doesnt support sharing these files.' + anj;
-            // }
-        })
-        .catch(function (error) {
-            console.error('oops, something went wrong!', error);
-            output.value = error
-        });
-}
+// function imm() {
+//     domtoimage
+//         .toPng(babi.value)
+//         .then(async function (dataUrl) {
+//             var img = new Image();
+//             img.src = dataUrl;
+//             document.body.appendChild(img);
+//             var anj = img.innerHTML
+//
+//             if (!navigator.canShare) {
+//                 output.value = `Your browser doesn't support the Web Share API.`;
+//                 return;
+//             }
+//
+//             // if (navigator.canShare({anj})) {
+//                 try {
+//                     await navigator.share({
+//                         files: [
+//                             new File([img.innerHTML], 'image.png', {
+//                                 type: 'image/png',
+//                             }),
+//                         ],
+//                         title: "Images",
+//                         text: "Beautiful images",
+//                         url: window.location.href
+//                     });
+//                     output.value = "Shared!";
+//                 } catch (error) {
+//                     output.value = `Error: ${error.message}`;
+//                 }
+//             // } else {
+//             //     output.value = 'Your system doesnt support sharing these files.' + anj;
+//             // }
+//         })
+//         .catch(function (error) {
+//             console.error('oops, something went wrong!', error);
+//             output.value = error
+//         });
+// }
 
 
 
@@ -247,17 +238,6 @@ function formatPrice(value) {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="flex justify-center gap-2 mt-5">
-                <PrimaryButton
-                    @click="imm"
-                    class="justify-center w-full"
-                >
-                    <i class="fa-regular fa-share-nodes mr-2" />
-                    Bagikan
-                </PrimaryButton>
-
             </div>
 
 <!--            <div>-->
