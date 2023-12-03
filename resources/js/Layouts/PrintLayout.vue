@@ -24,7 +24,7 @@ const props = defineProps({
             <Head :title="title"/>
         </template>
 
-        <div class="flex justify-center items-center py-5 max-w-sm mx-auto">
+        <div class="flex justify-center items-center max-w-sm mx-auto">
             <slot/>
         </div>
     </div>

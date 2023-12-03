@@ -37,14 +37,14 @@ function formatPrice(value) {
                desc="lorem ipsum dolor sit"
     >
 
-        <div class="border border-gray-300">
+        <div class="border border-gray-300 my-5">
             <div class="px-4 py-5 flex flex-col justify-center items-center ">
 <!--                <ApplicationLogo class="" />-->
                 <ApplicationLogoTitle />
                 <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Transaksi Berhasil</h3>
             </div>
             <div class="border-t border-gray-600 border-dashed px-4 py-5 ">
-                <div class="grid grid-cols-1 gap-x-4 gap-y-2 w-72 text-gray-900">
+                <div class="grid grid-cols-1 gap-x-4 gap-y-2 text-gray-900">
                     <div class=" flex justify-between">
                         <div class="text-sm ">Tanggal</div>
                         <div class="text-sm font-semibold">{{ formattedDate(props.history.updated_at) }}</div>
@@ -170,6 +170,12 @@ function formatPrice(value) {
                         <div class="text-sm font-bold">Rp {{ formatPrice(Number(props.history.gross_amount) + Number(props.history.agent_commission)) }}</div>
                     </div>
                 </div>
+            </div>
+
+            <div class="border-t border-gray-600 border-dashed px-4 py-5 text-xs text-gray-500">
+                <p>CV Cahaya Matahari Dunia</p>
+                <p>NPWP: 50.079.228.8-326.000</p>
+                <p>Jl. Lintas Sumatera, Campur Asri, Baradatu, Way Kanan, Lampung - 34761</p>
             </div>
         </div>
     </PrintLayout>

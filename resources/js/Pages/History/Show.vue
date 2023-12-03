@@ -242,6 +242,12 @@ function formatPrice(value) {
                             </div>
                         </div>
                     </div>
+
+                    <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6 text-xs text-gray-500">
+                        <p>CV Cahaya Matahari Dunia</p>
+                        <p>NPWP: 50.079.228.8-326.000</p>
+                        <p>Jl. Lintas Sumatera, Campur Asri, Baradatu, Way Kanan, Lampung - 34761</p>
+                    </div>
                 </div>
 
                 <template v-if="props.history.category_id!=0 && props.history.category_id!=1 && $page.props.user.role_id!=3 && props.history.user_id == $page.props.user.id">
