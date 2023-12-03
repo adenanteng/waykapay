@@ -14,6 +14,10 @@ const props = defineProps({
 
 onMounted(() => {
     window.print()
+    setTimeout(() => {
+        history.back();
+        return false;
+    }, 500);
     // document.execCommand('print');
 })
 // const printInvoice = () => {

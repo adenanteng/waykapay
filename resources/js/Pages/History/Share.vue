@@ -22,11 +22,16 @@ const props = defineProps({
 const { share, isSupported } = useShare()
 const ss = ref(null)
 
-// onMounted(() => {
-//     setTimeout(() => startShare(), 500);
-//     console.log(babi.value)
-//     // imm()
-// })
+onMounted(() => {
+    setTimeout(() => {
+        history.back();
+        return false;
+    }, 500);
+
+    // setTimeout(() => startShare(), 500);
+    // console.log(babi.value)
+    // imm()
+})
 
 // function startShare() {
 //     share({
