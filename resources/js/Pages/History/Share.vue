@@ -99,12 +99,8 @@ function formatPrice(value) {
                desc="lorem ipsum dolor sit"
     >
 
-        <div class="">
-            <div class="max-w-sm" >
-                {{ output }}
-            </div>
-
-            <div ref="babi" class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+        <div class="min-h-screen flex justify-center items-center">
+            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                 <div class="px-4 py-5 flex flex-col justify-center items-center ">
                     <!--                <ApplicationLogo class="" />-->
                     <ApplicationLogoTitle />
