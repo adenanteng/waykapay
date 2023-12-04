@@ -297,7 +297,7 @@ const tabData = ref('Umum')
             </nav>
         </div>
 
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
             <template v-if="props.response === undefined">
 <!--                <Loading />-->
             </template>
@@ -318,7 +318,7 @@ const tabData = ref('Umum')
                 <template v-if="tab=='Pulsa'" >
                     <template v-if="data.category == 'Pulsa'" >
                         <template v-if="data.brand == provider(form.customer_no)">
-                            <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
+                            <li class="relative px-6 py-5 shadow-lg flex items-center space-x-3">
                                 <div class="flex-shrink-0">
                                     <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
                                 </div>
@@ -366,7 +366,7 @@ const tabData = ref('Umum')
                                         </div>
                                     </template>
                                 </div>
-                            </div>
+                            </li>
                         </template>
                     </template>
                 </template>
@@ -375,7 +375,7 @@ const tabData = ref('Umum')
                     <template v-if="data.category == 'Data'" >
                         <template v-if="data.brand == provider(form.customer_no)">
                             <template v-if="data.type == tabData">
-                                <div class="relative rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl px-6 py-5 shadow-lg flex items-center space-x-3 focus-within:border-primary-300 focus-within:ring focus-within:ring-primary-200 focus-within:ring-opacity-50">
+                                <li class="relative px-6 py-5 shadow-lg flex items-center space-x-3">
                                     <div class="flex-shrink-0">
                                         <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
                                     </div>
@@ -423,14 +423,14 @@ const tabData = ref('Umum')
                                             </div>
                                         </template>
                                     </div>
-                                </div>
+                                </li>
                             </template>
 
                         </template>
                     </template>
                 </template>
             </template>
-        </div>
+        </ul>
 
         <DialogModal :show="confirmingModal" @close="closeModal">
             <template #title>

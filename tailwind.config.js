@@ -31,6 +31,7 @@ module.exports = {
             red: colors.red,
             violet: colors.violet,
             yellow: colors.yellow,
+            orange: colors.orange,
             "vtd-primary": colors.sky, // Light mode Datepicker color
             "vtd-secondary": colors.gray, // Dark mode Datepicker color
         },

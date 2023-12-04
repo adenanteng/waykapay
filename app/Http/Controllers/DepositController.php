@@ -9,6 +9,7 @@ use App\Models\TransactionOffline;
 use App\Models\TransactionQris;
 use App\Models\User;
 use DOKU\Client;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -134,38 +135,42 @@ class DepositController extends Controller
 //        dd($response);
 
         if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
-            $transaction = Transaction::create([
-                'sku' => '-',
+            try {
+                $transaction = Transaction::create([
+                    'sku' => '-',
 //                'order_id' => $merchantOrderId,
-                'order_id' => $merchantOrderId,
-                'product_name' => 'Deposit',
-                'customer_no' => '-',
-                'user_id' => $request['user_id'],
-                'status_id' => Transaction::PENDING,
-                'category_id' => Transaction::DEPOSIT,
-                'amount' => $request['amount'],
-                'gross_amount' => $request['amount'] + $admin_fee,
-                'last_amount' => $user->wallet_balance,
-                'admin_fee' => $admin_fee,
-                'desc' => isset($response['id']) ?? isset($response['deposit_id'])
-            ]);
+                    'order_id' => $merchantOrderId,
+                    'product_name' => 'Deposit',
+                    'customer_no' => '-',
+                    'user_id' => $request['user_id'],
+                    'status_id' => Transaction::PENDING,
+                    'category_id' => Transaction::DEPOSIT,
+                    'amount' => $request['amount'],
+                    'gross_amount' => $request['amount'] + $admin_fee,
+                    'last_amount' => $user->wallet_balance,
+                    'admin_fee' => $admin_fee,
+                    'desc' => isset($response['id']) ?? isset($response['deposit_id'])
+                ]);
 
-            if ($request['method']['id'] <= 6) {
-                $virtual_account = TransactionBankTransfer::create([
-                    'transaction_id' => $transaction->id,
-                    'bank_id' => $request['method']['id'],
-                    'va_number' => $response['code'][$sender_bank_type],
-                    'payment_url' => '-',
-                    'exp_time' => Carbon::tomorrow(),
-                ]);
-            } elseif ($request['method']['id'] == 13) {
-                $offline_account = TransactionOffline::create([
-                    'transaction_id' => $transaction->id,
-                    'bank_id' => $request['method']['id'],
-                    'payment_code' => $response['response']['alfamart']['code'],
-                    'payment_url' => '-',
-                    'exp_time' => Carbon::tomorrow(),
-                ]);
+                if ($request['method']['id'] <= 6) {
+                    $virtual_account = TransactionBankTransfer::create([
+                        'transaction_id' => $transaction->id,
+                        'bank_id' => $request['method']['id'],
+                        'va_number' => $response['code'][$sender_bank_type],
+                        'payment_url' => '-',
+                        'exp_time' => Carbon::tomorrow(),
+                    ]);
+                } elseif ($request['method']['id'] == 13) {
+                    $offline_account = TransactionOffline::create([
+                        'transaction_id' => $transaction->id,
+                        'bank_id' => $request['method']['id'],
+                        'payment_code' => $response['response']['alfamart']['code'],
+                        'payment_url' => '-',
+                        'exp_time' => Carbon::tomorrow(),
+                    ]);
+                }
+            } catch (Exception $e) {
+                dd($e->getMessage());
             }
 
         } else {

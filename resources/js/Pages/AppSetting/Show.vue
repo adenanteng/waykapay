@@ -28,7 +28,9 @@ const {...userInfo} = computed(() => usePage().props.appSetting).value;
 const deleteRedis = () => {
     form.delete(route('setting.destroy', userInfo), {
         preserveScroll: true,
-        // onSuccess: () => closeModal(),
+        onSuccess: () => {
+
+        }
         // onError: () => passwordInput.value.focus(),
         // onFinish: () => form.reset(),
     });

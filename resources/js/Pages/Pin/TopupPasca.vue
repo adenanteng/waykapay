@@ -51,12 +51,31 @@ const otpInput = ref(VOtpInput | null);
 const bindModal = ref("");
 
 const handleOnComplete = (value) => {
-    console.log("OTP completed: ", value);
+    // console.log("OTP completed: ", value);
+    // router.get(
+    //     route('pin.confirm'),
+    //     { pin: value },
+    //     {
+    //         preserveState: true,
+    //         replace: true,
+    //         onSuccess: () => {
+    //             // storeInformation()
+    //             console.log('berhasil')
+    //         },
+    //         onError: () => {
+    //             msgError.value=true
+    //             console.log('anjing')
+    //         },
+    //         onFinish: () => {
+    //             console.log('badut')
+    //         },
+    //     }
+    // );
     storeInformation()
 };
 
 const handleOnChange = (value) => {
-    console.log("OTP changed: ", value);
+    // console.log("OTP changed: ", value);
 };
 
 const clearInput = () => {
@@ -64,9 +83,11 @@ const clearInput = () => {
 };
 
 const fillInput = (value) => {
-    console.log(value);
+    // console.log(value);
     otpInput.value?.fillInput(value);
 };
+
+const msgError = ref(false);
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:m')
@@ -120,6 +141,7 @@ function formatPrice(value) {
                                 @on-complete="handleOnComplete"
                             />
                             <InputError :message="form.errors.pin" class="mt-2"/>
+                            <p v-if="msgError" class="text-sm text-red-600 mt-2">Pin salah</p>
 
                             <!--                            <button @click="clearInput()">Clear Input</button>-->
                             <!--                            <button @click="fillInput('2929')">Fill Input</button>-->

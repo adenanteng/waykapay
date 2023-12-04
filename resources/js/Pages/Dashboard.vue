@@ -165,13 +165,40 @@ const onSlideChange = (swiper) => {
                         <p class="text-xs text-green-600 dark:text-gray-900">TV</p>
                     </div>
                 </Link>
+                <Link :href="route('etoll.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-cards-blank text-2xl text-red-600 dark:text-gray-900" />
+                        <p class="text-xs text-red-600 dark:text-gray-900">E-Toll</p>
+                    </div>
+                </Link>
+            </div>
+        </div>
 
-                <Link :href="route('internet.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">
+        <div class="">
+            <h3 class="text-gray-700 text-sm ml-3 mt-2 mb-1">Pascabayar</h3>
+            <div class="grid grid-cols-3 gap-4">
+                <Link :href="route('pasca.bpjs.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-green-300 dark:from-green-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-heart-pulse text-2xl text-green-600 dark:text-green-900" />
+                        <p class="text-xs text-green-600 dark:text-gray-900">BPJS</p>
+                    </div>
+                </Link>
+
+                <Link :href="route('pasca.internet.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">
                     <div class="text-center">
                         <i class="fa-regular fa-router text-2xl text-red-600 dark:text-gray-900" />
                         <p class="text-xs text-red-600 dark:text-gray-900">Internet</p>
                     </div>
                 </Link>
+
+<!--                <Link :href="route('internet.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">-->
+<!--                    <div class="text-center">-->
+<!--                        <i class="fa-regular fa-car-side text-2xl text-red-600 dark:text-gray-900" />-->
+<!--                        <p class="text-xs text-red-600 dark:text-gray-900">Multifinance</p>-->
+<!--                    </div>-->
+<!--                </Link>-->
+
+
             </div>
         </div>
 

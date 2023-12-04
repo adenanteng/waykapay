@@ -1,5 +1,5 @@
 <script setup>
-import { defineComponent, h } from 'vue'
+import {defineComponent, h, ref} from 'vue'
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";

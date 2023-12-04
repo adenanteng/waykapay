@@ -16,7 +16,7 @@ class ProductInternetController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Product/Internet/Index', [
+        return Inertia::render('Product/PascaInternet/Index', [
 //            'users' => auth()->user(),
         ]);
     }
@@ -28,7 +28,7 @@ class ProductInternetController extends Controller
      */
     public function indihome()
     {
-        return Inertia::render('Product/Internet/Indihome/Index');
+        return Inertia::render('Product/PascaInternet/Indihome/Index');
     }
 
     /**

@@ -105,10 +105,10 @@ class Transaction extends Model
 //        self::PASCA_HP => 'Pasca HP',
         self::PASCA_INTERNET => 'Internet',
         self::PASCA_TV => 'TV Pascabayar',
-//        self::PASCA_BPJSK => 'BPJS Kesehatan',
-//        self::PASCA_BPJSTK => 'PBJS Ketenagakerjaan',
+        self::PASCA_BPJSK => 'BPJS Kesehatan',
+        self::PASCA_BPJSTK => 'PBJS Ketenagakerjaan',
 //        self::PASCA_BPJSTKPU => 'PBJS Ketenagakerjaan Penerima Upah',
-//        self::PASCA_MULTIFINANCE => 'Multifinance',
+        self::PASCA_MULTIFINANCE => 'Multifinance',
 //        self::PASCA_PBB => 'Pasca PBB',
 //        self::PASCA_GASNEGARA => 'Pasca Gas Negara',
 //        self::PASCA_SAMSAT => 'Pasca Samsat',
@@ -133,6 +133,7 @@ class Transaction extends Model
         'wallet_account',
         'offline_account',
         'money_transfer',
+        'pasca_desc'
     ];
 
     public function getCreatedAttribute()
@@ -182,5 +183,10 @@ class Transaction extends Model
     public function offline_account(): HasOne
     {
         return $this->hasOne(TransactionOffline::class, 'transaction_id', 'id');
+    }
+
+    public function pasca_desc(): HasOne
+    {
+        return $this->hasOne(TransactionPasca::class, 'transaction_id', 'id');
     }
 }
