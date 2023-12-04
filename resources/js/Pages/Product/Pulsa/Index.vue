@@ -318,7 +318,7 @@ const tabData = ref('Umum')
                 <template v-if="tab=='Pulsa'" >
                     <template v-if="data.category == 'Pulsa'" >
                         <template v-if="data.brand == provider(form.customer_no)">
-                            <li class="relative px-6 py-5 shadow-lg flex items-center space-x-3">
+                            <li class="relative px-6 py-5 flex items-center space-x-3">
                                 <div class="flex-shrink-0">
                                     <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
                                 </div>
@@ -375,7 +375,7 @@ const tabData = ref('Umum')
                     <template v-if="data.category == 'Data'" >
                         <template v-if="data.brand == provider(form.customer_no)">
                             <template v-if="data.type == tabData">
-                                <li class="relative px-6 py-5 shadow-lg flex items-center space-x-3">
+                                <li class="relative px-6 py-5 flex items-center space-x-3">
                                     <div class="flex-shrink-0">
                                         <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
                                     </div>
