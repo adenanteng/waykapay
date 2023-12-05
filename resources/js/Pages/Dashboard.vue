@@ -50,12 +50,6 @@ const onSlideChange = (swiper) => {
     // console.log(swipeMenu);
 };
 
-onMounted(() => {
-    window.otpless = (otplessUser) => {
-        alert(JSON.stringify(otplessUser));
-    }
-})
-
 </script>
 
 <template>
