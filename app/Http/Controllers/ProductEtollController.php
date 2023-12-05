@@ -27,13 +27,13 @@ class ProductEtollController extends Controller
      */
     public function show($product)
     {
-        $response = Helper::pricelist();
+//        $response = Helper::pricelist();
 
 //        dd($response);
 //        if ($response->successful()) {
         return Inertia::render('Product/Etoll/Show', [
             'users' => auth()->user(),
-            'response' => Inertia::lazy(fn () => $response),
+            'response' => Inertia::lazy(fn () => Helper::pricelist()),
             'product' => $product,
             'fee_25' => Helper::fee()->etoll_25,
             'fee_50' => Helper::fee()->etoll_50,

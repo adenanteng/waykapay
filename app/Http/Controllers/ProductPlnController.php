@@ -41,7 +41,7 @@ class ProductPlnController extends Controller
     public function inquiryPrepaid(Request $request)
     {
 //        dd($request->all());
-        $response = Helper::pricelist();
+//        $response = Helper::pricelist();
 
         $customer = Http::post('https://api.digiflazz.com/v1/transaction', [
             'commands' => 'pln-subscribe',
@@ -52,7 +52,7 @@ class ProductPlnController extends Controller
             return Inertia::render('Product/Pln/Prepaid/CreateEdit', [
                 'users' => auth()->user(),
                 'customer' => $customer->object(),
-                'response'  => Inertia::lazy(fn () => $response),
+                'response'  => Inertia::lazy(fn () => Helper::pricelist()),
                 'fee_25' => Helper::fee()->pln_25,
                 'fee_50' => Helper::fee()->pln_50,
                 'fee_75' => Helper::fee()->pln_75,

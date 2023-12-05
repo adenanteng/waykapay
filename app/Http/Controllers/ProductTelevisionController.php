@@ -28,12 +28,12 @@ class ProductTelevisionController extends Controller
      */
     public function show($product)
     {
-        $response = Helper::pricelist();
+//        $response = Helper::pricelist();
 
 //        if ($response->successful()) {
             return Inertia::render('Product/Television/Show', [
                 'users' => auth()->user(),
-                'response' => Inertia::lazy(fn () => $response),
+                'response' => Inertia::lazy(fn () => Helper::pricelist()),
                 'product' => $product,
                 'fee_25' => Helper::fee()->tv_25,
                 'fee_50' => Helper::fee()->tv_50,

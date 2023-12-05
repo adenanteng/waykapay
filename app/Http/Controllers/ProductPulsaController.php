@@ -17,12 +17,12 @@ class ProductPulsaController extends Controller
      */
     public function index()
     {
-        $response = Helper::pricelist();
+//        $response = Helper::pricelist();
 
 //        if ($response->successful()) {
             return Inertia::render('Product/Pulsa/Index', [
                 'users' => auth()->user(),
-                'response' => Inertia::lazy(fn () => $response),
+                'response' => Inertia::lazy(fn () => Helper::pricelist()),
                 'fee_25' => Helper::fee()->pulsa_25,
                 'fee_50' => Helper::fee()->pulsa_50,
                 'fee_75' => Helper::fee()->pulsa_75,

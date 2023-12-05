@@ -15,7 +15,7 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div class="rounded-3xl border border-gray-300 bg-white bg-opacity-50 backdrop-blur-2xl">
+    <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl">
         <div v-for="loader in 6" class="animate-pulse relative px-6 py-5 flex items-center space-x-3">
             <div class="flex-shrink-0">
                 <div class="h-10 w-10 rounded-full bg-gray-300" ></div>
