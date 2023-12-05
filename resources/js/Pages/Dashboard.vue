@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
@@ -49,6 +49,12 @@ const onSwiper = (swiper) => {
 const onSlideChange = (swiper) => {
     // console.log(swipeMenu);
 };
+
+onMounted(() => {
+    window.otpless = (otplessUser) => {
+        alert(JSON.stringify(otplessUser));
+    }
+})
 
 </script>
 
