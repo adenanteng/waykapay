@@ -32,7 +32,9 @@ onMounted(() => {
 <template>
     <Head title="Login"/>
 
-    <div id="otpless-login-page">
+    <div class="min-h-screen flex justify-center items-center">
+        <div id="otpless-login-page">
 
+        </div>
     </div>
 </template>
