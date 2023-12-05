@@ -8,15 +8,22 @@ defineProps({
     darkMode: Boolean
 });
 
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
-
 onMounted(() => {
     window.otpless = (otplessUser) => {
-        alert(JSON.stringify(otplessUser));
+        // alert(JSON.stringify(otplessUser));
+
+        const form = useForm({
+            phone: JSON.stringify(otplessUser['waNumber']),
+            // email: JSON.stringify(otplessUser['waNumber']),
+        });
+        form.post(route('otp.acc'), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            // replace: true,
+            onSuccess: () => {
+
+            }
+        });
     }
 })
 

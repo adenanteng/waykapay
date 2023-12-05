@@ -46,5 +46,9 @@ class DashboardController extends Controller
         return $data;
     }
 
+    public function accOtp(Request $request) {
+        dd($request->all());
+    }
+
 
 }
