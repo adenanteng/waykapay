@@ -8,24 +8,24 @@ defineProps({
     darkMode: Boolean
 });
 
-onMounted(() => {
-    window.otpless = (otplessUser) => {
-        // alert(JSON.stringify(otplessUser));
-
-        const form = useForm({
-            phone: JSON.stringify(otplessUser['waNumber']),
-            // email: JSON.stringify(otplessUser['waNumber']),
-        });
-        form.post(route('otp.acc'), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            // replace: true,
-            onSuccess: () => {
-
-            }
-        });
-    }
-})
+// onMounted(() => {
+//     window.otpless = (otplessUser) => {
+//         // alert(JSON.stringify(otplessUser));
+//
+//         const form = useForm({
+//             phone: JSON.stringify(otplessUser['waNumber']),
+//             // email: JSON.stringify(otplessUser['waNumber']),
+//         });
+//         form.post(route('otp.acc'), {
+//             errorBag: 'storeInformation',
+//             preserveScroll: true,
+//             // replace: true,
+//             onSuccess: () => {
+//
+//             }
+//         });
+//     }
+// })
 
 </script>
 
