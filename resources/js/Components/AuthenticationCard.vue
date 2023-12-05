@@ -22,17 +22,11 @@ watch(darkMode, (newDarkMode) => {
     localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
 })
 
-// onMounted(() => {
-//     window.otpless = (otplessUser) => {
-//         alert(JSON.stringify(otplessUser));
-//     }
-// })
-
 </script>
 
 <template>
 
-    <div id="otpless-login-page" class="" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
+    <div class="" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
         <div class="min-h-screen flex bg-white bg-glass bg-fixed" >
             <div class="min-h-screen mb-80 lg:mb-0 flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div class="mx-auto w-full max-w-sm lg:w-96 py-10">

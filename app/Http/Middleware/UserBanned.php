@@ -25,7 +25,7 @@ class UserBanned
 
             $request->session()->regenerateToken();
 
-            session()->flash('flash.banner', 'akunmu nonaktif, hubungi admin!');
+            session()->flash('flash.banner', 'Akunmu nonaktif, hubungi admin!');
             session()->flash('flash.bannerStyle', 'danger');
             return redirect()->route('login');
         }

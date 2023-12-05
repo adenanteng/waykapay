@@ -26,12 +26,12 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/all.min.css') }}">
 
-{{--        <script--}}
-{{--            type="text/javascript"--}}
-{{--            src="https://otpless.com/auth.js"--}}
-{{--            cid="11PUMM5B0OOP6S64C6JOIF049GMFNGXU">--}}
+        <script
+            type="text/javascript"
+            src="https://otpless.com/auth.js"
+            cid="11PUMM5B0OOP6S64C6JOIF049GMFNGXU">
 
-{{--        </script>--}}
+        </script>
 
         <script>
             // On page load or when changing themes, best to add inline in `head` to avoid FOUC

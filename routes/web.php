@@ -51,8 +51,12 @@ Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigi
 //Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
 //Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+Route::inertia('/login-otp', 'Auth/LoginOtp')->name('login.otp');
+
+Route::middleware(['auth:sanctum', 'phone', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/otp/create', [DashboardController::class, 'createOtp'])->name('otp.create');
+    Route::get('/otp/request', [DashboardController::class, 'reqOtp'])->name('otp.req');
 
     Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
     Route::post('/deposit/method', [DepositController::class, 'method'])->name('deposit.method');

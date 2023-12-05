@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Otpless\OTPLessAuth;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -27,6 +28,15 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
+
+        $auth = new OtplessAuth();
+        $data = $auth->generateMagicLink(
+                        $input['phone'],
+                        $input['email'],
+                        "11PUMM5B0OOP6S64C6JOIF049GMFNGXU",
+                        "2j07p4bhipk2oz8k6mo0j7dlenjj86ri",
+                        "https://waykapay.com/dashboard",
+                        null);
 
         return User::create([
             'slug' => rand(100000,999999),
