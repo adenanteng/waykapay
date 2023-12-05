@@ -105,6 +105,10 @@ class MoneyTransferController extends Controller
 //            'transaction' => $transaction,
 //        ]);
 
+        Helper::sendNotification();
+
+//        return $response->object()->data->deposit;
+
         return Inertia::render('History/Show', [
             'history' => $transaction,
             'goBack' => false,

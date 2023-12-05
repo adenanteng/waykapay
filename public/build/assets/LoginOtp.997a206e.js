@@ -1,0 +1,1 @@
+import{e as s,b as t,u as a,F as o,a as e,o as n,Z as r}from"./app.73f98d73.js";const c=e("div",{class:"min-h-screen flex justify-center items-center"},[e("div",{id:"otpless-login-page"})],-1),_={__name:"LoginOtp",props:{canResetPassword:Boolean,status:String,darkMode:Boolean},setup(i){return(l,p)=>(n(),s(o,null,[t(a(r),{title:"Login"}),c],64))}};export{_ as default};

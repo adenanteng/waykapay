@@ -8,6 +8,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MoneyTransferController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PinController;
 use App\Http\Controllers\PricingController;
@@ -48,10 +49,13 @@ Route::get('/share/{transaction}', [TransactionController::class, 'share'])->nam
 Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
 Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
+Route::get('/register/device?token={token}', [WebHookController::class, 'webhookHandlerPushy']);
 //Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
 //Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
 
 Route::inertia('/login-otp', 'Auth/LoginOtp')->name('login.otp');
+Route::get('push-notification', [NotificationController::class, 'index']);
+Route::post('sendNotification', [NotificationController::class, 'sendNotification'])->name('send.notification');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

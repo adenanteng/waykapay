@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Input\Input;
 
 class WebHookController extends Controller
 {
@@ -172,6 +173,17 @@ class WebHookController extends Controller
         }
 
         Helper::update_digiflazz_saldo($anj->data->buyer_last_saldo);
+
+        return response()->json('ok');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function webhookHandlerPushy(){
+        $start = Input::get('token');
+        Log::debug($start);
 
         return response()->json('ok');
     }
