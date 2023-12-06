@@ -50,6 +50,10 @@ const onSlideChange = (swiper) => {
     // console.log(swipeMenu);
 };
 
+// Dalam JavaScript di WebView
+AndroidBridge.sendDataToKotlin("Data yang ingin Anda bagikan")
+
+
 </script>
 
 <template>
