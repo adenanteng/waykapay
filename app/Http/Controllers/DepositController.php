@@ -123,7 +123,6 @@ class DepositController extends Controller
             ));
         }
 
-
         // Set response json
         $responseJson = curl_exec($curl);
         $response = json_decode($responseJson, true);

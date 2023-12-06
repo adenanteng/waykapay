@@ -105,7 +105,15 @@ class MoneyTransferController extends Controller
 //            'transaction' => $transaction,
 //        ]);
 
-//        Helper::sendNotification();
+        if (auth()->user()->device_token) {
+            $msg = array([
+                'title' => 'Transfer Berhasil',
+                'body' => 'Lorem ipsum dolor sit amet',
+                'badge' => 1,
+                'sound' => 'ping.aiff'
+            ]);
+            Helper::sendNotification(auth()->user()->device_token, $msg);
+        }
 
 //        return $response->object()->data->deposit;
 

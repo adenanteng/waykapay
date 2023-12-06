@@ -102,40 +102,25 @@ class Helper
         Redis::del('appsetting');
     }
 
-    public static function sendNotification()
+    public static function sendNotification($token, $msg)
     {
-//        $firebaseToken = User::whereNotNull('device_token')->pluck('device_token')->all();
-        $firebaseToken = 'xTlVto47Edh2vjjKZMXlFa0gSrp2';
 
-        $SERVER_API_KEY = env('FCM_SERVER_KEY');
+        $response = Http::post('https://api.pushy.me/push?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
+            'to' => $token,
+            'data' => array([
+                'message' => 'Waykapay',
+            ]),
+            'notification'  => array([
+                'title' => 'Hello World',
+                'body' => 'Hello World \u270c',
+                'badge' => 1,
+                'sound' => 'ping.aiff'
+            ])
+        ]);
 
-        $data = [
-            "registration_ids" => $firebaseToken,
-            "notification" => [
-                "title" => 'Hello World',
-                "body" => 'Lorem ipsum',
-            ]
-        ];
-        $dataString = json_encode($data);
-
-        $headers = [
-            'Authorization: key=' . $SERVER_API_KEY,
-            'Content-Type: application/json',
-        ];
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
-
-        $response = curl_exec($ch);
 
 //        return back()->with('success', 'Notification send successfully.');
 //        return true;
-        dd($response);
+        dd($response->object());
     }
 }
