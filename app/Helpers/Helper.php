@@ -125,6 +125,6 @@ class Helper
 
 //        return back()->with('success', 'Notification send successfully.');
 //        return true;
-        dd($response->object());
+        dd($response->object(), json_encode($array));
     }
 }
