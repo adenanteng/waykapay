@@ -41,8 +41,8 @@
             //     document.documentElement.classList.remove('dark')
             // }
 
-            console.log("hahahaha");
-            AndroidBridge.sendDataToKotlin("Data yang ingin Anda bagikan");
+            // console.log("hahahaha");
+            // AndroidBridge.sendDataToKotlin("Data yang ingin Anda bagikan");
 
             function halo() {
                 try {
