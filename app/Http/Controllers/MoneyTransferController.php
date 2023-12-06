@@ -65,44 +65,54 @@ class MoneyTransferController extends Controller
         $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();
 
-//        $transaction = Transaction::create([
-//            'sku' => '-',
-//            'order_id' => strtolower(Str::random(8)),
-//            'product_name' => 'Kirim uang',
-//            'customer_no' => $to->phone,
-//            'user_id' => $user->id,
-//            'status_id' => Transaction::PENDING,
-//            'category_id' => Transaction::TRANSFER,
-//            'amount' => $request['amount'],
-//            'gross_amount' => $request['amount'] + $request['bank']['admin'],
-//            'last_amount' => $user->wallet_balance,
-//            'admin_fee' => $request['bank']['admin'],
-//            'desc' => $request['desc'],
-//        ]);
-//
-//        $money_transfer = TransactionMoneyTransfer::create([
-//            'transaction_id' => $transaction->id,
-//            'bank_id' => $request['bank']['id'],
-//            'to_name' => $to->name,
-//            'to_number' => $to->phone,
-//            'to_id' => $to->id,
-//        ]);
-//
-//        $user->withdraw($transaction->gross_amount);
-//        $to->deposit($transaction->amount);
-//
-//        $transaction->update([
-//            'status_id' => Transaction::SUCCESS
-//        ]);
+        $transaction = Transaction::create([
+            'sku' => '-',
+            'order_id' => strtolower(Str::random(8)),
+            'product_name' => 'Kirim uang',
+            'customer_no' => $to->phone,
+            'user_id' => $user->id,
+            'status_id' => Transaction::PENDING,
+            'category_id' => Transaction::TRANSFER,
+            'amount' => $request['amount'],
+            'gross_amount' => $request['amount'] + $request['bank']['admin'],
+            'last_amount' => $user->wallet_balance,
+            'admin_fee' => $request['bank']['admin'],
+            'desc' => $request['desc'],
+        ]);
+
+        $money_transfer = TransactionMoneyTransfer::create([
+            'transaction_id' => $transaction->id,
+            'bank_id' => $request['bank']['id'],
+            'to_name' => $to->name,
+            'to_number' => $to->phone,
+            'to_id' => $to->id,
+        ]);
+
+        $user->withdraw($transaction->gross_amount);
+        $to->deposit($transaction->amount);
+
+        $transaction->update([
+            'status_id' => Transaction::SUCCESS
+        ]);
 
         if (auth()->user()->device_token) {
             $msg = [
-                'title' => 'Transfer Berhasil',
+                'title' => 'Kirim uang ke '.$to->name.' berhasil!',
                 'body' => 'Lorem ipsum dolor sit amet',
                 'badge' => 1,
                 'sound' => 'ping.aiff'
             ];
-            Helper::sendNotification(auth()->user()->device_token, $msg);
+            Helper::sendNotification($user->device_token, $msg);
+        }
+
+        if ($to->device_token) {
+            $msg = [
+                'title' => 'Kirim uang dari '.$to->name.' sejumlah Rp '.$request['amount'],
+                'body' => 'Lorem ipsum dolor sit amet',
+                'badge' => 1,
+                'sound' => 'ping.aiff'
+            ];
+            Helper::sendNotification($to->device_token, $msg);
         }
 
 //        return $response->object()->data->deposit;

@@ -105,9 +105,9 @@ class Helper
     public static function sendNotification($token, $msg)
     {
         $array = [
-            'to' => auth()->user()->device_token,
+            'to' => $token,
             'data' => [
-                'message' => 'Waykapay',
+                'message' => $msg['title'],
             ],
             'notification'  => [
                 'title' => $msg['title'],
@@ -126,6 +126,6 @@ class Helper
 
 //        return back()->with('success', 'Notification send successfully.');
 //        return true;
-        dd($response->object(), json_encode($array));
+//        dd($response->object(), json_encode($array));
     }
 }
