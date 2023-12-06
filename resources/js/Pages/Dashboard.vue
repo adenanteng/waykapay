@@ -51,16 +51,19 @@ const onSlideChange = (swiper) => {
 };
 
 // Dalam skrip JavaScript di Vue.js
-try {
-    // eslint-disable-next-line no-undef
-    if (AndroidBridge) {
+function halo() {
+    try {
         // eslint-disable-next-line no-undef
-        console.log("Trying to call AndroidBridge.sendDataToKotlin");
-        AndroidBridge.sendDataToKotlin("Data yang ingin Anda bagikan");
+        if (AndroidBridge) {
+            // eslint-disable-next-line no-undef
+            console.log("Trying to call AndroidBridge.sendDataToKotlin");
+            AndroidBridge.sendDataToKotlin("Data yang ingin Anda bagikan");
+        }
+    } catch (error) {
+        console.error(error.message);
     }
-} catch (error) {
-    console.error(error.message);
 }
+
 
 
 </script>
