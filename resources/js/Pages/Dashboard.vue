@@ -50,8 +50,6 @@ const onSlideChange = (swiper) => {
     // console.log(swipeMenu);
 };
 
-// Dalam skrip JavaScript di Vue.js
-AndroidBridge.sendDataToKotlin("fuck u");
 function halo() {
     try {
         // eslint-disable-next-line no-undef
