@@ -26,6 +26,16 @@ class WebHookController extends Controller
                 case ('SUCCESS'):
                     $user->deposit($request['amount']);
                     $status_id = Transaction::SUCCESS;
+
+                    if ($user->device_token) {
+                        $msg = [
+                            'title' => 'Deposit Rp '.$request['amount'].' berhasil!',
+                            'body' => 'Lorem ipsum dolor sit amet',
+                            'badge' => 1,
+                            'sound' => 'ping.aiff'
+                        ];
+                        Helper::sendNotification($user->device_token, $msg);
+                    }
                     break;
 
                 case ('CANCEL'):
@@ -154,6 +164,16 @@ class WebHookController extends Controller
                     $user->update(
                         [ 'coin'=> DB::raw('coin+6') ]
                     );
+
+                    if ($user->device_token) {
+                        $msg = [
+                            'title' => 'Transaksi '.$transaction->product_name.' berhasil!',
+                            'body' => 'Lorem ipsum dolor sit amet',
+                            'badge' => 1,
+                            'sound' => 'ping.aiff'
+                        ];
+                        Helper::sendNotification($user->device_token, $msg);
+                    }
                     break;
 
                 case ('Pending'):
@@ -169,6 +189,16 @@ class WebHookController extends Controller
                         'status_id' => Transaction::ERROR,
                         'desc' => $anj->data->rc.' '.$anj->data->message,
                     ]);
+
+                    if ($user->device_token) {
+                        $msg = [
+                            'title' => 'Transaksi '.$transaction->product_name.' gagal!',
+                            'body' => 'Lorem ipsum dolor sit amet',
+                            'badge' => 1,
+                            'sound' => 'ping.aiff'
+                        ];
+                        Helper::sendNotification($user->device_token, $msg);
+                    }
             }
         }
 
