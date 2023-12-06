@@ -105,7 +105,7 @@ class Helper
     public static function sendNotification($token, $msg)
     {
 
-        $response = Http::post('https://api.pushy.me/push?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
+        $array = [
             'to' => $token,
             'data' => array([
                 'message' => 'Waykapay',
@@ -116,6 +116,10 @@ class Helper
                 'badge' => 1,
                 'sound' => 'ping.aiff'
             ])
+        ];
+
+        $response = Http::post('https://api.pushy.me/push?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
+            json_encode($array),
         ]);
 
 
