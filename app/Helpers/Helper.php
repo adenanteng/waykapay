@@ -111,8 +111,8 @@ class Helper
                 'message' => 'Waykapay',
             ]),
             'notification'  => array([
-                'title' => $msg->title,
-                'body' => $msg->body,
+                'title' => $msg['title'],
+                'body' => $msg['body'],
                 'badge' => 1,
                 'sound' => 'ping.aiff'
             ])
