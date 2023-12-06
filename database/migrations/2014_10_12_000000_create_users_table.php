@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('device_token')->unique();
             $table->unsignedBigInteger('status_id')->default(1);
             $table->unsignedBigInteger('role_id');
             $table->integer('coin')->unsigned()->default(0);

@@ -105,7 +105,7 @@ class MoneyTransferController extends Controller
 //            'transaction' => $transaction,
 //        ]);
 
-        Helper::sendNotification();
+//        Helper::sendNotification();
 
 //        return $response->object()->data->deposit;
 

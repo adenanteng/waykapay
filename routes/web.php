@@ -49,7 +49,7 @@ Route::get('/share/{transaction}', [TransactionController::class, 'share'])->nam
 Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
 Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
-Route::get('/register/device?token={token}', [WebHookController::class, 'webhookHandlerPushy']);
+Route::get('/register/device', [WebHookController::class, 'webhookHandlerPushyRegister']);
 //Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
 //Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
 

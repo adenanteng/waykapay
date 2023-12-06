@@ -16,6 +16,6 @@ class VerifyCsrfToken extends Middleware
         'webhook-digiflazz',
         'webhook-flip-accept-payment',
         'webhook-doku-accept-payment',
-        'webhook-oke-connect'
+        'webhook-oke-connect',
     ];
 }

@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\Request as Req;
 
 class WebHookController extends Controller
 {
@@ -181,9 +181,9 @@ class WebHookController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function webhookHandlerPushy(){
-        $start = Input::get('token');
-        Log::debug($start);
+    public function webhookHandlerPushyRegister(){
+
+        Log::debug(Req::input('token'));
 
         return response()->json('ok');
     }
