@@ -105,7 +105,7 @@ class Helper
     public static function sendNotification($token, $msg)
     {
         $array = [
-            'to' => $token,
+            'to' => auth()->user()->device_token,
             'data' => [
                 'message' => 'Waykapay',
             ],
