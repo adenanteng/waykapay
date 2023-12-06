@@ -107,7 +107,7 @@ class MoneyTransferController extends Controller
 
         if ($to->device_token) {
             $msg = [
-                'title' => 'Kirim uang dari '.$to->name.' sejumlah Rp '.$request['amount'],
+                'title' => 'Kirim uang dari '.$user->name.' sejumlah Rp '.$request['amount'],
                 'body' => 'Lorem ipsum dolor sit amet',
                 'badge' => 1,
                 'sound' => 'ping.aiff'
