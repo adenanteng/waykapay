@@ -96,12 +96,12 @@ class MoneyTransferController extends Controller
 //        ]);
 
         if (auth()->user()->device_token) {
-            $msg = array([
+            $msg = [
                 'title' => 'Transfer Berhasil',
                 'body' => 'Lorem ipsum dolor sit amet',
                 'badge' => 1,
                 'sound' => 'ping.aiff'
-            ]);
+            ];
             Helper::sendNotification(auth()->user()->device_token, $msg);
         }
 
