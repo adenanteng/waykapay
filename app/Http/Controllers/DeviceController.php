@@ -41,6 +41,7 @@ class DeviceController extends Controller
 //            dd('chock');
         }
 
+        session()->flash('flash.banner', 'Notifikasi perangkat!');
         return Inertia::render('Device/Index', []);
 //        return to_route('profile.index');
     }

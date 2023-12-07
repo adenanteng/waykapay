@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
+use App\Models\Otp;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -32,52 +35,87 @@ class DashboardController extends Controller
     }
 
     public function reqOtp() {
-        // Your ID token to decode
-        $clientId = '11PUMM5B0OOP6S64C6JOIF049GMFNGXU';
-        $clientSecret = '2j07p4bhipk2oz8k6mo0j7dlenjj86ri';
 
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json',
-            'clientId' => $clientId,
-            'clientSecret' => $clientSecret
-        ])->post('https://auth.otpless.app/auth/otp/send',
-            [
-                "sendTo" => "6285156875180",
-                "orderId" => "akua",
-                "otpLength" => 6,
-            ],
-        );
+        $originalNumber = auth()->user()->phone;
+        $countryCode = '62'; // Replace with known country code of user.
+        $internationalNumber = preg_replace('/^0/', $countryCode, $originalNumber);
+//        echo $internationalNumber; // Will output: +6212345678
 
-//        dd($response->object());
 
-//        $responseResend = Http::withHeaders([
-//            'Content-Type' => 'application/json',
-//            'clientId' => $clientId,
-//            'clientSecret' => $clientSecret
-//        ])->post('https://auth.otpless.app/auth/otp/resend',
-//            [
-//                "orderId" => $response->object()->orderId,
-//            ],
-//        );
+        $key = "NI2OOUICFTWI23NNLM14";
+        $number = $internationalNumber;
+        $otp = rand(100000,999999);
+        $text = "Kode%20OTP%20Waykapay%20anda%20adalah%20".$otp;
 
-//        $responseVerify = Http::withHeaders([
-//            'Content-Type' => 'application/json',
-//            'clientId' => $clientId,
-//            'clientSecret' => $clientSecret
-//        ])->post('https://auth.otpless.app/auth/otp/verify',
-//            [
-//                "orderId" => $response->object()->orderId,
-//                "otp" => '999999',
-//                "sendTo" => '6285156875180'
-//            ],
-//        );
+        $url = "https://panel.rapiwha.com/send_message.php?apikey=".$key."&number=".$number."&text=".$text;
 
-        dd($response->object());
-//        return $data;
+//        dd($url);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            dd('error: '.$err);
+        } else {
+//            dd($response);
+            session()->flash('flash.banner', 'OTP terkirim!');
+
+            Otp::create([
+                'user_id' => auth()->user()->id,
+                'otp' => $otp
+            ]);
+
+//            $idk = Otp::where('user_id', auth()->user()->id);
+//            if ($idk) {
+//                $idk->update([
+//                    'otp' => $otp
+//                ]);
+//
+//            } else {
+//                Otp::create([
+//                    'user_id' => auth()->user()->id,
+//                    'otp' => $otp
+//                ]);
+//            }
+
+        }
+
     }
 
     public function accOtp(Request $request) {
-        dd($request->all());
+//        dd($request->all());
+        $idk = Otp::where('user_id', auth()->user()->id)->latest()->first();
+//        dd($idk->otp, $request['pin']);
+        if ($request['pin'] == $idk->otp) {
+            $user = auth()->user();
+            $user->update([
+                'phone_verified_at' => Carbon::now(),
+            ]);
+
+            $idk->update([
+                'status_id' => 0
+            ]);
+
+            session()->flash('flash.banner', 'Kode OTP benar!');
+            return to_route('dashboard');
+        } else {
+            session()->flash('flash.banner', 'Kode OTP salah!');
+            session()->flash('flash.bannerStyle', 'danger');
+        }
     }
 
 

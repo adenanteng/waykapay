@@ -18,7 +18,7 @@ class CheckPhone
     {
         if (   $request->routeIs('otp.create')
             || $request->routeIs('otp.req')
-//            || $request->routeIs('organisations.store')
+            || $request->routeIs('otp.acc')
 //            || $request->routeIs('logout')
         )
         {
@@ -28,7 +28,7 @@ class CheckPhone
         if (auth()->user()->phone_verified_at == null) {
             session()->flash('flash.banner', 'Whatsapp belum tervalidasi!');
             session()->flash('flash.bannerStyle', 'danger');
-            return redirect()->route('otp.create');
+            return redirect()->route('login.otp');
         }
 
         return $next($request);

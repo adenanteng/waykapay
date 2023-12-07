@@ -1,5 +1,5 @@
 <script setup>
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -24,14 +24,18 @@ const form = useForm({
     // amount: props.request.amount,
     // category_id: props.request.category_id,
     // fee: props.request.fee,
-    // pin: null,
+    pin: null,
 });
 
 // console.log(props.request)
 
+// onMounted(() => {
+//     otpInformation()
+// })
+
 const storeInformation = () => {
     form.pin = bindModal.value
-    form.post(route('product.topup'), {
+    form.post(route('otp.acc'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         // replace: true,
@@ -51,6 +55,7 @@ const otpInformation = () => {
         },
         onFinish: () => {
             otpReq.value=true
+
         },
     });
 };
@@ -140,9 +145,9 @@ function formatPrice(value) {
                     <!--                        </a>-->
                     <!--                    </div>-->
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan OTP</h1>
-                    <p class="text-sm text-gray-600">Masukkan OTP kamu, <button @click="otpInformation" class="text-primary-600 underline">kirim ulang OTP</button></p>
-                    <ActionMessage :on="form.recentlySuccessful" class="mt-1">
-                        Berhasil kirim ulang.
+                    <p class="text-sm text-gray-600">Masukkan OTP kamu, <button @click="otpInformation" class="text-primary-600 underline">kirim OTP</button></p>
+                    <ActionMessage :on="otpReq" class="mt-1">
+                        Berhasil kirim ulang ke {{ $page.props.user.phone }}.
                     </ActionMessage>
 
                     <div class="mt-10">
