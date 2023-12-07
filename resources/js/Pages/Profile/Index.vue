@@ -113,6 +113,12 @@ function formatPrice(value) {
                         <i class="fa-regular text-gray-900" :class="darkMode ? 'fa-moon' : 'fa-sun-bright' " />
                     </Link>
                 </li>
+                <li>
+                    <Link :href="route('device.index')" class="flex justify-between px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Perangkat</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
+                    </Link>
+                </li>
             </ul>
         </div>
 
@@ -174,13 +180,13 @@ function formatPrice(value) {
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li>
                     <Link :href="route('terms.show')" class="block px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Ketentuan Layanan</p>
+                        <p class="text-sm font-medium text-gray-900">Ketentuan layanan</p>
                     </Link>
                 </li>
 
                 <li>
                     <Link :href="route('policy.show')" class="block px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Kebijakan Privasi</p>
+                        <p class="text-sm font-medium text-gray-900">Kebijakan privasi</p>
                     </Link>
                 </li>
             </ul>

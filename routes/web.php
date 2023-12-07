@@ -4,6 +4,7 @@ use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
@@ -54,8 +55,6 @@ Route::get('/register/device', [WebHookController::class, 'webhookHandlerPushyRe
 //Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
 
 Route::inertia('/login-otp', 'Auth/LoginOtp')->name('login.otp');
-Route::get('push-notification', [NotificationController::class, 'index']);
-Route::post('sendNotification', [NotificationController::class, 'sendNotification'])->name('send.notification');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -134,7 +133,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
 
-//    Route::get('/profile', function () {return Inertia::render('Profile/Index');})->name('profile.index');
+//    Route::resource('/device', DeviceController::class)->names('device');
+    Route::get('/device', [DeviceController::class, 'index'])->name('device.index');
+    Route::get('/device/store', [DeviceController::class, 'store'])->name('device.store');
+
+
     Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');

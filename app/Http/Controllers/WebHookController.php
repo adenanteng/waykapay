@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Helpers\Helper;
+use App\Models\Device;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -214,6 +215,12 @@ class WebHookController extends Controller
     public function webhookHandlerPushyRegister(){
 
         Log::debug(Req::input('token'));
+
+        $device = Device::latest()->first();
+        $user = User::where('id', $device->user_id)->first();
+        $user->update([
+            'device_token' => Req::input('token'),
+        ]);
 
         return response()->json('ok');
     }
