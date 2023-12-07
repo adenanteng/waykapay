@@ -33,17 +33,47 @@ class DashboardController extends Controller
 
     public function reqOtp() {
         // Your ID token to decode
-
         $clientId = '11PUMM5B0OOP6S64C6JOIF049GMFNGXU';
         $clientSecret = '2j07p4bhipk2oz8k6mo0j7dlenjj86ri';
 
-        $auth = new OtplessAuth();
-        $token = $auth->decodeIdToken('', $clientId, $clientSecret, null);
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'clientId' => $clientId,
+            'clientSecret' => $clientSecret
+        ])->post('https://auth.otpless.app/auth/otp/send',
+            [
+                "sendTo" => "6285156875180",
+                "orderId" => "akua",
+                "otpLength" => 6,
+            ],
+        );
 
+//        dd($response->object());
 
-        $data = $auth->generateMagicLink('6282372892755', auth()->user()->email, $clientId, $clientSecret, "https://waykapay.com/dashboard", null);
+//        $responseResend = Http::withHeaders([
+//            'Content-Type' => 'application/json',
+//            'clientId' => $clientId,
+//            'clientSecret' => $clientSecret
+//        ])->post('https://auth.otpless.app/auth/otp/resend',
+//            [
+//                "orderId" => $response->object()->orderId,
+//            ],
+//        );
 
-        return $data;
+//        $responseVerify = Http::withHeaders([
+//            'Content-Type' => 'application/json',
+//            'clientId' => $clientId,
+//            'clientSecret' => $clientSecret
+//        ])->post('https://auth.otpless.app/auth/otp/verify',
+//            [
+//                "orderId" => $response->object()->orderId,
+//                "otp" => '999999',
+//                "sendTo" => '6285156875180'
+//            ],
+//        );
+
+        dd($response->object());
+//        return $data;
     }
 
     public function accOtp(Request $request) {
