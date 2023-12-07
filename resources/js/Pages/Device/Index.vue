@@ -29,21 +29,21 @@ onMounted(() => {
 //     );
 // });
 
-const form = useForm({
-    // user_id: props.request.users.id ?? null,
-    // customer_no: props.request.customer_no,
-});
+// const form = useForm({
+//     // user_id: props.request.users.id ?? null,
+//     // customer_no: props.request.customer_no,
+// });
 
-const storeInformation = () => {
-    form.get(route('device.store'), {
-        errorBag: 'storeInformation',
-        preserveScroll: true,
-        replace: true,
-        onSuccess: () => {
-            req.value = true
-        }
-    });
-};
+// const storeInformation = () => {
+//     form.get(route('device.store'), {
+//         errorBag: 'storeInformation',
+//         preserveScroll: true,
+//         replace: true,
+//         onSuccess: () => {
+//             req.value = true
+//         }
+//     });
+// };
 
 const req = ref(false)
 
@@ -104,13 +104,13 @@ function formatPrice(value) {
 <!--                            <i class="fa-duotone fa-coins text-amber-400"/>-->
                             <div class="ml-3 truncate">
                                 <div class="text-xs text-gray-500"></div>
-                                <button
+                                <Link
                                     class="text-sm font-medium text-primary-600 truncate"
                                     v-if="!req"
-                                    @click="storeInformation"
+                                    :href="route('device.store')"
                                 >
                                     Refresh perangkat
-                                </button>
+                                </Link>
                                 <div
                                     class="text-sm font-medium text-gray-600 truncate"
                                     v-else

@@ -41,6 +41,7 @@ class DeviceController extends Controller
 //            dd('chock');
         }
 
+
         return to_route('profile.index');
     }
 

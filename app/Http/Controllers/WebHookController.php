@@ -222,6 +222,8 @@ class WebHookController extends Controller
             'device_token' => Req::input('token'),
         ]);
 
+        $device->delete();
+
         return response()->json('ok');
     }
 
