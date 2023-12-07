@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91c65d92a382eec82fdf8641122cf3aa",
+    "content-hash": "ce9c9fa2953a067cc9112383d3b2f469",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1563,16 +1563,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.34.2",
+            "version": "v10.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c581caa233e380610b34cc491490bfa147a3b62b"
+                "reference": "91ec2d92d2f6007e9084fe06438b99c91845da69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c581caa233e380610b34cc491490bfa147a3b62b",
-                "reference": "c581caa233e380610b34cc491490bfa147a3b62b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/91ec2d92d2f6007e9084fe06438b99c91845da69",
+                "reference": "91ec2d92d2f6007e9084fe06438b99c91845da69",
                 "shasum": ""
             },
             "require": {
@@ -1605,7 +1605,7 @@
                 "symfony/console": "^6.2",
                 "symfony/error-handler": "^6.2",
                 "symfony/finder": "^6.2",
-                "symfony/http-foundation": "^6.3",
+                "symfony/http-foundation": "^6.4",
                 "symfony/http-kernel": "^6.2",
                 "symfony/mailer": "^6.2",
                 "symfony/mime": "^6.2",
@@ -1761,7 +1761,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-11-28T19:06:27+00:00"
+            "time": "2023-12-05T14:50:33+00:00"
         },
         {
             "name": "laravel/jetstream",
@@ -2789,69 +2789,6 @@
             "time": "2023-10-27T15:32:31+00:00"
         },
         {
-            "name": "myclabs/php-enum",
-            "version": "1.8.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "a867478eae49c9f59ece437ae7f9506bfaa27483"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/a867478eae49c9f59ece437ae7f9506bfaa27483",
-                "reference": "a867478eae49c9f59ece437ae7f9506bfaa27483",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^7.3 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "1.*",
-                "vimeo/psalm": "^4.6.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MyCLabs\\Enum\\": "src/"
-                },
-                "classmap": [
-                    "stubs/Stringable.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP Enum contributors",
-                    "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
-                }
-            ],
-            "description": "PHP Enum implementation",
-            "homepage": "http://github.com/myclabs/php-enum",
-            "keywords": [
-                "enum"
-            ],
-            "support": {
-                "issues": "https://github.com/myclabs/php-enum/issues",
-                "source": "https://github.com/myclabs/php-enum/tree/1.8.4"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/mnapoli",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/myclabs/php-enum",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2022-08-04T09:53:51+00:00"
-        },
-        {
             "name": "nesbot/carbon",
             "version": "2.72.0",
             "source": {
@@ -2957,132 +2894,6 @@
                 }
             ],
             "time": "2023-11-28T10:13:25+00:00"
-        },
-        {
-            "name": "netflie/laravel-notification-whatsapp",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/netflie/laravel-notification-whatsapp.git",
-                "reference": "0485e6fe1e0eeafc28842b8cb77a1a6563c68a9c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/netflie/laravel-notification-whatsapp/zipball/0485e6fe1e0eeafc28842b8cb77a1a6563c68a9c",
-                "reference": "0485e6fe1e0eeafc28842b8cb77a1a6563c68a9c",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/notifications": "~8.0 || ~9.0 || ~10.0",
-                "illuminate/support": "~8.0 || ~9.0 || ~10.0",
-                "netflie/whatsapp-cloud-api": "^2.0.0",
-                "php": ">=7.4"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.0",
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "NotificationChannels\\WhatsApp\\WhatsAppServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "NotificationChannels\\WhatsApp\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Álex Albarca",
-                    "email": "alex@netflie.es",
-                    "homepage": "https://www.netflie.es",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel notification driver for WhatsApp",
-            "homepage": "https://github.com/netflie/laravel-notification-whatsapp",
-            "keywords": [
-                "laravel",
-                "notification",
-                "whatsapp",
-                "whatsapp notification",
-                "whatsapp notifications channel"
-            ],
-            "support": {
-                "issues": "https://github.com/netflie/laravel-notification-whatsapp/issues",
-                "source": "https://github.com/netflie/laravel-notification-whatsapp/tree/1.2.0"
-            },
-            "time": "2023-06-12T16:29:22+00:00"
-        },
-        {
-            "name": "netflie/whatsapp-cloud-api",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/netflie/whatsapp-cloud-api.git",
-                "reference": "cca16a9d48bc4f30d5b9abe122de0edf1d866545"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/netflie/whatsapp-cloud-api/zipball/cca16a9d48bc4f30d5b9abe122de0edf1d866545",
-                "reference": "cca16a9d48bc4f30d5b9abe122de0edf1d866545",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.0",
-                "myclabs/php-enum": "^1.8",
-                "php": "^7.4 || ^8.0 || ^8.1",
-                "vlucas/phpdotenv": "^5.4"
-            },
-            "require-dev": {
-                "fakerphp/faker": "^1.19",
-                "friendsofphp/php-cs-fixer": "^3.13",
-                "phpspec/prophecy-phpunit": "^2.0",
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^9.0",
-                "symfony/var-dumper": "^5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Netflie\\WhatsAppCloudApi\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Álex Albarca",
-                    "email": "alex@albarca.es"
-                },
-                {
-                    "name": "Álex Albarca",
-                    "email": "alex@netflie.es"
-                }
-            ],
-            "description": "The first PHP SDK to send and receive messages using a cloud-hosted version of the WhatsApp Business Platform",
-            "support": {
-                "issues": "https://github.com/netflie/whatsapp-cloud-api/issues",
-                "source": "https://github.com/netflie/whatsapp-cloud-api/tree/2.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/aalbarca",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-11-19T16:21:30+00:00"
         },
         {
             "name": "nette/schema",
@@ -3376,16 +3187,16 @@
         },
         {
             "name": "otpless/otpless-auth-sdk",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/otpless-tech/otpless-php-auth-sdk.git",
-                "reference": "b0a5cf8ad8f02fff3c14a2957224f46c843fc69b"
+                "reference": "db67f38e9287ace093feb3119ff6b7aa02755ed6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/otpless-tech/otpless-php-auth-sdk/zipball/b0a5cf8ad8f02fff3c14a2957224f46c843fc69b",
-                "reference": "b0a5cf8ad8f02fff3c14a2957224f46c843fc69b",
+                "url": "https://api.github.com/repos/otpless-tech/otpless-php-auth-sdk/zipball/db67f38e9287ace093feb3119ff6b7aa02755ed6",
+                "reference": "db67f38e9287ace093feb3119ff6b7aa02755ed6",
                 "shasum": ""
             },
             "require": {
@@ -3416,9 +3227,9 @@
             "description": "SDK for Backend PHP SDK for resolving idToken and more.",
             "support": {
                 "issues": "https://github.com/otpless-tech/otpless-php-auth-sdk/issues",
-                "source": "https://github.com/otpless-tech/otpless-php-auth-sdk/tree/1.12.0"
+                "source": "https://github.com/otpless-tech/otpless-php-auth-sdk/tree/1.13.0"
             },
-            "time": "2023-12-03T19:47:58+00:00"
+            "time": "2023-12-05T11:52:43+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -8053,16 +7864,16 @@
         },
         {
             "name": "laravel/pint",
-            "version": "v1.13.6",
+            "version": "v1.13.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "3e3d2ab01c7d8b484c18e6100ecf53639c744fa7"
+                "reference": "4157768980dbd977f1c4b4cc94997416d8b30ece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/3e3d2ab01c7d8b484c18e6100ecf53639c744fa7",
-                "reference": "3e3d2ab01c7d8b484c18e6100ecf53639c744fa7",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/4157768980dbd977f1c4b4cc94997416d8b30ece",
+                "reference": "4157768980dbd977f1c4b4cc94997416d8b30ece",
                 "shasum": ""
             },
             "require": {
@@ -8115,20 +7926,20 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2023-11-07T17:59:57+00:00"
+            "time": "2023-12-05T19:43:12+00:00"
         },
         {
             "name": "laravel/sail",
-            "version": "v1.26.2",
+            "version": "v1.26.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "c0177786b1cd05b687b0fa11364aeeecb42cd3d8"
+                "reference": "fa1ad5fbb03686dfc752bfd1861d86091cc1c32d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/c0177786b1cd05b687b0fa11364aeeecb42cd3d8",
-                "reference": "c0177786b1cd05b687b0fa11364aeeecb42cd3d8",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/fa1ad5fbb03686dfc752bfd1861d86091cc1c32d",
+                "reference": "fa1ad5fbb03686dfc752bfd1861d86091cc1c32d",
                 "shasum": ""
             },
             "require": {
@@ -8180,7 +7991,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-11-27T14:46:06+00:00"
+            "time": "2023-12-02T18:26:39+00:00"
         },
         {
             "name": "mockery/mockery",
