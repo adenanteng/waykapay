@@ -144,8 +144,8 @@ function formatPrice(value) {
                     <!--                            </span>-->
                     <!--                        </a>-->
                     <!--                    </div>-->
-                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Masukkan OTP</h1>
-                    <p class="text-sm text-gray-600">Masukkan OTP kamu, <button @click="otpInformation" class="text-primary-600 underline">kirim OTP</button></p>
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Verifikasi Whatsapp</h1>
+                    <p class="text-sm text-gray-600">Masukkan kode OTP kamu, <button @click="otpInformation" class="text-primary-600 underline">kirim OTP</button></p>
                     <ActionMessage :on="otpReq" class="mt-1">
                         Berhasil kirim ulang ke {{ $page.props.user.phone }}.
                     </ActionMessage>
