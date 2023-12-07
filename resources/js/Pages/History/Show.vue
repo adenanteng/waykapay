@@ -293,16 +293,6 @@ function formatPrice(value) {
                 </template>
 
                 <div class="flex justify-center gap-2">
-                    <SecondaryButton
-                        v-if="!props.goBack"
-                        as="a"
-                        :href="route('dashboard')"
-                        class="justify-center w-full border border-gray-300 nightwind-prevent"
-                    >
-                        <i class="fa-regular fa-home mr-2" />
-                        Beranda
-                    </SecondaryButton>
-
                     <PrimaryButton
                         v-if="props.history.user_id == $page.props.user.id && props.history.category_id!=1"
                         as="a"
@@ -323,6 +313,18 @@ function formatPrice(value) {
                         Bagikan
                     </PrimaryButton>
 
+                </div>
+
+                <div class="">
+                    <SecondaryButton
+                        v-if="!props.goBack"
+                        as="a"
+                        :href="route('dashboard')"
+                        class="justify-center w-full border border-gray-300 nightwind-prevent"
+                    >
+                        <i class="fa-regular fa-home mr-2" />
+                        Beranda
+                    </SecondaryButton>
                 </div>
 
                 <div class="pb-80 lg:pb-0" />

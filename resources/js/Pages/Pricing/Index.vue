@@ -155,7 +155,7 @@ const lists = [
                 <div class="bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">
                     <div class="px-3 py-5 grid gap-3 ">
                         <h3 class="font-semibold text-gray-900 ml-2">
-                            Produk Pascabayar
+                            Produk Prabayar
                         </h3>
 
                         <template v-for="(list, listIdx) in lists" :key="list.id">

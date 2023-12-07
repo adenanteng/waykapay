@@ -10,8 +10,11 @@ function formatPrice(value) {
 </script>
 
 <template>
-    <template v-if="Number(props.price) < 25000">
-        Rp {{ formatPrice(Number(props.price) + Number($page.props.appSetting?.tv_25)) }}
+    <template v-if="Number(props.price) < 1000">
+        Rp {{ formatPrice(Number(props.price)) }}
+    </template>
+    <template v-else-if="Number(props.price) < 25000">
+        Rp {{ formatPrice(Number(props.price) + Number(props.fee_25)) }}
     </template>
     <template v-else-if="Number(props.price) < 50000">
         Rp {{ formatPrice(Number(props.price) + Number($page.props.appSetting?.tv_50)) }}
