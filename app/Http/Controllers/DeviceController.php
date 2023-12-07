@@ -41,7 +41,7 @@ class DeviceController extends Controller
 //            dd('chock');
         }
 
-
+        return Inertia::render('Device/Index', []);
 //        return to_route('profile.index');
     }
 
