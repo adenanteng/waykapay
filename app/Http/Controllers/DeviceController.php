@@ -42,7 +42,7 @@ class DeviceController extends Controller
         }
 
 
-        return to_route('profile.index');
+//        return to_route('profile.index');
     }
 
     /**
