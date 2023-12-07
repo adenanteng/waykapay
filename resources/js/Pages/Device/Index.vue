@@ -45,8 +45,6 @@ onMounted(() => {
 //     });
 // };
 
-const req = ref(false)
-
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
@@ -71,9 +69,9 @@ function formatPrice(value) {
                desc="Profil perangkat kamu"
     >
 
-        <template #previous>
-            <PreviousButton />
-        </template>
+<!--        <template #previous>-->
+<!--            <PreviousButton />-->
+<!--        </template>-->
 
         <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
             <div class="flex w-full items-center justify-between space-x-6 p-6">
@@ -105,18 +103,21 @@ function formatPrice(value) {
                             <div class="ml-3 truncate">
                                 <div class="text-xs text-gray-500"></div>
                                 <Link
+                                    v-if="$page.url.startsWith('/device/store')"
                                     class="text-sm font-medium text-primary-600 truncate"
-                                    v-if="!req"
+                                    :href="route('dashboard')"
+                                    replace
+                                >
+                                    Kembali ke dasbor
+                                </Link>
+                                <Link
+                                    v-else
+                                    class="text-sm font-medium text-primary-600 truncate"
                                     :href="route('device.store')"
+                                    replace
                                 >
                                     Refresh perangkat
                                 </Link>
-                                <div
-                                    class="text-sm font-medium text-gray-600 truncate"
-                                    v-else
-                                >
-                                    Request berhasi
-                                </div>
                             </div>
                         </div>
                     </div>

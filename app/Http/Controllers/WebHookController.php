@@ -217,12 +217,14 @@ class WebHookController extends Controller
         Log::debug(Req::input('token'));
 
         $device = Device::latest()->first();
-        $user = User::where('id', $device->user_id)->first();
-        $user->update([
-            'device_token' => Req::input('token'),
-        ]);
+        if ($device) {
+            $user = User::where('id', $device->user_id)->first();
+            $user->update([
+                'device_token' => Req::input('token'),
+            ]);
 
-        $device->delete();
+            $device->delete();
+        }
 
         return response()->json('ok');
     }
