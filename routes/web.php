@@ -55,7 +55,7 @@ Route::get('/register/device', [WebHookController::class, 'webhookHandlerPushyRe
 
 Route::inertia('/login-otp', 'Pin/Otp')->name('login.otp');
 
-Route::middleware(['auth:sanctum', 'phone', config('jetstream.auth_session'), 'verified',])->group(function () {
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/otp/create', [DashboardController::class, 'createOtp'])->name('otp.create');
     Route::get('/otp/request', [DashboardController::class, 'reqOtp'])->name('otp.req');
