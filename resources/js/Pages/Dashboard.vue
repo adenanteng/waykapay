@@ -108,22 +108,22 @@ const onSlideChange = (swiper) => {
             </div>
         </div>
 
-        <div class="border-l-4 border-primary-400 bg-primary-100 rounded-3xl p-4" v-if="$page.props.user.role_id!=2">
-            <div class="flex">
-                <div class="flex-shrink-0 flex items-center">
-                    <i class="fa-regular fa-stars text-primary-700 h-5 w-5" />
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm text-primary-700">
-                        Selamat Bergabung, yuk
-                        {{ ' ' }}
-                        <Link :href="route('landing.upgrade')" class="font-medium text-primary-700 underline hover:text-primary-600">upgrade ke Waykapay Premium!</Link>
-                        {{ ' ' }}
-                        Nikmatin akses dan benefit lengkap dari Waykapay!
-                    </p>
-                </div>
-            </div>
-        </div>
+<!--        <div class="border-l-4 border-primary-400 bg-primary-100 rounded-3xl p-4" v-if="$page.props.user.role_id==3">-->
+<!--            <div class="flex">-->
+<!--                <div class="flex-shrink-0 flex items-center">-->
+<!--                    <i class="fa-regular fa-stars text-primary-700 h-5 w-5" />-->
+<!--                </div>-->
+<!--                <div class="ml-3">-->
+<!--                    <p class="text-sm text-primary-700">-->
+<!--                        Selamat Bergabung, yuk-->
+<!--                        {{ ' ' }}-->
+<!--                        <Link :href="route('landing.upgrade')" class="font-medium text-primary-700 underline hover:text-primary-600">upgrade ke Waykapay Premium!</Link>-->
+<!--                        {{ ' ' }}-->
+<!--                        Nikmatin akses dan benefit lengkap dari Waykapay!-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="border-l-4 border-yellow-400 bg-yellow-100 rounded-3xl p-4" v-if="$page.props.user.pin==null">
             <div class="flex">
