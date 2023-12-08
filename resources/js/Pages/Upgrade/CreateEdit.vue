@@ -8,10 +8,19 @@ import moment from "moment";
 import {Vue3Lottie} from "vue3-lottie";
 import BlankLayout from "../../Layouts/BlankLayout.vue";
 import ApplicationLogo from "../../Components/ApplicationLogo.vue";
+import InputLabel from "../../Components/InputLabel.vue";
+import TextInput from "../../Components/TextInput.vue";
+import InputError from "../../Components/InputError.vue";
 
 const props = defineProps({
 
 })
+
+const form = useForm({
+    name: null,
+    ktp: null,
+    photo: null,
+});
 
 const isCameraOpen = ref(false)
 const isPhotoTaken = ref(false)
@@ -106,38 +115,69 @@ function formatPrice(value) {
 <template>
     <BlankLayout title="Upgrade">
 
-        <div class="min-h-screen text-center">
-            <div class="">
-                <h3>Hello bitch</h3>
-            </div>
+        <div class="min-h-screen">
+<!--            <div class="text-center">-->
+<!--                <h3>Pendaftaran Waykapay Premium</h3>-->
+<!--            </div>-->
             <div class="mt-10">
                 <div class="">
-                    <button type="button" class="" :class="{ 'is-primary' : !isCameraOpen, 'is-danger' : isCameraOpen}" @click="toggleCamera">
-                        <span v-if="!isCameraOpen">Open Camera</span>
-                        <span v-else>Close Camera</span>
-                    </button>
+<!--                    <button type="button" class="" :class="{ 'is-primary' : !isCameraOpen, 'is-danger' : isCameraOpen}" @click="toggleCamera">-->
+<!--                        <span v-if="!isCameraOpen">Open Camera</span>-->
+<!--                        <span v-else>Close Camera</span>-->
+<!--                    </button>-->
+
                 </div>
 
-                <div v-show="isCameraOpen && isLoading" class="my-10">
-                    <i class="fa-duotone fa-loader fa-spin text-3xl" />
+                <div v-show="isCameraOpen && isLoading" class="my-10 text-center">
+                    <i class="fa-duotone fa-loader fa-spin text-3xl text-primary-600" />
                 </div>
 
-                <div v-if="isCameraOpen" v-show="!isLoading" class="p-3 rounded-3xl" :class="{ 'flash' : isShotPhoto }">
+                <div v-if="isCameraOpen" v-show="!isLoading" class="p-3 rounded-3xl relative" :class="{ 'flash' : isShotPhoto }">
+                    <InputLabel value="Foto KTP" class="ml-3 mb-1" />
                     <div class="" :class="{'flash' : isShotPhoto}"></div>
-                    <video v-show="!isPhotoTaken" ref="camcam" class="rounded-3xl" :width="450" :height="337.5" autoplay></video>
-                    <canvas v-show="isPhotoTaken" id="photoTaken" ref="canvas" class="p-3 rounded-3xl" :width="450" :height="337.5"></canvas>
+                    <video v-show="!isPhotoTaken" ref="camcam" class="rounded-3xl scale-x-flip" :width="450" :height="337.5" autoplay />
+                    <canvas v-show="isPhotoTaken" id="photoTaken" ref="canvas" class="rounded-3xl scale-x-flip w-full" :width="450" :height="337.5" />
+
+                    <div v-if="isCameraOpen && !isLoading" class="text-center mt-2 absolute bottom-5 left-0 right-0 justify-center">
+                        <button class="" @click="takePhoto">
+                            <i class="fa-light fa-camera text-3xl text-white nightwind-prevent" />
+                        </button>
+                    </div>
                 </div>
 
-                <div v-if="isCameraOpen && !isLoading" class="mt-2">
-                    <button class="" @click="takePhoto">
-                        <i class="fa-regular fa-camera text-3xl" />
-                    </button>
+<!--                <div v-if="isPhotoTaken && isCameraOpen" class="text-center">-->
+<!--                    <a id="downloadPhoto" :download="'waykapay' + $page.props.user.name + '.jpg'" class="button" role="button" @click="downloadImage">-->
+<!--                        Download-->
+<!--                    </a>-->
+<!--                </div>-->
+            </div>
+
+            <div class="mt-5 p-3 grid space-y-5">
+                <div class="">
+                    <InputLabel for="ktp" value="Nomor KTP" class="ml-3" />
+                    <TextInput
+                        id="ktp"
+                        v-model="form.ktp"
+                        type="number"
+                        class="mt-1 block w-full"
+                    />
+                    <InputError :message="form.errors.ktp" class="mt-2" />
+                </div>
+                <div class="">
+                    <InputLabel for="name" value="Nama Sesuai KTP" class="ml-3" />
+                    <TextInput
+                        id="name"
+                        v-model="form.name"
+                        type="text"
+                        class="mt-1 block w-full uppercase"
+                    />
+                    <InputError :message="form.errors.name" class="mt-2" />
                 </div>
 
-                <div v-if="isPhotoTaken && isCameraOpen" class="">
-                    <a id="downloadPhoto" download="my-photo.jpg" class="button" role="button" @click="downloadImage">
-                        Download
-                    </a>
+                <div class="">
+                    <PrimaryButton class="w-full justify-center" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Ajukan Pendaftaran
+                    </PrimaryButton>
                 </div>
             </div>
         </div>

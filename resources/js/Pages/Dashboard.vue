@@ -108,33 +108,31 @@ const onSlideChange = (swiper) => {
             </div>
         </div>
 
-<!--        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
-<!--            <div class="py-6 pl-2 pr-6 flex ">-->
-<!--&lt;!&ndash;                <template v-if="$page.props.user.role_id==3">&ndash;&gt;-->
-<!--                    <div class="flex-none flex items-center">-->
-<!--                        <Vue3Lottie-->
-<!--                            animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"-->
-<!--                            :height="80"-->
-<!--                        />-->
-<!--                    </div>-->
-<!--                    <div class="grow">-->
-<!--                        <h4 class="text-gray-900 font-semibold">Selamat Bergabung!</h4>-->
-<!--                        <p class="text-sm text-gray-600">Yuk, upgrade ke Waykapay Premium! Nikmatin akses dan benefit lengkap dari Waykapay!</p>-->
-<!--                        <Link :href="route('landing.upgrade')" class="text-sm text-primary-600 font-medium">Upgrade <i class="fa-regular fa-arrow-right" /></Link>-->
-<!--                    </div>-->
-<!--&lt;!&ndash;                </template>&ndash;&gt;-->
-
-<!--            </div>-->
-<!--        </div>-->
+        <div class="border-l-4 border-primary-400 bg-primary-100 rounded-3xl p-4" v-if="$page.props.user.role_id!=2">
+            <div class="flex">
+                <div class="flex-shrink-0 flex items-center">
+                    <i class="fa-regular fa-stars text-primary-700 h-5 w-5" />
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-primary-700">
+                        Selamat Bergabung, yuk
+                        {{ ' ' }}
+                        <Link :href="route('landing.upgrade')" class="font-medium text-primary-700 underline hover:text-primary-600">upgrade ke Waykapay Premium!</Link>
+                        {{ ' ' }}
+                        Nikmatin akses dan benefit lengkap dari Waykapay!
+                    </p>
+                </div>
+            </div>
+        </div>
 
         <div class="border-l-4 border-yellow-400 bg-yellow-100 rounded-3xl p-4" v-if="$page.props.user.pin==null">
             <div class="flex">
-                <div class="flex-shrink-0">
-                    <i class="fa-regular fa-triangle-exclamation text-yellow-400 h-5 w-5" />
+                <div class="flex-shrink-0 flex items-center">
+                    <i class="fa-regular fa-triangle-exclamation text-yellow-700 h-5 w-5" />
                 </div>
                 <div class="ml-3">
                     <p class="text-sm text-yellow-700">
-                        Pin kamu belum aktif,
+                        Pin kamu belum aktif, yuk
                         {{ ' ' }}
                         <Link :href="route('pin.create')" class="font-medium text-yellow-700 underline hover:text-yellow-600">buat pin untuk keamanan transaksi.</Link>
                     </p>

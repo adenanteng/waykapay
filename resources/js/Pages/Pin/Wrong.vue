@@ -111,7 +111,7 @@ function formatPrice(value) {
             <!--            </svg>-->
             <div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:py-40 lg:px-8">
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
-                    <!--                    <ApplicationLogo />-->
+                                        <ApplicationLogo class="mb-10" />
                     <!--                    <div class="mt-24 sm:mt-32 lg:mt-16">-->
                     <!--                        <a href="#" class="inline-flex space-x-6">-->
                     <!--                            <span class="rounded-full bg-primary-600 bg-opacity-20 px-3 py-1 text-sm font-semibold leading-6 text-primary-600 ring-1 ring-inset ring-primary-600/10">Promo</span>-->

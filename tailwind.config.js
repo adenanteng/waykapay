@@ -43,6 +43,9 @@ module.exports = {
                 'glass': "url('/img/glass.png')",
                 'hero': "url('/img/hero.jpg')",
             },
+            scale: {
+                'flip': '-1',
+            }
         },
         nightwind: {
             transitionDuration: "1000ms", // default '300ms'

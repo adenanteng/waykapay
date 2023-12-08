@@ -42,18 +42,18 @@ function formatPrice(value) {
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
                     <ApplicationLogo />
                     <div class="mt-24 sm:mt-32 lg:mt-16">
-                        <a href="#" class="inline-flex space-x-6">
-                            <span class="rounded-full bg-primary-600 bg-opacity-20 px-3 py-1 text-sm font-semibold leading-6 text-primary-600 ring-1 ring-inset ring-primary-600/10">Promo</span>
-                            <span class="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-600">
-                              <span>Lorem ipsum</span>
-                                <i class="fa-regular fa-angle-right text-gray-400"/>
-                            </span>
-                        </a>
+<!--                        <a href="#" class="inline-flex space-x-6">-->
+<!--                            <span class="rounded-full bg-primary-600 bg-opacity-20 px-3 py-1 text-sm font-semibold leading-6 text-primary-600 ring-1 ring-inset ring-primary-600/10">Promo</span>-->
+<!--                            <span class="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-gray-600">-->
+<!--                              <span>Lorem ipsum</span>-->
+<!--                                <i class="fa-regular fa-angle-right text-gray-400"/>-->
+<!--                            </span>-->
+<!--                        </a>-->
                     </div>
                     <h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Waykapay Premium</h1>
                     <p class="mt-6 text-lg leading-8 text-gray-600">Yuk, upgrade ke Waykapay Premium! Nikmatin akses dan benefit lengkap dari Waykapay!</p>
                     <div class="mt-10 flex items-center gap-x-5">
-                        <PrimaryButton as="a" :href="route('upgrade.create')">Mulai</PrimaryButton>
+                        <PrimaryButton as="a" :href="route('upgrade.create')">Daftar Sekarang</PrimaryButton>
 <!--                        <SecondaryButton >Lorem</SecondaryButton>-->
                     </div>
                 </div>
