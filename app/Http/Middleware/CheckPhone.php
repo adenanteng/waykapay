@@ -16,20 +16,20 @@ class CheckPhone
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (   $request->routeIs('otp.create')
-            || $request->routeIs('otp.req')
-            || $request->routeIs('otp.acc')
-//            || $request->routeIs('logout')
-        )
-        {
-            return $next($request);
-        }
-
-        if (auth()->user()->phone_verified_at == null) {
-            session()->flash('flash.banner', 'Whatsapp belum tervalidasi!');
-            session()->flash('flash.bannerStyle', 'danger');
-            return redirect()->route('login.otp');
-        }
+//        if (   $request->routeIs('otp.create')
+//            || $request->routeIs('otp.req')
+//            || $request->routeIs('otp.acc')
+////            || $request->routeIs('logout')
+//        )
+//        {
+//            return $next($request);
+//        }
+//
+//        if (auth()->user()->phone_verified_at == null) {
+//            session()->flash('flash.banner', 'Whatsapp belum tervalidasi!');
+//            session()->flash('flash.bannerStyle', 'danger');
+//            return redirect()->route('login.otp');
+//        }
 
         return $next($request);
     }
