@@ -83,6 +83,7 @@ function formatPrice(value) {
 <!--                        </span>-->
                     </div>
                     <p class="mt-1 truncate text-sm font-medium text-gray-900">{{ $page.props.user.device_token ? 'Aktif' : 'Tidak aktif' }}</p>
+                    <p class="mt-1 text-sm text-gray-500" v-if="$page.props.user.device_token">{{ $page.props.user.device_token }}</p>
                 </div>
                 <i class="fa-duotone fa-mobile-android text-3xl flex-shrink-0" :class="$page.props.user.device_token ? 'text-green-600' : 'text-red-600' " />
             </div>

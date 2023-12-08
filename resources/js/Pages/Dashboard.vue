@@ -115,7 +115,7 @@ const onSlideChange = (swiper) => {
 <!--                </div>-->
 <!--                <div class="ml-3">-->
 <!--                    <p class="text-sm text-primary-700">-->
-<!--                        Selamat Bergabung, yuk-->
+<!--                        Selamat bergabung, yuk-->
 <!--                        {{ ' ' }}-->
 <!--                        <Link :href="route('landing.upgrade')" class="font-medium text-primary-700 underline hover:text-primary-600">upgrade ke Waykapay Premium!</Link>-->
 <!--                        {{ ' ' }}-->
@@ -135,6 +135,23 @@ const onSlideChange = (swiper) => {
                         Pin kamu belum aktif, yuk
                         {{ ' ' }}
                         <Link :href="route('pin.create')" class="font-medium text-yellow-700 underline hover:text-yellow-600">buat pin untuk keamanan transaksi.</Link>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-l-4 border-green-400 bg-green-100 rounded-3xl p-4" >
+            <div class="flex">
+                <div class="flex-shrink-0 flex items-center">
+                    <i class="fa-regular fa-triangle-exclamation text-green-700 h-5 w-5" />
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-green-700">
+                        Notifikasi perangkat kamu belum aktif, yuk
+                        {{ ' ' }}
+                        <Link :href="route('device.index')" class="font-medium text-green-700 underline hover:text-green-600">aktifin notifikasi</Link>
+                        {{ '' }}
+                        perangkat kamu.
                     </p>
                 </div>
             </div>
