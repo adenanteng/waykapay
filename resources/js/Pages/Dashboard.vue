@@ -140,7 +140,7 @@ const onSlideChange = (swiper) => {
             </div>
         </div>
 
-        <div class="border-l-4 border-green-400 bg-green-100 rounded-3xl p-4" >
+        <div class="border-l-4 border-green-400 bg-green-100 rounded-3xl p-4" v-if="$page.props.user.device_token==null">
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center">
                     <i class="fa-regular fa-triangle-exclamation text-green-700 h-5 w-5" />
