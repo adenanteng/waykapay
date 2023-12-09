@@ -11,9 +11,9 @@ use Inertia\Inertia;
 class ReportController extends Controller
 {
     public function index() {
-        $trx = Transaction::where('user_id', auth()->user()->id
-        )->where('status_id', Transaction::SUCCESS)
-        ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
+        $trx = Transaction::where('user_id', auth()->user()->id)
+            ->where('status_id', Transaction::SUCCESS)
+            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
 
 //        dd($trx->get());
 

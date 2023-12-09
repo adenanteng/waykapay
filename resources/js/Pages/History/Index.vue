@@ -11,12 +11,11 @@ const props = defineProps({
     history: undefined,
     in_count: undefined,
     out_count: undefined,
-    on_process: undefined,
     all_process: undefined
 })
 
 onMounted(() => {
-    router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
+    router.reload({ only: ['history', 'in_count', 'out_count', 'all_process'] })
 })
 
 onUnmounted(() => {
@@ -25,15 +24,11 @@ onUnmounted(() => {
 
 const interval = setInterval(() => {
     console.log('interval');
-    router.reload({ only: ['history', 'in_count', 'out_count', 'on_process', 'all_process'] })
+    router.reload({ only: ['history', 'in_count', 'out_count', 'all_process'] })
 }, 10000)
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
-}
-
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
 }
 
 function formatPrice(value) {
@@ -57,19 +52,15 @@ watch(tabHistory, (newTabHistory) => {
     >
 
         <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
-<!--            <div class="flex w-full items-center justify-between space-x-6 p-6">-->
-<!--                <div class="flex-1 truncate">-->
-<!--                    <div class="flex items-center space-x-3">-->
-<!--                        <h3 class="truncate text-sm font-medium text-gray-900">-->
-<!--                            Bla bla-->
-<!--                        </h3>-->
-<!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
-<!--                            lorem ipsum-->
-<!--                        </span>-->
-<!--                    </div>-->
-<!--                    <p class="mt-1 truncate text-sm text-gray-500">awww</p>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div class="flex w-full items-center justify-between space-x-6 p-6">
+                <div class="flex-1 truncate">
+                    <p class="mt-1 truncate text-sm text-gray-500">Total transaksi</p>
+                    <h3 class="truncate text-sm font-medium text-gray-900">
+                        {{ props.all_process }}
+                        <span class="truncate text-xs text-gray-500">bulan ini</span>
+                    </h3>
+                </div>
+            </div>
             <div>
                 <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
                     <div class="flex w-0 flex-1">

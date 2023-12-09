@@ -33,7 +33,7 @@ module.exports = {
             yellow: colors.yellow,
             orange: colors.orange,
             "vtd-primary": colors.sky, // Light mode Datepicker color
-            "vtd-secondary": colors.gray, // Dark mode Datepicker color
+            "vtd-secondary": colors.sky, // Dark mode Datepicker color
         },
         extend: {
             fontFamily: {

@@ -18,36 +18,42 @@ use Stephenjude\Wallet\Exceptions\InsufficientFundException;
 class HistoryController extends Controller
 {
     public function index() {
-//        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
-        $history = Transaction::where('user_id', auth()->user()->id)
-            ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
-            ->latest()
-            ->get()
-            ->groupBy(function ($val) {
-                return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
-            });
+//        $history = Transaction::where('user_id', auth()->user()->id);
 
 //        dd($history->toArray());
 
         return Inertia::render('History/Index', [
-            'history'=> Inertia::lazy(fn () => $history),
-            'on_process' => Inertia::lazy(fn () => $history
-                                                    ->where('status_id', Transaction::PENDING)->count()),
-            'all_process' => Inertia::lazy(fn () => $history->count()),
+            'history'=> Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                                                    ->whereMonth('created_at', Carbon::now()->month)
+                                                    ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+                                                    ->latest()
+                                                    ->get()
+                                                    ->groupBy(function ($val) {
+                                                        return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
+                                                    })),
+
+            'all_process' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                                                    ->whereMonth('created_at', Carbon::now()->month)
+                                                    ->count()),
 
             'in_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                                                    ->whereMonth('created_at', Carbon::now()->month)
                                                     ->where('status_id', Transaction::SUCCESS)
                                                     ->where('category_id', Transaction::DEPOSIT)
                                                     ->orWhere('category_id', Transaction::TRANSFER)
+//                                                    ->whereIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT])
                                                     ->whereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+                                                    ->get()
                                                     ->sum('amount')),
 
             'out_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+                                                    ->whereMonth('created_at', Carbon::now()->month)
                                                     ->where('status_id', Transaction::SUCCESS)
                                                     ->where('category_id', '!=', Transaction::DEPOSIT)
                                                     ->orWhere('category_id', '!=', Transaction::TRANSFER)
-                                                    ->whereRelation('money_transfer', 'to_id', '!=', auth()->user()->id)
+//                                                    ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT])
+                                                    ->get()
                                                     ->sum('gross_amount')),
         ]);
     }

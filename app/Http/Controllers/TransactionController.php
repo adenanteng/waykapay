@@ -35,7 +35,8 @@ class TransactionController extends Controller
 //
 //        dd($magic->toArray());
 
-        $trx = Transaction::where('status_id', Transaction::SUCCESS)->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
+        $trx = Transaction::where('status_id', Transaction::SUCCESS)
+                ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
 
         return Inertia::render('Transaction/Index', [
 //            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
