@@ -22,10 +22,8 @@ class HistoryController extends Controller
 //        ->whereDate('created_at', Carbon::today())
 //        dd(Carbon::now()->month);
         $history = Transaction::where('user_id', auth()->user()->id)
-//            ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
-            ->with(["money_transfer" => function($q){
-                $q->where('money_transfer.to_id', '=', auth()->user()->id);
-            }])
+            ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+            ->whereRelation('money_transfer', 'created_at', '=', Carbon::now()->month)
             ->whereMonth('created_at', Carbon::now()->month)
             ->latest()
             ->get()
