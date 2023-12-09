@@ -20,6 +20,7 @@ class HistoryController extends Controller
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
+        dd(Carbon::now()->month);
         $history = Transaction::where('user_id', auth()->user()->id)
             ->whereMonth('created_at', Carbon::now()->month)
             ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
