@@ -41,14 +41,14 @@ class HistoryController extends Controller
                                                     ->where('category_id', Transaction::DEPOSIT)
                                                     ->orWhere('category_id', Transaction::TRANSFER)
                                                     ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
-                                                    ->whereMonth('created_at', Carbon::now()->month)
+//                                                    ->whereMonth('created_at', Carbon::now()->month)
                                                     ->sum('amount')),
 
             'out_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
                                                     ->where('status_id', Transaction::SUCCESS)
                                                     ->where('category_id', '!=', Transaction::DEPOSIT)
                                                     ->orWhere('category_id', '!=', Transaction::TRANSFER)
-                                                    ->whereMonth('created_at', Carbon::now()->month)
+//                                                    ->whereMonth('created_at', Carbon::now()->month)
 //                                                    ->orWhereRelation('money_transfer', 'to_id', '!=', auth()->user()->id)
                                                     ->sum('gross_amount')),
         ]);
