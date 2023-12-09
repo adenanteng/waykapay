@@ -22,6 +22,7 @@ class HistoryController extends Controller
 //        ->whereDate('created_at', Carbon::today())
         $history = Transaction::where('user_id', auth()->user()->id)
             ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+            ->whereMonth('created_at', Carbon::now()->month)
             ->latest()
             ->get()
             ->groupBy(function ($val) {
@@ -32,22 +33,23 @@ class HistoryController extends Controller
 
         return Inertia::render('History/Index', [
             'history'=> Inertia::lazy(fn () => $history),
-            'on_process' => Inertia::lazy(fn () => $history
-                                                    ->where('status_id', Transaction::PENDING)->count()),
+
             'all_process' => Inertia::lazy(fn () => $history->count()),
 
             'in_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
                                                     ->where('status_id', Transaction::SUCCESS)
                                                     ->where('category_id', Transaction::DEPOSIT)
                                                     ->orWhere('category_id', Transaction::TRANSFER)
-                                                    ->whereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+                                                    ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
+                                                    ->whereMonth('created_at', Carbon::now()->month)
                                                     ->sum('amount')),
 
             'out_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
                                                     ->where('status_id', Transaction::SUCCESS)
                                                     ->where('category_id', '!=', Transaction::DEPOSIT)
                                                     ->orWhere('category_id', '!=', Transaction::TRANSFER)
-                                                    ->whereRelation('money_transfer', 'to_id', '!=', auth()->user()->id)
+                                                    ->whereMonth('created_at', Carbon::now()->month)
+//                                                    ->orWhereRelation('money_transfer', 'to_id', '!=', auth()->user()->id)
                                                     ->sum('gross_amount')),
         ]);
     }
