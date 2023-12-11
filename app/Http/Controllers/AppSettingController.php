@@ -21,15 +21,9 @@ class AppSettingController extends Controller
     {
         $setting = AppSetting::all()->first();
 
-        if ($setting == null) {
-            $setting = AppSetting::all();
-        } else {
-            $setting = AppSetting::all()->first();
-        }
-
 //        dd($setting);
         return Inertia::render('AppSetting/Show', [
-            'setting' => $setting
+//            'setting' => $setting
         ]);
     }
 

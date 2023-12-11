@@ -46,42 +46,42 @@ const deleteRedis = () => {
             <PreviousButton :href="route('profile.index')" />
         </template>
 
-        <UpdateAppInformationForm :setting="$page.props.setting" />
+        <UpdateAppInformationForm :setting="$page.props.appSetting" />
 
         <SectionBorder />
 
-<!--        <UpdateApiMidtransForm :setting="$page.props.setting" />-->
-<!--        <UpdateApiFlipForm :setting="$page.props.setting" />-->
+<!--        <UpdateApiMidtransForm :setting="$page.props.appSetting" />-->
+<!--        <UpdateApiFlipForm :setting="$page.props.appSetting" />-->
 
-        <UpdateFeeEmoneyForm :setting="$page.props.setting" />
-
-        <SectionBorder />
-
-        <UpdateFeeEtollForm :setting="$page.props.setting" />
+        <UpdateFeeEmoneyForm :setting="$page.props.appSetting" />
 
         <SectionBorder />
 
-        <UpdateFeeGamesForm :setting="$page.props.setting" />
+        <UpdateFeeEtollForm :setting="$page.props.appSetting" />
 
         <SectionBorder />
 
-        <UpdateFeeInternetForm :setting="$page.props.setting" />
+        <UpdateFeeGamesForm :setting="$page.props.appSetting" />
 
         <SectionBorder />
 
-        <UpdateFeePlnForm :setting="$page.props.setting" />
+        <UpdateFeeInternetForm :setting="$page.props.appSetting" />
 
         <SectionBorder />
 
-        <UpdateFeePulsaForm :setting="$page.props.setting" />
+        <UpdateFeePlnForm :setting="$page.props.appSetting" />
 
         <SectionBorder />
 
-        <UpdateFeeTVForm :setting="$page.props.setting" />
+        <UpdateFeePulsaForm :setting="$page.props.appSetting" />
 
         <SectionBorder />
 
-        <UpdateFeeVoucherForm :setting="$page.props.setting" />
+        <UpdateFeeTVForm :setting="$page.props.appSetting" />
+
+        <SectionBorder />
+
+        <UpdateFeeVoucherForm :setting="$page.props.appSetting" />
 
 <!--        <SectionBorder />-->
 
@@ -101,7 +101,7 @@ const deleteRedis = () => {
             </div>
         </div>
 
-        <UpdateApiDigiflazzForm :setting="$page.props.setting" />
+        <UpdateApiDigiflazzForm :setting="$page.props.appSetting" />
 
     </AppLayout>
 </template>
