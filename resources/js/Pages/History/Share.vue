@@ -11,7 +11,6 @@ import BlankLayout from "@/Layouts/BlankLayout.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 import PrimaryButton from "../../Components/PrimaryButton.vue";
 import PrintLayout from "../../Layouts/PrintLayout.vue";
-import domtoimage from 'dom-to-image-more';
 
 const props = defineProps({
     // users: Object,

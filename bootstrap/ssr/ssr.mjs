@@ -12,7 +12,6 @@ import { toClipboard, VueClipboard } from "@soerenmartius/vue3-clipboard";
 import Popper from "vue3-popper";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 import moment$1 from "moment/moment.js";
-import "dom-to-image-more";
 import { InboxIcon, UsersIcon, TrashIcon, PencilSquareIcon, DocumentChartBarIcon, ArrowUturnLeftIcon, ChatBubbleLeftEllipsisIcon, HeartIcon } from "@heroicons/vue/24/outline";
 import VOtpInput from "vue3-otp-input";
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
@@ -1676,7 +1675,7 @@ const _sfc_main$1W = {
                               ]),
                               _: 1
                             })
-                          ], 40, ["onSubmit"])
+                          ], 32)
                         ];
                       }
                     }),
@@ -1741,7 +1740,7 @@ const _sfc_main$1W = {
                             ]),
                             _: 1
                           })
-                        ], 40, ["onSubmit"])
+                        ], 32)
                       ]),
                       _: 1
                     })
@@ -2015,7 +2014,7 @@ const _sfc_main$1W = {
                                           ]),
                                           _: 1
                                         })
-                                      ], 40, ["onSubmit"])
+                                      ], 32)
                                     ])
                                   ])
                                 ])
@@ -2110,7 +2109,7 @@ const _sfc_main$1W = {
                                         ]),
                                         _: 1
                                       })
-                                    ], 40, ["onSubmit"])
+                                    ], 32)
                                   ])
                                 ])
                               ])
@@ -2234,7 +2233,7 @@ const _sfc_main$1W = {
                                         ]),
                                         _: 1
                                       })
-                                    ], 40, ["onSubmit"])
+                                    ], 32)
                                   ])
                                 ])
                               ])
@@ -2341,7 +2340,7 @@ const _sfc_main$1W = {
                                 ]),
                                 _: 1
                               })
-                            ], 40, ["onSubmit"])
+                            ], 32)
                           ]),
                           _: 1
                         })
@@ -2518,7 +2517,7 @@ const _sfc_main$1W = {
                                       ]),
                                       _: 1
                                     })
-                                  ], 40, ["onSubmit"])
+                                  ], 32)
                                 ])
                               ])
                             ])
@@ -3380,7 +3379,7 @@ const _sfc_main$1R = {
                     createTextVNode(" Ubah Logo ")
                   ]),
                   _: 1
-                }, 8, ["onClick"]),
+                }),
                 createVNode(_sfc_main$29, {
                   message: unref(form).errors.photo,
                   class: "mt-2"
@@ -6780,7 +6779,7 @@ const _sfc_main$1E = {
                     _: 1
                   }, 8, ["class", "disabled"])
                 ])
-              ], 40, ["onSubmit"])
+              ], 32)
             ];
           }
         }),
@@ -6909,7 +6908,7 @@ const _sfc_main$1D = {
                     _: 1
                   }, 8, ["class", "disabled"])
                 ])
-              ], 40, ["onSubmit"])
+              ], 32)
             ];
           }
         }),
@@ -7160,7 +7159,7 @@ const _sfc_main$1C = {
                     _: 1
                   }, 8, ["class", "disabled"])
                 ])
-              ], 40, ["onSubmit"])
+              ], 32)
             ];
           }
         }),
@@ -7587,7 +7586,7 @@ const _sfc_main$1B = {
                     _: 1
                   }, 8, ["class", "disabled"])
                 ])
-              ], 40, ["onSubmit"])
+              ], 32)
             ];
           }
         }),
@@ -7749,7 +7748,7 @@ const _sfc_main$1A = {
                     _: 1
                   }, 8, ["class", "disabled"])
                 ])
-              ], 40, ["onSubmit"])
+              ], 32)
             ];
           }
         }),
@@ -7948,7 +7947,7 @@ const _sfc_main$1z = {
                     ], 64)) : (openBlock(), createBlock(Fragment, { key: 1 }, [
                       createTextVNode(" Use an authentication code ")
                     ], 64))
-                  ], 8, ["onClick"]),
+                  ]),
                   createVNode(_sfc_main$27, {
                     class: ["ml-4", { "opacity-25": unref(form).processing }],
                     disabled: unref(form).processing
@@ -7959,7 +7958,7 @@ const _sfc_main$1z = {
                     _: 1
                   }, 8, ["class", "disabled"])
                 ])
-              ], 40, ["onSubmit"])
+              ], 32)
             ];
           }
         }),
@@ -8078,7 +8077,7 @@ const _sfc_main$1y = {
                     ]),
                     _: 1
                   }, 8, ["href"])
-                ], 40, ["onSubmit"]),
+                ], 32),
                 createVNode("div")
               ])
             ];
@@ -8559,7 +8558,7 @@ const _sfc_main$1u = {
                     createTextVNode(" Ubah Foto ")
                   ]),
                   _: 1
-                }, 8, ["onClick"]),
+                }),
                 createVNode(_sfc_main$29, {
                   message: unref(form).errors.photo,
                   class: "mt-2"
@@ -11965,7 +11964,7 @@ const _sfc_main$1d = {
                             }, 8, ["class", "disabled"])
                           ])
                         ])
-                      ], 40, ["onSubmit"])
+                      ], 32)
                     ])
                   ])) : createCommentVNode("", true),
                   createVNode("div", { class: "flex justify-center gap-2" }, [
@@ -12755,7 +12754,7 @@ const _sfc_main$1a = {
                     ]),
                     _: 1
                   })
-                ], 40, ["onSubmit"])
+                ], 32)
               ];
             }
           }),
@@ -23584,7 +23583,7 @@ const _sfc_main$m = {
                   ]),
                   _: 1
                 })
-              ], 40, ["onSubmit"]),
+              ], 32),
               createVNode(_sfc_main$1x)
             ];
           }
@@ -23709,7 +23708,7 @@ const _sfc_main$l = {
                         class: "mt-1 block w-3/4",
                         placeholder: "Password",
                         onKeyup: withKeys(deleteUser, ["enter"])
-                      }, null, 8, ["modelValue", "onUpdate:modelValue", "onKeyup"]),
+                      }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                       createVNode(_sfc_main$29, {
                         message: unref(form).errors.password,
                         class: "mt-2"
@@ -23801,7 +23800,7 @@ const _sfc_main$l = {
                       class: "mt-1 block w-3/4",
                       placeholder: "Password",
                       onKeyup: withKeys(deleteUser, ["enter"])
-                    }, null, 8, ["modelValue", "onUpdate:modelValue", "onKeyup"]),
+                    }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                     createVNode(_sfc_main$29, {
                       message: unref(form).errors.password,
                       class: "mt-2"
@@ -23991,7 +23990,7 @@ const _sfc_main$k = {
                         class: "mt-1 block w-3/4",
                         placeholder: "Password",
                         onKeyup: withKeys(logoutOtherBrowserSessions, ["enter"])
-                      }, null, 8, ["modelValue", "onUpdate:modelValue", "onKeyup"]),
+                      }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                       createVNode(_sfc_main$29, {
                         message: unref(form).errors.password,
                         class: "mt-2"
@@ -24125,7 +24124,7 @@ const _sfc_main$k = {
                       class: "mt-1 block w-3/4",
                       placeholder: "Password",
                       onKeyup: withKeys(logoutOtherBrowserSessions, ["enter"])
-                    }, null, 8, ["modelValue", "onUpdate:modelValue", "onKeyup"]),
+                    }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                     createVNode(_sfc_main$29, {
                       message: unref(form).errors.password,
                       class: "mt-2"
@@ -24264,7 +24263,7 @@ const _sfc_main$j = {
                   class: "mt-1 block w-3/4",
                   placeholder: "Password",
                   onKeyup: withKeys(confirmPassword, ["enter"])
-                }, null, 8, ["modelValue", "onUpdate:modelValue", "onKeyup"]),
+                }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                 createVNode(_sfc_main$29, {
                   message: form.error,
                   class: "mt-2"
@@ -24797,7 +24796,7 @@ const _sfc_main$i = {
                       autofocus: "",
                       autocomplete: "one-time-code",
                       onKeyup: withKeys(confirmTwoFactorAuthentication, ["enter"])
-                    }, null, 8, ["modelValue", "onUpdate:modelValue", "onKeyup"]),
+                    }, null, 8, ["modelValue", "onUpdate:modelValue"]),
                     createVNode(_sfc_main$29, {
                       message: unref(confirmationForm).errors.code,
                       class: "mt-2"
@@ -25589,7 +25588,7 @@ const _sfc_main$f = {
                     createTextVNode(" Ubah Avatar ")
                   ]),
                   _: 1
-                }, 8, ["onClick"]),
+                }),
                 __props.user.profile_photo_path ? (openBlock(), createBlock(_sfc_main$26, {
                   key: 0,
                   type: "button",
@@ -25600,7 +25599,7 @@ const _sfc_main$f = {
                     createTextVNode(" Hapus Avatar ")
                   ]),
                   _: 1
-                }, 8, ["onClick"])) : createCommentVNode("", true),
+                })) : createCommentVNode("", true),
                 createVNode(_sfc_main$29, {
                   message: unref(form).errors.photo,
                   class: "mt-2"
@@ -25671,7 +25670,7 @@ const _sfc_main$f = {
                         createTextVNode(" Klik di sini untuk mengirim ulang email verifikasi. ")
                       ]),
                       _: 1
-                    }, 8, ["href", "onClick"])
+                    }, 8, ["href"])
                   ]),
                   withDirectives(createVNode("div", { class: "mt-2 font-medium text-sm text-green-600" }, " Tautan verifikasi baru telah dikirim ke alamat email kamu. ", 512), [
                     [vShow, verificationLinkSent.value]
