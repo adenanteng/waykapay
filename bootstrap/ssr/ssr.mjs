@@ -12555,13 +12555,8 @@ const _sfc_main$1a = {
     page: Object
   },
   setup(__props) {
-    var _a;
     const props = __props;
-    const darkMode = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
-    watch(darkMode, (newDarkMode) => {
-      console.log(`darkmode is ${newDarkMode}`);
-      localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
-    });
+    const darkMode = ref(false);
     const showingNavigationDropdown = ref(false);
     const logout = () => {
       router.post(route("logout"));
