@@ -28596,6 +28596,7 @@ createServer(
       return pages[`./Pages/${name}.vue`];
     },
     setup({ App, props, plugin }) {
+      console.log("ssr is alive");
       return createSSRApp({
         render: () => h$1(App, props)
       }).use(plugin).use(P, Ziggy$1, VueClipboard, VueQrcode);
