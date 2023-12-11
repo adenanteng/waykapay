@@ -327,8 +327,6 @@ function formatPrice(value) {
                     </SecondaryButton>
                 </div>
 
-                <div class="pb-80 lg:pb-0" />
-
             </template>
 
             <template v-else-if="props.history.status_id == 2">

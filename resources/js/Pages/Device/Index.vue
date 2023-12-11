@@ -114,7 +114,7 @@ function formatPrice(value) {
                                 <Link
                                     v-else
                                     class="text-sm font-medium text-primary-600 truncate"
-                                    :href="route('device.store')"
+                                    :href="route('device.store', { 'user' : $page.props.user.slug})"
                                     replace
                                 >
                                     Refresh perangkat
