@@ -24,12 +24,14 @@ const props = defineProps({
 
 const darkMode = ref(false)
 
-// const darkMode = ref(JSON.parse(localStorage.getItem('darkmode')) ?? false)
-//
-// watch(darkMode, (newDarkMode) => {
-//     console.log(`darkmode is ${newDarkMode}`)
-//     localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
-// })
+if (typeof window !== 'undefined') {
+    const darkMode = ref(JSON.parse(localStorage.getItem('darkmode')) ?? false)
+
+    watch(darkMode, (newDarkMode) => {
+        console.log(`darkmode is ${newDarkMode}`)
+        localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
+    })
+}
 
 const showingNavigationDropdown = ref(false);
 

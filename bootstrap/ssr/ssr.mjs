@@ -1521,8 +1521,16 @@ const _sfc_main$1W = {
     avatar: String
   },
   setup(__props) {
+    var _a;
     const props = __props;
     const darkMode = ref(false);
+    if (typeof window !== "undefined") {
+      const darkMode2 = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
+      watch(darkMode2, (newDarkMode) => {
+        console.log(`darkmode is ${newDarkMode}`);
+        localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
+      });
+    }
     const showingNavigationDropdown = ref(false);
     computed(() => !!useSlots().action);
     const hasPrevious = computed(() => !!useSlots().previous);
@@ -1531,12 +1539,12 @@ const _sfc_main$1W = {
       router.post(route("logout"));
     };
     return (_ctx, _push, _parent, _attrs) => {
-      var _a, _b;
+      var _a2, _b;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: ["transition duration-1000", darkMode.value ? "nightwind dark" : "nightwind"]
       }, _attrs))}>`);
       _push(ssrRenderComponent(unref(Head), {
-        title: __props.title + " - " + ((_a = _ctx.$page.props.appSetting) == null ? void 0 : _a.name)
+        title: __props.title + " - " + ((_a2 = _ctx.$page.props.appSetting) == null ? void 0 : _a2.name)
       }, null, _parent));
       _push(`<div class="sticky top-0 z-50">`);
       _push(ssrRenderComponent(_sfc_main$1X, null, null, _parent));
@@ -12555,8 +12563,16 @@ const _sfc_main$1a = {
     page: Object
   },
   setup(__props) {
+    var _a;
     const props = __props;
     const darkMode = ref(false);
+    if (typeof window !== "undefined") {
+      const darkMode2 = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
+      watch(darkMode2, (newDarkMode) => {
+        console.log(`darkmode is ${newDarkMode}`);
+        localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
+      });
+    }
     const showingNavigationDropdown = ref(false);
     const logout = () => {
       router.post(route("logout"));
