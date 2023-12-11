@@ -18,12 +18,14 @@ onMounted(() => {
     router.reload({ only: ['digiflazz_saldo'] })
 })
 
-const darkMode = ref(JSON.parse(localStorage.getItem('darkmode')) ?? false)
+if (typeof window !== 'undefined') {
+    const darkMode = ref(JSON.parse(localStorage.getItem('darkmode')) ?? false)
 
-watch(darkMode, (newDarkMode) => {
-    console.log(`darkmode is ${newDarkMode}`)
-    localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
-})
+    watch(darkMode, (newDarkMode) => {
+        console.log(`darkmode is ${newDarkMode}`)
+        localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
+    })
+}
 
 const logout = () => {
     router.post(route('logout'));

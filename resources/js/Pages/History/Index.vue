@@ -36,12 +36,14 @@ function formatPrice(value) {
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
-const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 2)
+if (typeof window !== 'undefined') {
+    const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 2)
 
-watch(tabHistory, (newTabHistory) => {
-    console.log(`tab is ${newTabHistory}`)
-    localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
-})
+    watch(tabHistory, (newTabHistory) => {
+        console.log(`tab is ${newTabHistory}`)
+        localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
+    })
+}
 
 </script>
 
