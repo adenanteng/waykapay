@@ -1521,18 +1521,16 @@ const _sfc_main$1W = {
     avatar: String
   },
   setup(__props) {
+    var _a;
     const props = __props;
     const darkMode = ref(false);
-    onMounted(() => {
-      var _a;
-      if (typeof window !== "undefined") {
-        darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
-      }
-    });
-    watch(darkMode, (newDarkMode) => {
-      console.log(`darkmode is ${newDarkMode}`);
-      localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
-    });
+    if (typeof window !== "undefined") {
+      darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
+      watch(darkMode, (newDarkMode) => {
+        console.log(`darkmode is ${newDarkMode}`);
+        localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
+      });
+    }
     const showingNavigationDropdown = ref(false);
     computed(() => !!useSlots().action);
     const hasPrevious = computed(() => !!useSlots().previous);
@@ -1541,12 +1539,12 @@ const _sfc_main$1W = {
       router.post(route("logout"));
     };
     return (_ctx, _push, _parent, _attrs) => {
-      var _a, _b;
+      var _a2, _b;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: ["transition duration-1000", darkMode.value ? "nightwind dark" : "nightwind"]
       }, _attrs))}>`);
       _push(ssrRenderComponent(unref(Head), {
-        title: __props.title + " - " + ((_a = _ctx.$page.props.appSetting) == null ? void 0 : _a.name)
+        title: __props.title + " - " + ((_a2 = _ctx.$page.props.appSetting) == null ? void 0 : _a2.name)
       }, null, _parent));
       _push(`<div class="sticky top-0 z-50">`);
       _push(ssrRenderComponent(_sfc_main$1X, null, null, _parent));
@@ -11056,17 +11054,16 @@ const _sfc_main$1g = {
     computed(() => !!useSlots().action);
     computed(() => !!useSlots().previous);
     return (_ctx, _push, _parent, _attrs) => {
+      var _a2;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: ["transition duration-1000", darkMode.value ? "nightwind dark" : "nightwind"]
       }, _attrs))}>`);
-      if (_ctx.$page.props.appSetting) {
-        _push(ssrRenderComponent(unref(Head), {
-          title: __props.title + " - " + _ctx.$page.props.appSetting.name
-        }, null, _parent));
-      } else {
-        _push(ssrRenderComponent(unref(Head), { title: __props.title }, null, _parent));
-      }
+      _push(ssrRenderComponent(unref(Head), {
+        title: __props.title + " - " + ((_a2 = _ctx.$page.props.appSetting) == null ? void 0 : _a2.name)
+      }, null, _parent));
       _push(`<div class="sticky top-0 z-50">`);
+      _push(ssrRenderComponent(_sfc_main$1X, null, null, _parent));
+      _push(`</div><div class="sticky top-0 z-50">`);
       _push(ssrRenderComponent(_sfc_main$21, null, null, _parent));
       _push(`</div><div class="min-h-screen bg-gray-100 bg-glass bg-fixed flex justify-center items-center">`);
       ssrRenderSlot(_ctx.$slots, "default", {}, null, _push, _parent);
@@ -12609,18 +12606,18 @@ const _sfc_main$1a = {
       });
     });
     return (_ctx, _push, _parent, _attrs) => {
+      var _a2;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: ["transition duration-1000 nightwind", darkMode.value ? "dark" : ""]
       }, _attrs))}>`);
-      if (_ctx.$page.props.setting != null) {
-        _push(ssrRenderComponent(unref(Head), {
-          title: __props.title + " - " + _ctx.$page.props.setting.name
-        }, null, _parent));
-      } else {
-        _push(ssrRenderComponent(unref(Head), { title: __props.title }, null, _parent));
-      }
+      _push(ssrRenderComponent(unref(Head), {
+        title: __props.title + " - " + ((_a2 = _ctx.$page.props.appSetting) == null ? void 0 : _a2.name)
+      }, null, _parent));
+      _push(`<div class="sticky top-0 z-50">`);
+      _push(ssrRenderComponent(_sfc_main$1X, null, null, _parent));
+      _push(`</div><div class="sticky top-0 z-50">`);
       _push(ssrRenderComponent(_sfc_main$21, null, null, _parent));
-      _push(`<div class="min-h-screen bg-gray-100 bg-glass bg-fixed"><nav class="px-3 mb-3 pt-3 w-full z-50 fixed top-0"><div class="px-3 max-w-screen-xl mx-auto"><div class="flex justify-between h-16"><div class="flex"><div class="shrink-0 flex items-center">`);
+      _push(`</div><div class="min-h-screen bg-gray-100 bg-glass bg-fixed"><nav class="px-3 mb-3 pt-3 w-full z-50 fixed top-0"><div class="px-3 max-w-screen-xl mx-auto"><div class="flex justify-between h-16"><div class="flex"><div class="shrink-0 flex items-center">`);
       _push(ssrRenderComponent(ApplicationMark, { class: "block h-10 w-auto" }, null, _parent));
       _push(`</div><div class="hidden space-x-8 sm:-my-px sm:ml-10 lg:flex">`);
       _push(ssrRenderComponent(_sfc_main$1b, {
@@ -28601,6 +28598,7 @@ createServer(
       return pages[`./Pages/${name}.vue`];
     },
     setup({ App, props, plugin }) {
+      console.log("ssr is alive");
       return createSSRApp({
         render: () => h$1(App, props)
       }).use(plugin).use(P, Ziggy$1, VueClipboard, VueQrcode);

@@ -12,6 +12,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
 import Footer from "@/Components/Footer.vue";
 import FlyoutMenu from "@/Components/FlyoutMenu.vue";
+import OnlineStatus from "@/Components/OnlineStatus.vue";
 
 const props = defineProps({
     title: String,
@@ -66,15 +67,15 @@ onMounted(() => {
 
 <template>
     <div class="transition duration-1000 nightwind" :class="darkMode ? 'dark' : '' ">
-        <template v-if="$page.props.setting != null">
-            <Head :title="title + ' - ' + $page.props.setting.name"/>
-        </template>
+        <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
-        <template v-else>
-            <Head :title="title"/>
-        </template>
+        <div class="sticky top-0 z-50">
+            <OnlineStatus />
+        </div>
 
-        <Banner/>
+        <div class="sticky top-0 z-50">
+            <Banner/>
+        </div>
 
         <div class="min-h-screen bg-gray-100 bg-glass bg-fixed">
             <nav class="px-3 mb-3 pt-3 w-full z-50 fixed top-0" >

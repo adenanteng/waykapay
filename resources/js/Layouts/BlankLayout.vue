@@ -23,6 +23,7 @@ import {
     TransitionChild,
     TransitionRoot,
 } from '@headlessui/vue'
+import OnlineStatus from "../Components/OnlineStatus.vue";
 
 const props = defineProps({
     title: String,
@@ -55,16 +56,14 @@ const logout = () => {
 
 <template>
     <div class="transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
-        <template v-if="$page.props.appSetting">
-            <Head :title="title + ' - ' + $page.props.appSetting.name"/>
-        </template>
-
-        <template v-else>
-            <Head :title="title"/>
-        </template>
+        <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
         <div class="sticky top-0 z-50">
-        <Banner/>
+            <OnlineStatus />
+        </div>
+
+        <div class="sticky top-0 z-50">
+            <Banner/>
         </div>
 
         <div class="min-h-screen bg-gray-100 bg-glass bg-fixed flex justify-center items-center">
