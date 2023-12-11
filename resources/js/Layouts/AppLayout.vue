@@ -35,7 +35,6 @@ const props = defineProps({
 });
 
 const darkMode = ref(false)
-
 if (typeof window !== 'undefined') {
     darkMode.value = JSON.parse(localStorage.getItem('darkmode')) ?? false
 

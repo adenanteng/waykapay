@@ -6622,8 +6622,9 @@ const _sfc_main$1G = {
     watch(message, async () => {
       show.value = true;
     });
+    const darkMode = ref(false);
     if (typeof window !== "undefined") {
-      const darkMode = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
+      darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
       watch(darkMode, (newDarkMode) => {
         console.log(`darkmode is ${newDarkMode}`);
         localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
@@ -6631,7 +6632,7 @@ const _sfc_main$1G = {
     }
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["", __props.darkMode ? "nightwind dark" : "nightwind"]
+        class: ["", darkMode.value ? "nightwind dark" : "nightwind"]
       }, _attrs))}><div class="min-h-screen flex bg-white bg-glass bg-fixed"><div class="min-h-screen flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"><div class="mx-auto w-full max-w-sm lg:w-96 py-10"><div><button>`);
       ssrRenderSlot(_ctx.$slots, "logo", {}, null, _push, _parent);
       _push(`</button><h2 class="mt-6 text-3xl font-extrabold text-gray-900">Selamat Datang</h2><p class="mt-2 text-sm text-gray-600">`);
@@ -11041,8 +11042,9 @@ const _sfc_main$1g = {
   },
   setup(__props) {
     var _a;
+    const darkMode = ref(false);
     if (typeof window !== "undefined") {
-      const darkMode = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
+      darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
       watch(darkMode, (newDarkMode) => {
         console.log(`darkmode is ${newDarkMode}`);
         localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
@@ -11053,7 +11055,7 @@ const _sfc_main$1g = {
     computed(() => !!useSlots().previous);
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["transition duration-1000", __props.darkMode ? "nightwind dark" : "nightwind"]
+        class: ["transition duration-1000", darkMode.value ? "nightwind dark" : "nightwind"]
       }, _attrs))}>`);
       if (_ctx.$page.props.appSetting) {
         _push(ssrRenderComponent(unref(Head), {
@@ -12571,8 +12573,9 @@ const _sfc_main$1a = {
   setup(__props) {
     var _a;
     const props = __props;
+    const darkMode = ref(false);
     if (typeof window !== "undefined") {
-      const darkMode = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
+      darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
       watch(darkMode, (newDarkMode) => {
         console.log(`darkmode is ${newDarkMode}`);
         localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
@@ -12605,7 +12608,7 @@ const _sfc_main$1a = {
     });
     return (_ctx, _push, _parent, _attrs) => {
       _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["transition duration-1000 nightwind", __props.darkMode ? "dark" : ""]
+        class: ["transition duration-1000 nightwind", darkMode.value ? "dark" : ""]
       }, _attrs))}>`);
       if (_ctx.$page.props.setting != null) {
         _push(ssrRenderComponent(unref(Head), {
@@ -12656,8 +12659,8 @@ const _sfc_main$1a = {
       }
       _push(`<div class="ml-3 relative">`);
       _push(ssrRenderComponent(_sfc_main$1Y, {
-        darkMode: __props.darkMode,
-        onClick: ($event) => __props.darkMode = !__props.darkMode
+        darkMode: darkMode.value,
+        onClick: ($event) => darkMode.value = !darkMode.value
       }, null, _parent));
       _push(`</div>`);
       if (_ctx.$page.props.user) {
@@ -12777,8 +12780,8 @@ const _sfc_main$1a = {
       }
       _push(`</div><div class="-mr-2 flex items-center lg:hidden">`);
       _push(ssrRenderComponent(_sfc_main$1Y, {
-        darkMode: __props.darkMode,
-        onClick: ($event) => __props.darkMode = !__props.darkMode
+        darkMode: darkMode.value,
+        onClick: ($event) => darkMode.value = !darkMode.value
       }, null, _parent));
       _push(`<button class="inline-flex items-center justify-center ml-2 p-2 rounded-3xl text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"><svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path class="${ssrRenderClass({ "hidden": showingNavigationDropdown.value, "inline-flex": !showingNavigationDropdown.value })}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path><path class="${ssrRenderClass({ "hidden": !showingNavigationDropdown.value, "inline-flex": showingNavigationDropdown.value })}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div></div></div><div class="${ssrRenderClass([{ "block": showingNavigationDropdown.value, "hidden": !showingNavigationDropdown.value }, "lg:hidden mt-2 bg-white bg-opacity-50 backdrop-blur rounded-3xl border border-gray-300"])}"><div class="pt-2 pb-3 space-y-1">`);
       _push(ssrRenderComponent(_sfc_main$1Z, {
@@ -23123,8 +23126,9 @@ const _sfc_main$m = {
     onMounted(() => {
       router.reload({ only: ["digiflazz_saldo"] });
     });
+    const darkMode = ref(false);
     if (typeof window !== "undefined") {
-      const darkMode = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
+      darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
       watch(darkMode, (newDarkMode) => {
         console.log(`darkmode is ${newDarkMode}`);
         localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
@@ -23204,17 +23208,17 @@ const _sfc_main$m = {
             _push2(`</li><li class="block lg:hidden"${_scopeId}>`);
             _push2(ssrRenderComponent(unref(Link), {
               href: _ctx.route("profile.index"),
-              onClick: ($event) => _ctx.darkMode = !_ctx.darkMode,
+              onClick: ($event) => darkMode.value = !darkMode.value,
               class: "flex justify-between px-6 py-4"
             }, {
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
-                  _push3(`<p class="text-sm font-medium text-gray-900"${_scopeId2}>Mode ${ssrInterpolate(_ctx.darkMode ? "gelap" : "terang")}</p><i class="${ssrRenderClass([_ctx.darkMode ? "fa-moon" : "fa-sun-bright", "fa-regular text-gray-900"])}"${_scopeId2}></i>`);
+                  _push3(`<p class="text-sm font-medium text-gray-900"${_scopeId2}>Mode ${ssrInterpolate(darkMode.value ? "gelap" : "terang")}</p><i class="${ssrRenderClass([darkMode.value ? "fa-moon" : "fa-sun-bright", "fa-regular text-gray-900"])}"${_scopeId2}></i>`);
                 } else {
                   return [
-                    createVNode("p", { class: "text-sm font-medium text-gray-900" }, "Mode " + toDisplayString(_ctx.darkMode ? "gelap" : "terang"), 1),
+                    createVNode("p", { class: "text-sm font-medium text-gray-900" }, "Mode " + toDisplayString(darkMode.value ? "gelap" : "terang"), 1),
                     createVNode("i", {
-                      class: ["fa-regular text-gray-900", _ctx.darkMode ? "fa-moon" : "fa-sun-bright"]
+                      class: ["fa-regular text-gray-900", darkMode.value ? "fa-moon" : "fa-sun-bright"]
                     }, null, 2)
                   ];
                 }
@@ -23451,13 +23455,13 @@ const _sfc_main$m = {
                   createVNode("li", { class: "block lg:hidden" }, [
                     createVNode(unref(Link), {
                       href: _ctx.route("profile.index"),
-                      onClick: ($event) => _ctx.darkMode = !_ctx.darkMode,
+                      onClick: ($event) => darkMode.value = !darkMode.value,
                       class: "flex justify-between px-6 py-4"
                     }, {
                       default: withCtx(() => [
-                        createVNode("p", { class: "text-sm font-medium text-gray-900" }, "Mode " + toDisplayString(_ctx.darkMode ? "gelap" : "terang"), 1),
+                        createVNode("p", { class: "text-sm font-medium text-gray-900" }, "Mode " + toDisplayString(darkMode.value ? "gelap" : "terang"), 1),
                         createVNode("i", {
-                          class: ["fa-regular text-gray-900", _ctx.darkMode ? "fa-moon" : "fa-sun-bright"]
+                          class: ["fa-regular text-gray-900", darkMode.value ? "fa-moon" : "fa-sun-bright"]
                         }, null, 2)
                       ]),
                       _: 1
