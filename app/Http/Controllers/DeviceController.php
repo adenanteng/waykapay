@@ -35,9 +35,9 @@ class DeviceController extends Controller
 
 //            dd('check');
         } else {
-            Device::create([
-                'user_id' => auth()->user()->id
-            ]);
+//            Device::create([
+//                'user_id' => auth()->user()->id
+//            ]);
 //            dd('chock');
         }
 
