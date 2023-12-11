@@ -6,7 +6,6 @@ import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
 import {Link, useForm} from "@inertiajs/vue3";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
-import {Vue3Lottie} from "vue3-lottie";
 import { useShare } from '@vueuse/core'
 import BlankLayout from "@/Layouts/BlankLayout.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";

@@ -14,7 +14,6 @@ import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {computed, onMounted, ref} from "vue";
 import Loading from "../../Loading.vue";
-import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
     users: Object,

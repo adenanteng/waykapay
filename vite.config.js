@@ -23,7 +23,7 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
                 compilerOptions: { // here
-                    isCustomElement: tag => tag === 'lottie-player'
+                    // isCustomElement: tag => tag === 'lottie-player'
                 }
             },
         }),

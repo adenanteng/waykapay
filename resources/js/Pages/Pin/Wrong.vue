@@ -5,7 +5,6 @@ import MobileMenu from "@/Components/MobileMenu.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import moment from "moment";
-import {Vue3Lottie} from "vue3-lottie";
 import BlankLayout from "../../Layouts/BlankLayout.vue";
 import ApplicationLogo from "../../Components/ApplicationLogo.vue";
 import VOtpInput from "vue3-otp-input";

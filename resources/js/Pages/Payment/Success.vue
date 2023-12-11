@@ -9,7 +9,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import Badge from "../../Components/Badge.vue";
 import {router, useForm} from "@inertiajs/vue3";
 import ApplicationLogoTitle from "@/Components/ApplicationLogoTitle.vue";
-import {Vue3Lottie} from "vue3-lottie";
+// import {Vue3Lottie} from "vue3-lottie";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 
 const props = defineProps({
@@ -61,11 +61,11 @@ function formatPrice(value) {
                     <div class="text-center justify-center">
                         <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
                         <div class="px-4 sm:px-6 text-center text-gray-900 text-sm" >
-                            <Vue3Lottie
-                                animation-link="https://lottie.host/a3272d43-4bd3-4974-a125-712019ae512e/mskSUiuPqv.json"
-                                :height="200"
-                                :width="200"
-                            />
+<!--                            <Vue3Lottie-->
+<!--                                animation-link="https://lottie.host/a3272d43-4bd3-4974-a125-712019ae512e/mskSUiuPqv.json"-->
+<!--                                :height="200"-->
+<!--                                :width="200"-->
+<!--                            />-->
                         </div>
                         <h1 class="text-lg font-bold tracking-tight text-gray-900">Transaksi Berhasil</h1>
                         <p class="text-gray-500 text-sm">Kamu akan dialihkan dalam </p>

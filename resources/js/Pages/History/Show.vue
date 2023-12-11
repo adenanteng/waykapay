@@ -16,7 +16,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
-import {Vue3Lottie} from "vue3-lottie";
+// import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
     // users: Object,
@@ -82,11 +82,11 @@ function formatPrice(value) {
                     <div class="mt-5">
                         <div class="text-center justify-center">
                             <div class="px-4 sm:px-6 text-center text-gray-900 text-sm" >
-                                <Vue3Lottie
-                                    animation-link="https://lottie.host/a3272d43-4bd3-4974-a125-712019ae512e/mskSUiuPqv.json"
-                                    :height="200"
-                                    :width="200"
-                                />
+<!--                                <Vue3Lottie-->
+<!--                                    animation-link="https://lottie.host/a3272d43-4bd3-4974-a125-712019ae512e/mskSUiuPqv.json"-->
+<!--                                    :height="200"-->
+<!--                                    :width="200"-->
+<!--                                />-->
                             </div>
 
                             <h1 class="text-lg font-bold tracking-tight text-gray-900">Transaksi Berhasil</h1>

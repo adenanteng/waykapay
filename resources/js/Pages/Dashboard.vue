@@ -11,7 +11,7 @@ import { FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/autoplay';
-import {Vue3Lottie} from "vue3-lottie";
+// import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
     users: Object,

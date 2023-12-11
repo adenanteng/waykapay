@@ -4,16 +4,8 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import moment from "moment";
-import {Vue3Lottie} from 'vue3-lottie'
-import Badge from "../../Components/Badge.vue";
-import PrimaryButton from "../../Components/PrimaryButton.vue";
-import TextInput from "../../Components/TextInput.vue";
-import Pagination from "../../Components/Pagination.vue";
-import SelectInput from "../../Components/SelectInput.vue";
 import Loading from "../Product/Loading.vue";
 import PriceList from "./Partials/PriceList.vue";
-import FormatPulsa from "./Partials/FormatPulsa.vue";
-import FormatEmoney from "./Partials/FormatEmoney.vue";
 
 const props = defineProps({
     product_count: undefined,

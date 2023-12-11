@@ -4,7 +4,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import moment from "moment";
-import { Vue3Lottie } from 'vue3-lottie'
 import Badge from "../../Components/Badge.vue";
 import PrimaryButton from "../../Components/PrimaryButton.vue";
 import TextInput from "../../Components/TextInput.vue";
