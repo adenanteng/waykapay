@@ -22,7 +22,6 @@ createServer(page =>
         },
         // resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
         setup({ App, props, plugin }) {
-            console.log("ssr is alive")
             return createSSRApp({
                 render: () => h(App, props),
             })

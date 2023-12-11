@@ -1521,9 +1521,14 @@ const _sfc_main$1W = {
     avatar: String
   },
   setup(__props) {
-    var _a;
     const props = __props;
-    const darkMode = ref((_a = JSON.parse(localStorage == null ? void 0 : localStorage.getItem("darkmode"))) != null ? _a : false);
+    const darkMode = ref(false);
+    onMounted(() => {
+      var _a;
+      if (typeof window !== "undefined") {
+        darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
+      }
+    });
     watch(darkMode, (newDarkMode) => {
       console.log(`darkmode is ${newDarkMode}`);
       localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
@@ -1536,12 +1541,12 @@ const _sfc_main$1W = {
       router.post(route("logout"));
     };
     return (_ctx, _push, _parent, _attrs) => {
-      var _a2, _b;
+      var _a, _b;
       _push(`<div${ssrRenderAttrs(mergeProps({
         class: ["transition duration-1000", darkMode.value ? "nightwind dark" : "nightwind"]
       }, _attrs))}>`);
       _push(ssrRenderComponent(unref(Head), {
-        title: __props.title + " - " + ((_a2 = _ctx.$page.props.appSetting) == null ? void 0 : _a2.name)
+        title: __props.title + " - " + ((_a = _ctx.$page.props.appSetting) == null ? void 0 : _a.name)
       }, null, _parent));
       _push(`<div class="sticky top-0 z-50">`);
       _push(ssrRenderComponent(_sfc_main$1X, null, null, _parent));
@@ -28596,7 +28601,6 @@ createServer(
       return pages[`./Pages/${name}.vue`];
     },
     setup({ App, props, plugin }) {
-      console.log("ssr is alive");
       return createSSRApp({
         render: () => h$1(App, props)
       }).use(plugin).use(P, Ziggy$1, VueClipboard, VueQrcode);

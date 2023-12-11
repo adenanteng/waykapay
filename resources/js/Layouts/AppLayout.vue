@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref, useSlots, watch} from 'vue';
+import {computed, onMounted, ref, useSlots, watch} from 'vue';
 import {router, Head, Link} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -34,18 +34,20 @@ const props = defineProps({
     avatar: String
 });
 
-const darkMode = ref(JSON.parse(localStorage?.getItem('darkmode')) ?? false)
+const darkMode = ref(false)
 
-watch(darkMode, (newDarkMode) => {
-    console.log(`darkmode is ${newDarkMode}`)
-    localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
+onMounted(() => {
+    if (typeof window !== 'undefined') {
+        darkMode.value = JSON.parse(localStorage.getItem('darkmode')) ?? false
+    }
 })
 
-// if (typeof window !== 'undefined') {
-//     darkMode.value =
-//
-//
-// }
+
+    watch(darkMode, (newDarkMode) => {
+        console.log(`darkmode is ${newDarkMode}`)
+        localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
+    })
+
 
 const showingNavigationDropdown = ref(false);
 
