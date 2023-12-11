@@ -34,15 +34,18 @@ const props = defineProps({
     avatar: String
 });
 
-const darkMode = ref(false)
-if (typeof window !== 'undefined') {
-    darkMode.value = JSON.parse(localStorage.getItem('darkmode')) ?? false
+const darkMode = ref(JSON.parse(localStorage?.getItem('darkmode')) ?? false)
 
-    watch(darkMode, (newDarkMode) => {
-        console.log(`darkmode is ${newDarkMode}`)
-        localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
-    })
-}
+watch(darkMode, (newDarkMode) => {
+    console.log(`darkmode is ${newDarkMode}`)
+    localStorage.setItem('darkmode', JSON.stringify(newDarkMode))
+})
+
+// if (typeof window !== 'undefined') {
+//     darkMode.value =
+//
+//
+// }
 
 const showingNavigationDropdown = ref(false);
 

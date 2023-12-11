@@ -1523,14 +1523,11 @@ const _sfc_main$1W = {
   setup(__props) {
     var _a;
     const props = __props;
-    const darkMode = ref(false);
-    if (typeof window !== "undefined") {
-      darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
-      watch(darkMode, (newDarkMode) => {
-        console.log(`darkmode is ${newDarkMode}`);
-        localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
-      });
-    }
+    const darkMode = ref((_a = JSON.parse(localStorage == null ? void 0 : localStorage.getItem("darkmode"))) != null ? _a : false);
+    watch(darkMode, (newDarkMode) => {
+      console.log(`darkmode is ${newDarkMode}`);
+      localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
+    });
     const showingNavigationDropdown = ref(false);
     computed(() => !!useSlots().action);
     const hasPrevious = computed(() => !!useSlots().previous);
