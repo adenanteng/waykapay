@@ -1523,8 +1523,9 @@ const _sfc_main$1W = {
   setup(__props) {
     var _a;
     const props = __props;
+    const darkMode = ref(false);
     if (typeof window !== "undefined") {
-      const darkMode = ref((_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false);
+      darkMode.value = (_a = JSON.parse(localStorage.getItem("darkmode"))) != null ? _a : false;
       watch(darkMode, (newDarkMode) => {
         console.log(`darkmode is ${newDarkMode}`);
         localStorage.setItem("darkmode", JSON.stringify(newDarkMode));
@@ -1540,7 +1541,7 @@ const _sfc_main$1W = {
     return (_ctx, _push, _parent, _attrs) => {
       var _a2, _b;
       _push(`<div${ssrRenderAttrs(mergeProps({
-        class: ["transition duration-1000", __props.darkMode ? "nightwind dark" : "nightwind"]
+        class: ["transition duration-1000", darkMode.value ? "nightwind dark" : "nightwind"]
       }, _attrs))}>`);
       _push(ssrRenderComponent(unref(Head), {
         title: __props.title + " - " + ((_a2 = _ctx.$page.props.appSetting) == null ? void 0 : _a2.name)
@@ -1570,8 +1571,8 @@ const _sfc_main$1W = {
             }
             _push2(`</div><div class="hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5"${_scopeId}>`);
             _push2(ssrRenderComponent(_sfc_main$1Y, {
-              darkMode: __props.darkMode,
-              onClick: ($event) => __props.darkMode = !__props.darkMode
+              darkMode: darkMode.value,
+              onClick: ($event) => darkMode.value = !darkMode.value
             }, null, _parent2, _scopeId));
             _push2(ssrRenderComponent(unref(Menu), {
               as: "div",
@@ -1864,8 +1865,8 @@ const _sfc_main$1W = {
                             if (_push5) {
                               _push5(`<div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-200"${_scopeId4}><div class="pt-3 pb-2"${_scopeId4}><div class="flex items-center justify-between px-4"${_scopeId4}><div${_scopeId4}>`);
                               _push5(ssrRenderComponent(_sfc_main$1Y, {
-                                darkMode: __props.darkMode,
-                                onClick: ($event) => __props.darkMode = !__props.darkMode
+                                darkMode: darkMode.value,
+                                onClick: ($event) => darkMode.value = !darkMode.value
                               }, null, _parent5, _scopeId4));
                               _push5(`</div><div class="-mr-2"${_scopeId4}>`);
                               _push5(ssrRenderComponent(unref(PopoverButton), { class: "bg-white rounded-3xl inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500" }, {
@@ -1942,8 +1943,8 @@ const _sfc_main$1W = {
                                     createVNode("div", { class: "flex items-center justify-between px-4" }, [
                                       createVNode("div", null, [
                                         createVNode(_sfc_main$1Y, {
-                                          darkMode: __props.darkMode,
-                                          onClick: ($event) => __props.darkMode = !__props.darkMode
+                                          darkMode: darkMode.value,
+                                          onClick: ($event) => darkMode.value = !darkMode.value
                                         }, null, 8, ["darkMode", "onClick"])
                                       ]),
                                       createVNode("div", { class: "-mr-2" }, [
@@ -2037,8 +2038,8 @@ const _sfc_main$1W = {
                                   createVNode("div", { class: "flex items-center justify-between px-4" }, [
                                     createVNode("div", null, [
                                       createVNode(_sfc_main$1Y, {
-                                        darkMode: __props.darkMode,
-                                        onClick: ($event) => __props.darkMode = !__props.darkMode
+                                        darkMode: darkMode.value,
+                                        onClick: ($event) => darkMode.value = !darkMode.value
                                       }, null, 8, ["darkMode", "onClick"])
                                     ]),
                                     createVNode("div", { class: "-mr-2" }, [
@@ -2161,8 +2162,8 @@ const _sfc_main$1W = {
                                   createVNode("div", { class: "flex items-center justify-between px-4" }, [
                                     createVNode("div", null, [
                                       createVNode(_sfc_main$1Y, {
-                                        darkMode: __props.darkMode,
-                                        onClick: ($event) => __props.darkMode = !__props.darkMode
+                                        darkMode: darkMode.value,
+                                        onClick: ($event) => darkMode.value = !darkMode.value
                                       }, null, 8, ["darkMode", "onClick"])
                                     ]),
                                     createVNode("div", { class: "-mr-2" }, [
@@ -2277,8 +2278,8 @@ const _sfc_main$1W = {
                   ]),
                   createVNode("div", { class: "hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5" }, [
                     createVNode(_sfc_main$1Y, {
-                      darkMode: __props.darkMode,
-                      onClick: ($event) => __props.darkMode = !__props.darkMode
+                      darkMode: darkMode.value,
+                      onClick: ($event) => darkMode.value = !darkMode.value
                     }, null, 8, ["darkMode", "onClick"]),
                     createVNode(unref(Menu), {
                       as: "div",
@@ -2445,8 +2446,8 @@ const _sfc_main$1W = {
                                 createVNode("div", { class: "flex items-center justify-between px-4" }, [
                                   createVNode("div", null, [
                                     createVNode(_sfc_main$1Y, {
-                                      darkMode: __props.darkMode,
-                                      onClick: ($event) => __props.darkMode = !__props.darkMode
+                                      darkMode: darkMode.value,
+                                      onClick: ($event) => darkMode.value = !darkMode.value
                                     }, null, 8, ["darkMode", "onClick"])
                                   ]),
                                   createVNode("div", { class: "-mr-2" }, [
