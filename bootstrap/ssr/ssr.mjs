@@ -16,7 +16,6 @@ import { InboxIcon, UsersIcon, TrashIcon, PencilSquareIcon, DocumentChartBarIcon
 import VOtpInput from "vue3-otp-input";
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 import "@vuepic/vue-datepicker";
-import axios$1 from "axios";
 import createServer from "@inertiajs/vue3/server";
 import { renderToString } from "@vue/server-renderer";
 const _sfc_main$2i = {
@@ -28112,8 +28111,6 @@ const __vite_glob_0_107 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.d
   __proto__: null,
   default: _sfc_main
 }, Symbol.toStringTag, { value: "Module" }));
-window.axios = axios$1;
-window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 const app = "";
 function t(t4, r2) {
   for (var n2 = 0; n2 < r2.length; n2++) {
