@@ -31,17 +31,16 @@ class DeviceController extends Controller
     {
         $device = Device::where('user_id', auth()->user()->id)->first();
 
-        if ($device) {
+//        if ($device) {
+////            dd('check');
+//        } else {
+////            Device::create([
+////                'user_id' => auth()->user()->id
+////            ]);
+////            dd('chock');
+//        }
 
-//            dd('check');
-        } else {
-//            Device::create([
-//                'user_id' => auth()->user()->id
-//            ]);
-//            dd('chock');
-        }
-
-        session()->flash('flash.banner', 'Notifikasi perangkat!');
+//        session()->flash('flash.banner', 'Notifikasi perangkat!');
         return Inertia::render('Device/Index', []);
 //        return to_route('profile.index');
     }
