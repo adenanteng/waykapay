@@ -226,6 +226,10 @@ class WebHookController extends Controller
 //
 //            $device->delete();
 //        }
+        $user = User::where('slug', Req::input('user'))->first();
+        $user->update([
+            'device_token' => Req::input('token'),
+        ]);
 
         return response()->json('ok');
     }
