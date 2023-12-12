@@ -19,8 +19,8 @@ const data = [
     {
         name: 'Kontak Admin',
         title: 'Online 08.30 - 22.00',
-        role: Number(clock.value>=22) ? 'Nonaktif' : 'Aktif',
-        roleClass: Number(clock.value>=22) ? 'text-red-800 bg-red-100' : 'text-green-800 bg-green-100',
+        role: clock>=22 ? 'Nonaktif' : 'Aktif',
+        roleClass: clock>=22 ? 'text-red-800 bg-red-100' : 'text-green-800 bg-green-100',
         icon: 'fa-whatsapp text-green-500',
         btn: 'Admin 1',
         btn2: 'Admin 2',
