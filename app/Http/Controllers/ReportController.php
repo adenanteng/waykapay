@@ -46,9 +46,14 @@ class ReportController extends Controller
 
             'gross_amount' => $trx->sum('gross_amount'),
             'agent_commission' => $trx->sum('agent_commission'),
-            'transaction_count' => Transaction::where('user_id', auth()->user()->id)
-                ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)->latest()
-                ->where('status_id', Transaction::SUCCESS)->get()->count(),
+            'transaction_count' => Transaction::where(function($query)
+                {
+                    $query->where('user_id', auth()->user()->id)
+                        ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id);
+                })
+                ->where('status_id', Transaction::SUCCESS)
+                ->latest()
+                ->get()->count(),
 
             'filters' => Req::only(['search', 'filter', 'date_start', 'date_end']),
             'selectCategory' => Transaction::CATEGORY,
