@@ -22,9 +22,9 @@ export default defineConfig({
                     base: null,
                     includeAbsolute: false,
                 },
-                compilerOptions: { // here
+                // compilerOptions: { // here
                     // isCustomElement: tag => tag === 'lottie-player'
-                }
+                // }
             },
         }),
     ],

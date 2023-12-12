@@ -16,11 +16,11 @@ createServer(page =>
     createInertiaApp({
         page,
         render: renderToString,
-        resolve: name => {
-            const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-            return pages[`./Pages/${name}.vue`]
-        },
-        // resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+        // resolve: name => {
+        //     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+        //     return pages[`./Pages/${name}.vue`]
+        // },
+        resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
         setup({ App, props, plugin }) {
             console.log("ssr is alive")
             return createSSRApp({
