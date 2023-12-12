@@ -63,6 +63,18 @@ const onSlideChange = (swiper) => {
 //     }
 // }
 
+function greeting() {
+    if (moment().format('HH') < 10) {
+        return  "Selamat Pagi";
+    } else if (moment().format('HH') < 15) {
+        return  "Selamat Siang";
+    } else if (moment().format('HH') < 19) {
+        return  "Selamat Sore";
+    } else {
+        return  "Selamat Malam";
+    }
+}
+
 
 
 </script>
@@ -71,7 +83,7 @@ const onSlideChange = (swiper) => {
     <AppLayout title="Beranda"
                greeting="Selamat datang kembali,"
                :name="$page.props.user.name"
-               :desc="$page.props.user.email"
+               :desc="greeting()"
                :avatar="$page.props.user.profile_photo_url"
     >
         <div class="rounded-3xl bg-gradient-to-br from-primary-600 overflow-hidden shadow-lg">

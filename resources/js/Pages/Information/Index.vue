@@ -13,8 +13,6 @@ const props = defineProps({
 
 const clock = moment().format('HH')
 
-console.log(clock)
-
 const data = [
     {
         name: 'Kontak Admin',
