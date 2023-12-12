@@ -27,7 +27,6 @@ class HistoryController extends Controller
                     ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id);
             })
 //            ->whereRelation('money_transfer', 'created_at', '=', Carbon::now()->month)
-            ->whereMonth('created_at', Carbon::now()->month)
             ->latest()
             ->get()
             ->groupBy(function ($val) {
@@ -41,12 +40,15 @@ class HistoryController extends Controller
 
             'all_process' => Inertia::lazy(fn () => $history->count()),
 
-            'in_count' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)
+            'in_count' => Inertia::lazy(fn () => Transaction::where(function($query)
+                                                    {
+                                                        $query->where('user_id', auth()->user()->id)
+                                                            ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id);
+                                                    })
                                                     ->where([
                                                         ['status_id', Transaction::SUCCESS],
                                                     ])
                                                     ->whereIn('category_id', [Transaction::DEPOSIT])
-                                                    ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
                                                     ->whereMonth('created_at', Carbon::now()->month)
                                                     ->sum('amount')),
 
