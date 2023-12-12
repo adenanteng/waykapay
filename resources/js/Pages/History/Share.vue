@@ -103,7 +103,7 @@ function formatPrice(value) {
     >
 
         <div class="min-h-screen flex justify-center items-center py-5">
-            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden border border-gray-300">
                 <div class="px-4 py-5 flex flex-col justify-center items-center ">
                     <!--                <ApplicationLogo class="" />-->
                     <ApplicationLogoTitle />
@@ -241,7 +241,7 @@ function formatPrice(value) {
                 <div class="border-t border-gray-600 border-dashed px-4 py-5 text-xs text-gray-500">
                     <p>CV Cahaya Matahari Dunia</p>
                     <p>NPWP: 50.079.228.8-326.000</p>
-                    <p>Jl. Lintas Sumatera, Campur Asri, Baradatu, Way Kanan, Lampung - 34761</p>
+                    <p>Jl. Lintas Sumatera, Baradatu, Way Kanan, Lampung - 34761</p>
                 </div>
             </div>
 

@@ -56,10 +56,10 @@ if (typeof window !== 'undefined') {
         <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
             <div class="flex w-full items-center justify-between space-x-6 p-6">
                 <div class="flex-1 truncate">
-                    <p class="mt-1 truncate text-sm text-gray-500">Total transaksi</p>
+                    <p class="mt-1 truncate text-sm text-gray-500">Bulan ini</p>
                     <h3 class="truncate text-sm font-medium text-gray-900">
                         {{ props.all_process }}
-                        <span class="truncate text-xs text-gray-500">bulan ini</span>
+                        <span class="truncate text-xs text-gray-500">transaksi</span>
                     </h3>
                 </div>
             </div>

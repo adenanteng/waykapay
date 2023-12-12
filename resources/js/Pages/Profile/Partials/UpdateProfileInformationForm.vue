@@ -113,14 +113,14 @@ const clearPhotoFileInput = () => {
                     />
                 </div>
 
-                <SecondaryButton class="mt-2 mr-2 nightwind-prevent" type="button" @click.prevent="selectNewPhoto">
+                <SecondaryButton class="mt-2 mr-2 border border-gray-300" type="button" @click.prevent="selectNewPhoto">
                     Ubah Avatar
                 </SecondaryButton>
 
                 <SecondaryButton
                     v-if="user.profile_photo_path"
                     type="button"
-                    class="mt-2 nightwind-prevent"
+                    class="mt-2 border border-gray-300"
                     @click.prevent="deletePhoto"
                 >
                     Hapus Avatar
@@ -138,6 +138,7 @@ const clearPhotoFileInput = () => {
                     type="text"
                     class="mt-1 block w-full capitalize"
                     autocomplete="name"
+                    disabled
                 />
                 <InputError :message="form.errors.name" class="mt-2" />
             </div>
@@ -148,7 +149,8 @@ const clearPhotoFileInput = () => {
                     id="phone"
                     v-model="form.phone"
                     type="tel"
-                    class="mt-1 block w-full capitalize"
+                    class="mt-1 block w-full"
+                    disabled
                 />
                 <InputError :message="form.errors.phone" class="mt-2" />
             </div>
@@ -161,6 +163,7 @@ const clearPhotoFileInput = () => {
                     v-model="form.email"
                     type="email"
                     class="mt-1 block w-full"
+                    disabled
                 />
                 <InputError :message="form.errors.email" class="mt-2" />
 
