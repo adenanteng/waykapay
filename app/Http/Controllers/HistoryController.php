@@ -27,6 +27,7 @@ class HistoryController extends Controller
                     ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id);
             })
 //            ->whereRelation('money_transfer', 'created_at', '=', Carbon::now()->month)
+            ->whereMonth('created_at', Carbon::now()->month)
             ->latest()
             ->get()
             ->groupBy(function ($val) {
@@ -48,7 +49,8 @@ class HistoryController extends Controller
                                                     ->where([
                                                         ['status_id', Transaction::SUCCESS],
                                                     ])
-                                                    ->whereIn('category_id', [Transaction::DEPOSIT])
+                                                    ->whereIn('category_id', [Transaction::DEPOSIT, Transaction::TRANSFER])
+//                                                    ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id)
                                                     ->whereMonth('created_at', Carbon::now()->month)
                                                     ->sum('amount')),
 
