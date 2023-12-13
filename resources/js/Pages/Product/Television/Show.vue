@@ -217,7 +217,7 @@ const tab = ref('Umum')
                                 <img class="w-10" :src="'/img/vendor/' + props.product + '.svg'" alt="">
                             </div>
                             <div class="flex-1 min-w-0">
-                                <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo) && data.buyer_product_status">
+                                <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo) && data.buyer_product_status && data.seller_product_status">
                                     <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                         <span class="absolute inset-0" aria-hidden="true"></span>
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
