@@ -226,6 +226,7 @@ class WebHookController extends Controller
 //
 //            $device->delete();
 //        }
+
         $user = User::where('slug', Req::input('user'))->first();
         if ($user) {
             $user->update([
@@ -233,6 +234,15 @@ class WebHookController extends Controller
             ]);
         }
 
+//        if ($user->device_token) {
+        $msg = [
+            'title' => 'Halo '.$user->name.', perangkatmu berhasil ditautkan!',
+            'body' => 'Lorem ipsum dolor sit amet',
+            'badge' => 1,
+            'sound' => 'ping.aiff'
+        ];
+        Helper::sendNotification($user->device_token, $msg);
+//        }
 
         return response()->json('ok');
     }
