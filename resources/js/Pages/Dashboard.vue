@@ -233,14 +233,49 @@ function greeting() {
                     </div>
                 </Link>
 
-<!--                <Link :href="route('internet.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">-->
-<!--                    <div class="text-center">-->
-<!--                        <i class="fa-regular fa-car-side text-2xl text-red-600 dark:text-gray-900" />-->
-<!--                        <p class="text-xs text-red-600 dark:text-gray-900">Multifinance</p>-->
-<!--                    </div>-->
-<!--                </Link>-->
+                <Link :href="route('pasca.multifinance.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-blue-300 dark:from-blue-700 shadow-lg">
+                    <div class="text-center">
+                        <i class="fa-regular fa-credit-card text-2xl text-blue-600 dark:text-gray-900" />
+                        <p class="text-xs text-blue-600 dark:text-gray-900">Multifinance</p>
+                    </div>
+                </Link>
+            </div>
+        </div>
 
-
+        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+            <div class="flex w-full items-center justify-between space-x-6 p-3">
+                <div class="flex-1 truncate">
+                    <div class="flex items-center space-x-3">
+                        <h3 class="truncate text-sm font-medium text-gray-900">Waykapay Protection</h3>
+                        <span class="inline-block flex-shrink-0 rounded-full font-medium text-green-600" >
+                            <i class="fa-solid fa-shield-check text-lg" />
+                        </span>
+                    </div>
+<!--                    <p class="mt-1 truncate text-sm text-gray-500">bbbbb</p>-->
+                </div>
+<!--                <i class="fa-brands fa-whatsapp-square text-3xl flex-shrink-0" />-->
+            </div>
+            <div>
+                <div class="flex">
+                    <div class="flex w-0 flex-1">
+                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-xs font-medium text-gray-700 hover:text-gray-500">
+                            <i class="fa-regular fa-gauge-max text-primary-600"/>
+                            <span class="ml-1">Proses Instan</span>
+                        </p>
+                    </div>
+                    <div class="flex w-0 flex-1">
+                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-xs font-medium text-gray-700 hover:text-gray-500">
+                            <i class="fa-regular fa-clock text-primary-600"/>
+                            <span class="ml-1">24 Jam</span>
+                        </p>
+                    </div>
+                    <div class="flex w-0 flex-1" >
+                        <p class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-xs font-medium text-gray-700 hover:text-gray-500">
+                            <i class="fa-regular fa-badge-check text-primary-600"/>
+                            <span class="ml-1">Bergaransi</span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 

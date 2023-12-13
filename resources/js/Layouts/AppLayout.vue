@@ -74,7 +74,7 @@ const headRef = ref(null); // obtain the reference
 const titleRef = ref(null);
 
 onMounted(() => {
-    console.log(headRef.value)
+    // console.log(headRef.value)
     var prev = window.pageYOffset;
     window.addEventListener("scroll", () => {
         if (headRef.value != null && titleRef.value != null) {

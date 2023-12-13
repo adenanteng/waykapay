@@ -14,9 +14,33 @@ class ProductPascaController extends Controller
      *
      * @return \Inertia\Response
      */
+    public function internet()
+    {
+        return Inertia::render('Product/PascaInternet/Index', [
+//            'users' => auth()->user(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
     public function bpjs()
     {
         return Inertia::render('Product/PascaBpjs/Index', [
+//            'users' => auth()->user(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Inertia\Response
+     */
+    public function multifinance()
+    {
+        return Inertia::render('Product/PascaMultifinance/Index', [
 //            'users' => auth()->user(),
         ]);
     }

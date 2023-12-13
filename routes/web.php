@@ -103,13 +103,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 //    Route::get('/product/television/kvision', [ProductTelevisionController::class, 'kvision'])->name('television.kvision');
 //    Route::get('/product/television/nex', [ProductTelevisionController::class, 'nex'])->name('television.nex');
 
-    Route::get('/product/internet', [ProductInternetController::class, 'index'])->name('pasca.internet.index');
+//    Route::get('/product/internet', [ProductInternetController::class, 'index'])->name('pasca.internet.index');
 //    Route::get('/product/internet/indihome', [ProductInternetController::class, 'indihome'])->name('internet.indihome.index');
 //    Route::post('/product/internet/indihome-inquiry', [ProductInternetController::class, 'indihomeInquiry'])->name('internet.indihome.inquiry');
 //    Route::get('/product/internet/myrepublic', [ProductInternetController::class, 'myrepublic'])->name('internet.myrepublic.index');
 //    Route::post('/product/internet/myrepublic-inquiry', [ProductInternetController::class, 'myrepublicInquiry'])->name('internet.myrepublic.inquiry');
-
+    Route::get('/product/internet', [ProductPascaController::class, 'internet'])->name('pasca.internet.index');
     Route::get('/product/bpjs', [ProductPascaController::class, 'bpjs'])->name('pasca.bpjs.index');
+    Route::get('/product/multifinance', [ProductPascaController::class, 'multifinance'])->name('pasca.multifinance.index');
 
     Route::get('/product/pasca/{sku}', [ProductController::class, 'indexPasca'])->name('pasca.index');
     Route::post('/product/pasca/inquiry', [ProductController::class, 'inquiryPasca'])->name('pasca.inquiry');
