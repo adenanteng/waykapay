@@ -135,6 +135,7 @@ const closeModal = () => {
     // form.reset();
 };
 
+const tab = ref(props.product == 'MAXIM' ? 'Customer' : 'Umum' )
 </script>
 
 <template>
@@ -173,6 +174,34 @@ const closeModal = () => {
             </template>
         </FormSection>
 
+        <div class="border-b border-gray-300" >
+            <nav class="-mb-px flex" aria-label="Tabs">
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Umum'"
+                        v-if="props.product != 'MAXIM' "
+                >
+                    Umum
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Customer' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Customer'"
+                        v-if="props.product == 'GO PAY' || props.product == 'MAXIM' "
+                >
+                    Customer
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Driver' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Driver'"
+                        v-if="props.product == 'GO PAY' || props.product == 'MAXIM' "
+                >
+                    Driver
+                </button>
+            </nav>
+        </div>
+
         <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
             <template v-if="props.response === undefined">
                 <Loading />
@@ -191,12 +220,13 @@ const closeModal = () => {
 
             <template v-else v-for="data in sort(props.response.data)" >
                 <template v-if="data.brand == props.product">
+                    <template v-if="data.type == tab">
                         <li class="relative px-6 py-5 flex items-center space-x-3">
                             <div class="flex-shrink-0">
                                 <img class="w-10" :src="'/img/vendor/' + props.product + '.svg'" alt="">
                             </div>
                             <div class="flex-1 min-w-0">
-                                <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo) && data.buyer_product_status">
+                                <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo) && data.buyer_product_status && data.seller_product_status">
                                     <button @click="confirmModal(data)" class="focus:outline-none text-left">
                                         <span class="absolute inset-0" aria-hidden="true"></span>
                                         <p class="text-sm font-medium text-gray-900">{{ data.product_name }}</p>
@@ -240,6 +270,7 @@ const closeModal = () => {
                                 </template>
                             </div>
                         </li>
+                    </template>
                 </template>
             </template>
         </ul>

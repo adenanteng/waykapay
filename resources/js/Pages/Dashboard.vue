@@ -258,19 +258,19 @@ function greeting() {
             <div>
                 <div class="flex">
                     <div class="flex w-0 flex-1">
-                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-xs font-medium text-gray-700 hover:text-gray-500">
+                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-gauge-max text-primary-600"/>
                             <span class="ml-1">Proses Instan</span>
                         </p>
                     </div>
                     <div class="flex w-0 flex-1">
-                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-xs font-medium text-gray-700 hover:text-gray-500">
+                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-clock text-primary-600"/>
                             <span class="ml-1">24 Jam</span>
                         </p>
                     </div>
                     <div class="flex w-0 flex-1" >
-                        <p class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-xs font-medium text-gray-700 hover:text-gray-500">
+                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-badge-check text-primary-600"/>
                             <span class="ml-1">Bergaransi</span>
                         </p>
