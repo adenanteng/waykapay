@@ -55,13 +55,19 @@ const info = [
         name: 'Admin Waykapay',
         desc: 'Semua transaksi terpantau lancar bosku.',
         role: 'fa-circle-info',
-        roleClass: 'text-green-800',
+        roleClass: 'text-blue-700',
     },
     {
         name: 'Admin Waykapay',
         desc: 'Sesuai syarat dan ketentuan Waykapay tidak pernah menerima dana isi ulang atas pencairan paylater dalam bentuk apapun, maka dari itu mohon dipatuhi dan diikuti bosku.',
         role: 'fa-megaphone',
-        roleClass: 'text-green-800',
+        roleClass: 'text-green-700',
+    },
+    {
+        name: 'Admin Waykapay',
+        desc: 'Hindari transaksi di jam 23:00 hingga 00:10 dikarenakan cut off & pemeliharaan sistem.',
+        role: 'fa-power-off',
+        roleClass: 'text-red-700',
     },
 
 ]

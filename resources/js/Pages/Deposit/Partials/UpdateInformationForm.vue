@@ -7,6 +7,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import moment from "moment/moment";
 
 const props = defineProps({
     users: Object | String,
@@ -36,6 +37,7 @@ const formReset = () => {
     form.reset()
 }
 
+const clock = moment().format('HH')
 </script>
 
 <template>
@@ -76,7 +78,11 @@ const formReset = () => {
                 Berhasil disimpan.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <ActionMessage :on="clock>=23" class="mr-3">
+                Sistem cut off.
+            </ActionMessage>
+
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing || clock>=23">
                 Konfirmasi
             </PrimaryButton>
         </template>

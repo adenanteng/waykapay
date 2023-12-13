@@ -32,6 +32,7 @@ const storeInformation = () => {
 
 import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { CheckCircleIcon } from '@heroicons/vue/20/solid'
+import moment from "moment";
 
 const mailingLists = [
     { id: 1, name: 'wkp', logo: '/img/vendor/WAYKAPAY.svg', admin: 0, disabled: false },
@@ -48,6 +49,7 @@ function formatPrice(value) {
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
+const clock = moment().format('HH')
 </script>
 
 <template>
@@ -117,7 +119,11 @@ function formatPrice(value) {
                 Berhasil disimpan.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.bank === null || form.account_no === '' ">
+            <ActionMessage :on="clock>=23" class="mr-3">
+                Sistem cut off.
+            </ActionMessage>
+
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.bank === null || form.account_no === ''  || clock>=23">
                 Lanjutkan
             </PrimaryButton>
         </template>

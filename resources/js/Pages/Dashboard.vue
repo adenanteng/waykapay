@@ -75,8 +75,6 @@ function greeting() {
     }
 }
 
-
-
 </script>
 
 <template>
@@ -107,12 +105,20 @@ function greeting() {
 <!--                        Transfer-->
 <!--                    </Link>-->
 
-                    <PrimaryButton as="a" :href="route('deposit.index')" class="text-sm">
+                    <PrimaryButton
+                        as="a"
+                        :href="route('deposit.index')"
+                        class="text-sm"
+                    >
                         <i class="fa-solid fa-circle-plus mr-2" />
                         Isi Ulang
                     </PrimaryButton>
 
-                    <SecondaryButton as="a" :href="route('money-transfer.index')" class="text-sm border border-gray-900 dark:border-white nightwind-prevent">
+                    <SecondaryButton
+                        as="a"
+                        :href="route('money-transfer.index')"
+                        class="text-sm border border-gray-900 dark:border-white nightwind-prevent"
+                    >
                         <i class="fa-solid fa-circle-up mr-2" />
                         Kirim Uang
                     </SecondaryButton>

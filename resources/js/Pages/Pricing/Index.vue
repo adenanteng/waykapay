@@ -99,7 +99,7 @@ const lists = [
 <template>
     <AppLayout title="Daftar Harga"
                name="Daftar Harga"
-               desc="Daftar harga produk per"
+               desc="Daftar harga produk prabayar"
     >
         <div
             class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
