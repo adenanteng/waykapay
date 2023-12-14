@@ -15,25 +15,6 @@ use Inertia\Response;
 class TransactionController extends Controller
 {
     public function index() {
-//        dd(Transaction::all()->toArray());
-
-//        $magic = Transaction::query()
-//            ->latest()
-//            ->when(Req::input('search'), function ($query, $search) {
-//                $query->where('order_id', 'like', '%' . $search . '%')
-//                    ->OrWhere('customer_no', 'like', '%' . $search . '%')
-//                    ->OrWhere('product_name', 'like', '%' . $search . '%');
-//            })
-//            ->when(Req::input('filter'), function ($query, $filter) {
-//                $query->where('category_id', $filter);
-//            })
-//            ->get()
-//            ->groupBy(function ($val) {
-//                return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
-//            })
-//            ;
-//
-//        dd($magic->toArray());
 
         $trx = Transaction::where('status_id', Transaction::SUCCESS)
                 ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
@@ -56,7 +37,7 @@ class TransactionController extends Controller
                 ->when(Req::input('date_end'), function ($query, $date_end) {
                     $query->whereDate('created_at', '<=', $date_end);
                 })
-//                ->paginate(8)
+//                ->paginate(8),
 //                ->withQueryString()
                 ->get()
                 ->groupBy(function ($val) {

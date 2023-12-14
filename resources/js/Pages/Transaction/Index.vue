@@ -132,7 +132,7 @@ function formatPrice(value) {
 <!--                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>-->
                             <div class="ml-3">
                                 <div class="text-xs text-gray-500">Modal</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.amount) }}</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(Number(props.amount)) }}</div>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@ function formatPrice(value) {
 <!--                            <i class="fa-duotone fa-coins text-amber-400"/>-->
                             <div class="ml-3">
                                 <div class="text-xs text-gray-500">Omzet</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.gross_amount) }}</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(Number(props.gross_amount)) }}</div>
                             </div>
                         </div>
                     </div>

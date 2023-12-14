@@ -114,7 +114,7 @@ if (typeof window !== 'undefined') {
 
         <template v-if="props.history === undefined">
             <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
-                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">
+                <div v-for="loader in 6" class="px-4 py-4 sm:px-6">
                     <div class="flex items-center justify-between">
                         <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
                         <div class="ml-2 flex-shrink-0 flex">
