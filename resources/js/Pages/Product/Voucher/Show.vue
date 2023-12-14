@@ -283,21 +283,20 @@ const closeModal = () => {
             </template>
 
             <template #footer>
-<!--                <SecondaryButton @click="closeModal">-->
-<!--                    Batal-->
-<!--                </SecondaryButton>-->
+                <div class="grid items-center w-full">
+                    <ActionMessage :on="$page.props.user.wallet_balance <= productPrice" class="mr-3">
+                        Saldo anda kurang
+                    </ActionMessage>
 
-                <ActionMessage :on="$page.props.user.wallet_balance <= productPrice" class="mr-3">
-                    Saldo anda kurang
-                </ActionMessage>
-
-                <PrimaryButton
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"
-                    @click="storeInformation"
-                >
-                    Beli
-                </PrimaryButton>
+                    <PrimaryButton
+                        class="w-full justify-center"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"
+                        @click="storeInformation"
+                    >
+                        Beli
+                    </PrimaryButton>
+                </div>
             </template>
         </DialogModal>
 

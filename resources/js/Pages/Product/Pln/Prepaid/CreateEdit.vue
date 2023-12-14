@@ -288,12 +288,13 @@ const closeModal = () => {
             </template>
 
             <template #footer>
-                <div class="flex items-center">
+                <div class="grid items-center w-full">
                     <ActionMessage :on="$page.props.user.wallet_balance <= productPrice" class="mr-3">
                         Saldo anda kurang
                     </ActionMessage>
 
                     <PrimaryButton
+                        class="w-full justify-center"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"
                         @click="storeInformation"

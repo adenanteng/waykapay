@@ -69,6 +69,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/money-transfer', [MoneyTransferController::class, 'index'])->name('money-transfer.index');
     Route::post('/money-transfer/amount', [MoneyTransferController::class, 'amount'])->name('money-transfer.amount');
     Route::post('/money-transfer/confirm', [MoneyTransferController::class, 'confirm'])->name('money-transfer.confirm');
+    Route::get('/money-transfer/test', [MoneyTransferController::class, 'test'])->name('money-transfer.test');
 
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 

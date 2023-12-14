@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\TransactionMoneyTransfer;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -124,5 +125,47 @@ class MoneyTransferController extends Controller
         ]);
 
 //        return to_route('history.show', $transaction->order_id);
+    }
+
+    public function test()
+    {
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'X-SIGNATURE' => '',
+            'X-CLIENT-KEY' => 'ASnwtsfNMsJZRF4M8K3vW3Xk77xlLiTh',
+            'X-TIMESTAMP' => Carbon::now(),
+        ])->post('https://sandbox.partner.api.bri.co.id/snap/v1.0/access-token/b2b',
+            [
+//                "transaction_details" => [
+//                    "order_id" => $order_id,
+//                    "gross_amount" => $gross_amount,
+//                ],
+//                "item_details" => [
+//                    [
+//                        "id" => "DEPOSIT",
+//                        "price" => $gross_amount,
+//                        "quantity" => 1,
+//                        "name" => "Deposit",
+//                        "brand" => "Waykapay",
+//                        "category" => "deposit",
+//                        "merchant_name" => "Waykapay",
+//                        "url" => "https://waykapay.com"
+//                    ]
+//                ],
+//                "customer_details" => [
+//                    "first_name" => $request['name'],
+//                    "last_name" => "",
+//                    "email" => $request['email'],
+//                    "phone" => $request['phone'],
+//                ],
+//                "payment_type" => $payment_type,
+//                $payment_type => [
+//                    "bank" => $request['method']['name'],
+//                ],
+            ],
+        );
+
+        dd($response->object());
     }
 }
