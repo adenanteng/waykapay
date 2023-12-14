@@ -37,7 +37,7 @@ class HistoryController extends Controller
                                                     return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
                                                 })),
 
-            'all_process' => Inertia::lazy(fn () => $history->count()),
+            'all_process' => Inertia::lazy(fn () => $history->where('status_id', Transaction::SUCCESS)->count()),
 
             'in_count' => Inertia::lazy(fn () => Transaction::where(function($query)
                                                 {

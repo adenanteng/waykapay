@@ -356,7 +356,7 @@ class ProductController extends Controller
                     'desc' => $status->object()->data->rc.' '.$status->object()->data->message
                 ]);
 
-                $user->deposit($transaction->gross_amount);
+//                $user->deposit($transaction->gross_amount);
 
                 return Inertia::render('Payment/Error', [
                     'transaction'   => $transaction

@@ -59,7 +59,7 @@ if (typeof window !== 'undefined') {
                     <p class="mt-1 truncate text-sm text-gray-500">Bulan ini</p>
                     <h3 class="truncate text-sm font-medium text-gray-900">
                         {{ props.all_process }}
-                        <span class="truncate text-xs text-gray-500">transaksi</span>
+                        <span class="truncate text-xs text-gray-500">transaksi sukses</span>
                     </h3>
                 </div>
             </div>
