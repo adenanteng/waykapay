@@ -72,6 +72,7 @@ const logout = () => {
 
 const headRef = ref(null); // obtain the reference
 const titleRef = ref(null);
+const paddingRef = ref(null);
 
 onMounted(() => {
     // console.log(headRef.value)
@@ -80,19 +81,24 @@ onMounted(() => {
         if (headRef.value != null && titleRef.value != null) {
             var curr = window.pageYOffset;
             if (prev > curr) {
+                // paddingRef.value.classList.add('py-5');
                 // headRef.value.classList.add("scrolled");
                 // headRef.value.classList.remove("scrollDown");
             } else {
                 if (!hasPrevious.value) {
-                    headRef.value.classList.add('backdrop-blur', 'border', 'border-gray-300', 'mx-4', 'rounded-full');
+                    headRef.value.classList.add('backdrop-blur', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
                     titleRef.value.classList.add('text-xl');
+                    paddingRef.value.classList.remove('py-5');
+                    paddingRef.value.classList.add('py-2');
                 }
                 // headRef.value.classList.remove("scrolled");
             }
             if (curr === 0) {
                 if (!hasPrevious.value) {
-                    headRef.value.classList.remove('backdrop-blur', 'border', 'border-gray-300', 'mx-4', 'rounded-full');
+                    headRef.value.classList.remove('backdrop-blur', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
                     titleRef.value.classList.remove('text-xl');
+                    paddingRef.value.classList.add('py-5');
+                    paddingRef.value.classList.remove('py-2');
                 }
                 // headRef.value.classList.remove("scrolled");
             }
@@ -124,18 +130,13 @@ onMounted(() => {
                         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                             <div class="relative flex flex-wrap items-center justify-start lg:justify-between">
                                 <!-- Logo -->
-                                <div class="py-5 flex-shrink-0 flex items-center">
+                                <div class="py-5 flex-shrink-0 flex items-center" ref="paddingRef">
                                     <template v-if="hasPrevious">
                                         <slot name="previous" />
                                     </template>
 
                                     <template v-else>
                                         <div class="sm:flex sm:space-x-5">
-                                            <!--                                    <div class="lg:hidden">-->
-                                            <!--                                        <img v-if="props.avatar" class="mx-auto h-12 w-12 object-cover rounded-full"-->
-                                            <!--                                             :src="props.avatar" :alt="props.avatar"/>-->
-                                            <!--                                    </div>-->
-                                            <!--                                    <i class="fa-duotone fa-wallet text-primary-600 text-5xl" />-->
                                             <div class="sm:mt-0 sm:pt-1 text-left">
                                                 <!--                                        <p class="text-sm font-medium text-gray-600">{{ props.greeting }}</p>-->
                                                 <p class="text-4xl sm:text-2xl font-bold text-gray-900 capitalize" ref="titleRef">
@@ -150,11 +151,6 @@ onMounted(() => {
                                             </div>
                                         </div>
 
-                                        <!--                                <ApplicationMark class="block h-10 w-auto" />-->
-                                        <!--                                <div class="ml-2 nightwind-prevent-block" v-if="$page.props.appSetting">-->
-                                        <!--                                    <h1 class="text-white capitalize font-semibold">{{ $page.props.appSetting.name }}</h1>-->
-                                        <!--                                    <p class="text-gray-100 font-light text-sm">{{ $page.props.appSetting.desc }}</p>-->
-                                        <!--                                </div>-->
                                     </template>
                                 </div>
 

@@ -55,7 +55,7 @@ const clock = moment().format('HH')
 <template>
     <FormSection @submitted="storeInformation">
         <template #title>
-            Bank dan nomor rekening
+            Bank dan nomor rekening tujuan
         </template>
 
         <template #description>
