@@ -169,4 +169,45 @@ class UserController extends Controller
         // User user data...
         $data->fill($data->all()->toArray())->update();
     }
+
+    public function normalizeTransaction(User $user)
+    {
+        $depo = Transaction::where([
+            ['user_id', $user->id],
+            ['status_id', Transaction::SUCCESS],
+            ['category_id', Transaction::DEPOSIT]
+        ])->get()->sum('amount');
+
+        $tf_accept = Transaction::whereRelation('money_transfer', 'to_id', '=', $user->id)
+            ->get()->sum('amount');
+
+        $tf_send = Transaction::where([
+            ['user_id', $user->id],
+            ['status_id', Transaction::SUCCESS],
+            ['category_id', Transaction::TRANSFER]
+        ])->get()->sum('amount');
+
+        $trx = Transaction::where([
+            ['user_id', $user->id],
+            ['status_id', Transaction::SUCCESS],
+            ['category_id', '!=', [Transaction::DEPOSIT]]
+        ])->get()->sum('gross_amount');
+
+        $fail = Transaction::where([
+            ['user_id', $user->id],
+            ['status_id', '!=', Transaction::SUCCESS],
+            ['category_id', '!=', [Transaction::DEPOSIT, Transaction::TRANSFER]]
+        ])->get()->sum('gross_amount');
+
+        $in = $depo + $tf_accept;
+        $out = $trx;
+
+        $saldo = $in - $out;
+
+//        dd($depo, $tf_accept, $tf_send, $trx, $in, $out, $saldo);
+
+        $user->update([
+            'wallet_balance' => $saldo
+        ]);
+    }
 }

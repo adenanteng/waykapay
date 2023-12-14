@@ -8,6 +8,7 @@ import PreviousButton from "@/Components/PreviousButton.vue";
 import {Link, router} from "@inertiajs/vue3";
 import moment from "moment/moment";
 import Pagination from "../../Components/Pagination.vue";
+import SecondaryButton from "../../Components/SecondaryButton.vue";
 
 const props = defineProps({
     users: Object | String,
@@ -84,6 +85,12 @@ function formatPrice(value) {
 
                 </div>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">
+                    <SecondaryButton
+                        as="a" :href="route('user.normalizeTransaction', props.users)"
+                    >
+                        <i class="fa-regular fa-arrows-rotate" />
+                    </SecondaryButton>
+
                     <PrimaryButton as="a" :href="route('user.edit', props.users)">
                         Ubah Data
                     </PrimaryButton>

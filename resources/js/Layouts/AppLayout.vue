@@ -488,7 +488,7 @@ onMounted(() => {
 
             <footer>
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
-                    <div class="py-10 block lg:hidden">
+                    <div class="py-10 sm:py-5 block ">
 
                     </div>
                     <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block">

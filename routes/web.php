@@ -133,6 +133,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
+    Route::get('/user/normalize-transaction/{user}', [UserController::class, 'normalizeTransaction'])->name('user.normalizeTransaction');
 
 //    Route::resource('/device', DeviceController::class)->names('device');
     Route::get('/device', [DeviceController::class, 'index'])->name('device.index');
