@@ -130,7 +130,7 @@ if (typeof window !== 'undefined') {
 
         <div v-else class="">
             <template v-for="(date, index) in props.history">
-                <h3 class="text-sm text-gray-900 font-medium ml-5 mt-5 mb-1 flex items-center">
+                <h3 class="text-sm text-gray-600 font-medium ml-5 mt-5 mb-1 flex items-center">
                     {{ index }}
                     <Badge :name="date.length + ' transaksi' " class="ml-3 text-xs text-primary-600 bg-primary-100" />
                 </h3>
