@@ -109,12 +109,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 //    Route::post('/product/internet/indihome-inquiry', [ProductInternetController::class, 'indihomeInquiry'])->name('internet.indihome.inquiry');
 //    Route::get('/product/internet/myrepublic', [ProductInternetController::class, 'myrepublic'])->name('internet.myrepublic.index');
 //    Route::post('/product/internet/myrepublic-inquiry', [ProductInternetController::class, 'myrepublicInquiry'])->name('internet.myrepublic.inquiry');
-    Route::get('/product/internet', [ProductPascaController::class, 'internet'])->name('pasca.internet.index');
-    Route::get('/product/bpjs', [ProductPascaController::class, 'bpjs'])->name('pasca.bpjs.index');
-    Route::get('/product/multifinance', [ProductPascaController::class, 'multifinance'])->name('pasca.multifinance.index');
 
     Route::get('/product/pasca/{sku}', [ProductController::class, 'indexPasca'])->name('pasca.index');
     Route::post('/product/pasca/inquiry', [ProductController::class, 'inquiryPasca'])->name('pasca.inquiry');
+
+
+    Route::get('/product/internet', [ProductPascaController::class, 'internet'])->name('pasca.internet.index');
+    Route::get('/product/bpjs', [ProductPascaController::class, 'bpjs'])->name('pasca.bpjs.index');
+    Route::get('/product/multifinance', [ProductPascaController::class, 'multifinance'])->name('pasca.multifinance.index');
 
     Route::resource('/information', InformationController::class)->names('information');
 

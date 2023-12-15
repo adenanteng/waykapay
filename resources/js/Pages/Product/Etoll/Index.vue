@@ -18,8 +18,8 @@ const form = useForm({
 </script>
 
 <template>
-    <AppLayout title="E-Money"
-               name="E-Money"
+    <AppLayout title="E-Toll"
+               name="E-Toll"
                desc="Summertime sadness"
     >
         <template #previous>

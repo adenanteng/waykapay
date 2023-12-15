@@ -272,7 +272,7 @@ class ProductController extends Controller
 //            'transaction' => $customer->object()->data,
 //        ]);
 
-        if ($customer->successful() && $customer->object()->data->status == "Sukses") {
+        if ($customer->successful() && $customer->object()->data->rc == "00") {
             return Inertia::render('Product/Pasca/CreateEdit', [
                 'users' => auth()->user(),
                 'customer' => $customer->object(),

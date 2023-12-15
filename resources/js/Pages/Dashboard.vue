@@ -247,7 +247,7 @@ function greeting() {
                 <Link :href="route('pasca.multifinance.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-blue-300 dark:from-blue-700 shadow-lg">
                     <div class="text-center">
                         <i class="fa-regular fa-credit-card text-2xl text-blue-600 dark:text-gray-900" />
-                        <p class="text-xs text-blue-600 dark:text-gray-900">Multifinance</p>
+                        <p class="text-xs text-blue-600 dark:text-gray-900">Cicilan</p>
                     </div>
                 </Link>
             </div>
@@ -264,7 +264,23 @@ function greeting() {
                 </Link>
             </div>
 
-            <template v-if="props.history != undefined">
+            <template v-if="props.history === undefined">
+                <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
+                    <div v-for="loader in 5" class="px-4 py-4 sm:px-6">
+                        <div class="flex items-center justify-between">
+                            <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
+                            <div class="ml-2 flex-shrink-0 flex">
+                                <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>
+                            </div>
+                        </div>
+                        <div class="sm:flex sm:justify-between">
+                            <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template v-else>
                 <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                         <template v-for="history in props.history.data" :key="history.id">

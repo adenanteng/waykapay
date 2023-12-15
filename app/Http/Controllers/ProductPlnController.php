@@ -48,7 +48,9 @@ class ProductPlnController extends Controller
             'customer_no' => $request['customer_no'],
         ]);
 
-        if ($customer->successful()) {
+//        dd($customer->object());
+
+        if ($customer->successful() && $customer->object()->data->customer_no != null) {
             return Inertia::render('Product/Pln/Prepaid/CreateEdit', [
                 'users' => auth()->user(),
                 'customer' => $customer->object(),
@@ -110,7 +112,7 @@ class ProductPlnController extends Controller
 //            'transaction' => $customer->object()->data,
 //        ]);
 
-        if ($customer->successful()) {
+        if ($customer->successful() && $customer->object()->data->rc == "00") {
             return Inertia::render('Product/Pln/Postpaid/CreateEdit', [
                 'users' => auth()->user(),
                 'customer' => $customer->object(),

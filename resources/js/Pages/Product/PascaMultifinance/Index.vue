@@ -18,8 +18,8 @@ const form = useForm({
 </script>
 
 <template>
-    <AppLayout title="BPJS"
-               name="BPJS"
+    <AppLayout title="Cicilan Multifinance"
+               name="Cicilan Multifinance"
     >
         <template #previous>
             <PreviousButton />
@@ -62,6 +62,59 @@ const form = useForm({
                             <h3 class="text-sm font-medium text-gray-900">MNC Finance</h3>
                         </div>
                         <p class="text-sm text-gray-500">Bayar tagihan MNC Finance</p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="relative">
+                <Link :href="route('pasca.index', 'bca-multifinance')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <!--                    <img src="/img/vendor/BPJSK.svg" alt="" class="w-20">-->
+                    <i class="fa-regular fa-credit-card text-3xl text-blue-500" />
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">BCA Multifinance</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Bayar tagihan BCA Multifinance</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('pasca.index', 'cimb-niaga-jcb')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <!--                    <img src="/img/vendor/BPJSK.svg" alt="" class="w-20">-->
+                    <i class="fa-regular fa-credit-card text-3xl text-blue-500" />
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">CIMB Niaga JCB</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Bayar tagihan CIMB Niaga JCB</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('pasca.index', 'mega-auto-finance')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <!--                    <img src="/img/vendor/BPJSK.svg" alt="" class="w-20">-->
+                    <i class="fa-regular fa-credit-card text-3xl text-blue-500" />
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">Mega Auto Finance</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Bayar tagihan Mega Auto Finance</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('pasca.index', 'sms-finance')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <!--                    <img src="/img/vendor/BPJSK.svg" alt="" class="w-20">-->
+                    <i class="fa-regular fa-credit-card text-3xl text-blue-500" />
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">SMS Finance</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Bayar tagihan SMS Finance</p>
                     </div>
                 </div>
             </li>
