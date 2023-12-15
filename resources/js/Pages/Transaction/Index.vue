@@ -221,18 +221,13 @@ function formatPrice(value) {
                                 <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                                     <div class="px-4 py-4 sm:px-6">
                                         <div class="flex items-center justify-between">
-                                            <p class="font-medium truncate uppercase"
-                                               :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
+                                            <p class="text-sm font-medium truncate capitalize"
+                                               :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                 {{ history.product_name }}
                                                 <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                                 <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
                                                 <template v-else-if="history.money_transfer">
-                                                    <!--                                            <template v-if="history.user_id == $page.props.user.id">-->
                                                     ke {{ history.money_transfer.to.name }}
-                                                    <!--                                            </template>-->
-                                                    <!--                                            <template v-else>-->
-                                                    <!--                                                dari {{ history.user.name }}-->
-                                                    <!--                                            </template>-->
                                                 </template>
                                             </p>
                                             <div class="ml-2 flex-shrink-0 flex">
@@ -244,15 +239,15 @@ function formatPrice(value) {
                                             </div>
                                         </div>
                                         <div class="flex items-end" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                            <p class="font-medium mr-2">{{ history.user.name }}</p>
-                                            <p class="text-sm">#{{ history.user.slug }}</p>
+                                            <p class="font-medium text-sm mr-2">{{ history.user.name }}</p>
+                                            <p class="text-xs">#{{ history.user.slug }}</p>
                                         </div>
                                         <div class=" flex justify-between">
                                             <div class="flex">
                                                 <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                     #{{ history.order_id }}
                                                 </p>
-                                                <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                <p class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                     <!--                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}-->
                                                     Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                                 </p>
@@ -261,7 +256,7 @@ function formatPrice(value) {
                                                 <!--                                                {{ history.customer_no }}-->
                                                 <!--                                            </p>-->
                                             </div>
-                                            <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                            <div class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                 <!--                                            <i class="fa-regular fa-calendar pr-2" />-->
                                                 {{ formattedDate(history.created_at) }}
                                             </div>

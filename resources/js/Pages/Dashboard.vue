@@ -14,8 +14,12 @@ import 'swiper/css/autoplay';
 // import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
-    users: Object,
-    carousel: Object,
+    carousel: undefined,
+    history: undefined,
+})
+
+onMounted(() => {
+    router.reload({ only: ['history', 'carousel'] })
 })
 
 function formattedDate(value) {
@@ -65,13 +69,13 @@ const onSlideChange = (swiper) => {
 
 function greeting() {
     if (moment().format('HH') < 10) {
-        return  "Selamat Pagi";
+        return  "Selamat Pagi, jangan lupa sarapan ya.";
     } else if (moment().format('HH') < 15) {
-        return  "Selamat Siang";
+        return  "Selamat Siang, semangat ya beraktivitasnya.";
     } else if (moment().format('HH') < 19) {
         return  "Selamat Sore";
     } else {
-        return  "Selamat Malam";
+        return  "Selamat Malam, selamat beristirahat.";
     }
 }
 
@@ -176,6 +180,7 @@ function greeting() {
         </div>
 
         <div class="">
+            <h3 class="text-gray-700 text-sm ml-3 mb-1">Prabayar</h3>
             <div class="grid grid-cols-3 grid-rows-6 grid-flow-col gap-4">
                 <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center rounded-3xl bg-gradient-to-br from-sky-300 dark:from-sky-700 shadow-lg">
                     <div class="text-center">
@@ -223,7 +228,7 @@ function greeting() {
         </div>
 
         <div class="">
-            <h3 class="text-gray-700 text-sm ml-3 mt-2 mb-1">Pascabayar</h3>
+            <h3 class="text-gray-700 text-sm ml-3 mb-1">Pascabayar</h3>
             <div class="grid grid-cols-3 gap-4">
                 <Link :href="route('pasca.bpjs.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-green-300 dark:from-green-700 shadow-lg">
                     <div class="text-center">
@@ -248,6 +253,68 @@ function greeting() {
             </div>
         </div>
 
+        <div class="">
+            <div class="flex mx-3 mb-1">
+                <h3 class="flex-1 text-gray-700 text-sm">Riwayat Transaksi</h3>
+                <Link
+                    class="text-primary-600 text-xs"
+                    :href="route('history.index')"
+                >
+                    Lihat Semua <i class="fa-regular fa-arrow-right "/>
+                </Link>
+            </div>
+
+            <template v-if="props.history != undefined">
+                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                    <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                        <template v-for="history in props.history.data" :key="history.id">
+                            <li>
+                                <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
+                                    <div class="px-4 py-4 sm:px-6">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-sm font-medium truncate capitalize"
+                                               :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                {{ history.product_name }}
+                                                <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
+                                                <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                                <template v-else-if="history.money_transfer">
+                                                    <template v-if="history.user_id == $page.props.user.id">
+                                                        ke {{ history.money_transfer.to.name }}
+                                                    </template>
+                                                    <template v-else>
+                                                        dari {{ history.user.name }}
+                                                    </template>
+                                                </template>
+                                            </p>
+                                            <div class="ml-2 flex-shrink-0 flex">
+                                                <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
+                                                   :class="history.color"
+                                                >
+                                                    {{ history.status }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <div class="flex">
+                                                <p class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                    {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
+                                                    Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
+                                                </p>
+                                            </div>
+                                            <div class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                {{ formattedDate(history.created_at) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+
+        </div>
+
         <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
             <div class="flex w-full items-center justify-between space-x-6 p-3">
                 <div class="flex-1 truncate">
@@ -257,26 +324,26 @@ function greeting() {
                             <i class="fa-solid fa-shield-check text-lg" />
                         </span>
                     </div>
-<!--                    <p class="mt-1 truncate text-sm text-gray-500">bbbbb</p>-->
+                    <!--                    <p class="mt-1 truncate text-sm text-gray-500">bbbbb</p>-->
                 </div>
-<!--                <i class="fa-brands fa-whatsapp-square text-3xl flex-shrink-0" />-->
+                <!--                <i class="fa-brands fa-whatsapp-square text-3xl flex-shrink-0" />-->
             </div>
             <div>
-                <div class="flex">
-                    <div class="flex w-0 flex-1">
-                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
+                <div class="flex justify-between">
+                    <div class="flex flex-1">
+                        <p class="relative inline-flex flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-gauge-max text-primary-600"/>
                             <span class="ml-1">Proses Instan</span>
                         </p>
                     </div>
-                    <div class="flex w-0 flex-1">
-                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
+                    <div class="flex flex-1">
+                        <p class="relative inline-flex flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-clock text-primary-600"/>
                             <span class="ml-1">24 Jam</span>
                         </p>
                     </div>
-                    <div class="flex w-0 flex-1" >
-                        <p class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
+                    <div class="flex flex-1" >
+                        <p class="relative inline-flex flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-badge-check text-primary-600"/>
                             <span class="ml-1">Bergaransi</span>
                         </p>
@@ -284,68 +351,6 @@ function greeting() {
                 </div>
             </div>
         </div>
-
-<!--        <div class="">-->
-<!--            <div class="py-6">-->
-<!--                <div class="gap-x-6 gap-y-10 grid grid-cols-4 lg:grid-cols-6 lg:gap-x-8">-->
-<!--                    <Link :href="route('pulsa.index')" class="group flex flex-col justify-center items-center">-->
-<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
-<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-sky-300 to-sky-50"></i>-->
-<!--                            <i class="fa-stack-1x fa-duotone fa-mobile text-sky-600 group-hover:text-sky-800"></i>-->
-<!--                        </span>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Pulsa</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('pln.index')" class="group flex flex-col justify-center items-center">-->
-<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
-<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-amber-300 to-amber-50"></i>-->
-<!--                            <i class="fa-stack-1x fa-duotone fa-lightbulb text-amber-600 group-hover:text-amber-800"></i>-->
-<!--                        </span>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Listrik</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('games.index')" class="group flex flex-col justify-center items-center">-->
-<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
-<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-teal-300 to-teal-50"></i>-->
-<!--                            <i class="fa-stack-1x fa-duotone fa-gamepad-modern text-teal-600 group-hover:text-teal-800"></i>-->
-<!--                        </span>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Games</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('emoney.index')" class="group flex flex-col justify-center items-center">-->
-<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
-<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-blue-300 to-blue-50"></i>-->
-<!--                            <i class="fa-stack-1x fa-duotone fa-wallet text-blue-600 group-hover:text-blue-800"></i>-->
-<!--                        </span>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">E-Money</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('voucher.index')" class="group flex flex-col justify-center items-center">-->
-<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
-<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-violet-300 to-violet-50"></i>-->
-<!--                            <i class="fa-stack-1x fa-duotone fa-ticket text-violet-600 group-hover:text-violet-800"></i>-->
-<!--                        </span>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Voucher</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('television.index')" class="group flex flex-col justify-center items-center">-->
-<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
-<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-green-300 to-green-50"></i>-->
-<!--                            <i class="fa-stack-1x fa-duotone fa-tv-retro text-green-600 group-hover:text-green-800"></i>-->
-<!--                        </span>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">TV</h3>-->
-<!--                    </Link>-->
-
-<!--                    <Link :href="route('internet.index')" class="group flex flex-col justify-center items-center">-->
-<!--                        <span class="fa-stack fa-2x flex justify-center items-center nightwind-prevent-block">-->
-<!--                            <i class="fa-stack-2x fa-solid fa-circle text-6xl text-transparent bg-clip-text bg-gradient-to-br from-red-300 to-red-50"></i>-->
-<!--                            <i class="fa-stack-1x fa-duotone fa-router text-red-600 group-hover:text-red-800"></i>-->
-<!--                        </span>-->
-<!--                        <h3 class="mt-2 text-sm text-gray-700">Internet</h3>-->
-<!--                    </Link>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
 
         <swiper
             :modules="[Autoplay]"

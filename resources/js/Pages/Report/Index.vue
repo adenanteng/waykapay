@@ -203,8 +203,8 @@ function formatPrice(value) {
                                 <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                                     <div class="px-4 py-4 sm:px-6">
                                         <div class="flex items-center justify-between">
-                                            <p class="font-medium truncate uppercase"
-                                               :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'">
+                                            <p class="text-sm font-medium truncate capitalize"
+                                               :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                 {{ history.product_name }}
                                                 <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                                 <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
@@ -225,22 +225,14 @@ function formatPrice(value) {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div class=" flex justify-between">
+                                        <div class="flex justify-between">
                                             <div class="flex">
-                                                <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                    #{{ history.order_id }}
-                                                </p>
-                                                <p class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                    <!--                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}-->
+                                                <p class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                    {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
                                                     Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                                 </p>
-                                                <!--                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-                                                <!--                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />-->
-                                                <!--                                                {{ history.customer_no }}-->
-                                                <!--                                            </p>-->
                                             </div>
-                                            <div class="flex items-center text-sm" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                <!--                                            <i class="fa-regular fa-calendar pr-2" />-->
+                                            <div class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                 {{ formattedDate(history.created_at) }}
                                             </div>
                                         </div>

@@ -21,10 +21,10 @@ class DashboardController extends Controller
 {
     public function index() {
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
-//        dd(Carousel::all()->toArray());
+//        dd(Transaction::where('user_id', auth()->user()->id)->latest()->paginate(5)->toArray());
         return Inertia::render('Dashboard', [
-            'users' => auth()->user(),
-            'carousel' => Carousel::all(),
+            'history' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)->latest()->paginate(5)),
+            'carousel' => Inertia::lazy(fn () => Carousel::all()),
         ]);
     }
 
