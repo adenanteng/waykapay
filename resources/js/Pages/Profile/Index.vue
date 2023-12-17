@@ -98,7 +98,7 @@ function formatPrice(value) {
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
-                <li>
+                <li v-if="$page.props.user.role_id!=3">
                     <Link :href="route('report.index')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Laporan</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
@@ -117,7 +117,7 @@ function formatPrice(value) {
                     </Link>
                 </li>
                 <li>
-                    <Link :href="route('device.index')" replace class="flex justify-between px-6 py-4">
+                    <Link :href="route('device.index')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Perangkat</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>

@@ -66,16 +66,16 @@ function formattedDate(value) {
                         <Link :href="route('user.show', item.slug)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
-                                    <p class="font-medium truncate capitalize text-gray-900">
+                                    <p class="text-sm font-medium truncate capitalize text-gray-900">
                                         {{ item.name }}
-                                        <span class="text-sm font-medium ml-2 text-gray-500">#{{ item.slug }}</span>
+<!--                                        <span class="text-sm font-medium ml-2 text-gray-500">#{{ item.slug }}</span>-->
                                     </p>
                                     <div class="ml-2 flex-shrink-0 flex">
-                                        <p  v-if="item.email_verified_at"
-                                            class="px-2 text-xs leading-5 font-semibold rounded-full mr-2 bg-green-100 text-green-800"
-                                        >
-                                            <i class="fa-regular fa-check mr-1" /> Verified
-                                        </p>
+<!--                                        <p  v-if="item.email_verified_at"-->
+<!--                                            class="px-2 text-xs leading-5 font-semibold rounded-full mr-2 bg-green-100 text-green-800"-->
+<!--                                        >-->
+<!--                                            <i class="fa-regular fa-check mr-1" /> Verified-->
+<!--                                        </p>-->
                                         <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
                                            :class="item.color"
                                         >
@@ -85,15 +85,15 @@ function formattedDate(value) {
                                 </div>
                                 <div class="flex justify-between">
                                     <div class="sm:flex gap-3">
-                                        <p class="flex items-center text-sm text-gray-600" >
+                                        <p class="flex items-center text-xs text-gray-600" >
                                             {{ item.phone }}
                                         </p>
-                                        <p class="flex items-center text-sm text-gray-600" >
+                                        <p class="flex items-center text-xs text-gray-600" >
                                             {{ item.email }}
                                         </p>
 
                                     </div>
-                                    <div class="flex items-end text-sm text-gray-600" >
+                                    <div class="flex items-end text-xs text-gray-600" >
 <!--                                        <i class="fa-regular fa-calendar pr-2" />-->
                                         {{ formattedDate(item.updated_at) }}
                                     </div>
