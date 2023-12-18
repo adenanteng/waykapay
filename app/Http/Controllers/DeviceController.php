@@ -111,6 +111,13 @@ class DeviceController extends Controller
     public function send(Request $request)
     {
 //        dd($request->all());
-        Helper::sendUserNotification($request['message']);
+        $msg = [
+            'title' => $request['message'],
+            'body' => $request['message'],
+            'badge' => 1,
+            'sound' => 'ping.aiff'
+        ];
+
+        Helper::sendUserNotification($msg);
     }
 }
