@@ -81,7 +81,7 @@ function formatPrice(value) {
         </div>
 
 
-        <NotificationForm />
+        <NotificationForm v-if="$page.props.user.role_id==1" />
         <!--        <MobileMenu/>-->
     </AppLayout>
 </template>
