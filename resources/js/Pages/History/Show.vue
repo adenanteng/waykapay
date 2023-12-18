@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
 import PreviousButton from "@/Components/PreviousButton.vue"
@@ -35,7 +35,15 @@ const form = useForm({
     agent_commission: null,
 });
 
+const message = ref(null)
+
 const storeInformation = () => {
+    form.agent_commission = commission.value.replaceAll(".", "")
+
+    // if (Number(form.agent_commission) <= Number(props.history.gross_amount)) {
+    //     message.value = "Nominal tidak boleh kurang dari harga modal"
+    // }
+
     form.patch(route('transaction.update', props.history), {
         errorBag: 'storeInformation',
         preserveScroll: true,
@@ -49,6 +57,15 @@ const timerSuccess = ref(props.goSuccess)
 
 onMounted(() => {
     setTimeout(() => timerSuccess.value=false, 5000);
+})
+
+const commission = ref(null)
+
+watch(commission, (newAmount) => {
+    commission.value = newAmount.toString()
+        .replace(/\D/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    // console.log(amount.value)
 })
 
 function formattedDate(value) {
@@ -266,15 +283,14 @@ function formatPrice(value) {
                                         </span>
                                             <TextInput
                                                 id="amount"
-                                                v-model="form.agent_commission"
-                                                type="number"
+                                                v-model="commission"
+                                                type="tel"
                                                 class="mt-1 block w-full rounded-l-none"
                                                 :min="Number(props.history.gross_amount)"
-                                                max="100000"
                                                 required
                                             />
                                         </div>
-                                        <InputError :message="form.errors.agent_commission" class="mt-2"/>
+                                        <InputError :message="form.errors.agent_commission || message" class="mt-2"/>
                                     </div>
 
                                     <div class="col-span-6 mt-3 flex justify-between items-center">

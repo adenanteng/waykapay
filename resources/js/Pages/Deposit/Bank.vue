@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import PreviousButton from "@/Components/PreviousButton.vue";3
+import PreviousButton from "@/Components/PreviousButton.vue";
 import UpdateBankForm from "@/Pages/Deposit/Partials/UpdateBankForm.vue";
 
 </script>

@@ -1,6 +1,6 @@
 <script setup>
 import {Link, useForm, usePage} from '@inertiajs/vue3';
-import {computed, ref} from 'vue'
+import {computed, ref, watch} from 'vue'
 import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
@@ -27,24 +27,31 @@ const form = useForm({
 
 const {...userInfo} = computed(() => usePage().props.user).value;
 // console.log(userInfo.name); // Show my user name
+const message = ref(null)
 
 const storeInformation = () => {
-    if (userInfo.pin) {
-        form.post(route('pin.moneyTransfer'), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            replace: true,
-            onSuccess: () => {
-            }
-        });
+    form.amount = amount.value.replaceAll(".", "")
+
+    if (Number(form.amount) >= Number(userInfo.wallet_balance)) {
+        message.value = "Saldo kurang"
     } else {
-        form.post(route('money-transfer.confirm'), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            replace: true,
-            onSuccess: () => {
-            }
-        });
+        if (userInfo.pin) {
+            form.post(route('pin.moneyTransfer'), {
+                errorBag: 'storeInformation',
+                preserveScroll: true,
+                replace: true,
+                onSuccess: () => {
+                }
+            });
+        } else {
+            form.post(route('money-transfer.confirm'), {
+                errorBag: 'storeInformation',
+                preserveScroll: true,
+                replace: true,
+                onSuccess: () => {
+                }
+            });
+        }
     }
 };
 
@@ -52,6 +59,16 @@ function formatPrice(value) {
     let val = (value/1).toFixed(0).replace('.', '')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
+
+const amount = ref(null)
+
+watch(amount, (newAmount) => {
+    amount.value = newAmount.toString()
+        .replace(/\D/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    // console.log(amount.value)
+})
+
 </script>
 
 <template>
@@ -102,15 +119,16 @@ function formatPrice(value) {
                     </span>
                     <TextInput
                         id="amount"
-                        v-model="form.amount"
-                        type="number"
+                        v-model="amount"
+                        type="tel"
                         class="mt-1 block w-full rounded-l-none"
                         min="1"
                         :max="Number($page.props.user.wallet_balance) <= 2000000 ? $page.props.user.wallet_balance : 2000000"
                         required
+                        autofocus
                     />
                 </div>
-                <InputError :message="form.errors.amount" class="mt-2"/>
+                <InputError :message="form.errors.amount || message" class="mt-2"/>
                 <p class="mt-1 text-xs text-gray-600">
                     Nominal Rp 1.000 - Rp {{ Number($page.props.user.wallet_balance) <= 2000000 ?
                     formatPrice($page.props.user.wallet_balance) : '2.000.000' }}

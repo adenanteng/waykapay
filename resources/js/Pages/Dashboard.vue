@@ -181,46 +181,46 @@ function greeting() {
 
         <div class="">
             <h3 class="text-gray-700 text-sm ml-3 mb-1">Prabayar</h3>
-            <div class="grid grid-cols-3 grid-rows-6 grid-flow-col gap-4">
-                <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center rounded-3xl bg-gradient-to-br from-sky-300 dark:from-sky-700 shadow-lg">
+            <div class="grid grid-cols-3 grid-rows-6 grid-flow-col rounded-3xl shadow-lg border border-gray-300">
+                <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center border-b border-r border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-mobile text-5xl text-sky-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-mobile text-5xl text-sky-600" />
                         <p class="text-xs text-sky-600 dark:text-gray-900 mt-1">Pulsa & Data</p>
                     </div>
                 </Link>
-                <Link :href="route('pln.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-amber-300 dark:from-amber-700 shadow-lg">
+                <Link :href="route('pln.index')" class="row-span-2 py-3 flex justify-center items-center border-r border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-lightbulb text-2xl text-amber-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-lightbulb text-2xl text-amber-600" />
                         <p class="text-xs text-amber-600 dark:text-gray-900">Listrik</p>
                     </div>
                 </Link>
-                <Link :href="route('games.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-teal-300 dark:from-teal-700 shadow-lg">
+                <Link :href="route('games.index')" class="row-span-2 py-3 flex justify-center items-center border-b border-r border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-gamepad-modern text-2xl text-teal-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-gamepad-modern text-2xl text-teal-600" />
                         <p class="text-xs text-teal-600 dark:text-gray-900">Games</p>
                     </div>
                 </Link>
-                <Link :href="route('voucher.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-violet-300 dark:from-violet-700 shadow-lg">
+                <Link :href="route('voucher.index')" class="row-span-2 py-3 flex justify-center items-center border-b border-r border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-ticket text-2xl text-violet-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-ticket text-2xl text-violet-600" />
                         <p class="text-xs text-violet-600 dark:text-gray-900">Voucher</p>
                     </div>
                 </Link>
-                <Link :href="route('emoney.index')" class="row-span-2  col-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-blue-300 dark:from-blue-700 shadow-lg">
+                <Link :href="route('emoney.index')" class="row-span-2  col-span-2 py-3 flex justify-center items-center">
                     <div class="text-center">
-                        <i class="fa-regular fa-wallet text-2xl text-blue-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-wallet text-2xl text-blue-600" />
                         <p class="text-xs text-blue-600 dark:text-gray-900">E-Money</p>
                     </div>
                 </Link>
-                <Link :href="route('television.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-green-300 dark:from-green-700 shadow-lg">
+                <Link :href="route('television.index')" class="row-span-2 py-3 flex justify-center items-center border-b border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-tv-retro text-2xl text-green-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-tv-retro text-2xl text-green-600" />
                         <p class="text-xs text-green-600 dark:text-gray-900">TV</p>
                     </div>
                 </Link>
-                <Link :href="route('etoll.index')" class="row-span-2 py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">
+                <Link :href="route('etoll.index')" class="row-span-2 py-3 flex justify-center items-center border-b border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-cards-blank text-2xl text-red-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-cards-blank text-2xl text-red-600" />
                         <p class="text-xs text-red-600 dark:text-gray-900">E-Toll</p>
                     </div>
                 </Link>
@@ -229,24 +229,24 @@ function greeting() {
 
         <div class="">
             <h3 class="text-gray-700 text-sm ml-3 mb-1">Pascabayar</h3>
-            <div class="grid grid-cols-3 gap-4">
-                <Link :href="route('pasca.bpjs.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-green-300 dark:from-green-700 shadow-lg">
+            <div class="grid grid-cols-3 rounded-3xl shadow-lg border border-gray-300">
+                <Link :href="route('pasca.bpjs.index')" class="py-3 rounded-l-3xl flex justify-center items-center border-r border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-heart-pulse text-2xl text-green-600 dark:text-green-900" />
+                        <i class="fa-regular fa-heart-pulse text-2xl text-green-600" />
                         <p class="text-xs text-green-600 dark:text-gray-900">BPJS</p>
                     </div>
                 </Link>
 
-                <Link :href="route('pasca.internet.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-red-300 dark:from-red-700 shadow-lg">
+                <Link :href="route('pasca.internet.index')" class="py-3 flex justify-center items-center border-r border-gray-300">
                     <div class="text-center">
-                        <i class="fa-regular fa-router text-2xl text-red-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-router text-2xl text-red-600" />
                         <p class="text-xs text-red-600 dark:text-gray-900">Internet</p>
                     </div>
                 </Link>
 
-                <Link :href="route('pasca.multifinance.index')" class="py-3 flex justify-center items-center rounded-3xl bg-gradient-to-br from-blue-300 dark:from-blue-700 shadow-lg">
+                <Link :href="route('pasca.multifinance.index')" class="py-3 rounded-r-3xl flex justify-center items-center">
                     <div class="text-center">
-                        <i class="fa-regular fa-credit-card text-2xl text-blue-600 dark:text-gray-900" />
+                        <i class="fa-regular fa-credit-card text-2xl text-blue-600" />
                         <p class="text-xs text-blue-600 dark:text-gray-900">Cicilan</p>
                     </div>
                 </Link>

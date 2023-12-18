@@ -1,6 +1,6 @@
 <script setup>
 import {Link, useForm, usePage} from '@inertiajs/vue3';
-import {computed, ref} from 'vue'
+import {computed, ref, watch} from 'vue'
 import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
@@ -20,6 +20,7 @@ const form = useForm({
 });
 
 const storeInformation = () => {
+    form.amount = amount.value.replaceAll(".", "")
     form.post(route('deposit.method'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
@@ -38,6 +39,25 @@ const formReset = () => {
 }
 
 const clock = moment().format('HH')
+
+function formatPrice(value) {
+    let val = (value/1).toFixed(0).replace('.', '')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+}
+
+// function formatPrice(value) {
+//     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+// }
+
+const amount = ref(null)
+
+watch(amount, (newAmount) => {
+    amount.value = newAmount.toString()
+        .replace(/\D/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    // console.log(amount.value)
+})
+
 </script>
 
 <template>
@@ -59,10 +79,10 @@ const clock = moment().format('HH')
                     </span>
                     <TextInput
                         id="amount"
-                        v-model="form.amount"
-                        type="number"
+                        v-model="amount"
+                        type="tel"
                         class="mt-1 block w-full rounded-l-none"
-                        min="10000"
+                        min="1"
                         max="5000000"
                         required
                         autofocus
