@@ -112,7 +112,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Inertia\Response
+     * @return \Illuminate\Http\RedirectResponse|\Inertia\Response
      */
     public function topupPasca(Request $request)
     {
@@ -120,6 +120,21 @@ class ProductController extends Controller
 //        $gross_amount = $request['amount'] + $admin_fee;
 
 //        dd($request->all());
+
+        if (auth()->user()->pin != null) {
+            Validator::make($request->toArray(), [
+                'pin' => ['required'],
+            ])->validateWithBag('storeInformation');
+
+//            dd('lewat');
+
+            if (!Hash::check($request['pin'], auth()->user()->pin)) {
+//                session()->flash('flash.banner', 'Pin tidak valid');
+//                session()->flash('flash.bannerStyle', 'danger');
+//                dd('pin salah');
+                return to_route('pin.wrong');
+            }
+        }
 
         switch($request['sku']) {
             case ('pln'):

@@ -70,8 +70,8 @@ function sort(arr) {
 </script>
 
 <template>
-    <AppLayout :title="props.customer.data.buyer_sku_code"
-               :name="props.customer.data.buyer_sku_code"
+    <AppLayout :title="props.customer.data.buyer_sku_code.replaceAll('-', ' ')"
+               :name="props.customer.data.buyer_sku_code.replaceAll('-', ' ')"
                desc="Masukkan nomor"
     >
         <template #previous>
@@ -80,7 +80,7 @@ function sort(arr) {
 
         <FormSection class="sticky top-0 z-40">
             <template #title>
-                {{ props.customer.data.buyer_sku_code }}
+                {{ props.customer.data.buyer_sku_code.replaceAll("-", " ") }}
             </template>
 
             <template #description>
