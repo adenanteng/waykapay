@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request as Req;
 
@@ -233,6 +234,13 @@ class WebHookController extends Controller
         ];
         Helper::sendNotification($user->device_token, $msg);
 //        }
+
+        $response = Http::post('https://api.pushy.me/topics/subscribe?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
+            'token' => Req::input('token'),
+            'topics' => [
+                'user'
+            ],
+        ]);
 
         return response()->json('ok');
     }
