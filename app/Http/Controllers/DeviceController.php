@@ -81,8 +81,8 @@ class DeviceController extends Controller
 
     public function subscribe()
     {
-        $admin = User::where('category_id', User::SUPERADMIN);
-        $user = User::where('device_token', '!=', null);
+        $admin = User::where('category_id', User::SUPERADMIN)->get();
+        $user = User::where('device_token', '!=', null)->get();
 
         foreach ($admin as $item) {
             $response = Http::post('https://api.pushy.me/topics/subscribe?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
@@ -94,6 +94,8 @@ class DeviceController extends Controller
             ]);
 
         }
+
+        dd($user);
 
         foreach ($user as $item) {
             $response = Http::post('https://api.pushy.me/topics/subscribe?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
