@@ -141,6 +141,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/device', [DeviceController::class, 'index'])->name('device.index');
     Route::get('/device/store', [DeviceController::class, 'store'])->name('device.store');
     Route::get('/device/subscribe', [DeviceController::class, 'subscribe'])->name('device.subscribe');
+    Route::post('/device/send', [DeviceController::class, 'send'])->name('device.send');
 
 
     Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');

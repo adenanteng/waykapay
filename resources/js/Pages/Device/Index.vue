@@ -5,6 +5,7 @@ import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import moment from "moment";
 import PreviousButton from "../../Components/PreviousButton.vue";
+import NotificationForm from "./Partials/NotificationForm.vue";
 
 const props = defineProps({
 
@@ -41,25 +42,16 @@ function formatPrice(value) {
                     <div class="flex items-center space-x-3">
                         <h3 class="truncate text-sm text-gray-600">Notifikasi Perangkat</h3>
 <!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
-<!--                            {{ props.transaction.total }} Transaksi-->
+<!--                            Transaksi-->
 <!--                        </span>-->
                     </div>
                     <p class="mt-1 truncate text-sm font-medium text-gray-900">{{ $page.props.user.device_token ? 'Aktif' : 'Tidak aktif' }}</p>
-                    <p class="mt-1 text-sm text-gray-500" v-if="$page.props.user.device_token">{{ $page.props.user.device_token }}</p>
+                    <p class="mt-1 text-xs text-gray-500" v-if="$page.props.user.device_token">{{ $page.props.user.device_token }}</p>
                 </div>
                 <i class="fa-duotone fa-mobile-android text-3xl flex-shrink-0" :class="$page.props.user.device_token ? 'text-green-600' : 'text-red-600' " />
             </div>
             <div>
-                <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
-<!--                    <div class="flex w-0 flex-1">-->
-<!--                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">-->
-<!--&lt;!&ndash;                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>&ndash;&gt;-->
-<!--                            <div class="ml-3 truncate">-->
-<!--                                <div class="text-xs text-gray-500">Token Perangkat</div>-->
-<!--                                <div class="text-sm font-medium text-gray-700 truncate">{{ $page.props.user.device_token }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                <div class="flex divide-x divide-gray-300 dark:divide-gray-600">
                     <div class="flex w-0 flex-1">
                         <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
 <!--                            <i class="fa-duotone fa-coins text-amber-400"/>-->
@@ -88,6 +80,8 @@ function formatPrice(value) {
             </div>
         </div>
 
-<!--        <MobileMenu/>-->
+
+        <NotificationForm />
+        <!--        <MobileMenu/>-->
     </AppLayout>
 </template>

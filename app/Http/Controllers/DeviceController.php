@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Device;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
+use PHPUnit\TextUI\Help;
 
 class DeviceController extends Controller
 {
@@ -104,5 +106,11 @@ class DeviceController extends Controller
             ]);
 
         }
+    }
+
+    public function send(Request $request)
+    {
+//        dd($request->all());
+        Helper::sendUserNotification($request['message']);
     }
 }
