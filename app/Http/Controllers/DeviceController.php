@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
 class DeviceController extends Controller
@@ -75,5 +77,32 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         //
+    }
+
+    public function subscribe()
+    {
+        $admin = User::where('category_id', User::SUPERADMIN);
+        $user = User::where('device_token', '!=', null);
+
+        foreach ($admin as $item) {
+            $response = Http::post('https://api.pushy.me/topics/subscribe?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
+                'token' => $item->device_token,
+                'topics' => [
+                    'admin',
+                    'user'
+                ],
+            ]);
+
+        }
+
+        foreach ($user as $item) {
+            $response = Http::post('https://api.pushy.me/topics/subscribe?api_key=c6c48c9d9c6de34d676a6ba63ca60d8fd6437b970e2f82facb9c6540918b6dd0', [
+                'token' => $item->device_token,
+                'topics' => [
+                    'user'
+                ],
+            ]);
+
+        }
     }
 }

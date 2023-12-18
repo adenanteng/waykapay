@@ -11,39 +11,8 @@ const props = defineProps({
 })
 
 onMounted(() => {
-    // router.reload({ only: ['amount', 'gross_amount'] })
 
-    // const endDate = new Date();
-    // const startDate = new Date(new Date().setDate(endDate.getDate() - 7));
-    // date.value = [startDate, endDate];
 })
-
-// watch(filter, (value) => {
-//     router.get(
-//         route('transaction.index'),
-//         { filter: value },
-//         {
-//             preserveState: true,
-//             replace: true,
-//         }
-//     );
-// });
-
-// const form = useForm({
-//     // user_id: props.request.users.id ?? null,
-//     // customer_no: props.request.customer_no,
-// });
-
-// const storeInformation = () => {
-//     form.get(route('device.store'), {
-//         errorBag: 'storeInformation',
-//         preserveScroll: true,
-//         replace: true,
-//         onSuccess: () => {
-//             req.value = true
-//         }
-//     });
-// };
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -53,13 +22,6 @@ function formatPrice(value) {
     let val = (value/1).toFixed(0).replace('.', '')
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
-
-// const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 2)
-//
-// watch(tabHistory, (newTabHistory) => {
-//     console.log(`tab is ${newTabHistory}`)
-//     localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
-// })
 
 </script>
 

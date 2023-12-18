@@ -47,9 +47,9 @@ Route::get('/print/{transaction}', [TransactionController::class, 'print'])->nam
 Route::get('/share/{transaction}', [TransactionController::class, 'share'])->name('transaction.share');
 
 Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
-Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
 Route::get('/register/device', [WebHookController::class, 'webhookHandlerPushyRegister']);
+//Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 //Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
 //Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
 
@@ -140,6 +140,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 //    Route::resource('/device', DeviceController::class)->names('device');
     Route::get('/device', [DeviceController::class, 'index'])->name('device.index');
     Route::get('/device/store', [DeviceController::class, 'store'])->name('device.store');
+    Route::get('/device/subscribe', [DeviceController::class, 'subscribe'])->name('device.subscribe');
 
 
     Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');
