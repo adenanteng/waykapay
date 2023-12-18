@@ -81,7 +81,7 @@ class DeviceController extends Controller
 
     public function subscribe()
     {
-        $admin = User::where('category_id', User::SUPERADMIN)->get();
+        $admin = User::where('role_id', User::SUPERADMIN)->get();
         $user = User::where('device_token', '!=', null)->get();
 
         foreach ($admin as $item) {
