@@ -35,19 +35,25 @@ class TransactionBankTransfer extends Model
     const LINKAJA = 10;
     const DANA = 11;
     const ALFAMART = 13;
+    const INDOMARET = 14;
+    const MANUAL_BCA = 15;
+    const MANUAL_BRI = 16;
     const BANK = [
-        self::BCA => 'BCA',
-        self::BNI => 'BNI',
-        self::BRI  => 'BRI',
-        self::MANDIRI => 'MANDIRI',
-        self::PERMATA => 'PERMATA',
-        self::BSM  => 'BSI',
+        self::BCA => 'VA BCA',
+        self::BNI => 'VA BNI',
+        self::BRI  => 'VA BRI',
+        self::MANDIRI => 'VA MANDIRI',
+        self::PERMATA => 'VA PERMATA',
+        self::BSM  => 'VA BSI',
         self::QRIS => 'QRIS',
         self::OVO => 'OVO',
         self::SHOPEEPAY  => 'SHOPEEPAY',
         self::LINKAJA => 'LINKAJA',
         self::DANA => 'DANA',
-        self::ALFAMART => 'Alfamart'
+        self::ALFAMART => 'Alfamart',
+        self::INDOMARET => 'Indomaret',
+        self::MANUAL_BCA => 'Transfer BCA',
+        self::MANUAL_BRI => 'Transfer BRI'
     ];
 
     protected $appends = [

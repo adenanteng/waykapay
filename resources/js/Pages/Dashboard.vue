@@ -73,7 +73,7 @@ function greeting() {
     } else if (moment().format('HH') < 15) {
         return  "Selamat Siang, semangat ya beraktivitasnya.";
     } else if (moment().format('HH') < 19) {
-        return  "Selamat Sore";
+        return  "Selamat Sore, gimana? hari ini lancar?";
     } else {
         return  "Selamat Malam, selamat beristirahat.";
     }

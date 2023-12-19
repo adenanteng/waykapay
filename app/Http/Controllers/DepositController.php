@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Transaction;
 use App\Models\TransactionBankTransfer;
+use App\Models\TransactionManualTransfer;
 use App\Models\TransactionOffline;
 use App\Models\TransactionQris;
 use App\Models\User;
@@ -63,81 +64,132 @@ class DepositController extends Controller
             5 => $bank = "PERMATA",
             6 => $bank = "BSI",
             13 => $bank = "ALFAMART",
+            14 => $bank = "INDOMARET",
+            15 => $bank = "Transfer BCA",
+            16 => $bank = "Transfer BRI",
         };
 
         $sender_bank_fee = match ($request['method']['id']) {
-            1, 2, 3, 4, 5, 6 => $admin_fee = 4000,
+            1, 2, 3, 4, 5, 6 => $admin_fee = 3000,
             13 => $admin_fee = 4000,
+            16 => $admin_fee = 0,
         };
 
         $grossAmount = $request['amount'] + $admin_fee;
 
-        $curl = curl_init();
+        if ($request['method']['id'] <=14) {
+            $curl = curl_init();
 //        dd($sender_bank_type);
-        if ($request['method']['id'] <=6) {
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://gateway.okeconnect.com/api/va/inquiry',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array(
-                    'merchantCode' => $merchantCode,
-                    'paymentAmount' => $grossAmount,
-                    'merchantOrderId' => $merchantOrderId,
-                    'productDetails' => 'Pembayaran Deposit Waykapay',
-                    'email' => $user->email,
-                    'phoneNumber' => $user->phone,
-                    'bank' => $bank,
-                    'returnUrl' => 'https://waykapay.com',
-                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
-                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
-                ),
-            ));
-        } else {
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://gateway.okeconnect.com/api/retail/inquiry',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => array(
-                    'merchantCode' => $merchantCode,
-                    'paymentAmount' => $grossAmount,
-                    'paymentFee' => '0',
-                    'merchantOrderId' => $merchantOrderId,
-                    'productDetails' => 'Pembayaran Deposit Waykapay',
-                    'email' => $user->email,
-                    'phoneNumber' => $user->phone,
-                    'channel' => $bank,
-                    'returnUrl' => 'https://waykapay.com',
-                    'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
-                    'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
-                ),
-            ));
-        }
+            if ($request['method']['id'] <=6) {
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://gateway.okeconnect.com/api/va/inquiry',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array(
+                        'merchantCode' => $merchantCode,
+                        'paymentAmount' => $grossAmount,
+                        'merchantOrderId' => $merchantOrderId,
+                        'productDetails' => 'Pembayaran Deposit Waykapay',
+                        'email' => $user->email,
+                        'phoneNumber' => $user->phone,
+                        'bank' => $bank,
+                        'returnUrl' => 'https://waykapay.com',
+                        'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                        'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
+                    ),
+                ));
+            } else {
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://gateway.okeconnect.com/api/retail/inquiry',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array(
+                        'merchantCode' => $merchantCode,
+                        'paymentAmount' => $grossAmount,
+                        'paymentFee' => '0',
+                        'merchantOrderId' => $merchantOrderId,
+                        'productDetails' => 'Pembayaran Deposit Waykapay',
+                        'email' => $user->email,
+                        'phoneNumber' => $user->phone,
+                        'channel' => $bank,
+                        'returnUrl' => 'https://waykapay.com',
+                        'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                        'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
+                    ),
+                ));
+            }
 
-        // Set response json
-        $responseJson = curl_exec($curl);
-        $response = json_decode($responseJson, true);
-        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            // Set response json
+            $responseJson = curl_exec($curl);
+            $response = json_decode($responseJson, true);
+            $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-        curl_close($curl);
+            curl_close($curl);
 //        dd($response['code'][$sender_bank_type]);
 
 //        dd($response);
 
-        if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
+            if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
+                try {
+                    $transaction = Transaction::create([
+                        'sku' => '-',
+//                'order_id' => $merchantOrderId,
+                        'order_id' => $merchantOrderId,
+                        'product_name' => 'Deposit',
+                        'customer_no' => '-',
+                        'user_id' => $request['user_id'],
+                        'status_id' => Transaction::PENDING,
+                        'category_id' => Transaction::DEPOSIT,
+                        'amount' => $request['amount'],
+                        'gross_amount' => $grossAmount,
+                        'last_amount' => $user->wallet_balance,
+                        'admin_fee' => $admin_fee,
+                        'desc' => isset($response['id']) ?? isset($response['deposit_id'])
+                    ]);
+
+                    if ($request['method']['id'] <= 6) {
+                        $virtual_account = TransactionBankTransfer::create([
+                            'transaction_id' => $transaction->id,
+                            'bank_id' => $request['method']['id'],
+                            'va_number' => $response['code'][$sender_bank_type],
+                            'payment_url' => '-',
+                            'exp_time' => Carbon::tomorrow(),
+                        ]);
+                    } elseif ($request['method']['id'] == 13) {
+                        $offline_account = TransactionOffline::create([
+                            'transaction_id' => $transaction->id,
+                            'bank_id' => $request['method']['id'],
+                            'payment_code' => $response['response']['alfamart']['code'],
+                            'payment_url' => '-',
+                            'exp_time' => Carbon::tomorrow(),
+                        ]);
+                    }
+                } catch (Exception $e) {
+                    dd($e->getMessage());
+                }
+
+            } else {
+                dd('error');
+            }
+        } else {
+            $idk = match ($request['method']['id']) {
+                15 => $bank_code = '',
+                16 => $bank_code = '009801143657509',
+            };
+
             try {
                 $transaction = Transaction::create([
                     'sku' => '-',
-//                'order_id' => $merchantOrderId,
                     'order_id' => $merchantOrderId,
                     'product_name' => 'Deposit',
                     'customer_no' => '-',
@@ -145,35 +197,23 @@ class DepositController extends Controller
                     'status_id' => Transaction::PENDING,
                     'category_id' => Transaction::DEPOSIT,
                     'amount' => $request['amount'],
-                    'gross_amount' => $request['amount'] + $admin_fee,
+                    'gross_amount' => $grossAmount + rand(2,500),
                     'last_amount' => $user->wallet_balance,
                     'admin_fee' => $admin_fee,
-                    'desc' => isset($response['id']) ?? isset($response['deposit_id'])
+                    'desc' => ''
                 ]);
 
-                if ($request['method']['id'] <= 6) {
-                    $virtual_account = TransactionBankTransfer::create([
-                        'transaction_id' => $transaction->id,
-                        'bank_id' => $request['method']['id'],
-                        'va_number' => $response['code'][$sender_bank_type],
-                        'payment_url' => '-',
-                        'exp_time' => Carbon::tomorrow(),
-                    ]);
-                } elseif ($request['method']['id'] == 13) {
-                    $offline_account = TransactionOffline::create([
-                        'transaction_id' => $transaction->id,
-                        'bank_id' => $request['method']['id'],
-                        'payment_code' => $response['response']['alfamart']['code'],
-                        'payment_url' => '-',
-                        'exp_time' => Carbon::tomorrow(),
-                    ]);
-                }
+                $manual_account = TransactionManualTransfer::create([
+                    'transaction_id' => $transaction->id,
+                    'bank_id' => $request['method']['id'],
+                    'payment_code' => $bank_code,
+                    'payment_url' => '-',
+                    'exp_time' => Carbon::tomorrow(),
+                ]);
+
             } catch (Exception $e) {
                 dd($e->getMessage());
             }
-
-        } else {
-            dd('error');
         }
 
         return Inertia::render('Deposit/Confirm', [
@@ -181,6 +221,7 @@ class DepositController extends Controller
             'virtual_account' => $virtual_account ?? '',
             'wallet_account' => $wallet_account ?? '',
             'offline_account' => $offline_account ?? '',
+            'manual_account' => $manual_account ?? '',
         ]);
     }
 

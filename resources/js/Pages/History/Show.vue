@@ -1,12 +1,12 @@
 <script setup>
-import {onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
 import PreviousButton from "@/Components/PreviousButton.vue"
 import Badge from "../../Components/Badge.vue";
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
-import {Link, useForm} from "@inertiajs/vue3";
+import {Link, useForm, usePage} from "@inertiajs/vue3";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -33,17 +33,14 @@ const props = defineProps({
 
 const form = useForm({
     agent_commission: null,
+    valid: null
 });
 
+const {...userInfo} = computed(() => usePage().props.user).value;
 const message = ref(null)
 
 const storeInformation = () => {
     form.agent_commission = commission.value.replaceAll(".", "")
-
-    // if (Number(form.agent_commission) <= Number(props.history.gross_amount)) {
-    //     message.value = "Nominal tidak boleh kurang dari harga modal"
-    // }
-
     form.patch(route('transaction.update', props.history), {
         errorBag: 'storeInformation',
         preserveScroll: true,
@@ -51,6 +48,28 @@ const storeInformation = () => {
             form.reset()
         }
     });
+};
+
+const validate = () => {
+    if (userInfo.pin) {
+        form.valid = props.history.order_id
+        form.post(route('pin.manualTransfer'), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            // replace: true,
+            onSuccess: () => {
+            }
+        });
+    } else {
+        form.valid = props.history.order_id
+        form.patch(route('transaction.update', props.history), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            onSuccess: () => {
+                form.reset()
+            }
+        });
+    }
 };
 
 const timerSuccess = ref(props.goSuccess)
@@ -165,6 +184,9 @@ function formatPrice(value) {
                                     </template>
                                     <template v-if="props.history.offline_account">
                                         <div class="text-sm font-semibold uppercase">{{ props.history.offline_account.bank }}</div>
+                                    </template>
+                                    <template v-if="props.history.manual_account">
+                                        <div class="text-sm font-semibold uppercase">{{ props.history.manual_account.bank }}</div>
                                     </template>
                                 </div>
                             </template>
@@ -444,12 +466,46 @@ function formatPrice(value) {
                                 </div>
                             </template>
 
+                            <template v-else-if="props.history.manual_account">
+                                <div class="sm:col-span-1 flex sm:block justify-between">
+                                    <div class="text-sm">Metode Pembayaran</div>
+                                    <div class="text-sm font-semibold uppercase">{{ props.history.manual_account.bank }}</div>
+                                </div>
+                                <div class="sm:col-span-1 flex sm:block justify-between">
+                                    <div class="text-sm">Atas Nama</div>
+                                    <div class="text-sm font-semibold uppercase">Agus Suryaman</div>
+                                </div>
+                                <div class="sm:col-span-1 flex sm:block justify-between">
+                                    <div class="text-sm">No. Rekening</div>
+                                    <div class="text-sm font-semibold">
+                                        {{ props.history.manual_account.payment_code }}
+                                        <Popper class="text-sm text-primary-700 font-normal lowercase" content="Sukses Copy" arrow placement="right-end">
+                                            <button class="" @click="toClipboard(props.history.manual_account.payment_code)">
+                                                <i class="fa-duotone fa-paste ml-2" />
+                                            </button>
+                                        </Popper>
+                                    </div>
+                                </div>
+<!--                                <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                    <div class="text-sm">Cara bayar</div>-->
+<!--                                    <div class="text-sm font-semibold text-primary-600 underline">-->
+<!--                                        <a target="_blank" :href="props.history.offline_account.payment_url" >-->
+<!--                                            Bayar-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </template>
+
                             <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm ">Nominal</div>
                                 <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.amount) }}</div>
                             </div>
-                            <div class="sm:col-span-1 flex sm:block justify-between">
+                            <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.manual_account">
+                                <div class="text-sm ">Kode Unik</div>
+                                <div class="text-sm font-semibold ">{{ Number(props.history.gross_amount) - Number(props.history.amount) }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between" v-else>
                                 <div class="text-sm ">Biaya Admin</div>
                                 <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.admin_fee) }}</div>
                             </div>
@@ -457,8 +513,31 @@ function formatPrice(value) {
                                 <div class="text-sm ">Total</div>
                                 <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.gross_amount) }}</div>
                             </div>
+                            <div class="" v-if="props.history.manual_account">
+                                <p class="text-xs text-gray-500">Untuk memudahkan transaksi harap transfer nominal beserta kode uniknya ya.</p>
+                            </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="mt-5 grid gap-5" v-if="props.history.manual_account">
+                    <SecondaryButton
+                        class="border border-gray-300 w-full justify-center"
+                        as="outside"
+                        href="https://api.whatsapp.com/send?phone=6285839036717&text=Halo%20admin%20Waykapay.%20Saya%20ingin%20mengirimkan%20bukti%20transfer"
+                        target="_blank"
+                    >
+                        <i class="fa-brands fa-whatsapp mr-2" />
+                        Kirim bukti Transfer
+                    </SecondaryButton>
+
+                    <PrimaryButton
+                        class="border border-gray-300 w-full justify-center"
+                        @click="validate"
+                    >
+                        <i class="fa-regular fa-paper-plane mr-2" />
+                        Validasi
+                    </PrimaryButton>
                 </div>
             </template>
 

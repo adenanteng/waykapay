@@ -17,7 +17,8 @@ const props = defineProps({
     transaction: Object,
     virtual_account: Object | String,
     wallet_account: Object | String,
-    offline_account: Object | String
+    offline_account: Object | String,
+    manual_account: Object | String,
 })
 
 // onMounted(() => {
@@ -162,18 +163,49 @@ function formattedDateTime(value) {
 <!--                            </div>-->
                         </template>
 
+                        <template v-else-if="props.manual_account">
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Metode Pembayaran</div>
+                                <div class="text-sm font-semibold ">{{ props.manual_account.bank }}</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Atas Nama</div>
+                                <div class="text-sm font-semibold ">Agus Suryaman</div>
+                            </div>
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">No. Rekening</div>
+                                <div class="text-sm font-semibold ">{{ props.manual_account.payment_code }}
+                                    <Popper class="text-sm text-primary-900 font-normal lowercase" content="Sukses copy" arrow placement="right-end">
+                                        <button class="" @click="toClipboard(props.manual_account.payment_code)">
+                                            <i class="fa-duotone fa-paste ml-2" />
+                                        </button>
+                                    </Popper>
+                                </div>
+                            </div>
+                            <!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+                            <!--                                <div class="text-sm ">Cara bayar</div>-->
+                            <!--                                <div class="text-sm font-semibold text-primary-600 underline">-->
+                            <!--                                    <a target="_blank" :href="props.offline_account.payment_url" >Bayar</a>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                        </template>
+
                         <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Nominal</div>
                             <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.amount) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
-                            <div class="text-sm ">Biaya Admin</div>
-                            <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.admin_fee) }}</div>
+                            <div class="text-sm ">Kode Unik</div>
+                            <div class="text-sm font-semibold ">{{ Number(props.transaction.gross_amount) - Number(props.transaction.amount) }}</div>
                         </div>
                         <div class="sm:col-span-1 flex sm:block justify-between">
                             <div class="text-sm ">Total</div>
                             <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.gross_amount) }}</div>
+                        </div>
+
+                        <div class="" v-if="props.manual_account">
+                            <p class="text-xs text-gray-500">Untuk memudahkan transaksi harap transfer nominal beserta kode uniknya ya.</p>
                         </div>
                     </div>
                 </div>
@@ -184,14 +216,22 @@ function formattedDateTime(value) {
 <!--                <ActionMessage :on="form.recentlySuccessful" class="mr-3">-->
 <!--                    Berhasil disimpan.-->
 <!--                </ActionMessage>-->
+                <div class="flex gap-3">
+                    <SecondaryButton
+                        class="border border-gray-300"
+                        v-if="props.manual_account"
+                        as="outside"
+                        href="https://api.whatsapp.com/send?phone=6285839036717&text=Halo%20admin%20Waykapay.%20Saya%20ingin%20mengirimkan%20bukti%20transfer"
+                        target="_blank"
+                    >
+                        Kirim bukti Transfer
+                    </SecondaryButton>
 
-                <PrimaryButton as="a" :href="route('dashboard')">
-                    Kembali ke Beranda
-                </PrimaryButton>
+                    <PrimaryButton as="a" :href="route('dashboard')">
+                        Beranda
+                    </PrimaryButton>
+                </div>
 
-<!--                <PrimaryButton @click="storeInformation" >-->
-<!--                    Kembali ke Beranda-->
-<!--                </PrimaryButton>-->
             </template>
         </FormSection>
 

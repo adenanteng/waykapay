@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Validator;
@@ -57,13 +60,23 @@ class TransactionController extends Controller
      *
      * @param Request $request
      * @param Transaction $transaction
-     * @return void
+     * @return RedirectResponse|void
      */
     public function update(Request $request, Transaction $transaction)
     {
 
 //        dd($request->all(), $transaction);
-        if ($request['agent_commission']) {
+        if (auth()->user()->pin != null) {
+            Validator::make($request->toArray(), [
+                'pin' => ['required'],
+            ])->validateWithBag('storeInformation');
+
+            if (!Hash::check($request['pin'], auth()->user()->pin)) {
+                return to_route('pin.wrong');
+            }
+        }
+
+        if ($request['agent_commission'] != null) {
             Validator::make($request->toArray(), [
                 'agent_commission' => ['required', 'integer', 'gte:'.$transaction['gross_amount']],
             ])->validateWithBag('storeInformation');
@@ -74,6 +87,31 @@ class TransactionController extends Controller
                 'agent_commission' => $commission,
 //                'gross_amount' => $transaction['gross_amount'] + $commission
             ]);
+
+        } elseif ($request['valid'] != null) {
+            $transaction = Transaction::where('order_id', $request['valid'])->first();
+            $user = User::where('id', $transaction['user_id'])->first();
+
+            if ($transaction->status_id != Transaction::SUCCESS) {
+                $user->deposit($transaction->amount);
+                $unique = $transaction->gross_amount - $transaction->amount;
+                $transaction->update([
+                    'amount' => $transaction->amount + $unique,
+//                    'gross_amount' => $transaction->gross_amount - $unique,
+                    'status_id' => Transaction::SUCCESS,
+                ]);
+
+                if ($user->device_token) {
+                    $msg = [
+                        'title' => 'Deposit Rp '.$request['amount'].' berhasil!',
+                        'body' => 'Lorem ipsum dolor sit amet',
+                        'badge' => 1,
+                        'sound' => 'ping.aiff'
+                    ];
+                    Helper::sendNotification($user->device_token, $msg);
+                }
+            }
+            return to_route('history.show', $transaction->order_id);
         }
 
 

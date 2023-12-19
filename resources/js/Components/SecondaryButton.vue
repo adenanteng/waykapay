@@ -23,6 +23,10 @@ const classes = computed(() => {
 <!--        <i class="fa-solid fa-arrow-right text-xs ml-1" />-->
     </Link>
 
+    <a v-else-if="as === 'outside'" :href="href" :class="classes" >
+        <slot />
+    </a>
+
     <button v-else :type="type" :class="classes" >
         <slot />
 <!--        <i class="fa-solid fa-arrow-right text-xs ml-1" />-->

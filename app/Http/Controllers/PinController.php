@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -71,7 +72,6 @@ class PinController extends Controller
     {
 //        dd($request->toArray());
         return Inertia::render('Pin/MoneyTransfer', [
-//            'users' => User::latest()->get(),
             'request' => $request->all()
         ]);
     }
@@ -80,7 +80,6 @@ class PinController extends Controller
     {
 //        dd($request->toArray());
         return Inertia::render('Pin/Topup', [
-//            'users' => User::latest()->get(),
             'request' => $request->all()
         ]);
     }
@@ -89,8 +88,16 @@ class PinController extends Controller
     {
 //        dd($request->toArray());
         return Inertia::render('Pin/TopupPasca', [
-//            'users' => User::latest()->get(),
             'request' => $request->all()
+        ]);
+    }
+
+    public function confirmManualTransfer(Request $request)
+    {
+//        dd(Transaction::where('order_id', $request['valid'])->first());
+        return Inertia::render('Pin/ManualTransfer', [
+            'request' => $request->all(),
+            'history' => Transaction::where('order_id', $request['valid'])->first()
         ]);
     }
 

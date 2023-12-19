@@ -132,6 +132,7 @@ class Transaction extends Model
         'virtual_account',
         'wallet_account',
         'offline_account',
+        'manual_account',
         'money_transfer',
         'pasca_desc'
     ];
@@ -183,6 +184,11 @@ class Transaction extends Model
     public function offline_account(): HasOne
     {
         return $this->hasOne(TransactionOffline::class, 'transaction_id', 'id');
+    }
+
+    public function manual_account(): HasOne
+    {
+        return $this->hasOne(TransactionManualTransfer::class, 'transaction_id', 'id');
     }
 
     public function pasca_desc(): HasOne

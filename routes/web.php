@@ -131,6 +131,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/pin-money-transfer', [PinController::class, 'confirmMoneyTransfer'])->name('pin.moneyTransfer');
     Route::post('/pin-topup', [PinController::class, 'confirmTopup'])->name('pin.topup');
     Route::post('/pin-topup-pasca', [PinController::class, 'confirmTopupPasca'])->name('pin.topupPasca');
+    Route::post('/pin-manual-transfer', [PinController::class, 'confirmManualTransfer'])->name('pin.manualTransfer');
     Route::get('/pin-wrong', [PinController::class, 'wrong'])->name('pin.wrong');
 
     Route::resource('/user', UserController::class)->names('user');
