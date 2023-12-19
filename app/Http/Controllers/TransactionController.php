@@ -103,7 +103,7 @@ class TransactionController extends Controller
 
                 if ($user->device_token) {
                     $msg = [
-                        'title' => 'Deposit Rp '.$request['amount'].' berhasil!',
+                        'title' => 'Deposit Rp '.$transaction->amount.' berhasil!',
                         'body' => 'Lorem ipsum dolor sit amet',
                         'badge' => 1,
                         'sound' => 'ping.aiff'
