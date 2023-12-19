@@ -534,16 +534,17 @@ function formatPrice(value) {
 
                     <SecondaryButton
                         class="border border-gray-300"
-                        v-if="props.manual_account && $page.props.user.role_id!=1"
+                        v-if="props.manual_account && props.history.user_id == $page.props.user.id"
                         as="outside"
-                        href="https://wa.me/6285839036717"
+                        href="https://api.whatsapp.com/send?phone=6285839036717&text=Halo%20admin%20Waykapay.%20Saya%20ingin%20mengirimkan%20bukti%20transfer"
                         target="_blank"
+                        replace
                     >
                         Kirim bukti Transfer
                     </SecondaryButton>
 
                     <PrimaryButton
-                        class="border border-gray-300 w-full justify-center"
+                        class="w-full justify-center"
                         @click="validate"
                         v-if="$page.props.user.role_id==1"
                     >

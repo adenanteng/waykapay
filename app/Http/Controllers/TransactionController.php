@@ -96,11 +96,11 @@ class TransactionController extends Controller
             if ($transaction->status_id != Transaction::SUCCESS) {
                 $user->deposit($transaction->amount);
                 $unique = $transaction->gross_amount - $transaction->amount;
-//                $transaction->update([
-//                    'amount' => $transaction->amount + $unique,
-////                    'gross_amount' => $transaction->gross_amount - $unique,
-//                    'status_id' => Transaction::SUCCESS,
-//                ]);
+                $transaction->update([
+                    'amount' => $transaction->amount + $unique,
+//                    'gross_amount' => $transaction->gross_amount - $unique,
+                    'status_id' => Transaction::SUCCESS,
+                ]);
 
                 if ($user->device_token) {
                     $msg = [

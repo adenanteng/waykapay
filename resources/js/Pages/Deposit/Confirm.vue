@@ -231,7 +231,7 @@ function formattedDateTime(value) {
                         class="border border-gray-300"
                         v-if="props.manual_account"
                         as="outside"
-                        href="https://wa.me/6285839036717"
+                        href="https://api.whatsapp.com/send?phone=6285839036717&text=Halo%20admin%20Waykapay.%20Saya%20ingin%20mengirimkan%20bukti%20transfer"
                         target="_blank"
                     >
                         Kirim bukti Transfer
