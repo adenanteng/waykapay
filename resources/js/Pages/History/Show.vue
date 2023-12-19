@@ -521,19 +521,30 @@ function formatPrice(value) {
                 </div>
 
                 <div class="mt-5 grid gap-5" v-if="props.history.manual_account">
+<!--                    <SecondaryButton-->
+<!--                        class="border border-gray-300 w-full justify-center"-->
+<!--                        as="outside"-->
+<!--                        href="https://api.whatsapp.com/send?phone=6285839036717&text=Halo%20admin%20Waykapay.%20Saya%20ingin%20mengirimkan%20bukti%20transfer"-->
+<!--                        target="_blank"-->
+<!--                    >-->
+<!--                        <i class="fa-brands fa-whatsapp mr-2" />-->
+<!--                        Kirim bukti Transfer-->
+<!--                    </SecondaryButton>-->
+
                     <SecondaryButton
-                        class="border border-gray-300 w-full justify-center"
+                        class="border border-gray-300"
+                        v-if="props.manual_account && $page.props.user.role_id!=1"
                         as="outside"
-                        href="https://api.whatsapp.com/send?phone=6285839036717&text=Halo%20admin%20Waykapay.%20Saya%20ingin%20mengirimkan%20bukti%20transfer"
+                        href="https://wa.me/6285839036717"
                         target="_blank"
                     >
-                        <i class="fa-brands fa-whatsapp mr-2" />
                         Kirim bukti Transfer
                     </SecondaryButton>
 
                     <PrimaryButton
                         class="border border-gray-300 w-full justify-center"
                         @click="validate"
+                        v-if="$page.props.user.role_id==1"
                     >
                         <i class="fa-regular fa-paper-plane mr-2" />
                         Validasi
