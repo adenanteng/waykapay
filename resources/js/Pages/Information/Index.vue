@@ -101,13 +101,13 @@ function formattedDate(value) {
                 <div>
                     <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
                         <div class="flex w-0 flex-1">
-                            <a :href="item.link" target="_blank" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                            <a :href="item.link" class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
 <!--                                <i class="fa-duotone fa-circle-i text-gray-400"/>-->
                                 <span class="ml-3">{{ item.btn }}</span>
                             </a>
                         </div>
                         <div class="-ml-px flex w-0 flex-1" v-if="item.btn2">
-                            <a :href="item.link2" target="_blank" class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
+                            <a :href="item.link2" class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500">
 <!--                                <i class="fa-duotone fa-circle-i text-gray-400"/>-->
                                 <span class="ml-3">{{ item.btn2 }}</span>
                             </a>

@@ -145,4 +145,30 @@ class Helper
             $array,
         ]);
     }
+
+    public static function phoneFormat($phoneNumber) {
+        //Terlebih dahulu kita trim dl
+        $phoneNumber = trim($phoneNumber);
+        //bersihkan dari karakter yang tidak perlu
+        $phoneNumber = strip_tags($phoneNumber);
+        // Berishkan dari spasi
+        $phoneNumber= str_replace(" ","",$phoneNumber);
+        // bersihkan dari bentuk seperti  (022) 66677788
+        $phoneNumber= str_replace("(","",$phoneNumber);
+        // bersihkan dari format yang ada titik seperti 0811.222.333.4
+        $phoneNumber= str_replace(".","",$phoneNumber);
+
+        //cek apakah mengandung karakter + dan 0-9
+        if(!preg_match('/[^+0-9]/',trim($phoneNumber))){
+            // cek apakah no hp karakter 1-3 adalah +62
+            if(substr(trim($phoneNumber), 0, 2)=='62'){
+                $phoneNumber= trim($phoneNumber);
+            }
+            // cek apakah no hp karakter 1 adalah 0
+            elseif(substr($phoneNumber, 0, 1)=='0'){
+                $phoneNumber= '62'.substr($phoneNumber, 1);
+            }
+        }
+        return $phoneNumber;
+    }
 }

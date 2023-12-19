@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 use Inertia\Response;
+use PHPUnit\TextUI\Help;
 
 class TransactionController extends Controller
 {
@@ -60,7 +61,7 @@ class TransactionController extends Controller
      *
      * @param Request $request
      * @param Transaction $transaction
-     * @return RedirectResponse|void
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response|void
      */
     public function update(Request $request, Transaction $transaction)
     {
@@ -111,7 +112,12 @@ class TransactionController extends Controller
                     Helper::sendNotification($user->device_token, $msg);
                 }
             }
-            return to_route('history.show', $transaction->order_id);
+
+//            dd(Helper::phoneFormat($user->phone));
+
+            $url = 'https://api.whatsapp.com/send?phone='.Helper::phoneFormat($user->phone).'&text=Deposit%20Rp%20'.$transaction->amount.'%20sudah%20diproses%20ya.%20Terima%20kasih';
+            return Inertia::location($url);
+//            return to_route('history.show', $transaction->order_id);
         }
 
 
