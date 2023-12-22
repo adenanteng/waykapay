@@ -166,9 +166,9 @@ const lists = [
                 </div>
             </div>
 
-            <template v-if="props.pulsa === undefined">
+            <div v-if="props.pulsa === undefined">
                 <Loading/>
-            </template>
+            </div>
 
             <div v-else class="grid sm:col-span-4 gap-5">
 <!--                <template v-for="list in lists">-->

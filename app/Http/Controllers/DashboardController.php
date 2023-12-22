@@ -23,7 +23,12 @@ class DashboardController extends Controller
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        dd(Transaction::where('user_id', auth()->user()->id)->latest()->paginate(5)->toArray());
         return Inertia::render('Dashboard', [
-            'history' => Inertia::lazy(fn () => Transaction::where('user_id', auth()->user()->id)->latest()->paginate(5)),
+            'history' => Inertia::lazy(fn () => Transaction::where(function($query)
+                        {
+                            $query->where('user_id', auth()->user()->id)
+                                ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id);
+                        })->latest()->paginate(5)),
+
             'carousel' => Inertia::lazy(fn () => Carousel::all()),
         ]);
     }

@@ -22,14 +22,10 @@ const props = defineProps({
 });
 
 const form = useForm({
-    user_id: props.users.id ?? null,
+    // user_id: props.users.id ?? null,
     order_id: props.customer.data.ref_id,
     customer_no: props.customer.data.customer_no,
-    product_name: props.customer.data.customer_name,
     sku: props.customer.data.buyer_sku_code,
-    admin: props.customer.data.admin,
-    price: props.customer.data.price,
-    selling_price: props.customer.data.selling_price,
     // category_id: 9,
 });
 
@@ -39,7 +35,7 @@ const storeInformation = () => {
         form.post(route('pin.topupPasca'), {
             errorBag: 'storeInformation',
             preserveScroll: true,
-            onSuccess: () => closeModal(),
+            // onSuccess: () => closeModal(),
             // onError: () => passwordInput.value.focus(),
             // onFinish: () => form.reset(),
         });
@@ -78,9 +74,12 @@ function sort(arr) {
             <PreviousButton />
         </template>
 
-        <FormSection class="sticky top-0 z-40">
+        <FormSection >
             <template #title>
-                {{ props.customer.data.buyer_sku_code.replaceAll("-", " ") }}
+                <span class="capitalize">
+                    {{ props.customer.data.buyer_sku_code.replaceAll("-", " ") }}
+                </span>
+
             </template>
 
             <template #description>
@@ -109,34 +108,52 @@ function sort(arr) {
                     </div>
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Lembar Tagihan"/>
-                    <div class="font-semibold text-gray-900">
-                        {{ props.customer.data.desc.lembar_tagihan }}
-                    </div>
-                </div>
+<!--                <div class="col-span-6 sm:col-span-3">-->
+<!--                    <InputLabel for="number" value="Lembar Tagihan"/>-->
+<!--                    <div class="font-semibold text-gray-900">-->
+<!--                        {{ props.customer.data.desc.lembar_tagihan }}-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="col-span-6 sm:col-span-3"
+                <div class="col-span-6 sm:col-span-3 space-y-5 py-5 border-y border-gray-600 border-dashed"
                      v-if="props.customer.data.desc?.detail"
                      v-for="(item, index) in props.customer.data.desc.detail"
                 >
-                    <InputLabel for="number" :value="'Periode ' + Number(index + 1)"/>
-                    <div class="font-semibold text-gray-900">
-                        {{ item.periode }}
+                    <div>
+                        <InputLabel for="number" :value="'Periode ' + Number(index + 1)"/>
+                        <div class="font-semibold text-gray-900">
+                            {{ item.periode }}
+                        </div>
                     </div>
+
+                    <div>
+                        <InputLabel for="number" value="Nilai Tagihan" v-if="item?.nilai_tagihan" />
+                        <div class="font-semibold text-gray-900">
+                            Rp {{ formatPrice(item.nilai_tagihan) }}
+                        </div>
+                    </div>
+
+                    <div>
+                        <InputLabel for="number" value="Denda" v-if="item?.denda" />
+                        <div class="font-semibold text-gray-900">
+                            Rp {{ formatPrice(item.denda) }}
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
-                    <InputLabel for="number" value="Harga"/>
-                    <div class="font-semibold text-gray-900">
-                        Rp {{ formatPrice(props.customer.data.price) }}
-                    </div>
-                </div>
+<!--                <div class="col-span-6 sm:col-span-3">-->
+<!--                    <InputLabel for="number" value="Harga"/>-->
+<!--                    <div class="font-semibold text-gray-900">-->
+<!--                        Rp {{ formatPrice(props.customer.data.price) }}-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <div class="col-span-6 sm:col-span-3">
                     <InputLabel for="number" value="Biaya Admin"/>
                     <div class="font-semibold text-gray-900">
-                        Rp {{ formatPrice(props.customer.data.admin) }}
+                        Rp {{ formatPrice(Number(props.customer.data.selling_price) - Number(props.customer.data.price)) }}
+<!--                        {{ formatPrice(props.customer.data.admin) }}-->
                     </div>
                 </div>
 

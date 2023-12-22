@@ -126,12 +126,7 @@ class ProductController extends Controller
                 'pin' => ['required'],
             ])->validateWithBag('storeInformation');
 
-//            dd('lewat');
-
             if (!Hash::check($request['pin'], auth()->user()->pin)) {
-//                session()->flash('flash.banner', 'Pin tidak valid');
-//                session()->flash('flash.bannerStyle', 'danger');
-//                dd('pin salah');
                 return to_route('pin.wrong');
             }
         }
@@ -161,6 +156,10 @@ class ProductController extends Controller
             case ('home-credit'):
             case ('mnc-finance'):
             case ('adira-finance'):
+            case ('bca-multifinance'):
+            case ('cimb-niaga-jcb'):
+            case ('mega-auto-finance'):
+            case ('sms-finance'):
                 $category_id = Transaction::PASCA_MULTIFINANCE;
                 break;
 
@@ -191,17 +190,18 @@ class ProductController extends Controller
 
             try {
                 $transaction = Transaction::create([
-                    'sku' => $request['sku'],
-                    'order_id' => $request['order_id'],
-                    'product_name' => $request['sku'].' '.$request['customer_name'],
-                    'customer_no' => $request['customer_no'],
+                    'sku' => $response->object()->data->buyer_sku_code,
+                    'order_id' => $response->object()->data->ref_id,
+                    'product_name' => $response->object()->data->buyer_sku_code.' '.$response->object()->data->customer_name,
+                    'customer_no' => $response->object()->data->customer_no,
                     'user_id' => auth()->user()->id,
                     'status_id' => Transaction::PENDING,
                     'category_id' => $category_id,
-                    'amount' => $request['price'],
-                    'gross_amount' => $request['selling_price'],
+                    'amount' => $response->object()->data->price,
+                    'gross_amount' => $response->object()->data->selling_price,
                     'last_amount' => $user->wallet_balance,
-                    'admin_fee' => $request['admin'],
+//                    'admin_fee' => $response->object()->data->admin,
+                    'admin_fee' => $response->object()->data->selling_price - $response->object()->data->price,
                     'desc' => $response->object()->data->sn ?? $response->object()->data->rc.' '.$response->object()->data->message,
                 ]);
 
@@ -326,7 +326,7 @@ class ProductController extends Controller
             ]);
         } else {
             $status = Http::post('https://api.digiflazz.com/v1/transaction', [
-            'commands' => 'status-pasca',
+                'commands' => 'status-pasca',
                 'username' => Helper::api()->digiflazz_username,
                 'buyer_sku_code' => $request['sku'],
                 'customer_no' => $request['customer_no'],

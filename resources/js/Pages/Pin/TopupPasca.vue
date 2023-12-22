@@ -11,17 +11,14 @@ import VOtpInput from "vue3-otp-input";
 import InputError from "../../Components/InputError.vue";
 
 const props = defineProps({
-    request: Object
+    customer: Object
 })
 
 const form = useForm({
     // user_id: props.request.users.id ?? null,
-    customer_no: props.request.customer_no,
-    product_name: props.request.product_name,
-    sku: props.request.sku,
-    amount: props.request.amount,
-    category_id: props.request.category_id,
-    fee: props.request.fee,
+    order_id: props.customer.data.ref_id,
+    customer_no: props.customer.data.customer_no,
+    sku: props.customer.data.sku,
     pin: null,
 });
 

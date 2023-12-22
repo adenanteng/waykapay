@@ -1,15 +1,11 @@
 <script setup>
 import {onUnmounted, ref} from "vue";
 import {Link} from '@inertiajs/vue3';
-import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
-import PreviousButton from "@/Components/PreviousButton.vue";
 import BlankLayout from "@/Layouts/BlankLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import Badge from "@/Components/Badge.vue";
 import {useForm} from "@inertiajs/vue3";
-import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
+import ApplicationLogoTitle from "@/Components/ApplicationLogoTitle.vue";
 // import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({

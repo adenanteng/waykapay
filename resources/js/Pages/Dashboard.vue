@@ -293,6 +293,9 @@ function greeting() {
                                                 {{ history.product_name }}
                                                 <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                                 <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                                <template v-else-if="history.offline_account">{{ history.offline_account.bank }}</template>
+                                                <template v-else-if="history.manual_account">{{ history.manual_account.bank }}</template>
+
                                                 <template v-else-if="history.money_transfer">
                                                     <template v-if="history.user_id == $page.props.user.id">
                                                         ke {{ history.money_transfer.to.name }}
