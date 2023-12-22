@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref, useSlots, watch} from 'vue';
+import {computed, onMounted, onUnmounted, ref, useSlots, watch} from 'vue';
 import {router, Head, Link} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -8,8 +8,6 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLinkAlt from '@/Components/NavLinkAlt.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
-import FlyoutMenu from "@/Components/FlyoutMenu.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
 
 import {
     Menu,
@@ -111,6 +109,8 @@ onMounted(() => {
 </script>
 
 <template>
+
+
     <div class="transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
         <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
@@ -122,7 +122,15 @@ onMounted(() => {
             <Banner />
         </div>
 
-        <div class="min-h-screen bg-white bg-glass bg-fixed object-cover" >
+        <div class="min-h-screen bg-white relative isolate" >
+            <div class="fixed inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+                <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[72.1875rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-100 sm:left-[calc(50%-30rem)]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+            </div>
+
+            <div class="fixed inset-x-0 -bottom-32 -z-10 transform-gpu overflow-hidden blur-3xl " aria-hidden="true">
+                <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[72.1875rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-100 sm:left-[calc(50%+36rem)]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+            </div>
+
 <!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
             <div class="" :class="hasPrevious ? '' : 'sticky sm:relative top-3 right-0 left-0 z-40' " ref="headRef">
                 <Popover as="header" class=""  v-slot="{ open }">

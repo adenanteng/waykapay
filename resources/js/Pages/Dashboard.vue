@@ -181,7 +181,7 @@ function greeting() {
 
         <div class="">
             <h3 class="text-gray-700 text-sm ml-3 mb-1">Prabayar</h3>
-            <div class="grid grid-cols-3 grid-rows-6 grid-flow-col rounded-3xl shadow-lg border border-gray-300">
+            <div class="grid grid-cols-3 grid-rows-6 grid-flow-col bg-white bg-opacity-50 backdrop-blur-2xl rounded-3xl shadow-lg border border-gray-300">
                 <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center border-b border-r border-gray-300">
                     <div class="text-center">
                         <i class="fa-regular fa-mobile text-5xl text-sky-600" />
@@ -229,7 +229,7 @@ function greeting() {
 
         <div class="">
             <h3 class="text-gray-700 text-sm ml-3 mb-1">Pascabayar</h3>
-            <div class="grid grid-cols-3 rounded-3xl shadow-lg border border-gray-300">
+            <div class="grid grid-cols-3 bg-white bg-opacity-50 backdrop-blur-2xl rounded-3xl shadow-lg border border-gray-300">
                 <Link :href="route('pasca.bpjs.index')" class="py-3 rounded-l-3xl flex justify-center items-center border-r border-gray-300">
                     <div class="text-center">
                         <i class="fa-regular fa-heart-pulse text-2xl text-green-600" />
