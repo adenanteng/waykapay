@@ -69,13 +69,13 @@ const onSlideChange = (swiper) => {
 
 function greeting() {
     if (moment().format('HH') < 10) {
-        return  "Selamat Pagi, jangan lupa sarapan ya.";
+        return  "Selamat pagi, jangan lupa sarapan ya.";
     } else if (moment().format('HH') < 15) {
-        return  "Selamat Siang, semangat ya beraktivitasnya.";
+        return  "Selamat siang, semangat ya beraktivitasnya.";
     } else if (moment().format('HH') < 19) {
-        return  "Selamat Sore, gimana? hari ini lancar?";
+        return  "Selamat sore, gimana? hari ini lancar?";
     } else {
-        return  "Selamat Malam, selamat beristirahat.";
+        return  "Selamat malam, selamat beristirahat.";
     }
 }
 

@@ -7,6 +7,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { VueClipboard } from '@soerenmartius/vue3-clipboard';
 import VueQrcode from '@chenfengyuan/vue-qrcode';
+import { MotionPlugin } from '@vueuse/motion';
 
 import {Ziggy} from "./ziggy";
 
@@ -18,7 +19,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue, Ziggy, VueClipboard, VueQrcode)
+            .use(ZiggyVue, Ziggy, VueClipboard, VueQrcode, MotionPlugin)
             .mount(el);
         // return createSSRApp({ render: () => h(App, props) })
         //     .use(plugin)
