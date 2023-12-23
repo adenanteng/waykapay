@@ -136,7 +136,7 @@ class DepositController extends Controller
 
             curl_close($curl);
 
-        dd($response);
+//        dd($response);
 
             if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
                 try {
