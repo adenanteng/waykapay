@@ -265,7 +265,7 @@ function greeting() {
             </div>
 
             <template v-if="props.history === undefined">
-                <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
+                <div class="animate-pulse rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl shadow-lg border border-gray-300 divide-y divide-gray-300">
                     <div v-for="loader in 5" class="px-4 py-4 sm:px-6">
                         <div class="flex items-center justify-between">
                             <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
