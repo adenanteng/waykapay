@@ -9,7 +9,7 @@ const hasTitle = computed(() => !! useSlots().title)
 </script>
 
 <template>
-    <div class="mb-5 sm:mt-0 backdrop-blur-2xl" :class="hasTitle ? 'md:grid md:grid-cols-4 md:gap-6' : '' ">
+    <div class="mb-5 sm:mt-0 " :class="hasTitle ? 'md:grid md:grid-cols-4 md:gap-6' : '' ">
         <SectionTitle v-if="hasTitle" class="pl-3">
             <template #title>
                 <slot name="title" />

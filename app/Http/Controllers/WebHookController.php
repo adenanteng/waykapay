@@ -54,7 +54,7 @@ class WebHookController extends Controller
 
             $transaction->update([
                 'status_id' => $status_id,
-                'desc' => $request['merchantOrderId'].' '.$request['payment_reff']
+                'desc'  =>  $request['merchantOrderId'].' '.$request['payment_reff']
             ]);
         }
 

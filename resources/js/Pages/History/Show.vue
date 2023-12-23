@@ -540,7 +540,7 @@ function formatPrice(value) {
                         target="_blank"
                         replace
                     >
-                        Kirim bukti Transfer
+                        Kirim bukti tf
                     </SecondaryButton>
 
                     <PrimaryButton
