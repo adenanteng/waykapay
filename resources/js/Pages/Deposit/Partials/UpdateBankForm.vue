@@ -10,7 +10,6 @@ import TextInput from '@/Components/TextInput.vue';
 import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { CheckCircleIcon } from '@heroicons/vue/20/solid'
 
-
 const props = defineProps({
     users: Object | String,
     response: Object | String,
