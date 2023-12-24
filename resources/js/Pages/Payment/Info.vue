@@ -43,7 +43,7 @@ function formatPrice(value) {
 </script>
 
 <template>
-    <BlankLayout :title="props.transaction.message" >
+    <BlankLayout :title="props.transaction?.message ?? 'Transaksi Gagal'" >
 
         <div class="pt-16 pb-12">
             <main class="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-6 lg:px-8">
@@ -59,9 +59,9 @@ function formatPrice(value) {
                         <div class="">
                             <div class="text-sm text-gray-900">
                                 <span class="class text-gray-600">
-                                    ({{ props.transaction.rc ?? 'null' }})
+                                    ({{ props.transaction?.rc ?? 'null' }})
                                 </span>
-                                {{ props.transaction.message ?? 'Transaksi Gagal' }}
+                                {{ props.transaction?.message ?? 'Transaksi Gagal' }}
                             </div>
                         </div>
 

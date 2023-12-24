@@ -136,9 +136,24 @@ class DepositController extends Controller
 
             curl_close($curl);
 
-//        dd($response);
-
             if (isset($response['status']) || isset($response['success']) && $httpCode == 200) {
+
+                if ($request['method']['id'] <= 6) {
+                    if ($response['code'][$sender_bank_type] == null) {
+                        return Inertia::render('Payment/Info', [
+//                            'transaction' => $response->object()->data,
+                        ]);
+                    }
+                } elseif ($request['method']['id'] == 13) {
+                    if ($response['response']['alfamart']['code'] == 'Tidak Tersedia') {
+                        return Inertia::render('Payment/Info', [
+//                            'transaction' => $response->object()->data,
+                        ]);
+                    }
+                }
+
+//                dd($response);
+
                 try {
                     $transaction = Transaction::create([
                         'sku' => '-',
