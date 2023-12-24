@@ -28,12 +28,12 @@ class WebHookController extends Controller
         if ($transaction->status_id != Transaction::SUCCESS) {
             switch($request['status']) {
                 case ('SUCCESS'):
-                    $user->deposit($request['amount']);
+                    $user->deposit($transaction->amount);
                     $status_id = Transaction::SUCCESS;
 
                     if ($user->device_token) {
                         $msg = [
-                            'title' => 'Deposit Rp '.$request['amount'].' berhasil!',
+                            'title' => 'Deposit Rp '.$transaction->amount.' berhasil!',
                             'body' => 'Lorem ipsum dolor sit amet',
                             'badge' => 1,
                             'sound' => 'ping.aiff'

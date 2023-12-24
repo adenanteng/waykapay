@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request as Req;
 use Inertia\Inertia;
 use Inertia\Response;
 use Psy\Util\Str;
@@ -68,139 +69,82 @@ class HistoryController extends Controller
 
 //        dd($transaction->toArray());
 
-        if ($transaction->category_id == Transaction::DEPOSIT) {
-            switch ($transaction->status_id) {
-                case (Transaction::SUCCESS):
-                case (Transaction::ERROR):
-//                    session()->flash('flash.banner', 'tidak ada proses!');
-                    break;
-                default:
-
-//                    $clientId = "BRN-0207-1696486292133";
-//                    $secretKey = "SK-tJPSFOkRG0WHG8PIuzso";
-//                    $requestId = $transaction->order_id;
-//                    $requestDate = Carbon::now('UTC')->toIso8601ZuluString();
-//                    $getUrl = 'https://api-sandbox.doku.com';
-//                    $targetPath = '/orders/v1/status/';
-//                    $url = $getUrl . $targetPath . $transaction->order_id;
+//        mulai aari sini
+//        if ($transaction->category_id == Transaction::DEPOSIT) {
+//            switch ($transaction->status_id) {
+//                case (Transaction::SUCCESS):
+//                case (Transaction::ERROR):
+////                    session()->flash('flash.banner', 'tidak ada proses!');
+//                    break;
+//                default:
+//            }
+//        } elseif ($transaction->category_id == Transaction::TRANSFER) {
 //
-//                    // Prepare signature component
-//                    $componentSignature = "Client-Id:".$clientId ."\n".
-//                        "Request-Id:".$requestId . "\n".
-//                        "Request-Timestamp:".$requestDate ."\n".
-//                        "Request-Target:".$targetPath;
+//        } else {
+//            switch ($transaction->status_id) {
+//                case (Transaction::SUCCESS):
+////                case (Transaction::ERROR):
+////                    session()->flash('flash.banner', 'tidak ada proses!');
+//                    break;
+//                default:
+//                    if ($transaction->category_id < 8) {
+//                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
+////                        'commands' => 'status-pasca',
+//                            'username' => Helper::api()->digiflazz_username,
+//                            'buyer_sku_code' => $transaction->sku,
+//                            'customer_no' => $transaction->customer_no,
+//                            'ref_id' => $transaction->order_id,
+//                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id)
+//                        ]);
+//                    } else {
+//                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
+//                            'commands' => 'status-pasca',
+//                            'username' => Helper::api()->digiflazz_username,
+//                            'buyer_sku_code' => $transaction->sku,
+//                            'customer_no' => $transaction->customer_no,
+//                            'ref_id' => $transaction->order_id,
+//                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id),
+//                        ]);
+//                    }
 //
-//                    // Generate signature
-//                    $signature = base64_encode(hash_hmac('sha256', $componentSignature, $secretKey, true));
 //
-//                    // Execute request
-//                    $ch = curl_init($url);
-////                    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestBody));
-//                    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-//                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+////                dd($response->object()->data);
 //
-//                    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-//                        'Content-Type: application/json',
-//                        'Client-Id:' . $clientId,
-//                        'Request-Id:' . $requestId,
-//                        'Request-Timestamp:' . $requestDate,
-//                        'Signature:' . "HMACSHA256=" . $signature,
-//                    ));
-//
-//                    // Set response json
-//                    $responseJson = curl_exec($ch);
-//                    $response = json_decode($responseJson);
-//                    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-//
-//                    curl_close($ch);
-//
-//                    dd($response);
-//
-//                    switch ($response->object()->data[0]->status) {
-//                        case('SUCCESSFUL'):
-//                            $status_id = Transaction::SUCCESS;
-//                            $user->deposit($transaction->amount);
+//                    switch ($response->object()->data->status) {
+//                        case ('Sukses'):
+//                            $transaction->update([
+//                                'status_id' => Transaction::SUCCESS,
+//                                'desc' => $response->object()->data->sn
+//                            ]);
+//                            $user->deposit($transaction->gross_amount);
 //                            break;
 //
-//                        case ('PENDING'):
-//                            $status_id = Transaction::PENDING;
-//                            break;
-//
-//                        case ('FAILED'):
-//                            $status_id = Transaction::ERROR;
+//                        case ('Pending'):
+//                            $transaction->update([
+//                                'status_id' => Transaction::PENDING,
+//                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
+//                            ]);
 //                            break;
 //
 //                        default:
-//                            $status_id = Transaction::UNDEFINED;
+//                            $transaction->update([
+//                                'status_id' => Transaction::ERROR,
+//                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
+//                            ]);
 //                    }
-//                    $transaction->update([
-//                        'status_id' => $status_id,
-//                    ]);
+//
+////                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
+//            }
+//        }
+//        sampe sini
 
-            }
-        } elseif ($transaction->category_id == Transaction::TRANSFER) {
-
-        } else {
-            switch ($transaction->status_id) {
-                case (Transaction::SUCCESS):
-//                case (Transaction::ERROR):
-//                    session()->flash('flash.banner', 'tidak ada proses!');
-                    break;
-                default:
-                    if ($transaction->category_id < 8) {
-                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
-//                        'commands' => 'status-pasca',
-                            'username' => Helper::api()->digiflazz_username,
-                            'buyer_sku_code' => $transaction->sku,
-                            'customer_no' => $transaction->customer_no,
-                            'ref_id' => $transaction->order_id,
-                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id)
-                        ]);
-                    } else {
-                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
-                            'commands' => 'status-pasca',
-                            'username' => Helper::api()->digiflazz_username,
-                            'buyer_sku_code' => $transaction->sku,
-                            'customer_no' => $transaction->customer_no,
-                            'ref_id' => $transaction->order_id,
-                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id),
-                        ]);
-                    }
-
-
-//                dd($response->object()->data);
-
-                    switch ($response->object()->data->status) {
-                        case ('Sukses'):
-                            $transaction->update([
-                                'status_id' => Transaction::SUCCESS,
-                                'desc' => $response->object()->data->sn
-                            ]);
-                            $user->deposit($transaction->gross_amount);
-                            break;
-
-                        case ('Pending'):
-                            $transaction->update([
-                                'status_id' => Transaction::PENDING,
-                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
-                            ]);
-                            break;
-
-                        default:
-                            $transaction->update([
-                                'status_id' => Transaction::ERROR,
-                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
-                            ]);
-                    }
-
-//                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
-            }
-        }
 
 //        dd($transaction->toArray());
 
         return Inertia::render('History/Show', [
             'history' => $transaction,
+//            'goBack' => (boolean)Req::input('goBack'),
+//            'goSuccess' => (boolean)Req::input('goSuccess')
         ]);
     }
 }

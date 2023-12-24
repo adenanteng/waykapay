@@ -1,12 +1,12 @@
 <script setup>
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
 import moment from "moment";
 import PreviousButton from "@/Components/PreviousButton.vue"
 import Badge from "../../Components/Badge.vue";
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
 import Popper from "vue3-popper";
-import {Link, useForm, usePage} from "@inertiajs/vue3";
+import {Link, router, useForm, usePage} from "@inertiajs/vue3";
 import VueQrcode from "@chenfengyuan/vue-qrcode";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import InputLabel from "@/Components/InputLabel.vue";
@@ -75,8 +75,27 @@ const validate = () => {
 
 const timerSuccess = ref(props.goSuccess)
 
+const handleClick = () => {
+    // timerSuccess.value=false
+    router.visit(route("history.show", props.history.order_id), {
+        method: "get",
+        // data: {
+        //     goBack: false,
+        //     goSuccess: false
+        // },
+    });
+};
+
+const lala = setTimeout(() => handleClick(), 5000);
+
 onMounted(() => {
-    setTimeout(() => timerSuccess.value=false, 5000);
+    if (props.goSuccess) {
+        lala
+    }
+})
+
+onUnmounted(() => {
+    clearTimeout(lala)
 })
 
 const commission = ref(null)
@@ -130,7 +149,7 @@ function formatPrice(value) {
                             <p class="text-gray-500 text-sm">Kamu akan dialihkan dalam 5 detik</p>
 
                             <div class="mt-5 gap-x-2">
-                                <PrimaryButton @click="timerSuccess=false" >
+                                <PrimaryButton as="a" :href="route('history.show', props.history.order_id)" >
                                     Lihat Transaksi
                                 </PrimaryButton>
 

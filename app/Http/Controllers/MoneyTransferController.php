@@ -124,7 +124,12 @@ class MoneyTransferController extends Controller
             'goSuccess' => true
         ]);
 
-//        return to_route('history.show', $transaction->order_id);
+//        $transaction->goBack = false;
+//        $transaction->goSuccess = true;
+//
+//        return to_route('history.show', [
+//            $transaction->order_id
+//        ]);
     }
 
     public function test()

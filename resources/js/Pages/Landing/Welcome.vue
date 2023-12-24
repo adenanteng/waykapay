@@ -300,14 +300,16 @@ const footerNavigation = {
                             <div>
                                 <div>
                                   <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">
-                                      <i class="fa-regular fa-inbox text-xl text-white nightwind-prevent" />
+                                      <i class="fa-regular fa-wallet text-xl text-white nightwind-prevent" />
                                   </span>
                                 </div>
                                 <div class="mt-6">
-                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Stay on top of customer support</h2>
-                                    <p class="mt-4 text-lg text-gray-500">Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum malesuada faucibus lacinia porttitor. Pulvinar laoreet sagittis viverra duis. In venenatis sem arcu pretium pharetra at. Lectus viverra dui tellus ornare pharetra.</p>
+                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Seperti dompetmu, tapi lebih canggih</h2>
+                                    <p class="mt-4 text-lg text-gray-500">
+                                        Waykapay bikin kamu lebih mudah untuk akses semua kebutuhan transaksi dan mulai berinvestasi.
+                                    </p>
                                     <div class="mt-6">
-                                        <PrimaryButton>Get started</PrimaryButton>
+<!--                                        <PrimaryButton>Get started</PrimaryButton>-->
                                    </div>
                                 </div>
                             </div>
@@ -340,14 +342,16 @@ const footerNavigation = {
                             <div>
                                 <div>
                                   <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">
-                                      <i class="fa-regular fa-inbox text-xl text-white nightwind-prevent" />
+                                      <i class="fa-regular fa-shield-check text-xl text-white nightwind-prevent" />
                                   </span>
                                 </div>
                                 <div class="mt-6">
-                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Better understand your customers</h2>
-                                    <p class="mt-4 text-lg text-gray-500">Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum malesuada faucibus lacinia porttitor. Pulvinar laoreet sagittis viverra duis. In venenatis sem arcu pretium pharetra at. Lectus viverra dui tellus ornare pharetra.</p>
+                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Perlindungan dengan Waykapay Protection</h2>
+                                    <p class="mt-4 text-lg text-gray-500">
+                                        Dengan standar keamanan PCI DSS & ISO 27001, Waykapay mengamankan data pembayaran dan informasi milikmu. Garansi berlaku saat ada kehilangan uang di Saldo Waykapay & sumber uang lainnya yang tersimpan di Waykapay.
+                                    </p>
                                     <div class="mt-6">
-                                        <PrimaryButton>Get started</PrimaryButton>
+<!--                                        <PrimaryButton>Get started</PrimaryButton>-->
                                     </div>
                                 </div>
                             </div>
