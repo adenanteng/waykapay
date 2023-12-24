@@ -99,7 +99,7 @@ class DepositController extends Controller
                         'phoneNumber' => $user->phone,
                         'bank' => $bank,
                         'returnUrl' => 'https://waykapay.com',
-                        'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                        'callbackUrl' => 'https://waykapay.com/webhook-oke-connect?order='.$merchantOrderId,
                         'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
                     ),
                 ));
@@ -123,7 +123,7 @@ class DepositController extends Controller
                         'phoneNumber' => $user->phone,
                         'channel' => $bank,
                         'returnUrl' => 'https://waykapay.com',
-                        'callbackUrl' => 'https://waykapay.com/webhook-oke-connect',
+                        'callbackUrl' => 'https://waykapay.com/webhook-oke-connect?order='.$merchantOrderId,
                         'signature' => md5($merchantCode . $merchantOrderId . $grossAmount . $mKey)
                     ),
                 ));
@@ -142,7 +142,6 @@ class DepositController extends Controller
                 try {
                     $transaction = Transaction::create([
                         'sku' => '-',
-//                'order_id' => $merchantOrderId,
                         'order_id' => $merchantOrderId,
                         'product_name' => 'Deposit',
                         'customer_no' => '-',
@@ -153,7 +152,7 @@ class DepositController extends Controller
                         'gross_amount' => $grossAmount,
                         'last_amount' => $user->wallet_balance,
                         'admin_fee' => $admin_fee,
-                        'desc' => isset($response['id']) ?? isset($response['deposit_id'])
+                        'desc' => ''
                     ]);
 
                     if ($request['method']['id'] <= 6) {

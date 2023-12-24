@@ -210,7 +210,7 @@ const footerNavigation = {
 
         <main>
             <!-- Hero section -->
-            <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
+            <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40" >
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto"  >
 
                     <div class="flex">
@@ -249,6 +249,7 @@ const footerNavigation = {
                     </div>
                 </div>
                 <div class="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0 lg:flex-grow" >
+
                     <svg viewBox="0 0 366 729" role="img" class="mx-auto w-[22.875rem] max-w-full drop-shadow-xl" >
                         <title>App screenshot</title>
                         <defs>
@@ -262,6 +263,7 @@ const footerNavigation = {
                             <img src="/img/landing/dashboard-dark.png" alt="" />
                         </foreignObject>
                     </svg>
+
                 </div>
             </div>
 
