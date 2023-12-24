@@ -143,7 +143,7 @@ const clock = moment().format('HH')
                 Sistem cut off.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.account_no === ''  || clock>=23">
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.account_no === ''  ">
                 Lanjutkan
             </PrimaryButton>
         </template>
