@@ -139,12 +139,12 @@ class HistoryController extends Controller
 //        sampe sini
 
 
-//        dd($transaction->toArray());
+//        dd((boolean)Req::input('goBack'));
 
         return Inertia::render('History/Show', [
             'history' => $transaction,
-//            'goBack' => (boolean)Req::input('goBack'),
-//            'goSuccess' => (boolean)Req::input('goSuccess')
+//            'goBack' => (boolean)Req::input('goBack') ?? true,
+//            'goSuccess' => (boolean)Req::input('goSuccess') ?? false
         ]);
     }
 }

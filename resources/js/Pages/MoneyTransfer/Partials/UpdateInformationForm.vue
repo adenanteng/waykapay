@@ -7,8 +7,8 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import ActionSection from "../../../Components/ActionSection.vue";
-import TextAreaInput from "../../../Components/TextAreaInput.vue";
+import ActionSection from "@/Components/ActionSection.vue";
+import TextAreaInput from "@/Components/TextAreaInput.vue";
 
 const props = defineProps({
     users: Object | String,

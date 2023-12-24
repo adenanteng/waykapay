@@ -96,6 +96,10 @@ class MoneyTransferController extends Controller
             'status_id' => Transaction::SUCCESS
         ]);
 
+        $transaction = Transaction::where('order_id', $transaction->order_id)->first();
+
+//        dd($transaction->toArray());
+
         if (auth()->user()->device_token) {
             $msg = [
                 'title' => 'Kirim uang ke '.$to->name.' berhasil!',

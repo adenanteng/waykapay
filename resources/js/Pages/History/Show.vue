@@ -75,27 +75,18 @@ const validate = () => {
 
 const timerSuccess = ref(props.goSuccess)
 
-const handleClick = () => {
-    // timerSuccess.value=false
-    router.visit(route("history.show", props.history.order_id), {
-        method: "get",
-        // data: {
-        //     goBack: false,
-        //     goSuccess: false
-        // },
-    });
-};
-
-const lala = setTimeout(() => handleClick(), 5000);
+// const lala = setTimeout(() => handleClick(), 5000);
 
 onMounted(() => {
-    if (props.goSuccess) {
-        lala
+    if (timerSuccess.value) {
+        console.log('anjir')
+        // lala
+        setTimeout(() => timerSuccess.value = false, 5000)
     }
 })
 
 onUnmounted(() => {
-    clearTimeout(lala)
+    // clearTimeout(lala)
 })
 
 const commission = ref(null)
