@@ -19,7 +19,7 @@ class WebHookController extends Controller
     public function webhookHandlerOkeConnect(Request $request){
 //        dd(Req::input('order'));
 //        dd($request->all());
-//        Log::debug($request);
+        Log::debug($request);
 
         $transaction = Transaction::where('order_id', Req::input('order'))->first();
         $user = User::where('id', $transaction['user_id'])->first();
