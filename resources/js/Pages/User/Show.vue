@@ -166,7 +166,7 @@ function formatPrice(value) {
                                 <div class="flex justify-between">
                                     <div class="flex">
                                         <p class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
+                                            {{ history.category_id == 1 || history.user_id != props.users.id ? '+' : '-' }}
                                             Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
                                         </p>
                                     </div>
