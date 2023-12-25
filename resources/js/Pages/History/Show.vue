@@ -33,7 +33,8 @@ const props = defineProps({
 
 const form = useForm({
     agent_commission: null,
-    valid: null
+    valid: null,
+    valid_amount: null
 });
 
 const {...userInfo} = computed(() => usePage().props.user).value;
@@ -51,8 +52,9 @@ const storeInformation = () => {
 };
 
 const validate = () => {
+    form.valid = props.history.order_id
+    form.valid_amount = amount.value.replaceAll(".", "")
     if (userInfo.pin) {
-        form.valid = props.history.order_id
         form.post(route('pin.manualTransfer'), {
             errorBag: 'storeInformation',
             preserveScroll: true,
@@ -62,7 +64,6 @@ const validate = () => {
             }
         });
     } else {
-        form.valid = props.history.order_id
         form.patch(route('transaction.update', props.history), {
             errorBag: 'storeInformation',
             preserveScroll: true,
@@ -93,6 +94,17 @@ const commission = ref(null)
 
 watch(commission, (newAmount) => {
     commission.value = newAmount.toString()
+        .replace(/\D/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    // console.log(amount.value)
+})
+
+const amount = ref(props.history.gross_amount.toString()
+    .replace(/\D/g, '')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.'))
+
+watch(amount, (newAmount) => {
+    amount.value = newAmount.toString()
         .replace(/\D/g, '')
         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     // console.log(amount.value)
@@ -553,14 +565,43 @@ function formatPrice(value) {
                         Kirim bukti tf
                     </SecondaryButton>
 
-                    <PrimaryButton
-                        class="w-full justify-center"
-                        @click="validate"
-                        v-if="$page.props.user.role_id==1"
-                    >
-                        <i class="fa-regular fa-paper-plane mr-2" />
-                        Validasi
-                    </PrimaryButton>
+                    <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300" v-if="$page.props.user.role_id==1">
+                        <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
+                            <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Validasi</h3>
+                        </div>
+                        <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
+                            <form @submit.prevent="validate">
+                                <div class="grid grid-cols-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <InputLabel for="amount" value="Jumlah Validasi"/>
+                                        <div class="flex">
+                                        <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                                            Rp
+                                        </span>
+                                            <TextInput
+                                                id="amount"
+                                                v-model="amount"
+                                                type="tel"
+                                                class="mt-1 block w-full rounded-l-none"
+                                            />
+                                        </div>
+                                        <InputError :message="form.errors.valid_amount || message" class="mt-2"/>
+                                    </div>
+
+                                    <div class="col-span-6 mt-3 flex justify-between items-center">
+                                        <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                                            Berhasil disimpan.
+                                        </ActionMessage>
+
+                                        <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                            Validasi
+                                        </PrimaryButton>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </template>
 

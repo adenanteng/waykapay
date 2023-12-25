@@ -18,12 +18,14 @@ const props = defineProps({
 const form = useForm({
     agent_commission: null,
     valid: null,
+    valid_amount: null,
     pin: null,
 });
 
 const storeInformation = () => {
     form.pin = bindModal.value
     form.valid = props.history.order_id
+    form.valid_amount = props.request.valid_amount
     form.patch(route('transaction.update', props.history), {
         errorBag: 'storeInformation',
         preserveScroll: true,

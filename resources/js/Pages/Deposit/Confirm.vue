@@ -195,7 +195,7 @@ function formattedDateTime(value) {
                             <div class="text-sm ">Nominal</div>
                             <div class="text-sm font-semibold ">Rp {{ formatPrice(props.transaction.amount) }}</div>
                         </div>
-                        <div class="sm:col-span-1 flex sm:block justify-between">
+                        <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.manual_account">
                             <div class="text-sm ">Kode Unik</div>
                             <div class="text-sm font-semibold ">{{ Number(props.transaction.gross_amount) - Number(props.transaction.amount) }}</div>
                         </div>

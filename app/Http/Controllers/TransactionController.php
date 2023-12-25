@@ -94,13 +94,16 @@ class TransactionController extends Controller
             $user = User::where('id', $transaction['user_id'])->first();
 
             if ($transaction->status_id != Transaction::SUCCESS) {
-                $user->deposit($transaction->amount);
                 $unique = $transaction->gross_amount - $transaction->amount;
+                $amount = $request['valid_amount'] - $unique;
                 $transaction->update([
-                    'amount' => $transaction->amount + $unique,
-//                    'gross_amount' => $transaction->gross_amount - $unique,
+                    'admin_fee' => $unique,
+                    'amount' => $amount,
+                    'gross_amount' => $request['valid_amount'],
                     'status_id' => Transaction::SUCCESS,
                 ]);
+
+                $user->deposit($amount);
 
                 if ($user->device_token) {
                     $msg = [
@@ -118,6 +121,8 @@ class TransactionController extends Controller
             $url = 'https://api.whatsapp.com/send?phone='.Helper::phoneFormat($user->phone).'&text=Deposit%20Rp%20'.$transaction->amount.'%20sudah%20diproses%20ya.%20Terima%20kasih';
             return Inertia::location($url);
 //            return to_route('history.show', $transaction->order_id);
+        } else {
+            dd('something error!');
         }
 
 

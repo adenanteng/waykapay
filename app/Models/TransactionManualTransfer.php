@@ -38,6 +38,7 @@ class TransactionManualTransfer extends Model
     const INDOMARET = 14;
     const MANUAL_BCA = 15;
     const MANUAL_BRI = 16;
+    const AGENT = 20;
     const BANK = [
         self::BCA => 'BCA',
         self::BNI => 'BNI',
@@ -53,7 +54,8 @@ class TransactionManualTransfer extends Model
         self::ALFAMART => 'Alfamart',
         self::INDOMARET => 'Indomaret',
         self::MANUAL_BCA => 'Transfer BCA',
-        self::MANUAL_BRI => 'Transfer BRI'
+        self::MANUAL_BRI => 'Transfer BRI',
+        self::AGENT => 'Agen Waykapay'
     ];
 
     protected $appends = [

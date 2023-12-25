@@ -59,9 +59,13 @@ const mailingLists = [
     // { id: 16, name: 'transfer bri', logo: '/img/vendor/ALFAMART.svg', adminFee: 'Biaya admin Rp 4.000' },
 ]
 
-const manualTransfer = [
-    // { id: 15, name: 'bca', logo: '/img/vendor/BCA.svg', adminFee: 'Biaya admin Rp 4.000' },
-    { id: 16, name: 'bri', logo: '/img/vendor/BRI.svg', adminFee: 'Bebas biaya admin' },
+const category = ref()
+
+const categoryLists = [
+    { id: 1, name: 'Virtual Account', logo: '/img/vendor/BCA.svg', icon: 'fa-wallet', desc: 4000, disabled: false },
+    { id: 2, name: 'Manual Transfer', logo: '/img/vendor/WAYKAPAY.svg', icon: 'fa-bank', desc: 0, disabled: false },
+    { id: 3, name: 'Retail Offline', logo: '/img/vendor/WAYKAPAY.svg', icon: 'fa-bank', desc: 0, disabled: false },
+    // { id: 4, name: 'Agen Waykapay', logo: '/img/vendor/WAYKAPAY.svg', icon: 'fa-bank', desc: 0, disabled: false },
 ]
 
 const virtualAccount = [
@@ -73,8 +77,17 @@ const virtualAccount = [
     { id: 6, name: 'bsi', logo: '/img/vendor/BSI.svg', adminFee: 'Biaya admin Rp3.000' },
 ]
 
-const offline = [
+const offlineAccount = [
     { id: 13, name: 'alfamart', logo: '/img/vendor/ALFAMART.svg', adminFee: 'Biaya admin Rp4.000' },
+]
+
+const manualTransfer = [
+    // { id: 15, name: 'bca', logo: '/img/vendor/BCA.svg', adminFee: 'Biaya admin Rp 4.000' },
+    { id: 16, name: 'bri', logo: '/img/vendor/BRI.svg', adminFee: 'Bebas biaya admin' },
+]
+
+const codAccount = [
+    { id: 20, name: 'waykapay', logo: '/img/vendor/WAYKAPAY.svg', adminFee: 'Bebas biaya admin' },
 ]
 
 function formatPrice(value) {
@@ -114,7 +127,7 @@ const amount = formatPrice(props.amount)
         </template>
     </FormSection>
 
-    <FormSection @submitted="storeInformation">
+    <FormSection>
         <template #title>
             Pilih metode pembayaranmu.
         </template>
@@ -125,11 +138,50 @@ const amount = formatPrice(props.amount)
 
         <template #form>
             <div class="col-span-6">
-<!--                <InputLabel for="amount" value="Jumlah Saldo"/>-->
+                <RadioGroup >
+                    <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
+                        <RadioGroupOption
+                            @click="category=item.id; form.method=null"
+                            as="template"
+                            v-for="item in categoryLists"
+                            :key="item.id"
+                            :value="item"
+                            v-slot="{ checked, active }"
+                            :disabled="item.disabled"
+                            :class="item.disabled ? 'bg-gray-200 opacity-75' : '' "
+                        >
+                            <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-primary-500' : '', 'relative flex py-4 px-2 cursor-pointer rounded-3xl border shadow-sm focus:outline-none']">
+                                <div class="flex flex-1 justify-center items-center h-full">
+                                    <div class="inline-flex items-center">
+                                        <!--                                    <img :src="item.logo" class="h-7" alt=""/>-->
+                                        <i class="fa-duotone text-primary-600 text-lg mr-2" :class="item.icon" />
+                                        <RadioGroupDescription as="span" class="flex text-sm font-medium text-gray-900">{{ item.name }}</RadioGroupDescription>
+                                    </div>
+                                </div>
+                                <CheckCircleIcon :class="[!checked ? 'invisible' : '', 'h-5 w-5 text-primary-600']" aria-hidden="true" />
+                                <span :class="[active ? 'border' : 'border-2', checked ? 'border-primary-500' : 'border-transparent', 'pointer-events-none absolute -inset-px rounded-3xl']" aria-hidden="true" />
+                            </div>
+                        </RadioGroupOption>
+                    </div>
+                </RadioGroup>
+            </div>
+        </template>
+    </FormSection>
 
+
+    <FormSection @submitted="storeInformation" v-if="category==1">
+        <template #title>
+            Virtual Account
+        </template>
+
+        <template #description>
+
+        </template>
+
+        <template #form>
+            <div class="col-span-6">
                 <RadioGroup v-model="form.method">
                     <div class="">
-                        <InputLabel value="Virtual Account"/>
                         <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
                             <RadioGroupOption as="template" v-for="mailingList in virtualAccount" :key="mailingList.id" :value="mailingList" v-slot="{ checked, active }">
                                 <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-primary-500' : '', 'relative flex cursor-pointer rounded-3xl border p-4 shadow-sm focus:outline-none']">
@@ -145,9 +197,37 @@ const amount = formatPrice(props.amount)
                             </RadioGroupOption>
                         </div>
                     </div>
+                </RadioGroup>
 
-                    <div class="mt-5">
-                        <InputLabel value="Manual Transfer" />
+                <InputError :message="form.errors.method" class="mt-2"/>
+            </div>
+
+        </template>
+
+        <template #actions>
+            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                Berhasil disimpan.
+            </ActionMessage>
+
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.method === null ">
+                Konfirmasi
+            </PrimaryButton>
+        </template>
+    </FormSection>
+
+    <FormSection @submitted="storeInformation" v-if="category==2">
+        <template #title>
+            Manual Transfer
+        </template>
+
+        <template #description>
+
+        </template>
+
+        <template #form>
+            <div class="col-span-6">
+                <RadioGroup v-model="form.method">
+                    <div class="">
                         <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
                             <RadioGroupOption as="template" v-for="mailingList in manualTransfer" :key="mailingList.id" :value="mailingList" v-slot="{ checked, active }">
                                 <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-primary-500' : '', 'relative flex cursor-pointer rounded-3xl border p-4 shadow-sm focus:outline-none']">
@@ -163,11 +243,39 @@ const amount = formatPrice(props.amount)
                             </RadioGroupOption>
                         </div>
                     </div>
+                </RadioGroup>
 
-                    <div class="mt-5">
-                        <InputLabel value="Retail" />
+                <InputError :message="form.errors.method" class="mt-2"/>
+            </div>
+
+        </template>
+
+        <template #actions>
+            <ActionMessage :on="form.recentlySuccessful" class="mr-3">
+                Berhasil disimpan.
+            </ActionMessage>
+
+            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.method === null ">
+                Konfirmasi
+            </PrimaryButton>
+        </template>
+    </FormSection>
+
+    <FormSection @submitted="storeInformation" v-if="category==3">
+        <template #title>
+            Retail Offline
+        </template>
+
+        <template #description>
+
+        </template>
+
+        <template #form>
+            <div class="col-span-6">
+                <RadioGroup v-model="form.method">
+                    <div class="">
                         <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
-                            <RadioGroupOption as="template" v-for="mailingList in offline" :key="mailingList.id" :value="mailingList" v-slot="{ checked, active }">
+                            <RadioGroupOption as="template" v-for="mailingList in offlineAccount" :key="mailingList.id" :value="mailingList" v-slot="{ checked, active }">
                                 <div :class="[checked ? 'border-transparent' : 'border-gray-300', active ? 'border-primary-500 ring-2 ring-primary-500' : '', 'relative flex cursor-pointer rounded-3xl border p-4 shadow-sm focus:outline-none']">
                                     <div class="flex flex-1 justify-center">
                                         <div class="flex flex-col items-center">
@@ -181,7 +289,6 @@ const amount = formatPrice(props.amount)
                             </RadioGroupOption>
                         </div>
                     </div>
-
                 </RadioGroup>
 
                 <InputError :message="form.errors.method" class="mt-2"/>
