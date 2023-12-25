@@ -212,11 +212,12 @@ function formatPrice(value) {
 <!--        </template>-->
 
         <div class="">
-            <template v-for="(date, index) in props.transaction">
-                <h3 class="text-sm text-gray-500 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>
+<!--            <template v-for="(date, index) in props.transaction.items">-->
+<!--                <h3 class="text-sm text-gray-500 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>-->
+
                 <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                        <template v-for="history in date" :key="history.id">
+                        <template v-for="history in props.transaction.data" :key="history.id">
                             <li>
                                 <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                                     <div class="px-4 py-4 sm:px-6">
@@ -268,11 +269,10 @@ function formatPrice(value) {
                     </ul>
                 </div>
 
-            </template>
+<!--            </template>-->
         </div>
 
-
-<!--        <Pagination :pagination="props.transaction" />-->
+        <Pagination :pagination="props.transaction" />
 
 <!--        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >-->
 <!--            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >-->

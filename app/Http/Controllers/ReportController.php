@@ -37,12 +37,12 @@ class ReportController extends Controller
                 ->when(Req::input('date_end'), function ($query, $date_end) {
                     $query->whereDate('created_at', '<=', $date_end);
                 })
-//                ->paginate(8)
+                ->paginate(8),
 //                ->withQueryString()
-                ->get()
-                ->groupBy(function ($val) {
-                    return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
-                }),
+//                ->get()
+//                ->groupBy(function ($val) {
+//                    return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
+//                }),
 
             'gross_amount' => $trx->sum('gross_amount'),
             'agent_commission' => $trx->sum('agent_commission'),

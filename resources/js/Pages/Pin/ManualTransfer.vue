@@ -31,9 +31,14 @@ const storeInformation = () => {
         preserveScroll: true,
         replace: true,
         onSuccess: () => {
-
+            // router.get(route('history.show', props.history.order_id, {
+            //    replace: true
+            // }))
         }
     });
+
+    // router.get(route('history.show', props.history.order_id))
+
 };
 
 const formReset = () => {
