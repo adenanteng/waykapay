@@ -114,17 +114,15 @@ class TransactionController extends Controller
                     ];
                     Helper::sendNotification($user->device_token, $msg);
                 }
+
+                $url = 'https://api.whatsapp.com/send?phone='.Helper::phoneFormat($user->phone).'&text=Deposit%20Rp%20'.$transaction->amount.'%20sudah%20diproses%20ya.%20Terima%20kasih';
+                return Inertia::location($url);
             }
-
 //            dd(Helper::phoneFormat($user->phone));
-
-            $url = 'https://api.whatsapp.com/send?phone='.Helper::phoneFormat($user->phone).'&text=Deposit%20Rp%20'.$transaction->amount.'%20sudah%20diproses%20ya.%20Terima%20kasih';
-            return Inertia::location($url);
 //            return to_route('history.show', $transaction->order_id);
         } else {
             dd('something error!');
         }
-
 
 //        return Redirect::route('user.index');
     }
