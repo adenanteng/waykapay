@@ -377,8 +377,8 @@ function formatPrice(value) {
                 </div>
 
                 <div class="">
+<!--                    v-if="!props.goBack" -->
                     <SecondaryButton
-                        v-if="!props.goBack"
                         as="a"
                         :href="route('dashboard')"
                         class="justify-center w-full border border-gray-300 nightwind-prevent"
