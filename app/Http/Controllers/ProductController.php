@@ -50,6 +50,10 @@ class ProductController extends Controller
 //        dd($request->all());
         $order_id = strtolower(Str::random(8));
 
+        if (auth()->user()->wallet_balance <= $gross_amount) {
+            dd('Saldo kurang');
+        }
+
         $response = Http::post('https://api.digiflazz.com/v1/transaction', [
             'username' => Helper::api()->digiflazz_username,
             'buyer_sku_code' => $request['sku'],
@@ -129,6 +133,10 @@ class ProductController extends Controller
             if (!Hash::check($request['pin'], auth()->user()->pin)) {
                 return to_route('pin.wrong');
             }
+        }
+
+        if (auth()->user()->wallet_balance <= $request['selling_price']) {
+            dd('Saldo kurang');
         }
 
         switch($request['sku']) {

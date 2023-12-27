@@ -26,6 +26,7 @@ const form = useForm({
     order_id: props.customer.data.ref_id,
     customer_no: props.customer.data.customer_no,
     sku: props.customer.data.buyer_sku_code,
+    selling_price: props.customer.data.selling_price,
     // category_id: 9,
 });
 

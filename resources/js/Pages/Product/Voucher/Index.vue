@@ -75,6 +75,30 @@ const form = useForm({
                     </div>
                 </div>
             </li>
+            <li class="relative">
+                <Link :href="route('voucher.show', 'INDOMARET')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/vendor/M-Tix.svg" alt="" class="w-20">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">M-TIX</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup saldo M-TIX</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('voucher.show', 'M-Tix')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/vendor/M-Tix.svg" alt="" class="w-20">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">M-TIX</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup saldo M-TIX</p>
+                    </div>
+                </div>
+            </li>
         </ul>
 
 <!--        <ul role="list" class="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-4 sm:gap-x-6 lg:grid-cols-6 xl:gap-x-8">-->

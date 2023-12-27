@@ -198,23 +198,19 @@ const tab = ref('Umum')
                 <Loading />
             </template>
 
-<!--            <template v-else-if="props.response.data.rc==83">-->
-<!--                <div class="grid justify-center">-->
-<!--                    <Vue3Lottie-->
-<!--                        animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"-->
-<!--                        :height="200"-->
-<!--                        :width="200"-->
-<!--                    />-->
-<!--                    <span class="text-sm text-gray-600 text-center">Ada yang salah, coba beberapa saat lagi.</span>-->
-<!--                </div>-->
-<!--            </template>-->
+            <template v-else-if="props.response.data?.rc">
+                <div class="grid justify-center text-center px-5 py-3">
+                    <i class="fa-regular fa-exclamation-triangle text-2xl text-red-600" />
+                    <p class="text-sm text-gray-600">Produk sedang tidak tersedia, coba beberapa saat lagi.</p>
+                </div>
+            </template>
 
             <template v-else v-for="data in sort(props.response.data)" >
                 <template v-if="data.brand == props.product">
                     <template v-if="data.type == tab">
                         <li class="relative px-6 py-5 flex items-center space-x-3">
                             <div class="flex-shrink-0">
-                                <img class="w-10" :src="'/img/games/icons/' + props.product + '.png'" alt="">
+                                <img class="h-10" :src="'/img/games/' + props.product + '.png'" alt="">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo) && data.buyer_product_status && data.seller_product_status">

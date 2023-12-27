@@ -30,7 +30,7 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('games.show', 'GOOGLE PLAY INDONESIA')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/GOOGLE%20PLAY%20INDONESIA.png" alt="" class="w-20">
+                    <img src="/img/games/GOOGLE%20PLAY%20INDONESIA.png" alt="" class="h-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Google Play</h3>
@@ -42,7 +42,7 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('games.show', 'Steam Wallet (IDR)')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/Steam%20Wallet%20(IDR).svg" alt="" class="w-20">
+                    <img src="/img/games/Steam%20Wallet%20(IDR).png" alt="" class="h-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Steam</h3>
@@ -54,7 +54,7 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('games.show', 'PUBG MOBILE')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/PUBG%20MOBILE.png" alt="" class="w-20">
+                    <img src="/img/games/PUBG%20MOBILE.png" alt="" class="h-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">PUBG Mobile</h3>
@@ -66,12 +66,48 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('games.show', 'MOBILE LEGENDS')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/MOBILE%20LEGENDS.png" alt="" class="w-20">
+                    <img src="/img/games/MOBILE%20LEGENDS.png" alt="" class="h-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Mobile Legends</h3>
                         </div>
                         <p class="text-sm text-gray-500">Topup Mobile Legends</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('games.show', 'HAGO')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/games/HAGO.png" alt="" class="h-10">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">HAGO</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup HAGO</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('games.show', 'FC Mobile')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/games/FC%20Mobile.png" alt="" class="h-10">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">FC Mobile</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup FC Mobile</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('games.show', 'Valorant')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/games/Valorant.png" alt="" class="h-10">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">Valorant</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup Valorant</p>
                     </div>
                 </div>
             </li>

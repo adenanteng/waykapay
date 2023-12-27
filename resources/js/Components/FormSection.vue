@@ -24,7 +24,7 @@ const hasTitle = computed(() => !! useSlots().title)
             <form @submit.prevent="$emit('submitted')">
                 <div
                     class="px-4 py-5 bg-white bg-opacity-50 sm:p-6 shadow-lg border border-gray-300"
-                    :class="hasActions ? 'rounded-tl-3xl rounded-tr-3xl' : 'rounded-3xl'"
+                    :class="hasActions ? 'rounded-tl-3xl rounded-tr-3xl' : 'rounded-3xl backdrop-blur-sm'"
                 >
                     <div class="grid grid-cols-6 gap-6">
                         <slot name="form" />

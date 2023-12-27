@@ -292,6 +292,14 @@ const tabData = ref('Umum')
                 >
                     Internet Sakti
                 </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tabData=='Xtra Combo Mini' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tabData='Xtra Combo Mini'"
+                        v-if="provider(form.customer_no) == 'XL' "
+                >
+                    Xtra Combo Mini
+                </button>
             </nav>
         </div>
 
@@ -300,16 +308,12 @@ const tabData = ref('Umum')
 <!--                <Loading />-->
             </template>
 
-<!--            <template v-else-if="props.response.data.rc==83">-->
-<!--                <div class="grid justify-center">-->
-<!--                    <Vue3Lottie-->
-<!--                        animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"-->
-<!--                        :height="200"-->
-<!--                        :width="200"-->
-<!--                    />-->
-<!--                    <span class="text-sm text-gray-600 text-center">Ada yang salah, coba beberapa saat lagi.</span>-->
-<!--                </div>-->
-<!--            </template>-->
+            <template v-else-if="props.response.data?.rc">
+                <div class="grid justify-center text-center px-5 py-3">
+                    <i class="fa-regular fa-exclamation-triangle text-2xl text-red-600" />
+                    <p class="text-sm text-gray-600">Produk sedang tidak tersedia, coba beberapa saat lagi.</p>
+                </div>
+            </template>
 
             <template v-else v-for="data in sort(props.response.data)" >
 

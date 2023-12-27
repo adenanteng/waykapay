@@ -28,6 +28,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UpgradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,7 +63,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
     Route::post('/deposit/method', [DepositController::class, 'method'])->name('deposit.method');
-    Route::post('/deposit', [DepositController::class, 'create'])->name('deposit.create');
+    Route::post('/deposit/create', [DepositController::class, 'create'])->name('deposit.create');
     Route::put('/deposit/confirm', [DepositController::class, 'confirm'])->name('deposit.confirm');
 
     Route::get('/money-transfer', [MoneyTransferController::class, 'index'])->name('money-transfer.index');
@@ -112,7 +113,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/pasca/{sku}', [ProductController::class, 'indexPasca'])->name('pasca.index');
     Route::post('/product/pasca/inquiry', [ProductController::class, 'inquiryPasca'])->name('pasca.inquiry');
 
-
     Route::get('/product/internet', [ProductPascaController::class, 'internet'])->name('pasca.internet.index');
     Route::get('/product/bpjs', [ProductPascaController::class, 'bpjs'])->name('pasca.bpjs.index');
     Route::get('/product/multifinance', [ProductPascaController::class, 'multifinance'])->name('pasca.multifinance.index');
@@ -122,6 +122,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/carousel', CarouselController::class)->names('carousel');
 
     Route::resource('/transaction', TransactionController::class)->names('transaction');
+
     Route::resource('/report', ReportController::class)->names('report');
 
     Route::resource('/upgrade', UpgradeController::class)->names('upgrade');
@@ -149,4 +150,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::resource('/setting', AppSettingController::class)->names('setting');
+
+    Route::fallback(function () {
+        session()->flash('flash.banner', 'Coba lagi');
+        session()->flash('flash.bannerStyle', 'danger');
+        return Redirect::back();
+    });
 });

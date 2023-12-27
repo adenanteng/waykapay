@@ -32,9 +32,18 @@ class ProductEmoneyController extends Controller
 
 //        dd($response);
 //        if ($response->successful()) {
+
+            $arr = array(
+                "data" => array(
+                    'rc' => '83',
+                    'message' => 'Anda telah mencapai limitasi pengecekan pricelist, silahkan coba beberapa saat lagi'
+                ),
+            );
+
             return Inertia::render('Product/Emoney/Show', [
                 'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => Helper::pricelist()),
+//                'response' => Inertia::lazy(fn () => $arr),
                 'product' => $product,
                 'fee_25' => Helper::fee()->emoney_25,
                 'fee_50' => Helper::fee()->emoney_50,
