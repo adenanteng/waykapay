@@ -46,7 +46,7 @@ class ProductController extends Controller
 //        dd($request->toArray());
 //        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
 
-//        $gross_amount = $request['amount'] + $request['fee'];
+        $gross_amount = $request['amount'] + $request['fee'];
 //        $def = auth()->user()->wallet_balance;
 //        $asu = auth()->user()->withdraw($gross_amount);
 //
