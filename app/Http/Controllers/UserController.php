@@ -189,7 +189,7 @@ class UserController extends Controller
 
         $trx = Transaction::where([
             ['user_id', $user->id],
-            ['status_id', Transaction::SUCCESS],
+            ['status_id', [Transaction::SUCCESS, Transaction::PENDING]],
             ['category_id', '!=', [Transaction::DEPOSIT, Transaction::TRANSFER]]
         ])->get()->sum('gross_amount');
 
