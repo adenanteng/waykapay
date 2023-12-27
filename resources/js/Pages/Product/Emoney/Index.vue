@@ -76,6 +76,18 @@ const form = useForm({
                 </div>
             </li>
             <li class="relative">
+                <Link :href="route('emoney.show', 'LinkAja')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/vendor/LINKAJA.svg" alt="" class="w-16">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">LinkAja</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup saldo LinkAja</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
                 <Link :href="route('emoney.show', 'MAXIM')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
                     <img src="/img/vendor/MAXIM.svg" alt="" class="w-20">
