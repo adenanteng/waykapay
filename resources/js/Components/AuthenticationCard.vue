@@ -45,7 +45,7 @@ if (typeof window !== 'undefined') {
                         <button @click="darkMode = ! darkMode">
                             <slot name="logo" />
                         </button>
-                        <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Selamat Datang</h2>
+                        <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Selamat Datang <br> di Waykapay</h2>
                         <p class="mt-2 text-sm text-gray-600"><slot name="title"/></p>
                     </div>
 

@@ -226,7 +226,7 @@ const footerNavigation = {
                     </div>
                     <h1 class="mt-10 max-w-lg text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Waykapay</h1>
                     <p class="mt-6 text-lg leading-8 text-gray-600">
-                        Satu aplikasi untuk transfer apa aja dan bayar apa aja. <br>
+                        Satu aplikasi untuk transfer apa aja, bayar apa aja dan kapan aja. <br>
                         Unduh aplikasi Waykapay sekarang!
                     </p>
                     <div class="mt-10 flex items-center gap-x-3">

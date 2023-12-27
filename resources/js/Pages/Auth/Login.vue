@@ -8,6 +8,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import {ref} from "vue";
+import SecondaryButton from "../../Components/SecondaryButton.vue";
 
 defineProps({
     canResetPassword: Boolean,
@@ -42,8 +43,7 @@ const showPassword = ref(false)
         </template>
 
         <template #title>
-            Belum punya akun?
-            <Link class="underline text-sm text-gray-600 hover:text-gray-900" :href="route('register')">Daftar</Link>
+            Nikmati mudahnya bertranksi. transfer apa aja, bayar apa aja dan kapan aja.
         </template>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -93,16 +93,28 @@ const showPassword = ref(false)
             <!--                </label>-->
             <!--            </div>-->
 
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')"
-                      class="underline text-sm text-gray-600 hover:text-gray-900">
+            <div class="grid gap-4 items-center mt-4">
+                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm font-semibold text-primary-600 hover:text-primary-900 text-right">
                     Lupa password?
                 </Link>
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton class="w-full justify-center" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Masuk
                 </PrimaryButton>
             </div>
         </form>
+
+<!--        <div class="mt-5 relative">-->
+<!--            <div class="absolute inset-0 flex items-center" aria-hidden="true">-->
+<!--                <div class="w-full border-t border-gray-600" />-->
+<!--            </div>-->
+<!--            <div class="relative flex justify-center text-sm font-medium">-->
+<!--                <span class="px-2 backdrop-blur text-gray-700"> atau </span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <SecondaryButton as="a" :href="route('register')" class="w-full justify-center mt-5 border border-gray-600 dark:border-gray-300" >
+            Daftar
+        </SecondaryButton>
     </AuthenticationCard>
 </template>

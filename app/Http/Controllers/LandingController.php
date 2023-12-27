@@ -46,4 +46,16 @@ class LandingController extends Controller
 //            'trip' => Trip::all()
         ]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function loginWelcome(): Response
+    {
+        return Inertia::render('Auth/Index', [
+//            'trip' => Trip::all()
+        ]);
+    }
 }
