@@ -28,7 +28,10 @@ class WebHookController extends Controller
         if ($transaction->status_id != Transaction::SUCCESS) {
             switch($request['status']) {
                 case ('SUCCESS'):
-                    $user->deposit($transaction->amount);
+//                    $user->deposit($transaction->amount);
+                    $user->update([
+                        'wallet_balance' => auth()->user()->wallet_balance + $transaction->amount,
+                    ]);
                     $status_id = Transaction::SUCCESS;
 
                     if ($user->device_token) {
@@ -77,6 +80,9 @@ class WebHookController extends Controller
             switch($request['transaction']['status']) {
                 case ('SUCCESS'):
                     $user->deposit($transaction->amount);
+                    $user->update([
+                        'wallet_balance' => auth()->user()->wallet_balance + $transaction->amount,
+                    ]);
                     $status_id = Transaction::SUCCESS;
                     break;
 
@@ -179,7 +185,11 @@ class WebHookController extends Controller
                     break;
 
                 default:
-                    $user->deposit($transaction->gross_amount);
+//                    $user->deposit($transaction->gross_amount);
+                    $user->update([
+                        'wallet_balance' => auth()->user()->wallet_balance + $transaction->gross_amount,
+                        'coin' => DB::raw('coin+6')
+                    ]);
                     $transaction->update([
                         'status_id' => Transaction::ERROR,
                         'desc' => $anj->data->rc.' '.$anj->data->message,

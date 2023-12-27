@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function topup(Request $request)
     {
-//        dd('halo');
+//        dd($request->toArray());
         if (auth()->user()->pin != null) {
             Validator::make($request->toArray(), [
                 'pin' => ['required'],
@@ -45,9 +45,13 @@ class ProductController extends Controller
 
 //        dd($request->toArray());
 //        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
-        $gross_amount = $request['amount'] + $request['fee'];
 
-//        dd($request->all());
+//        $gross_amount = $request['amount'] + $request['fee'];
+//        $def = auth()->user()->wallet_balance;
+//        $asu = auth()->user()->withdraw($gross_amount);
+//
+//        dd($gross_amount, $def, auth()->user()->wallet_balance - $gross_amount, $asu);
+
         $order_id = strtolower(Str::random(8));
 
         if (auth()->user()->wallet_balance <= $gross_amount) {
@@ -88,10 +92,11 @@ class ProductController extends Controller
             switch($response->object()->data->status) {
                 case ('Pending'):
                 case ('Sukses'):
-                    $user->withdraw($transaction->gross_amount);
-                    $user->update(
-                        [ 'coin'=> DB::raw('coin+6') ]
-                    );
+//                    $user->withdraw($transaction->gross_amount);
+                    $user->update([
+                        'wallet_balance' => auth()->user()->wallet_balance - $gross_amount,
+                        'coin' => DB::raw('coin+6')
+                    ]);
                     Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
                     break;
                 default:
@@ -230,10 +235,14 @@ class ProductController extends Controller
             switch($response->object()->data->status) {
                 case ('Pending'):
                 case ('Sukses'):
-                    $user->withdraw($transaction->gross_amount);
-                    $user->update(
-                        [ 'coin'=> DB::raw('coin+6') ]
-                    );
+//                    $user->withdraw($transaction->gross_amount);
+//                    $user->update(
+//                        [ 'coin'=> DB::raw('coin+6') ]
+//                    );
+                    $user->update([
+                        'wallet_balance' => auth()->user()->wallet_balance - $gross_amount,
+                        'coin' => DB::raw('coin+6')
+                    ]);
                     Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo ?? $user->wallet_balance);
                     break;
                 default:
