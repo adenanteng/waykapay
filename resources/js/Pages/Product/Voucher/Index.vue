@@ -78,24 +78,24 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('voucher.show', 'INDOMARET')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/M-Tix.svg" alt="" class="w-20">
+                    <img src="/img/vendor/INDOMARET.svg" alt="" class="w-20">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
-                            <h3 class="text-sm font-medium text-gray-900">M-TIX</h3>
+                            <h3 class="text-sm font-medium text-gray-900">Indomaret</h3>
                         </div>
-                        <p class="text-sm text-gray-500">Topup saldo M-TIX</p>
+                        <p class="text-sm text-gray-500">Voucher Indomaret</p>
                     </div>
                 </div>
             </li>
             <li class="relative">
-                <Link :href="route('voucher.show', 'M-Tix')" class="absolute inset-0" />
+                <Link :href="route('voucher.show', 'ALFAMART VOUCHER')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/M-Tix.svg" alt="" class="w-20">
+                    <img src="/img/vendor/ALFAMART%20VOUCHER.svg" alt="" class="w-20">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
-                            <h3 class="text-sm font-medium text-gray-900">M-TIX</h3>
+                            <h3 class="text-sm font-medium text-gray-900">Alfamart</h3>
                         </div>
-                        <p class="text-sm text-gray-500">Topup saldo M-TIX</p>
+                        <p class="text-sm text-gray-500">Voucher Alfamart</p>
                     </div>
                 </div>
             </li>

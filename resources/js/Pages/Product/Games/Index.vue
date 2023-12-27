@@ -18,8 +18,8 @@ const form = useForm({
 </script>
 
 <template>
-    <AppLayout title="Voucher Games"
-               name="Voucher Games"
+    <AppLayout title="Topup Games"
+               name="Topup Games"
                desc="Summertime sadness"
     >
         <template #previous>
@@ -48,6 +48,18 @@ const form = useForm({
                             <h3 class="text-sm font-medium text-gray-900">Steam</h3>
                         </div>
                         <p class="text-sm text-gray-500">Topup Steam Wallet</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('games.show', 'Unipin Voucher')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/games/Unipin%20Voucher.png" alt="" class="h-10">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">Unipin Voucher</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup Unipin</p>
                     </div>
                 </div>
             </li>
@@ -108,6 +120,30 @@ const form = useForm({
                             <h3 class="text-sm font-medium text-gray-900">Valorant</h3>
                         </div>
                         <p class="text-sm text-gray-500">Topup Valorant</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('games.show', 'Bigo Live')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/games/Bigo%20Live.png" alt="" class="h-10">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">Bigo Live</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup Bigo Live</p>
+                    </div>
+                </div>
+            </li>
+            <li class="relative">
+                <Link :href="route('games.show', 'IMVU')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/games/IMVU.png" alt="" class="h-10">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">IMVU</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Topup IMVU</p>
                     </div>
                 </div>
             </li>
