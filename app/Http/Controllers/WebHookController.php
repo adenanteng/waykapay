@@ -30,7 +30,7 @@ class WebHookController extends Controller
                 case ('SUCCESS'):
 //                    $user->deposit($transaction->amount);
                     $user->update([
-                        'wallet_balance' => auth()->user()->wallet_balance + $transaction->amount,
+                        'wallet_balance' => $user->wallet_balance + $transaction->amount,
                     ]);
                     $status_id = Transaction::SUCCESS;
 
@@ -81,7 +81,7 @@ class WebHookController extends Controller
                 case ('SUCCESS'):
                     $user->deposit($transaction->amount);
                     $user->update([
-                        'wallet_balance' => auth()->user()->wallet_balance + $transaction->amount,
+                        'wallet_balance' => $user->wallet_balance + $transaction->amount,
                     ]);
                     $status_id = Transaction::SUCCESS;
                     break;
@@ -148,7 +148,7 @@ class WebHookController extends Controller
      */
     public function webhookHandlerDigiflazz(Request $request){
 //        Log::info(json_decode($request->getContent(), true));
-
+        Log::debug(json_decode($request->getContent()));
         $anj = json_decode($request->getContent());
 
         $transaction = Transaction::where('order_id', $anj->data->ref_id)->first();
@@ -187,7 +187,7 @@ class WebHookController extends Controller
                 default:
 //                    $user->deposit($transaction->gross_amount);
                     $user->update([
-                        'wallet_balance' => auth()->user()->wallet_balance + $transaction->gross_amount,
+                        'wallet_balance' => $user->wallet_balance + $transaction->gross_amount,
                         'coin' => DB::raw('coin+6')
                     ]);
                     $transaction->update([
