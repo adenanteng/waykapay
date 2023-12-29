@@ -381,7 +381,7 @@ function formatPrice(value) {
                     <SecondaryButton
                         as="a"
                         :href="route('dashboard')"
-                        class="justify-center w-full border border-gray-300 nightwind-prevent"
+                        class="justify-center w-full border border-gray-600 dark:border-white nightwind-prevent"
                     >
                         <i class="fa-regular fa-home mr-2" />
                         Beranda
@@ -555,7 +555,7 @@ function formatPrice(value) {
 <!--                    </SecondaryButton>-->
 
                     <SecondaryButton
-                        class="border border-gray-300"
+                        class="border border-gray-600 dark:border-white"
                         v-if="props.manual_account && props.history.user_id == $page.props.user.id"
                         as="outside"
                         href="https://api.whatsapp.com/send?phone=6285839036717&text=Halo%20admin%20Waykapay.%20Saya%20ingin%20mengirimkan%20bukti%20transfer"

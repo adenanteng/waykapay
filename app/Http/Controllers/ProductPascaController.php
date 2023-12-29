@@ -16,9 +16,7 @@ class ProductPascaController extends Controller
      */
     public function internet()
     {
-        return Inertia::render('Product/PascaInternet/Index', [
-//            'users' => auth()->user(),
-        ]);
+        return Inertia::render('Product/PascaInternet/Index', []);
     }
 
     /**
@@ -28,9 +26,7 @@ class ProductPascaController extends Controller
      */
     public function bpjs()
     {
-        return Inertia::render('Product/PascaBpjs/Index', [
-//            'users' => auth()->user(),
-        ]);
+        return Inertia::render('Product/PascaBpjs/Index', []);
     }
 
     /**
@@ -40,8 +36,6 @@ class ProductPascaController extends Controller
      */
     public function multifinance()
     {
-        return Inertia::render('Product/PascaMultifinance/Index', [
-//            'users' => auth()->user(),
-        ]);
+        return Inertia::render('Product/PascaMultifinance/Index', []);
     }
 }

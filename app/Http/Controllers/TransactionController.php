@@ -91,20 +91,12 @@ class TransactionController extends Controller
     {
 
 //        dd($request->all(), $transaction);
-        if (auth()->user()->pin != null) {
-            Validator::make($request->toArray(), [
-                'pin' => ['required'],
-            ])->validateWithBag('storeInformation');
-
-            if (!Hash::check($request['pin'], auth()->user()->pin)) {
-                return to_route('pin.wrong');
-            }
-        }
 
         if ($request['agent_commission'] != null) {
             Validator::make($request->toArray(), [
                 'agent_commission' => ['required', 'integer', 'gte:'.$transaction['gross_amount']],
             ])->validateWithBag('storeInformation');
+
 
             $commission = $request['agent_commission'] - $transaction['gross_amount'];
 
@@ -114,6 +106,17 @@ class TransactionController extends Controller
             ]);
 
         } elseif ($request['valid'] != null) {
+
+            if (auth()->user()->pin != null) {
+                Validator::make($request->toArray(), [
+                    'pin' => ['required'],
+                ])->validateWithBag('storeInformation');
+
+                if (!Hash::check($request['pin'], auth()->user()->pin)) {
+                    return to_route('pin.wrong');
+                }
+            }
+
             $transaction = Transaction::where('order_id', $request['valid'])->first();
             $user = User::where('id', $transaction['user_id'])->first();
 

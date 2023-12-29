@@ -15,7 +15,7 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {ref} from "vue";
 
 const props = defineProps({
-    users: Object,
+
 });
 
 </script>

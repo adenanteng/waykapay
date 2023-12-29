@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
@@ -31,10 +32,11 @@ class ProductGamesController extends Controller
 //        $response = Helper::pricelist();
 
 //        if ($response->successful()) {
-            return Inertia::render('Product/Games/Show', [
+            return Inertia::render('Product/Show', [
                 'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => Helper::pricelist()),
                 'product' => $product,
+                'category_id' => Transaction::GAMES,
                 'fee_25' => Helper::fee()->games_25,
                 'fee_50' => Helper::fee()->games_50,
                 'fee_75' => Helper::fee()->games_75,

@@ -15,14 +15,12 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {computed, ref} from "vue";
 
 const props = defineProps({
-    users: Object,
     // response: Object,
     customer: Object,
     // fee: Number
 });
 
 const form = useForm({
-    // user_id: props.users.id ?? null,
     order_id: props.customer.data.ref_id,
     customer_no: props.customer.data.customer_no,
     sku: props.customer.data.buyer_sku_code,

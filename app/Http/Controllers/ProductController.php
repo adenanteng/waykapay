@@ -28,20 +28,20 @@ class ProductController extends Controller
     public function topup(Request $request)
     {
 //        dd($request->toArray());
-        if (auth()->user()->pin != null) {
-            Validator::make($request->toArray(), [
-                'pin' => ['required'],
-            ])->validateWithBag('storeInformation');
-
-//            dd('lewat');
-
-            if (!Hash::check($request['pin'], auth()->user()->pin)) {
-//                session()->flash('flash.banner', 'Pin tidak valid');
-//                session()->flash('flash.bannerStyle', 'danger');
-//                dd('pin salah');
-                return to_route('pin.wrong');
-            }
-        }
+//        if (auth()->user()->pin != null) {
+//            Validator::make($request->toArray(), [
+//                'pin' => ['required'],
+//            ])->validateWithBag('storeInformation');
+//
+////            dd('lewat');
+//
+//            if (!Hash::check($request['pin'], auth()->user()->pin)) {
+////                session()->flash('flash.banner', 'Pin tidak valid');
+////                session()->flash('flash.bannerStyle', 'danger');
+////                dd('pin salah');
+//                return to_route('pin.wrong');
+//            }
+//        }
 
 //        dd($request->toArray());
 //        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
@@ -130,15 +130,15 @@ class ProductController extends Controller
 
 //        dd($request->all());
 
-        if (auth()->user()->pin != null) {
-            Validator::make($request->toArray(), [
-                'pin' => ['required'],
-            ])->validateWithBag('storeInformation');
-
-            if (!Hash::check($request['pin'], auth()->user()->pin)) {
-                return to_route('pin.wrong');
-            }
-        }
+//        if (auth()->user()->pin != null) {
+//            Validator::make($request->toArray(), [
+//                'pin' => ['required'],
+//            ])->validateWithBag('storeInformation');
+//
+//            if (!Hash::check($request['pin'], auth()->user()->pin)) {
+//                return to_route('pin.wrong');
+//            }
+//        }
 
         if (auth()->user()->wallet_balance <= $request['selling_price']) {
             dd('Saldo kurang');

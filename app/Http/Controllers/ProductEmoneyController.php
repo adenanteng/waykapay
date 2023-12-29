@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
@@ -16,9 +17,7 @@ class ProductEmoneyController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Product/Emoney/Index', [
-            'users' => auth()->user(),
-        ]);
+        return Inertia::render('Product/Emoney/Index', []);
     }
 
     /**
@@ -40,11 +39,11 @@ class ProductEmoneyController extends Controller
                 ),
             );
 
-            return Inertia::render('Product/Emoney/Show', [
-                'users' => auth()->user(),
+            return Inertia::render('Product/Show', [
                 'response' => Inertia::lazy(fn () => Helper::pricelist()),
 //                'response' => Inertia::lazy(fn () => $arr),
                 'product' => $product,
+                'category_id' => Transaction::EMONEY,
                 'fee_25' => Helper::fee()->emoney_25,
                 'fee_50' => Helper::fee()->emoney_50,
                 'fee_75' => Helper::fee()->emoney_75,

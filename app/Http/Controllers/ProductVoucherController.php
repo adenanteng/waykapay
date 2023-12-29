@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
@@ -31,10 +32,11 @@ class ProductVoucherController extends Controller
 //        $response = Helper::pricelist();
 
 //        if ($response->successful()) {
-            return Inertia::render('Product/Voucher/Show', [
+            return Inertia::render('Product/Show', [
                 'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => Helper::pricelist()),
                 'product' => $product,
+                'category_id' => Transaction::VOUCHER,
                 'fee_25' => Helper::fee()->voucher_25,
                 'fee_50' => Helper::fee()->voucher_50,
                 'fee_75' => Helper::fee()->voucher_75,

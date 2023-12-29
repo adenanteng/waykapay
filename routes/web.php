@@ -16,7 +16,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductEmoneyController;
 use App\Http\Controllers\ProductEtollController;
 use App\Http\Controllers\ProductGamesController;
-use App\Http\Controllers\ProductInternetController;
 use App\Http\Controllers\ProductPascaController;
 use App\Http\Controllers\ProductPlnController;
 use App\Http\Controllers\ProductPulsaController;
@@ -84,8 +83,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/product/pln', [ProductPlnController::class, 'index'])->name('pln.index');
     Route::get('/product/pln-prepaid', [ProductPlnController::class, 'prepaid'])->name('pln.prepaid.index');
     Route::get('/product/pln-prepaid-inquiry', [ProductPlnController::class, 'inquiryPrepaid'])->name('pln.prepaid.inquiry');
-    Route::get('/product/pln-postpaid', [ProductPlnController::class, 'postpaid'])->name('pln.postpaid.index');
-    Route::get('/product/pln-postpaid-inquiry', [ProductPlnController::class, 'inquiryPostpaid'])->name('pln.postpaid.inquiry');
 
     Route::get('/product/games', [ProductGamesController::class, 'index'])->name('games.index');
     Route::get('/product/games/{product}', [ProductGamesController::class, 'show'])->name('games.show');

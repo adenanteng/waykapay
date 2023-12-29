@@ -10,11 +10,6 @@ const props = defineProps({
     // user: Object,
 });
 
-const form = useForm({
-    name: null,
-    email: null,
-});
-
 </script>
 
 <template>

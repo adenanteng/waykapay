@@ -7,12 +7,7 @@ import InputError from "@/Components/InputError.vue";
 import PreviousButton from "../../../Components/PreviousButton.vue";
 
 const props = defineProps({
-    // user: Object,
-});
 
-const form = useForm({
-    name: null,
-    email: null,
 });
 
 </script>

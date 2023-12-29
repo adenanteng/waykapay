@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -15,9 +16,7 @@ class ProductEtollController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Product/Etoll/Index', [
-            'users' => auth()->user(),
-        ]);
+        return Inertia::render('Product/Etoll/Index', []);
     }
 
     /**
@@ -31,10 +30,10 @@ class ProductEtollController extends Controller
 
 //        dd($response);
 //        if ($response->successful()) {
-        return Inertia::render('Product/Etoll/Show', [
-            'users' => auth()->user(),
+        return Inertia::render('Product/Show', [
             'response' => Inertia::lazy(fn () => Helper::pricelist()),
             'product' => $product,
+            'category_id' => Transaction::EMONEY,
             'fee_25' => Helper::fee()->etoll_25,
             'fee_50' => Helper::fee()->etoll_50,
             'fee_75' => Helper::fee()->etoll_75,

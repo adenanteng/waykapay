@@ -16,7 +16,6 @@ import {computed, onMounted, ref} from "vue";
 import Loading from "../Loading.vue";
 
 const props = defineProps({
-    users: Object,
     response: undefined,
     product: String,
     fee_25: Number,

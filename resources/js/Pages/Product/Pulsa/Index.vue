@@ -14,6 +14,8 @@ import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {computed, onMounted, ref, watch} from "vue";
 import Loading from "../Loading.vue";
+import VOtpInput from "vue3-otp-input";
+import bcrypt from "bcryptjs";
 
 const props = defineProps({
     users: Object,
@@ -40,7 +42,8 @@ const form = useForm({
     sku: '',
     amount: '',
     category_id: '',
-    fee: null
+    fee: null,
+    pin: null
 });
 
 const {...userInfo} = computed(() => usePage().props.user).value;
@@ -51,22 +54,11 @@ const storeInformation = () => {
         form.fee = fee.value
     }
 
-    if (userInfo.pin) {
-        form.post(route('pin.topup'), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            onSuccess: () => closeModal(),
-            // onError: () => passwordInput.value.focus(),
-            // onFinish: () => form.reset(),
-        });
-    } else {
-        form.post(route('product.topup'), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            onSuccess: () => closeModal()
-        });
-    }
-
+    form.post(route('product.topup'), {
+        errorBag: 'storeInformation',
+        preserveScroll: true,
+        onSuccess: () => closeModal()
+    });
 };
 
 function formatPrice(value) {
@@ -142,6 +134,7 @@ function provider(value) {
 }
 
 const confirmingModal = ref(false);
+
 let productSku = ref(null);
 let productName = ref(null);
 let productBrand = ref(null);
@@ -195,6 +188,15 @@ function sort(arr) {
     });
 }
 
+const handleModal = () => {
+    if (userInfo.pin) {
+        confirmingModal.value=false
+        pinModal.value=true
+    } else {
+        storeInformation()
+    }
+};
+
 const closeModal = () => {
     confirmingModal.value = false;
     // form.reset();
@@ -204,12 +206,29 @@ const tab = ref('Pulsa')
 
 const tabData = ref('Umum')
 
-// const tabPulsa = ref(JSON.parse(localStorage.getItem('tabPulsa')) ?? 'Pulsa')
-//
-// watch(tabPulsa, (newTabPulsa) => {
-//     console.log(`tab is ${newTabPulsa}`)
-//     localStorage.setItem('tabPulsa', JSON.stringify(newTabPulsa))
-// })
+const pinModal = ref(false);
+const otpInput = ref(VOtpInput | null);
+const bindModal = ref("");
+const msgError = ref(false);
+
+const handleOnComplete = (value) => {
+    let hash = value;
+    hash = hash.replace(/^\$2y(.+)$/i, '$2a$1');
+    bcrypt.compare(hash, userInfo.pin, function(err, res) {
+        if (res) {
+            storeInformation()
+            // otpInput.value?.clearInput();
+        } else {
+            msgError.value = true
+            otpInput.value?.clearInput();
+        }
+    });
+
+};
+
+const handleOnChange = (value) => {
+    // console.log("OTP changed: ", value);
+};
 
 </script>
 
@@ -248,7 +267,6 @@ const tabData = ref('Umum')
 
             </template>
         </FormSection>
-
 
         <div class="border-b border-gray-300" v-show="form.customer_no.length >= 4">
             <nav class="-mb-px flex" aria-label="Tabs">
@@ -484,11 +502,20 @@ const tabData = ref('Umum')
                         Saldo anda kurang
                     </ActionMessage>
 
+<!--                    <PrimaryButton-->
+<!--                        class="w-full justify-center"-->
+<!--                        :class="{ 'opacity-25': form.processing }"-->
+<!--                        :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"-->
+<!--                        @click="storeInformation"-->
+<!--                    >-->
+<!--                        Beli-->
+<!--                    </PrimaryButton>-->
+
                     <PrimaryButton
                         class="w-full justify-center"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"
-                        @click="storeInformation"
+                        @click="handleModal"
                     >
                         Beli
                     </PrimaryButton>
@@ -496,7 +523,36 @@ const tabData = ref('Umum')
             </template>
         </DialogModal>
 
+        <DialogModal :show="pinModal" @close="closeModal">
+            <template #title>
+                <div class="w-full text-center">
+                    Masukkan PIN transaksi kamu
+                </div>
 
-<!--        <MobileMenu />-->
+            </template>
+
+            <template #content>
+                <div class="grid justify-center">
+                    <VOtpInput
+                        ref="otpInput"
+                        v-model:value="bindModal"
+                        input-classes="otp-input"
+                        separator=""
+                        :num-inputs="6"
+                        :should-auto-focus="true"
+                        input-type="letter-numeric"
+                        :conditionalClass="['one', 'two', 'three', 'four', 'five', 'six']"
+                        @on-change="handleOnChange"
+                        @on-complete="handleOnComplete"
+                    />
+                    <!--                    <InputError :message="form.errors.pin" class="mt-2"/>-->
+                    <p v-if="msgError" class="w-full text-center text-sm text-red-600 mt-2">Pin salah, silahkan coba lagi.</p>
+
+                </div>
+            </template>
+        </DialogModal>
+
+
+        <!--        <MobileMenu />-->
     </AppLayout>
 </template>
