@@ -18,7 +18,6 @@ import VOtpInput from "vue3-otp-input";
 import bcrypt from "bcryptjs";
 
 const props = defineProps({
-    users: Object,
     response: undefined,
     fee_25: Number,
     fee_50: Number,
@@ -36,7 +35,6 @@ onMounted(() => {
 })
 
 const form = useForm({
-    user_id: props.users.id ?? null,
     customer_no: '',
     product_name: '',
     sku: '',
