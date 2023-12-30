@@ -20,7 +20,6 @@ class MoneyTransferController extends Controller
     public function index()
     {
         return Inertia::render('MoneyTransfer/Bank', [
-            'users' => auth()->user(),
             'response' => null,
         ]);
     }
@@ -44,6 +43,7 @@ class MoneyTransferController extends Controller
             return \redirect()->back();
         }
 
+//        dd($users);
         return Inertia::render('MoneyTransfer/CreateEdit', [
             'users' => $users,
             'bank' => $request['bank'],
@@ -53,15 +53,15 @@ class MoneyTransferController extends Controller
 
     public function confirm(Request $request)
     {
-        if (auth()->user()->pin != null) {
-            Validator::make($request->toArray(), [
-                'pin' => ['required'],
-            ])->validateWithBag('storeInformation');
-
-            if (!Hash::check($request['pin'], auth()->user()->pin)) {
-                return to_route('pin.wrong');
-            }
-        }
+//        if (auth()->user()->pin != null) {
+//            Validator::make($request->toArray(), [
+//                'pin' => ['required'],
+//            ])->validateWithBag('storeInformation');
+//
+//            if (!Hash::check($request['pin'], auth()->user()->pin)) {
+//                return to_route('pin.wrong');
+//            }
+//        }
 
         $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();
@@ -89,8 +89,14 @@ class MoneyTransferController extends Controller
             'to_id' => $to->id,
         ]);
 
-        $user->withdraw($transaction->gross_amount);
-        $to->deposit($transaction->amount);
+//        $user->withdraw($transaction->gross_amount);
+        //        $to->deposit($transaction->amount);
+        $user->update([
+            'wallet_balance' => $user->wallet_balance - $transaction->gross_amount,
+        ]);
+        $to->update([
+            'wallet_balance' => $to->wallet_balance + $transaction->gross_amount,
+        ]);
 
         $transaction->update([
             'status_id' => Transaction::SUCCESS

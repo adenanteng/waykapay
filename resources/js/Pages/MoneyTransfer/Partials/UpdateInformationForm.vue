@@ -9,6 +9,9 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import ActionSection from "@/Components/ActionSection.vue";
 import TextAreaInput from "@/Components/TextAreaInput.vue";
+import VOtpInput from "vue3-otp-input";
+import bcrypt from "bcryptjs";
+import DialogModal from "@/Components/DialogModal.vue";
 
 const props = defineProps({
     users: Object | String,
@@ -18,7 +21,6 @@ const props = defineProps({
 });
 
 const form = useForm({
-    // user_id: props.users.id ?? null,
     amount: null,
     bank: props.bank,
     account_no: props.account_no,
@@ -33,25 +35,16 @@ const storeInformation = () => {
     form.amount = amount.value.replaceAll(".", "")
 
     if (Number(form.amount) >= Number(userInfo.wallet_balance)) {
+        pinModal.value = false
         message.value = "Saldo kurang"
     } else {
-        if (userInfo.pin) {
-            form.post(route('pin.moneyTransfer'), {
-                errorBag: 'storeInformation',
-                preserveScroll: true,
-                replace: true,
-                onSuccess: () => {
-                }
-            });
-        } else {
-            form.post(route('money-transfer.confirm'), {
-                errorBag: 'storeInformation',
-                preserveScroll: true,
-                replace: true,
-                onSuccess: () => {
-                }
-            });
-        }
+        form.post(route('money-transfer.confirm'), {
+            errorBag: 'storeInformation',
+            preserveScroll: true,
+            replace: true,
+            onSuccess: () => {
+            }
+        });
     }
 };
 
@@ -68,6 +61,43 @@ watch(amount, (newAmount) => {
         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     // console.log(amount.value)
 })
+
+const pinModal = ref(false);
+const otpInput = ref(VOtpInput | null);
+const bindModal = ref("");
+const msgError = ref(false);
+
+const handleModal = () => {
+    if (userInfo.pin) {
+        pinModal.value=true
+    } else {
+        storeInformation()
+    }
+};
+
+const closeModal = () => {
+    pinModal.value = false;
+    // form.reset();
+};
+
+const handleOnComplete = (value) => {
+    let hash = value;
+    hash = hash.replace(/^\$2y(.+)$/i, '$2a$1');
+    bcrypt.compare(hash, userInfo.pin, function(err, res) {
+        if (res) {
+            storeInformation()
+            // otpInput.value?.clearInput();
+        } else {
+            msgError.value = true
+            otpInput.value?.clearInput();
+        }
+    });
+
+};
+
+const handleOnChange = (value) => {
+    // console.log("OTP changed: ", value);
+};
 
 </script>
 
@@ -90,7 +120,6 @@ watch(amount, (newAmount) => {
                 </div>
                 <div class="ml-3 min-w-0 flex-1">
                     <div class="text-base font-medium text-gray-800 truncate capitalize">
-<!--                        {{ $page.props.user.name }}-->
                         {{ props.users.name }}
                     </div>
                     <div class="text-sm font-medium text-gray-500 truncate">
@@ -101,7 +130,7 @@ watch(amount, (newAmount) => {
         </template>
     </ActionSection>
 
-    <FormSection @submitted="storeInformation">
+    <FormSection >
         <template #title>
             Mau Transfer berapa?
         </template>
@@ -154,10 +183,49 @@ watch(amount, (newAmount) => {
                 Berhasil disimpan.
             </ActionMessage>
 
-            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+<!--            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">-->
+<!--                Konfirmasi-->
+<!--            </PrimaryButton>-->
+
+            <PrimaryButton
+                class="w-full justify-center"
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+                @click="handleModal"
+            >
                 Konfirmasi
             </PrimaryButton>
         </template>
     </FormSection>
+
+    <DialogModal :show="pinModal" @close="closeModal">
+        <template #title>
+            <div class="w-full text-center">
+                Masukkan PIN transaksi kamu
+            </div>
+
+        </template>
+
+        <template #content>
+            <div class="grid justify-center">
+                <VOtpInput
+                    ref="otpInput"
+                    v-model:value="bindModal"
+                    input-classes="otp-input"
+                    separator=""
+                    :num-inputs="6"
+                    :should-auto-focus="true"
+                    input-type="letter-numeric"
+                    :conditionalClass="['one', 'two', 'three', 'four', 'five', 'six']"
+                    @on-change="handleOnChange"
+                    @on-complete="handleOnComplete"
+                />
+<!--                    <InputError :message="form.errors.pin" class="mt-2"/>-->
+                <p v-if="msgError" class="w-full text-center text-sm text-red-600 mt-2">Pin salah, silahkan coba lagi.</p>
+
+            </div>
+        </template>
+
+    </DialogModal>
 
 </template>

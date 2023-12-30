@@ -28,7 +28,7 @@ const storeInformation = () => {
     form.post(route('money-transfer.amount'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
-        replace: true,
+        // replace: true,
         onSuccess: () => {
         }
     });
