@@ -108,7 +108,7 @@ class HistoryController extends Controller
                     }
 
 
-                dd($response->object()->data);
+//                dd($response->object()->data);
 
                     switch ($response->object()->data->status) {
                         case ('Sukses'):
