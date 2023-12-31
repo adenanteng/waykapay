@@ -31,6 +31,7 @@ class Transaction extends Model
         'gross_amount',
         'last_amount',
         'admin_fee',
+        'service_fee',
         'agent_commission',
         'desc',
     ];

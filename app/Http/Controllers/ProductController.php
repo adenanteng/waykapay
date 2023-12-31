@@ -84,6 +84,7 @@ class ProductController extends Controller
                 'gross_amount' => $gross_amount,
                 'last_amount' => $user->wallet_balance,
                 'admin_fee' => $request['fee'],
+                'service_fee' => 0,
                 'desc' => $response->object()->data->sn ?? $response->object()->data->rc.' '.$response->object()->data->message,
             ]);
 
@@ -201,6 +202,17 @@ class ProductController extends Controller
         if ($response->successful()) {
             $user = User::where('id', auth()->user()->id)->first();
 
+            $extra_fee = $request['extra_fee'];
+
+            $admin_fee = $response->object()->data->selling_price - $response->object()->data->price; //1125 komisi
+            $service_fee = $response->object()->data->admin - $admin_fee; //1375
+
+            $idk = $admin_fee + $service_fee; //2500 admin
+
+//            $price = 351375;
+//            $selling = 352500; //1125
+//            $admin = 2500;
+
             try {
                 $transaction = Transaction::create([
                     'sku' => $response->object()->data->buyer_sku_code,
@@ -211,10 +223,11 @@ class ProductController extends Controller
                     'status_id' => Transaction::PENDING,
                     'category_id' => $category_id,
                     'amount' => $response->object()->data->price,
-                    'gross_amount' => $response->object()->data->selling_price,
+                    'gross_amount' => $response->object()->data->price + $admin_fee + $service_fee + $extra_fee,
                     'last_amount' => $user->wallet_balance,
 //                    'admin_fee' => $response->object()->data->admin,
-                    'admin_fee' => $response->object()->data->selling_price - $response->object()->data->price,
+                    'admin_fee' => $admin_fee + $extra_fee,
+                    'service_fee' => $service_fee,
                     'desc' => $response->object()->data->sn ?? $response->object()->data->rc.' '.$response->object()->data->message,
                 ]);
 
@@ -240,10 +253,10 @@ class ProductController extends Controller
 //                        [ 'coin'=> DB::raw('coin+6') ]
 //                    );
                     $user->update([
-                        'wallet_balance' => auth()->user()->wallet_balance - $gross_amount,
+                        'wallet_balance' => auth()->user()->wallet_balance - $transaction->gross_amount,
                         'coin' => DB::raw('coin+6')
                     ]);
-                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo ?? $user->wallet_balance);
+                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
                     break;
                 default:
 //                    dd($response->object()->data);

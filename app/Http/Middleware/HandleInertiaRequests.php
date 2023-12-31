@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use App\Helpers\Helper;
 use App\Models\AppSetting;
-use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Middleware;

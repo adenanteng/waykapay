@@ -118,6 +118,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::resource('/carousel', CarouselController::class)->names('carousel');
 
+    Route::get('transaction/detail', [TransactionController::class, 'detail'])->name('transaction.detail');
     Route::resource('/transaction', TransactionController::class)->names('transaction');
 
     Route::resource('/report', ReportController::class)->names('report');

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 use Inertia\Response;
 use PHPUnit\TextUI\Help;
@@ -19,6 +20,55 @@ use PHPUnit\TextUI\Help;
 class TransactionController extends Controller
 {
     public function index() {
+//        dd(Carbon::today()->subMonth()->toDateString());
+
+        $now = Transaction::where('status_id', Transaction::SUCCESS)
+            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT])
+            ->whereYear('created_at', Carbon::today()->year)->whereMonth('created_at', Carbon::today()->month);
+
+        $prev = Transaction::where('status_id', Transaction::SUCCESS)
+            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT])
+            ->whereYear('created_at', Carbon::today()->year)->whereMonth('created_at', Carbon::now()->subMonth()->month);
+
+//        dd(Carbon::now()->subMonth()->month);
+
+//        dd(
+//            $now->count(),
+//            $now->sum('amount'),
+//            $now->get(),
+//
+//            $prev->count(),
+//            $prev->sum('amount'),
+//            $prev->get(),
+//        );
+
+
+//        $now = $trx->whereYear('created_at', Carbon::today()->year)->whereMonth('created_at', Carbon::today()->month);
+
+//        dd($trx->whereDate('created_at', now()->subMonth())->get()->sum('gross_amount'));
+//        dd($trx->whereDate('created_at', Carbon::now()->subMonth())->get()->count());
+
+        $trxSuccess = $now->count();
+        $amount = $now->sum('amount');
+        $gross = $now->sum('gross_amount');
+
+//        $prev_trx = $prev->count();
+//        $prev_amount = $prev->sum('amount');
+//        $prev_gross_amount = $prev->sum('gross_amount');
+
+        return Inertia::render('Transaction/Index', [
+            'trx' => Inertia::lazy(fn () => $now->count()),
+            'admin' => Inertia::lazy(fn () => $now->sum('admin_fee')),
+            'amount' => Inertia::lazy(fn () => $now->sum('amount')),
+            'gross_amount' => Inertia::lazy(fn () => $now->sum('gross_amount')),
+
+            'prev_trx' => Inertia::lazy(fn () => $prev->count()),
+            'prev_amount' => Inertia::lazy(fn () => $prev->sum('amount')),
+            'prev_gross_amount' => Inertia::lazy(fn () => $prev->sum('gross_amount')),
+        ]);
+    }
+
+    public function detail() {
 
 //        dd(Transaction::query()
 //            ->latest()
@@ -47,7 +97,7 @@ class TransactionController extends Controller
         $trx = Transaction::where('status_id', Transaction::SUCCESS)
                 ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
 
-        return Inertia::render('Transaction/Index', [
+        return Inertia::render('Transaction/Detail', [
 //            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
             'transaction' => Transaction::query()
                 ->latest()

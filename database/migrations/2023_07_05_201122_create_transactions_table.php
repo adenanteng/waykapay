@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->integer('gross_amount');
             $table->integer('admin_fee')->default(0);
+            $table->integer('service_fee')->default(0);
             $table->integer('agent_commission')->nullable();
             $table->integer('last_amount');
             $table->string('desc')->nullable();
