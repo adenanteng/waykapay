@@ -160,6 +160,12 @@ function formatPrice(value) {
                             Rp {{ props.history.category_id == 1 || props.history.category_id >= 8 ? formatPrice(props.history.admin_fee) : '0' }}
                         </div>
                     </div>
+                    <div v-if="props.history.service_fee!=0" class="flex justify-between">
+                        <div class="text-sm ">Biaya Layanan</div>
+                        <div class="text-sm font-semibold">
+                            Rp {{ formatPrice(props.history.service_fee) }}
+                        </div>
+                    </div>
 <!--                    <div v-if="props.history.agent_commission" class="flex justify-between">-->
 <!--                        <div class="text-sm ">Komisi</div>-->
 <!--                        <div class="text-sm font-semibold">-->

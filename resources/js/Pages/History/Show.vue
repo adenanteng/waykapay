@@ -295,7 +295,7 @@ function formatPrice(value) {
                                     Rp {{ formatPrice(props.history.agent_commission) }}
                                 </div>
                             </div>
-                            <div v-if="props.history.service_fee" class="sm:col-span-1 flex sm:block justify-between">
+                            <div v-if="props.history.service_fee!=0" class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm ">Biaya Layanan</div>
                                 <div class="text-sm font-semibold">
                                     Rp {{ formatPrice(props.history.service_fee) }}
