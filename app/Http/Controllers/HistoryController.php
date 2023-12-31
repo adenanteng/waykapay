@@ -116,7 +116,7 @@ class HistoryController extends Controller
                                 'status_id' => Transaction::SUCCESS,
                                 'desc' => $response->object()->data->sn
                             ]);
-                            $user->deposit($transaction->gross_amount);
+//                            $user->deposit($transaction->gross_amount);
                             break;
 
                         case ('Pending'):
