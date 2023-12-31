@@ -147,7 +147,7 @@ class WebHookController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function webhookHandlerDigiflazz(Request $request){
-//        Log::info(json_decode($request->getContent(), true));
+        Log::info($request->getContent());
         Log::debug(json_decode($request->getContent()));
         $anj = json_decode($request->getContent());
 
