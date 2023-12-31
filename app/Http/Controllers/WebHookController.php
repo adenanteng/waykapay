@@ -207,7 +207,7 @@ class WebHookController extends Controller
             }
         }
 
-        Helper::update_digiflazz_saldo($anj->data->buyer_last_saldo);
+        Helper::update_digiflazz_saldo($anj['data']['buyer_last_saldo']);
 
         return response()->json('ok');
     }
