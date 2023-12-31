@@ -149,7 +149,7 @@ class WebHookController extends Controller
     public function webhookHandlerDigiflazz(Request $request){
         Log::info($request->getContent());
 //        Log::debug(json_decode($request->getContent()));
-        $anj = $request->getContent();
+        $anj = $request->all();
 
         $transaction = Transaction::where('order_id', $anj->data->ref_id)->first();
         $user = User::where('id', $transaction['user_id'])->first();
