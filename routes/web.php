@@ -121,6 +121,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('transaction/detail', [TransactionController::class, 'detail'])->name('transaction.detail');
     Route::resource('/transaction', TransactionController::class)->names('transaction');
 
+    Route::get('report/detail', [ReportController::class, 'detail'])->name('report.detail');
     Route::resource('/report', ReportController::class)->names('report');
 
     Route::resource('/upgrade', UpgradeController::class)->names('upgrade');

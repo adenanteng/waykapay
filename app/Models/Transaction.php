@@ -45,6 +45,7 @@ class Transaction extends Model
     const CLOSE = 7;
     const UNDEFINED = 8;
     const STATUS = [
+        self::ALL => 'Semua',
         self::SUCCESS => 'Sukses',
         self::PENDING => 'Pending',
         self::CANCEL => 'Batal',

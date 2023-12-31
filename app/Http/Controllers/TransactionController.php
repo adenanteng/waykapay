@@ -28,9 +28,9 @@ class TransactionController extends Controller
 
         $prev = Transaction::where('status_id', Transaction::SUCCESS)
             ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT])
-            ->whereYear('created_at', Carbon::today()->year)->whereMonth('created_at', Carbon::now()->subMonth()->month);
+            ->whereMonth('created_at', Carbon::now()->startOfMonth()->subMonth()->month);
 
-//        dd(Carbon::now()->subMonth()->month);
+//        dd(Carbon::now()->startOfMonth()->subMonth()->month);
 
 //        dd(
 //            $now->count(),
@@ -48,23 +48,26 @@ class TransactionController extends Controller
 //        dd($trx->whereDate('created_at', now()->subMonth())->get()->sum('gross_amount'));
 //        dd($trx->whereDate('created_at', Carbon::now()->subMonth())->get()->count());
 
-        $trxSuccess = $now->count();
-        $amount = $now->sum('amount');
-        $gross = $now->sum('gross_amount');
-
 //        $prev_trx = $prev->count();
 //        $prev_amount = $prev->sum('amount');
 //        $prev_gross_amount = $prev->sum('gross_amount');
 
         return Inertia::render('Transaction/Index', [
-            'trx' => Inertia::lazy(fn () => $now->count()),
-            'admin' => Inertia::lazy(fn () => $now->sum('admin_fee')),
-            'amount' => Inertia::lazy(fn () => $now->sum('amount')),
-            'gross_amount' => Inertia::lazy(fn () => $now->sum('gross_amount')),
+            'trx' => $now->count(),
+            'amount' => $now->sum('amount'),
+            'gross_amount' => $now->sum('gross_amount'),
 
-            'prev_trx' => Inertia::lazy(fn () => $prev->count()),
-            'prev_amount' => Inertia::lazy(fn () => $prev->sum('amount')),
-            'prev_gross_amount' => Inertia::lazy(fn () => $prev->sum('gross_amount')),
+            'prev_trx' => $prev->count(),
+            'prev_amount' => $prev->sum('amount'),
+            'prev_gross_amount' => $prev->sum('gross_amount'),
+
+//            'trx' => Inertia::lazy(fn () => $now->count()),
+//            'amount' => Inertia::lazy(fn () => $now->sum('amount')),
+//            'gross_amount' => Inertia::lazy(fn () => $now->sum('gross_amount')),
+//
+//            'prev_trx' => Inertia::lazy(fn () => $prev->count()),
+//            'prev_amount' => Inertia::lazy(fn () => $prev->sum('amount')),
+//            'prev_gross_amount' => Inertia::lazy(fn () => $prev->sum('gross_amount')),
         ]);
     }
 
@@ -94,8 +97,8 @@ class TransactionController extends Controller
 ////            })
 //        );
 
-        $trx = Transaction::where('status_id', Transaction::SUCCESS)
-                ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
+//        $trx = Transaction::where('status_id', Transaction::SUCCESS)
+//                ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
 
         return Inertia::render('Transaction/Detail', [
 //            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
@@ -106,8 +109,11 @@ class TransactionController extends Controller
                         ->OrWhere('customer_no', 'like', '%' . $search . '%')
                         ->OrWhere('product_name', 'like', '%' . $search . '%');
                 })
-                ->when(Req::input('filter'), function ($query, $filter) {
-                    $query->where('category_id', $filter);
+                ->when(Req::input('filter_status'), function ($query, $filter_status) {
+                    $query->where('status_id', $filter_status);
+                })
+                ->when(Req::input('filter_category'), function ($query, $filter_category) {
+                    $query->where('category_id', $filter_category);
                 })
                 ->when(Req::input('date_start'), function ($query, $date_start) {
                     $query->whereDate('created_at', '>=', $date_start);
@@ -122,11 +128,9 @@ class TransactionController extends Controller
 //                    return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
 //                }),
 
-            'amount' => $trx->sum('amount'),
-            'gross_amount' => $trx->sum('gross_amount'),
-
-            'filters' => Req::only(['search', 'filter', 'date_start', 'date_end']),
+            'filters' => Req::only(['search', 'filter_status', 'filter_category', 'date_start', 'date_end']),
             'selectCategory' => Transaction::CATEGORY,
+            'selectStatus' => Transaction::STATUS,
         ]);
     }
 

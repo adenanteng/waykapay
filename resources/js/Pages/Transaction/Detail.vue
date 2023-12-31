@@ -24,12 +24,13 @@ const props = defineProps({
         default: () => ({}),
     },
 
-    amount: Number,
-    gross_amount: Number,
+    // amount: Number,
+    // gross_amount: Number,
 })
 
 let search = ref(props.filters.search);
-let filter = ref(props.filters.filter);
+let filterStatus = ref(props.filters.filterStatus);
+let filterCategory = ref(props.filters.filterCategory);
 const date = ref([]);
 
 onMounted(() => {
@@ -40,13 +41,14 @@ onMounted(() => {
     // date.value = [startDate, endDate];
 })
 
-watch([search, filter, date], ([value, valueF, valueD]) => {
+watch([search, filterStatus, filterCategory, date], ([value, valueFS, valueFC, valueD]) => {
     // console.log(date)
     router.get(
         route('transaction.detail'),
         {
             search: value,
-            filter: valueF,
+            filter_status: valueFS,
+            filter_category: valueFC,
             date_start: valueD ? valueD[0] : null,
             date_end: valueD ? valueD[1] : null
         },
@@ -112,43 +114,6 @@ function formatPrice(value) {
                desc="Riwayat transaksi semua pengguna"
     >
 
-        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
-            <div class="flex w-full items-center justify-between space-x-6 p-6">
-                <div class="flex-1 truncate">
-                    <div class="flex items-center space-x-3">
-                        <h3 class="truncate text-sm text-gray-600">Total Laba</h3>
-<!--                        <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">-->
-<!--                            {{ props.transaction.total }} Transaksi-->
-<!--                        </span>-->
-                    </div>
-                    <p class="mt-1 truncate text-sm font-medium text-gray-900">Rp {{ formatPrice(Number(props.gross_amount) - Number(props.amount)) }}</p>
-                </div>
-                <i class="fa-duotone fa-money-bill-1-wave text-green-600 text-3xl flex-shrink-0" />
-            </div>
-            <div>
-                <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
-                    <div class="flex w-0 flex-1">
-                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
-<!--                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>-->
-                            <div class="ml-3">
-                                <div class="text-xs text-gray-500">Modal</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(Number(props.amount)) }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-0 flex-1">
-                        <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
-<!--                            <i class="fa-duotone fa-coins text-amber-400"/>-->
-                            <div class="ml-3">
-                                <div class="text-xs text-gray-500">Omzet</div>
-                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(Number(props.gross_amount)) }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="">
             <div class="w-full">
                 <TextInput
@@ -188,7 +153,15 @@ function formatPrice(value) {
 
             <div class="w-full">
                 <SelectInput
-                    v-model:model-value.number="filter"
+                    v-model:model-value.number="filterStatus"
+                    :option="$page.props.selectStatus"
+                    class="block w-full shadow"
+                />
+            </div>
+
+            <div class="w-full">
+                <SelectInput
+                    v-model:model-value.number="filterCategory"
                     :option="$page.props.selectCategory"
                     class="block w-full shadow"
                 />

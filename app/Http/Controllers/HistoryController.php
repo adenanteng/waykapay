@@ -70,72 +70,72 @@ class HistoryController extends Controller
 //        dd($transaction->toArray());
 
 //        mulai aari sini
-        if ($transaction->category_id == Transaction::DEPOSIT) {
-            switch ($transaction->status_id) {
-                case (Transaction::SUCCESS):
-                case (Transaction::ERROR):
-//                    session()->flash('flash.banner', 'tidak ada proses!');
-                    break;
-                default:
-            }
-        } elseif ($transaction->category_id == Transaction::TRANSFER) {
-
-        } else {
-            switch ($transaction->status_id) {
-                case (Transaction::SUCCESS):
+//        if ($transaction->category_id == Transaction::DEPOSIT) {
+//            switch ($transaction->status_id) {
+//                case (Transaction::SUCCESS):
 //                case (Transaction::ERROR):
-//                    session()->flash('flash.banner', 'tidak ada proses!');
-                    break;
-                default:
-                    if ($transaction->category_id < 8) {
-                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
-//                        'commands' => 'status-pasca',
-                            'username' => Helper::api()->digiflazz_username,
-                            'buyer_sku_code' => $transaction->sku,
-                            'customer_no' => $transaction->customer_no,
-                            'ref_id' => $transaction->order_id,
-                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id)
-                        ]);
-                    } else {
-                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
-                            'commands' => 'status-pasca',
-                            'username' => Helper::api()->digiflazz_username,
-                            'buyer_sku_code' => $transaction->sku,
-                            'customer_no' => $transaction->customer_no,
-                            'ref_id' => $transaction->order_id,
-                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id),
-                        ]);
-                    }
-
-
-//                dd($response->object()->data);
-
-                    switch ($response->object()->data->status) {
-                        case ('Sukses'):
-                            $transaction->update([
-                                'status_id' => Transaction::SUCCESS,
-                                'desc' => $response->object()->data->sn
-                            ]);
-//                            $user->deposit($transaction->gross_amount);
-                            break;
-
-                        case ('Pending'):
-                            $transaction->update([
-                                'status_id' => Transaction::PENDING,
-                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
-                            ]);
-                            break;
-
-                        default:
-                            $transaction->update([
-                                'status_id' => Transaction::ERROR,
-                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
-                            ]);
-                    }
-
-//                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
-            }
-        }
+////                    session()->flash('flash.banner', 'tidak ada proses!');
+//                    break;
+//                default:
+//            }
+//        } elseif ($transaction->category_id == Transaction::TRANSFER) {
+//
+//        } else {
+//            switch ($transaction->status_id) {
+//                case (Transaction::SUCCESS):
+////                case (Transaction::ERROR):
+////                    session()->flash('flash.banner', 'tidak ada proses!');
+//                    break;
+//                default:
+//                    if ($transaction->category_id < 8) {
+//                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
+////                        'commands' => 'status-pasca',
+//                            'username' => Helper::api()->digiflazz_username,
+//                            'buyer_sku_code' => $transaction->sku,
+//                            'customer_no' => $transaction->customer_no,
+//                            'ref_id' => $transaction->order_id,
+//                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id)
+//                        ]);
+//                    } else {
+//                        $response = Http::post('https://api.digiflazz.com/v1/transaction', [
+//                            'commands' => 'status-pasca',
+//                            'username' => Helper::api()->digiflazz_username,
+//                            'buyer_sku_code' => $transaction->sku,
+//                            'customer_no' => $transaction->customer_no,
+//                            'ref_id' => $transaction->order_id,
+//                            'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id),
+//                        ]);
+//                    }
+//
+//
+////                dd($response->object()->data);
+//
+//                    switch ($response->object()->data->status) {
+//                        case ('Sukses'):
+//                            $transaction->update([
+//                                'status_id' => Transaction::SUCCESS,
+//                                'desc' => $response->object()->data->sn
+//                            ]);
+////                            $user->deposit($transaction->gross_amount);
+//                            break;
+//
+//                        case ('Pending'):
+//                            $transaction->update([
+//                                'status_id' => Transaction::PENDING,
+//                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
+//                            ]);
+//                            break;
+//
+//                        default:
+//                            $transaction->update([
+//                                'status_id' => Transaction::ERROR,
+//                                'desc' => $response->object()->data->rc.' '.$response->object()->data->message
+//                            ]);
+//                    }
+//
+////                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
+//            }
+//        }
 //        sampe sini
 
 
