@@ -151,15 +151,15 @@ class WebHookController extends Controller
 //        Log::debug(json_decode($request->getContent()));
         $anj = $request->all();
 
-        $transaction = Transaction::where('order_id', $anj->data->ref_id)->first();
+        $transaction = Transaction::where('order_id', $anj['data']['ref_id'])->first();
         $user = User::where('id', $transaction['user_id'])->first();
 
         if ($transaction->status_id != Transaction::SUCCESS) {
-            switch($anj->data->status) {
+            switch($anj['data']['status']) {
                 case ('Sukses'):
                     $transaction->update([
                         'status_id' => Transaction::SUCCESS,
-                        'desc' => $anj->data->sn,
+                        'desc' => $anj['data']['sn'],
                     ]);
 
                     $user->update(
@@ -180,7 +180,7 @@ class WebHookController extends Controller
                 case ('Pending'):
                     $transaction->update([
                         'status_id' => Transaction::PENDING,
-                        'desc' => $anj->data->rc.' '.$anj->data->message,
+                        'desc' => $anj['data']['rc'].' '.$anj['data']['message'],
                     ]);
                     break;
 
@@ -192,7 +192,7 @@ class WebHookController extends Controller
                     ]);
                     $transaction->update([
                         'status_id' => Transaction::ERROR,
-                        'desc' => $anj->data->rc.' '.$anj->data->message,
+                        'desc' => $anj['data']['rc'].' '.$anj['data']['message'],
                     ]);
 
                     if ($user->device_token) {
