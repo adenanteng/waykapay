@@ -41,7 +41,7 @@ const form = useForm({
     product_name: '',
     sku: '',
     amount: '',
-    category_id: props.category_id ?? null,
+    category_id: props.category_id ?? 90,
     fee: null,
     pin: null
 });

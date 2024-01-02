@@ -19,6 +19,7 @@ import bcrypt from "bcryptjs";
 
 const props = defineProps({
     response: undefined,
+    category_id: Number,
     customer: Object,
     fee_25: Number,
     fee_50: Number,
@@ -40,7 +41,7 @@ const form = useForm({
     product_name: '',
     sku: '',
     amount: '',
-    category_id: props.category_id ?? null,
+    category_id: props.category_id ?? 5,
     fee: null,
     pin: null
 });
