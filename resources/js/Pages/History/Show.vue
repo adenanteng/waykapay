@@ -525,24 +525,64 @@ function formatPrice(value) {
 <!--                                </div>-->
                             </template>
 
+                            <template v-else>
+                                <template v-if="props.history.category_id != 99 && props.history.category_id != 1">
+                                    <div class="sm:col-span-1 flex sm:block justify-between" >
+                                        <div class="text-sm ">Produk</div>
+                                        <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
+                                    </div>
+                                </template>
+
+                                <template v-if="props.history.category_id != 99 && props.history.category_id != 1">
+                                    <div class="sm:col-span-1 flex sm:block justify-between" >
+                                        <div class="text-sm ">No. Kustomer</div>
+                                        <div class="text-sm font-semibold">{{ props.history.customer_no }}</div>
+                                    </div>
+                                </template>
+
+<!--                                <template v-else >-->
+                                    <div class="sm:col-span-2 flex sm:block justify-between gap-5">
+                                        <div class="text-sm ">Keterangan</div>
+                                        <div class="text-sm font-semibold text-right sm:text-left ">{{ props.history?.desc?.replaceAll("/", " ") ?? '-' }}</div>
+                                    </div>
+<!--                                </template>-->
+                            </template>
+
                             <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm ">Nominal</div>
-                                <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.amount) }}</div>
+                                <div class="text-sm font-semibold">
+                                    Rp {{ props.history.category_id == 1 || props.history.category_id >= 8 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}
+                                </div>
                             </div>
+
                             <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.manual_account">
                                 <div class="text-sm ">Kode Unik</div>
                                 <div class="text-sm font-semibold ">{{ Number(props.history.gross_amount) - Number(props.history.amount) }}</div>
                             </div>
-                            <div class="sm:col-span-1 flex sm:block justify-between" v-else>
-                                <div class="text-sm ">Biaya Admin</div>
-                                <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.admin_fee) }}</div>
-                            </div>
+
                             <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm ">Total</div>
-                                <div class="text-sm font-semibold ">Rp {{ formatPrice(props.history.gross_amount) }}</div>
+                                <div class="text-sm ">Biaya Admin</div>
+                                <div class="text-sm font-semibold">
+                                    Rp {{ props.history.category_id == 1 || props.history.category_id >= 8 ? formatPrice(props.history.admin_fee) : '0' }}
+                                </div>
                             </div>
+
+                            <div v-if="props.history.service_fee!=0" class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm ">Biaya Layanan</div>
+                                <div class="text-sm font-semibold">
+                                    Rp {{ formatPrice(props.history.service_fee) }}
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-1 flex sm:block justify-between">
+                                <div class="text-sm font-bold">Total</div>
+                                <div class="text-sm font-bold">Rp {{ formatPrice(Number(props.history.gross_amount)) }}</div>
+                            </div>
+
                             <div class="" v-if="props.history.manual_account">
+                                <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
                                 <p class="text-xs text-gray-500">Untuk memudahkan transaksi harap transfer nominal beserta kode uniknya ya.</p>
                             </div>
                         </div>
@@ -637,7 +677,7 @@ function formatPrice(value) {
                                 <div class="text-sm font-semibold">{{ props.history.category }}</div>
                             </div>
 
-                            <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 1">
+                            <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id == 1">
                                 <div class="text-sm ">Sumber Dana</div>
                                 <template v-if="props.history.virtual_account">
                                     <div class="text-sm font-semibold uppercase">{{ props.history.virtual_account.bank }}</div>
@@ -673,21 +713,21 @@ function formatPrice(value) {
 
                             <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
 
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm ">Nominal</div>
-                                <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>
-                            </div>
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm ">Biaya Admin</div>
-                                <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>
-                            </div>
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                <div class="text-sm ">Nominal</div>-->
+<!--                                <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.amount) : formatPrice(props.history.gross_amount) }}</div>-->
+<!--                            </div>-->
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                <div class="text-sm ">Biaya Admin</div>-->
+<!--                                <div class="text-sm font-semibold">Rp {{ props.history.category_id == 1 ? formatPrice(props.history.admin_fee) : '0' }}</div>-->
+<!--                            </div>-->
 
-                            <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
+<!--                            <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />-->
 
-                            <div class="sm:col-span-1 flex sm:block justify-between">
-                                <div class="text-sm font-bold">Total</div>
-                                <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>
-                            </div>
+<!--                            <div class="sm:col-span-1 flex sm:block justify-between">-->
+<!--                                <div class="text-sm font-bold">Total</div>-->
+<!--                                <div class="text-sm font-bold">Rp {{ formatPrice(props.history.gross_amount) }}</div>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>

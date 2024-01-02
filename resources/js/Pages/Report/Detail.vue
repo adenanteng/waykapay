@@ -171,15 +171,13 @@ function formatPrice(value) {
                 />
             </div>
 
-            <div class="w-full">
+            <div class="grid grid-cols-2 gap-2 w-full">
                 <SelectInput
                     v-model:model-value.number="filterStatus"
                     :option="$page.props.selectStatus"
                     class="block w-full shadow"
                 />
-            </div>
 
-            <div class="w-full">
                 <SelectInput
                     v-model:model-value.number="filterCategory"
                     :option="$page.props.selectCategory"
@@ -219,6 +217,8 @@ function formatPrice(value) {
                                                 {{ history.product_name }}
                                                 <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                                 <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                                <template v-else-if="history.offline_account">{{ history.offline_account.bank }}</template>
+                                                <template v-else-if="history.manual_account">{{ history.manual_account.bank }}</template>
                                                 <template v-else-if="history.money_transfer">
                                                     <template v-if="history.user_id == $page.props.user.id">
                                                         ke {{ history.money_transfer.to.name }}
