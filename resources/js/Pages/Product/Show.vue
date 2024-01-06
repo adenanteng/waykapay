@@ -43,7 +43,7 @@ const form = useForm({
     amount: '',
     category_id: props.category_id ?? 90,
     fee: null,
-    pin: null
+    pin: null,
 });
 
 const {...userInfo} = computed(() => usePage().props.user).value;
@@ -201,7 +201,7 @@ const handleOnChange = (value) => {
             </template>
         </FormSection>
 
-        <div class="border-b border-gray-300" >
+        <div class="border-b border-gray-300" v-if="props.response !== undefined">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tab=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
@@ -247,6 +247,8 @@ const handleOnChange = (value) => {
                     <p class="text-sm text-gray-600">Produk sedang tidak tersedia, coba beberapa saat lagi.</p>
                 </div>
             </template>
+
+<!--            v-if="props.response !== undefined && form.customer_no.length >= 6" -->
 
             <template v-else v-for="data in sort(props.response.data)" >
                 <template v-if="data.brand == props.product">
@@ -304,6 +306,21 @@ const handleOnChange = (value) => {
                 </template>
             </template>
         </ul>
+
+<!--        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">-->
+<!--            <li class="relative px-6 py-5 flex items-center space-x-3">-->
+<!--                <div class="flex-shrink-0">-->
+<!--                    <img class="w-10" :src="'/img/vendor/' + props.product + '.svg'" alt="">-->
+<!--                </div>-->
+<!--                <div class="flex-1 min-w-0">-->
+<!--                    <button class="focus:outline-none text-left">-->
+<!--                        <span class="absolute inset-0" aria-hidden="true"></span>-->
+<!--                        <p class="text-sm font-medium text-gray-900">Aden Anteng</p>-->
+<!--                        <p class="text-sm text-gray-500 truncate">lalalalla</p>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </li>-->
+<!--        </ul>-->
 
         <DialogModal :show="confirmingModal" @close="closeModal">
             <template #title>

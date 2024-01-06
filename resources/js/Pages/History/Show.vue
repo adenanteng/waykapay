@@ -83,7 +83,7 @@ onMounted(() => {
     if (timerSuccess.value) {
         console.log('anjir')
         // lala
-        // setTimeout(() => timerSuccess.value = false, 5000)
+        setTimeout(() => timerSuccess.value = false, 5000)
     }
 })
 
@@ -162,6 +162,15 @@ function formatPrice(value) {
                                 </SecondaryButton>
 
                             </div>
+
+<!--                            <div class="mt-5">-->
+<!--                                <SecondaryButton-->
+<!--                                    class="border border-gray-300"-->
+<!--                                >-->
+<!--                                    <i class="fa-regular fa-save mr-2" />-->
+<!--                                    Simpan Nomor-->
+<!--                                </SecondaryButton>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </main>
