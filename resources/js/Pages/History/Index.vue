@@ -4,7 +4,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, router} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import moment from "moment";
-// import { Vue3Lottie } from 'vue3-lottie'
+import { Vue3Lottie } from 'vue3-lottie'
 import Badge from "../../Components/Badge.vue";
 
 const props = defineProps({
@@ -187,11 +187,11 @@ if (typeof window !== 'undefined') {
             </template>
 
             <div class="px-4 py-4 sm:px-6 text-center text-gray-900 text-sm" >
-<!--                <Vue3Lottie-->
-<!--                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"-->
-<!--                    :height="200"-->
-<!--                    :width="200"-->
-<!--                />-->
+                <Vue3Lottie
+                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                    :height="200"
+                    :width="200"
+                />
                 Eits, udah mentok hehe
             </div>
         </div>

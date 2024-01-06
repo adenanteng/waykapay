@@ -218,8 +218,7 @@ class WebHookController extends Controller
      */
     public function webhookHandlerPushyRegister(){
 
-        Log::debug(Req::input('token'));
-        Log::debug(Req::input('user'));
+        Log::info(Req::input('token'), Req::input('user'));
 
 //        $device = Device::latest()->first();
 //        if ($device) {

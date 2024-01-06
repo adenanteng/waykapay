@@ -137,7 +137,7 @@ const closeModal = () => {
     // form.reset();
 };
 
-const tab = ref(props.product == 'MAXIM' ? 'Customer' : 'Umum' )
+const tab = ref('Umum' )
 
 const pinModal = ref(false);
 const otpInput = ref(VOtpInput | null);
@@ -206,7 +206,6 @@ const handleOnChange = (value) => {
                 <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tab=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
                         @click="tab='Umum'"
-                        v-if="props.product != 'MAXIM' "
                 >
                     Umum
                 </button>
@@ -225,6 +224,14 @@ const handleOnChange = (value) => {
                         v-if="props.product == 'GO PAY' || props.product == 'MAXIM' "
                 >
                     Driver
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Tanaka HD' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Tanaka HD'"
+                        v-if="props.product == 'Transvision'"
+                >
+                    Tanaka HD
                 </button>
             </nav>
         </div>

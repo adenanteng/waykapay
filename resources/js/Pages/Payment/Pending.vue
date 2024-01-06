@@ -6,7 +6,7 @@ import BlankLayout from "@/Layouts/BlankLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {useForm} from "@inertiajs/vue3";
 import ApplicationLogoTitle from "@/Components/ApplicationLogoTitle.vue";
-// import {Vue3Lottie} from "vue3-lottie";
+import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
     transaction: Object
@@ -65,11 +65,11 @@ function formatPrice(value) {
                     <div class="text-center justify-center">
 <!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
                         <div class="px-4 sm:px-6 text-center text-gray-900 text-sm" >
-<!--                            <Vue3Lottie-->
-<!--                                animation-link="https://lottie.host/6fea85f2-ef6f-4d4b-aac5-6e9ef6521950/iNhXM2CBCy.json"-->
-<!--                                :height="200"-->
-<!--                                :width="200"-->
-<!--                            />-->
+                            <Vue3Lottie
+                                animation-link="https://lottie.host/6fea85f2-ef6f-4d4b-aac5-6e9ef6521950/iNhXM2CBCy.json"
+                                :height="200"
+                                :width="200"
+                            />
                         </div>
                         <h1 class="text-lg font-bold tracking-tight text-gray-900">Transaksi Sedang Diproses</h1>
 
