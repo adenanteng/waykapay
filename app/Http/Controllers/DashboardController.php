@@ -39,7 +39,116 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function reqOtp() {
+    public function requestOtp() {
+
+        $originalNumber = auth()->user()->phone;
+        $countryCode = '62'; // Replace with known country code of user.
+        $internationalNumber = preg_replace('/^0/', $countryCode, $originalNumber);
+//        echo $internationalNumber; // Will output: +6212345678
+        $number = $internationalNumber;
+
+//        dd($url);
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'clientId' => 'ITJXC4MO6U1LVRO4SC37J7DE6RJHNNLK',
+            'clientSecret' => 'l8n4izv923m1vd2j6edobr86aalfeso1'
+        ])->post('https://auth.otpless.app/auth/otp/v1/send',
+            [
+                "phoneNumber" => $number,
+                "otpLength" => 6,
+                "channel" => "WHATSAPP",
+                "expiry" => 360
+            ],
+        );
+
+//        dd($response->object(), $response->status());
+
+        if ($response->successful() && $response->status() == 200) {
+            Otp::create([
+                'user_id' => auth()->user()->id,
+                'otp' => $response->object()->orderId
+            ]);
+        } else {
+            dd($response->object());
+        }
+
+//        return Inertia::render('Dashboard', [
+//           'greet' => false
+//        ]);
+
+        return redirect()->back()->withErrors('pin', 'pin');
+    }
+
+    public function verifyOtp(Request $request) {
+//        dd($request->all());
+
+        $otp = Otp::where('user_id', auth()->user()->id)->latest()->first();
+
+        $originalNumber = auth()->user()->phone;
+        $countryCode = '62'; // Replace with known country code of user.
+        $internationalNumber = preg_replace('/^0/', $countryCode, $originalNumber);
+        $number = $internationalNumber;
+
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'clientId' => 'ITJXC4MO6U1LVRO4SC37J7DE6RJHNNLK',
+            'clientSecret' => 'l8n4izv923m1vd2j6edobr86aalfeso1'
+        ])->post('https://auth.otpless.app/auth/otp/v1/verify',
+            [
+                "orderId" => $otp->otp,
+                "otp" => $request['pin'],
+                "phoneNumber" => $number,
+            ],
+        );
+
+//        dd($response->object());
+        if ($response->successful() && $response->status() == 200) {
+            if ($response->object()->isOTPVerified) {
+                $user = auth()->user();
+                $user->update([
+                    'phone_verified_at' => Carbon::now(),
+                ]);
+
+                $otp->update([
+                    'status_id' => 0
+                ]);
+
+                session()->flash('flash.banner', 'Validasi sukses!');
+                return redirect()->route('dashboard');
+            } else {
+//                dd($response->object()->reason);
+                session()->flash('flash.banner', $response->object()->reason);
+                session()->flash('flash.bannerStyle', 'danger');
+                return redirect()->back()->withErrors('pin', 'pin');
+            }
+        } else {
+            dd($response->object());
+        }
+
+
+//        $idk = Otp::where('user_id', auth()->user()->id)->latest()->first();
+////        dd($idk->otp, $request['pin']);
+//        if ($request['pin'] == $idk->otp) {
+//            $user = auth()->user();
+//            $user->update([
+//                'phone_verified_at' => Carbon::now(),
+//            ]);
+//
+//            $idk->update([
+//                'status_id' => 0
+//            ]);
+//
+//            session()->flash('flash.banner', 'Kode OTP benar!');
+//            return to_route('dashboard');
+//        } else {
+//            session()->flash('flash.banner', 'Kode OTP salah!');
+//            session()->flash('flash.bannerStyle', 'danger');
+//        }
+    }
+
+
+    public function reqOtpRapiwha() {
 
         $originalNumber = auth()->user()->phone;
         $countryCode = '62'; // Replace with known country code of user.
@@ -100,28 +209,4 @@ class DashboardController extends Controller
         }
 
     }
-
-    public function accOtp(Request $request) {
-//        dd($request->all());
-        $idk = Otp::where('user_id', auth()->user()->id)->latest()->first();
-//        dd($idk->otp, $request['pin']);
-        if ($request['pin'] == $idk->otp) {
-            $user = auth()->user();
-            $user->update([
-                'phone_verified_at' => Carbon::now(),
-            ]);
-
-            $idk->update([
-                'status_id' => 0
-            ]);
-
-            session()->flash('flash.banner', 'Kode OTP benar!');
-            return to_route('dashboard');
-        } else {
-            session()->flash('flash.banner', 'Kode OTP salah!');
-            session()->flash('flash.bannerStyle', 'danger');
-        }
-    }
-
-
 }

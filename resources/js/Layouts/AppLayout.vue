@@ -1,6 +1,6 @@
 <script setup>
 import {computed, onMounted, onUnmounted, ref, useSlots, watch} from 'vue';
-import {router, Head, Link} from '@inertiajs/vue3';
+import {router, Head, Link, usePage} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -22,6 +22,10 @@ import {
     TransitionRoot,
 } from '@headlessui/vue'
 import OnlineStatus from "../Components/OnlineStatus.vue";
+import VOtpInput from "vue3-otp-input";
+import DialogModal from "../Components/DialogModal.vue";
+import bcrypt from "bcryptjs";
+import OtpWhatsapp from "../Components/OtpWhatsapp.vue";
 
 const props = defineProps({
     title: String,
@@ -31,6 +35,9 @@ const props = defineProps({
     desc: String,
     avatar: String
 });
+
+const {...userInfo} = computed(() => usePage().props.user).value;
+// console.log(userInfo.name); // Show my user name
 
 const darkMode = ref(false)
 if (typeof window !== 'undefined') {
@@ -48,21 +55,6 @@ const hasAction = computed(() => !! useSlots().action);
 const hasPrevious = computed(() => !! useSlots().previous);
 
 const split = props.name.split(" ");
-
-const setting = [
-    {
-        name: 'Aplikasi',
-        desc: 'Measure actions your users take',
-        href: '/setting',
-        icon: 'fa-screwdriver-wrench',
-    },
-    {
-        name: 'Pengguna',
-        desc: 'Measure actions your users take',
-        href: '/setting/user',
-        icon: 'fa-user-doctor',
-    },
-]
 
 const logout = () => {
     router.post(route('logout'));
@@ -109,8 +101,6 @@ onMounted(() => {
 </script>
 
 <template>
-
-
     <div class="transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
         <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
@@ -506,6 +496,8 @@ onMounted(() => {
                 </div>
             </footer>
         </div>
+
+        <OtpWhatsapp />
     </div>
 
 </template>

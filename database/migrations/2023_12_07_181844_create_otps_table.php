@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('otps', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->integer('otp');
+            $table->string('otp');
             $table->integer('status_id')->default(1);
             $table->timestamps();
         });

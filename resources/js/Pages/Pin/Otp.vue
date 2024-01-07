@@ -34,7 +34,7 @@ const form = useForm({
 
 const storeInformation = () => {
     form.pin = bindModal.value
-    form.post(route('otp.acc'), {
+    form.post(route('otp.verify'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         // replace: true,
@@ -45,7 +45,7 @@ const storeInformation = () => {
 };
 
 const otpInformation = () => {
-    form.get(route('otp.req'), {
+    form.get(route('otp.request'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         replace: true,

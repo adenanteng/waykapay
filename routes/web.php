@@ -57,8 +57,8 @@ Route::inertia('/login-otp', 'Pin/Otp')->name('login.otp');
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/otp/create', [DashboardController::class, 'createOtp'])->name('otp.create');
-    Route::get('/otp/request', [DashboardController::class, 'reqOtp'])->name('otp.req');
-    Route::post('/otp/acc', [DashboardController::class, 'accOtp'])->name('otp.acc');
+    Route::post('/otp/request', [DashboardController::class, 'requestOtp'])->name('otp.request');
+    Route::post('/otp/verify', [DashboardController::class, 'verifyOtp'])->name('otp.verify');
 
     Route::get('/deposit', [DepositController::class, 'index'])->name('deposit.index');
     Route::post('/deposit/method', [DepositController::class, 'method'])->name('deposit.method');
