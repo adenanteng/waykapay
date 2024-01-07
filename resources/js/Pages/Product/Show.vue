@@ -134,6 +134,7 @@ const handleModal = () => {
 const closeModal = () => {
     confirmingModal.value = false;
     pinModal.value = false;
+    otpInput.value?.clearInput();
     // form.reset();
 };
 

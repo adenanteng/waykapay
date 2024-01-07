@@ -17,6 +17,9 @@ import ActionMessage from "@/Components/ActionMessage.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 import ApplicationLogoTitle from "../../Components/ApplicationLogoTitle.vue";
 import { Vue3Lottie } from 'vue3-lottie';
+import VOtpInput from "vue3-otp-input";
+import DialogModal from "../../Components/DialogModal.vue";
+import bcrypt from "bcryptjs";
 
 const props = defineProps({
     // users: Object,
@@ -54,24 +57,15 @@ const storeInformation = () => {
 const validate = () => {
     form.valid = props.history.order_id
     form.valid_amount = amount.value.replaceAll(".", "")
-    if (userInfo.pin) {
-        form.post(route('pin.manualTransfer'), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            // replace: true,
-            onSuccess: () => {
 
-            }
-        });
-    } else {
-        form.patch(route('transaction.update', props.history), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            onSuccess: () => {
-                form.reset()
-            }
-        });
-    }
+    form.patch(route('transaction.update', props.history), {
+        errorBag: 'storeInformation',
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset()
+            pinModal.value = false
+        }
+    });
 };
 
 const timerSuccess = ref(props.goSuccess)
@@ -110,6 +104,44 @@ watch(amount, (newAmount) => {
         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     // console.log(amount.value)
 })
+
+const handleModal = () => {
+    if (userInfo.pin) {
+        pinModal.value=true
+    } else {
+        validate()
+    }
+};
+
+const closeModal = () => {
+    pinModal.value = false;
+    otpInput.value?.clearInput();
+    // form.reset();
+};
+
+const pinModal = ref(false);
+const otpInput = ref(VOtpInput | null);
+const bindModal = ref("");
+const msgError = ref(false);
+
+const handleOnComplete = (value) => {
+    let hash = value;
+    hash = hash.replace(/^\$2y(.+)$/i, '$2a$1');
+    bcrypt.compare(hash, userInfo.pin, function(err, res) {
+        if (res) {
+            validate()
+            // otpInput.value?.clearInput();
+        } else {
+            msgError.value = true
+            otpInput.value?.clearInput();
+        }
+    });
+
+};
+
+const handleOnChange = (value) => {
+    // console.log("OTP changed: ", value);
+};
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -626,7 +658,7 @@ function formatPrice(value) {
                             <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Validasi</h3>
                         </div>
                         <div class="border-t border-gray-600 border-dashed px-4 py-5 sm:px-6">
-                            <form @submit.prevent="validate">
+                            <form @submit.prevent="handleModal">
                                 <div class="grid grid-cols-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <InputLabel for="amount" value="Jumlah Validasi"/>
@@ -749,6 +781,51 @@ function formatPrice(value) {
 <!--        </template>-->
 
 
+        <DialogModal :show="pinModal" @close="closeModal">
+            <template #title>
+                <div class="w-full text-center">
+                    Masukkan PIN transaksi kamu
+                </div>
+
+            </template>
+
+            <template #content>
+                <div class="grid justify-center">
+                    <VOtpInput
+                        ref="otpInput"
+                        v-model:value="bindModal"
+                        input-classes="otp-input"
+                        separator=""
+                        :num-inputs="6"
+                        :should-auto-focus="true"
+                        input-type="letter-numeric"
+                        :conditionalClass="['one', 'two', 'three', 'four', 'five', 'six']"
+                        @on-change="handleOnChange"
+                        @on-complete="handleOnComplete"
+                    />
+                    <!--                    <InputError :message="form.errors.pin" class="mt-2"/>-->
+                    <p v-if="msgError" class="w-full text-center text-sm text-red-600 mt-2">Pin salah, silahkan coba lagi.</p>
+
+                </div>
+            </template>
+
+            <!--            <template #footer>-->
+            <!--                <div class="grid items-center w-full">-->
+            <!--                    <ActionMessage :on="$page.props.user.wallet_balance <= productPrice" class="mr-3">-->
+            <!--                        Saldo anda kurang-->
+            <!--                    </ActionMessage>-->
+
+            <!--                    <PrimaryButton-->
+            <!--                        class="w-full justify-center"-->
+            <!--                        :class="{ 'opacity-25': form.processing }"-->
+            <!--                        :disabled="form.processing || $page.props.user.wallet_balance <= productPrice"-->
+            <!--                        @click="storeInformation"-->
+            <!--                    >-->
+            <!--                        Beli-->
+            <!--                    </PrimaryButton>-->
+            <!--                </div>-->
+            <!--            </template>-->
+        </DialogModal>
         <!--        <MobileMenu/>-->
     </AppLayout>
 </template>
