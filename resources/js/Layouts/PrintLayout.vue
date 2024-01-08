@@ -16,13 +16,7 @@ const props = defineProps({
 
 <template>
     <div class="transition duration-1000" >
-        <template v-if="$page.props.appSetting">
-            <Head :title="title + ' - ' + $page.props.appSetting.name"/>
-        </template>
-
-        <template v-else>
-            <Head :title="title"/>
-        </template>
+        <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
         <div class="flex justify-center items-center max-w-sm mx-auto">
             <slot/>

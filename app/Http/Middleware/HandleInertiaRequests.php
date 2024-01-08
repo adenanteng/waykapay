@@ -7,6 +7,7 @@ use App\Models\AppSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Inertia\Middleware;
+use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -39,11 +40,19 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+//        return [
+//            ...parent::share($request),
+//            'ziggy' => fn () => [
+//                ...(new Ziggy)->toArray(),
+//                'location' => $request->url(),
+//            ],
+//        ];
+
         return array_merge(parent::share($request), [
 //            'appSetting' => AppSetting::get()->first(),
             'appSetting' => Helper::api(),
 //            'fee' => fn () => Helper::api()->fees,
-            'digiflazz_saldo' => Helper::api()->digiflazz_saldo ?? 0,
+//            'digiflazz_saldo' => Helper::api()->digiflazz_saldo ?? 0,
         ]);
     }
 }
