@@ -352,7 +352,7 @@ function greeting() {
                     <div class="flex flex-1">
                         <p class="relative inline-flex flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-gauge-max text-primary-600"/>
-                            <span class="ml-1">Proses Instan</span>
+                            <span class="ml-1">Realtime</span>
                         </p>
                     </div>
                     <div class="flex flex-1">
@@ -364,7 +364,7 @@ function greeting() {
                     <div class="flex flex-1" >
                         <p class="relative inline-flex flex-1 items-center justify-center py-4 text-xs font-medium text-gray-700">
                             <i class="fa-regular fa-badge-check text-primary-600"/>
-                            <span class="ml-1">Bergaransi</span>
+                            <span class="ml-1">Proteksi</span>
                         </p>
                     </div>
                 </div>
@@ -397,7 +397,12 @@ function greeting() {
             <template v-for="slide in props.carousel" :key="slide.id" >
                 <SwiperSlide>
                     <Link :href="slide.href" >
-                        <img :src="slide.media[0].original_url" alt="" class="rounded-3xl w-full h-auto aspect-video object-cover p-1">
+                        <img
+                            :src="slide.media[0].original_url"
+                            loading="lazy"
+                            alt=""
+                            class="rounded-3xl w-full h-auto aspect-video object-cover p-1"
+                        >
                     </Link>
                 </SwiperSlide>
             </template>

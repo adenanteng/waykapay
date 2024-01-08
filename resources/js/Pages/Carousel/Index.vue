@@ -43,7 +43,7 @@ const logout = () => {
 
             <template v-for="data in props.carousel" >
                 <div class="relative items-center bg-white bg-opacity-50 border border-gray-300 shadow-lg rounded-3xl">
-                        <img class="h-auto w-full aspect-video object-cover rounded-t-3xl" :src="data.media[0].original_url" alt="">
+                        <img class="h-auto w-full aspect-video object-cover rounded-t-3xl" :src="data.media[0].original_url" alt="" loading="lazy">
 
                         <Link :href="route('carousel.edit', data)" class="focus:outline-none text-left">
                             <span class="absolute inset-0" aria-hidden="true"></span>
