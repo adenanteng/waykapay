@@ -283,7 +283,7 @@ function greeting() {
             <template v-else>
                 <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                        <template v-for="history in props.history.data" :key="history.id">
+                        <template v-for="history in props.history" :key="history.id">
                             <li>
                                 <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                                     <div class="px-4 py-4 sm:px-6">
