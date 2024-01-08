@@ -40,19 +40,19 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-//        return [
-//            ...parent::share($request),
-//            'ziggy' => fn () => [
-//                ...(new Ziggy)->toArray(),
-//                'location' => $request->url(),
-//            ],
-//        ];
+        return [
+            ...parent::share($request),
+            'ziggy' => fn () => [
+                ...(new Ziggy)->toArray(),
+                'location' => $request->url(),
+            ],
+        ];
 
-        return array_merge(parent::share($request), [
-//            'appSetting' => AppSetting::get()->first(),
-//            'appSetting' => Helper::api(),
-//            'fee' => fn () => Helper::api()->fees,
-//            'digiflazz_saldo' => Helper::api()->digiflazz_saldo ?? 0,
-        ]);
+//        return array_merge(parent::share($request), [
+////            'appSetting' => AppSetting::get()->first(),
+////            'appSetting' => Helper::api(),
+////            'fee' => fn () => Helper::api()->fees,
+////            'digiflazz_saldo' => Helper::api()->digiflazz_saldo ?? 0,
+//        ]);
     }
 }
