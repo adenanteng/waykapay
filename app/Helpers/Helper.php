@@ -12,18 +12,18 @@ class Helper
     public static function api()
     {
 //        if (AppSetting::first() != null) {
-//            return AppSetting::first();
+            return AppSetting::first();
 //        }
 
-        $cached = Redis::get('appsetting');
-
-        if(isset($cached)) {
-            return json_decode($cached, FALSE);
-        }else {
-            $data = AppSetting::first();
-            Redis::set('appsetting', $data,'EX', 600);
-            return json_decode($data, FALSE);
-        }
+//        $cached = Redis::get('appsetting');
+//
+//        if(isset($cached)) {
+//            return json_decode($cached, FALSE);
+//        }else {
+//            $data = AppSetting::first();
+//            Redis::set('appsetting', $data,'EX', 360);
+//            return json_decode($data, FALSE);
+//        }
     }
 
 //    public static function flip_saldo()
@@ -73,7 +73,7 @@ class Helper
             ]);
 
 //            dd($data->status());
-            Redis::set('pricelist', $data,'EX', 600);
+            Redis::set('pricelist', $data,'EX', 360);
 //            $cached = Redis::get('pricelist');
 
 //            dd(json_decode($data));
