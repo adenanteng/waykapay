@@ -134,7 +134,7 @@ const opacity = computed(() => Math.min(Math.max(size.value / 300, 0.7), 1))
 <!--            <div class="fixed inset-0 h-56 sm:w-56 bg-yellow-400 -z-10 rounded-full -translate-x-1/2 mt-64 opacity-75 pointer-events-none blur-2xl"/>-->
 
             <div
-                class="absolute bg-yellow-400 -z-10 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-2xl"
+                class="absolute bg-green-400 -z-10 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-2xl"
                 :style="{
                     opacity,
                     left: `${x}px`,
