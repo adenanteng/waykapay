@@ -294,13 +294,13 @@ function formatPrice(value) {
                                     <div class="text-sm ">Nama Kustomer</div>
                                     <div class="text-sm font-semibold">{{ props.history.desc.split('/')[1] }}</div>
                                 </div>
-                                <div class="sm:col-span-1 flex sm:block justify-between" >
+                                <div class="sm:col-span-2 block justify-between" >
                                     <div class="text-sm ">Stroom</div>
-                                    <div class="text-sm font-bold">
+                                    <div class="text-sm mt-2 sm:mt-0 font-bold text-center sm:text-left">
                                         <Popper content="Sukses Copy" arrow placement="right-end">
                                             <button
                                                 @click="toClipboard(props.history.desc.split('/')[0])"
-                                                class=""
+                                                class="text-lg"
                                             >
                                                 {{ props.history.desc.split('/')[0] }}
                                             </button>
@@ -311,9 +311,9 @@ function formatPrice(value) {
                             </template>
 
                             <template v-else >
-                                <div class="sm:col-span-2 flex sm:block justify-between gap-5">
+                                <div class="sm:col-span-2 block justify-between">
                                     <div class="text-sm ">Keterangan</div>
-                                    <div class="text-sm font-semibold text-right sm:text-left ">{{ props.history?.desc?.replaceAll("/", " ") ?? '-' }}</div>
+                                    <div class="text-sm mt-2 sm:mt-0 font-semibold text-center sm:text-left ">{{ props.history?.desc?.replaceAll("/", " ") ?? '-' }}</div>
                                 </div>
                             </template>
 
@@ -348,7 +348,7 @@ function formatPrice(value) {
 
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm font-bold">Total</div>
-                                <div class="text-sm font-bold">Rp {{ formatPrice(Number(props.history.gross_amount) + Number(props.history.agent_commission)) }}</div>
+                                <div class="text-lg font-bold">Rp {{ formatPrice(Number(props.history.gross_amount) + Number(props.history.agent_commission)) }}</div>
                             </div>
                         </div>
                     </div>
@@ -620,7 +620,7 @@ function formatPrice(value) {
 
                             <div class="sm:col-span-1 flex sm:block justify-between">
                                 <div class="text-sm font-bold">Total</div>
-                                <div class="text-sm font-bold">Rp {{ formatPrice(Number(props.history.gross_amount)) }}</div>
+                                <div class="text-lg font-bold">Rp {{ formatPrice(Number(props.history.gross_amount)) }}</div>
                             </div>
 
                             <div class="" v-if="props.history.manual_account">

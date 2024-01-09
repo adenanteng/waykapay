@@ -103,7 +103,7 @@ function formatPrice(value) {
     >
 
         <div class="min-h-screen flex justify-center items-center py-5">
-            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden border border-gray-300">
+            <div class="bg-white overflow-hidden border border-gray-300">
                 <div class="px-4 py-5 flex flex-col justify-center items-center ">
                     <!--                <ApplicationLogo class="" />-->
                     <ApplicationLogoTitle />
@@ -182,13 +182,13 @@ function formatPrice(value) {
                                 <div class="text-sm">Nama Kustomer</div>
                                 <div class="text-sm font-semibold">{{ props.history.desc.split('/')[1] }}</div>
                             </div>
-                            <div class="flex justify-between" >
+                            <div class="block justify-between" >
                                 <div class="text-sm ">Stroom</div>
-                                <div class="text-sm font-bold">
+                                <div class="text-sm mt-2 font-bold text-center">
                                     <Popper content="Sukses Copy" arrow placement="right-end">
                                         <button
                                             @click="toClipboard(props.history.desc.split('/')[0])"
-                                            class=""
+                                            class="text-lg"
                                         >
                                             {{ props.history.desc.split('/')[0] }}
                                         </button>
@@ -199,9 +199,9 @@ function formatPrice(value) {
                         </template>
 
                         <template v-else >
-                            <div class="flex justify-between gap-5">
+                            <div class="block justify-between">
                                 <div class="text-sm ">Keterangan</div>
-                                <div class="text-sm font-semibold text-right ">{{ props.history?.desc?.replaceAll("/", " ") ?? '-' }}</div>
+                                <div class="text-sm mt-2 font-semibold text-center ">{{ props.history?.desc?.replaceAll("/", " ") ?? '-' }}</div>
                             </div>
                         </template>
 
