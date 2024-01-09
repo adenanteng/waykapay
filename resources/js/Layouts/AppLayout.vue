@@ -108,7 +108,7 @@ const distance = computed(() =>
     Math.sqrt(dx.value * dx.value + dy.value * dy.value)
 )
 
-const size = computed(() => Math.max(300 - distance.value / 3, 170))
+const size = computed(() => Math.max(300 - distance.value / 3, 160))
 const opacity = computed(() => Math.min(Math.max(size.value / 300, 0.7), 1))
 
 
