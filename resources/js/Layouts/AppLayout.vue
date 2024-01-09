@@ -78,7 +78,7 @@ onMounted(() => {
                 // headRef.value.classList.remove("scrollDown");
             } else {
                 if (!hasPrevious.value) {
-                    headRef.value.classList.add('backdrop-blur-sm', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
+                    headRef.value.classList.add('fixed', 'backdrop-blur-sm', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
                     titleRef.value.classList.add('text-xl');
                     paddingRef.value.classList.remove('py-5');
                     paddingRef.value.classList.add('py-2');
@@ -87,7 +87,7 @@ onMounted(() => {
             }
             if (curr === 0) {
                 if (!hasPrevious.value) {
-                    headRef.value.classList.remove('backdrop-blur-sm', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
+                    headRef.value.classList.remove('fixed', 'backdrop-blur-sm', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
                     titleRef.value.classList.remove('text-xl');
                     paddingRef.value.classList.add('py-5');
                     paddingRef.value.classList.remove('py-2');
@@ -119,7 +119,7 @@ onMounted(() => {
             <BackgroundParticle />
 
 <!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
-            <div class="" :class="hasPrevious ? '' : 'sticky sm:relative top-3 right-0 left-0 z-40' " ref="headRef">
+            <div class="transition duration-1000" :class="hasPrevious ? '' : 'sm:relative top-3 right-0 left-0 z-40 ' " ref="headRef">
                 <Popover as="header" class=""  v-slot="{ open }">
 
                         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
