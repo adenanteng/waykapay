@@ -211,7 +211,7 @@ function formatPrice(value) {
 
         <template v-else>
             <template v-if="props.history.status_id == 1">
-                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                     <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                         <!--                    <ApplicationLogo class="block sm:hidden" />-->
                         <ApplicationLogoTitle class="block sm:hidden" />
@@ -361,7 +361,7 @@ function formatPrice(value) {
                 </div>
 
                 <template v-if="props.history.category_id!=0 && props.history.category_id!=1 && $page.props.user.role_id!=3 && props.history.user_id == $page.props.user.id">
-                    <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                    <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                         <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                             <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Komisi Agen</h3>
                         </div>
@@ -439,7 +439,7 @@ function formatPrice(value) {
             </template>
 
             <template v-else-if="props.history.status_id == 2">
-                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                     <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
 <!--                        <ApplicationLogo class="block sm:hidden" />-->
                         <ApplicationLogoTitle class="block sm:hidden" />
@@ -653,7 +653,7 @@ function formatPrice(value) {
                         Kirim bukti tf
                     </SecondaryButton>
 
-                    <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300" v-if="$page.props.user.role_id==1">
+                    <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300" v-if="$page.props.user.role_id==1">
                         <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
                             <h3 class="mt-1 text-lg font-bold leading-6 text-gray-900">Validasi</h3>
                         </div>
@@ -694,7 +694,7 @@ function formatPrice(value) {
             </template>
 
             <template v-else>
-                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                     <div class="px-4 py-5 sm:px-6 flex flex-col justify-center items-center sm:items-start">
 <!--                        <ApplicationLogo class="block sm:hidden" />-->
                         <ApplicationLogoTitle class="block sm:hidden" />

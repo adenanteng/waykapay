@@ -71,7 +71,7 @@ function formatPrice(value) {
                desc="Riwayat transaksi semua pengguna"
     >
         <div>
-            <dl class="mt-2 grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-600 overflow-hidden rounded-3xl bg-white bg-opacity-50 backdrop-blur border border-gray-300 shadow-lg md:grid-cols-4 md:divide-y-0 md:divide-x">
+            <dl class="mt-2 grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-600 overflow-hidden rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm border border-gray-300 shadow-lg md:grid-cols-4 md:divide-y-0 md:divide-x">
                 <div v-for="item in stats" :key="item.name" class="px-4 py-5 sm:p-6">
                     <dt class="text-sm font-normal text-gray-900">{{ item.name }}</dt>
                     <dd class="mt-1 flex items-end justify-between md:block lg:flex">

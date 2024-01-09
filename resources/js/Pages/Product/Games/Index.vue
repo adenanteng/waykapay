@@ -21,7 +21,7 @@ const props = defineProps({
             <PreviousButton />
         </template>
 
-        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
             <li class="relative">
                 <Link :href="route('games.show', 'GOOGLE PLAY INDONESIA')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">

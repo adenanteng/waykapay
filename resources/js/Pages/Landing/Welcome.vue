@@ -282,22 +282,22 @@ const footerNavigation = {
                 <div class="mx-auto max-w-7xl py-12 px-6 lg:py-16 lg:px-8">
                     <p class="text-center text-lg font-semibold text-gray-600">Topup e-wallet, games, voucher, internet dan isi pulsa</p>
                     <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-50 py-8 px-8">
+                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
                             <img class="max-h-12" src="/img/vendor/AXIS.svg" alt="" />
                         </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-50 py-8 px-8">
+                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
                             <img class="max-h-12" src="/img/vendor/TIX%20ID.svg" alt="" />
                         </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-50 py-8 px-8">
+                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
                             <img class="max-h-12" src="/img/vendor/INDIHOME.svg" alt="" />
                         </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-50 py-8 px-8">
+                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
                             <img class="max-h-12" src="/img/vendor/SPOTIFY.svg" alt="" />
                         </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-50 py-8 px-8">
+                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
                             <img class="max-h-12" src="/img/vendor/DANA.svg" alt="" />
                         </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-50 py-8 px-8">
+                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
                             <img class="max-h-12" src="/img/vendor/SHOPEE%20PAY.svg" alt="" />
                         </div>
                     </div>

@@ -53,7 +53,7 @@ if (typeof window !== 'undefined') {
                desc="Riwayat transaksi kamu"
     >
 
-        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300">
             <div class="flex w-full items-center justify-between space-x-6 p-6">
                 <div class="flex-1 truncate">
                     <p class="mt-1 truncate text-sm text-gray-500">Bulan ini</p>
@@ -113,7 +113,7 @@ if (typeof window !== 'undefined') {
 <!--        </div>-->
 
         <template v-if="props.history === undefined">
-            <div class="animate-pulse rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl shadow-lg border border-gray-300 divide-y divide-gray-300">
+            <div class="animate-pulse rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y divide-gray-300">
                 <div v-for="loader in 6" class="px-4 py-4 sm:px-6">
                     <div class="flex items-center justify-between">
                         <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
@@ -134,7 +134,7 @@ if (typeof window !== 'undefined') {
                     {{ index }}
                     <Badge :name="date.length + ' transaksi' " class="ml-3 text-xs text-primary-600 bg-primary-100" />
                 </h3>
-                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                         <template v-for="history in date" :key="history.id">
 <!--                            <template v-if="history.status_id == tabHistory || tabHistory==99">-->

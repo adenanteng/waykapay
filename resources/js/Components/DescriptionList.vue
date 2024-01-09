@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="bg-white bg-opacity-50 shadow-lg border border-gray-300 overflow-hidden rounded-3xl">
+    <div class="bg-white bg-opacity-20 shadow-lg border border-gray-300 overflow-hidden rounded-3xl">
         <div class="px-4 py-5 sm:px-6 flex justify-between">
             <div class="">
                 <h3 class="text-lg leading-6 font-medium text-gray-900"><slot name="title" /></h3>

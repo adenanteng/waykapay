@@ -181,7 +181,7 @@ function greeting() {
 
         <div class="">
             <h3 class="text-gray-700 text-sm ml-3 mb-1">Prabayar</h3>
-            <div class="grid grid-cols-3 grid-rows-6 grid-flow-col bg-white bg-opacity-50 backdrop-blur-2xl rounded-3xl shadow-lg border border-gray-300">
+            <div class="grid grid-cols-3 grid-rows-6 grid-flow-col bg-white bg-opacity-20 backdrop-blur-sm rounded-3xl shadow-lg border border-gray-300">
                 <Link :href="route('pulsa.index')" class="row-span-4 flex justify-center items-center border-b border-r border-gray-300">
                     <div class="text-center">
                         <i class="fa-regular fa-mobile text-5xl text-sky-600" />
@@ -229,7 +229,7 @@ function greeting() {
 
         <div class="">
             <h3 class="text-gray-700 text-sm ml-3 mb-1">Pascabayar</h3>
-            <div class="grid grid-cols-3 bg-white bg-opacity-50 backdrop-blur-2xl rounded-3xl shadow-lg border border-gray-300">
+            <div class="grid grid-cols-3 bg-white bg-opacity-20 backdrop-blur-sm rounded-3xl shadow-lg border border-gray-300">
                 <Link :href="route('pasca.bpjs.index')" class="py-3 rounded-l-3xl flex justify-center items-center border-r border-gray-300">
                     <div class="text-center">
                         <i class="fa-regular fa-heart-pulse text-2xl text-green-600" />
@@ -265,7 +265,7 @@ function greeting() {
             </div>
 
             <template v-if="props.history === undefined">
-                <div class="animate-pulse rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl shadow-lg border border-gray-300 divide-y divide-gray-300">
+                <div class="animate-pulse rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y divide-gray-300">
                     <div v-for="loader in 5" class="px-4 py-4 sm:px-6">
                         <div class="flex items-center justify-between">
                             <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
@@ -281,7 +281,7 @@ function greeting() {
             </template>
 
             <template v-else>
-                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+                <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                         <template v-for="history in props.history" :key="history.id">
                             <li>
@@ -334,7 +334,7 @@ function greeting() {
 
         </div>
 
-        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+        <div class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300">
             <div class="flex w-full items-center justify-between space-x-6 p-3">
                 <div class="flex-1 truncate">
                     <div class="flex items-center space-x-3">

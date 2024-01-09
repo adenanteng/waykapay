@@ -59,7 +59,7 @@ function formatPrice(value) {
             <PreviousButton />
         </template>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+        <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
             <div class="py-4 px-4 lg:flex lg:items-center lg:justify-between">
                 <div class="tracking-tight flex gap-5 items-center">
                     <div class="">
@@ -134,7 +134,7 @@ function formatPrice(value) {
 <!--            </div>-->
 <!--        </template>-->
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+        <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="history in props.history.data">
                     <li>

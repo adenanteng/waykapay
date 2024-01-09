@@ -4,7 +4,7 @@ import {Link} from "@inertiajs/vue3";
 </script>
 
 <template>
-    <div class="rounded-full bg-white bg-opacity-50 backdrop-blur border border-gray-300 overflow-hidden shadow-lg fixed bottom-3 right-4 left-4 lg:hidden z-40">
+    <div class="rounded-full bg-white bg-opacity-20 backdrop-blur-sm border border-gray-300 overflow-hidden shadow-lg fixed bottom-3 right-4 left-4 lg:hidden z-40">
         <div class="pt-3 pb-2">
             <div class="grid grid-cols-4 max-w-7xl mx-auto">
                 <Link :href="route('dashboard')" class="group text-center">

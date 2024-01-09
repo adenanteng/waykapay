@@ -102,7 +102,7 @@ const lists = [
                desc="Daftar harga produk prabayar"
     >
         <div
-            class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+            class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300">
             <div class="flex w-full items-center justify-between space-x-6 p-6">
                 <div class="flex-1 truncate">
                     <div class="flex items-center space-x-3">
@@ -144,7 +144,7 @@ const lists = [
 
         <div class="grid sm:grid-cols-6 gap-5">
             <div class="sm:col-span-2">
-                <div class="bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">
+                <div class="bg-white bg-opacity-20 backdrop-blur-sm border border-gray-300 rounded-3xl shadow-lg">
                     <div class="px-3 py-5 grid gap-3 ">
                         <h3 class="font-semibold text-gray-900 ml-2">
                             Produk Prabayar

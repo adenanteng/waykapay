@@ -59,7 +59,7 @@ function formattedDate(value) {
             </div>
         </div>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+        <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="item in props.users.data" :key="item.id">
                     <li>

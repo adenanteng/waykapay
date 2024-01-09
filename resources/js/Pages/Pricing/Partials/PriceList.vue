@@ -42,7 +42,7 @@ function sort(arr) {
 
     <div v-for="(data, index) in props.list">
         <h3 class="text-gray-900 text-sm font-medium mx-5 mt-5 mb-2">{{ props.title }} {{ index }}</h3>
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+        <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <li v-for="item in sort(data)">
                     <div class="relative px-6 py-5 flex items-center space-x-3">

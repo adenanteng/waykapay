@@ -34,12 +34,12 @@ const props = defineProps({
                 <div
                     class="overflow-hidden rounded-3xl shadow-lg border border-gray-300"
                 >
-                    <div class="relative grid gap-8 bg-white bg-opacity-50 backdrop-blur p-7 lg:grid-cols-2">
+                    <div class="relative grid gap-8 bg-white bg-opacity-20 backdrop-blur p-7 lg:grid-cols-2">
                         <Link
                             v-for="item in props.data"
                             :key="item.name"
                             :href="item.href"
-                            class="-m-3 flex items-center rounded-3xl p-2 transition duration-150 ease-in-out hover:bg-gray-300 hover:bg-opacity-50"
+                            class="-m-3 flex items-center rounded-3xl p-2 transition duration-150 ease-in-out hover:bg-gray-300 hover:bg-opacity-20"
                         >
                             <i class="fa-regular text-primary-700 dark:text-white text-2xl ml-2" :class="item.icon" />
                             <div class="ml-4 text-left">

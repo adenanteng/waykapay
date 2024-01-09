@@ -85,7 +85,7 @@ function formattedDate(value) {
 
         <ul role="list" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <li v-for="item in data" :key="item.name"
-                class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300">
+                class="col-span-1 divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300">
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
                     <div class="flex-1 truncate">
                         <div class="flex items-center space-x-3">
@@ -117,7 +117,7 @@ function formattedDate(value) {
             </li>
         </ul>
 
-        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg ">
+        <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm border border-gray-300 overflow-hidden shadow-lg ">
             <div class="divide-y divide-gray-300 dark:divide-gray-600">
                 <Disclosure as="div" v-for="faq in faqs" :key="faq.question" class="" v-slot="{ open }" >
                     <dt>
@@ -135,7 +135,7 @@ function formattedDate(value) {
             </div>
         </div>
 
-        <ul role="list" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 rounded-3xl bg-white bg-opacity-50 shadow-lg border border-gray-300 divide-y divide-gray-300 dark:divide-gray-600">
+        <ul role="list" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y divide-gray-300 dark:divide-gray-600">
             <li v-for="item in info" :key="item.name" class="">
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
                     <div class="flex-1 ">

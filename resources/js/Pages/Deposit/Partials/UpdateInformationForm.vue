@@ -110,15 +110,15 @@ watch(amount, (newAmount) => {
     </FormSection>
 
     <div class="grid grid-cols-3 lg:grid-cols-6 gap-3">
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=10000">10.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=50000">50.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=100000">100.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=150000">150.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=200000">200.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=500000">500.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=1000000">1.000.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=2000000">2.000.000</SecondaryButton>
-        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-50 shadow-lg" @click="amount=5000000">5.000.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=10000">10.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=50000">50.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=100000">100.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=150000">150.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=200000">200.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=500000">500.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=1000000">1.000.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=2000000">2.000.000</SecondaryButton>
+        <SecondaryButton class="border border-gray-300 justify-center bg-white dark:bg-gray-600 bg-opacity-20 shadow-lg" @click="amount=5000000">5.000.000</SecondaryButton>
     </div>
 
 </template>

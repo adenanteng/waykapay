@@ -15,7 +15,7 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <li class=" backdrop-blur-2xl rounded-3xl">
+    <li class=" backdrop-blur-sm rounded-3xl">
         <div v-for="loader in 6" class="animate-pulse relative px-6 py-5 flex items-center space-x-3">
             <div class="flex-shrink-0">
                 <div class="h-10 w-10 rounded-full bg-gray-300" ></div>
