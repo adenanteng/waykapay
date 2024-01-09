@@ -103,7 +103,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="transition duration-1000 " :class="darkMode ? 'nightwind dark' : 'nightwind' ">
+    <div class="transition duration-1000 overflow-hidden" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
         <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
         <div class="sticky top-0 z-50">
@@ -114,7 +114,7 @@ onMounted(() => {
             <Banner />
         </div>
 
-        <div class="min-h-screen bg-white relative isolate transition duration-1000 " >
+        <div class="min-h-screen bg-white relative isolate transition duration-1000 pt-28 sm:pt-0" >
 
             <BackgroundParticle />
 
