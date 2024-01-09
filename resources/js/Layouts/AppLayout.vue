@@ -27,6 +27,7 @@ import DialogModal from "../Components/DialogModal.vue";
 import bcrypt from "bcryptjs";
 import OtpWhatsapp from "../Components/OtpWhatsapp.vue";
 import {useMouse, useWindowSize} from "@vueuse/core";
+import BackgroundParticle from "../Components/BackgroundParticle.vue";
 
 const props = defineProps({
     title: String,
@@ -77,7 +78,7 @@ onMounted(() => {
                 // headRef.value.classList.remove("scrollDown");
             } else {
                 if (!hasPrevious.value) {
-                    headRef.value.classList.add('backdrop-blur', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
+                    headRef.value.classList.add('backdrop-blur-sm', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
                     titleRef.value.classList.add('text-xl');
                     paddingRef.value.classList.remove('py-5');
                     paddingRef.value.classList.add('py-2');
@@ -86,7 +87,7 @@ onMounted(() => {
             }
             if (curr === 0) {
                 if (!hasPrevious.value) {
-                    headRef.value.classList.remove('backdrop-blur', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
+                    headRef.value.classList.remove('backdrop-blur-sm', 'border', 'border-gray-300', 'mx-4', 'rounded-full', 'sm:mx-0', 'sm:border-0', 'sm:rounded-none');
                     titleRef.value.classList.remove('text-xl');
                     paddingRef.value.classList.add('py-5');
                     paddingRef.value.classList.remove('py-2');
@@ -99,23 +100,10 @@ onMounted(() => {
     });
 });
 
-const { x, y } = useMouse()
-const { width, height } = useWindowSize()
-
-const dx = computed(() => Math.abs(x.value - width.value / 2))
-const dy = computed(() => Math.abs(y.value - height.value / 2))
-const distance = computed(() =>
-    Math.sqrt(dx.value * dx.value + dy.value * dy.value)
-)
-
-const size = computed(() => Math.max(300 - distance.value / 3, 160))
-const opacity = computed(() => Math.min(Math.max(size.value / 300, 0.7), 1))
-
-
 </script>
 
 <template>
-    <div class="transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
+    <div class="transition duration-1000 " :class="darkMode ? 'nightwind dark' : 'nightwind' ">
         <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
         <div class="sticky top-0 z-50">
@@ -126,39 +114,9 @@ const opacity = computed(() => Math.min(Math.max(size.value / 300, 0.7), 1))
             <Banner />
         </div>
 
-        <div class="min-h-screen bg-white relative isolate overflow-hidden transition duration-1000" >
-<!--            <div class="fixed inset-x-0 -top-20 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">-->
-<!--                <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[72.1875rem] -translate-x-1/2 bg-gradient-to-tr from-primary-200 dark:from-primary-700 to-primary-400 dark:to-primary-900 opacity-75 sm:left-[calc(50%-30rem)]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>-->
-<!--            </div>-->
+        <div class="min-h-screen bg-white relative isolate transition duration-1000 pt-28 sm:pt-0" >
 
-<!--            <div class="fixed inset-0 h-56 sm:w-56 bg-yellow-400 -z-10 rounded-full -translate-x-1/2 mt-64 opacity-75 pointer-events-none blur-2xl"/>-->
-
-            <div
-                class="absolute bg-primary-400 -z-10 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-2xl"
-                :style="{
-                    opacity,
-                    left: `${x}px`,
-                    top: `${y}px`,
-                    width: `${size}px`,
-                    height: `${size}px`
-                  }"
-            />
-
-            <div class="fixed inset-0 -z-10 transform-gpu" aria-hidden="true">
-                <svg viewBox="0 0 1024 1024" class="absolute -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0" aria-hidden="true">
-                    <circle cx="512" cy="512" r="512" fill="#0284c7" fill-opacity="0.7" />
-                    <defs>
-                        <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-                            <stop stop-color="#7775D6" />
-                            <stop offset="1" stop-color="#E935C1" />
-                        </radialGradient>
-                    </defs>
-                </svg>
-            </div>
-
-            <div class="fixed inset-x-0 -bottom-32 -z-10 transform-gpu overflow-hidden blur-2xl " aria-hidden="true">
-                <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[72.1875rem] -translate-x-1/2 bg-gradient-to-tr from-primary-200 to-primary-400 dark:from-primary-500 dark:to-primary-700 opacity-75 sm:left-[calc(50%+36rem)]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
-            </div>
+            <BackgroundParticle />
 
 <!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
             <div class="" :class="hasPrevious ? '' : 'sticky sm:relative top-3 right-0 left-0 z-40' " ref="headRef">
@@ -507,6 +465,7 @@ const opacity = computed(() => Math.min(Math.max(size.value / 300, 0.7), 1))
                         </TransitionRoot>
                 </Popover>
             </div>
+
 <!--            -mt-24 -->
             <main class="mt-5">
                 <div class="max-w-3xl lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
