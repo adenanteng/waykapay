@@ -86,7 +86,7 @@ const opacity = computed(() => Math.min(Math.max(size.value / 300, 0.7), 1))
 <!--            </div>-->
 
             <div
-                class="absolute bg-green-400 -z-10 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-2xl"
+                class="absolute bg-primary-400 -z-10 rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none blur-2xl"
                 :style="{
                     opacity,
                     left: `${x}px`,
