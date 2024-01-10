@@ -22,11 +22,7 @@ import {
     TransitionRoot,
 } from '@headlessui/vue'
 import OnlineStatus from "../Components/OnlineStatus.vue";
-import VOtpInput from "vue3-otp-input";
-import DialogModal from "../Components/DialogModal.vue";
-import bcrypt from "bcryptjs";
 import OtpWhatsapp from "../Components/OtpWhatsapp.vue";
-import {useMouse, useWindowSize} from "@vueuse/core";
 import BackgroundParticle from "../Components/BackgroundParticle.vue";
 
 const props = defineProps({
@@ -99,6 +95,24 @@ onMounted(() => {
         }
     });
 });
+
+onUnmounted(() => {
+
+})
+
+// const messages = ref()
+//
+// // Enable pusher logging - don't include this in production
+// Pusher.logToConsole = true;
+//
+// const pusher = new Pusher('e4c42e8e3951c6ee37f6', {
+//     cluster: 'ap1'
+// });
+//
+// let channel = pusher.subscribe('my-channel');
+// channel.bind('my-event', function(data) {
+//     messages.value.push(JSON.stringify(data));
+// });
 
 </script>
 

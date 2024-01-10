@@ -1,35 +1,37 @@
 <script setup>
-import {onUnmounted, ref} from "vue";
-import {Link} from '@inertiajs/vue3';
+import {computed, onUnmounted, ref} from "vue";
+import {Link, router, usePage} from '@inertiajs/vue3';
 import moment from "moment";
 import BlankLayout from "@/Layouts/BlankLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {useForm} from "@inertiajs/vue3";
 import ApplicationLogoTitle from "@/Components/ApplicationLogoTitle.vue";
 import {Vue3Lottie} from "vue3-lottie";
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
 
 const props = defineProps({
     transaction: Object
 })
 
 onUnmounted(() => {
-    clearInterval(interval)
+    // clearInterval(interval)
+    window.Echo.leave('transaction-channel')
 })
 
-const interval = setInterval(() => {
-    form.get(route('product.status', form), {
-        errorBag: 'updateInformation',
-        preserveScroll: true,
-        onSuccess: () => {}
-    });
-}, 5000)
+// const interval = setInterval(() => {
+//     form.get(route('product.status', form), {
+//         errorBag: 'updateInformation',
+//         preserveScroll: true,
+//         onSuccess: () => {}
+//     });
+// }, 5000)
 
 const form = useForm({
     transaction: props.transaction,
 });
 
 const storeInformation = () => {
-
     form.get(route('product.status', form), {
         errorBag: 'updateInformation',
         preserveScroll: true,
@@ -37,17 +39,33 @@ const storeInformation = () => {
     });
 };
 
-function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
-}
+const {...userInfo} = computed(() => usePage().props.user).value;
+// console.log(userInfo.name); // Show my user name
 
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
-}
+if (typeof window !== 'undefined') {
+    window.Pusher = Pusher;
 
-function formatPrice(value) {
-    let val = (value/1).toFixed(0).replace('.', '')
-    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: import.meta.env.VITE_PUSHER_APP_KEY,
+        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+        forceTLS: true
+    });
+
+    let channel = window.Echo.channel('transaction-channel');
+    channel.listen('.transaction-event', function (data) {
+        if (data.action === 'reload' && data.user === userInfo.slug) {
+            form.get(route('product.status', form), {
+                errorBag: 'updateInformation',
+                preserveScroll: true,
+                onSuccess: () => {}
+            });
+
+            console.log(data.action, data.user)
+        } else {
+            console.log(data)
+        }
+    });
 }
 
 </script>

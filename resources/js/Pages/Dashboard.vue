@@ -1,7 +1,7 @@
 <script setup>
-import {onMounted, ref, watch} from "vue";
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, useForm, router} from "@inertiajs/vue3";
+import {Link, useForm, router, usePage} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
@@ -11,6 +11,8 @@ import { FreeMode, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/autoplay';
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
 // import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
@@ -20,6 +22,10 @@ const props = defineProps({
 
 onMounted(() => {
     router.reload({ only: ['history', 'carousel'] })
+})
+
+onUnmounted(() => {
+    window.Echo.leave('transaction-channel')
 })
 
 function formattedDate(value) {
@@ -54,18 +60,29 @@ const onSlideChange = (swiper) => {
     // console.log(swipeMenu);
 };
 
-// function halo() {
-//     try {
-//         // eslint-disable-next-line no-undef
-//         if (AndroidBridge) {
-//             // eslint-disable-next-line no-undef
-//             console.log("Trying to call AndroidBridge.sendDataToKotlin");
-//             AndroidBridge.sendDataToKotlin("Data yang ingin Anda bagikan");
-//         }
-//     } catch (error) {
-//         console.error(error.message);
-//     }
-// }
+const {...userInfo} = computed(() => usePage().props.user).value;
+// console.log(userInfo.name); // Show my user name
+
+if (typeof window !== 'undefined') {
+    window.Pusher = Pusher;
+
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: import.meta.env.VITE_PUSHER_APP_KEY,
+        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+        forceTLS: true
+    });
+
+    let channel = window.Echo.channel('transaction-channel');
+    channel.listen('.transaction-event', function (data) {
+        if (data.action === 'reload' && data.user === userInfo.slug) {
+            router.reload({ only: ['history'] })
+            console.log(data.action, data.user)
+        } else {
+            console.log(data)
+        }
+    });
+}
 
 function greeting() {
     if (moment().format('HH') < 10) {

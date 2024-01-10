@@ -4,6 +4,7 @@ use App\Helpers\Helper;
 use App\Models\Device;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -64,81 +65,7 @@ class WebHookController extends Controller
             ]);
         }
 
-        return response()->json('ok');
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function webhookHandlerDokuAcceptPayment(Request $request){
-
-        $transaction = Transaction::where('order_id', $request['order']['invoice_number'])->first();
-        $user = User::where('id', $transaction['user_id'])->first();
-
-        if ($transaction->status_id != Transaction::SUCCESS) {
-            switch($request['transaction']['status']) {
-                case ('SUCCESS'):
-                    $user->deposit($transaction->amount);
-                    $user->update([
-                        'wallet_balance' => $user->wallet_balance + $transaction->amount,
-                    ]);
-                    $status_id = Transaction::SUCCESS;
-                    break;
-
-                case ('CANCEL'):
-                    $status_id = Transaction::CANCEL;
-                    break;
-
-                case ('FAILED'):
-                    $status_id = Transaction::ERROR;
-                    break;
-
-                default:
-                    $status_id = Transaction::UNDEFINED;
-            }
-
-            $transaction->update([
-                'status_id' => $status_id,
-            ]);
-        }
-
-        return response()->json('ok');
-    }
-
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function webhookHandlerFlipAcceptPayment(Request $request){
-
-        $transaction = Transaction::where('order_id', $request['bill_link_id'])->first();
-        $user = User::where('id', $transaction['user_id'])->first();
-
-        if ($transaction->status_id != Transaction::SUCCESS) {
-            switch($request['status']) {
-                case ('SUCCESSFUL'):
-                    $user->deposit($transaction->amount);
-                    $status_id = Transaction::SUCCESS;
-                    break;
-
-                case ('CANCELLED'):
-                    $status_id = Transaction::CANCEL;
-                    break;
-
-                case ('FAILED'):
-                    $status_id = Transaction::ERROR;
-                    break;
-
-                default:
-                    $status_id = Transaction::UNDEFINED;
-            }
-
-            $transaction->update([
-                'status_id' => $status_id,
-            ]);
-        }
-
+        Helper::pusher()->trigger('transaction-channel', 'transaction-event', array('action' => 'reload', 'user' => $user->slug));
         return response()->json('ok');
     }
 
@@ -207,6 +134,7 @@ class WebHookController extends Controller
             }
         }
 
+        Helper::pusher()->trigger('transaction-channel', 'transaction-event', array('action' => 'reload', 'user' => $user->slug));
         Helper::update_digiflazz_saldo($anj['data']['buyer_last_saldo']);
 
         return response()->json('ok');
@@ -257,6 +185,12 @@ class WebHookController extends Controller
         return response()->json('ok');
     }
 
+    public function webhookTest() {
+        Helper::pusher()->trigger('transaction-channel', 'transaction-event', array('action' => 'reload', 'user' => auth()->user()->slug));
+
+        return 'ok';
+    }
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -280,6 +214,81 @@ class WebHookController extends Controller
                     break;
 
                 case ('202'):
+                    $status_id = Transaction::ERROR;
+                    break;
+
+                default:
+                    $status_id = Transaction::UNDEFINED;
+            }
+
+            $transaction->update([
+                'status_id' => $status_id,
+            ]);
+        }
+
+        return response()->json('ok');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function webhookHandlerDokuAcceptPayment(Request $request){
+
+        $transaction = Transaction::where('order_id', $request['order']['invoice_number'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
+
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['transaction']['status']) {
+                case ('SUCCESS'):
+                    $user->deposit($transaction->amount);
+                    $user->update([
+                        'wallet_balance' => $user->wallet_balance + $transaction->amount,
+                    ]);
+                    $status_id = Transaction::SUCCESS;
+                    break;
+
+                case ('CANCEL'):
+                    $status_id = Transaction::CANCEL;
+                    break;
+
+                case ('FAILED'):
+                    $status_id = Transaction::ERROR;
+                    break;
+
+                default:
+                    $status_id = Transaction::UNDEFINED;
+            }
+
+            $transaction->update([
+                'status_id' => $status_id,
+            ]);
+        }
+
+        return response()->json('ok');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function webhookHandlerFlipAcceptPayment(Request $request){
+
+        $transaction = Transaction::where('order_id', $request['bill_link_id'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
+
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['status']) {
+                case ('SUCCESSFUL'):
+                    $user->deposit($transaction->amount);
+                    $status_id = Transaction::SUCCESS;
+                    break;
+
+                case ('CANCELLED'):
+                    $status_id = Transaction::CANCEL;
+                    break;
+
+                case ('FAILED'):
                     $status_id = Transaction::ERROR;
                     break;
 

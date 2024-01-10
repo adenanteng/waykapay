@@ -1,11 +1,13 @@
 <script setup>
-import {onMounted, onUnmounted, ref, watch} from "vue";
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, useForm, router} from "@inertiajs/vue3";
+import {Link, useForm, router, usePage} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import moment from "moment";
 import { Vue3Lottie } from 'vue3-lottie'
 import Badge from "../../Components/Badge.vue";
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
 
 const props = defineProps({
     history: undefined,
@@ -19,13 +21,14 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-    clearInterval(interval)
+    // clearInterval(interval)
+    window.Echo.leave('transaction-channel')
 })
 
-const interval = setInterval(() => {
-    console.log('interval');
-    router.reload({ only: ['history', 'in_count', 'out_count', 'all_process'] })
-}, 10000)
+// const interval = setInterval(() => {
+//     console.log('interval');
+//     router.reload({ only: ['history', 'in_count', 'out_count', 'all_process'] })
+// }, 10000)
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -36,13 +39,37 @@ function formatPrice(value) {
     return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 
-if (typeof window !== 'undefined') {
-    const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 2)
+// if (typeof window !== 'undefined') {
+//     const tabHistory = ref(JSON.parse(localStorage.getItem('tabHistory')) ?? 2)
+//
+//     watch(tabHistory, (newTabHistory) => {
+//         console.log(`tab is ${newTabHistory}`)
+//         localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
+//     })
+// }
 
-    watch(tabHistory, (newTabHistory) => {
-        console.log(`tab is ${newTabHistory}`)
-        localStorage.setItem('tabHistory', JSON.stringify(newTabHistory))
-    })
+const {...userInfo} = computed(() => usePage().props.user).value;
+// console.log(userInfo.name); // Show my user name
+
+if (typeof window !== 'undefined') {
+    window.Pusher = Pusher;
+
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: import.meta.env.VITE_PUSHER_APP_KEY,
+        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+        forceTLS: true
+    });
+
+    let channel = window.Echo.channel('transaction-channel');
+    channel.listen('.transaction-event', function (data) {
+        if (data.action === 'reload' && data.user === userInfo.slug) {
+            router.reload({ only: ['history', 'in_count', 'out_count', 'all_process'] })
+            console.log(data.action, data.user)
+        } else {
+            console.log(data)
+        }
+    });
 }
 
 </script>

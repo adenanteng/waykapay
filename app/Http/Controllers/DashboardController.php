@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\TransactionEvent;
+use App\Helpers\Helper;
 use App\Models\Carousel;
 use App\Models\Otp;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -15,11 +18,21 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Otpless\OTPLessAuth;
 use Psy\Util\Str;
+use Pusher\ApiErrorException;
+use Pusher\Pusher;
+use Pusher\PusherException;
 use Stephenjude\Wallet\Exceptions\InsufficientFundException;
 
 class DashboardController extends Controller
 {
-    public function index() {
+    /**
+     * @throws PusherException
+     * @throws ApiErrorException
+     * @throws GuzzleException
+     */
+    public function index(): Response
+    {
+
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        dd(Transaction::where('user_id', auth()->user()->id)->latest()->take(5)->get());
         return Inertia::render('Dashboard', [

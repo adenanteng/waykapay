@@ -6,6 +6,8 @@ use App\Models\AppSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;
+use Pusher\Pusher;
+use Pusher\PusherException;
 
 class Helper
 {
@@ -170,5 +172,17 @@ class Helper
             }
         }
         return $phoneNumber;
+    }
+
+    /**
+     * @throws PusherException
+     */
+    public static function pusher() {
+        return new Pusher(
+            "e4c42e8e3951c6ee37f6",
+            "6fbcf5dc9a409d3ae337",
+            "1696509",
+            array('cluster' => 'ap1')
+        );
     }
 }
