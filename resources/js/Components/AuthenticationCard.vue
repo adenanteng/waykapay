@@ -31,10 +31,13 @@ if (typeof window !== 'undefined') {
 
 <template>
 
-    <div class="" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
+    <div class="relative transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
+
         <div class="min-h-screen flex bg-white relative isolate" >
 
-            <BackgroundParticle />
+            <div class="-z-10">
+                <BackgroundParticle />
+            </div>
 
             <div class="min-h-screen flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
                 <div class="mx-auto w-full max-w-sm lg:w-96 py-10">
