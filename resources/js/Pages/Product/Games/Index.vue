@@ -25,7 +25,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'GOOGLE PLAY INDONESIA')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/GOOGLE%20PLAY%20INDONESIA.png" alt="" class="h-10">
+                    <img src="/img/games/GOOGLE%20PLAY%20INDONESIA.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Google Play</h3>
@@ -37,7 +37,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'Steam Wallet (IDR)')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/Steam%20Wallet%20(IDR).png" alt="" class="h-10">
+                    <img src="/img/games/Steam%20Wallet%20(IDR).png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Steam</h3>
@@ -49,7 +49,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'Unipin Voucher')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/Unipin%20Voucher.png" alt="" class="h-10">
+                    <img src="/img/games/Unipin%20Voucher.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Unipin Voucher</h3>
@@ -61,7 +61,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'PUBG MOBILE')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/PUBG%20MOBILE.png" alt="" class="h-10">
+                    <img src="/img/games/PUBG%20MOBILE.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">PUBG Mobile</h3>
@@ -73,7 +73,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'MOBILE LEGENDS')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/MOBILE%20LEGENDS.png" alt="" class="h-10">
+                    <img src="/img/games/MOBILE%20LEGENDS.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Mobile Legends</h3>
@@ -85,7 +85,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'HAGO')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/HAGO.png" alt="" class="h-10">
+                    <img src="/img/games/HAGO.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">HAGO</h3>
@@ -97,7 +97,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'FC Mobile')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/FC%20Mobile.png" alt="" class="h-10">
+                    <img src="/img/games/FC%20Mobile.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">FC Mobile</h3>
@@ -109,7 +109,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'Valorant')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/Valorant.png" alt="" class="h-10">
+                    <img src="/img/games/Valorant.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Valorant</h3>
@@ -121,7 +121,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'Bigo Live')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/Bigo%20Live.png" alt="" class="h-10">
+                    <img src="/img/games/Bigo%20Live.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Bigo Live</h3>
@@ -133,7 +133,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('games.show', 'IMVU')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/games/IMVU.png" alt="" class="h-10">
+                    <img src="/img/games/IMVU.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">IMVU</h3>

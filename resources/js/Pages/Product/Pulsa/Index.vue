@@ -395,7 +395,7 @@ const handleOnChange = (value) => {
                             <template v-if="data.type == tabData">
                                 <li class="relative px-6 py-5 flex items-center space-x-3">
                                     <div class="flex-shrink-0">
-                                        <img class="h-10 w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
+                                        <img class="w-10" :src=" '/img/vendor/'+data.brand+'.svg' " alt="">
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo)  && data.buyer_product_status">

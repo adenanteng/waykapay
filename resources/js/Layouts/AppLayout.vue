@@ -128,7 +128,7 @@ onUnmounted(() => {
             <Banner />
         </div>
 
-        <div class="min-h-screen bg-white relative isolate transition duration-1000 pt-28 sm:pt-0" >
+        <div class="min-h-screen bg-white relative isolate transition duration-1000 " >
 
             <BackgroundParticle />
 

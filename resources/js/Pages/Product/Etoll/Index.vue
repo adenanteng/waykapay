@@ -25,7 +25,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('etoll.show', 'MANDIRI E-TOLL')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <i class="fa-regular fa-cards-blank text-3xl text-blue-500" />
+                    <img src="/img/vendor/MANDIRI%20E-TOLL.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Mandiri E-Toll</h3>
@@ -37,7 +37,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('etoll.show', 'TAPCASH BNI')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <i class="fa-regular fa-cards-blank text-3xl text-orange-500" />
+                    <img src="/img/vendor/TAPCASH%20BNI.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Tapcash BNI</h3>
@@ -49,7 +49,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('etoll.show', 'BRI BRIZZI')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <i class="fa-regular fa-cards-blank text-3xl text-indigo-500" />
+                    <img src="/img/vendor/BRI%20BRIZZI.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">BRI Brizzi</h3>

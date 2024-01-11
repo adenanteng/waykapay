@@ -33,7 +33,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('pasca.index', 'indihome')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/INDIHOME.svg" alt="" class="w-20">
+                    <img src="/img/vendor/INDIHOME.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Indihome</h3>
@@ -45,7 +45,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('pasca.index', 'myrepublic')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/MYREPUBLIC.svg" alt="" class="w-20">
+                    <img src="/img/vendor/MYREPUBLIC.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">MyRepublic</h3>

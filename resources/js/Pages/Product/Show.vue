@@ -164,6 +164,41 @@ const handleOnChange = (value) => {
     // console.log("OTP changed: ", value);
 };
 
+function checkIfImageExists(url, callback) {
+    const img = new Image();
+    img.src = url;
+
+    if (img.complete) {
+        callback(true);
+    } else {
+        img.onload = () => {
+            callback(true);
+        };
+
+        img.onerror = () => {
+            callback(false);
+        };
+    }
+}
+
+const checkImage = (url) => {
+    const img = new Image();
+    img.src = '/img/vendor/' + url + '.svg'
+
+    if (img.complete) {
+        return '/img/vendor/' + url + '.svg'
+    } else {
+        img.onload = () => {
+            return '/img/vendor/' + url + '.svg'
+        }
+
+        img.onerror = () => {
+            console.log('/img/games/' + url + '.png')
+            return '/img/games/' + url + '.png'
+        }
+    }
+}
+
 </script>
 
 <template>
@@ -255,9 +290,12 @@ const handleOnChange = (value) => {
                 <template v-if="data.brand == props.product">
                     <template v-if="data.type == tab">
                         <li class="relative px-6 py-5 flex items-center space-x-3">
-                            <div class="flex-shrink-0">
+
+                            <div class="flex-shrink-0" >
+                                <img class="w-10" :src="'/img/vendor/' + props.product + '.png'" alt="">
                                 <img class="w-10" :src="'/img/vendor/' + props.product + '.svg'" alt="">
                             </div>
+
                             <div class="flex-1 min-w-0">
                                 <template v-if="Number(data.price) < Number($page.props.digiflazz_saldo) && data.buyer_product_status && data.seller_product_status">
                                     <button @click="confirmModal(data)" class="focus:outline-none text-left">

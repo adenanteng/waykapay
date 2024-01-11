@@ -30,7 +30,7 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('television.show', 'K-VISION dan GOL')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/K-VISION%20dan%20GOL.svg" alt="" class="w-20">
+                    <img src="/img/vendor/K-VISION%20dan%20GOL.png" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">K-Vision</h3>
@@ -42,7 +42,7 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('television.show', 'Nex Parabola')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/Nex%20Parabola.svg" alt="" class="w-20">
+                    <img src="/img/vendor/Nex%20Parabola.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Nex Parabola</h3>
@@ -54,7 +54,7 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('television.show', 'Transvision')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/Transvision.svg" alt="" class="w-20">
+                    <img src="/img/vendor/Transvision.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Transvision</h3>

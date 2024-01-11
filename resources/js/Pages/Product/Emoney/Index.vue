@@ -25,7 +25,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('emoney.show', 'DANA')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/DANA.svg" alt="" class="w-20">
+                    <img src="/img/vendor/DANA.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Dana</h3>
@@ -37,7 +37,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('emoney.show', 'GO PAY')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/GO%20PAY.svg" alt="" class="w-20">
+                    <img src="/img/vendor/GO%20PAY.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Gopay</h3>
@@ -49,7 +49,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('emoney.show', 'OVO')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/OVO.svg" alt="" class="w-20">
+                    <img src="/img/vendor/OVO.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">OVO</h3>
@@ -61,7 +61,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('emoney.show', 'SHOPEE PAY')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/SHOPEE%20PAY.svg" alt="" class="w-20">
+                    <img src="/img/vendor/SHOPEE%20PAY.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">ShopeePay</h3>
@@ -73,7 +73,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('emoney.show', 'LinkAja')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/LINKAJA.svg" alt="" class="w-16">
+                    <img src="/img/vendor/LinkAja.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">LinkAja</h3>
@@ -85,7 +85,7 @@ const props = defineProps({
             <li class="relative">
                 <Link :href="route('emoney.show', 'MAXIM')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/MAXIM.svg" alt="" class="w-20">
+                    <img src="/img/vendor/MAXIM.svg" alt="" class="w-10">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">Maxim</h3>

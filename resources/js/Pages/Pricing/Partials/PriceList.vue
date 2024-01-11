@@ -48,15 +48,15 @@ function sort(arr) {
                     <div class="relative px-6 py-5 flex items-center space-x-3">
                         <div class="flex-shrink-0">
                             <img
-                                class="h-6"
+                                class="w-10"
                                 :src="'/img/vendor/' + item.brand + '.svg'"
                                 alt=""
                             >
-<!--                            <img-->
-<!--                                class="w-10 h-7"-->
-<!--                                :src="'/img/games/icons/' + item.brand + '.png'"-->
-<!--                                alt=""-->
-<!--                            >-->
+                            <img
+                                class="w-10"
+                                :src="'/img/vendor/' + item.brand + '.png'"
+                                alt=""
+                            >
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="focus:outline-none text-left">
