@@ -278,213 +278,216 @@ const footerNavigation = {
                 </div>
             </div>
 
-            <div class="">
-                <div class="mx-auto max-w-7xl py-12 px-6 lg:py-16 lg:px-8">
-                    <p class="text-center text-lg font-semibold text-gray-600">Topup e-wallet, games, voucher, internet dan isi pulsa</p>
-                    <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
-                            <img class="max-h-12" src="/img/vendor/AXIS.svg" alt="" />
-                        </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
-                            <img class="max-h-12" src="/img/vendor/TIX%20ID.svg" alt="" />
-                        </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
-                            <img class="max-h-12" src="/img/vendor/INDIHOME.svg" alt="" />
-                        </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
-                            <img class="max-h-12" src="/img/vendor/SPOTIFY.svg" alt="" />
-                        </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
-                            <img class="max-h-12" src="/img/vendor/DANA.svg" alt="" />
-                        </div>
-                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">
-                            <img class="max-h-12" src="/img/vendor/SHOPEE%20PAY.svg" alt="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            dari sini -->
 
-            <!-- Alternating Feature Sections -->
-            <div class="relative overflow-hidden pt-16 pb-32" >
-<!--                <div aria-hidden="true" class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100" />-->
-                <div class="relative">
-                    <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-                        <div class="mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
-                            <div>
-                                <div>
-                                  <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">
-                                      <i class="fa-regular fa-wallet text-xl text-white nightwind-prevent" />
-                                  </span>
-                                </div>
-                                <div class="mt-6">
-                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Seperti dompetmu, tapi lebih canggih</h2>
-                                    <p class="mt-4 text-lg text-gray-500">
-                                        Waykapay bikin kamu lebih mudah untuk akses semua kebutuhan transaksi dan mulai berinvestasi.
-                                    </p>
-                                    <div class="mt-6">
-<!--                                        <PrimaryButton>Get started</PrimaryButton>-->
-                                   </div>
-                                </div>
-                            </div>
-                            <div class="mt-8 border-t border-gray-200 pt-6">
-                                <blockquote>
-                                    <div>
-                                        <p class="text-base text-gray-500">&ldquo;Cras velit quis eros eget rhoncus lacus ultrices sed diam. Sit orci risus aenean curabitur donec aliquet. Mi venenatis in euismod ut.&rdquo;</p>
-                                    </div>
-                                    <footer class="mt-3">
-                                        <div class="flex items-center space-x-3">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1509783236416-c9ad59bae472?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" />
-                                            </div>
-                                            <div class="text-base font-medium text-gray-700">Marcia Hill, Digital Marketing Manager</div>
-                                        </div>
-                                    </footer>
-                                </blockquote>
-                            </div>
-                        </div>
-                        <div class="mt-12 sm:mt-16 lg:mt-0">
-                            <div class="-mr-48 pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                                <img class="w-full rounded-3xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-1.jpg" alt="Inbox user interface" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-24">
-                    <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-                        <div class="mx-auto max-w-xl px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
-                            <div>
-                                <div>
-                                  <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">
-                                      <i class="fa-regular fa-shield-check text-xl text-white nightwind-prevent" />
-                                  </span>
-                                </div>
-                                <div class="mt-6">
-                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Perlindungan dengan Waykapay Protection</h2>
-                                    <p class="mt-4 text-lg text-gray-500">
-                                        Dengan standar keamanan PCI DSS & ISO 27001, Waykapay mengamankan data pembayaran dan informasi milikmu. Garansi berlaku saat ada kehilangan uang di Saldo Waykapay & sumber uang lainnya yang tersimpan di Waykapay.
-                                    </p>
-                                    <div class="mt-6">
-<!--                                        <PrimaryButton>Get started</PrimaryButton>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
-                            <div class="-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                                <img class="w-full rounded-3xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-2.jpg" alt="Customer profile user interface" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="">-->
+<!--                <div class="mx-auto max-w-7xl py-12 px-6 lg:py-16 lg:px-8">-->
+<!--                    <p class="text-center text-lg font-semibold text-gray-600">Topup e-wallet, games, voucher, internet dan isi pulsa</p>-->
+<!--                    <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">-->
+<!--                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">-->
+<!--                            <img class="max-h-12" src="/img/vendor/AXIS.svg" alt="" />-->
+<!--                        </div>-->
+<!--                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">-->
+<!--                            <img class="max-h-12" src="/img/vendor/TIX%20ID.svg" alt="" />-->
+<!--                        </div>-->
+<!--                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">-->
+<!--                            <img class="max-h-12" src="/img/vendor/INDIHOME.svg" alt="" />-->
+<!--                        </div>-->
+<!--                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">-->
+<!--                            <img class="max-h-12" src="/img/vendor/SPOTIFY.svg" alt="" />-->
+<!--                        </div>-->
+<!--                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">-->
+<!--                            <img class="max-h-12" src="/img/vendor/DANA.svg" alt="" />-->
+<!--                        </div>-->
+<!--                        <div class="col-span-1 flex justify-center bg-gray-100 bg-opacity-20 backdrop-blur-sm py-8 px-8">-->
+<!--                            <img class="max-h-12" src="/img/vendor/SHOPEE%20PAY.svg" alt="" />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <!-- Gradient Feature Section -->
-            <div class="bg-gradient-to-r from-blue-800 to-primary-700 nightwind-prevent-block">
-                <div class="mx-auto max-w-4xl py-16 px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:px-8 lg:pt-24">
-                    <h2 class="text-3xl font-bold tracking-tight text-white">Inbox support built for efficiency</h2>
-                    <p class="mt-4 max-w-3xl text-lg text-blue-200">Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis. Blandit aliquam sit nisl euismod mattis in.</p>
-                    <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
-                        <div v-for="feature in features" :key="feature.name">
-                            <div>
-                                <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-white bg-opacity-10">
-                                  <component :is="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />
-                                </span>
-                            </div>
-                            <div class="mt-6">
-                                <h3 class="text-lg font-medium text-white">{{ feature.name }}</h3>
-                                <p class="mt-2 text-base text-blue-200">{{ feature.description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            &lt;!&ndash; Alternating Feature Sections &ndash;&gt;-->
+<!--            <div class="relative overflow-hidden pt-16 pb-32" >-->
+<!--&lt;!&ndash;                <div aria-hidden="true" class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100" />&ndash;&gt;-->
+<!--                <div class="relative">-->
+<!--                    <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">-->
+<!--                        <div class="mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">-->
+<!--                            <div>-->
+<!--                                <div>-->
+<!--                                  <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">-->
+<!--                                      <i class="fa-regular fa-wallet text-xl text-white nightwind-prevent" />-->
+<!--                                  </span>-->
+<!--                                </div>-->
+<!--                                <div class="mt-6">-->
+<!--                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Seperti dompetmu, tapi lebih canggih</h2>-->
+<!--                                    <p class="mt-4 text-lg text-gray-500">-->
+<!--                                        Waykapay bikin kamu lebih mudah untuk akses semua kebutuhan transaksi dan mulai berinvestasi.-->
+<!--                                    </p>-->
+<!--                                    <div class="mt-6">-->
+<!--&lt;!&ndash;                                        <PrimaryButton>Get started</PrimaryButton>&ndash;&gt;-->
+<!--                                   </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="mt-8 border-t border-gray-200 pt-6">-->
+<!--                                <blockquote>-->
+<!--                                    <div>-->
+<!--                                        <p class="text-base text-gray-500">&ldquo;Cras velit quis eros eget rhoncus lacus ultrices sed diam. Sit orci risus aenean curabitur donec aliquet. Mi venenatis in euismod ut.&rdquo;</p>-->
+<!--                                    </div>-->
+<!--                                    <footer class="mt-3">-->
+<!--                                        <div class="flex items-center space-x-3">-->
+<!--                                            <div class="flex-shrink-0">-->
+<!--                                                <img class="h-6 w-6 rounded-full" src="https://images.unsplash.com/photo-1509783236416-c9ad59bae472?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80" alt="" />-->
+<!--                                            </div>-->
+<!--                                            <div class="text-base font-medium text-gray-700">Marcia Hill, Digital Marketing Manager</div>-->
+<!--                                        </div>-->
+<!--                                    </footer>-->
+<!--                                </blockquote>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="mt-12 sm:mt-16 lg:mt-0">-->
+<!--                            <div class="-mr-48 pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">-->
+<!--                                <img class="w-full rounded-3xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-1.jpg" alt="Inbox user interface" />-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="mt-24">-->
+<!--                    <div class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">-->
+<!--                        <div class="mx-auto max-w-xl px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">-->
+<!--                            <div>-->
+<!--                                <div>-->
+<!--                                  <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-r from-blue-600 to-primary-600">-->
+<!--                                      <i class="fa-regular fa-shield-check text-xl text-white nightwind-prevent" />-->
+<!--                                  </span>-->
+<!--                                </div>-->
+<!--                                <div class="mt-6">-->
+<!--                                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Perlindungan dengan Waykapay Protection</h2>-->
+<!--                                    <p class="mt-4 text-lg text-gray-500">-->
+<!--                                        Dengan standar keamanan PCI DSS & ISO 27001, Waykapay mengamankan data pembayaran dan informasi milikmu. Garansi berlaku saat ada kehilangan uang di Saldo Waykapay & sumber uang lainnya yang tersimpan di Waykapay.-->
+<!--                                    </p>-->
+<!--                                    <div class="mt-6">-->
+<!--&lt;!&ndash;                                        <PrimaryButton>Get started</PrimaryButton>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">-->
+<!--                            <div class="-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">-->
+<!--                                <img class="w-full rounded-3xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/inbox-app-screenshot-2.jpg" alt="Customer profile user interface" />-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <!-- Stats section -->
-            <div class="relative bg-gray-900 nightwind-prevent nightwind-prevent-block">
-                <div class="absolute inset-x-0 bottom-0 h-80 xl:top-0 xl:h-full">
-                    <div class="h-full w-full xl:grid xl:grid-cols-2">
-                        <div class="h-full xl:relative xl:col-start-2">
-                            <img class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0" src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100" alt="People working on laptops" />
-                            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r" />
-                        </div>
-                    </div>
-                </div>
-                <div class="mx-auto max-w-4xl px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-flow-col-dense xl:grid-cols-2 xl:gap-x-8">
-                    <div class="relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24">
-                        <h2 class="text-base font-semibold">
-                            <span class="bg-gradient-to-r from-blue-300 to-primary-300 bg-clip-text text-transparent">Valuable Metrics</span>
-                        </h2>
-                        <p class="mt-3 text-3xl font-bold tracking-tight text-white">Get actionable data that will help grow your business</p>
-                        <p class="mt-5 text-lg text-gray-300">Rhoncus sagittis risus arcu erat lectus bibendum. Ut in adipiscing quis in viverra tristique sem. Ornare feugiat viverra eleifend fusce orci in quis amet. Sit in et vitae tortor, massa. Dapibus laoreet amet lacus nibh integer quis. Eu vulputate diam sit tellus quis at.</p>
-                        <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
-                            <p v-for="item in metrics" :key="item.id">
-                                <span class="block text-2xl font-bold text-white">{{ item.stat }}</span>
-                                <span class="mt-1 block text-base text-gray-300"
-                                ><span class="font-medium text-white">{{ item.emphasis }}</span> {{ item.rest }}</span
-                                >
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--            &lt;!&ndash; Gradient Feature Section &ndash;&gt;-->
+<!--            <div class="bg-gradient-to-r from-blue-800 to-primary-700 nightwind-prevent-block">-->
+<!--                <div class="mx-auto max-w-4xl py-16 px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:px-8 lg:pt-24">-->
+<!--                    <h2 class="text-3xl font-bold tracking-tight text-white">Inbox support built for efficiency</h2>-->
+<!--                    <p class="mt-4 max-w-3xl text-lg text-blue-200">Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis. Blandit aliquam sit nisl euismod mattis in.</p>-->
+<!--                    <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">-->
+<!--                        <div v-for="feature in features" :key="feature.name">-->
+<!--                            <div>-->
+<!--                                <span class="flex h-12 w-12 items-center justify-center rounded-3xl bg-white bg-opacity-10">-->
+<!--                                  <component :is="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />-->
+<!--                                </span>-->
+<!--                            </div>-->
+<!--                            <div class="mt-6">-->
+<!--                                <h3 class="text-lg font-medium text-white">{{ feature.name }}</h3>-->
+<!--                                <p class="mt-2 text-base text-blue-200">{{ feature.description }}</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <!-- CTA Section -->
-            <div class="bg-white">
-                <div class="mx-auto max-w-4xl py-16 px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
-                    <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        <span class="block">Ready to get started?</span>
-                        <span class="-mb-1 block bg-gradient-to-r from-blue-600 to-primary-600 bg-clip-text pb-1 text-transparent">Get in touch or create an account.</span>
-                    </h2>
-                    <div class="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
-                        <PrimaryButton>Learn more</PrimaryButton>
-                        <SecondaryButton>Get started</SecondaryButton>
-                    </div>
-                </div>
-            </div>
+<!--            &lt;!&ndash; Stats section &ndash;&gt;-->
+<!--            <div class="relative bg-gray-900 nightwind-prevent nightwind-prevent-block">-->
+<!--                <div class="absolute inset-x-0 bottom-0 h-80 xl:top-0 xl:h-full">-->
+<!--                    <div class="h-full w-full xl:grid xl:grid-cols-2">-->
+<!--                        <div class="h-full xl:relative xl:col-start-2">-->
+<!--                            <img class="h-full w-full object-cover opacity-25 xl:absolute xl:inset-0" src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100" alt="People working on laptops" />-->
+<!--                            <div aria-hidden="true" class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-gray-900 xl:inset-y-0 xl:left-0 xl:h-full xl:w-32 xl:bg-gradient-to-r" />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="mx-auto max-w-4xl px-6 lg:max-w-7xl lg:px-8 xl:grid xl:grid-flow-col-dense xl:grid-cols-2 xl:gap-x-8">-->
+<!--                    <div class="relative pt-12 pb-64 sm:pt-24 sm:pb-64 xl:col-start-1 xl:pb-24">-->
+<!--                        <h2 class="text-base font-semibold">-->
+<!--                            <span class="bg-gradient-to-r from-blue-300 to-primary-300 bg-clip-text text-transparent">Valuable Metrics</span>-->
+<!--                        </h2>-->
+<!--                        <p class="mt-3 text-3xl font-bold tracking-tight text-white">Get actionable data that will help grow your business</p>-->
+<!--                        <p class="mt-5 text-lg text-gray-300">Rhoncus sagittis risus arcu erat lectus bibendum. Ut in adipiscing quis in viverra tristique sem. Ornare feugiat viverra eleifend fusce orci in quis amet. Sit in et vitae tortor, massa. Dapibus laoreet amet lacus nibh integer quis. Eu vulputate diam sit tellus quis at.</p>-->
+<!--                        <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">-->
+<!--                            <p v-for="item in metrics" :key="item.id">-->
+<!--                                <span class="block text-2xl font-bold text-white">{{ item.stat }}</span>-->
+<!--                                <span class="mt-1 block text-base text-gray-300"-->
+<!--                                ><span class="font-medium text-white">{{ item.emphasis }}</span> {{ item.rest }}</span-->
+<!--                                >-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; CTA Section &ndash;&gt;-->
+<!--            <div class="bg-white">-->
+<!--                <div class="mx-auto max-w-4xl py-16 px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">-->
+<!--                    <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">-->
+<!--                        <span class="block">Ready to get started?</span>-->
+<!--                        <span class="-mb-1 block bg-gradient-to-r from-blue-600 to-primary-600 bg-clip-text pb-1 text-transparent">Get in touch or create an account.</span>-->
+<!--                    </h2>-->
+<!--                    <div class="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">-->
+<!--                        <PrimaryButton>Learn more</PrimaryButton>-->
+<!--                        <SecondaryButton>Get started</SecondaryButton>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            sampe sini -->
         </main>
 
         <footer class="bg-white" aria-labelledby="footer-heading">
-            <h2 id="footer-heading" class="sr-only">Footer</h2>
             <div class="mx-auto max-w-7xl px-6 pt-16 pb-8 lg:px-8 lg:pt-24">
                 <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                    <div class="grid grid-cols-2 gap-8 xl:col-span-2">
-                        <div class="md:grid md:grid-cols-2 md:gap-8">
-                            <div>
-                                <h3 class="text-base font-medium text-gray-900">Solutions</h3>
-                                <ul role="list" class="mt-4 space-y-4">
-                                    <li v-for="item in footerNavigation.solutions" :key="item.name">
-                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="mt-12 md:mt-0">
-                                <h3 class="text-base font-medium text-gray-900">Support</h3>
-                                <ul role="list" class="mt-4 space-y-4">
-                                    <li v-for="item in footerNavigation.support" :key="item.name">
-                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="md:grid md:grid-cols-2 md:gap-8">
-                            <div>
-                                <h3 class="text-base font-medium text-gray-900">Company</h3>
-                                <ul role="list" class="mt-4 space-y-4">
-                                    <li v-for="item in footerNavigation.company" :key="item.name">
-                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="mt-12 md:mt-0">
-                                <h3 class="text-base font-medium text-gray-900">Legal</h3>
-                                <ul role="list" class="mt-4 space-y-4">
-                                    <li v-for="item in footerNavigation.legal" :key="item.name">
-                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <div class="grid grid-cols-2 gap-8 xl:col-span-2">-->
+<!--                        <div class="md:grid md:grid-cols-2 md:gap-8">-->
+<!--                            <div>-->
+<!--                                <h3 class="text-base font-medium text-gray-900">Solutions</h3>-->
+<!--                                <ul role="list" class="mt-4 space-y-4">-->
+<!--                                    <li v-for="item in footerNavigation.solutions" :key="item.name">-->
+<!--                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                            <div class="mt-12 md:mt-0">-->
+<!--                                <h3 class="text-base font-medium text-gray-900">Support</h3>-->
+<!--                                <ul role="list" class="mt-4 space-y-4">-->
+<!--                                    <li v-for="item in footerNavigation.support" :key="item.name">-->
+<!--                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="md:grid md:grid-cols-2 md:gap-8">-->
+<!--                            <div>-->
+<!--                                <h3 class="text-base font-medium text-gray-900">Company</h3>-->
+<!--                                <ul role="list" class="mt-4 space-y-4">-->
+<!--                                    <li v-for="item in footerNavigation.company" :key="item.name">-->
+<!--                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                            <div class="mt-12 md:mt-0">-->
+<!--                                <h3 class="text-base font-medium text-gray-900">Legal</h3>-->
+<!--                                <ul role="list" class="mt-4 space-y-4">-->
+<!--                                    <li v-for="item in footerNavigation.legal" :key="item.name">-->
+<!--                                        <a :href="item.href" class="text-base text-gray-500 hover:text-gray-900">{{ item.name }}</a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="mt-12 xl:mt-0">
                         <h3 class="text-base font-medium text-gray-900">Waykapay</h3>
                         <p class="mt-4 text-base text-gray-500">CV Cahaya Matahari Dunia</p>
@@ -499,7 +502,7 @@ const footerNavigation = {
                             <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
                         </a>
                     </div>
-                    <p class="mt-8 text-base text-gray-400 md:order-1 md:mt-0">&copy; 2023 Waykapay. All rights reserved.</p>
+                    <p class="mt-8 text-base text-gray-400 md:order-1 md:mt-0">&copy; 2024 Waykapay. All rights reserved.</p>
                 </div>
             </div>
         </footer>
