@@ -42,7 +42,7 @@ class TransactionCustomerController extends Controller
 
         TransactionCustomer::create($request->all());
 
-//        return to_route('history.show', $request['history_id']);
+        return to_route('history.show', $request['history_id']);
 //        return Inertia::location($url);
     }
 
