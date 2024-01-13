@@ -15,17 +15,17 @@ const props = defineProps({
 })
 
 onUnmounted(() => {
-    clearInterval(interval)
+    // clearInterval(interval)
     window.Echo.leave('transaction-channel')
 })
 
-const interval = setInterval(() => {
-    form.get(route('product.status', form), {
-        errorBag: 'updateInformation',
-        preserveScroll: true,
-        onSuccess: () => {}
-    });
-}, 5000)
+// const interval = setInterval(() => {
+//     form.get(route('product.status', form), {
+//         errorBag: 'updateInformation',
+//         preserveScroll: true,
+//         onSuccess: () => {}
+//     });
+// }, 5000)
 
 const form = useForm({
     transaction: props.transaction,
