@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Transaction;
+use App\Models\TransactionCustomer;
 use App\Models\TransactionMoneyTransfer;
 use App\Models\User;
 use Carbon\Carbon;
@@ -22,6 +23,7 @@ class MoneyTransferController extends Controller
     {
         return Inertia::render('MoneyTransfer/Bank', [
             'response' => null,
+            'customer_list' => Inertia::lazy(fn () => Helper::transactionCustomer(['WAYKAPAY'])),
         ]);
     }
 
@@ -72,6 +74,7 @@ class MoneyTransferController extends Controller
         $transaction = Transaction::create([
             'sku' => '-',
             'order_id' => strtolower(Str::random(8)),
+            'brand' => 'WAYKAPAY',
             'product_name' => 'Kirim uang',
             'customer_no' => $to->phone,
             'user_id' => $user->id,
@@ -131,10 +134,16 @@ class MoneyTransferController extends Controller
 
 //        return $response->object()->data->deposit;
 
+        $save = !TransactionCustomer::where('user_id', auth()->user()->id)
+            ->where('customer_no', $request['customer_no'])
+            ->where('brand', $transaction->brand)
+            ->first();
+
         return Inertia::render('History/Show', [
             'history' => $transaction,
             'goBack' => false,
-            'goSuccess' => true
+            'goSuccess' => true,
+            'saveCustomer' => $save,
         ]);
 
 //        $transaction->goBack = false;
