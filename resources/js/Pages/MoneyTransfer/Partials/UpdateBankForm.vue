@@ -164,7 +164,7 @@ const clock = moment().format('HH')
                 <li class="relative px-6 py-5 flex items-center space-x-3">
                     <div class="flex-shrink-0" >
                         <img class="w-10" :src="'/img/vendor/' + cust.brand + '.png'" alt="">
-                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.svg'" alt="">
+<!--                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.svg'" alt="">-->
                     </div>
 
                     <div @click="form.account_no = cust.customer_no" class="flex-1 min-w-0">

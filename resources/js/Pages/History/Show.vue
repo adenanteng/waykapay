@@ -63,6 +63,10 @@ const storeInformation = () => {
             form.reset()
             timerSuccess.value=false
             saveModal.value=false
+        },
+        onFinish: () => {
+            timerSuccess.value=false
+            saveModal.value=false
         }
     });
 };
