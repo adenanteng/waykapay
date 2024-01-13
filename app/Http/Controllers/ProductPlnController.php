@@ -27,7 +27,9 @@ class ProductPlnController extends Controller
      */
     public function prepaid()
     {
-        return Inertia::render('Product/Pln/Prepaid/Index', []);
+        return Inertia::render('Product/Pln/Prepaid/Index', [
+            'customer_list' => Inertia::lazy(fn () => Helper::transactionCustomer(['PLN'])),
+        ]);
     }
 
     /**

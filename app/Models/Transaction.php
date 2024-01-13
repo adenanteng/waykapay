@@ -22,6 +22,7 @@ class Transaction extends Model
     protected $fillable = [
         'sku',
         'order_id',
+        'brand',
         'product_name',
         'customer_no',
         'user_id',

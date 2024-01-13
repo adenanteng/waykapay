@@ -33,8 +33,9 @@ class ProductGamesController extends Controller
 
 //        if ($response->successful()) {
             return Inertia::render('Product/Show', [
-                'users' => auth()->user(),
+//                'users' => auth()->user(),
                 'response' => Inertia::lazy(fn () => Helper::pricelist()),
+                'customer_list' => Inertia::lazy(fn () => Helper::transactionCustomer([$product])),
                 'product' => $product,
                 'category_id' => Transaction::GAMES,
                 'fee_25' => Helper::fee()->games_25,

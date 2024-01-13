@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('sku');
             $table->string('order_id');
+            $table->string('brand')->nullable();
             $table->String('product_name');
             $table->string('customer_no');
             $table->unsignedBigInteger('user_id');

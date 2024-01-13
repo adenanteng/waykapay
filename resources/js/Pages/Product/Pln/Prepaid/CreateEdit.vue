@@ -37,6 +37,7 @@ onMounted(() => {
 })
 
 const form = useForm({
+    brand: 'PLN',
     customer_no: props.customer.data.customer_no,
     product_name: '',
     sku: '',

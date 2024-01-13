@@ -24,6 +24,7 @@ use App\Http\Controllers\ProductVoucherController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionCustomerController;
 use App\Http\Controllers\UpgradeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebHookController;
@@ -137,6 +138,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
     Route::get('/user/normalize-transaction/{user}', [UserController::class, 'normalizeTransaction'])->name('user.normalizeTransaction');
+
+    Route::resource('/transaction-customer', TransactionCustomerController::class)->names('transaction-customer');
 
 //    Route::resource('/device', DeviceController::class)->names('device');
     Route::get('/device', [DeviceController::class, 'index'])->name('device.index');

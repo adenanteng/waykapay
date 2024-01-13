@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\AppSetting;
+use App\Models\TransactionCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;
@@ -184,5 +185,9 @@ class Helper
             "1696509",
             array('cluster' => 'ap1')
         );
+    }
+
+    public static function transactionCustomer($brand) {
+        return TransactionCustomer::where('user_id', auth()->user()->id)->whereIn('brand', $brand)->select(['customer_name', 'customer_no', 'brand'])->get()->toArray();
     }
 }

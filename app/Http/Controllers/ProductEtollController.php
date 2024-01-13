@@ -32,6 +32,7 @@ class ProductEtollController extends Controller
 //        if ($response->successful()) {
         return Inertia::render('Product/Show', [
             'response' => Inertia::lazy(fn () => Helper::pricelist()),
+            'customer_list' => Inertia::lazy(fn () => Helper::transactionCustomer([$product])),
             'product' => $product,
             'category_id' => Transaction::EMONEY,
             'fee_25' => Helper::fee()->etoll_25,

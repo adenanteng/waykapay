@@ -43,7 +43,7 @@ const props = defineProps({
                 </div>
             </li>
             <li class="relative">
-                <Link :href="route('pasca.index', 'pln')" class="absolute inset-0" />
+                <Link :href="route('pasca.index', 'tagihan-pln')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
                     <img src="/img/vendor/PLN.svg" alt="" class="w-10">
                     <div class="flex-1">

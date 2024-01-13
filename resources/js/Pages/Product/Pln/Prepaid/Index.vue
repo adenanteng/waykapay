@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, useForm} from "@inertiajs/vue3";
+import {Link, router, useForm} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
@@ -12,13 +12,21 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+import Loading from "../../Loading.vue";
 
 const props = defineProps({
-    users: Object,
+    // users: Object,
+    customer_list: undefined,
 });
 
+onMounted(() => {
+    // console.log('dana');
+    router.reload({ only: ['customer_list'] })
+})
+
 const form = useForm({
+    brand: 'PLN',
     customer_no: '',
 });
 
@@ -86,6 +94,30 @@ const tabs = ref('Pulsa')
                 </PrimaryButton>
             </template>
         </FormSection>
+
+
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
+            <template v-if="props.customer_list === undefined">
+                <Loading />
+            </template>
+
+            <template v-else v-for="cust in props.customer_list">
+                <li class="relative px-6 py-5 flex items-center space-x-3">
+                    <div class="flex-shrink-0" >
+                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.png'" alt="">
+                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.svg'" alt="">
+                    </div>
+
+                    <div @click="form.customer_no = cust.customer_no" class="flex-1 min-w-0">
+                        <button @click="" class="focus:outline-none text-left">
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            <p class="text-sm font-medium text-gray-900">{{ cust.customer_name }}</p>
+                            <p class="text-sm text-gray-500 truncate">{{ cust.customer_no }}</p>
+                        </button>
+                    </div>
+                </li>
+            </template>
+        </ul>
 
 <!--        <MobileMenu />-->
     </AppLayout>

@@ -210,20 +210,20 @@ const footerNavigation = {
 
         <main>
             <!-- Hero section -->
-            <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40" >
+            <div class="min-h-screen mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40" >
                 <div class="mx-auto max-w-2xl lg:mx-0 lg:flex-auto"  >
 
-                    <div class="flex">
-                        <div class="relative flex items-center gap-x-4 rounded-full py-1 px-4 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                            <span class="font-semibold text-primary-600">We’re hiring</span>
-                            <span class="h-4 w-px bg-gray-900/10" aria-hidden="true" />
-                            <a href="#" class="flex items-center gap-x-1">
-                                <span class="absolute inset-0" aria-hidden="true" />
-                                See open positions
-                                <i class="fa-regular fa-angle-right text-gray-400 ml-1" />
-                            </a>
-                        </div>
-                    </div>
+<!--                    <div class="flex">-->
+<!--                        <div class="relative flex items-center gap-x-4 rounded-full py-1 px-4 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">-->
+<!--                            <span class="font-semibold text-primary-600">We’re hiring</span>-->
+<!--                            <span class="h-4 w-px bg-gray-900/10" aria-hidden="true" />-->
+<!--                            <a href="#" class="flex items-center gap-x-1">-->
+<!--                                <span class="absolute inset-0" aria-hidden="true" />-->
+<!--                                See open positions-->
+<!--                                <i class="fa-regular fa-angle-right text-gray-400 ml-1" />-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <h1 class="mt-10 max-w-lg text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Waykapay</h1>
                     <p class="mt-6 text-lg leading-8 text-gray-600">
                         Satu aplikasi untuk transfer apa aja, bayar apa aja dan kapan aja. <br>

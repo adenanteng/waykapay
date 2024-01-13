@@ -289,8 +289,8 @@ onMounted(() => {
                 <slot />
             </main>
 
-            <div class="sticky inset-x-0 bottom-0 nightwind-prevent-block">
-                <div class="bg-primary-600 bg-opacity-20 backdrop-blur-sm">
+            <div class="fixed inset-x-0 bottom-0 nightwind-prevent-block">
+                <div class="bg-primary-600 bg-opacity-50 backdrop-blur-sm">
                     <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
                         <div class="flex items-center justify-between flex-wrap">
                             <div class="w-0 flex-1 flex items-center">

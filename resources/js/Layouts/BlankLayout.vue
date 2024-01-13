@@ -58,7 +58,7 @@ const logout = () => {
 </script>
 
 <template>
-    <div class="overflow-hidden transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
+    <div class="relative overflow-hidden transition duration-1000" :class="darkMode ? 'nightwind dark' : 'nightwind' ">
         <Head :title="title + ' - ' + $page.props.appSetting?.name"/>
 
         <div class="sticky top-0 z-50">
@@ -70,8 +70,9 @@ const logout = () => {
         </div>
 
         <div class="min-h-screen bg-white relative isolate transition duration-1000 flex justify-center items-center">
-
-            <BackgroundParticle />
+            <div class="-z-10">
+                <BackgroundParticle />
+            </div>
 
             <slot/>
         </div>

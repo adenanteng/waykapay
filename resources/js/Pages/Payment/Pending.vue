@@ -15,17 +15,17 @@ const props = defineProps({
 })
 
 onUnmounted(() => {
-    // clearInterval(interval)
+    clearInterval(interval)
     window.Echo.leave('transaction-channel')
 })
 
-// const interval = setInterval(() => {
-//     form.get(route('product.status', form), {
-//         errorBag: 'updateInformation',
-//         preserveScroll: true,
-//         onSuccess: () => {}
-//     });
-// }, 5000)
+const interval = setInterval(() => {
+    form.get(route('product.status', form), {
+        errorBag: 'updateInformation',
+        preserveScroll: true,
+        onSuccess: () => {}
+    });
+}, 5000)
 
 const form = useForm({
     transaction: props.transaction,
@@ -89,7 +89,10 @@ if (typeof window !== 'undefined') {
                                 :width="200"
                             />
                         </div>
-                        <h1 class="text-lg font-bold tracking-tight text-gray-900">Transaksi Sedang Diproses</h1>
+                        <div class="">
+                            <h1 class="text-lg font-bold tracking-tight text-gray-900">Transaksi Sedang Diproses</h1>
+                            <p class="text-gray-500 text-sm">Kamu bisa kembali ke Beranda tanpa harus menunggu proses transaksi</p>
+                        </div>
 
                         <div class="mt-5 space-x-2">
                             <PrimaryButton as="a" :href="route('dashboard')" >

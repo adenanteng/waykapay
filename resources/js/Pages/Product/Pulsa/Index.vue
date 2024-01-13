@@ -12,13 +12,14 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch, watchEffect} from "vue";
 import Loading from "../Loading.vue";
 import VOtpInput from "vue3-otp-input";
 import bcrypt from "bcryptjs";
 
 const props = defineProps({
     response: undefined,
+    customer_list: undefined,
     fee_25: Number,
     fee_50: Number,
     fee_75: Number,
@@ -31,10 +32,11 @@ const props = defineProps({
 
 onMounted(() => {
     // console.log('dana');
-    router.reload({ only: ['response'] })
+    router.reload({ only: ['customer_list'] })
 })
 
 const form = useForm({
+    brand: null,
     customer_no: '',
     product_name: '',
     sku: '',
@@ -51,6 +53,8 @@ const storeInformation = () => {
     if (fee.value != null) {
         form.fee = fee.value
     }
+
+    form.brand = provider(form.customer_no)
 
     form.post(route('product.topup'), {
         errorBag: 'storeInformation',
@@ -228,6 +232,18 @@ const handleOnChange = (value) => {
     // console.log("OTP changed: ", value);
 };
 
+if (typeof window !== 'undefined') {
+    watchEffect(() => {
+        // Trigger the submit method whenever any of the specified properties change
+        if (form.customer_no.length >= 4) {
+            // console.log(form.customer_no)
+            if (props.response === undefined || props.response.data?.rc) {
+                router.reload({ only: ['response'] })
+            }
+        }
+    })
+}
+
 </script>
 
 <template>
@@ -266,7 +282,7 @@ const handleOnChange = (value) => {
             </template>
         </FormSection>
 
-        <div class="border-b border-gray-300" v-show="form.customer_no.length >= 4">
+        <div class="border-b border-gray-300" v-show="form.customer_no.length >= 5">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tab=='Pulsa' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
@@ -284,7 +300,7 @@ const handleOnChange = (value) => {
             </nav>
         </div>
 
-        <div class="border-b border-gray-300" v-show="tab=='Data' && form.customer_no.length >= 4">
+        <div class="border-b border-gray-300" v-show="tab=='Data' && form.customer_no.length >= 5">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tabData=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
@@ -320,8 +336,29 @@ const handleOnChange = (value) => {
         </div>
 
         <ul role="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
-            <template v-if="props.response === undefined">
-<!--                <Loading />-->
+            <template v-if="props.customer_list === undefined">
+                <Loading />
+            </template>
+
+            <template v-else-if="form.customer_no.length <= 4" v-for="cust in props.customer_list">
+                <li class="relative px-6 py-5 flex items-center space-x-3">
+                    <div class="flex-shrink-0" >
+                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.png'" alt="">
+                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.svg'" alt="">
+                    </div>
+
+                    <div @click="form.customer_no = cust.customer_no" class="flex-1 min-w-0">
+                        <button @click="" class="focus:outline-none text-left">
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            <p class="text-sm font-medium text-gray-900">{{ cust.customer_name }}</p>
+                            <p class="text-sm text-gray-500 truncate">{{ cust.customer_no }}</p>
+                        </button>
+                    </div>
+                </li>
+            </template>
+
+            <template v-else-if="props.response === undefined">
+                <Loading />
             </template>
 
             <template v-else-if="props.response.data?.rc">

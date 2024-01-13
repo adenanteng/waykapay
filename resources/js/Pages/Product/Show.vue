@@ -13,12 +13,13 @@ import InputLabel from "@/Components/InputLabel.vue";
 import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch, watchEffect} from "vue";
 import VOtpInput from "vue3-otp-input";
 import Loading from "./Loading.vue";
 
 const props = defineProps({
     response: undefined,
+    customer_list: undefined,
     category_id: Number,
     product: String,
     fee_25: Number,
@@ -33,10 +34,11 @@ const props = defineProps({
 
 onMounted(() => {
     // console.log('dana');
-    router.reload({ only: ['response'] })
+    router.reload({ only: ['customer_list'] })
 })
 
 const form = useForm({
+    brand: props.product,
     customer_no: '',
     product_name: '',
     sku: '',
@@ -134,7 +136,7 @@ const handleModal = () => {
 const closeModal = () => {
     confirmingModal.value = false;
     pinModal.value = false;
-    otpInput.value?.clearInput();
+    otpInput.value?.clearInput;
     // form.reset();
 };
 
@@ -164,39 +166,16 @@ const handleOnChange = (value) => {
     // console.log("OTP changed: ", value);
 };
 
-function checkIfImageExists(url, callback) {
-    const img = new Image();
-    img.src = url;
-
-    if (img.complete) {
-        callback(true);
-    } else {
-        img.onload = () => {
-            callback(true);
-        };
-
-        img.onerror = () => {
-            callback(false);
-        };
-    }
-}
-
-const checkImage = (url) => {
-    const img = new Image();
-    img.src = '/img/vendor/' + url + '.svg'
-
-    if (img.complete) {
-        return '/img/vendor/' + url + '.svg'
-    } else {
-        img.onload = () => {
-            return '/img/vendor/' + url + '.svg'
+if (typeof window !== 'undefined') {
+    watchEffect(() => {
+        // Trigger the submit method whenever any of the specified properties change
+        if (form.customer_no.length >= 3) {
+            // console.log(form.customer_no)
+            if (props.response === undefined || props.response.data?.rc) {
+                router.reload({ only: ['response'] })
+            }
         }
-
-        img.onerror = () => {
-            console.log('/img/games/' + url + '.png')
-            return '/img/games/' + url + '.png'
-        }
-    }
+    })
 }
 
 </script>
@@ -237,7 +216,7 @@ const checkImage = (url) => {
             </template>
         </FormSection>
 
-        <div class="border-b border-gray-300" v-if="props.response !== undefined">
+        <div class="border-b border-gray-300" v-if="props.response !== undefined && form.customer_no.length >= 5">
             <nav class="-mb-px flex" aria-label="Tabs">
                 <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tab=='Umum' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
@@ -273,11 +252,33 @@ const checkImage = (url) => {
         </div>
 
         <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
-            <template v-if="props.response === undefined">
+            <template v-if="props.customer_list === undefined">
+                <Loading />
+            </template>
+
+            <template v-else-if="form.customer_no.length <= 4" v-for="cust in props.customer_list">
+                <li class="relative px-6 py-5 flex items-center space-x-3">
+                    <div class="flex-shrink-0" >
+                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.png'" alt="">
+                        <img class="w-10" :src="'/img/vendor/' + cust.brand + '.svg'" alt="">
+                    </div>
+
+                    <div @click="form.customer_no = cust.customer_no" class="flex-1 min-w-0">
+                        <button @click="" class="focus:outline-none text-left">
+                            <span class="absolute inset-0" aria-hidden="true"></span>
+                            <p class="text-sm font-medium text-gray-900">{{ cust.customer_name }}</p>
+                            <p class="text-sm text-gray-500 truncate">{{ cust.customer_no }}</p>
+                        </button>
+                    </div>
+                </li>
+            </template>
+
+            <template v-else-if="props.response === undefined">
                 <Loading />
             </template>
 
             <template v-else-if="props.response.data?.rc">
+<!--                {{ props.response.data?.rc }}-->
                 <div class="grid justify-center text-center px-5 py-3">
                     <i class="fa-regular fa-exclamation-triangle text-2xl text-red-600" />
                     <p class="text-sm text-gray-600">Produk sedang tidak tersedia, coba beberapa saat lagi.</p>

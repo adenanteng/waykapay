@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\AppSetting;
 use App\Models\Transaction;
+use App\Models\TransactionCustomer;
 use App\Models\TransactionPasca;
 use App\Models\User;
 use App\Rules\PinValidationRules;
@@ -75,6 +76,7 @@ class ProductController extends Controller
             $transaction = Transaction::create([
                 'sku' => $request['sku'],
                 'order_id' => $order_id,
+                'brand' => $request['brand'] ?? null,
                 'product_name' => $request['product_name'],
                 'customer_no' => $request['customer_no'],
                 'user_id' => auth()->user()->id,
@@ -217,6 +219,7 @@ class ProductController extends Controller
                 $transaction = Transaction::create([
                     'sku' => $response->object()->data->buyer_sku_code,
                     'order_id' => $response->object()->data->ref_id,
+                    'brand' => $request['sku'] ?? null,
                     'product_name' => $response->object()->data->buyer_sku_code.' '.$response->object()->data->customer_name,
                     'customer_no' => $response->object()->data->customer_no,
                     'user_id' => auth()->user()->id,
@@ -287,6 +290,7 @@ class ProductController extends Controller
 //        dd($id);
         return Inertia::render('Product/Pasca/Index', [
             'sku' => $sku,
+            'customer_list' => Inertia::lazy(fn () => Helper::transactionCustomer([$sku])),
         ]);
     }
 
@@ -335,7 +339,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Inertia\Response
+     * @return \Inertia\Response
      */
     public function status(Request $request)
     {
@@ -367,6 +371,8 @@ class ProductController extends Controller
 
 //            dd($status->object()->data);
 
+        $save = !TransactionCustomer::where('user_id', auth()->user()->id)->where('customer_no', $request['customer_no'])->first();
+
         switch($status->object()->data->status) {
             case ('Sukses'):
 //                    $user->withdraw($request['amount']);
@@ -378,7 +384,8 @@ class ProductController extends Controller
                 return Inertia::render('History/Show', [
                     'history' => $transaction,
                     'goBack' => false,
-                    'goSuccess' => true
+                    'goSuccess' => true,
+                    'saveCustomer' => $save,
                 ]);
 
 //                return Redirect::route('history.show', $transaction->order_id);
