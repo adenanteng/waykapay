@@ -104,14 +104,16 @@ const closeModal = () => {
                             </div>
 
                             <h1 class="text-xl font-bold tracking-tight text-gray-900">Transaksi Berhasil</h1>
-                            <p class="text-gray-500 text-sm">Kamu akan dialihkan dalam 5 detik</p>
+<!--                            <p class="text-gray-500 text-sm">{{ props.history.product_name }}</p>-->
+                            <p class="text-gray-500 text-sm">Tekan lihat struk untuk melihat rincian</p>
 
                             <div class="mt-5 space-x-2 space-y-5">
                                 <PrimaryButton
                                     as="a"
                                     :href="route('history.show', props.history.order_id)"
                                 >
-                                    Lihat Transaksi
+                                    <i class="fa-regular fa-receipt mr-2" />
+                                    Lihat Struk
                                 </PrimaryButton>
 
                                 <SecondaryButton
@@ -130,7 +132,7 @@ const closeModal = () => {
                                     class="border border-gray-300"
                                     @click="saveModal=true"
                                 >
-<!--                                    <i class="fa-regular fa-save mr-2" />-->
+                                    <i class="fa-regular fa-save mr-2" />
                                     Simpan Nomor
                                 </SecondaryButton>
                             </div>
@@ -146,6 +148,17 @@ const closeModal = () => {
             <Pending :history="props.history" v-else-if="props.history.status_id == 2" />
 
             <Error :history="props.history" v-else />
+
+            <template v-if="userInfo.id!=props.history.user_id && $page.props.user.role_id==1">
+                <SecondaryButton
+                    as="a"
+                    :href="route('user.show', props.history.user?.slug)"
+                    class="justify-center w-full border border-gray-600 dark:border-white nightwind-prevent"
+                >
+                    <i class="fa-regular fa-user mr-2" />
+                    Lihat Pengguna
+                </SecondaryButton>
+            </template>
         </template>
 
 <!--        save customer modal -->
