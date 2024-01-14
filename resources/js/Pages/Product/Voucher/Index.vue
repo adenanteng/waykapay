@@ -54,7 +54,7 @@ const form = useForm({
             <li class="relative">
                 <Link :href="route('voucher.show', 'TIX ID')" class="absolute inset-0" />
                 <div class="flex w-full items-center justify-between space-x-6 p-6">
-                    <img src="/img/vendor/TIX%20ID.svg" alt="" class="w-20">
+                    <img src="/img/vendor/TIX%20ID.png" alt="" class="w-20">
                     <div class="flex-1">
                         <div class="flex items-center space-x-3">
                             <h3 class="text-sm font-medium text-gray-900">TIX ID</h3>

@@ -350,7 +350,7 @@ if (typeof window !== 'undefined') {
                     <div @click="form.customer_no = cust.customer_no" class="flex-1 min-w-0">
                         <button @click="" class="focus:outline-none text-left">
                             <span class="absolute inset-0" aria-hidden="true"></span>
-                            <p class="text-sm font-medium text-gray-900">{{ cust.customer_name }}</p>
+                            <p class="text-sm font-medium text-gray-900 capitalize">{{ cust.customer_name }}</p>
                             <p class="text-sm text-gray-500 truncate">{{ cust.customer_no }}</p>
                         </button>
                     </div>
