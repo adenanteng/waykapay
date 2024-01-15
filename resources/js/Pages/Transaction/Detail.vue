@@ -31,6 +31,7 @@ const props = defineProps({
 let search = ref(props.filters.search);
 let filterStatus = ref(props.filters.filterStatus);
 let filterCategory = ref(props.filters.filterCategory);
+let filterPaginate = ref(props.filters.filterPaginate);
 const date = ref([]);
 
 onMounted(() => {
@@ -41,7 +42,7 @@ onMounted(() => {
     // date.value = [startDate, endDate];
 })
 
-watch([search, filterStatus, filterCategory, date], ([value, valueFS, valueFC, valueD]) => {
+watch([search, filterStatus, filterCategory, filterPaginate, date], ([value, valueFS, valueFC, valueP, valueD]) => {
     // console.log(date)
     router.get(
         route('transaction.detail'),
@@ -49,6 +50,7 @@ watch([search, filterStatus, filterCategory, date], ([value, valueFS, valueFC, v
             search: value,
             filter_status: valueFS,
             filter_category: valueFC,
+            filter_paginate: valueP,
             date_start: valueD ? valueD[0] : null,
             date_end: valueD ? valueD[1] : null
         },
@@ -58,18 +60,6 @@ watch([search, filterStatus, filterCategory, date], ([value, valueFS, valueFC, v
         }
     )
 });
-
-
-// watch(filter, (value) => {
-//     router.get(
-//         route('transaction.index'),
-//         { filter: value },
-//         {
-//             preserveState: true,
-//             replace: true,
-//         }
-//     );
-// });
 
 const formatter = ref({
     date: 'YYYY-MM-DD',
@@ -163,6 +153,7 @@ function formatPrice(value) {
                     :option="$page.props.selectCategory"
                     class="block w-full shadow"
                 />
+
             </div>
         </div>
 
@@ -250,7 +241,15 @@ function formatPrice(value) {
 <!--            </template>-->
         </div>
 
-        <Pagination :pagination="props.transaction" />
+        <Pagination :pagination="props.transaction" >
+            <template #select>
+                <SelectInput
+                    v-model:model-value.number="filterPaginate"
+                    :option="$page.props.selectPaginate"
+                    class="block text-center shadow"
+                />
+            </template>
+        </Pagination>
 
 <!--        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >-->
 <!--            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >-->

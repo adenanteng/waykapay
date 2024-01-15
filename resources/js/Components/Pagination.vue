@@ -30,6 +30,9 @@ const props = defineProps({
             <div class="flex justify-between">
                 <Link replace :href="props.pagination.prev_page_url ?? ''"
                       class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-full shadow-lg text-gray-700 bg-white hover:bg-gray-50"> Previous </Link>
+
+                <slot name="select" />
+
                 <Link replace :href="props.pagination.next_page_url ?? ''"
                       class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-full shadow-lg text-gray-700 bg-white hover:bg-gray-50"> Next </Link>
             </div>
@@ -55,7 +58,9 @@ const props = defineProps({
             </div>
             <div>
                 <nav class="relative z-0 inline-flex -space-x-px" aria-label="Pagination">
-
+                    <div class="mr-5">
+                        <slot name="select" />
+                    </div>
                     <template v-for="link in props.pagination.links">
                         <Link
                             replace

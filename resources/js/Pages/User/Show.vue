@@ -9,6 +9,7 @@ import {Link, router} from "@inertiajs/vue3";
 import moment from "moment/moment";
 import Pagination from "../../Components/Pagination.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
+import SelectInput from "../../Components/SelectInput.vue";
 
 const props = defineProps({
     users: Object | String,
@@ -27,10 +28,14 @@ const props = defineProps({
 // })
 
 let search = ref(props.filters.search);
-watch(search, (value) => {
+let filterPaginate = ref(props.filters.filterPaginate);
+watch([search, filterPaginate], ([value, valueP]) => {
     router.get(
         route('user.show', props.users),
-        { search: value },
+        {
+            search: value,
+            filter_paginate: valueP
+        },
         {
             preserveState: true,
             replace: true,
@@ -183,7 +188,16 @@ function formatPrice(value) {
                 </template>
             </ul>
         </div>
-        <Pagination :pagination="props.history" />
+
+        <Pagination :pagination="props.history" >
+            <template #select>
+                <SelectInput
+                    v-model:model-value.number="filterPaginate"
+                    :option="$page.props.selectPaginate"
+                    class="block text-center shadow"
+                />
+            </template>
+        </Pagination>
 
     </AppLayout>
 

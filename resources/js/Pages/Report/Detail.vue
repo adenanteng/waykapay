@@ -33,9 +33,10 @@ onMounted(() => {
 let search = ref(props.filters.search);
 let filterStatus = ref(props.filters.filterStatus);
 let filterCategory = ref(props.filters.filterCategory);
+let filterPaginate = ref(props.filters.filterPaginate);
 const date = ref([]);
 
-watch([search, filterStatus, filterCategory, date], ([value, valueFS, valueFC, valueD]) => {
+watch([search, filterStatus, filterCategory, filterPaginate, date], ([value, valueFS, valueFC, valueP, valueD]) => {
     // console.log(date)
     router.get(
         route('report.detail'),
@@ -43,6 +44,7 @@ watch([search, filterStatus, filterCategory, date], ([value, valueFS, valueFC, v
             search: value,
             filter_status: valueFS,
             filter_category: valueFC,
+            filter_paginate: valueP,
             date_start: valueD ? valueD[0] : null,
             date_end: valueD ? valueD[1] : null
         },
@@ -257,6 +259,14 @@ function formatPrice(value) {
 <!--            </template>-->
         </div>
 
-        <Pagination :pagination="props.transaction" />
+        <Pagination :pagination="props.transaction" >
+            <template #select>
+                <SelectInput
+                    v-model:model-value.number="filterPaginate"
+                    :option="$page.props.selectPaginate"
+                    class="block text-center shadow"
+                />
+            </template>
+        </Pagination>
     </AppLayout>
 </template>

@@ -118,6 +118,17 @@ class Transaction extends Model
         self::UNKNOWN => 'Tidak diketahui'
     ];
 
+    const SEPULUH = 10;
+    const LIMAPULUH = 50;
+    const SERATUS = 100;
+//    const SEMUA = null;
+    const PAGINATE = [
+        self::SEPULUH => '10',
+        self::LIMAPULUH => '50',
+        self::SERATUS => '100',
+//        self::SEMUA => 'Semua',
+    ];
+
     /**
      * The accessors to append to the model's array form.
      *

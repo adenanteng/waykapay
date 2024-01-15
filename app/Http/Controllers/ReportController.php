@@ -40,6 +40,7 @@ class ReportController extends Controller
 //            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
 
 //        dd($trx->get());
+        $paginate = Req::input('filter_paginate') ?? 10;
 
         return Inertia::render('Report/Detail', [
 //            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
@@ -64,7 +65,7 @@ class ReportController extends Controller
                 ->when(Req::input('date_end'), function ($query, $date_end) {
                     $query->whereDate('created_at', '<=', $date_end);
                 })
-                ->paginate(8),
+                ->paginate($paginate)->onEachSide(1),
 //                ->withQueryString()
 //                ->get()
 //                ->groupBy(function ($val) {
@@ -82,9 +83,10 @@ class ReportController extends Controller
 //                ->latest()
 //                ->get()->count(),
 
-            'filters' => Req::only(['search', 'filter_status', 'filter_category', 'date_start', 'date_end']),
+            'filters' => Req::only(['search', 'filter_status', 'filter_category', 'filter_paginate', 'date_start', 'date_end']),
             'selectCategory' => Transaction::CATEGORY,
             'selectStatus' => Transaction::STATUS,
+            'selectPaginate' => Transaction::PAGINATE
         ]);
     }
 }

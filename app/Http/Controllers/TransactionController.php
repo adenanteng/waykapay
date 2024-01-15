@@ -73,32 +73,7 @@ class TransactionController extends Controller
 
     public function detail() {
 
-//        dd(Transaction::query()
-//            ->latest()
-//            ->when(Req::input('search'), function ($query, $search) {
-//                $query->where('order_id', 'like', '%' . $search . '%')
-//                    ->OrWhere('customer_no', 'like', '%' . $search . '%')
-//                    ->OrWhere('product_name', 'like', '%' . $search . '%');
-//            })
-//            ->when(Req::input('filter'), function ($query, $filter) {
-//                $query->where('category_id', $filter);
-//            })
-//            ->when(Req::input('date_start'), function ($query, $date_start) {
-//                $query->whereDate('created_at', '>=', $date_start);
-//            })
-//            ->when(Req::input('date_end'), function ($query, $date_end) {
-//                $query->whereDate('created_at', '<=', $date_end);
-//            })
-//            ->paginate(8)->toArray()
-////                ->withQueryString()
-////                ->get()
-////            ->groupBy(function ($val) {
-////                return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
-////            })
-//        );
-
-//        $trx = Transaction::where('status_id', Transaction::SUCCESS)
-//                ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT]);
+        $paginate = Req::input('filter_paginate') ?? 10;
 
         return Inertia::render('Transaction/Detail', [
 //            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
@@ -121,16 +96,17 @@ class TransactionController extends Controller
                 ->when(Req::input('date_end'), function ($query, $date_end) {
                     $query->whereDate('created_at', '<=', $date_end);
                 })
-                ->paginate(8),
+                ->paginate($paginate)->onEachSide(1),
 //                ->withQueryString()
 //                ->get()
 //                ->groupBy(function ($val) {
 //                    return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
 //                }),
 
-            'filters' => Req::only(['search', 'filter_status', 'filter_category', 'date_start', 'date_end']),
+            'filters' => Req::only(['search', 'filter_status', 'filter_category', 'filter_paginate','date_start', 'date_end']),
             'selectCategory' => Transaction::CATEGORY,
             'selectStatus' => Transaction::STATUS,
+            'selectPaginate' => Transaction::PAGINATE
         ]);
     }
 
