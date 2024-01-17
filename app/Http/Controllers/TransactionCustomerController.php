@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransactionCustomer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -14,7 +15,10 @@ class TransactionCustomerController extends Controller
      */
     public function index()
     {
-        //
+//        dd(TransactionCustomer::where('user_id', auth()->user()->id)->get()->groupBy('brand')->toArray());
+        return Inertia::render('TransactionCustomer/Index', [
+            'customer' => Inertia::lazy(fn () => TransactionCustomer::where('user_id', auth()->user()->id)->get()->groupBy('brand') ),
+        ]);
     }
 
     /**

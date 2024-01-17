@@ -26,11 +26,11 @@ const category = ref()
 
 const categoryLists = [
     { id: 1, name: 'Transfer Waykapay', logo: '/img/vendor/BCA.svg', icon: 'fa-wallet', desc: 4000, disabled: false },
-    { id: 2, name: 'Transfer Bank', logo: '/img/vendor/WAYKAPAY.svg', icon: 'fa-bank', desc: 0, disabled: false },
+    { id: 2, name: 'Transfer Bank', logo: '/img/vendor/WAYKAPAY-LONG.svg', icon: 'fa-bank', desc: 0, disabled: false },
 ]
 
 const walletLists = [
-    { id: 1, name: 'wkp', logo: '/img/vendor/WAYKAPAY.svg', admin: 0, disabled: false },
+    { id: 1, name: 'wkp', logo: '/img/vendor/WAYKAPAY-LONG.svg', admin: 0, disabled: false },
 ]
 
 const bankLists = [

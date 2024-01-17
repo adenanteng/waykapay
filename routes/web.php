@@ -122,6 +122,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('transaction/detail', [TransactionController::class, 'detail'])->name('transaction.detail');
     Route::resource('/transaction', TransactionController::class)->names('transaction');
+    Route::resource('/transaction-customer', TransactionCustomerController::class)->names('transaction-customer');
+
 
     Route::get('report/detail', [ReportController::class, 'detail'])->name('report.detail');
     Route::resource('/report', ReportController::class)->names('report');
@@ -138,8 +140,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/user', UserController::class)->names('user');
     Route::post('/users/reset-password/{user}', [UserController::class, 'resetPassword'])->name('user.passwordReset');
     Route::get('/user/normalize-transaction/{user}', [UserController::class, 'normalizeTransaction'])->name('user.normalizeTransaction');
-
-    Route::resource('/transaction-customer', TransactionCustomerController::class)->names('transaction-customer');
 
 //    Route::resource('/device', DeviceController::class)->names('device');
     Route::get('/device', [DeviceController::class, 'index'])->name('device.index');

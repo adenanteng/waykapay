@@ -117,6 +117,12 @@ function formatPrice(value) {
                     </Link>
                 </li>
                 <li>
+                    <Link :href="route('transaction-customer.index')" class="flex justify-between px-6 py-4">
+                        <p class="text-sm font-medium text-gray-900">Nomor Tersimpan</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
+                    </Link>
+                </li>
+                <li>
                     <Link :href="route('device.index')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Perangkat</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
