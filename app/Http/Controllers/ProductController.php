@@ -372,7 +372,7 @@ class ProductController extends Controller
 //            dd($status->object()->data);
 
         $save = !TransactionCustomer::where('user_id', auth()->user()->id)
-            ->where('customer_no', $request['customer_no'])
+            ->where('customer_no', $transaction->customer_no)
             ->where('brand', $transaction->brand)
             ->first();
 

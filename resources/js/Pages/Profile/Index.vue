@@ -107,7 +107,7 @@ function formatPrice(value) {
                 <li >
                     <Link :href="route('pricing.index')" class="flex justify-between px-6 py-4">
                         <p class="text-sm font-medium text-gray-900">Daftar harga</p>
-                        <i class="fa-regular fa-angle-right text-gray-900" />
+                        <i class="fa-regular fa-andashboardgle-right text-gray-900" />
                     </Link>
                 </li>
                 <li class="block lg:hidden">
@@ -118,7 +118,7 @@ function formatPrice(value) {
                 </li>
                 <li>
                     <Link :href="route('transaction-customer.index')" class="flex justify-between px-6 py-4">
-                        <p class="text-sm font-medium text-gray-900">Nomor Tersimpan</p>
+                        <p class="text-sm font-medium text-gray-900">Nomor tersimpan</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>

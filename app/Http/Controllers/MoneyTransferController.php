@@ -135,7 +135,7 @@ class MoneyTransferController extends Controller
 //        return $response->object()->data->deposit;
 
         $save = !TransactionCustomer::where('user_id', auth()->user()->id)
-            ->where('customer_no', $request['customer_no'])
+            ->where('customer_no', $transaction->customer_no)
             ->where('brand', $transaction->brand)
             ->first();
 
