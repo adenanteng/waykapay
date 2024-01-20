@@ -12,10 +12,13 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'webhook-midtrans',
         'webhook-digiflazz',
-        'webhook-flip-accept-payment',
-        'webhook-doku-accept-payment',
         'webhook-oke-connect',
+        'webhook-ayo-beneficiary',
+        'webhook-ayo-disbursement',
+        'webhook-ayo-inquiry'
+//        'webhook-midtrans',
+//        'webhook-flip-accept-payment',
+//        'webhook-doku-accept-payment',
     ];
 }
