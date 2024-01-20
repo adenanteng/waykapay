@@ -21,6 +21,8 @@ import {ref} from "vue";
 
         <UpdateInformationForm
             :users="$page.props.users ?? '' "
+            :beneficiary="$page.props.beneficiary ?? '' "
+            :token="$page.props.token ?? '' "
             :response="$page.props.response ?? '' "
             :bank="$page.props.bank ?? '' "
             :account_no="$page.props.account_no ?? '' "

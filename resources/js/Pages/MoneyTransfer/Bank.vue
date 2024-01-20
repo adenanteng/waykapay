@@ -16,7 +16,6 @@ import UpdateBankForm from "./Partials/UpdateBankForm.vue";
         </template>
 
         <UpdateBankForm
-            :users="$page.props.users ?? '' "
             :response="$page.props.response ?? '' "
             :customer_list="$page.props.customer_list ?? '' "
         />

@@ -7,6 +7,9 @@ use App\Models\TransactionCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Str;
+use IP2LocationIO\Configuration;
+use IP2LocationIO\IPGeolocation;
 use Pusher\Pusher;
 use Pusher\PusherException;
 
@@ -194,11 +197,11 @@ class Helper
     public static function ayoToken() {
 
 //        Redis::del('ayotoken');
-        $cached = Redis::get('ayotoken');
-
-        if(isset($cached)) {
-            return $cached;
-        }else {
+//        $cached = Redis::get('ayotoken');
+//
+//        if(isset($cached)) {
+//            return $cached;
+//        }else {
             $response = Http::asForm()
                 ->withHeaders([
                     'Accept' => 'application/json',
@@ -212,10 +215,55 @@ class Helper
                     "client_secret" => 'ZEJUGzxsctMsk2zFwEwhcOgHAyhwnxGlvswT7cJifLSfcmusygdCyvhdf1QywOK2',
                 ]);
 
-            Redis::set('ayotoken', $response->object()->accessToken, 'EX', 3500);
+//            Redis::set('ayotoken', $response->object()->accessToken, 'EX', 3500);
 
             return $response->object()->accessToken;
+//        }
+    }
 
+    public static function ayoBeneficiary($request, $token, $ip) {
+        $order_id = Str::random(32);
+
+        $geo = self::ipGeo($ip);
+
+//        dd($request, $token, $ip);
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $token,
+            'A-Correlation-ID' => $order_id,
+            'A-Merchant-Code' => 'WAYKPY',
+            'A-Latitude' => $geo->latitude ?? '-5.4292',
+            'A-Longitude' => $geo->longitude ?? '105.2611',
+        ])
+        ->post('https://sandbox.api.of.ayoconnect.id/api/v1/bank-disbursements/beneficiary', [
+            "transactionId" => $order_id,
+            "phoneNumber" => self::phoneFormat(auth()->user()->phone),
+            "customerDetails" => [
+                "ipAddress" => $ip
+            ],
+            "beneficiaryAccountDetails" => [
+                "accountNumber" => $request['account_no'],
+                "bankCode" => $request['bank']['name']
+            ],
+        ]);
+
+        if ($response->successful()) {
+            return $response->object();
         }
+
+        dd($response->object());
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public static function ipGeo($ip) {
+        // Configures IP2Location.io API key
+        $config = new Configuration('61E99FF3C0D01AE3E033882EBE0517D6');
+        $ip2locationio = new IPGeolocation($config);
+
+        // Lookup ip address geolocation data
+        return $ip2locationio->lookup($ip); // The language parameter is only available for Plus and Security plan only.
     }
 }

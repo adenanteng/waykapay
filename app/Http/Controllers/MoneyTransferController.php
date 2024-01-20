@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use PHPUnit\TextUI\Help;
 
 class MoneyTransferController extends Controller
 {
@@ -35,20 +36,27 @@ class MoneyTransferController extends Controller
             'account_no' => ['required'],
         ])->validateWithBag('storeInformation');
 
-        $to = User::where('phone', $request['account_no'])->first();
+        if ($request['bank']['name'] == 'wkp') {
+            $to = User::where('phone', $request['account_no'])->first();
 
-        if ($to && $to->id != auth()->user()->id) {
-            $users = $to;
+            if ($to && $to->id != auth()->user()->id) {
+                $users = $to;
+            } else {
+                session()->flash('flash.banner', 'Nomor rekening tidak valid!');
+                session()->flash('flash.bannerStyle', 'danger');
+                return \redirect()->back();
+            }
         } else {
-//            dd('Nomor rekening tidak valid');
-            session()->flash('flash.banner', 'Nomor rekening tidak valid!');
-            session()->flash('flash.bannerStyle', 'danger');
-            return \redirect()->back();
+            $token = Helper::ayoToken();
+            $beneficiary = Helper::ayoBeneficiary($request->all(), $token, $request->ip());
+//            dd($beneficiary);
         }
 
 //        dd($users);
         return Inertia::render('MoneyTransfer/CreateEdit', [
-            'users' => $users,
+            'users' => $users ?? null,
+            'beneficiary' => $beneficiary ?? null,
+            'token' => $token ?? null,
             'bank' => $request['bank'],
             'account_no' => $request['account_no']
         ]);
@@ -57,16 +65,6 @@ class MoneyTransferController extends Controller
     public function confirm(Request $request)
     {
         Log::info($request);
-
-//        if (auth()->user()->pin != null) {
-//            Validator::make($request->toArray(), [
-//                'pin' => ['required'],
-//            ])->validateWithBag('storeInformation');
-//
-//            if (!Hash::check($request['pin'], auth()->user()->pin)) {
-//                return to_route('pin.wrong');
-//            }
-//        }
 
         $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();
@@ -95,8 +93,6 @@ class MoneyTransferController extends Controller
             'to_id' => $to->id,
         ]);
 
-//        $user->withdraw($transaction->gross_amount);
-        //        $to->deposit($transaction->amount);
         $user->update([
             'wallet_balance' => $user->wallet_balance - $transaction->gross_amount,
         ]);
@@ -145,34 +141,35 @@ class MoneyTransferController extends Controller
             'goSuccess' => true,
             'saveCustomer' => $save,
         ]);
-
-//        $transaction->goBack = false;
-//        $transaction->goSuccess = true;
-//
-//        return to_route('history.show', [
-//            $transaction->order_id
-//        ]);
     }
 
-//    public function ayoToken()
-//    {
-//        $response = Http::asForm()
-//        ->withHeaders([
-//            'Accept' => 'application/json',
-//            'Content-Type' => 'application/x-www-form-urlencoded',
-//        ])
-//        ->withQueryParameters([
-//            'grant_type' => 'client_credentials',
-//        ])
-//        ->post('https://sandbox.api.of.ayoconnect.id/v1/oauth/client_credential/accesstoken', [
-//            "client_id" => 'ZS17kIhKQupbosYCo4zVB2gH3GdmmAlFprStdVnLGMkw0GTE',
-//            "client_secret" => 'ZEJUGzxsctMsk2zFwEwhcOgHAyhwnxGlvswT7cJifLSfcmusygdCyvhdf1QywOK2',
-//        ]);
-//
-//        dd($response->object());
-////        return $response->object();
-//    }
+    public function confirmAyo(Request $request) {
+//        dd($request->toArray());
 
+        $geo = Helper::ipGeo($request->ip());
+//        dd($request['beneficiary']['beneficiaryDetails']['beneficiaryId']);
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $request['token'],
+            'A-Correlation-ID' => $request['beneficiary']['transactionId'],
+            'A-Merchant-Code' => 'WAYKPY',
+            'A-IP-Address' => $request->ip(),
+            'A-Latitude' => $geo->latitude ?? '-5.4292',
+            'A-Longitude' => $geo->longitude ?? '105.2611',
+        ])
+        ->post('https://sandbox.api.of.ayoconnect.id/api/v1/bank-disbursements/disbursement', [
+            "transactionId" => $request['beneficiary']['transactionId'],
+            "customerId" => $request['beneficiary']['customerId'],
+            "beneficiaryId" => $request['beneficiary']['beneficiaryDetails']['beneficiaryId'],
+//            "beneficiaryId" => 'BE_46fba92630',
+            "amount" => '20000.00',
+            "currency" => "IDR",
+            "remark" => "Testing"
+        ]);
+
+        dd($response->object());
+    }
     public function ayoBalance()
     {
         $order_id = Str::random(32);
@@ -218,12 +215,16 @@ class MoneyTransferController extends Controller
                 "ipAddress" => "192.168.100.12"
             ],
             "beneficiaryAccountDetails" => [
-                "accountNumber" => "510654300",
-                "bankCode" => "GNESIDJA"
+                "accountNumber" => "510654320",
+                "bankCode" => "BRINIDJA"
             ],
         ]);
 
         dd($response->object());
+
+    }
+
+    public function ayoDisbursement() {
 
     }
 }

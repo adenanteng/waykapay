@@ -15,6 +15,8 @@ import DialogModal from "@/Components/DialogModal.vue";
 
 const props = defineProps({
     users: Object | String,
+    beneficiary: Object | String,
+    token: String,
     response: Object | String,
     bank: Object,
     account_no: String,
@@ -24,7 +26,9 @@ const form = useForm({
     amount: null,
     bank: props.bank,
     account_no: props.account_no,
-    desc: null
+    desc: null,
+    beneficiary: props.beneficiary ?? null,
+    token: props.token ?? null,
 });
 
 const {...userInfo} = computed(() => usePage().props.user).value;
@@ -32,19 +36,29 @@ const {...userInfo} = computed(() => usePage().props.user).value;
 const message = ref(null)
 
 const storeInformation = () => {
-    form.amount = amount.value.replaceAll(".", "")
-
     if (Number(form.amount) >= Number(userInfo.wallet_balance)) {
         pinModal.value = false
         message.value = "Saldo kurang"
     } else {
-        form.post(route('money-transfer.confirm'), {
-            errorBag: 'storeInformation',
-            preserveScroll: true,
-            replace: true,
-            onSuccess: () => {
-            }
-        });
+        if (props.beneficiary) {
+            form.amount = amount.value
+            form.post(route('money-transfer.confirmAyo'), {
+                errorBag: 'storeInformation',
+                preserveScroll: true,
+                replace: true,
+                onSuccess: () => {
+                }
+            });
+        } else {
+            form.amount = amount.value.replaceAll(".", "")
+            form.post(route('money-transfer.confirm'), {
+                errorBag: 'storeInformation',
+                preserveScroll: true,
+                replace: true,
+                onSuccess: () => {
+                }
+            });
+        }
     }
 };
 
@@ -120,7 +134,7 @@ const handleOnChange = (value) => {
                 </div>
                 <div class="ml-3 min-w-0 flex-1">
                     <div class="text-base font-medium text-gray-800 truncate capitalize">
-                        {{ props.users.name }}
+                        {{ props.users?.name ?? props.beneficiary?.beneficiaryDetails?.beneficiaryName }}
                     </div>
                     <div class="text-sm font-medium text-gray-500 truncate">
                         {{ props.account_no }}

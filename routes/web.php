@@ -74,6 +74,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/money-transfer', [MoneyTransferController::class, 'index'])->name('money-transfer.index');
     Route::post('/money-transfer/amount', [MoneyTransferController::class, 'amount'])->name('money-transfer.amount');
     Route::post('/money-transfer/confirm', [MoneyTransferController::class, 'confirm'])->name('money-transfer.confirm');
+    Route::post('/money-transfer/confirm-ayo', [MoneyTransferController::class, 'confirmAyo'])->name('money-transfer.confirmAyo');
+
     Route::get('/money-transfer/ayo-token', [MoneyTransferController::class, 'ayoToken'])->name('money-transfer.ayoToken');
     Route::get('/money-transfer/ayo-balance', [MoneyTransferController::class, 'ayoBalance'])->name('money-transfer.ayoBalance');
     Route::get('/money-transfer/ayo-beneficiary', [MoneyTransferController::class, 'ayoBeneficiary'])->name('money-transfer.ayoBeneficiary');

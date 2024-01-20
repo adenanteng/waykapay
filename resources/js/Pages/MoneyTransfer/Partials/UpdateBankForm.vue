@@ -13,7 +13,6 @@ import moment from "moment";
 import Loading from "../../Product/Loading.vue";
 
 const props = defineProps({
-    users: Object | String,
     response: Object | String,
     customer_list: undefined,
 });
@@ -23,10 +22,14 @@ onMounted(() => {
 })
 
 const category = ref()
+const handleCategoryTab = (value) => {
+    category.value=value;
+    form.reset()
+}
 
 const categoryLists = [
-    { id: 1, name: 'Transfer Waykapay', logo: '/img/vendor/BCA.svg', icon: 'fa-wallet', desc: 4000, disabled: false },
-    { id: 2, name: 'Transfer Bank', logo: '/img/vendor/WAYKAPAY-LONG.svg', icon: 'fa-bank', desc: 0, disabled: false },
+    { id: 1, name: 'Sesama Waykapay', icon: 'fa-wallet', desc: 0, disabled: false },
+    { id: 2, name: 'Transfer Bank', icon: 'fa-bank', desc: 0, disabled: false },
 ]
 
 const walletLists = [
@@ -37,14 +40,13 @@ const bankLists = [
     // { id: 1, name: 'wkp', logo: '/img/vendor/WAYKAPAY.svg', admin: 0, disabled: false },
     { id: 2, name: 'bca', logo: '/img/vendor/BCA.svg', admin: 4000, disabled: true },
     { id: 3, name: 'bni', logo: '/img/vendor/BNI.svg', admin: 4000, disabled: true },
-    { id: 4, name: 'bri', logo: '/img/vendor/BRI.svg', admin: 4000, disabled: true },
+    { id: 4, name: 'BRINIDJA', logo: '/img/vendor/BRI.svg', admin: 4000, disabled: false },
     { id: 5, name: 'mandiri', logo: '/img/vendor/MANDIRI.svg', admin: 4000, disabled: true },
     { id: 6, name: 'permata', logo: '/img/vendor/PERMATA.svg', admin: 4000, disabled: true },
     { id: 7, name: 'bsm', logo: '/img/vendor/BSI.svg', admin: 4000, disabled: true },
 ]
 
 const form = useForm({
-    user_id: props.users.id ?? null,
     bank: walletLists[0],
     account_no: '',
 });
@@ -83,7 +85,7 @@ const clock = moment().format('HH')
                 <RadioGroup >
                     <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
                         <RadioGroupOption
-                            @click="category=item.id"
+                            @click="handleCategoryTab(item.id)"
                             as="template"
                             v-for="item in categoryLists"
                             :key="item.id"
@@ -192,7 +194,6 @@ const clock = moment().format('HH')
         <template #form>
             <div class="col-span-6">
 <!--                <InputLabel for="amount" value="Jumlah Saldo"/>-->
-
                 <RadioGroup v-model="form.bank">
                     <div class="mt-4 grid grid-cols-2 gap-y-6 sm:grid-cols-3 gap-x-4">
                         <RadioGroupOption
@@ -220,24 +221,19 @@ const clock = moment().format('HH')
                 </RadioGroup>
 
                 <InputError :message="form.errors.bank" class="mt-2"/>
-            </div>
 
-<!--            <div class="col-span-6" v-if="form.bank?.id==1">-->
-<!--                <InputLabel for="amount" value="Nomor handphone tujuan"/>-->
-<!--&lt;!&ndash;                <div class="flex">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">&ndash;&gt;-->
-<!--&lt;!&ndash;                        08&ndash;&gt;-->
-<!--&lt;!&ndash;                    </span>&ndash;&gt;-->
-<!--                    <TextInput-->
-<!--                        id="account_no"-->
-<!--                        v-model="form.account_no"-->
-<!--                        type="number"-->
-<!--                        class="mt-1 block w-full"-->
-<!--                        required-->
-<!--                    />-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--                <InputError :message="form.errors.account_no" class="mt-2"/>-->
-<!--            </div>-->
+                <div class="col-span-6 mt-10" v-if="form.bank.id != 1">
+                    <InputLabel for="amount" value="Nomor rekening tujuan"/>
+                    <TextInput
+                        id="account_no"
+                        v-model="form.account_no"
+                        type="number"
+                        class="mt-1 block w-full"
+                        required
+                    />
+                    <InputError :message="form.errors.account_no" class="mt-2"/>
+                </div>
+            </div>
 
         </template>
 
