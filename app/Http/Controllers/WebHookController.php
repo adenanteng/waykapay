@@ -185,6 +185,21 @@ class WebHookController extends Controller
         return response()->json('ok');
     }
 
+    public function webhookAyoBeneficiary(Request $request) {
+        Log::info($request->getContent());
+        return 'ok';
+    }
+
+    public function webhookAyoDisbursement(Request $request) {
+        Log::info($request->getContent());
+        return 'ok';
+    }
+
+    public function webhookAyoInquiry(Request $request) {
+        Log::info('inq', (array)$request->getContent());
+        return 'ok';
+    }
+
     public function webhookTest() {
         Helper::pusher()->trigger('transaction-channel', 'transaction-event', array('action' => 'reload', 'user' => auth()->user()->slug));
 

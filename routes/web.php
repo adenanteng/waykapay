@@ -50,6 +50,10 @@ Route::get('/share/{transaction}', [TransactionController::class, 'share'])->nam
 Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
 Route::get('/register/device', [WebHookController::class, 'webhookHandlerPushyRegister']);
+Route::get('/webhook-ayo-beneficiary', [WebHookController::class, 'webhookAyoBeneficiary']);
+Route::get('/webhook-ayo-disbursement', [WebHookController::class, 'webhookAyoDisbursement']);
+Route::get('/webhook-ayo-inquiry', [WebHookController::class, 'webhookAyoInquiry']);
+
 Route::get('/webhook-test', [WebHookController::class, 'webhookTest']);
 //Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
 //Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
@@ -70,7 +74,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/money-transfer', [MoneyTransferController::class, 'index'])->name('money-transfer.index');
     Route::post('/money-transfer/amount', [MoneyTransferController::class, 'amount'])->name('money-transfer.amount');
     Route::post('/money-transfer/confirm', [MoneyTransferController::class, 'confirm'])->name('money-transfer.confirm');
-    Route::get('/money-transfer/test', [MoneyTransferController::class, 'test'])->name('money-transfer.test');
+    Route::get('/money-transfer/ayo-token', [MoneyTransferController::class, 'ayoToken'])->name('money-transfer.ayoToken');
+    Route::get('/money-transfer/ayo-balance', [MoneyTransferController::class, 'ayoBalance'])->name('money-transfer.ayoBalance');
+    Route::get('/money-transfer/ayo-beneficiary', [MoneyTransferController::class, 'ayoBeneficiary'])->name('money-transfer.ayoBeneficiary');
 
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 

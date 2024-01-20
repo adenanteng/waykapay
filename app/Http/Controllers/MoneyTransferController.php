@@ -154,45 +154,76 @@ class MoneyTransferController extends Controller
 //        ]);
     }
 
-    public function test()
+//    public function ayoToken()
+//    {
+//        $response = Http::asForm()
+//        ->withHeaders([
+//            'Accept' => 'application/json',
+//            'Content-Type' => 'application/x-www-form-urlencoded',
+//        ])
+//        ->withQueryParameters([
+//            'grant_type' => 'client_credentials',
+//        ])
+//        ->post('https://sandbox.api.of.ayoconnect.id/v1/oauth/client_credential/accesstoken', [
+//            "client_id" => 'ZS17kIhKQupbosYCo4zVB2gH3GdmmAlFprStdVnLGMkw0GTE',
+//            "client_secret" => 'ZEJUGzxsctMsk2zFwEwhcOgHAyhwnxGlvswT7cJifLSfcmusygdCyvhdf1QywOK2',
+//        ]);
+//
+//        dd($response->object());
+////        return $response->object();
+//    }
+
+    public function ayoBalance()
     {
+        $order_id = Str::random(32);
+        $token = Helper::ayoToken();
+//        dd($token);
+
+        $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Authorization' => $token,
+                'A-Correlation-ID' => $order_id,
+                'A-Merchant-Code' => 'WAYKPY',
+            ])
+            ->withQueryParameters([
+                'transactionId' => $order_id,
+            ])
+            ->get('https://sandbox.api.of.ayoconnect.id/api/v1/merchants/balance');
+
+        dd($response->object());
+    }
+
+    public function ayoBeneficiary()
+    {
+        $order_id = Str::random(32);
+        $token = Helper::ayoToken();
+
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'X-SIGNATURE' => '',
-            'X-CLIENT-KEY' => 'ASnwtsfNMsJZRF4M8K3vW3Xk77xlLiTh',
-            'X-TIMESTAMP' => Carbon::now(),
-        ])->post('https://sandbox.partner.api.bri.co.id/snap/v1.0/access-token/b2b',
-            [
-//                "transaction_details" => [
-//                    "order_id" => $order_id,
-//                    "gross_amount" => $gross_amount,
-//                ],
-//                "item_details" => [
-//                    [
-//                        "id" => "DEPOSIT",
-//                        "price" => $gross_amount,
-//                        "quantity" => 1,
-//                        "name" => "Deposit",
-//                        "brand" => "Waykapay",
-//                        "category" => "deposit",
-//                        "merchant_name" => "Waykapay",
-//                        "url" => "https://waykapay.com"
-//                    ]
-//                ],
-//                "customer_details" => [
-//                    "first_name" => $request['name'],
-//                    "last_name" => "",
-//                    "email" => $request['email'],
-//                    "phone" => $request['phone'],
-//                ],
-//                "payment_type" => $payment_type,
-//                $payment_type => [
-//                    "bank" => $request['method']['name'],
-//                ],
+            'Authorization' => 'Bearer ' . $token,
+            'A-Correlation-ID' => $order_id,
+            'A-Merchant-Code' => 'WAYKPY',
+            'A-Latitude' => '-4.721020',
+            'A-Longitude' => '104.542023'
+        ])
+//            ->withQueryParameters([
+//                'transactionId' => $order_id,
+//            ])
+        ->post('https://sandbox.api.of.ayoconnect.id/api/v1/bank-disbursements/beneficiary', [
+            "transactionId" => $order_id,
+            "phoneNumber" => "6298896111134",
+            "customerDetails" => [
+                "ipAddress" => "192.168.100.12"
             ],
-        );
+            "beneficiaryAccountDetails" => [
+                "accountNumber" => "510654300",
+                "bankCode" => "GNESIDJA"
+            ],
+        ]);
 
         dd($response->object());
+
     }
 }

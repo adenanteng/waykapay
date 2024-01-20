@@ -190,4 +190,32 @@ class Helper
     public static function transactionCustomer($brand) {
         return TransactionCustomer::where('user_id', auth()->user()->id)->whereIn('brand', $brand)->select(['customer_name', 'customer_no', 'brand'])->get()->toArray();
     }
+
+    public static function ayoToken() {
+
+//        Redis::del('ayotoken');
+        $cached = Redis::get('ayotoken');
+
+        if(isset($cached)) {
+            return $cached;
+        }else {
+            $response = Http::asForm()
+                ->withHeaders([
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                ])
+                ->withQueryParameters([
+                    'grant_type' => 'client_credentials',
+                ])
+                ->post('https://sandbox.api.of.ayoconnect.id/v1/oauth/client_credential/accesstoken', [
+                    "client_id" => 'ZS17kIhKQupbosYCo4zVB2gH3GdmmAlFprStdVnLGMkw0GTE',
+                    "client_secret" => 'ZEJUGzxsctMsk2zFwEwhcOgHAyhwnxGlvswT7cJifLSfcmusygdCyvhdf1QywOK2',
+                ]);
+
+            Redis::set('ayotoken', $response->object()->accessToken, 'EX', 3500);
+
+            return $response->object()->accessToken;
+
+        }
+    }
 }
