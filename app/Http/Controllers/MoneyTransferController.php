@@ -69,6 +69,12 @@ class MoneyTransferController extends Controller
         $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();
 
+        $gross_amount = $request['amount'] + $request['bank']['admin'];
+
+        if ($user->wallet_balance <= $gross_amount) {
+            dd('Saldo kurang');
+        }
+
         $transaction = Transaction::create([
             'sku' => '-',
             'order_id' => strtolower(Str::random(8)),
@@ -79,7 +85,7 @@ class MoneyTransferController extends Controller
             'status_id' => Transaction::PENDING,
             'category_id' => Transaction::TRANSFER,
             'amount' => $request['amount'],
-            'gross_amount' => $request['amount'] + $request['bank']['admin'],
+            'gross_amount' => $gross_amount,
             'last_amount' => $user->wallet_balance,
             'admin_fee' => $request['bank']['admin'],
             'desc' => $request['desc'],

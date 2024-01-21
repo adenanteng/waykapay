@@ -28,30 +28,7 @@ class ProductController extends Controller
      */
     public function topup(Request $request)
     {
-//        dd($request->toArray());
-//        if (auth()->user()->pin != null) {
-//            Validator::make($request->toArray(), [
-//                'pin' => ['required'],
-//            ])->validateWithBag('storeInformation');
-//
-////            dd('lewat');
-//
-//            if (!Hash::check($request['pin'], auth()->user()->pin)) {
-////                session()->flash('flash.banner', 'Pin tidak valid');
-////                session()->flash('flash.bannerStyle', 'danger');
-////                dd('pin salah');
-//                return to_route('pin.wrong');
-//            }
-//        }
-
-//        dd($request->toArray());
-//        $admin_fee = (Helper::api()->fees / 100) * $request['amount'];
-
         $gross_amount = $request['amount'] + $request['fee'];
-//        $def = auth()->user()->wallet_balance;
-//        $asu = auth()->user()->withdraw($gross_amount);
-//
-//        dd($gross_amount, $def, auth()->user()->wallet_balance - $gross_amount, $asu);
 
         $order_id = strtolower(Str::random(8));
 
