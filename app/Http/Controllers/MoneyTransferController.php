@@ -64,7 +64,7 @@ class MoneyTransferController extends Controller
 
     public function confirm(Request $request)
     {
-        Log::info($request);
+        Log::info($request->getContent());
 
         $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();

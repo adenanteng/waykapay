@@ -20,7 +20,7 @@ class WebHookController extends Controller
     public function webhookHandlerOkeConnect(Request $request){
 //        dd(Req::input('order'));
 //        dd($request->all());
-        Log::info($request);
+        Log::info($request->getContent());
 
         $transaction = Transaction::where('order_id', Req::input('order'))->first();
         $user = User::where('id', $transaction['user_id'])->first();
@@ -196,7 +196,7 @@ class WebHookController extends Controller
     }
 
     public function webhookAyoInquiry(Request $request) {
-        Log::info('inq', (array)$request->getContent());
+        Log::info($request->getContent());
         return 'ok';
     }
 
