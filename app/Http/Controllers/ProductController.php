@@ -148,7 +148,7 @@ class ProductController extends Controller
         }
 
         switch($request['sku']) {
-            case ('pln'):
+            case ('tagihan-pln'):
                 $category_id = Transaction::PASCA_PLN;
                 break;
 
