@@ -174,6 +174,8 @@ class MoneyTransferController extends Controller
             "remark" => "Testing"
         ]);
 
+        Log::info($request->getContent());
+        Log::info($response->object());
         dd($response->object());
     }
     public function ayoBalance()
