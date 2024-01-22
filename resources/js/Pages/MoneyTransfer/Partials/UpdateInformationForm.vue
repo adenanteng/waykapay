@@ -36,7 +36,7 @@ const {...userInfo} = computed(() => usePage().props.user).value;
 const message = ref(null)
 
 const storeInformation = () => {
-    if (Number(form.amount) >= Number(userInfo.wallet_balance)) {
+    if (Number(amount.value) >= Number(userInfo.wallet_balance)) {
         pinModal.value = false
         message.value = "Saldo kurang"
     } else {
@@ -47,6 +47,7 @@ const storeInformation = () => {
                 preserveScroll: true,
                 replace: true,
                 onSuccess: () => {
+                    otpInput.value?.clearInput();
                 }
             });
         } else {
@@ -56,6 +57,7 @@ const storeInformation = () => {
                 preserveScroll: true,
                 replace: true,
                 onSuccess: () => {
+                    otpInput.value?.clearInput();
                 }
             });
         }
