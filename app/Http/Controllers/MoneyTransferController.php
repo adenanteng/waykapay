@@ -175,7 +175,7 @@ class MoneyTransferController extends Controller
         ]);
 
         Log::info($request->getContent());
-        Log::info($response->object());
+        Log::info(json_decode($response->object()));
         dd($response->object());
     }
     public function ayoBalance()
