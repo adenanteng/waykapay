@@ -225,7 +225,6 @@ class Helper
 
     public static function ayoBeneficiary($request, $token, $ip) {
         $order_id = Str::random(32);
-
         $geo = self::ipGeo($ip);
 
 //        dd($request, $token, $ip);
