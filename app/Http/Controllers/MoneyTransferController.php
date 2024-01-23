@@ -151,14 +151,14 @@ class MoneyTransferController extends Controller
 
     public function confirmAyo(Request $request) {
 //        dd($request->toArray());
-
+        $order_id = Str::random(32);
         $geo = Helper::ipGeo($request->ip());
 //        dd($request['beneficiary']['beneficiaryDetails']['beneficiaryId']);
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer ' . $request['token'],
-            'A-Correlation-ID' => $request['beneficiary']['transactionId'],
+            'A-Correlation-ID' => $order_id,
             'A-Merchant-Code' => 'WAYKPY',
             'A-IP-Address' => $request->ip(),
             'A-Latitude' => $geo->latitude ?? '-5.4292',
