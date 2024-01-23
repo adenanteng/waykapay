@@ -168,13 +168,12 @@ class MoneyTransferController extends Controller
             "transactionId" => $request['beneficiary']['transactionId'],
             "customerId" => $request['beneficiary']['customerId'],
             "beneficiaryId" => $request['beneficiary']['beneficiaryDetails']['beneficiaryId'],
-//            "beneficiaryId" => 'BE_46fba92630',
             "amount" => '20000.00',
             "currency" => "IDR",
             "remark" => "Testing"
         ]);
 
-        Log::info($request->getContent());
+//        Log::info($request->getContent());
         Log::info(json_decode( json_encode($response->object()), true));
         dd($response->object());
     }

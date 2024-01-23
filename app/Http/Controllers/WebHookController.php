@@ -187,16 +187,19 @@ class WebHookController extends Controller
 
     public function webhookAyoBeneficiary(Request $request) {
         Log::info($request->getContent());
+        Log::debug('ini beneficiary');
         return 'ok';
     }
 
     public function webhookAyoDisbursement(Request $request) {
         Log::info($request->getContent());
+        Log::debug('ini disbursement');
         return 'ok';
     }
 
     public function webhookAyoInquiry(Request $request) {
         Log::info($request->getContent());
+        Log::debug('ini inquiry');
         return 'ok';
     }
 

@@ -6,6 +6,7 @@ use App\Models\AppSetting;
 use App\Models\TransactionCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use IP2LocationIO\Configuration;
@@ -217,6 +218,7 @@ class Helper
 
 //            Redis::set('ayotoken', $response->object()->accessToken, 'EX', 3500);
 
+            Log::info(json_decode( json_encode($response->object()), true));
             return $response->object()->accessToken;
 //        }
     }
@@ -248,6 +250,7 @@ class Helper
             ],
         ]);
 
+        Log::info(json_decode( json_encode($response->object()), true));
         if ($response->successful()) {
             return $response->object();
         }
