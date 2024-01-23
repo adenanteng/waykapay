@@ -50,9 +50,9 @@ Route::get('/share/{transaction}', [TransactionController::class, 'share'])->nam
 Route::post('/webhook-oke-connect', [WebHookController::class, 'webhookHandlerOkeConnect']);
 Route::post('/webhook-digiflazz', [WebHookController::class, 'webhookHandlerDigiflazz']);
 Route::get('/register/device', [WebHookController::class, 'webhookHandlerPushyRegister']);
-Route::get('/webhook-ayo-beneficiary', [WebHookController::class, 'webhookAyoBeneficiary']);
-Route::get('/webhook-ayo-disbursement', [WebHookController::class, 'webhookAyoDisbursement']);
-Route::get('/webhook-ayo-inquiry', [WebHookController::class, 'webhookAyoInquiry']);
+Route::post('/webhook-ayo-beneficiary', [WebHookController::class, 'webhookAyoBeneficiary']);
+Route::post('/webhook-ayo-disbursement', [WebHookController::class, 'webhookAyoDisbursement']);
+Route::post('/webhook-ayo-inquiry', [WebHookController::class, 'webhookAyoInquiry']);
 
 Route::get('/webhook-test', [WebHookController::class, 'webhookTest']);
 //Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
