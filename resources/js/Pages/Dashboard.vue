@@ -270,7 +270,7 @@ function greeting() {
             </div>
         </div>
 
-        <div class="">
+        <div class="" >
             <div class="flex mx-3 mb-1">
                 <h3 class="flex-1 text-gray-700 text-sm">Riwayat Transaksi</h3>
                 <Link

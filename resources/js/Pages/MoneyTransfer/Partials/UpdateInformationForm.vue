@@ -1,5 +1,5 @@
 <script setup>
-import {Link, useForm, usePage} from '@inertiajs/vue3';
+import {Link, router, useForm, usePage} from '@inertiajs/vue3';
 import {computed, ref, watch} from 'vue'
 import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
@@ -12,6 +12,8 @@ import TextAreaInput from "@/Components/TextAreaInput.vue";
 import VOtpInput from "vue3-otp-input";
 import bcrypt from "bcryptjs";
 import DialogModal from "@/Components/DialogModal.vue";
+import Pusher from "pusher-js";
+import Echo from "laravel-echo";
 
 const props = defineProps({
     users: Object | String,
@@ -114,6 +116,27 @@ const handleOnComplete = (value) => {
 const handleOnChange = (value) => {
     // console.log("OTP changed: ", value);
 };
+
+if (typeof window !== 'undefined') {
+    window.Pusher = Pusher;
+
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: import.meta.env.VITE_PUSHER_APP_KEY,
+        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+        forceTLS: true
+    });
+
+    let channel = window.Echo.channel('ayo-beneficiary-channel');
+    channel.listen('.ayo-beneficiary-event', function (data) {
+        if (data.action === 'reload' &&
+            props.beneficiary?.beneficiaryDetails?.beneficiaryAccountNumber == data.beneficiaryAccountNumber) {
+            console.log(data.action, data.beneficiaryAccountNumber)
+        } else {
+            console.log(data)
+        }
+    });
+}
 
 </script>
 

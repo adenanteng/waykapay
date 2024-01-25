@@ -49,7 +49,7 @@ class MoneyTransferController extends Controller
         } else {
             $token = Helper::ayoToken();
             $beneficiary = Helper::ayoBeneficiary($request->all(), $token, $request->ip());
-//            dd($beneficiary);
+            dd($beneficiary);
         }
 
 //        dd($users);
@@ -64,7 +64,7 @@ class MoneyTransferController extends Controller
 
     public function confirm(Request $request)
     {
-        Log::info($request->getContent());
+//        Log::info($request->getContent());
 
         $to = User::where('phone', $request['account_no'])->first();
         $user = auth()->user();
@@ -173,8 +173,7 @@ class MoneyTransferController extends Controller
             "remark" => "Testing"
         ]);
 
-//        Log::info($request->getContent());
-        Log::info(json_decode( json_encode($response->object()), true));
+//        Log::info(json_decode( json_encode($response->object()), true));
         dd($response->object());
     }
     public function ayoBalance()

@@ -55,9 +55,7 @@ Route::post('/webhook-ayo-disbursement', [WebHookController::class, 'webhookAyoD
 Route::post('/webhook-ayo-inquiry', [WebHookController::class, 'webhookAyoInquiry']);
 
 Route::get('/webhook-test', [WebHookController::class, 'webhookTest']);
-//Route::post('/webhook-doku-accept-payment', [WebHookController::class, 'webhookHandlerDokuAcceptPayment']);
-//Route::post('/webhook-flip-accept-payment', [WebHookController::class, 'webhookHandlerFlipAcceptPayment']);
-//Route::post('/webhook-midtrans', [WebHookController::class, 'webhookHandlerMidtrans']);
+
 Route::inertia('/login-otp', 'Pin/Otp')->name('login.otp');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {

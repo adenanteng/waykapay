@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
                 'name' => 'Agus Suryaman',
                 'email' => 'agusyaya@gmail.com',
                 'phone' => '082372892755',
-                'password' => bcrypt('wkpbaradatu1'),
+                'password' => bcrypt('112345678'),
                 'role_id' => 1,
                 'email_verified_at' => now(),
             ],
