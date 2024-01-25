@@ -187,6 +187,9 @@ class WebHookController extends Controller
 
     public function webhookAyoBeneficiary(Request $request) {
         Log::info($request->getContent());
+
+        sleep(5);
+
         Helper::pusher()
             ->trigger('ayo-beneficiary-channel', 'ayo-beneficiary-event',
                 array(
@@ -194,6 +197,7 @@ class WebHookController extends Controller
                     'beneficiaryAccountNumber' => $request['details']['beneficiaryAccountNumber'],
                     'beneficiaryName' => $request['details']['beneficiaryName'],
                 ));
+
         return 'ok';
     }
 
