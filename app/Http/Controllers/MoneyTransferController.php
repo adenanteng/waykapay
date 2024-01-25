@@ -49,7 +49,7 @@ class MoneyTransferController extends Controller
         } else {
             $token = Helper::ayoToken();
             $beneficiary = Helper::ayoBeneficiary($request->all(), $token, $request->ip());
-            dd($beneficiary);
+//            dd($beneficiary);
         }
 
 //        dd($users);
