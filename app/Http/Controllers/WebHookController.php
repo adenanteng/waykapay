@@ -214,9 +214,9 @@ class WebHookController extends Controller
     public function webhookAyoDisbursement(Request $request) {
         Log::info($request->getContent());
 
-        $transaction = Transaction::where('order_id', $request['transactionId'])->first();
+        $transaction = Transaction::where('order_id', $request['details']['A-Correlation-ID'])->first();
 
-        dd($request['transactionId'], $request['details']['status'], $transaction);
+//        dd($request['transactionId'], $request['details']['status'], $transaction);
         $user = User::where('id', $transaction['user_id'])->first();
 
         if ($transaction->status_id != Transaction::SUCCESS) {
