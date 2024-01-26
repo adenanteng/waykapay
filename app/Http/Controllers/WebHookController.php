@@ -214,7 +214,66 @@ class WebHookController extends Controller
 
     public function webhookAyoDisbursement(Request $request) {
         Log::info($request->getContent());
-//        Log::debug('ini disbursement');
+
+        sleep(5);
+
+        $transaction = Transaction::where('order_id', $request['transactionId'])->first();
+        $user = User::where('id', $transaction['user_id'])->first();
+
+        if ($transaction->status_id != Transaction::SUCCESS) {
+            switch($request['details']['status']) {
+                case (0):
+                    $transaction->update([
+                        'status_id' => Transaction::PENDING,
+                    ]);
+                    break;
+
+                case (1):
+                    $transaction->update([
+                        'status_id' => Transaction::SUCCESS,
+                    ]);
+
+                    if ($user->device_token) {
+                        $msg = [
+                            'title' => 'Kirim uang ke '.$transaction->money_transfer->to_name.' berhasil!',
+                            'body' => 'Lorem ipsum dolor sit amet',
+                            'badge' => 1,
+                            'sound' => 'ping.aiff'
+                        ];
+                        Helper::sendNotification($user->device_token, $msg);
+                    }
+                    break;
+
+                default:
+                    $user->update([
+                        'wallet_balance' => $user->wallet_balance + $transaction->gross_amount,
+                    ]);
+                    $transaction->update([
+                        'status_id' => Transaction::ERROR,
+                        'desc' => $request['details']['errors'][0]['details'],
+                    ]);
+
+                    if ($user->device_token) {
+                        $msg = [
+                            'title' => 'Kirim uang ke '.$transaction->money_transfer->to_name.' gagal!',
+                            'body' => 'Lorem ipsum dolor sit amet',
+                            'badge' => 1,
+                            'sound' => 'ping.aiff'
+                        ];
+                        Helper::sendNotification($user->device_token, $msg);
+                    }
+            }
+        }
+
+        Helper::pusher()
+            ->trigger(
+                'ayo-disbursement-channel',
+                'ayo-disbursement-event',
+                array(
+                    'action' => 'reload',
+                    'orderId' => $request['details']['A-Correlation-ID']
+                ));
+
         return 'ok';
     }
 

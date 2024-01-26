@@ -178,7 +178,7 @@ if (typeof window !== 'undefined') {
                                                 <template v-else-if="history.manual_account">{{ history.manual_account.bank }}</template>
                                                 <template v-else-if="history.money_transfer">
                                                     <template v-if="history.user_id == $page.props.user.id">
-                                                        ke {{ history.money_transfer.to.name }}
+                                                        ke {{ history.money_transfer?.to_name }}
                                                     </template>
                                                     <template v-else>
                                                         dari {{ history.user.name }}

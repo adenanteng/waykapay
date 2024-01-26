@@ -154,6 +154,7 @@ class MoneyTransferController extends Controller
         $order_id = Str::random(32);
         $geo = Helper::ipGeo($request->ip());
 //        dd($request['beneficiary']['beneficiaryDetails']['beneficiaryId']);
+//        dd($request['amount'] . '.00');
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
@@ -168,7 +169,7 @@ class MoneyTransferController extends Controller
             "transactionId" => $request['beneficiary']['transactionId'],
             "customerId" => $request['beneficiary']['customerId'],
             "beneficiaryId" => $request['beneficiary']['beneficiaryDetails']['beneficiaryId'],
-            "amount" => '20000.00',
+            "amount" => $request['amount'] . '.00',
             "currency" => "IDR",
             "remark" => "Testing"
         ]);
@@ -179,22 +180,22 @@ class MoneyTransferController extends Controller
             dd($response->object()->errors[0]->details);
         }
 
-        dd($response->object(), $request->toArray());
+//        dd($response->object(), $request->toArray());
 
         $user = auth()->user();
 
         $gross_amount = $request['amount'] + $request['bank']['admin'];
 
-        if ($user->wallet_balance <= $gross_amount) {
-            dd('Saldo kurang');
-        }
+//        if ($user->wallet_balance <= $gross_amount) {
+//            dd('Saldo kurang');
+//        }
 
         $transaction = Transaction::create([
             'sku' => '-',
-            'order_id' => strtolower(Str::random(8)),
-            'brand' => 'WAYKAPAY',
+            'order_id' => $order_id,
+            'brand' => $request['beneficiary']['beneficiaryDetails']['beneficiaryBankName'],
             'product_name' => 'Kirim uang',
-            'customer_no' => $to->phone,
+            'customer_no' => $request['account_no'],
             'user_id' => $user->id,
             'status_id' => Transaction::PENDING,
             'category_id' => Transaction::TRANSFER,
@@ -208,59 +209,137 @@ class MoneyTransferController extends Controller
         $money_transfer = TransactionMoneyTransfer::create([
             'transaction_id' => $transaction->id,
             'bank_id' => $request['bank']['id'],
-            'to_name' => $to->name,
-            'to_number' => $to->phone,
-            'to_id' => $to->id,
+            'to_name' => $request['beneficiary']['beneficiaryDetails']['beneficiaryName'],
+            'to_number' => $request['account_no'],
+            'to_id' => null,
         ]);
 
         $user->update([
             'wallet_balance' => $user->wallet_balance - $transaction->gross_amount,
         ]);
-        $to->update([
-            'wallet_balance' => $to->wallet_balance + $transaction->gross_amount,
-        ]);
 
-        $transaction->update([
-            'status_id' => Transaction::SUCCESS
-        ]);
+//        $transaction->update([
+//            'status_id' => Transaction::SUCCESS
+//        ]);
 
         $transaction = Transaction::where('order_id', $transaction->order_id)->first();
 
 //        dd($transaction->toArray());
 
-        if (auth()->user()->device_token) {
-            $msg = [
-                'title' => 'Kirim uang ke '.$to->name.' berhasil!',
-                'body' => 'Lorem ipsum dolor sit amet',
-                'badge' => 1,
-                'sound' => 'ping.aiff'
-            ];
-            Helper::sendNotification($user->device_token, $msg);
-        }
-
-        if ($to->device_token) {
-            $msg = [
-                'title' => $user->name.' mengirim uang sejumlah Rp '.$request['amount'],
-                'body' => 'Lorem ipsum dolor sit amet',
-                'badge' => 1,
-                'sound' => 'ping.aiff'
-            ];
-            Helper::sendNotification($to->device_token, $msg);
-        }
-
 //        return $response->object()->data->deposit;
 
-        $save = !TransactionCustomer::where('user_id', auth()->user()->id)
-            ->where('customer_no', $transaction->customer_no)
-            ->where('brand', $transaction->brand)
-            ->first();
+//        $save = !TransactionCustomer::where('user_id', auth()->user()->id)
+//            ->where('customer_no', $transaction->customer_no)
+//            ->where('brand', $transaction->brand)
+//            ->first();
 
-        return Inertia::render('History/Show', [
-            'history' => $transaction,
-            'goBack' => false,
-            'goSuccess' => true,
-            'saveCustomer' => $save,
+        return Inertia::render('Payment/AyoPending', [
+            'transaction' => $transaction,
+            'response' => $response->object()
         ]);
+    }
+
+    public function ayoStatus(Request $request)
+    {
+//        dd($request->all());
+//        $request = $request['transaction'];
+//        dd($request);
+        $order_id = Str::random(32);
+        $geo = Helper::ipGeo($request->ip());
+        $token = Helper::ayoToken();
+//        dd($token);
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $token,
+            'A-Merchant-Code' => 'WAYKPY',
+            'A-IP-Address' => $request->ip(),
+            'A-Latitude' => $geo->latitude ?? '-5.4292',
+            'A-Longitude' => $geo->longitude ?? '105.2611',
+            'A-Correlation-ID' => $order_id,
+        ])
+            ->withQueryParameters([
+                'transactionId' => $request['response']['transactionId'],
+                'beneficiaryId' => $request['response']['transaction']['beneficiaryId'],
+                'customerId' => $request['response']['customerId'],
+
+            ])
+            ->get('https://sandbox.api.of.ayoconnect.id/api/v1/bank-disbursements/status/'.$request['transaction']['order_id']);
+
+        if (!$response->successful()) {
+            dd($response->object()->errors[0]->details);
+        }
+
+        $transaction = Transaction::where('order_id', $request['transaction']['order_id'])->first();
+
+        if ($transaction->status_id == Transaction::PENDING) {
+            $save = !TransactionCustomer::where('user_id', auth()->user()->id)
+                ->where('customer_no', $transaction->customer_no)
+                ->where('brand', $transaction->brand)
+                ->first();
+
+            switch($response->object()->transaction->status) {
+                case(TransactionMoneyTransfer::PROCESSING):
+                    $transaction->update([
+                        'status_id' => Transaction::PENDING,
+                        'desc' => $response->object()->message
+                    ]);
+                    return Inertia::render('Payment/Pending', [
+                        'transaction'   => $transaction,
+                        'response' => $request['response']
+                    ]);
+                    break;
+
+                case(TransactionMoneyTransfer::SUCCESS):
+                    $transaction->update([
+                        'status_id' => Transaction::SUCCESS,
+                    ]);
+
+                    return Inertia::render('History/Show', [
+                        'history' => $transaction,
+                        'goBack' => false,
+                        'goSuccess' => true,
+                        'saveCustomer' => $save,
+                    ]);
+                    break;
+
+                case(TransactionMoneyTransfer::REFUNDED):
+                    $transaction->update([
+                        'status_id' => Transaction::REFUNDED,
+                        'desc' => $response->object()->message
+                    ]);
+
+                    return Inertia::render('Payment/Error', [
+                        'transaction'   => $transaction
+                    ]);
+                    break;
+
+                case(TransactionMoneyTransfer::CANCELED):
+                    $transaction->update([
+                        'status_id' => Transaction::CANCEL,
+                        'desc' => $response->object()->message
+                    ]);
+
+                    return Inertia::render('Payment/Error', [
+                        'transaction'   => $transaction
+                    ]);
+                    break;
+
+                default:
+                    $transaction->update([
+                        'status_id' => Transaction::ERROR,
+                        'desc' => $response->object()->message
+                    ]);
+
+                    return Inertia::render('Payment/Error', [
+                        'transaction'   => $transaction
+                    ]);
+            }
+        }
+
+
+//        dd($response->object());
     }
 
     public function ayoBalance()

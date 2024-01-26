@@ -43,7 +43,7 @@ class Transaction extends Model
     const DENY = 4;
     const EXPIRE = 5;
     const ERROR = 6;
-    const CLOSE = 7;
+    const REFUNDED = 7;
     const UNDEFINED = 8;
     const STATUS = [
         self::ALL => 'Semua',
@@ -53,7 +53,7 @@ class Transaction extends Model
         self::DENY => 'Ditolak',
         self::EXPIRE => 'Kadaluarsa',
         self::ERROR =>  'Gagal',
-        self::CLOSE => 'Keluar',
+        self::REFUNDED => 'Refund',
         self::UNDEFINED => 'Undefined',
     ];
 
@@ -64,7 +64,7 @@ class Transaction extends Model
         self::DENY => 'bg-gray-100 text-gray-800',
         self::EXPIRE => 'bg-gray-100 text-gray-800',
         self::ERROR =>  'bg-red-100 text-red-800',
-        self::CLOSE => 'bg-gray-100 text-gray-800',
+        self::REFUNDED => 'bg-gray-100 text-gray-800',
         self::UNDEFINED => 'bg-gray-100 text-gray-800',
     ];
 

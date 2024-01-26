@@ -38,12 +38,12 @@ const walletLists = [
 
 const bankLists = [
     // { id: 1, name: 'wkp', logo: '/img/vendor/WAYKAPAY.svg', admin: 0, disabled: false },
-    { id: 2, name: 'CENAIDJA', logo: '/img/vendor/BCA.svg', admin: 4000, disabled: false },
-    { id: 3, name: 'BNINIDJA', logo: '/img/vendor/BNI.svg', admin: 4000, disabled: false },
-    { id: 4, name: 'BRINIDJA', logo: '/img/vendor/BRI.svg', admin: 4000, disabled: true },
-    { id: 5, name: 'Bank MANDIRI', logo: '/img/vendor/MANDIRI.svg', admin: 4000, disabled: false },
-    { id: 6, name: 'permata', logo: '/img/vendor/PERMATA.svg', admin: 4000, disabled: true },
-    { id: 7, name: 'bsm', logo: '/img/vendor/BSI.svg', admin: 4000, disabled: true },
+    { id: 2, name: 'CENAIDJA', logo: '/img/vendor/BCA.svg', admin: 1000, disabled: false },
+    { id: 3, name: 'BNINIDJA', logo: '/img/vendor/BNI.svg', admin: 1000, disabled: false },
+    { id: 4, name: 'BRINIDJA', logo: '/img/vendor/BRI.svg', admin: 1000, disabled: true },
+    { id: 5, name: 'Bank MANDIRI', logo: '/img/vendor/MANDIRI.svg', admin: 1000, disabled: false },
+    { id: 6, name: 'permata', logo: '/img/vendor/PERMATA.svg', admin: 1000, disabled: true },
+    { id: 7, name: 'bsm', logo: '/img/vendor/BSI.svg', admin: 1000, disabled: true },
 ]
 
 const form = useForm({

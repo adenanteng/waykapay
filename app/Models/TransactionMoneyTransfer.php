@@ -40,6 +40,19 @@ class TransactionMoneyTransfer extends Model
         self::BSM => 'BSI',
     ];
 
+    const PROCESSING = 0;
+    const SUCCESS = 1;
+    const REFUNDED = 2;
+    const CANCELED = 3;
+    const FAILED = 4;
+    const DISBURSEMENT_STATUS = [
+        self::PROCESSING => 'Proses',
+        self::SUCCESS => 'Sukses',
+        self::REFUNDED => 'Refund',
+        self::CANCELED => 'Batal',
+        self::FAILED => 'Gagal',
+    ];
+
     protected $with = [
         'to'
     ];

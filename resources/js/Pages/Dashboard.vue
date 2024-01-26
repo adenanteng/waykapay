@@ -315,7 +315,7 @@ function greeting() {
 
                                                 <template v-else-if="history.money_transfer">
                                                     <template v-if="history.user_id == $page.props.user.id">
-                                                        ke {{ history.money_transfer.to.name }}
+                                                        ke {{ history.money_transfer?.to_name }}
                                                     </template>
                                                     <template v-else>
                                                         dari {{ history.user.name }}

@@ -108,11 +108,11 @@ function formatPrice(value) {
                     </div>
                     <div class="sm:col-span-1 flex sm:block justify-between" >
                         <div class="text-sm ">Nama Tujuan</div>
-                        <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.name }}</div>
+                        <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to_name }}</div>
                     </div>
                     <div class="sm:col-span-1 flex sm:block justify-between" >
                         <div class="text-sm ">No. Rekening Tujuan</div>
-                        <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to?.phone }}</div>
+                        <div class="text-sm font-semibold uppercase">{{ props.history.money_transfer?.to_number }}</div>
                     </div>
                 </template>
 

@@ -1,6 +1,6 @@
 <script setup>
 import {Link, router, useForm, usePage} from '@inertiajs/vue3';
-import {computed, ref, watch} from 'vue'
+import {computed, onMounted, onUnmounted, ref, watch} from 'vue'
 import ActionMessage from '@/Components/ActionMessage.vue';
 import FormSection from '@/Components/FormSection.vue';
 import InputError from '@/Components/InputError.vue';
@@ -43,7 +43,8 @@ const storeInformation = () => {
         message.value = "Saldo kurang"
     } else {
         if (props.beneficiary) {
-            form.amount = amount.value
+            form.amount = amount.value.replaceAll(".", "")
+            form.beneficiary.beneficiaryDetails.beneficiaryName = accountName.value
             form.post(route('money-transfer.confirmAyo'), {
                 errorBag: 'storeInformation',
                 preserveScroll: true,
@@ -117,6 +118,9 @@ const handleOnChange = (value) => {
     // console.log("OTP changed: ", value);
 };
 
+const accountName = ref()
+const errMessage = ref()
+
 if (typeof window !== 'undefined') {
     window.Pusher = Pusher;
 
@@ -129,15 +133,30 @@ if (typeof window !== 'undefined') {
 
     let channel = window.Echo.channel('ayo-beneficiary-channel');
     channel.listen('.ayo-beneficiary-event', function (data) {
-        if (data.action === 'reload' &&
+        if (data.action === 'success' &&
+            props.beneficiary?.beneficiaryDetails?.beneficiaryAccountNumber == data.beneficiaryAccountNumber)
+        {
+            accountName.value = data.beneficiaryName
+            console.log(data.beneficiaryName, data.beneficiaryAccountNumber)
+
+        } else if (data.action === 'error' &&
             props.beneficiary?.beneficiaryDetails?.beneficiaryAccountNumber == data.beneficiaryAccountNumber) {
-            console.log(data.action, data.beneficiaryAccountNumber)
+            errMessage.value = data.message
+            console.log(data.message, data.beneficiaryAccountNumber)
+
         } else {
             console.log(data)
         }
     });
 }
 
+onMounted(() => {
+
+})
+
+onUnmounted(() => {
+    window.Echo.leave('ayo-beneficiary-channel')
+})
 </script>
 
 <template>
@@ -151,15 +170,42 @@ if (typeof window !== 'undefined') {
         </template>
 
         <template #content>
-            <div class="flex items-center px-2">
+            <div class="flex items-center px-2" v-if="props.beneficiary">
+                <template v-if="accountName">
+                    <div class="flex-shrink-0">
+                        <img class="h-5 w-full"
+                             :src="props.bank.logo"
+                             :alt="props.bank.name" />
+                    </div>
+                    <div class="ml-3 min-w-0 flex-1">
+                        <div class="text-base font-medium text-gray-800 truncate capitalize" >
+                            {{ accountName }}
+                        </div>
+                        <div class="text-sm font-medium text-gray-500 truncate">
+                            {{ props.account_no }}
+                        </div>
+                    </div>
+                </template>
+                <template v-else-if="errMessage">
+                    <div class="text-center">
+                        <i class="fa-regular fa-triangle-exclamation text-2xl text-red-600" />
+                        <p class="text-gray-900">{{ errMessage }}</p>
+                    </div>
+                </template>
+                <template v-else>
+                    <i class="fa-regular fa-spinner-third animate-spin" />
+                </template>
+            </div>
+
+            <div class="flex items-center px-2" v-else>
                 <div class="flex-shrink-0">
                     <img class="h-5 w-full"
                          :src="props.bank.logo"
                          :alt="props.bank.name" />
                 </div>
                 <div class="ml-3 min-w-0 flex-1">
-                    <div class="text-base font-medium text-gray-800 truncate capitalize">
-                        {{ props.users?.name ?? props.beneficiary?.beneficiaryDetails?.beneficiaryName }}
+                    <div class="text-base font-medium text-gray-800 truncate capitalize" >
+                        {{ props.users?.name }}
                     </div>
                     <div class="text-sm font-medium text-gray-500 truncate">
                         {{ props.account_no }}
@@ -169,7 +215,7 @@ if (typeof window !== 'undefined') {
         </template>
     </ActionSection>
 
-    <FormSection >
+    <FormSection v-if="accountName || !props.beneficiary">
         <template #title>
             Mau Transfer berapa?
         </template>
@@ -198,7 +244,7 @@ if (typeof window !== 'undefined') {
                 </div>
                 <InputError :message="form.errors.amount || message" class="mt-2"/>
                 <p class="mt-1 text-xs text-gray-600">
-                    Nominal Rp 1.000 - Rp {{ Number($page.props.user.wallet_balance) <= 2000000 ?
+                    Max Rp {{ Number($page.props.user.wallet_balance) <= 2000000 ?
                     formatPrice($page.props.user.wallet_balance) : '2.000.000' }}
                 </p>
             </div>
