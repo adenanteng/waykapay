@@ -208,15 +208,15 @@ class WebHookController extends Controller
                     ));
         }
 
-
         return 'ok';
     }
 
     public function webhookAyoDisbursement(Request $request) {
         Log::info($request->getContent());
 
-        dd($request['transactionId'], $request['details']['status']);
         $transaction = Transaction::where('order_id', $request['transactionId'])->first();
+
+        dd($request['transactionId'], $request['details']['status'], $transaction);
         $user = User::where('id', $transaction['user_id'])->first();
 
         if ($transaction->status_id != Transaction::SUCCESS) {
