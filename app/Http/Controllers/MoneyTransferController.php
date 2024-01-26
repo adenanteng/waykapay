@@ -273,13 +273,12 @@ class MoneyTransferController extends Controller
 
         $transaction = Transaction::where('order_id', $request['transaction']['order_id'])->first();
 
-        if ($transaction->status_id == Transaction::PENDING) {
-            $save = !TransactionCustomer::where('user_id', auth()->user()->id)
-                ->where('customer_no', $transaction->customer_no)
-                ->where('brand', $transaction->brand)
-                ->first();
+        $save = !TransactionCustomer::where('user_id', auth()->user()->id)
+            ->where('customer_no', $transaction->customer_no)
+            ->where('brand', $transaction->brand)
+            ->first();
 
-            switch($response->object()->transaction->status) {
+        switch($response->object()->transaction->status) {
                 case(TransactionMoneyTransfer::PROCESSING):
                     $transaction->update([
                         'status_id' => Transaction::PENDING,
@@ -336,7 +335,6 @@ class MoneyTransferController extends Controller
                         'transaction'   => $transaction
                     ]);
             }
-        }
 
 
 //        dd($response->object());
