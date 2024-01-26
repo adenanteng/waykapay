@@ -166,7 +166,7 @@ if (typeof window !== 'undefined') {
                         <template v-for="history in date" :key="history.id">
 <!--                            <template v-if="history.status_id == tabHistory || tabHistory==99">-->
                             <li>
-                                <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
+                                <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                                     <div class="px-4 py-4 sm:px-6">
                                         <div class="flex items-center justify-between">
                                             <p class="text-sm font-medium truncate capitalize"
