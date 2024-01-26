@@ -190,13 +190,24 @@ class WebHookController extends Controller
 
         sleep(5);
 
-        Helper::pusher()
-            ->trigger('ayo-beneficiary-channel', 'ayo-beneficiary-event',
-                array(
-                    'action' => 'reload',
-                    'beneficiaryAccountNumber' => $request['details']['beneficiaryAccountNumber'],
-                    'beneficiaryName' => $request['details']['beneficiaryName'],
-                ));
+        if ($request['code'] == 201) {
+            Helper::pusher()
+                ->trigger('ayo-beneficiary-channel', 'ayo-beneficiary-event',
+                    array(
+                        'action' => 'success',
+                        'beneficiaryAccountNumber' => $request['details']['beneficiaryAccountNumber'],
+                        'beneficiaryName' => $request['details']['beneficiaryName'],
+                    ));
+        } else {
+            Helper::pusher()
+                ->trigger('ayo-beneficiary-channel', 'ayo-beneficiary-event',
+                    array(
+                        'action' => 'error',
+                        'beneficiaryAccountNumber' => $request['details']['beneficiaryAccountNumber'],
+                        'message' => $request['message'],
+                    ));
+        }
+
 
         return 'ok';
     }

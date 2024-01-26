@@ -174,8 +174,95 @@ class MoneyTransferController extends Controller
         ]);
 
 //        Log::info(json_decode( json_encode($response->object()), true));
-        dd($response->object());
+
+        if (!$response->successful()) {
+            dd($response->object()->errors[0]->details);
+        }
+
+        dd($response->object(), $request->toArray());
+
+        $user = auth()->user();
+
+        $gross_amount = $request['amount'] + $request['bank']['admin'];
+
+        if ($user->wallet_balance <= $gross_amount) {
+            dd('Saldo kurang');
+        }
+
+        $transaction = Transaction::create([
+            'sku' => '-',
+            'order_id' => strtolower(Str::random(8)),
+            'brand' => 'WAYKAPAY',
+            'product_name' => 'Kirim uang',
+            'customer_no' => $to->phone,
+            'user_id' => $user->id,
+            'status_id' => Transaction::PENDING,
+            'category_id' => Transaction::TRANSFER,
+            'amount' => $request['amount'],
+            'gross_amount' => $gross_amount,
+            'last_amount' => $user->wallet_balance,
+            'admin_fee' => $request['bank']['admin'],
+            'desc' => $request['desc'],
+        ]);
+
+        $money_transfer = TransactionMoneyTransfer::create([
+            'transaction_id' => $transaction->id,
+            'bank_id' => $request['bank']['id'],
+            'to_name' => $to->name,
+            'to_number' => $to->phone,
+            'to_id' => $to->id,
+        ]);
+
+        $user->update([
+            'wallet_balance' => $user->wallet_balance - $transaction->gross_amount,
+        ]);
+        $to->update([
+            'wallet_balance' => $to->wallet_balance + $transaction->gross_amount,
+        ]);
+
+        $transaction->update([
+            'status_id' => Transaction::SUCCESS
+        ]);
+
+        $transaction = Transaction::where('order_id', $transaction->order_id)->first();
+
+//        dd($transaction->toArray());
+
+        if (auth()->user()->device_token) {
+            $msg = [
+                'title' => 'Kirim uang ke '.$to->name.' berhasil!',
+                'body' => 'Lorem ipsum dolor sit amet',
+                'badge' => 1,
+                'sound' => 'ping.aiff'
+            ];
+            Helper::sendNotification($user->device_token, $msg);
+        }
+
+        if ($to->device_token) {
+            $msg = [
+                'title' => $user->name.' mengirim uang sejumlah Rp '.$request['amount'],
+                'body' => 'Lorem ipsum dolor sit amet',
+                'badge' => 1,
+                'sound' => 'ping.aiff'
+            ];
+            Helper::sendNotification($to->device_token, $msg);
+        }
+
+//        return $response->object()->data->deposit;
+
+        $save = !TransactionCustomer::where('user_id', auth()->user()->id)
+            ->where('customer_no', $transaction->customer_no)
+            ->where('brand', $transaction->brand)
+            ->first();
+
+        return Inertia::render('History/Show', [
+            'history' => $transaction,
+            'goBack' => false,
+            'goSuccess' => true,
+            'saveCustomer' => $save,
+        ]);
     }
+
     public function ayoBalance()
     {
         $order_id = Str::random(32);
