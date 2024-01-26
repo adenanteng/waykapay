@@ -146,13 +146,10 @@ class ProductController extends Controller
                 $category_id = Transaction::PASCA_BPJSTK;
                 break;
 
-            case ('home-credit'):
-            case ('mnc-finance'):
+            case ('astra-credit-company'):
             case ('adira-finance'):
-            case ('bca-multifinance'):
-            case ('cimb-niaga-jcb'):
-            case ('mega-auto-finance'):
-            case ('sms-finance'):
+            case ('federal-inti-finance'):
+            case ('home-credit-indonesia'):
                 $category_id = Transaction::PASCA_MULTIFINANCE;
                 break;
 
