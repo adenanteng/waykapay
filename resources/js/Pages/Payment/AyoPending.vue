@@ -48,7 +48,7 @@ if (typeof window !== 'undefined') {
     let channel = window.Echo.channel('ayo-disbursement-channel');
     channel.listen('.ayo-disbursement-event', function (data) {
         if (data.action === 'reload' && data.orderId === props.transaction.order_id) {
-            form.get(route('money-transfer.ayoStatus', form), {
+            form.post(route('money-transfer.ayoStatus'), {
                 errorBag: 'updateInformation',
                 preserveScroll: true,
                 onSuccess: () => {}
