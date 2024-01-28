@@ -186,14 +186,14 @@ function formatPrice(value) {
                                         <div class="flex items-center justify-between">
                                             <p class="text-sm font-medium truncate capitalize"
                                                :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                {{ history.product_name }}
+                                                {{ history.product_name.replaceAll("-", " ") }}
                                                 <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
                                                 <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
                                                 <template v-else-if="history.offline_account">{{ history.offline_account.bank }}</template>
                                                 <template v-else-if="history.manual_account">{{ history.manual_account.bank }}</template>
                                                 <template v-else-if="history.money_transfer">
                                                     <template v-if="history.user_id == $page.props.user.id">
-                                                        ke {{ history.money_transfer.to.name }}
+                                                        ke {{ history.money_transfer?.to_name }}
                                                     </template>
                                                     <template v-else>
                                                         dari {{ history.user.name }}

@@ -1,17 +1,12 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import {Link, useForm, usePage} from "@inertiajs/vue3";
-import MobileMenu from "@/Components/MobileMenu.vue";
-import TextInput from "@/Components/TextInput.vue";
-import InputError from "@/Components/InputError.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 import FormSection from "@/Components/FormSection.vue";
 import ActionMessage from "@/Components/ActionMessage.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import ActionSection from "@/Components/ActionSection.vue";
 import DialogModal from "@/Components/DialogModal.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
 import {computed, ref} from "vue";
 import VOtpInput from "vue3-otp-input";
 import bcrypt from "bcryptjs";
@@ -22,7 +17,7 @@ const props = defineProps({
     // fee: Number
 });
 
-const extra_fee = 2000;
+const extra_fee = 500;
 
 const admin_fee = Number(props.customer.data.selling_price) - Number(props.customer.data.price);
 const service_fee = Number(props.customer.data.admin) - admin_fee;

@@ -61,7 +61,7 @@ function formatPrice(value) {
 
                 <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 99 || props.history.category_id != 1">
                     <div class="text-sm ">Produk</div>
-                    <div class="text-sm font-semibold">{{ props.history.product_name }}</div>
+                    <div class="text-sm font-semibold">{{ props.history.product_name.replaceAll("-", " ") }}</div>
                 </div>
 
                 <div class="sm:col-span-1 flex sm:block justify-between" v-if="props.history.category_id != 99 || props.history.category_id != 1">

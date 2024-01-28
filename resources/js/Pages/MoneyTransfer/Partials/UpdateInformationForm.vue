@@ -268,10 +268,6 @@ onUnmounted(() => {
                 Berhasil disimpan.
             </ActionMessage>
 
-<!--            <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">-->
-<!--                Konfirmasi-->
-<!--            </PrimaryButton>-->
-
             <PrimaryButton
                 class="w-full justify-center"
                 :class="{ 'opacity-25': form.processing }"
@@ -280,6 +276,14 @@ onUnmounted(() => {
             >
                 Konfirmasi
             </PrimaryButton>
+
+<!--            <PrimaryButton-->
+<!--                class="w-full justify-center"-->
+<!--                :class="{ 'opacity-25': form.processing }"-->
+<!--                disabled-->
+<!--            >-->
+<!--                Konfirmasi-->
+<!--            </PrimaryButton>-->
         </template>
     </FormSection>
 

@@ -23,11 +23,11 @@ class TransactionController extends Controller
 //        dd(Carbon::today()->subMonth()->toDateString());
 
         $now = Transaction::where('status_id', Transaction::SUCCESS)
-            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT])
+            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::TRANSFERAYO, Transaction::DEPOSIT])
             ->whereYear('created_at', Carbon::today()->year)->whereMonth('created_at', Carbon::today()->month);
 
         $prev = Transaction::where('status_id', Transaction::SUCCESS)
-            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::DEPOSIT])
+            ->whereNotIn('category_id', [Transaction::TRANSFER, Transaction::TRANSFERAYO, Transaction::DEPOSIT])
             ->whereMonth('created_at', Carbon::now()->startOfMonth()->subMonth()->month);
 
 //        dd(Carbon::now()->startOfMonth()->subMonth()->month);

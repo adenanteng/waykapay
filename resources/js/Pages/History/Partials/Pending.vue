@@ -236,7 +236,7 @@ function formatPrice(value) {
                     <template v-if="props.history.category_id != 99 && props.history.category_id != 1">
                         <div class="sm:col-span-1 flex sm:block justify-between" >
                             <div class="text-sm ">Produk</div>
-                            <div class="text-sm font-semibold uppercase">{{ props.history.product_name }}</div>
+                            <div class="text-sm font-semibold uppercase">{{ props.history.product_name.replaceAll("-", " ") }}</div>
                         </div>
                     </template>
 

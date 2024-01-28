@@ -70,6 +70,7 @@ class Transaction extends Model
 
     const ALL = null;
     const TRANSFER = 99;
+    const TRANSFERAYO =98;
     const DEPOSIT = 1;
     const PULSA = 2;
     const DATA = 3;
@@ -93,7 +94,8 @@ class Transaction extends Model
     const UNKNOWN = 90;
     const CATEGORY = [
         self::ALL => 'Semua',
-        self::TRANSFER => 'Kirim Uang',
+        self::TRANSFER => 'Kirim Uang Sesama',
+        self::TRANSFERAYO => 'Kirim Uang',
         self::DEPOSIT => 'Deposit',
         self::PULSA => 'Pulsa',
         self::DATA  => 'Data',

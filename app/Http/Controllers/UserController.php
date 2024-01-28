@@ -194,16 +194,22 @@ class UserController extends Controller
             ['category_id', Transaction::TRANSFER]
         ])->get()->sum('amount');
 
+        $tf_send_ayo = Transaction::where([
+            ['user_id', $user->id],
+            ['status_id', Transaction::SUCCESS],
+            ['category_id', Transaction::TRANSFERAYO]
+        ])->get()->sum('amount');
+
         $trx = Transaction::where([
             ['user_id', $user->id],
             ['status_id', [Transaction::SUCCESS, Transaction::PENDING]],
-            ['category_id', '!=', [Transaction::DEPOSIT, Transaction::TRANSFER]]
+            ['category_id', '!=', [Transaction::DEPOSIT, Transaction::TRANSFER, Transaction::TRANSFERAYO]]
         ])->get()->sum('gross_amount');
 
         $fail = Transaction::where([
             ['user_id', $user->id],
             ['status_id', '!=', Transaction::SUCCESS],
-            ['category_id', '!=', [Transaction::DEPOSIT, Transaction::TRANSFER]]
+            ['category_id', '!=', [Transaction::DEPOSIT, Transaction::TRANSFER, Transaction::TRANSFERAYO]]
         ])->get()->sum('gross_amount');
 
         $in = $depo + $tf_accept;
