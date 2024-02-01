@@ -71,8 +71,8 @@ class DepositController extends Controller
 
         $sender_bank_fee = match ($request['method']['id']) {
             1, 2, 3, 4, 5, 6 => $admin_fee = 3000,
-            13 => $admin_fee = 4000,
-            16 => $admin_fee = 0,
+            13, 14 => $admin_fee = 4000,
+            15, 16 => $admin_fee = 0,
         };
 
         $grossAmount = $request['amount'] + $admin_fee;
@@ -94,7 +94,7 @@ class DepositController extends Controller
                         'merchantCode' => $merchantCode,
                         'paymentAmount' => $grossAmount,
                         'merchantOrderId' => $merchantOrderId,
-                        'productDetails' => 'Pembayaran Deposit Waykapay',
+                        'productDetails' => 'Pembayaran Deposit Waykapay - ' . $user->name,
                         'email' => $user->email,
                         'phoneNumber' => $user->phone,
                         'bank' => $bank,
@@ -118,7 +118,7 @@ class DepositController extends Controller
                         'paymentAmount' => $grossAmount,
                         'paymentFee' => '0',
                         'merchantOrderId' => $merchantOrderId,
-                        'productDetails' => 'Pembayaran Deposit Waykapay',
+                        'productDetails' => 'Pembayaran Deposit Waykapay - ' . $user->name,
                         'email' => $user->email,
                         'phoneNumber' => $user->phone,
                         'channel' => $bank,

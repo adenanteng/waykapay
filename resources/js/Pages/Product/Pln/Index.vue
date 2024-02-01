@@ -54,6 +54,18 @@ const props = defineProps({
                     </div>
                 </div>
             </li>
+            <li class="relative">
+                <Link :href="route('pasca.index', 'pln-nontaglis')" class="absolute inset-0" />
+                <div class="flex w-full items-center justify-between space-x-6 p-6">
+                    <img src="/img/vendor/PLN.svg" alt="" class="w-10">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-sm font-medium text-gray-900">PLN Nontaglis</h3>
+                        </div>
+                        <p class="text-sm text-gray-500">Bayar PLN Nontaglis</p>
+                    </div>
+                </div>
+            </li>
 
 <!--            <li class="relative">-->
 <!--                <Link :href="route('pln.postpaid.index')" class="absolute inset-0" />-->

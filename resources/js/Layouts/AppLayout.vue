@@ -136,8 +136,6 @@ onUnmounted(() => {
             <div class="transition duration-1000" :class="hasPrevious ? '' : 'sticky sm:relative top-3 right-0 left-0 z-40 ' " ref="headRef">
                 <Popover as="header" class=""  v-slot="{ open }">
 
-
-
                     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                         <div class="relative flex flex-wrap items-center justify-start lg:justify-between">
                             <!-- Logo -->

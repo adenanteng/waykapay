@@ -60,7 +60,7 @@ class WebHookController extends Controller
 
             $transaction->update([
                 'status_id' => $status_id,
-                'desc'  =>  '-'
+                'desc'  =>  $request['payment_reff'] ?? null,
 //                'desc'  =>  $request['merchantOrderId'].' '.$request['payment_reff']
             ]);
         }
@@ -146,7 +146,7 @@ class WebHookController extends Controller
      */
     public function webhookHandlerPushyRegister(){
 
-        Log::info(Req::input('token'), Req::input('user'));
+//        Log::info(Req::input('token'), Req::input('user'));
 
 //        $device = Device::latest()->first();
 //        if ($device) {

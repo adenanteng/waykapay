@@ -131,7 +131,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/transaction', TransactionController::class)->names('transaction');
     Route::resource('/transaction-customer', TransactionCustomerController::class)->names('transaction-customer');
 
-
     Route::get('report/detail', [ReportController::class, 'detail'])->name('report.detail');
     Route::resource('/report', ReportController::class)->names('report');
 
@@ -153,7 +152,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/device/store', [DeviceController::class, 'store'])->name('device.store');
     Route::get('/device/subscribe', [DeviceController::class, 'subscribe'])->name('device.subscribe');
     Route::post('/device/send', [DeviceController::class, 'send'])->name('device.send');
-
 
     Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');
 

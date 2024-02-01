@@ -182,6 +182,12 @@ function formatPrice(value) {
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </Link>
                 </li>
+                <li>
+                    <a href="/log-viewer" class="flex justify-between px-6 py-4" >
+                        <p class="text-sm font-medium text-gray-900">Catatan</p>
+                        <i class="fa-regular fa-angle-right text-gray-900" />
+                    </a>
+                </li>
             </ul>
         </div>
 

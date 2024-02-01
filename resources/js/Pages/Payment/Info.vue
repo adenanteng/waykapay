@@ -46,24 +46,36 @@ function formatPrice(value) {
     <BlankLayout :title="props.transaction?.message ?? 'Transaksi Gagal'" >
 
         <div class="pt-16 pb-12">
-            <main class="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-6 lg:px-8">
+            <main class="mx-auto flex w-full max-w-sm flex-grow flex-col justify-center px-6 lg:px-8">
                 <div class="flex flex-shrink-0 justify-center">
-<!--                    <ApplicationLogo />-->
                     <ApplicationLogoTitle />
                 </div>
                 <div class="mt-5">
-                    <div class="text-center">
-<!--                        <p class="text-base font-semibold text-indigo-600">Lorem ipsum</p>-->
-                        <h1 class="text-lg font-bold tracking-tight text-gray-900">Info</h1>
-
-                        <div class="">
-                            <div class="text-sm text-gray-900">
-                                <span class="class text-gray-600">
-                                    ({{ props.transaction?.rc ?? 'null' }})
-                                </span>
-                                {{ props.transaction?.message ?? 'Transaksi Gagal' }}
+                    <div class="border-t border-gray-600 border-dashed px-4 py-5 ">
+                        <div class="grid grid-cols-1 gap-x-4 gap-y-2 text-gray-900">
+                            <div class=" flex justify-between" v-if="props.transaction">
+                                <div class="text-sm ">Status</div>
+                                <div class="text-sm font-semibold capitalize">{{ props.transaction?.status }}</div>
                             </div>
+                            <div class=" flex justify-between" v-if="props.transaction">
+                                <div class="text-sm ">Produk</div>
+                                <div class="text-sm font-semibold capitalize">{{ props.transaction?.buyer_sku_code.replaceAll("-", " ") }}</div>
+                            </div>
+                            <div class=" flex justify-between" v-if="props.transaction">
+                                <div class="text-sm ">ID Pelanggan</div>
+                                <div class="text-sm font-semibold">{{ props.transaction?.customer_no }}</div>
+                            </div>
+                            <div class=" flex justify-between gap-5">
+                                <div class="text-sm ">Keterangan</div>
+                                <div class="text-sm font-semibold ">{{ props.transaction?.message ?? 'Transaksi Gagal' }}</div>
+                            </div>
+
+                            <span class="my-2 border-t border-gray-600 border-dashed block" />
+
                         </div>
+                    </div>
+
+                    <div class="text-center">
 
                         <div class="mt-5 space-x-2">
 <!--                            <PrimaryButton as="a" :href="route('dashboard')" >-->

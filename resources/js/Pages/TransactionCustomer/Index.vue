@@ -16,6 +16,13 @@ onMounted(() => {
     router.reload({ only: ['customer'] })
 })
 
+const customerDelete = (id) => {
+    router.delete(route('transaction-customer.destroy', id), {
+        preserveScroll: true,
+        onFinish: () => router.reload({ only: ['customer'] }),
+    });
+};
+
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
@@ -58,17 +65,20 @@ function formattedDate(value) {
                 </h3>
                 <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300 divide-y sm:divide-y-0 divide-gray-300 dark:divide-gray-600">
                     <template v-for="cust in brand">
-                        <li class="relative px-6 py-5 flex items-center space-x-3">
+                        <li class="relative px-4 py-3 flex items-center space-x-3">
                             <div class="flex-shrink-0" >
-                                <img class="w-10" :src="'/img/vendor/' + cust.brand + '.png'" alt="">
-                                <img class="w-10" :src="'/img/vendor/' + cust.brand + '.svg'" alt="">
+                                <img class="w-8" :src="'/img/vendor/' + cust.brand + '.png'" alt="">
+                                <img class="w-8" :src="'/img/vendor/' + cust.brand + '.svg'" alt="">
                             </div>
 
-                            <div @click="" class="flex-1 min-w-0">
-                                <button @click="" class="focus:outline-none text-left">
-                                    <span class="absolute inset-0" aria-hidden="true"></span>
-                                    <p class="text-sm font-medium text-gray-900 capitalize">{{ cust.customer_name }}</p>
-                                    <p class="text-sm text-gray-500 truncate">{{ cust.customer_no }}</p>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 capitalize">{{ cust.customer_name }}</p>
+                                <p class="text-sm text-gray-500 truncate">{{ cust.customer_no }}</p>
+                            </div>
+
+                            <div class="">
+                                <button @click="customerDelete(cust)" class="mr-2">
+                                    <i class="fa-regular fa-trash text-lg text-red-600" />
                                 </button>
                             </div>
                         </li>

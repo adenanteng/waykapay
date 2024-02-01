@@ -91,6 +91,7 @@ class Transaction extends Model
     const PASCA_PBB = 18;
     const PASCA_GASNEGARA = 19;
     const PASCA_SAMSAT = 20;
+    const PLN_NONTAGLIS = 21;
     const UNKNOWN = 90;
     const CATEGORY = [
         self::ALL => 'Semua',
@@ -117,6 +118,7 @@ class Transaction extends Model
 //        self::PASCA_PBB => 'Pasca PBB',
 //        self::PASCA_GASNEGARA => 'Pasca Gas Negara',
 //        self::PASCA_SAMSAT => 'Pasca Samsat',
+        self::PLN_NONTAGLIS => 'PLN Nontaglis',
         self::UNKNOWN => 'Tidak diketahui'
     ];
 

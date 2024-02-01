@@ -79,6 +79,6 @@ class TransactionCustomerController extends Controller
      */
     public function destroy(TransactionCustomer $transactionCustomer)
     {
-        dd($transactionCustomer);
+        $transactionCustomer->delete();
     }
 }

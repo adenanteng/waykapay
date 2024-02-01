@@ -129,6 +129,10 @@ class ProductController extends Controller
                 $category_id = Transaction::PASCA_PLN;
                 break;
 
+            case ('pln-nontaglis'):
+                $category_id = Transaction::PLN_NONTAGLIS;
+                break;
+
             case ('pdam-bandar-lampung'):
                 $category_id = Transaction::PASCA_PDAM;
                 break;

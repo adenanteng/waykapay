@@ -47,7 +47,7 @@ const updateSettingInformation = () => {
         </template>
 
         <template #form>
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 25.000" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
@@ -62,7 +62,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.emoney_25" class="mt-2" />
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 50.000" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
@@ -77,7 +77,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.emoney_50" class="mt-2" />
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 75.000" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
@@ -92,7 +92,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.emoney_75" class="mt-2" />
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 100.000" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
@@ -107,7 +107,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.emoney_100" class="mt-2" />
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 200.000" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
@@ -122,7 +122,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.emoney_200" class="mt-2" />
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 500.000" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
@@ -137,7 +137,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.emoney_500" class="mt-2" />
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 1.000.000" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
@@ -152,7 +152,7 @@ const updateSettingInformation = () => {
                 <InputError :message="form.errors.emoney_1000" class="mt-2" />
             </div>
 
-            <div class="col-span-2">
+            <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Max" />
                 <div class="flex">
                     <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
