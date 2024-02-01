@@ -51,7 +51,7 @@ function formatPrice(value) {
                     <ApplicationLogoTitle />
                 </div>
                 <div class="mt-5">
-                    <div class="border-t border-gray-600 border-dashed px-4 py-5 ">
+                    <div class="border-y border-gray-600 border-dashed px-4 py-5 ">
                         <div class="grid grid-cols-1 gap-x-4 gap-y-2 text-gray-900">
                             <div class=" flex justify-between" v-if="props.transaction">
                                 <div class="text-sm ">Status</div>
@@ -69,9 +69,6 @@ function formatPrice(value) {
                                 <div class="text-sm ">Keterangan</div>
                                 <div class="text-sm font-semibold ">{{ props.transaction?.message ?? 'Transaksi Gagal' }}</div>
                             </div>
-
-                            <span class="my-2 border-t border-gray-600 border-dashed block" />
-
                         </div>
                     </div>
 
