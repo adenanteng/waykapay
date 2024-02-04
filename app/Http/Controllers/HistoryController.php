@@ -22,7 +22,7 @@ class HistoryController extends Controller
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
 //        dd(Carbon::now()->month);
-        $paginate = Req::input('filter_paginate') ?? 10;
+        $paginate = Req::input('filter_paginate') ?? 20;
         $history = Transaction::where(function($query)
             {
                 $query->where('user_id', auth()->user()->id)

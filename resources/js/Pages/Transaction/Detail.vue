@@ -32,7 +32,7 @@ const props = defineProps({
 let search = ref(props.filters.search);
 let filterStatus = ref(props.filters.filterStatus);
 let filterCategory = ref(props.filters.filterCategory);
-let filterPaginate = ref(props.filters.filterPaginate ?? 10);
+let filterPaginate = ref(props.filters.filterPaginate ?? 20);
 const date = ref([]);
 
 onMounted(() => {
@@ -246,7 +246,7 @@ function formatPrice(value) {
             </div>
 
             <button class="w-full grid text-gray-900 font-medium"
-                    @click="filterPaginate+=10"
+                    @click="filterPaginate+=20"
                     v-if="filterPaginate <= $page.props.transactionCount"
             >
                 Selanjutnya

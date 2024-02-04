@@ -73,7 +73,7 @@ class TransactionController extends Controller
 
     public function detail() {
 
-        $paginate = Req::input('filter_paginate') ?? 10;
+        $paginate = Req::input('filter_paginate') ?? 20;
 
         $tr = Transaction::query()
             ->latest()

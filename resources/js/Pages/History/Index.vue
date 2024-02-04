@@ -76,7 +76,7 @@ if (typeof window !== 'undefined') {
     });
 }
 
-let filterPaginate = ref(props.filters.filterPaginate ?? 10);
+let filterPaginate = ref(props.filters.filterPaginate ?? 20);
 
 watch([filterPaginate], ([valueP]) => {
     // console.log(date)
@@ -241,7 +241,7 @@ watch([filterPaginate], ([valueP]) => {
                 </div>
 
                 <button class="w-full grid text-gray-900 font-medium"
-                        @click="filterPaginate+=10"
+                        @click="filterPaginate+=20"
                         v-if="filterPaginate <= $page.props.history_count"
                 >
                     Selanjutnya
