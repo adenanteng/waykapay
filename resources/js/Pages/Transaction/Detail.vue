@@ -12,13 +12,14 @@ import SelectInput from "../../Components/SelectInput.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 // import '@vuepic/vue-datepicker/dist/main.css'
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
+import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
-    // transaction: undefined,
-    transaction: {
-        type: Object,
-        default: () => ({}),
-    },
+    transaction: undefined,
+    // transaction: {
+    //     type: Object,
+    //     default: () => ({}),
+    // },
     filters: {
         type: Object,
         default: () => ({}),
@@ -31,15 +32,11 @@ const props = defineProps({
 let search = ref(props.filters.search);
 let filterStatus = ref(props.filters.filterStatus);
 let filterCategory = ref(props.filters.filterCategory);
-let filterPaginate = ref(props.filters.filterPaginate);
+let filterPaginate = ref(props.filters.filterPaginate ?? 10);
 const date = ref([]);
 
 onMounted(() => {
-    // router.reload({ only: ['amount', 'gross_amount'] })
-
-    // const endDate = new Date();
-    // const startDate = new Date(new Date().setDate(endDate.getDate() - 7));
-    // date.value = [startDate, endDate];
+    router.reload({ only: ['transaction', 'transactionCount', 'filters'] })
 })
 
 watch([search, filterStatus, filterCategory, filterPaginate, date], ([value, valueFS, valueFC, valueP, valueD]) => {
@@ -56,7 +53,9 @@ watch([search, filterStatus, filterCategory, filterPaginate, date], ([value, val
         },
         {
             preserveState: true,
+            preserveScroll: true,
             replace: true,
+            only: ['transaction', 'transactionCount', 'filters']
         }
     )
 });
@@ -157,27 +156,27 @@ function formatPrice(value) {
             </div>
         </div>
 
-<!--        <template v-if="props.transaction === undefined">-->
-<!--            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">-->
-<!--                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">-->
-<!--                    <div class="flex items-center justify-between">-->
-<!--                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>-->
-<!--                        <div class="ml-2 flex-shrink-0 flex">-->
-<!--                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="mt-2 sm:flex sm:justify-between">-->
-<!--                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </template>-->
+        <template v-if="props.transaction === undefined">
+            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
+                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">
+                    <div class="flex items-center justify-between">
+                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
+                        <div class="ml-2 flex-shrink-0 flex">
+                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:flex sm:justify-between">
+                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
+                    </div>
+                </div>
+            </div>
+        </template>
 
-        <div class="">
+        <div v-else class="">
 <!--            <template v-for="(date, index) in props.transaction.items">-->
 <!--                <h3 class="text-sm text-gray-500 font-medium ml-5 mt-5 mb-1">{{ index }}</h3>-->
 
-                <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
+            <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                         <template v-for="history in props.transaction.data" :key="history.id">
                             <li>
@@ -214,9 +213,9 @@ function formatPrice(value) {
                                         </div>
                                         <div class=" flex justify-between">
                                             <div class="flex">
-                                                <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                    #{{ history.order_id }}
-                                                </p>
+<!--                                                <p class="flex items-center text-sm mr-2" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">-->
+<!--                                                    #{{ history.order_id }}-->
+<!--                                                </p>-->
                                                 <p class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
                                                     <!--                                            {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}-->
                                                     Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
@@ -241,15 +240,38 @@ function formatPrice(value) {
 <!--            </template>-->
         </div>
 
-        <Pagination :pagination="props.transaction" >
-            <template #select>
-                <SelectInput
-                    v-model:model-value.number="filterPaginate"
-                    :option="$page.props.selectPaginate"
-                    class="block text-center shadow"
+        <div class="">
+            <div class="text-sm text-center text-gray-600 mb-5">
+                Menampilkan <strong>{{ filterPaginate }}</strong> dari <strong>{{ $page.props.transactionCount }}</strong> hasil
+            </div>
+
+            <button class="w-full grid text-gray-900 font-medium"
+                    @click="filterPaginate+=10"
+                    v-if="filterPaginate <= $page.props.transactionCount"
+            >
+                Selanjutnya
+                <i class="fa-regular fa-angle-down animate-bounce mt-1" />
+            </button>
+
+            <div class="px-4 py-4 sm:px-6 text-center text-gray-900 text-sm" v-else>
+                <Vue3Lottie
+                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                    :height="200"
+                    :width="200"
                 />
-            </template>
-        </Pagination>
+                Eits, udah mentok hehe
+            </div>
+        </div>
+
+<!--        <Pagination :pagination="props.transaction" >-->
+<!--            <template #select>-->
+<!--                <SelectInput-->
+<!--                    v-model:model-value.number="filterPaginate"-->
+<!--                    :option="$page.props.selectPaginate"-->
+<!--                    class="block text-center shadow"-->
+<!--                />-->
+<!--            </template>-->
+<!--        </Pagination>-->
 
 <!--        <template v-if="!on_process && on_process!==undefined && tabHistory==2" >-->
 <!--            <div class="px-4 py-4 sm:px-6 text-center text-gray-900" >-->

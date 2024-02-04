@@ -75,38 +75,33 @@ class TransactionController extends Controller
 
         $paginate = Req::input('filter_paginate') ?? 10;
 
-        return Inertia::render('Transaction/Detail', [
-//            'transaction' => Inertia::lazy(fn () => Transaction::latest()->get()),
-            'transaction' => Transaction::query()
-                ->latest()
-                ->when(Req::input('search'), function ($query, $search) {
-                    $query->where('order_id', 'like', '%' . $search . '%')
-                        ->OrWhere('customer_no', 'like', '%' . $search . '%')
-                        ->OrWhere('product_name', 'like', '%' . $search . '%');
-                })
-                ->when(Req::input('filter_status'), function ($query, $filter_status) {
-                    $query->where('status_id', $filter_status);
-                })
-                ->when(Req::input('filter_category'), function ($query, $filter_category) {
-                    $query->where('category_id', $filter_category);
-                })
-                ->when(Req::input('date_start'), function ($query, $date_start) {
-                    $query->whereDate('created_at', '>=', $date_start);
-                })
-                ->when(Req::input('date_end'), function ($query, $date_end) {
-                    $query->whereDate('created_at', '<=', $date_end);
-                })
-                ->paginate($paginate)->onEachSide(1),
-//                ->withQueryString()
-//                ->get()
-//                ->groupBy(function ($val) {
-//                    return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
-//                }),
+        $tr = Transaction::query()
+            ->latest()
+            ->when(Req::input('search'), function ($query, $search) {
+                $query->where('order_id', 'like', '%' . $search . '%')
+                    ->OrWhere('customer_no', 'like', '%' . $search . '%')
+                    ->OrWhere('product_name', 'like', '%' . $search . '%');
+            })
+            ->when(Req::input('filter_status'), function ($query, $filter_status) {
+                $query->where('status_id', $filter_status);
+            })
+            ->when(Req::input('filter_category'), function ($query, $filter_category) {
+                $query->where('category_id', $filter_category);
+            })
+            ->when(Req::input('date_start'), function ($query, $date_start) {
+                $query->whereDate('created_at', '>=', $date_start);
+            })
+            ->when(Req::input('date_end'), function ($query, $date_end) {
+                $query->whereDate('created_at', '<=', $date_end);
+            });
 
+        return Inertia::render('Transaction/Detail', [
+            'transaction' => Inertia::lazy(fn () => $tr->paginate($paginate)->onEachSide(1)),
+            'transactionCount' => Inertia::lazy(fn () => $tr->count()),
             'filters' => Req::only(['search', 'filter_status', 'filter_category', 'filter_paginate','date_start', 'date_end']),
             'selectCategory' => Transaction::CATEGORY,
             'selectStatus' => Transaction::STATUS,
-            'selectPaginate' => Transaction::PAGINATE
+//            'selectPaginate' => Transaction::PAGINATE,
         ]);
     }
 

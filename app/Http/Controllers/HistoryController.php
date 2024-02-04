@@ -22,24 +22,27 @@ class HistoryController extends Controller
 //        dd(Transaction::where('user_id', auth()->user()->id)->get());
 //        ->whereDate('created_at', Carbon::today())
 //        dd(Carbon::now()->month);
+        $paginate = Req::input('filter_paginate') ?? 10;
         $history = Transaction::where(function($query)
             {
                 $query->where('user_id', auth()->user()->id)
                     ->orWhereRelation('money_transfer', 'to_id', '=', auth()->user()->id);
-            })
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->latest()
-            ->get();
+            });
+//            ->whereMonth('created_at', Carbon::now()->month)
+//            ->latest()
+//            ->paginate($paginate)
+//            ->groupBy(function ($val) {
+//                return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
+//            });
 
-//        dd($history->toArray());
+//        dd($history);
 
         return Inertia::render('History/Index', [
-            'history'=> Inertia::lazy(fn () => $history->groupBy(function ($val) {
+            'history'=> Inertia::lazy(fn () => $history->latest()->paginate($paginate)->groupBy(function ($val) {
                                                     return Carbon::parse($val->created_at)->isoFormat('dddd, D MMMM Y');
                                                 })),
-
-            'all_process' => Inertia::lazy(fn () => $history->where('status_id', Transaction::SUCCESS)->count()),
-
+            'history_count' => Inertia::lazy(fn () => $history->count()),
+            'all_process' => Inertia::lazy(fn () => $history->whereMonth('created_at', Carbon::now()->month)->where('status_id', Transaction::SUCCESS)->count()),
             'in_count' => Inertia::lazy(fn () => Transaction::where(function($query)
                                                 {
                                                     $query->where('user_id', auth()->user()->id)
@@ -60,6 +63,8 @@ class HistoryController extends Controller
                                                 ->whereMonth('created_at', Carbon::now()->month)
 //                                                    ->orWhereRelation('money_transfer', 'to_id', '!=', auth()->user()->id)
                                                 ->sum('gross_amount')),
+
+            'filters' => Req::only(['search', 'filter_paginate']),
         ]);
     }
 

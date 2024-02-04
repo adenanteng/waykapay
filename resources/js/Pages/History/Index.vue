@@ -13,11 +13,15 @@ const props = defineProps({
     history: undefined,
     in_count: undefined,
     out_count: undefined,
-    all_process: undefined
+    all_process: undefined,
+    filters: {
+        type: Object,
+        default: () => ({}),
+    },
 })
 
 onMounted(() => {
-    router.reload({ only: ['history', 'in_count', 'out_count', 'all_process'] })
+    router.reload({ only: ['history', 'history_count', 'in_count', 'out_count', 'all_process', 'filters'] })
 })
 
 onUnmounted(() => {
@@ -71,6 +75,24 @@ if (typeof window !== 'undefined') {
         }
     });
 }
+
+let filterPaginate = ref(props.filters.filterPaginate ?? 10);
+
+watch([filterPaginate], ([valueP]) => {
+    // console.log(date)
+    router.get(
+        route('history.index'),
+        {
+            filter_paginate: valueP,
+        },
+        {
+            preserveState: true,
+            preserveScroll: true,
+            replace: true,
+            only: ['history', 'history_count', 'in_count', 'out_count', 'all_process', 'filters']
+        }
+    );
+});
 
 </script>
 
@@ -213,13 +235,27 @@ if (typeof window !== 'undefined') {
                 </div>
             </template>
 
-            <div class="px-4 py-4 sm:px-6 text-center text-gray-900 text-sm" >
-                <Vue3Lottie
-                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
-                    :height="200"
-                    :width="200"
-                />
-                Eits, udah mentok hehe
+            <div class="mt-10">
+                <div class="text-sm text-center text-gray-600 mb-5">
+                    Menampilkan <strong>{{ filterPaginate }}</strong> dari <strong>{{ $page.props.history_count }}</strong> hasil
+                </div>
+
+                <button class="w-full grid text-gray-900 font-medium"
+                        @click="filterPaginate+=10"
+                        v-if="filterPaginate <= $page.props.history_count"
+                >
+                    Selanjutnya
+                    <i class="fa-regular fa-angle-down animate-bounce mt-1" />
+                </button>
+
+                <div class="px-4 py-4 sm:px-6 text-center text-gray-900 text-sm" v-else>
+                    <Vue3Lottie
+                        animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                        :height="200"
+                        :width="200"
+                    />
+                    Eits, udah mentok hehe
+                </div>
             </div>
         </div>
 
