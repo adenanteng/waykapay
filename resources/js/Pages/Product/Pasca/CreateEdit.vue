@@ -17,7 +17,7 @@ const props = defineProps({
     // fee: Number
 });
 
-const extra_fee = 500;
+const extra_fee = 0;
 
 const admin_fee = Number(props.customer.data.selling_price) - Number(props.customer.data.price);
 const service_fee = Number(props.customer.data.admin) - admin_fee;
@@ -180,7 +180,7 @@ const handleOnChange = (value) => {
                 <div class="col-span-6 sm:col-span-3">
                     <InputLabel for="number" value="Harga"/>
                     <div class="font-semibold text-gray-900">
-                        Rp {{ formatPrice(props.customer.data.price) }}
+                        Rp {{ formatPrice(Number(props.customer.data.price) - Number(service_fee)) }}
                     </div>
                 </div>
 
@@ -202,7 +202,8 @@ const handleOnChange = (value) => {
                 <div class="col-span-6 sm:col-span-3">
                     <InputLabel value="Total"/>
                     <div class="font-semibold text-gray-900">
-                        Rp {{ formatPrice(Number(props.customer.data.price) + admin_fee + service_fee + extra_fee) }}
+<!--                        Rp {{ formatPrice(Number(props.customer.data.price) + admin_fee + service_fee + extra_fee) }}-->
+                        Rp {{ formatPrice(Number(props.customer.data.price) + admin_fee + extra_fee) }}
                     </div>
                 </div>
             </template>

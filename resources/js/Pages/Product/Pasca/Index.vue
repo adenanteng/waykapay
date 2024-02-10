@@ -56,7 +56,7 @@ function formatPrice(value) {
 
         <FormSection @submitted="storeInformation">
             <template #title>
-                Tagihan <span class="capitalize">{{ props.sku.replaceAll("-", " ") }}</span>
+                <span class="capitalize">{{ props.sku.replaceAll("-", " ") }}</span>
             </template>
 
             <template #description>

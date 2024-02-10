@@ -219,11 +219,11 @@ import {
               </span>
             </ListboxButton>
 
-            <transition
-                leave-active-class="transition duration-100 ease-in"
-                leave-from-class="opacity-100"
-                leave-to-class="opacity-0"
-            >
+<!--            <transition-->
+<!--                leave-active-class="transition duration-100 ease-in"-->
+<!--                leave-from-class="opacity-100"-->
+<!--                leave-to-class="opacity-0"-->
+<!--            >-->
               <ListboxOptions class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-3xl bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
                 <ListboxOption
                     v-slot="{ active, selected }"
@@ -243,7 +243,7 @@ import {
                   </li>
                 </ListboxOption>
               </ListboxOptions>
-            </transition>
+<!--            </transition>-->
           </div>
         </Listbox>
 
