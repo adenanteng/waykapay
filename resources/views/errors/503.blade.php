@@ -2,4 +2,4 @@
 
 @section('title', __('Service Unavailable'))
 @section('code', '503')
-@section('message', __('Pemeliharaan sistem hingga jam 00:10'))
+@section('message', __('Oops! Sedang Pemeliharaan Sistem, Coba Lagi Nanti Ya.'))
