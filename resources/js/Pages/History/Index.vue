@@ -181,7 +181,7 @@ watch([filterPaginate], ([valueP]) => {
             <template v-for="(date, index) in props.history">
                 <h3 class="text-sm text-gray-500 font-medium ml-5 mt-5 mb-1 flex items-center">
                     {{ index }}
-                    <Badge :name="date.length + ' transaksi' " class="ml-3 text-xs text-primary-600 bg-primary-100" />
+<!--                    <Badge :name="date.length + ' transaksi' " class="ml-3 text-xs text-primary-600 bg-primary-100" />-->
                 </h3>
                 <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">

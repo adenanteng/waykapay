@@ -242,6 +242,22 @@ if (typeof window !== 'undefined') {
                 </button>
 
                 <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Visionku' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Visionku'"
+                        v-if="props.product == 'K-VISION dan GOL'"
+                >
+                    Visionku
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
+                        :class="tab=='Saldo' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
+                        @click="tab='Saldo'"
+                        v-if="props.product == 'K-VISION dan GOL'"
+                >
+                    Saldo
+                </button>
+
+                <button class="w-full py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tab=='Tanaka HD' ? 'border-primary-500 text-primary-600' : 'text-gray-500 border-gray-300' "
                         @click="tab='Tanaka HD'"
                         v-if="props.product == 'Transvision'"
