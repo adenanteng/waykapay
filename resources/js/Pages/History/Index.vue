@@ -188,44 +188,79 @@ watch([filterPaginate], ([valueP]) => {
                         <template v-for="history in date" :key="history.id">
 <!--                            <template v-if="history.status_id == tabHistory || tabHistory==99">-->
                             <li>
-                                <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
-                                    <div class="px-4 py-4 sm:px-6">
-                                        <div class="flex items-center justify-between">
-                                            <p class="text-sm font-medium truncate capitalize"
-                                               :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                {{ history.product_name.replaceAll("-", " ") }}
-                                                <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
-                                                <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
-                                                <template v-else-if="history.offline_account">{{ history.offline_account.bank }}</template>
-                                                <template v-else-if="history.manual_account">{{ history.manual_account.bank }}</template>
-                                                <template v-else-if="history.money_transfer">
-                                                    <template v-if="history.user_id == $page.props.user.id">
-                                                        ke {{ history.money_transfer?.to_name }}
+                                <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
+                                    <div class="px-4 py-4 sm:px-6 flex gap-3">
+                                        <div class="flex justify-center items-center text-center" v-if="history.product_name === 'Deposit'">
+                                            <i
+                                                class="fa-duotone fa-sack-dollar text-3xl w-8"
+                                                :class="history.status_id == 1 || history.status_id == 2 ? 'text-green-600' : 'text-gray-500'"
+                                            />
+                                        </div>
+                                        <div class="" v-else-if="history.product_name === 'Kirim uang'">
+                                            <i
+                                                class="fa-duotone fa-messages-dollar text-2xl w-8"
+                                                :class="history.status_id == 1 || history.status_id == 2 ? 'text-green-600' : 'text-gray-500'"
+                                            />
+                                        </div>
+                                        <div class="" v-else-if="history.brand === null">
+                                            <i
+                                                class="fa-regular fa-wallet text-3xl w-8"
+                                                :class="history.status_id == 1 || history.status_id == 2 ? 'text-primary-600' : 'text-gray-500'"
+                                            />
+                                        </div>
+                                        <div class="" v-else>
+                                            <img
+                                                :src="'/img/vendor/' + history.brand + '.svg'"
+                                                class="w-8"
+                                                :class="history.status_id == 1 || history.status_id == 2 ? '' : 'grayscale'"
+                                                alt=""
+                                            />
+                                            <img
+                                                :src="'/img/vendor/' + history.brand + '.png'"
+                                                class="w-8"
+                                                :class="history.status_id == 1 || history.status_id == 2 ? '' : 'grayscale'"
+                                                alt=""
+                                            />
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="flex items-center justify-between">
+                                                <p class="text-sm font-medium truncate capitalize"
+                                                   :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                    {{ history.product_name.replaceAll("-", " ") }}
+                                                    <template v-if="history.virtual_account">{{ history.virtual_account.bank }}</template>
+                                                    <template v-else-if="history.wallet_account">{{ history.wallet_account.bank }}</template>
+                                                    <template v-else-if="history.offline_account">{{ history.offline_account.bank }}</template>
+                                                    <template v-else-if="history.manual_account">{{ history.manual_account.bank }}</template>
+                                                    <template v-else-if="history.money_transfer">
+                                                        <template v-if="history.user_id == $page.props.user.id">
+                                                            ke {{ history.money_transfer?.to_name }}
+                                                        </template>
+                                                        <template v-else>
+                                                            dari {{ history.user.name }}
+                                                        </template>
                                                     </template>
-                                                    <template v-else>
-                                                        dari {{ history.user.name }}
-                                                    </template>
-                                                </template>
-                                            </p>
-                                            <div class="ml-2 flex-shrink-0 flex">
-                                                <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                                   :class="history.color"
-                                                >
-                                                    {{ history.status }}
                                                 </p>
+                                                <div class="ml-2 flex-shrink-0 flex">
+                                                    <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
+                                                       :class="history.color"
+                                                    >
+                                                        {{ history.status }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <div class="flex">
+                                                    <p class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                        {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
+                                                        Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
+                                                    </p>
+                                                </div>
+                                                <div class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
+                                                    {{ formattedDate(history.created_at) }}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="flex justify-between">
-                                            <div class="flex">
-                                                <p class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                    {{ history.category_id == 1 || history.user_id != $page.props.user.id ? '+' : '-' }}
-                                                    Rp {{ history.category_id == 1 ? formatPrice(history.amount) : formatPrice(history.gross_amount) }}
-                                                </p>
-                                            </div>
-                                            <div class="flex items-center text-xs" :class="history.status_id == 1 || history.status_id == 2 ? 'text-gray-900' : 'text-gray-500'">
-                                                {{ formattedDate(history.created_at) }}
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </Link>
                             </li>

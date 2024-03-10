@@ -30,21 +30,19 @@ class UserController extends Controller
     public function index()
     {
 //        dd(User::latest()->paginate(20));
-        $paginate = Req::input('filter_paginate') ?? 10;
+        $paginate = Req::input('filter_paginate') ?? 20;
+        $users = User::query()
+            ->latest()
+            ->when(Req::input('search'), function ($query, $search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->OrWhere('email', 'like', '%' . $search . '%');
+            });
 
         return Inertia::render('User/Index', [
-//            'users' => User::latest()->get(),
-            'users' => User::query()
-                ->latest()
-                ->when(Req::input('search'), function ($query, $search) {
-                    $query->where('name', 'like', '%' . $search . '%')
-                        ->OrWhere('email', 'like', '%' . $search . '%');
-                })
-                ->paginate($paginate)->onEachSide(1),
-//                ->withQueryString(),
-
+            'users' => Inertia::lazy(fn () => $users->paginate($paginate)->onEachSide(1)),
+            'usersCount' => Inertia::lazy(fn () => $users->count()),
             'filters' => Req::only(['search', 'filter_paginate']),
-            'selectPaginate' => Transaction::PAGINATE
+//            'selectPaginate' => Transaction::PAGINATE
         ]);
     }
 
@@ -94,25 +92,25 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $paginate = Req::input('filter_paginate') ?? 10;
+        $paginate = Req::input('filter_paginate') ?? 20;
+        $tr = Transaction::query()->where('user_id', $user->id)
+            ->orWhereRelation('money_transfer', 'to_id', '=', $user->id)
+            ->latest()
+            ->when(Req::input('search'), function ($query, $search) {
+                $query->where('order_id', 'like', '%' . $search . '%')
+                    ->OrWhere('product_name', 'like', '%' . $search . '%');
+//                        ->orWhereRelation('user', 'slug', '=', $user->id);
+            });
+
         return Inertia::render('User/Show', [
             'users' => $user,
 //            'history' => Transaction::where('user_id', $user->id)
 //                ->orWhereRelation('money_transfer', 'to_id', '=', $user->id)->latest()
 //                ->get(),
-            'history' => Transaction::query()->where('user_id', $user->id)
-                ->orWhereRelation('money_transfer', 'to_id', '=', $user->id)
-                ->latest()
-                ->when(Req::input('search'), function ($query, $search) {
-                    $query->where('order_id', 'like', '%' . $search . '%')
-                        ->OrWhere('product_name', 'like', '%' . $search . '%');
-//                        ->orWhereRelation('user', 'slug', '=', $user->id);
-                })
-                ->paginate($paginate)->onEachSide(1),
-//                ->withQueryString(),
-
+            'history' => Inertia::lazy(fn () => $tr->paginate($paginate)->onEachSide(1)),
+            'historyCount' => Inertia::lazy(fn () => $tr->count()),
             'filters' => Req::only(['search', 'filter_paginate']),
-            'selectPaginate' => Transaction::PAGINATE
+//            'selectPaginate' => Transaction::PAGINATE
         ]);
     }
 

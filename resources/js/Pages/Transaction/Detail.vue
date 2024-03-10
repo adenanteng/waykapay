@@ -105,12 +105,17 @@ function formatPrice(value) {
 
         <div class="">
             <div class="w-full">
-                <TextInput
-                    type="text"
-                    v-model="search"
-                    placeholder="Cari disini"
-                    class="block w-full lg:w-96 shadow"
-                />
+                <div class="relative ">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fa-regular fa-magnifying-glass text-gray-500" />
+                    </div>
+                    <TextInput
+                        type="search"
+                        v-model="search"
+                        placeholder="Cari disini"
+                        class="block w-full lg:w-96 shadow pl-10"
+                    />
+                </div>
             </div>
         </div>
 
@@ -180,7 +185,7 @@ function formatPrice(value) {
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                         <template v-for="history in props.transaction.data" :key="history.id">
                             <li>
-                                <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
+                                <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                                     <div class="px-4 py-4 sm:px-6">
                                         <div class="flex items-center justify-between">
                                             <p class="text-sm font-medium truncate capitalize"

@@ -1,10 +1,10 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, router} from "@inertiajs/vue3";
+import {Link, router, useForm, usePage} from "@inertiajs/vue3";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
 import DangerButton from "@/Components/DangerButton.vue";
-import {onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import moment from "moment/moment";
 
 const props = defineProps({
@@ -30,6 +30,21 @@ if (typeof window !== 'undefined') {
 
 const logout = () => {
     router.post(route('logout'));
+};
+
+const {...userInfo} = computed(() => usePage().props.appSetting).value;
+const form = useForm({
+    // password: '',
+});
+const deleteRedis = () => {
+    form.delete(route('setting.destroy', userInfo), {
+        preserveScroll: true,
+        onSuccess: () => {
+
+        }
+        // onError: () => passwordInput.value.focus(),
+        // onFinish: () => form.reset(),
+    });
 };
 
 function formattedDate(value) {
@@ -184,9 +199,15 @@ function formatPrice(value) {
                 </li>
                 <li>
                     <a href="/log-viewer" class="flex justify-between px-6 py-4" >
-                        <p class="text-sm font-medium text-gray-900">Catatan</p>
+                        <p class="text-sm font-medium text-gray-900">Logs</p>
                         <i class="fa-regular fa-angle-right text-gray-900" />
                     </a>
+                </li>
+                <li>
+                    <button @click="deleteRedis" class="flex justify-between px-6 py-4 w-full" >
+                        <p class="text-sm font-medium text-gray-900">Hapus Cache</p>
+                        <i class="fa-regular fa-trash text-red-600" />
+                    </button>
                 </li>
             </ul>
         </div>

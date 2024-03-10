@@ -10,9 +10,13 @@ import moment from "moment/moment";
 import Pagination from "../../Components/Pagination.vue";
 import SecondaryButton from "../../Components/SecondaryButton.vue";
 import SelectInput from "../../Components/SelectInput.vue";
+import {Vue3Lottie} from "vue3-lottie";
 
 const props = defineProps({
-    users: Object | String,
+    users: {
+        type: Object,
+        default: () => ({}),
+    },
     history: {
         type: Object,
         default: () => ({}),
@@ -23,12 +27,13 @@ const props = defineProps({
     },
 });
 
-// onMounted(() => {
-//     router.reload({ only: ['history'] })
-// })
-
 let search = ref(props.filters.search);
-let filterPaginate = ref(props.filters.filterPaginate);
+let filterPaginate = ref(props.filters.filterPaginate ?? 20);
+
+onMounted(() => {
+    router.reload({ only: ['users', 'history', 'historyCount', 'filters'] })
+})
+
 watch([search, filterPaginate], ([value, valueP]) => {
     router.get(
         route('user.show', props.users),
@@ -38,7 +43,9 @@ watch([search, filterPaginate], ([value, valueP]) => {
         },
         {
             preserveState: true,
+            preserveScroll: true,
             replace: true,
+            only: ['users', 'history', 'historyCount', 'filters']
         }
     );
 });
@@ -77,14 +84,33 @@ function formatPrice(value) {
                             <span class="text-sm font-medium ml-2 text-gray-500">#{{ props.users.slug }}</span>
                         </div>
                         <div class="block text-sm font-medium text-gray-600">
-                            <p><i class="fa-regular fa-mobile mr-1 w-3" /> {{ props.users.phone }}</p>
-                            <p><i class="fa-regular fa-envelope mr-1 w-3" /> {{ props.users.email }}</p>
+                            <p>
+                                {{ props.users.email }}
+                                <span
+                                    class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                                    :class="props.users.email_verified_at ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' "
+                                >
+                                    {{ props.users.email_verified_at ? 'Valid' : 'Tidak Valid' }}
+                                </span>
+                            </p>
+                            <p>
+                                {{ props.users.phone }}
+                                <span
+                                    class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                                    :class="props.users.phone_verified_at ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800' "
+                                >
+                                    {{ props.users.phone_verified_at ? 'Valid' : 'Tidak Valid' }}
+                                </span>
+                            </p>
                         </div>
                         <div class="block text-sm font-medium text-gray-600">
                             Akun {{ props.users.role }}
                         </div>
                         <div class="block text-sm font-medium text-primary-600">
                             Rp {{ formatPrice(props.users.wallet_balance) }}
+                        </div>
+                        <div class="block text-sm font-medium text-primary-600">
+                            Coin {{ formatPrice(props.users.coin) }}
                         </div>
                     </div>
 
@@ -123,27 +149,28 @@ function formatPrice(value) {
             </div>
         </div>
 
-<!--        <template v-if="props.history.data === undefined">-->
-<!--            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">-->
-<!--                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">-->
-<!--                    <div class="flex items-center justify-between">-->
-<!--                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>-->
-<!--                        <div class="ml-2 flex-shrink-0 flex">-->
-<!--                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="sm:flex sm:justify-between">-->
-<!--                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </template>-->
+        <template v-if="props.history === undefined">
+            <div class="animate-pulse rounded-3xl bg-white shadow-lg border border-gray-300 divide-y divide-gray-300">
+                <div v-for="loader in 4" class="px-4 py-4 sm:px-6">
+                    <div class="flex items-center justify-between">
+                        <p class="bg-gray-300 text-gray-300 w-full rounded-3xl">a</p>
+                        <div class="ml-2 flex-shrink-0 flex">
+                            <p class="px-2 bg-gray-300 text-gray-300 rounded-full w-20">b</p>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:flex sm:justify-between">
+                        <p class="flex items-center bg-gray-300 text-gray-300 w-1/2 rounded-3xl" >c</p>
+                    </div>
+                </div>
+            </div>
+        </template>
 
-        <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
+        <div v-else>
+            <div class="rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
                 <template v-for="history in props.history.data">
                     <li>
-                        <Link preserve-scroll :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
+                        <Link :href="route('history.show', history.order_id)" class="block hover:bg-primary-50" >
                             <div class="px-4 py-4 sm:px-6">
                                 <div class="flex items-center justify-between">
                                     <p class="text-sm font-medium truncate capitalize"
@@ -188,16 +215,30 @@ function formatPrice(value) {
                 </template>
             </ul>
         </div>
+        </div>
 
-        <Pagination :pagination="props.history" >
-            <template #select>
-                <SelectInput
-                    v-model:model-value.number="filterPaginate"
-                    :option="$page.props.selectPaginate"
-                    class="block text-center shadow"
+        <div class="">
+            <div class="text-sm text-center text-gray-600 mb-5">
+                Menampilkan <strong>{{ filterPaginate }}</strong> dari <strong>{{ $page.props.historyCount }}</strong> hasil
+            </div>
+
+            <button class="w-full grid text-gray-900 font-medium"
+                    @click="filterPaginate+=20"
+                    v-if="filterPaginate <= $page.props.historyCount"
+            >
+                Selanjutnya
+                <i class="fa-regular fa-angle-down animate-bounce mt-1" />
+            </button>
+
+            <div class="px-4 py-4 sm:px-6 text-center text-gray-900 text-sm" v-else>
+                <Vue3Lottie
+                    animation-link="https://lottie.host/847b8a44-3ca7-458b-a9b8-32c1c5d63308/ABskoUU2IH.json"
+                    :height="200"
+                    :width="200"
                 />
-            </template>
-        </Pagination>
+                Eits, udah mentok hehe
+            </div>
+        </div>
 
     </AppLayout>
 

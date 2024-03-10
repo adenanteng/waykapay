@@ -83,47 +83,47 @@ const clearPhotoFileInput = () => {
 
         <template #form>
             <!-- Profile Photo -->
-            <div class="col-span-6 sm:col-span-4">
-                <!-- Profile Photo File Input -->
-                <input
-                    ref="photoInput"
-                    type="file"
-                    class="hidden"
-                    @change="updatePhotoPreview"
-                >
-
-                <InputLabel for="photo" value="Logo" />
-
-                <!-- Current Profile Photo -->
-                <div v-show="! photoPreview" class="mt-2">
-                    <template v-if="props.setting.media !=null">
-                        <img :src="props.setting.media[0].original_url" :alt="setting.name" class="rounded-full h-20 w-20 object-cover">
-                    </template>
-                </div>
-
-                <!-- New Profile Photo Preview -->
-                <div v-show="photoPreview" class="mt-2">
-                    <span
-                        class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
-                        :style="'background-image: url(\'' + photoPreview + '\');'"
-                    />
-                </div>
-
-                <SecondaryButton class="mt-2 mr-2 border border-gray-300" type="button" @click.prevent="selectNewPhoto">
-                    Ubah Logo
-                </SecondaryButton>
-
-<!--                <SecondaryButton-->
-<!--                    v-if="user.profile_photo_path"-->
-<!--                    type="button"-->
-<!--                    class="mt-2"-->
-<!--                    @click.prevent="deletePhoto"-->
+<!--            <div class="col-span-6 sm:col-span-4">-->
+<!--                &lt;!&ndash; Profile Photo File Input &ndash;&gt;-->
+<!--                <input-->
+<!--                    ref="photoInput"-->
+<!--                    type="file"-->
+<!--                    class="hidden"-->
+<!--                    @change="updatePhotoPreview"-->
 <!--                >-->
-<!--                    Hapus Avatar-->
+
+<!--                <InputLabel for="photo" value="Logo" />-->
+
+<!--                &lt;!&ndash; Current Profile Photo &ndash;&gt;-->
+<!--                <div v-show="! photoPreview" class="mt-2">-->
+<!--                    <template v-if="props.setting.media !=null">-->
+<!--                        <img :src="props.setting.media[0].original_url" :alt="setting.name" class="rounded-full h-20 w-20 object-cover">-->
+<!--                    </template>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; New Profile Photo Preview &ndash;&gt;-->
+<!--                <div v-show="photoPreview" class="mt-2">-->
+<!--                    <span-->
+<!--                        class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"-->
+<!--                        :style="'background-image: url(\'' + photoPreview + '\');'"-->
+<!--                    />-->
+<!--                </div>-->
+
+<!--                <SecondaryButton class="mt-2 mr-2 border border-gray-300" type="button" @click.prevent="selectNewPhoto">-->
+<!--                    Ubah Logo-->
 <!--                </SecondaryButton>-->
 
-                <InputError :message="form.errors.photo" class="mt-2" />
-            </div>
+<!--&lt;!&ndash;                <SecondaryButton&ndash;&gt;-->
+<!--&lt;!&ndash;                    v-if="user.profile_photo_path"&ndash;&gt;-->
+<!--&lt;!&ndash;                    type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                    class="mt-2"&ndash;&gt;-->
+<!--&lt;!&ndash;                    @click.prevent="deletePhoto"&ndash;&gt;-->
+<!--&lt;!&ndash;                >&ndash;&gt;-->
+<!--&lt;!&ndash;                    Hapus Avatar&ndash;&gt;-->
+<!--&lt;!&ndash;                </SecondaryButton>&ndash;&gt;-->
+
+<!--                <InputError :message="form.errors.photo" class="mt-2" />-->
+<!--            </div>-->
 
             <div class="col-span-6 sm:col-span-4">
                 <InputLabel for="name" value="Nama" />

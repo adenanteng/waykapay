@@ -49,14 +49,14 @@ const updateSettingInformation = () => {
         <template #form>
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 25.000" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_25"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_25" class="mt-2" />
@@ -64,14 +64,14 @@ const updateSettingInformation = () => {
 
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 50.000" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_50"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_50" class="mt-2" />
@@ -79,14 +79,14 @@ const updateSettingInformation = () => {
 
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 75.000" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_75"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_75" class="mt-2" />
@@ -94,14 +94,14 @@ const updateSettingInformation = () => {
 
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 100.000" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_100"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_100" class="mt-2" />
@@ -109,14 +109,14 @@ const updateSettingInformation = () => {
 
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 200.000" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_200"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_200" class="mt-2" />
@@ -124,14 +124,14 @@ const updateSettingInformation = () => {
 
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 500.000" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_500"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_500" class="mt-2" />
@@ -139,14 +139,14 @@ const updateSettingInformation = () => {
 
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Rp 1.000.000" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_1000"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_1000" class="mt-2" />
@@ -154,14 +154,14 @@ const updateSettingInformation = () => {
 
             <div class="col-span-3 md:col-span-2">
                 <InputLabel value="Max" />
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         v-model="form.pln_max"
                         type="number"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                     />
                 </div>
                 <InputError :message="form.errors.pln_max" class="mt-2" />

@@ -67,18 +67,18 @@ const showPassword = ref(false)
 
             <div class="mt-4">
                 <InputLabel for="password" value="Password"/>
-                <div class="flex">
+                <div class="relative">
                     <TextInput
                         id="password"
                         v-model="form.password"
                         :type="showPassword ? 'text' : 'password'"
-                        class="mt-1 block w-full rounded-r-none"
+                        class="mt-1 block w-full"
                         required
                         autocomplete="current-password"
                     />
                     <button type="button"
                             @click="showPassword=!showPassword"
-                            class="bg-white text-black border border-gray-300 border-l-0 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 rounded-3xl rounded-l-none shadow-sm mt-1 px-3 ">
+                            class="absolute inset-y-0 right-0 text-black px-3">
                         <i class="fa-regular " :class="showPassword ? 'fa-eye-slash' : 'fa-eye' "/>
                     </button>
                 </div>
