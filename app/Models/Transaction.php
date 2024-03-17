@@ -68,9 +68,6 @@ class Transaction extends Model
         self::UNDEFINED => 'bg-gray-100 text-gray-800',
     ];
 
-    const ALL = null;
-    const TRANSFER = 99;
-    const TRANSFERAYO =98;
     const DEPOSIT = 1;
     const PULSA = 2;
     const DATA = 3;
@@ -93,6 +90,9 @@ class Transaction extends Model
     const PASCA_SAMSAT = 20;
     const PLN_NONTAGLIS = 21;
     const UNKNOWN = 90;
+    const TRANSFER = 99;
+    const TRANSFERAYO =98;
+    const ALL = null;
     const CATEGORY = [
         self::ALL => 'Semua',
         self::TRANSFER => 'Kirim Uang Sesama',
