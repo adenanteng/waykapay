@@ -67,7 +67,7 @@ function formatPrice(value) {
                 </div>
                 <div class="sm:col-span-1 flex sm:block justify-between">
                     <div class="text-sm ">Kode Referensi</div>
-                    <div class="text-sm font-semibold ">{{ props.history.order_id }}</div>
+                    <div class="text-sm font-semibold w-1/2 truncate">{{ props.history.order_id }}</div>
                 </div>
 
                 <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
@@ -211,15 +211,15 @@ function formatPrice(value) {
                     <div class="grid grid-cols-6">
                         <div class="col-span-6 sm:col-span-3">
                             <InputLabel for="amount" value="Harga Jual"/>
-                            <div class="flex">
-                                <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                                     Rp
-                                </span>
+                                </div>
                                 <TextInput
                                     id="amount"
                                     v-model="commission"
                                     type="tel"
-                                    class="mt-1 block w-full rounded-l-none"
+                                    class="mt-1 block w-full pl-10"
                                     :min="Number(props.history.gross_amount)"
                                     required
                                 />

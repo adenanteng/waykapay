@@ -111,15 +111,15 @@ const amount = formatPrice(props.amount)
         <template #form>
             <div class="col-span-6 sm:col-span-3">
                 <InputLabel for="amount" value="Jumlah Saldo"/>
-                <div class="flex">
-                    <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                <div class="relative">
+                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-gray-600">
                         Rp
-                    </span>
+                    </div>
                     <TextInput
                         id="amount"
                         v-model="amount"
                         type="text"
-                        class="mt-1 block w-full rounded-l-none"
+                        class="mt-1 block w-full pl-10"
                         disabled
                     />
                 </div>

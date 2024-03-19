@@ -33,7 +33,7 @@ function formatPrice(value) {
                 </div>
                 <div class="sm:col-span-1 flex sm:block justify-between">
                     <div class="text-sm ">Kode Referensi</div>
-                    <div class="text-sm font-semibold ">{{ props.history.order_id }}</div>
+                    <div class="text-sm font-semibold w-1/2 truncate">{{ props.history.order_id }}</div>
                 </div>
 
                 <span class="my-2 border-t border-gray-600 border-dashed block sm:hidden" />
