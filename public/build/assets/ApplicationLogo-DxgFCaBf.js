@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{o as t,e as o}from"./app-C054-7B9.js";const r={},c={class:"fa-regular fa-wallet text-primary-600 text-6xl"};function a(s,n){return t(),o("i",c)}const l=e(r,[["render",a]]);export{l as A};

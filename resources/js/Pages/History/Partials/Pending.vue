@@ -308,7 +308,7 @@ function formatPrice(value) {
         </div>
     </div>
 
-    <div class="mt-5 grid gap-5" v-if="props.history.category_id === 98 && props.history.status_id === 2">
+    <div class="mt-5 grid gap-5" v-if="props.history.category_id === 98">
         <PrimaryButton @click="statusInformation" >
             Cek Status
         </PrimaryButton>
