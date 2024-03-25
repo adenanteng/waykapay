@@ -40,6 +40,18 @@ const validate = () => {
     });
 };
 
+const formStatus = useForm({
+    transaction: history,
+});
+
+const statusInformation = () => {
+    formStatus.post(route('money-transfer.ayoStatus'), {
+        errorBag: 'updateInformation',
+        preserveScroll: true,
+        onSuccess: () => {}
+    });
+};
+
 const handleModal = () => {
     if (userInfo.pin) {
         pinModal.value=true
@@ -294,6 +306,12 @@ function formatPrice(value) {
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="mt-5 grid gap-5" v-if="props.history.category_id === 98 && props.history.status_id === 2">
+        <PrimaryButton @click="statusInformation" >
+            Cek Status
+        </PrimaryButton>
     </div>
 
     <div class="mt-5 grid gap-5" v-if="props.history.manual_account">

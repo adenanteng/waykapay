@@ -285,7 +285,7 @@ class MoneyTransferController extends Controller
                         'status_id' => Transaction::PENDING,
                         'desc' => $response->object()->message
                     ]);
-                    return Inertia::render('Payment/Pending', [
+                    return Inertia::render('Payment/AyoPending', [
                         'transaction'   => $transaction,
                         'response' => $request['response']
                     ]);
