@@ -14,9 +14,9 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'webhook-digiflazz',
         'webhook-oke-connect',
-        'webhook-ayo-beneficiary',
-        'webhook-ayo-disbursement',
-        'webhook-ayo-inquiry'
+        'api/v1/ayo-beneficiary',
+        'api/v1/ayo-disbursement',
+        'api/v1/ayo-inquiry'
 //        'webhook-midtrans',
 //        'webhook-flip-accept-payment',
 //        'webhook-doku-accept-payment',
