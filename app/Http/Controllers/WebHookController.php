@@ -186,6 +186,7 @@ class WebHookController extends Controller
     }
 
     public function webhookAyoBeneficiary(Request $request) {
+        $request->headers->set('Content-Type', 'application/json');
         Log::info($request->getContent());
 
         sleep(5);
@@ -212,6 +213,7 @@ class WebHookController extends Controller
     }
 
     public function webhookAyoDisbursement(Request $request) {
+        $request->headers->set('Content-Type', 'application/json');
         Log::info($request->getContent());
 
         $transaction = Transaction::where('order_id', $request['details']['A-Correlation-ID'])->first();
@@ -285,6 +287,7 @@ class WebHookController extends Controller
     }
 
     public function webhookAyoInquiry(Request $request) {
+        $request->headers->set('Content-Type', 'application/json');
         Log::info($request->getContent());
 //        Log::debug('ini inquiry');
         return 'ok';
