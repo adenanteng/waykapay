@@ -243,7 +243,7 @@ class WebHookController extends Controller
                     }
                     break;
 
-                default:
+                case (4):
                     $user->update([
                         'wallet_balance' => $user->wallet_balance + $transaction->gross_amount,
                     ]);
@@ -261,6 +261,12 @@ class WebHookController extends Controller
                         ];
                         Helper::sendNotification($user->device_token, $msg);
                     }
+                    break;
+
+                default:
+                    $transaction->update([
+                        'status_id' => Transaction::PENDING,
+                    ]);
             }
         }
 

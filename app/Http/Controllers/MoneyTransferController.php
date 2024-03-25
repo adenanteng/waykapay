@@ -165,7 +165,7 @@ class MoneyTransferController extends Controller
             'A-Latitude' => $geo->latitude ?? '-5.4292',
             'A-Longitude' => $geo->longitude ?? '105.2611',
         ])
-        ->post('https://sandbox.api.of.ayoconnect.id/api/v1/bank-disbursements/disbursement', [
+        ->post('https://api.of.ayoconnect.id/api/v1/bank-disbursements/disbursement', [
             "transactionId" => $request['beneficiary']['transactionId'],
             "customerId" => $request['beneficiary']['customerId'],
             "beneficiaryId" => $request['beneficiary']['beneficiaryDetails']['beneficiaryId'],
@@ -266,7 +266,7 @@ class MoneyTransferController extends Controller
                 'customerId' => $request['response']['customerId'],
 
             ])
-            ->get('https://sandbox.api.of.ayoconnect.id/api/v1/bank-disbursements/status/'.$request['transaction']['order_id']);
+            ->get('https://api.of.ayoconnect.id/api/v1/bank-disbursements/status/'.$request['transaction']['order_id']);
 
         if (!$response->successful()) {
             dd($response->object()->errors[0]->details);
@@ -357,7 +357,7 @@ class MoneyTransferController extends Controller
             ->withQueryParameters([
                 'transactionId' => $order_id,
             ])
-            ->get('https://sandbox.api.of.ayoconnect.id/api/v1/merchants/balance');
+            ->get('https://api.of.ayoconnect.id/api/v1/merchants/balance');
 
         dd($response->object());
     }

@@ -42,8 +42,8 @@ const bankLists = [
   {id: 3, name: 'BNINIDJA', title: 'BNI', logo: '/img/vendor/BNI.svg', admin: 665, service:335, disabled: false},
   {id: 4, name: 'BRINIDJA', title: 'BRI', logo: '/img/vendor/BRI.svg', admin: 665, service:335, disabled: true},
   {id: 5, name: 'BMRIIDJA', title: 'Mandiri', logo: '/img/vendor/MANDIRI.svg', admin: 665, service:335, disabled: false},
-  {id: 6, name: 'permata', title: 'Permata Bank', logo: '/img/vendor/PERMATA.svg', admin: 665, service:335, disabled: true},
-  {id: 7, name: 'bsm', title: 'BSI', logo: '/img/vendor/BSI.svg', admin: 665, service:335, disabled: true},
+  {id: 6, name: 'BBBAIDJA', title: 'Permata Bank', logo: '/img/vendor/PERMATA.svg', admin: 665, service:335, disabled: true},
+  {id: 7, name: 'BSMDIDJA', title: 'BSI', logo: '/img/vendor/BSI.svg', admin: 665, service:335, disabled: false},
 ]
 
 const form = useForm({

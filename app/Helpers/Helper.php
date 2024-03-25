@@ -211,9 +211,9 @@ class Helper
                 ->withQueryParameters([
                     'grant_type' => 'client_credentials',
                 ])
-                ->post('https://sandbox.api.of.ayoconnect.id/v1/oauth/client_credential/accesstoken', [
-                    "client_id" => 'ZS17kIhKQupbosYCo4zVB2gH3GdmmAlFprStdVnLGMkw0GTE',
-                    "client_secret" => 'ZEJUGzxsctMsk2zFwEwhcOgHAyhwnxGlvswT7cJifLSfcmusygdCyvhdf1QywOK2',
+                ->post('https://api.of.ayoconnect.id/v1/oauth/client_credential/accesstoken', [
+                    "client_id" => env('AYO_KEY',null),
+                    "client_secret" => env('AYO_SECRET',null),
                 ]);
 
 //            Redis::set('ayotoken', $response->object()->accessToken, 'EX', 3500);
@@ -237,7 +237,7 @@ class Helper
             'A-Latitude' => $geo->latitude ?? '-5.4292',
             'A-Longitude' => $geo->longitude ?? '105.2611',
         ])
-        ->post('https://sandbox.api.of.ayoconnect.id/api/v1/bank-disbursements/beneficiary', [
+        ->post('https://api.of.ayoconnect.id/api/v1/bank-disbursements/beneficiary', [
             "transactionId" => $order_id,
             "phoneNumber" => self::phoneFormat(auth()->user()->phone),
             "customerDetails" => [
