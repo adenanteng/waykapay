@@ -237,15 +237,15 @@ onUnmounted(() => {
                         type="tel"
                         class="mt-1 block w-full pl-10"
                         min="1"
-                        :max="Number($page.props.user.wallet_balance) <= 2000000 ? $page.props.user.wallet_balance : 2000000"
+                        :max="Number($page.props.user.wallet_balance + 1000) <= 2500000 ? $page.props.user.wallet_balance + 1000 : 2500000"
                         required
                         autofocus
                     />
                 </div>
                 <InputError :message="form.errors.amount || message" class="mt-2"/>
                 <p class="mt-1 text-xs text-gray-600">
-                    Max Rp {{ Number($page.props.user.wallet_balance) <= 2000000 ?
-                    formatPrice($page.props.user.wallet_balance) : '2.000.000' }}
+                    Max Rp {{ Number($page.props.user.wallet_balance + 1000) <= 2500000 ?
+                    formatPrice($page.props.user.wallet_balance + 1000) : '2.500.000' }}
                 </p>
             </div>
 

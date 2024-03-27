@@ -33,15 +33,33 @@ class Helper
         }
     }
 
-//    public static function flip_saldo()
-//    {
+    public static function ayoconnect_saldo()
+    {
 //        $response = Http::withHeaders([
 //            'Content-Type' => 'application/x-www-form-urlencoded',
 //            'Authorization' => 'Basic ' . base64_encode(Helper::api()->flip_secret . ':')
 //        ])->get('https://bigflip.id/big_sandbox_api/v2/general/balance');
 //
 //        return $response->object()->balance;
-//    }
+
+        $order_id = Str::random(32);
+        $token = Helper::ayoToken();
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => $token,
+            'A-Correlation-ID' => $order_id,
+            'A-Merchant-Code' => 'WAYKPY',
+        ])
+            ->withQueryParameters([
+                'transactionId' => $order_id,
+            ])
+            ->get('https://api.of.ayoconnect.id/api/v1/merchants/balance');
+
+//        dd($response->object()->accountInfo[0]->availableBalance->value);
+        return $response->object()->accountInfo[0]->availableBalance->value;
+    }
 
     public static function digiflazz_saldo()
     {
@@ -54,6 +72,15 @@ class Helper
         return $response->object()->data->deposit;
     }
 
+    public static function update_ayoconnect_saldo($saldo)
+    {
+        $app = AppSetting::all()->first();
+        $app->update([
+            'ayoconnect_saldo' => $saldo
+        ]);
+
+        return true;
+    }
     public static function update_digiflazz_saldo($saldo)
     {
          $app = AppSetting::all()->first();

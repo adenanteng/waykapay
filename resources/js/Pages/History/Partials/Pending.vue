@@ -308,12 +308,6 @@ function formatPrice(value) {
         </div>
     </div>
 
-    <div class="mt-5 grid gap-5" v-if="props.history.category_id === 98">
-        <PrimaryButton @click="statusInformation" >
-            Cek Status
-        </PrimaryButton>
-    </div>
-
     <div class="mt-5 grid gap-5" v-if="props.history.manual_account">
         <!--                    <SecondaryButton-->
         <!--                        class="border border-gray-300 w-full justify-center"-->

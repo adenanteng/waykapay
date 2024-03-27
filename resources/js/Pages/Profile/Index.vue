@@ -9,13 +9,13 @@ import moment from "moment/moment";
 
 const props = defineProps({
     history: Object,
-    // flip_saldo: undefined,
+    ayoconnect_saldo: undefined,
     digiflazz_saldo: undefined,
 })
 
 onMounted(() => {
     // console.log('dana');
-    router.reload({ only: ['digiflazz_saldo'] })
+    router.reload({ only: ['ayoconnect_saldo', 'digiflazz_saldo'] })
 })
 
 const darkMode = ref(false)
@@ -149,15 +149,15 @@ function formatPrice(value) {
         <div class="col-span-1 divide-y md:divide-none divide-gray-300 dark:divide-gray-600 rounded-3xl bg-white bg-opacity-20 backdrop-blur-sm shadow-lg border border-gray-300" v-if="$page.props.user.role_id==1">
             <div>
                 <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
-<!--                    <div class="flex w-0 flex-1">-->
-<!--                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">-->
-<!--                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>-->
-<!--                            <div class="ml-3">-->
-<!--                                <div class="text-xs text-gray-500">Flip Saldo</div>-->
-<!--                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.flip_saldo ?? 0) }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="flex w-0 flex-1">
+                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
+                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>
+                            <div class="ml-3">
+                                <div class="text-xs text-gray-500">Ayoconnect Saldo</div>
+                                <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice(props.ayoconnect_saldo) }}</div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="-ml-px flex w-0 flex-1">
                         <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
                             <i class="fa-duotone fa-money-bill-1-wave text-green-400"/>

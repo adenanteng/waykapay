@@ -150,11 +150,17 @@ class MoneyTransferController extends Controller
     }
 
     public function confirmAyo(Request $request) {
-//        dd($request->toArray());
+
         $order_id = Str::random(32);
         $geo = Helper::ipGeo($request->ip());
-//        dd($request['beneficiary']['beneficiaryDetails']['beneficiaryId']);
-//        dd($request['amount'] . '.00');
+
+        $user = auth()->user();
+        $gross_amount = $request['amount'] + $request['bank']['admin'] + $request['bank']['service'];
+
+        if ($user->wallet_balance <= $gross_amount) {
+            dd('Saldo kurang');
+        }
+
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
@@ -171,7 +177,7 @@ class MoneyTransferController extends Controller
             "beneficiaryId" => $request['beneficiary']['beneficiaryDetails']['beneficiaryId'],
             "amount" => $request['amount'] . '.00',
             "currency" => "IDR",
-            "remark" => "Testing"
+//            "remark" => "Testing"
         ]);
 
 //        Log::info(json_decode( json_encode($response->object()), true));
@@ -179,16 +185,6 @@ class MoneyTransferController extends Controller
         if (!$response->successful()) {
             dd($response->object()->errors[0]->details);
         }
-
-//        dd($response->object(), $request->toArray());
-
-        $user = auth()->user();
-
-        $gross_amount = $request['amount'] + $request['bank']['admin'] + $request['bank']['service'];
-
-//        if ($user->wallet_balance <= $gross_amount) {
-//            dd('Saldo kurang');
-//        }
 
         $transaction = Transaction::create([
             'sku' => '-',
@@ -225,10 +221,6 @@ class MoneyTransferController extends Controller
 
         $transaction = Transaction::where('order_id', $transaction->order_id)->first();
 
-//        dd($transaction->toArray());
-
-//        return $response->object()->data->deposit;
-
 //        $save = !TransactionCustomer::where('user_id', auth()->user()->id)
 //            ->where('customer_no', $transaction->customer_no)
 //            ->where('brand', $transaction->brand)
@@ -248,7 +240,6 @@ class MoneyTransferController extends Controller
         $order_id = Str::random(32);
         $geo = Helper::ipGeo($request->ip());
         $token = Helper::ayoToken();
-//        dd($token);
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Transaction;
+use App\Models\TransactionCustomer;
+use App\Models\TransactionMoneyTransfer;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as Req;
 use Inertia\Inertia;
 use Inertia\Response;
-use Psy\Util\Str;
+use Illuminate\Support\Str;
 use Stephenjude\Wallet\Exceptions\InsufficientFundException;
 
 class HistoryController extends Controller
@@ -86,7 +88,72 @@ class HistoryController extends Controller
         } elseif ($transaction->category_id == Transaction::TRANSFER) {
 
         } elseif ($transaction->category_id == Transaction::TRANSFERAYO) {
+            switch ($transaction->status_id) {
+                case (Transaction::SUCCESS):
 
+                break;
+                default:
+                    $order_id = Str::random(32);
+//                    $geo = Helper::ipGeo($request->ip());
+                    $token = Helper::ayoToken();
+
+                    $response = Http::withHeaders([
+                        'Accept' => 'application/json',
+                        'Content-Type' => 'application/json',
+                        'Authorization' => 'Bearer ' . $token,
+                        'A-Merchant-Code' => 'WAYKPY',
+                        'A-IP-Address' => $_SERVER['REMOTE_ADDR'],
+                        'A-Latitude' => '-5.4292',
+                        'A-Longitude' => '105.2611',
+                        'A-Correlation-ID' => $order_id,
+                    ])
+                        ->withQueryParameters([
+                            'transactionId' => $transaction->money_transfer->transaction_id,
+                            'beneficiaryId' => $transaction->money_transfer->beneficiary_id,
+                            'customerId' => $transaction->money_transfer->customer_id,
+
+                        ])
+                        ->get('https://api.of.ayoconnect.id/api/v1/bank-disbursements/status/'.$transaction->order_id);
+
+                    if (!$response->successful()) {
+                        dd($response->object()->errors[0]->details);
+                    }
+
+                    switch($response->object()->transaction->status) {
+                        case(TransactionMoneyTransfer::PROCESSING):
+                            $transaction->update([
+                                'status_id' => Transaction::PENDING,
+                                'desc' => $response->object()->message
+                            ]);
+                            break;
+
+                        case(TransactionMoneyTransfer::SUCCESS):
+                            $transaction->update([
+                                'status_id' => Transaction::SUCCESS,
+                            ]);
+                            break;
+
+                        case(TransactionMoneyTransfer::REFUNDED):
+                            $transaction->update([
+                                'status_id' => Transaction::REFUNDED,
+                                'desc' => $response->object()->message
+                            ]);
+                            break;
+
+                        case(TransactionMoneyTransfer::CANCELED):
+                            $transaction->update([
+                                'status_id' => Transaction::CANCEL,
+                                'desc' => $response->object()->message
+                            ]);
+                            break;
+
+                        default:
+                            $transaction->update([
+                                'status_id' => Transaction::ERROR,
+                                'desc' => $response->object()->message
+                            ]);
+                    }
+            }
         }else {
             switch ($transaction->status_id) {
                 case (Transaction::SUCCESS):
@@ -113,10 +180,6 @@ class HistoryController extends Controller
                             'sign' => md5(Helper::api()->digiflazz_username.Helper::api()->digiflazz_key.$transaction->order_id),
                         ]);
                     }
-
-
-//                dd($response->object()->data);
-
                     switch ($response->object()->data->status) {
                         case ('Sukses'):
                             $transaction->update([
@@ -139,7 +202,6 @@ class HistoryController extends Controller
                                 'desc' => $response->object()->data->rc.' '.$response->object()->data->message
                             ]);
                     }
-
 //                    Helper::update_digiflazz_saldo($response->object()->data->buyer_last_saldo);
             }
         }

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('digiflazz_username')->nullable();
             $table->string('digiflazz_key')->nullable();
             $table->bigInteger('digiflazz_saldo')->nullable();
+            $table->bigInteger('ayoconnect_saldo')->nullable();
             $table->timestamps();
 
         });
