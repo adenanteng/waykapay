@@ -20,7 +20,7 @@ class ProfileController extends Controller
     {
 //        $history = Transaction::where('user_id', auth()->user()->id)->latest()->get();
 
-        if (auth()->user()->role_id !== User::SUPERADMIN) {
+        if (auth()->user()->role_id == User::USER) {
             $ayoconnect_saldo = 0;
             $digiflazz_saldo = 0;
         } else {
