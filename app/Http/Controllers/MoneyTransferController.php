@@ -209,6 +209,9 @@ class MoneyTransferController extends Controller
             'to_name' => $request['beneficiary']['beneficiaryDetails']['beneficiaryName'],
             'to_number' => $request['account_no'],
             'to_id' => null,
+            'ayo_transaction_id' => $request['beneficiary']['transactionId'],
+            'ayo_beneficiary_id' => $request['beneficiary']['beneficiaryDetails']['beneficiaryId'],
+            'ayo_customer_id' => $request['beneficiary']['customerId'],
         ]);
 
         $user->update([

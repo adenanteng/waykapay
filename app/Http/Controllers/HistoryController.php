@@ -108,9 +108,9 @@ class HistoryController extends Controller
                         'A-Correlation-ID' => $order_id,
                     ])
                         ->withQueryParameters([
-                            'transactionId' => $transaction->money_transfer->transaction_id,
-                            'beneficiaryId' => $transaction->money_transfer->beneficiary_id,
-                            'customerId' => $transaction->money_transfer->customer_id,
+                            'transactionId' => $transaction->money_transfer->ayo_transaction_id,
+                            'beneficiaryId' => $transaction->money_transfer->ayo_beneficiary_id,
+                            'customerId' => $transaction->money_transfer->ayo_customer_id,
 
                         ])
                         ->get('https://api.of.ayoconnect.id/api/v1/bank-disbursements/status/'.$transaction->order_id);

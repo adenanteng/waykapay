@@ -20,7 +20,10 @@ class TransactionMoneyTransfer extends Model
         'bank_id',
         'to_name',
         'to_number',
-        'to_id'
+        'to_id',
+        'ayo_transaction_id',
+        'ayo_beneficiary_id',
+        'ayo_customer_id',
     ];
 
     const WKP = 1;
