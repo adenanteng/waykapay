@@ -97,7 +97,7 @@ function formatPrice(value) {
                     </div>
                 </template>
 
-                <template v-if="props.history.category_id == 99">
+                <template v-if="props.history.category_id == 99 || props.history.category_id == 98">
                     <div class="sm:col-span-1 flex sm:block justify-between" >
                         <div class="text-sm ">Jenis Transaksi</div>
                         <div class="text-sm font-semibold uppercase">{{ props.history.product_name.replaceAll("-", " ") }}</div>

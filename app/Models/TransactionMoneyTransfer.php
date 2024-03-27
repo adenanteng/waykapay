@@ -33,14 +33,25 @@ class TransactionMoneyTransfer extends Model
     const MANDIRI = 5;
     const PERMATA = 6;
     const BSM = 7;
+    const BPDLAMPUNG = 10;
+    const SHOPEEPAY = 100;
+    const DANA = 101;
+    const OVO = 103;
+    const GOPAY = 104;
     const BANK = [
         self::WKP => 'Waykapay',
         self::BCA => 'BCA',
         self::BNI => 'BNI',
         self::BRI => 'BRI',
         self::MANDIRI => 'Mandiri',
-        self::PERMATA => 'Permata',
+        self::PERMATA => 'Permata Bank',
         self::BSM => 'BSI',
+
+        self::BPDLAMPUNG => 'Bank Lampung',
+        self::SHOPEEPAY => 'ShopeePay',
+        self::DANA => 'Dana',
+        self::OVO => 'OVO',
+        self::GOPAY => 'Gopay',
     ];
 
     const PROCESSING = 0;
